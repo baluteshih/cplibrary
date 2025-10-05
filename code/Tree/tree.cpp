@@ -22,6 +22,7 @@ public:
                     _dfs(_dfs, i, u);
             dfs_out[u] = dft;
         };
+        dep[root] = -1;
         dfs(dfs, root, root);
     }
     bool ancestor(int u, int v) {

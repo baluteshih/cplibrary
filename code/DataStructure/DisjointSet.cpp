@@ -1,6 +1,6 @@
 #ifndef __BALU_DISJOINT_SET__
 #define __BALU_DISJOINT_SET__
-class DisjoinSet {
+class DisjointSet {
     int n;
     vector<int> boss, sz;
 public:

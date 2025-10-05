@@ -1,14 +1,14 @@
 #ifndef __BALU_EDGE_WEIGHTED_TREE__
 #define __BALU_EDGE_WEIGHTED_TREE__
 template<class T>
-struct Edge_Weighted_EDGE_WEIGHTED_TREE {
+struct Edge_Weighted_Tree {
     int n;
     vector<vector<pair<int, T>>> G;
 public:
     vector<int> pa, dep, dfs_in, dfs_out;
     vector<T> up, len;
     vector<vector<int>> pa_table;
-    Edge_Weighted_EDGE_WEIGHTED_TREE(int _n): n(_n), G(n) {}
+    Edge_Weighted_Tree(int _n): n(_n), G(n) {}
     void traverse(int root = 0) {
         vector<int>(n).swap(pa);
         vector<int>(n).swap(dep);
@@ -29,6 +29,7 @@ public:
                 }
             dfs_out[u] = dft;
         };
+        dep[root] = -1;
         dfs(dfs, root, root);
     }
     bool ancestor(int u, int v) {
