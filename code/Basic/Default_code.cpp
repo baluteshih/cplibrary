@@ -8,8 +8,23 @@ typedef pair<ll, ll> pll;
 #define X first
 #define Y second
 #define SZ(a) ((int)a.size())
-#define pb push_back
 #define ALL(v) v.begin(), v.end()
+template<class A, class B>
+ostream& operator<<(ostream& os, const pair<A, B> &a) {
+    os << "(" << a.first << ", " << a.second << ")";
+    return os;
+}
+template<class T>
+ostream& operator<<(ostream& os, const vector<T> &a) {
+    os << "[ ";
+    for (int i = 0; i < int(a.size()); ++i) {
+        os << a[i];
+        if (i + 1 < int(a.size()))
+            os << ", ";
+    }
+    os << " ]";
+    return os;
+}
 #ifdef bbq
 #include <experimental/iterator>
 #define safe cerr<<__PRETTY_FUNCTION__<<" line "<<__LINE__<<" safe\n"

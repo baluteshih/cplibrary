@@ -3,7 +3,7 @@ class ECC { // 0-base
     vector<int> low, dfn, stk;
     vector<vector<pii>> G;
     void dfs(int u, int f) {
-        dfn[u] = low[u] = ++dft, stk.pb(u);
+        dfn[u] = low[u] = ++dft, stk.push_back(u);
         for (auto [v, e] : G[u])
             if (!dfn[v])
                 dfs(v, e), low[u] = min(low[u], low[v]);

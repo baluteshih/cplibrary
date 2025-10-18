@@ -72,8 +72,8 @@ public:
         return G[u];
     }
     void add_edge(int u, int v) {
-        G[u].pb(v);
-        G[v].pb(u);
+        G[u].push_back(v);
+        G[v].push_back(u);
     }
 };
 #endif // __BALU_TREE__

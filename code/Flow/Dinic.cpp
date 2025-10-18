@@ -50,8 +50,8 @@ public:
     }
     void add_edge(int u, int v, T cap) {
         mxcap = max(mxcap, cap);
-        G[u].pb(edge{v, int(size(G[v])), cap, T(0)});
-        G[v].pb(edge{u, int(size(G[u])) - 1, T(0), T(0)});
+        G[u].push_back(edge{v, int(size(G[v])), cap, T(0)});
+        G[v].push_back(edge{u, int(size(G[u])) - 1, T(0), T(0)});
     }
     T maxflow(int _s, int _t) {
         s = _s, t = _t;
@@ -65,7 +65,7 @@ public:
     vector<vector<int>> get_route() {
         vector<int> stk;
         auto route = [&](auto _route, int u) -> bool {
-            stk.pb(u);
+            stk.push_back(u);
             if (u == t) return true;
             for (int &i = cur[u]; cur[u] < ssize(G[u]);) {
                 auto &e = G[u][i++];
@@ -81,7 +81,7 @@ public:
             stk.clear();
             fill(ALL(cur), 0);
             if (!route(route, s)) break;
-            res.pb(stk);
+            res.push_back(stk);
         }
         return res;
     }
