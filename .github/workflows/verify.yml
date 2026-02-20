@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-python@v4
 
     - name: Install dependencies
-      run: pip3 install -U git+https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git@main
+      run: pip3 install -U git+https://github.com/online-judge-tools/verification-helper@master
 
     # required only if you want to verify Haskell code
     - name: Install dependencies (Haskell)
