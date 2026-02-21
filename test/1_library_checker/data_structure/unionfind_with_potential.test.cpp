@@ -1,3 +1,4 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential"
 #include "default_code.hpp"
 
 #include "DataStructure/PotentialDisjointSet.hpp"
