@@ -15,11 +15,12 @@ ostream& operator<<(ostream& os, const pair<A, B> &a) {
     return os;
 }
 template <typename T>
-concept PrintableContainer = requires(T a) {
+concept PrintableContainer = requires(T& a) {
     a.begin();
     a.end();
-} && !std::derived_from<T, std::basic_string<typename T::value_type>>;
-
+} && !std::same_as<std::remove_cvref_t<T>, std::string> &&
+     !std::same_as<std::remove_cvref_t<T>, std::string_view> &&
+     !std::is_convertible_v<T, const char*>;
 template <PrintableContainer T>
 std::ostream& operator<<(std::ostream& os, const T& a) {
     os << "[ ";
