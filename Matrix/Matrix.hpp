@@ -5,8 +5,8 @@
 
 template<class T>
 class Matrix : public std::vector<Vector<T>> {
-    enum gauss_mode {half, full};
 public:
+    enum gauss_mode {half, full, euclidean};
     int n() const { return (int)this->size(); }
     int m() const { return n() ? (int)(*this)[0].size() : 0; }
     Matrix(int _n, int _m): std::vector<Vector<T>>(_n, Vector<T>(_m)) {}
@@ -94,16 +94,43 @@ public:
     void eliminate(int i) {
         int pivot = (*this)[i].find_pivot();
         if (pivot < m()) {
-            T pinv = T(1) / (*this)[i][pivot];
-            for (int j = (mode == half) * i; j < n(); ++j)
-                if (j != i)
-                    (*this)[j] += (*this)[i] * (*this)[j][pivot] * pinv * T(-1); 
+            T pinv = 0;
+            if constexpr (mode != euclidean) pinv = T(1) / (*this)[i][pivot];
+            for (int j = (mode != full) * i; j < n(); ++j)
+                if (j != i) {
+                    if constexpr (mode != euclidean) (*this)[j] += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);
+                    else {
+                        int parity = 1;
+                        while ((*this)[j][pivot] != T(0)) {
+                            T q;
+                            if constexpr (std::derived_from<T, internal::modint_base>) q = T((*this)[i][pivot].val() / (*this)[j][pivot].val());
+                            else q = (*this)[i][pivot] / (*this)[j][pivot];
+                            (*this)[i] += (*this)[j] * q * T(-1);
+                            std::swap((*this)[i], (*this)[j]);
+                            parity *= -1;
+                        }
+                        (*this)[j] *= T(parity);
+                    }
+                }
         }
     }
     template<gauss_mode mode = half>
     Matrix& gauss() {
-        for (int i = 0; i < n(); ++i)
+        for (int i = 0; i < n(); ++i) {
+            if constexpr (mode == euclidean) {
+                if ((*this)[i][i] == T(0)) {
+                    for (int j = i + 1; j < n(); ++j) {
+                        if ((*this)[j][i] != T(0)) {
+                            std::swap((*this)[i], (*this)[j]);
+                            (*this)[j] *= T(-1);
+                            break;
+                        }
+                    }
+                }
+                if ((*this)[i][i] == T(0)) continue;
+            }
             eliminate<mode>(i);
+        }
         return *this;
     }
     std::pair<std::vector<int>, std::vector<int>> sort_classify(int lim) {
@@ -140,10 +167,11 @@ public:
         if (n() > m()) return transpose().rank();
         return Matrix(*this).echelonize().first.size();
     }
+    template<gauss_mode mode = half>
     T det() const {
         assert(n() == m());
         Matrix cur = *this;
-        cur.echelonize();
+        cur.echelonize<mode>();
         T res = T(1);
         for (int i = 0; i < n(); ++i)
             res = res * cur[i][i];
