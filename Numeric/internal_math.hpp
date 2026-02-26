@@ -1,5 +1,5 @@
-// Reference: Atcoder Library https://github.com/atcoder/ac-library
 #pragma once
+// Reference: Atcoder Library https://github.com/atcoder/ac-library
 
 #include <utility>
 

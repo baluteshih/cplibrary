@@ -1,6 +1,6 @@
 #pragma once
 
-int Jacobi(int a, int m) {
+int jacobi(int a, int m) {
     int s = 1;
     for (; m > 1; ) {
         a %= m;
@@ -18,10 +18,10 @@ int Jacobi(int a, int m) {
 
 template<class T>
 requires std::derived_from<T, internal::modint_base>
-T QuadraticResidue(T a, bool &succ) {
+T quadratic_residue(T a, bool &succ) {
     succ = true;
     if (T::mod() == 2) return a;
-    const int jc = Jacobi(a.val(), T::mod());
+    const int jc = jacobi(a.val(), T::mod());
     if (jc == 0) return 0;
     if (jc == -1) return succ = false, 0;
     T b, d;
@@ -29,7 +29,7 @@ T QuadraticResidue(T a, bool &succ) {
     for (; ; ) {
         b = rng() % T::mod();
         d = b * b - a;
-        if (Jacobi(d.val(), T::mod()) == -1) break;
+        if (jacobi(d.val(), T::mod()) == -1) break;
     }
     T f0 = b, f1 = 1, g0 = 1, g1 = 0, tmp;
     for (int e = (1LL + T::mod()) >> 1; e; e >>= 1) {
