@@ -1,5 +1,4 @@
-#ifndef __BALU_QUADRATICRESIDUE__
-#define __BALU_QUADRATICRESIDUE__ 
+#pragma once
 
 int Jacobi(int a, int m) {
     int s = 1;
@@ -45,4 +44,3 @@ T QuadraticResidue(T a, bool &succ) {
     }
     return g0;
 }
-#endif // __BALU_QUADRATICRESIDUE__ 

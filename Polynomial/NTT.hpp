@@ -1,5 +1,4 @@
-#ifndef __NTT__
-#define __NTT__
+#pragma once
 
 #include "Numeric/Modint.hpp"
 #include "Numeric/internal_primitive_root.hpp"
@@ -62,4 +61,3 @@ public:
         return a;
     }
 };
-#endif // __NTT__

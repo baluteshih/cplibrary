@@ -1,5 +1,4 @@
-#ifndef __BALU_COMBINATION__
-#define __BALU_COMBINATION__
+#pragma once
 
 #include "Numeric/Modint.hpp"
 
@@ -56,4 +55,3 @@ vector<T> linear_inverse(int n) {
     return res;
 }
 }
-#endif  // __BALU_COMBINATION__ 

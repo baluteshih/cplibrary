@@ -1,5 +1,5 @@
-#ifndef __BALU_DINIC__
-#define __BALU_DINIC__
+#pragma once
+
 template<class T>
 class Dinic { // 0-base
     struct edge {
@@ -99,4 +99,3 @@ public:
         return G[u];
     }
 };
-#endif // __BALU_DINIC__

@@ -1,7 +1,7 @@
+#pragma once
+
 // Reference: Atcoder Library https://github.com/atcoder/ac-library
 #include "Numeric/internal_math.hpp"
-#ifndef ATCODER_INTERNAL_TYPE_TRAITS_HPP
-#define ATCODER_INTERNAL_TYPE_TRAITS_HPP 1
 
 #include <cassert>
 #include <numeric>
@@ -93,11 +93,6 @@ using is_unsigned_int_t = std::enable_if_t<is_unsigned_int<T>::value>;
 template <class T> using to_unsigned_t = typename to_unsigned<T>::type;
 
 }  // namespace internal
-
-#endif  // ATCODER_INTERNAL_TYPE_TRAITS_HPP
-
-#ifndef ATCODER_MODINT_HPP
-#define ATCODER_MODINT_HPP 1
 
 #include <cassert>
 #include <numeric>
@@ -390,5 +385,3 @@ using is_dynamic_modint_t = std::enable_if_t<is_dynamic_modint<T>::value>;
 /*
 modint::set_mod(p);
 */
-
-#endif  // ATCODER_MODINT_HPP

@@ -1,5 +1,4 @@
-#ifndef INTERNAL_PRIMITIVE_ROOT__
-#define INTERNAL_PRIMITIVE_ROOT__
+#pragma once
 
 #include "Numeric/internal_math.hpp"
 
@@ -44,4 +43,3 @@ constexpr int primitive_root_constexpr(int m) {
 }
 template <int m> constexpr int primitive_root = primitive_root_constexpr(m);
 }  // namespace internal
-#endif // INTERNAL_PRIMITIVE_ROOT__

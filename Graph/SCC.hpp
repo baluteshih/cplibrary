@@ -1,5 +1,5 @@
-#ifndef __BALU_SCC__
-#define __BALU_SCC__
+#pragma once
+
 struct SCC { // 0-base
     int n, dft, nscc;
     std::vector<int> low, dfn, bln, instack, stk;
@@ -27,4 +27,3 @@ struct SCC { // 0-base
             if (!dfn[i]) dfs(i);
     }
 }; // scc_id(i): bln[i]
-#endif // __BALU_SCC__

@@ -1,5 +1,4 @@
-#ifndef __BALU_POTENTIAL_DISJOINT_SET__
-#define __BALU_POTENTIAL_DISJOINT_SET__
+#pragma once
 
 #include "DataStructure/DisjointSet.hpp"
 
@@ -42,4 +41,3 @@ public:
         return potential[u] - potential[v];
     }
 };
-#endif // __BALU_POTENTIAL_DISJOINT_SET__

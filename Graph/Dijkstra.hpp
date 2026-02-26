@@ -1,5 +1,5 @@
-#ifndef __BALU_DIJKSTRA__
-#define __BALU_DIJKSTRA__
+#pragma once
+
 template<class T>
 class Dijkstra { // 0-base, O(mlogn)
     int n;
@@ -49,4 +49,3 @@ public:
         return res;
     }
 };
-#endif // __BALU_DIJKSTRA__

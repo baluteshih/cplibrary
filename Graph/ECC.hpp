@@ -1,5 +1,5 @@
-#ifndef __BALU_ECC__
-#define __BALU_ECC__
+#pragma once
+
 class ECC { // 0-base
     int n, dft, ecnt;
     std::vector<int> low, dfn, stk;
@@ -39,4 +39,3 @@ public:
         return res;
     }
 }; // ecc_id(i): bln[i]
-#endif // __BALU_ECC__

@@ -1,5 +1,4 @@
-#ifndef __BALU_MATRIX_HPP__
-#define __BALU_MATRIX_HPP__ 
+#pragma once
 
 #include "Matrix/Vector.hpp"
 
@@ -215,4 +214,3 @@ public:
         return std::make_pair(lower.columns(0, m()), upper.columns(0, m()));
     }
 };
-#endif // __BALU_MATRIX_HPP__

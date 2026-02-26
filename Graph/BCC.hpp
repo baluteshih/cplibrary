@@ -1,5 +1,5 @@
-#ifndef __BALU_BCC__
-#define __BALU_BCC__
+#pragma once
+
 struct BCC { // 0-base
     int n, dft, nbcc;
     std::vector<int> low, dfn, bln, stk, is_ap, cir;
@@ -46,4 +46,3 @@ struct BCC { // 0-base
                     nG[i].push_back(bln[j]), nG[bln[j]].push_back(i);
     } // up to 2 * n - 2 nodes!! bln[i] for id
 };
-#endif // __BALU_BCC__

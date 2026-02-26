@@ -1,5 +1,4 @@
-#ifndef __BALU_NUMBERSET_HPP__
-#define __BALU_NUMBERSET_HPP__
+#pragma once
 
 #include "DataStructure/BIT.hpp"
 
@@ -75,4 +74,3 @@ public:
         return vals[index];
     } 
 };
-#endif // __BALU_NUMBERSET_HPP__

@@ -1,6 +1,5 @@
 // Reference: Atcoder Library https://github.com/atcoder/ac-library
-#ifndef __INTERNAL_MATH__
-#define __INTERNAL_MATH__ 1
+#pragma once
 
 #include <utility>
 
@@ -137,5 +136,3 @@ constexpr std::pair<long long, long long> inv_gcd(long long a, long long b) {
     return {s, m0};
 }
 }  // namespace internal
-
-#endif  // __INTERNAL_MATH__

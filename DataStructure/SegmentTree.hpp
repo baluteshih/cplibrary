@@ -1,5 +1,5 @@
-#ifndef __BALU_SEGMENT_TREE__
-#define __BALU_SEGMENT_TREE__
+#pragma once
+
 template<typename Value = int, typename Tag = void>
 class SegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
@@ -103,4 +103,3 @@ public:
             range_transform(l, r, 0, n, 1, tag);
     }
 };
-#endif // __BALU_SEGMENT_TREE__

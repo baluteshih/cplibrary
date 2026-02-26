@@ -1,5 +1,5 @@
-#ifndef __BALU_DEFAULT_CODE__
-#define __BALU_DEFAULT_CODE__
+#pragma once
+
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -82,4 +82,3 @@ void discretization(vector<T> &vals) {
     ranges::sort(vals);
     vals.erase(ranges::unique(vals).begin(), vals.end());
 }
-#endif // __BALU_DEFAULT_CODE__

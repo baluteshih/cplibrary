@@ -1,5 +1,5 @@
-#ifndef __BALU_DISJOINT_SET__
-#define __BALU_DISJOINT_SET__
+#pragma once
+
 template<typename T = void>
 class DisjointSet {
 protected:
@@ -48,4 +48,3 @@ public:
         return result;
     }
 };
-#endif // __BALU_DISJOINT_SET__

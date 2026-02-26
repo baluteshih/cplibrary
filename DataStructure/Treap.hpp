@@ -1,5 +1,4 @@
-#ifndef __BALU_TREAP__
-#define __BALU_TREAP__
+#pragma once
 
 namespace TreapMeasure {
     enum class MergeType {
@@ -530,12 +529,19 @@ public:
         });
     }
     /*
+    return the product of longest prefix such that the product "res" of them has condition(res) == true
+    Assume monotonicity
+    */
+    Value prefix_product_value(const auto &condition) requires (hasValue) {
+        return prefix_product_value(root, Value(), condition);
+    }
+    /*
     return the product of longest prefix such that the product "res" of them has cmp(res, v) == true
     Assume monotonicity
     */
     template<typename V, typename Comp = std::less<Value>>
     Value prefix_product_value_lt(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return prefix_product_value(root, [&v, &cmp](const Value &src) {
+        return prefix_product_value(root, Value(), [&v, &cmp](const Value &src) {
             return cmp(src, v);
         });
     }
@@ -545,7 +551,7 @@ public:
     */
     template<typename V, typename Comp = std::less<Value>>
     Value prefix_product_value_leq(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return prefix_product_value(root, [&v, &cmp](const Value &src) {
+        return prefix_product_value(root, Value(), [&v, &cmp](const Value &src) {
             return !cmp(v, src);
         });
     }
@@ -581,4 +587,3 @@ public:
         }), this);
     }
 };
-#endif // __BALU_TREAP__

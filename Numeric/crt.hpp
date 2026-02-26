@@ -1,5 +1,4 @@
-#ifndef __CRT__
-#define __CRT__
+#pragma once
 
 // source: https://maspypy.github.io/library/mod/crt3.hpp
 
@@ -32,4 +31,3 @@ T CRT3(unsigned long long a0, unsigned long long a1, unsigned long long a2) {
     c = (a2 - ans_1 % p2 + p2) * x2 % p2;
     return T(ans_1) + T(c) * T(p01);
 }
-#endif // __CRT__

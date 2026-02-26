@@ -1,5 +1,5 @@
-#ifndef __BALU_VECTOR__
-#define __BALU_VECTOR__ 
+#pragma once
+
 template<typename T, class Allocator = std::allocator<T>> 
 class Vector : public std::vector<T, Allocator> {
     int n() const { return (int)this->size(); }
@@ -59,4 +59,3 @@ public:
         return pivot;
     }
 };
-#endif // __BALU_VECTOR__

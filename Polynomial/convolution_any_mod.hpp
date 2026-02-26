@@ -1,5 +1,4 @@
-#ifndef __CONVOLUTION_ANY_MOD__
-#define __CONVOLUTION_ANY_MOD__
+#pragma once
 
 // source: https://maspypy.github.io/library/poly/convolution.hpp
 
@@ -33,4 +32,3 @@ vector<T> convolution_any_mod(vector<T> a, vector<T> b) {
         c[i] = CRT3<T, p0, p1, p2>(c0[i].val(), c1[i].val(), c2[i].val());
     return c;
 }
-#endif // __CONVOLUTION_ANY_MOD__
