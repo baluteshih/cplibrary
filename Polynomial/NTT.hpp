@@ -2,14 +2,14 @@
 #define __NTT__
 
 #include "Numeric/Modint.hpp"
-#include "Numeric/primitive_root.hpp"
+#include "Numeric/internal_primitive_root.hpp"
 
 template<typename T>
 requires std::derived_from<T, internal::modint_base>
 class NTT {
     inline static int max_size = 1;
     inline static std::vector<T> w{1, T(1)};
-    inline static const T root = primitive_root(T::mod());
+    inline static const T root = internal::primitive_root_constexpr(T::mod());
     static void set_upper_bound(int n) {
         if (max_size < n) {
             while (max_size <= n) max_size <<= 1;
