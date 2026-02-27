@@ -14,8 +14,7 @@ int main() {
         cin >> i;
     for (auto &i : brr)
         cin >> i;
-    NTT<mint> ntt(arr.size() + brr.size());
-    arr = ntt.convolution(arr, brr);
+    arr = NTT<mint>::convolution(arr, brr);
     for (int i = 0; i < SZ(arr); ++i)
         cout << arr[i] << " \n"[i + 1 == SZ(arr)];
 }

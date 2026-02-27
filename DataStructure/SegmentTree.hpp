@@ -10,7 +10,7 @@ class SegmentTree {
     void up(int rt) {
         seg[rt] = seg[rt << 1] + seg[rt << 1 | 1];
     }
-    void give_tag(int rt, Tag tag) requires (hasTag) {
+    void give_tag(int rt, auto tag) requires (hasTag) {
         seg[rt] = seg[rt] + tag;
         lazy[rt] = lazy[rt] + tag;
     }
@@ -54,7 +54,7 @@ class SegmentTree {
         else transform(x, mid, r, rt << 1 | 1, func);
         up(rt);
     }
-    void range_transform(int L, int R, int l, int r, int rt, const Tag &tag) requires (hasTag) {
+    void range_transform(int L, int R, int l, int r, int rt, const auto &tag) requires (hasTag) {
         if (L <= l && R >= r)
             return give_tag(rt, tag);
         down(rt);
@@ -96,7 +96,7 @@ public:
         assert(0 <= x && x < n);
         transform(x, 0, n, 1, func);
     }
-    void range_transform(int l, int r, const Tag &tag) requires (hasTag) {
+    void range_transform(int l, int r, const auto &tag) requires (hasTag) {
         assert(0 <= l && r <= n);
         assert(l <= r);
         if (l < r)
