@@ -1,5 +1,5 @@
-#ifndef __BALU_BIT_HPP__
-#define __BALU_BIT_HPP__
+#pragma once
+
 template<class T>
 class BIT { // 0-base
     int n;
@@ -35,4 +35,3 @@ public:
         return total_;
     }
 };
-#endif // __BALU_BIT_HPP__
