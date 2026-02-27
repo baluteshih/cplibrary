@@ -355,7 +355,7 @@ public:
         using reference         = const node&;
         using value_type        = node;
         using pointer           = node*; 
-        Iterator(node* ptr, Treap *tree) : m_ptr(ptr), m_tree(tree) {}
+        Iterator(node* ptr, const Treap *tree) : m_ptr(ptr), m_tree(tree) {}
         reference operator*() const { return *m_ptr; }
         auto operator->() const { return m_ptr; }
         Iterator& operator++() {
@@ -384,8 +384,8 @@ public:
         node* m_ptr;
         const Treap* m_tree;
     };
-    Iterator begin() { return Iterator(find_min(), this); }
-    Iterator end() { return Iterator(nullptr, this); }
+    Iterator begin() const { return Iterator(find_min(), this); }
+    Iterator end() const { return Iterator(nullptr, this); }
     /*
     Find a node's iterator such that:
     - All nodes on its left have cmp(key, k) == true
