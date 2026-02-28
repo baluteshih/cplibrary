@@ -63,6 +63,16 @@ class SegmentTree {
         if (R > mid) range_transform(L, R, mid, r, rt << 1 | 1, tag);
         up(rt);
     }
+    void range_transform_beats(int L, int R, int l, int r, int rt, const auto &tag, const auto &tag_condition) requires (hasTag) {
+        if (L <= l && R >= r && tag_condition(seg[rt]))
+            return give_tag(rt, tag);
+        assert(r - l > 1);
+        down(rt);
+        int mid = (l + r) >> 1;
+        if (L < mid) range_transform_beats(L, R, l, mid, rt << 1, tag, tag_condition);
+        if (R > mid) range_transform_beats(L, R, mid, r, rt << 1 | 1, tag, tag_condition);
+        up(rt);
+    }
     Value get(int x, int l, int r, int rt) {
         while (r - l > 1) {
             if constexpr (hasTag) down(rt);
@@ -71,6 +81,27 @@ class SegmentTree {
             else l = mid, rt = rt << 1 | 1;
         }
         return seg[rt];
+    }
+    void printnode(int l, int r, int rt) {
+        std::cerr << "[" << l << ", " << r << "): ";
+        if constexpr (hasTag) std::cerr << "val = " << seg[rt] << ", tag = " << lazy[rt];
+        else std::cerr << seg[rt];
+        std::cerr << "\n";
+    }
+    void printinfo(int L, int R, int l, int r, int rt) {
+        printnode(l, r, rt);
+        if (L <= l && R >= r)
+            return;
+        int mid = (l + r) >> 1;
+        if (L < mid) printinfo(L, R, l, mid, rt << 1);
+        if (R > mid) printinfo(L, R, mid, r, rt << 1 | 1);
+    }
+    void printall(int l, int r, int rt) {
+        printnode(l, r, rt);
+        if (r - l == 1) return;
+        int mid = (l + r) >> 1;
+        printall(l, mid, rt << 1);
+        printall(mid, r, rt << 1 | 1);
     }
 public:
     SegmentTree(const vector<Value> &data): n(data.size()), seg(n << 2) { 
@@ -101,5 +132,24 @@ public:
         assert(l <= r);
         if (l < r)
             range_transform(l, r, 0, n, 1, tag);
+    }
+    void range_transform_beats(int l, int r, const auto &tag, const auto &tag_condition) requires (hasTag) {
+        assert(0 <= l && r <= n);
+        assert(l <= r);
+        if (l < r)
+            range_transform_beats(l, r, 0, n, 1, tag, tag_condition);
+    }
+    void printinfo(int l, int r) {
+        assert(0 <= l && r <= n);
+        assert(l <= r);
+        std::cerr << "\e[1;33mInfo [" << l << ", " << r << "):\n";
+        if (l < r) 
+            printinfo(l, r, 0, n, 1);
+        cerr << "\e[0m\n";
+    }
+    void printall() {
+        std::cerr << "\e[1;33mInfo all:\n";
+        printall(0, n, 1);
+        cerr << "\e[0m\n";
     }
 };
