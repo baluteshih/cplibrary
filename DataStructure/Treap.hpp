@@ -388,6 +388,25 @@ public:
     Iterator end() const { return Iterator(nullptr, this); }
     /*
     Find a node's iterator such that:
+    - All nodes on its left have condition(node*) == true
+    - All nodes on its right have condition(node*) == false
+    - The node itself has condition(node*) == false
+    Assume this is possible
+    */
+    Iterator bound_condition(const auto &condition) {
+        return Iterator(find(condition), this);
+    }
+    /*
+    Find a node's iterator such that:
+    - The product "res" of all nodes on its left have condition(res) == true
+    - The node itself has condition(res + node->org) == false
+    Assume this is possible
+    */
+    Iterator bound_condition_value(const auto &condition) requires (hasValue) {
+        return Iterator(find_value(condition), this);
+    }
+    /*
+    Find a node's iterator such that:
     - All nodes on its left have cmp(key, k) == true
     - All nodes on its right have cmp(key, k) == false
     - The node itself has cmp(key, k) == false
