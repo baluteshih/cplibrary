@@ -1,12 +1,15 @@
 #pragma once
 
-class ECC { // 0-base
-    int n, dft, ecnt;
+#include "Graph/base.hpp"
+
+template<typename Edge = void, typename Vertex = void>
+struct ECC : public Graph<false, Edge, Vertex> { // 0-base
+    using super = Graph<false, Edge, Vertex>;
+    int dft;
     std::vector<int> low, dfn, stk;
-    std::vector<std::vector<std::pair<int, int>>> G;
     void dfs(int u, int f) {
         dfn[u] = low[u] = ++dft, stk.push_back(u);
-        for (auto [v, e] : G[u])
+        for (auto [v, e] : this->G[u])
             if (!dfn[v])
                 dfs(v, e), low[u] = std::min(low[u], low[v]);
             else if (e != f)
@@ -18,23 +21,18 @@ class ECC { // 0-base
             bln[u] = necc++, stk.pop_back();
         }
     }
-public:
     int necc;
     std::vector<int> bln, is_bridge;
-    ECC(int _n): n(_n), dft(), ecnt(), low(n), dfn(n), G(n), necc(), bln(n) {}
-    void add_edge(int u, int v) {
-        G[u].emplace_back(v, ecnt);
-        G[v].emplace_back(u, ecnt++);
-    }
+    ECC(int n): super(n), dft(), low(n), dfn(n), necc(), bln(n) {}
     void solve() {
         necc = dft = 0;
-        is_bridge.resize(ecnt);
-        for (int i = 0; i < n; ++i)
+        is_bridge.resize(this->edges.size());
+        for (int i = 0; i < this->n(); ++i)
             if (!dfn[i]) dfs(i, -1);
     }
     std::vector<std::vector<int>> components() {
         std::vector<std::vector<int>> res(necc);
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < this->n(); ++i)
             res[bln[i]].push_back(i);
         return res;
     }

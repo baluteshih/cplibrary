@@ -14,10 +14,7 @@ int main() {
         scc.add_edge(u, v);
     }
     scc.solve();
-    vector<vector<int>> ans(scc.nscc);
-    for (int i = 0; i < n; ++i)
-        ans[scc.bln[i]].push_back(i);
-    reverse(ALL(ans));
+    auto ans = scc.components();
     cout << SZ(ans) << "\n";
     for (auto &v : ans) {
         cout << SZ(v);

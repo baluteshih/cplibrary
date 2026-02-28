@@ -1,13 +1,16 @@
 #pragma once
 
-struct SCC { // 0-base
-    int n, dft, nscc;
+#include "Graph/base.hpp"
+
+template<typename Edge = void, typename Vertex = void>
+struct SCC : public Graph<true, Edge, Vertex>  { // 0-base
+    using super = Graph<true, Edge, Vertex>;
+    int dft, nscc;
     std::vector<int> low, dfn, bln, instack, stk;
-    std::vector<std::vector<int>> G;
     void dfs(int u) {
         low[u] = dfn[u] = ++dft;
         instack[u] = 1, stk.push_back(u);
-        for (int v : G[u])
+        for (auto [v, eid] : this->G[u])
             if (!dfn[v])
                 dfs(v), low[u] = std::min(low[u], low[v]);
             else if (instack[v] && dfn[v] < dfn[u])
@@ -18,12 +21,16 @@ struct SCC { // 0-base
             instack[u] = 0, bln[u] = nscc++, stk.pop_back();
         }
     }
-    SCC(int _n): n(_n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n), G(n) {}
-    void add_edge(int u, int v) {
-        G[u].push_back(v);
-    }
+    SCC(int n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}
     void solve() {
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < this->n(); ++i)
             if (!dfn[i]) dfs(i);
+    }
+    std::vector<std::vector<int>> components() {
+        std::vector<std::vector<int>> res(nscc);
+        for (int i = 0; i < this->n(); ++i)
+            res[bln[i]].push_back(i);
+        std::ranges::reverse(res);
+        return res;
     }
 }; // scc_id(i): bln[i]
