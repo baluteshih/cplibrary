@@ -28,6 +28,22 @@ public:
     auto &vertex(int idx) requires (hasVertexWeight) {
         return weight[idx];
     }
+    const auto& edge(int idx) const requires (hasEdgeWeight) {
+        return edges[idx]; 
+    }
+    const auto &vertex(int idx) const requires (hasVertexWeight) {
+        return weight[idx];
+    }
+    auto &vertex_weight() requires (hasVertexWeight) {
+        return weight;
+    }
+    const auto &vertex_weight() const requires (hasVertexWeight) {
+        return weight;
+    }
+    void set_vertex_weight(const auto &vec) {
+        for (int i = 0; i < n(); ++i)
+            weight[i] = vec[i];
+    }
     void add_edge(int u, int v, const auto &w) requires (hasEdgeWeight) {
         G[u].emplace_back(v, edges.size());
         if constexpr (!directed) G[v].emplace_back(u, edges.size());
@@ -38,13 +54,13 @@ public:
         if constexpr (!directed) G[v].emplace_back(u, edges.size());
         edges.emplace_back(u, v);
     }
-    std::vector<int> in_degree(int idx) {
+    std::vector<int> in_degree() {
         std::vector<int> res(n());
         for (auto &e : edges)
             ++res[e.to];
         return res;
     }
-    std::vector<int> out_degree(int idx) {
+    virtual std::vector<int> out_degree() {
         std::vector<int> res(n());
         for (auto &e : edges)
             ++res[e.from];
@@ -52,5 +68,17 @@ public:
     }
     std::vector<std::pair<int, int>>& adj(int idx) {
         return G[idx];
+    }
+    const std::vector<std::pair<int, int>>& adj(int idx) const {
+        return G[idx];
+    }
+    Graph reversed() {
+        Graph res(n());
+        for (auto &e : edges) {
+            if constexpr (hasEdgeWeight) res.add_edge(e.to, e.from, e.weight);
+            else res.add_edge(e.to, e.from);
+        }
+        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);
+        return res;
     }
 };

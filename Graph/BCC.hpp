@@ -8,7 +8,6 @@ struct BCC : public Graph<false, Edge, Vertex> { // 0-base
     int dft, nbcc;
     std::vector<int> low, dfn, bln, stk, is_ap;
     std::vector<std::vector<int>> bcc;
-    bool prepared;
     void make_bcc(int u) {
         bcc.emplace_back(1, u); 
         for (; stk.back() != u; stk.pop_back())
