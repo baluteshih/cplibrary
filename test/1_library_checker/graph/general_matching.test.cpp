@@ -15,6 +15,6 @@ int main() {
     }
     cout << mch.solve() << "\n";
     for (int i = 0; i < n; ++i)
-        if (mch.match[i] != n && mch.match[i] > i)
+        if (mch.match[i] > i)
             cout << i << " " << mch.match[i] << "\n";
 }
