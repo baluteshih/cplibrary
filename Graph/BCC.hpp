@@ -1,9 +1,13 @@
 #pragma once
 
-struct BCC { // 0-base
-    int n, dft, nbcc;
-    std::vector<int> low, dfn, bln, stk, is_ap, cir;
-    std::vector<std::vector<int>> G, bcc, nG;
+#include "Graph/base.hpp"
+
+template<typename Edge = void, typename Vertex = void>
+struct BCC : public Graph<false, Edge, Vertex> { // 0-base
+    using super = Graph<false, Edge, Vertex>;
+    int dft, nbcc;
+    std::vector<int> low, dfn, bln, stk, is_ap;
+    std::vector<std::vector<int>> bcc;
     void make_bcc(int u) {
         bcc.emplace_back(1, u); 
         for (; stk.back() != u; stk.pop_back())
@@ -13,7 +17,7 @@ struct BCC { // 0-base
     void dfs(int u, int f) {
         int child = 0;
         low[u] = dfn[u] = ++dft, stk.push_back(u);
-        for (int v : G[u])
+        for (auto [v, eid] : this->G[u])
             if (!dfn[v]) {
                 dfs(v, u), ++child;
                 low[u] = std::min(low[u], low[v]);
@@ -26,23 +30,28 @@ struct BCC { // 0-base
         if (f == -1 && child < 2) is_ap[u] = 0;
         if (f == -1 && child == 0) make_bcc(u);
     }
-    BCC(int _n): n(_n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n), G(n) {}
-    void add_edge(int u, int v) {
-        G[u].push_back(v), G[v].push_back(u);
-    }
+    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}
     void solve() {
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < this->n(); ++i)
             if (!dfn[i]) dfs(i, -1);
     }
-    void block_cut_tree() {
-        cir.resize(nbcc);
-        for (int i = 0; i < n; ++i)
+    /*
+    Return std::pair<idx, tree adj matrix>
+    idx[u]: the new vertex index of the vertex u belongs to
+    */
+    std::pair<std::vector<int>, std::vector<std::vector<int>>> block_cut_tree() const {
+        int count = nbcc;
+        std::vector<int> cir, newbln(bln);
+        std::vector<std::vector<int>> nG;
+        cir.resize(count);
+        for (int i = 0; i < this->n; ++i)
             if (is_ap[i])
-                bln[i] = nbcc++;
-        cir.resize(nbcc, 1), nG.resize(nbcc);
-        for (int i = 0; i < nbcc && !cir[i]; ++i)
+                newbln[i] = count++;
+        cir.resize(count, 1), nG.resize(count);
+        for (int i = 0; i < count && !cir[i]; ++i)
             for (int j : bcc[i])
                 if (is_ap[j])
                     nG[i].push_back(bln[j]), nG[bln[j]].push_back(i);
+        return {newbln, nG};
     } // up to 2 * n - 2 nodes!! bln[i] for id
 };
