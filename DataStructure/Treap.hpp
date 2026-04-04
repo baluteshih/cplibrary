@@ -379,7 +379,9 @@ public:
         }
         friend bool operator== (const Iterator& a, const Iterator& b) { return a.m_ptr == b.m_ptr; };
         friend bool operator!= (const Iterator& a, const Iterator& b) { return a.m_ptr != b.m_ptr; };
-
+        void access_ptr() {
+            access(m_ptr);
+        }
     private:
         node* m_ptr;
         const Treap* m_tree;
