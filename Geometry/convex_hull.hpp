@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Geometry/base.hpp"
 
 template <typename Point>

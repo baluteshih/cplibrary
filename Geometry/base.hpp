@@ -71,8 +71,8 @@ struct Pt : Geometry<T, eps> {
     friend bool operator>(const Pt &a, const Pt &b) { return b < a; }
     friend bool operator<=(const Pt &a, const Pt &b) { return !(b < a); }
     friend bool operator>=(const Pt &a, const Pt &b) { return !(a < b); }
-    template <typename U, U _eps = eps>
-    Pt<U, _eps> cast() const {
+    template <typename U, U _eps = eps, typename _MulU = U>
+    Pt<U, _eps, _MulU> cast() const {
         return {static_cast<U>(x), static_cast<U>(y)};
     }
     friend MulT dot(const Pt &a, const Pt &b) {
@@ -95,10 +95,10 @@ struct Pt : Geometry<T, eps> {
     friend Ret dist(const Pt &a, const Pt &b) {
         return length<Ret>(a - b); 
     }
-    template <typename Ret = DefaultFloat<T>, Ret _eps = get_default_eps<T>()>
-    Pt<Ret, _eps> normal(Pt<T> a) {
+    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
+    Pt<Ret, _eps, _MulT> normal(Pt<T> a) {
         Ret len = length(a);
-        return a.template cast<Ret, _eps>() / len;
+        return a.template cast<Ret, _eps, _MulT>() / len;
     }
     friend MulT cross(const Pt &p, const Pt &a, const Pt &b) {
         return cross(a - p, b - p);
@@ -134,8 +134,8 @@ struct Pt : Geometry<T, eps> {
     friend Pt rotate270(const Pt &p) {
         return rotate90(-p);
     }
-    template <typename Ret = DefaultFloat<T>, Ret _eps = get_default_eps<T>()>
-    Pt<Ret, _eps> rotate(const Pt &p, Ret ang) {
+    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
+    Pt<Ret, _eps, _MulT> rotate(const Pt &p, Ret ang) {
         return {Ret(p.x) * std::cos(ang) - Ret(p.y) * std::sin(ang), Ret(p.x) * std::sin(ang) + Ret(p.y) * std::cos(ang)};
     }
     template <typename Ret = DefaultFloat<T>>
