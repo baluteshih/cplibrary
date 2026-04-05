@@ -71,7 +71,7 @@ struct Pt : Geometry<T, eps> {
     friend bool operator>(const Pt &a, const Pt &b) { return b < a; }
     friend bool operator<=(const Pt &a, const Pt &b) { return !(b < a); }
     friend bool operator>=(const Pt &a, const Pt &b) { return !(a < b); }
-    template <typename U, U _eps = eps, typename _MulU = U>
+    template <typename U, U _eps = get_default_eps<U>(), typename _MulU = U>
     Pt<U, _eps, _MulU> cast() const {
         return {static_cast<U>(x), static_cast<U>(y)};
     }
@@ -141,5 +141,13 @@ struct Pt : Geometry<T, eps> {
     template <typename Ret = DefaultFloat<T>>
     Ret angle(const Pt &p) {
         return std::atan2(Ret(p.y), Ret(p.x));
+    }
+    friend bool _betweenAngle(const Pt &o, const Pt &a, const Pt &b, const Pt &p, int strict) {
+        return side(o, a, p) >= strict && side(o, p, b) >= strict;
+    }
+    // whether op located between the counter-clockwise interval of oa and ob 
+    friend bool betweenAngle(const Pt &o, const Pt &a, const Pt &b, const Pt &p, int strict) {
+        if (side(o, a, b) >= 0) return _betweenAngle(o, a, b, p, strict);
+        return !_betweenAngle(o, b, a, p, !strict);
     }
 };

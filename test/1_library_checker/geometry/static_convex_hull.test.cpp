@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_convex_hull"
 #include "default_code.hpp"
 
-#include "Geometry/convex_hull.hpp"
+#include "Geometry/convex.hpp"
 
 using Point = Pt<ll>;
 
@@ -11,7 +11,7 @@ void solve() {
     vector<Point> dots(n);
     for (auto &p : dots)
         cin >> p;
-    auto hull = convex_hull(dots);
+    auto hull = convexHull(dots);
     cout << hull.size() << "\n";
     for (auto p : hull)
         cout << p << "\n";

@@ -10,6 +10,12 @@ struct Ln : Geometry<T, eps> {
     using Geometry<MulT, eps>::cmp;
     Ln() {}
     Ln(const Point &a, const Point &b) : l{a, b} {}
+    friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }
+    friend ostream& operator<<(ostream &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }
+    template <typename U, U _eps = get_default_eps<U>(), typename _MulU = U>
+    Ln<U, _eps, _MulU> cast() const {
+        return Ln<U, _eps, _MulU>(l[0].template cast<U, _eps, _MulU>(), l[1].template cast<U, _eps, _MulU>());
+    }
     friend int side(const Point &p, const Ln &l) { 
         return side(p, l[0], l[1]);
     }
@@ -52,7 +58,7 @@ struct Ln : Geometry<T, eps> {
     static bool between(U m, U l, U r) {
         return cmp(l, m) == 0 || cmp(m, r) == 0 || (l < m) != (r < m);
     }
-    friend bool point_on_seg(const Point &p, const Ln &l) {
+    friend bool pointOnSeg(const Point &p, const Ln &l) {
         return side(p, l) == 0 && between(p.x, l[0].x, l[1].x) && between(p.y, l[0].y, l[1].y);
     }
     friend bool pointStrictlyOnSeg(const Point &p, const Ln &l) {
@@ -96,4 +102,12 @@ struct Ln : Geometry<T, eps> {
         return std::min({pointToSegDist<Ret>(l1[0], l2), pointToSegDist<Ret>(l1[1], l2),
                 pointToSegDist<Ret>(l2[0], l1), pointToSegDist<Ret>(l2[1], l1)});
     }
+};
+
+template <typename PointType>
+struct LineType;
+
+template <typename T, T eps, typename MulT>
+struct LineType<Pt<T, eps, MulT>> {
+    using type = Ln<T, eps, MulT>;
 };
