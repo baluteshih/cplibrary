@@ -19,8 +19,8 @@ int main() {
         if (res == 1) cout << "COUNTER_CLOCKWISE\n";
         else if (res == -1) cout << "CLOCKWISE\n";
         else {
-            if (point_on_seg(p2, Line(p0, p1))) cout << "ON_SEGMENT\n";
-            else if (point_on_seg(p1, Line(p0, p2))) cout << "ONLINE_FRONT\n";
+            if (pointOnSeg(p2, Line(p0, p1))) cout << "ON_SEGMENT\n";
+            else if (pointOnSeg(p1, Line(p0, p2))) cout << "ONLINE_FRONT\n";
             else cout << "ONLINE_BACK\n";
         }
     }

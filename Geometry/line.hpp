@@ -12,10 +12,8 @@ struct Ln : Geometry<T, eps> {
     Ln(const Point &a, const Point &b) : l{a, b} {}
     friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }
     friend ostream& operator<<(ostream &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }
-    template <typename U, U _eps = get_default_eps<U>(), typename _MulU = U>
-    Ln<U, _eps, _MulU> cast() const {
-        return Ln<U, _eps, _MulU>(l[0].template cast<U, _eps, _MulU>(), l[1].template cast<U, _eps, _MulU>());
-    }
+    template <typename U, U _eps, typename _MulT>
+    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]} {}
     friend int side(const Point &p, const Ln &l) { 
         return side(p, l[0], l[1]);
     }
@@ -37,11 +35,11 @@ struct Ln : Geometry<T, eps> {
     template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
     friend Pt<Ret, _eps, _MulT> projection(const Point &p, const Ln &l) {
         auto d = direction(l);
-        return l[0].template cast<Ret, _eps, _MulT>() + d.template cast<Ret, _eps, _MulT>() * (Ret(dot(p - l[0], d)) / Ret(square(d)));
+        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret, _eps, _MulT>(d) * (Ret(dot(p - l[0], d)) / Ret(square(d)));
     }
     template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
     friend Pt<Ret, _eps, _MulT> reflection(const Point &p, const Ln &l) {
-        return projection<Ret, _eps, _MulT>(p, l) * Ret(2) - p.template cast<Ret, _eps, _MulT>();
+        return projection<Ret, _eps, _MulT>(p, l) * Ret(2) - Pt<Ret, _eps, _MulT>(p);
     }
     template <typename Ret = DefaultFloat<T>>
     friend Ret pointToLineDist(const Point &p, const Ln &l) {
@@ -52,7 +50,7 @@ struct Ln : Geometry<T, eps> {
     // l <= r is not explicitly required
     template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
     friend Pt<Ret, _eps, _MulT> lineIntersection(const Ln &l1, const Ln &l2) {
-        return l1[0].template cast<Ret, _eps, _MulT>() - direction(l1).template cast<Ret, _eps, _MulT>() * (Ret(cross(direction(l2), l1[0] - l2[0])) / Ret(cross(direction(l2), direction(l1))));
+        return Pt<Ret, _eps, _MulT>(l1[0]) - Pt<Ret, _eps, _MulT>(direction(l1)) * (Ret(cross(direction(l2), l1[0] - l2[0])) / Ret(cross(direction(l2), direction(l1))));
     }
     template <typename U>
     static bool between(U m, U l, U r) {

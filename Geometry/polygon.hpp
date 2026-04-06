@@ -6,11 +6,14 @@
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 class Polygon : public std::vector<Pt<T, eps, MulT>>, public Geometry<MulT, eps> {
     using Point = Pt<T, eps, MulT>;
+    using Line = Ln<T, eps, MulT>;
     using std::vector<Pt<T, eps, MulT>>::vector;
     using Geometry<MulT, eps>::sign;
     using Geometry<MulT, eps>::cmp;
 public:
     Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(), vec.end()) {} 
+    template <typename U, U _eps, typename _MulT>
+    Polygon(const Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}
     Point& at(int index) {
         index %= this->size();
         if (index < 0) index += this->size();
@@ -21,6 +24,10 @@ public:
         if (index < 0) index += this->size();
         return (*this)[index];
     }
+    Line edge(int index) const {
+        return Ln(at(index), at(index + 1));
+    }
+    // return twice of the true direct area
     MulT area() {
         MulT res = 0;
         int n = this->size();

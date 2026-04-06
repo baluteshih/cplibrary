@@ -71,10 +71,8 @@ struct Pt : Geometry<T, eps> {
     friend bool operator>(const Pt &a, const Pt &b) { return b < a; }
     friend bool operator<=(const Pt &a, const Pt &b) { return !(b < a); }
     friend bool operator>=(const Pt &a, const Pt &b) { return !(a < b); }
-    template <typename U, U _eps = get_default_eps<U>(), typename _MulU = U>
-    Pt<U, _eps, _MulU> cast() const {
-        return {static_cast<U>(x), static_cast<U>(y)};
-    }
+    template <typename U, U _eps, typename _MulT>
+    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)) {}
     friend MulT dot(const Pt &a, const Pt &b) {
         return MulT(a.x) * MulT(b.x) + MulT(a.y) * MulT(b.y);
     }
@@ -96,9 +94,9 @@ struct Pt : Geometry<T, eps> {
         return length<Ret>(a - b); 
     }
     template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
-    Pt<Ret, _eps, _MulT> normal(Pt<T> a) {
+    friend Pt<Ret, _eps, _MulT> normal(const Pt &a) {
         Ret len = length(a);
-        return a.template cast<Ret, _eps, _MulT>() / len;
+        return Pt<Ret, _eps, _MulT>(a) / len;
     }
     friend MulT cross(const Pt &p, const Pt &a, const Pt &b) {
         return cross(a - p, b - p);
