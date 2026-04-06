@@ -22,6 +22,7 @@ public:
     }
     int n() const { return G.size(); }
     int m() const { return edges.size(); }
+    int opposite(int u, int eid) const { return edges[eid].from ^ edges[eid].to ^ u; }
     auto& edge(int idx) requires (hasEdgeWeight) {
         return edges[idx]; 
     }
