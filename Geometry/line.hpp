@@ -4,10 +4,12 @@
 
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Ln : Geometry<T, eps> {
+    using value_type = T;
     using Point = Pt<T, eps, MulT>;
     std::array<Point, 2> l;
     using Geometry<MulT, eps>::sign;
     using Geometry<MulT, eps>::cmp;
+    static constexpr T eps_val = eps;
     Ln() {}
     Ln(const Point &a, const Point &b) : l{a, b} {}
     friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }

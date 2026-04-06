@@ -32,8 +32,10 @@ struct Geometry {
 
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Pt : Geometry<T, eps> {
+    using value_type = T;
     using Geometry<MulT, eps>::sign;
     using Geometry<MulT, eps>::cmp;
+    static constexpr T eps_val = eps;
     T x = 0, y = 0;
     Pt() : x(0), y(0) {}
     Pt(T x_, T y_) : x(x_), y(y_) {}
