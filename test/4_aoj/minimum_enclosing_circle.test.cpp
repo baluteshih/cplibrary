@@ -1,4 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_5_B"
+#define ERROR 0.000001
 #include "default_code.hpp"
 
 #include "Geometry/minimum_enclosing_circle.hpp"

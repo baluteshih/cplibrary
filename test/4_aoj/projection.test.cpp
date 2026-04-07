@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_1_B"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_1_A"
+#define ERROR 0.00000001
 #include "default_code.hpp"
 
 #include "Geometry/line.hpp"
@@ -16,6 +17,6 @@ int main() {
     while (q--) {
         Point p;
         cin >> p;
-        cout << reflection<long double>(p, base) << "\n";
+        cout << projection<double>(p, base) << "\n";
     }
 }

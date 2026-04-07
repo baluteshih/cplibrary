@@ -1,4 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_F"
+#define ERROR 0.00001
 #include "default_code.hpp"
 
 #include "Geometry/circle.hpp"
