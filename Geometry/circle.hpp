@@ -6,11 +6,13 @@
 
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Circle : Geometry<T, eps> {
+    using value_type = T;
     using Point = Pt<T, eps, MulT>;
     using Line = Ln<T, eps, MulT>;
     using polygon = Polygon<T, eps, MulT>;
     using Geometry<MulT, eps>::sign;
     using Geometry<MulT, eps>::cmp;
+    static constexpr T eps_val = eps;
     Point o;
     T r;
     Circle(Point _o = {}, T _r = 0) : o(_o), r(_r) {}
