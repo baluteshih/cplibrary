@@ -6,15 +6,15 @@ protected:
     static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;
     static constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;
     struct Empty {};
-    struct edge {
+    struct edge_v {
         int from, to;
         [[no_unique_address]] std::conditional_t<hasEdgeWeight, Edge, Empty> weight;
-        edge() {}
-        edge(int u, int v) : from(u), to(v) {}
-        edge(int u, int v, const auto &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}
+        edge_v() {}
+        edge_v(int u, int v) : from(u), to(v) {}
+        edge_v(int u, int v, const auto &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}
     };
     std::vector<std::vector<std::pair<int, int>>> G;
-    std::vector<edge> edges;
+    std::vector<edge_v> edges;
     [[no_unique_address]] std::conditional_t<hasVertexWeight, std::vector<Vertex>, Empty> weight;
 public:
     Graph(int _n) : G(_n) {
@@ -55,6 +55,11 @@ public:
         if constexpr (!directed) G[v].emplace_back(u, edges.size());
         edges.emplace_back(u, v);
     }
+    void add_edge(const edge_v &e) {
+        G[e.from].emplace_back(e.to, edges.size());
+        if constexpr (!directed) G[e.to].emplace_back(e.from, edges.size());
+        edges.emplace_back(e);
+    }
     std::vector<int> in_degree() {
         std::vector<int> res(n());
         for (auto &e : edges)
@@ -82,4 +87,9 @@ public:
         if constexpr (hasVertexWeight) res.set_vertex_weight(weight);
         return res;
     }
+};
+
+template<typename Edge = void, typename Vertex = void>
+class UndirectedGraph : public Graph<false, Edge, Vertex> {
+    using Graph<false, Edge, Vertex>::Graph;
 };

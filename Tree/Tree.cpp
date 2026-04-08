@@ -10,6 +10,11 @@ public:
     std::vector<int> pa, dfs_in, dfs_out;
     std::vector<int> preorder, postorder;
     Tree(int n): super(n), current_root(-1) {}
+    Tree(const super &graph, const std::vector<int> &edge_index): super(graph.n()), current_root(-1) {
+        assert(int(edge_index.size()) + 1 == this->n());
+        for (int eid : edge_index)
+            this->add_edge(graph.edge(eid));
+    }
     void traverse(int root = 0) {
         current_root = root;
         std::vector<int>(this->n()).swap(pa);
