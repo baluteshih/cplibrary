@@ -119,7 +119,8 @@ struct Pt : Geometry<T, eps> {
         return ua != ub ? ua : sign(cross(a, b)) == 1;
     }
     friend bool polar(const Pt &a, const Pt &b, const Pt &base) {
-        bool ua = sign(cross(base, a)) > 0, ub = sign(cross(base, b)) > 0;
+        bool ua = sign(cross(base, a)) > 0 || sameDirection(base, a);
+        bool ub = sign(cross(base, b)) > 0 || sameDirection(base, b);
         return ua != ub ? ua : sign(cross(a, b)) == 1;
     }
     friend bool parallel(const Pt &a, const Pt &b) {
