@@ -31,8 +31,8 @@ int main() {
             Polygon<double> res;
             res.push_back(lineIntersection(ln, Line(poly[r], poly.at(r + 1))));
             for (int i = r + 1; i % SZ(poly) != l; ++i)
-                res.push_back(poly.at(i).cast<double>());
-            res.push_back(poly[l].cast<double>());
+                res.push_back(poly.at(i));
+            res.push_back(poly[l]);
             res.push_back(lineIntersection(ln, Line(poly[l], poly.at(l + 1))));
             cout << res.area() / 2 << "\n";
         }

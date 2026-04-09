@@ -13,7 +13,7 @@ int main() {
     std::vector<mint> num(n);
     for (auto &x : num)
         cin >> x;
-    UndirectedGraph graph(n);
+    UndirectedGraph<> graph(n);
     for (int i = 0; i < m; ++i) {
         int u, v;
         cin >> u >> v;

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A"
 #include "default_code.hpp"
 
-#include "Geometry/Polygon.hpp"
+#include "Geometry/polygon.hpp"
 
 using polygon = Polygon<int>;
 

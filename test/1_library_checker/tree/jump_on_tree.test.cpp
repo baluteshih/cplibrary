@@ -7,7 +7,7 @@ int main() {
     ios::sync_with_stdio(0), cin.tie(0);
     int n, q;
     cin >> n >> q;
-    TreeTools tree(n);
+    TreeTools<> tree(n);
     for (int i = 1; i < n; ++i) {
         int u, v;
         cin >> u >> v;
