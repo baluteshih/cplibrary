@@ -2,7 +2,7 @@
 
 template<bool directed = true, typename Edge = void, typename Vertex = void>
 class Graph {
-protected:
+public:
     static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;
     static constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;
     struct Empty {};
@@ -11,19 +11,30 @@ protected:
         [[no_unique_address]] std::conditional_t<hasEdgeWeight, Edge, Empty> weight;
         edge_v() {}
         edge_v(int u, int v) : from(u), to(v) {}
-        edge_v(int u, int v, const auto &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}
+        template <typename W>
+        edge_v(int u, int v, const W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}
+        template <typename OtherEdge>
+        edge_v(const OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight; }) 
+            : from(other.from), to(other.to), weight(other.weight) {}
+        template <typename OtherEdge>
+        edge_v(const OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) 
+            : from(other.from), to(other.to) {} 
+        edge_v reversed() const {
+            edge_v res(*this);
+            std::swap(res.from, res.to);
+            return res;
+        }
     };
     std::vector<std::vector<std::pair<int, int>>> G;
     std::vector<edge_v> edges;
     [[no_unique_address]] std::conditional_t<hasVertexWeight, std::vector<Vertex>, Empty> weight;
-public:
     Graph(int _n) : G(_n) {
         if constexpr (hasVertexWeight) weight.resize(_n);
     }
     int n() const { return G.size(); }
     int m() const { return edges.size(); }
     int opposite(int u, int eid) const { return edges[eid].from ^ edges[eid].to ^ u; }
-    auto& edge(int idx) requires (hasEdgeWeight) {
+    auto& edge(int idx) {
         return edges[idx]; 
     }
     auto &vertex(int idx) requires (hasVertexWeight) {
@@ -50,7 +61,7 @@ public:
         if constexpr (!directed) G[v].emplace_back(u, edges.size());
         edges.emplace_back(u, v, w);
     }
-    void add_edge(int u, int v) {
+    void add_edge(int u, int v) requires (!hasEdgeWeight) {
         G[u].emplace_back(v, edges.size());
         if constexpr (!directed) G[v].emplace_back(u, edges.size());
         edges.emplace_back(u, v);
@@ -78,12 +89,10 @@ public:
     const std::vector<std::pair<int, int>>& adj(int idx) const {
         return G[idx];
     }
-    Graph reversed() {
+    Graph reversed() const {
         Graph res(n());
-        for (auto &e : edges) {
-            if constexpr (hasEdgeWeight) res.add_edge(e.to, e.from, e.weight);
-            else res.add_edge(e.to, e.from);
-        }
+        for (auto &e : edges)
+            res.add_edge(e.reversed());
         if constexpr (hasVertexWeight) res.set_vertex_weight(weight);
         return res;
     }
@@ -121,9 +130,19 @@ public:
         std::ranges::reverse(res_e);
         return std::make_pair(res_v, res_e);
     }
+    Graph<true, Edge, Vertex> oriented(const std::vector<int> &rk) const requires (!directed) {
+        Graph<true, Edge, Vertex> res(this->n());
+        for (auto &e : edges)
+            if (rk[e.from] < rk[e.to])
+                res.add_edge(e);
+            else
+                res.add_edge(e.reversed());
+        return res;
+    }
 };
 
 template<typename Edge = void, typename Vertex = void>
 class UndirectedGraph : public Graph<false, Edge, Vertex> {
+public:
     using Graph<false, Edge, Vertex>::Graph;
 };
