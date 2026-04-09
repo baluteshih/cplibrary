@@ -6,6 +6,8 @@ template<typename Edge = void, typename Vertex = void>
 class Tree : public Graph<false, Edge, Vertex> {
 public:
     using super = Graph<false, Edge, Vertex>;
+    using super::hasEdgeWeight;
+    using super::hasVertexWeight;
     int current_root;
     std::vector<int> pa, dfs_in, dfs_out;
     std::vector<int> preorder, postorder;
@@ -80,7 +82,7 @@ public:
         });
         return res;
     }
-    auto distance_edge(int root = -1) requires (this->hasEdgeWeight) {
+    auto distance_edge(int root = -1) requires (hasEdgeWeight) {
         if (current_root == -1 || (root != -1 && current_root != root)) {
             assert(root != -1);
             traverse(root);
@@ -89,6 +91,27 @@ public:
         predfs([&](int u) {
             if (parent_eid(u) != -1)
                 res[u] = res[parent(u)] + parent_edge(u).weight;
+        });
+        return res;
+    }
+    auto weighted_distance(int root = -1) requires ((hasEdgeWeight || hasVertexWeight) && (!(hasEdgeWeight && hasVertexWeight) || std::is_same_v<Edge, Vertex>)) {
+        using WeightType = std::conditional_t<hasEdgeWeight, Edge, Vertex>;
+        if (current_root == -1 || (root != -1 && current_root != root)) {
+            assert(root != -1);
+            traverse(root);
+        }
+        std::vector<WeightType> res(this->n());
+        predfs([&](int u) {
+            if constexpr (hasEdgeWeight && hasVertexWeight) {
+                res[u] = this->weight[u];
+                if (u != root) res[u] = parent_edge(u).weight + res[u];
+            }
+            else if constexpr (hasEdgeWeight) {
+                if (u != root) res[u] = parent_edge(u).weight; 
+            }
+            else if constexpr (hasVertexWeight) {
+                res[u] = this->weight[u];
+            }
         });
         return res;
     }

@@ -5,6 +5,8 @@ class Graph {
 public:
     static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;
     static constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;
+    using edge_value_type = Edge;
+    using vertex_value_type = Vertex;
     struct Empty {};
     struct edge_v {
         int from, to;
