@@ -87,6 +87,40 @@ public:
         if constexpr (hasVertexWeight) res.set_vertex_weight(weight);
         return res;
     }
+    std::pair<std::vector<int>, std::vector<int>> cycle() {
+        std::vector<int> vis(this->n());
+        std::vector<int> res_v, res_e;
+        int cyc_end = -1;
+        auto dfs = [&](auto self, int u, int f) -> int {
+            vis[u] = 1;
+            for (auto [v, eid] : G[u]) {
+                if (eid == f || vis[v] == 2) continue;
+                if (vis[v] == 1) {
+                    res_v.push_back(u);
+                    res_e.push_back(eid);
+                    cyc_end = v;
+                    return 1;
+                }
+                int rt = self(self, v, eid);
+                if (rt) {
+                    if (rt == 1) { 
+                        res_e.push_back(eid);
+                        res_v.push_back(u);
+                    }
+                    if (cyc_end == u) rt = 2;
+                    return rt;
+                }
+            }
+            vis[u] = 2;
+            return 0;
+        };
+        for (int i = 0; i < this->n(); ++i)
+            if (!vis[i] && dfs(dfs, i, -1))
+                break;
+        std::ranges::reverse(res_v);
+        std::ranges::reverse(res_e);
+        return std::make_pair(res_v, res_e);
+    }
 };
 
 template<typename Edge = void, typename Vertex = void>
