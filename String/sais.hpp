@@ -2,7 +2,7 @@
 
 /*
 0-base
-The input string should not containt 0
+The input string should not contain 0
 sa[i]: sa[i]-th suffix is the i-th lexicographically smallest suffix.
 hi[i]: LCP of suffix sa[i] and suffix sa[i - 1].
 ra[i]: the rank of the i-th suffix
