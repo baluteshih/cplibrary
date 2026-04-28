@@ -219,6 +219,9 @@ struct static_modint : internal::static_modint_base {
     friend bool operator!=(const mint& lhs, const mint& rhs) {
         return lhs._v != rhs._v;
     }
+    friend std::strong_ordering operator<=>(const mint& lhs, const mint& rhs) {
+        return lhs._v <=> rhs._v;
+    }
     friend ostream& operator<<(ostream& os, const mint& v) {
         os << v._v;
         return os;
@@ -340,6 +343,9 @@ template <int id> struct dynamic_modint : internal::modint_base {
     }
     friend bool operator!=(const mint& lhs, const mint& rhs) {
         return lhs._v != rhs._v;
+    }
+    friend std::strong_ordering operator<=>(const mint& lhs, const mint& rhs) {
+        return lhs._v <=> rhs._v;
     }
     friend ostream& operator<<(ostream& os, const mint& v) {
         os << v._v;
