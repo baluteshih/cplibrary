@@ -9,9 +9,8 @@ public:
     using super::Tree;
     using super::hasEdgeWeight;
     using super::hasVertexWeight;
-    static_assert(!(hasEdgeWeight && hasVertexWeight) || std::is_same_v<Edge, Vertex>, 
-                  "Compile Error: Edge and Vertex weights must be the exact same type if both are provided!");
-    using WeightType = std::conditional_t<hasEdgeWeight, Edge, Vertex>;
+    static_assert(ValidUnifiedWeight<Edge, Vertex>, "Compile Error: Edge and Vertex weights must be the exact same type if both are provided!");
+    using WeightType = UnifiedWeight_t<Edge, Vertex>;
     static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;
     std::vector<int> dep;
     std::vector<std::vector<int>> pa_table;

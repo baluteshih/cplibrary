@@ -24,20 +24,20 @@ public:
         std::vector<int>(this->n()).swap(dfs_out);
         preorder.clear(), preorder.reserve(this->n());
         postorder.clear(), postorder.reserve(this->n());
-        int dft = 0;
-        auto dfs = [&](auto _dfs, int u, int f) -> void {
+        int dft = -1;
+        auto dfs = [&](auto& self, int u, int f) -> void {
             pa[u] = f;
             dfs_in[u] = ++dft;
             preorder.push_back(u);
             for (auto [v, eid] : this->G[u])
                 if (eid != f)
-                    _dfs(_dfs, v, eid);
+                    self(self, v, eid);
             dfs_out[u] = dft;
             postorder.push_back(u);
         };
         dfs(dfs, root, -1);
     }
-    bool ancestor(int u, int v) {
+    bool ancestor(int u, int v) const {
         return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];
     }
     void run_order(const std::vector<int> &order, const auto &func) {
@@ -50,14 +50,14 @@ public:
     void postdfs(const auto &func) {
         run_order(postorder, func);
     }
-    int parent(int u) {
+    int parent(int u) const {
         if (pa[u] == -1) return u;
         return this->opposite(u, pa[u]);
     }
-    int parent_eid(int u) {
+    int parent_eid(int u) const {
         return pa[u];
     }
-    super::edge_v& parent_edge(int u) {
+    super::edge_v& parent_edge(int u) const {
         assert(pa[u] != -1);
         return this->edge(pa[u]);
     }
@@ -94,8 +94,8 @@ public:
         });
         return res;
     }
-    auto weighted_distance(int root = -1) requires ((hasEdgeWeight || hasVertexWeight) && (!(hasEdgeWeight && hasVertexWeight) || std::is_same_v<Edge, Vertex>)) {
-        using WeightType = std::conditional_t<hasEdgeWeight, Edge, Vertex>;
+    auto weighted_distance(int root = -1) requires (ValidUnifiedNonEmptyWeight<Edge, Vertex>) {
+        using WeightType = UnifiedWeight_t<Edge, Vertex>;
         if (current_root == -1 || (root != -1 && current_root != root)) {
             assert(root != -1);
             traverse(root);

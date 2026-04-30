@@ -148,3 +148,19 @@ class UndirectedGraph : public Graph<false, Edge, Vertex> {
 public:
     using Graph<false, Edge, Vertex>::Graph;
 };
+
+template <typename Edge, typename Vertex>
+struct UnifiedWeight {
+    static_assert(std::is_same_v<Edge, void> || std::is_same_v<Vertex, void> || std::is_same_v<Edge, Vertex>,
+                  "Compile Error: Edge and Vertex weights must be the exact same type if both are provided!");
+    using type = std::conditional_t<!std::is_same_v<Edge, void>, Edge, Vertex>;
+};
+
+template <typename Edge, typename Vertex>
+using UnifiedWeight_t = typename UnifiedWeight<Edge, Vertex>::type;
+
+template <typename Edge, typename Vertex>
+concept ValidUnifiedWeight = std::is_same_v<Edge, void> || std::is_same_v<Vertex, void> || std::is_same_v<Edge, Vertex>;
+
+template <typename Edge, typename Vertex>
+concept ValidUnifiedNonEmptyWeight = (!std::is_same_v<Edge, void> || !std::is_same_v<Vertex, void>) && ValidUnifiedWeight<Edge, Vertex>;
