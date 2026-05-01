@@ -42,7 +42,7 @@ public:
     auto &vertex(int idx) requires (hasVertexWeight) {
         return weight[idx];
     }
-    const auto& edge(int idx) const requires (hasEdgeWeight) {
+    const auto& edge(int idx) const {
         return edges[idx]; 
     }
     const auto &vertex(int idx) const requires (hasVertexWeight) {
