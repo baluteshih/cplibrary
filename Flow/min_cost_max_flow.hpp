@@ -1,28 +1,37 @@
 #pragma once
 
+#include "Graph/base.hpp"
+
 template<typename T>
-class min_cost_max_flow { // 0-base
-    struct Edge {
-        int from, to, rev;
-        T cap, flow, cost;
-    };
-    int n;
-    std::vector<Edge*> past;
-    std::vector<std::vector<Edge>> G;
+struct CostFlowWeight {
+    T cap, cost, flow;
+    CostFlowWeight() : cap(0), cost(0), flow(0) {}
+    CostFlowWeight(T c, T w, T f = 0) : cap(c), cost(w), flow(f) {}
+    friend ostream& operator<<(ostream& os, const CostFlowWeight &v) {
+        os << "[" << v.cap << ", " << v.cost << ", " << v.flow << "]";
+        return os;
+    }
+};
+
+template<typename T>
+class min_cost_max_flow : public Graph<true, CostFlowWeight<T>, void> { // 0-base
+public:
+    using super = Graph<true, CostFlowWeight<T>, void>;
+    std::vector<int> past;
     std::vector<T> dis, up, pot;
     template<bool bellmanford = true>
     bool shortest_path(int s, int t) {
-        std::vector<int> inq(n);
+        std::vector<int> inq(this->n());
         std::ranges::fill(dis, std::numeric_limits<T>::max());
         std::conditional_t<bellmanford, std::queue<int>, std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>>> q;
-        auto relax = [&](int u, T d, T cap, Edge *e) {
+        auto relax = [&](int u, T d, T cap, int eid) {
             if (cap > 0 && dis[u] > d) {
-                dis[u] = d, up[u] = cap, past[u] = e;
+                dis[u] = d, up[u] = cap, past[u] = eid;
                 if constexpr (!bellmanford) q.emplace(dis[u], u);
                 else if (!inq[u]) inq[u] = 1, q.push(u);
             }
         };
-        relax(s, 0, std::numeric_limits<T>::max(), 0);
+        relax(s, 0, std::numeric_limits<T>::max(), -1);
         while (!q.empty()) {
             T d;
             int u;
@@ -31,31 +40,31 @@ class min_cost_max_flow { // 0-base
             q.pop();
             if constexpr (bellmanford) inq[u] = 0;
             else if (dis[u] != d) continue;
-            for (auto &e : G[u]) {
-                T d2 = dis[u] + e.cost + pot[u] - pot[e.to];
-                relax(e.to, d2, std::min(up[u], e.cap - e.flow), &e);
+            for (auto [v, eid] : this->G[u]) {
+                auto &w = this->edges[eid].weight;
+                T d2 = dis[u] + w.cost + pot[u] - pot[v];
+                relax(v, d2, std::min(up[u], w.cap - w.flow), eid);
             }
         }
         return dis[t] != std::numeric_limits<T>::max();
     }
-public:
-    min_cost_max_flow(int _n) : n(_n), past(n), G(n), dis(n), up(n), pot(n) {} 
+    min_cost_max_flow(int _n) : super(_n), past(_n), dis(_n), up(_n), pot(_n) {} 
     template<bool bellmanford = true, bool neg = true>
     std::pair<T, T> solve(int s, int t) {
         T flow = 0, cost = 0;
         if constexpr (neg) shortest_path<true>(s, t), dis = pot;
         for (; shortest_path<bellmanford>(s, t); dis = pot) {
-            for (int i = 0; i < n; ++i) dis[i] += pot[i] - pot[s];
+            for (int i = 0; i < this->n(); ++i) dis[i] += pot[i] - pot[s];
             flow += up[t], cost += up[t] * dis[t];
-            for (int i = t; past[i]; i = past[i]->from) {
-                auto &e = *past[i];
-                e.flow += up[t], G[e.to][e.rev].flow -= up[t];
+            for (int i = t; past[i] != -1; i = this->edges[past[i]].from) {
+                this->edges[past[i]].weight.flow += up[t];
+                this->edges[past[i] ^ 1].weight.flow -= up[t];
             }
         }
         return std::make_pair(flow, cost);
     }
     void add_edge(int a, int b, T cap, T cost) {
-        G[a].push_back(Edge{a, b, int(G[b].size()), cap, 0, cost});
-        G[b].push_back(Edge{b, a, int(G[a].size()) - 1, 0, 0, -cost});
+        super::add_edge(a, b, CostFlowWeight(cap, cost, 0));
+        super::add_edge(b, a, CostFlowWeight(0, -cost, 0));
     }
 };
