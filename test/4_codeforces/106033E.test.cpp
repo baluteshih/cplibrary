@@ -17,7 +17,7 @@ int main() {
     }
     ll res = dinic.maxflow(0, n - 1);
     cout << res << "\n";
-    auto route = dinic.get_route(); 
+    auto route = dinic.get_route(0, n - 1); 
     cout << route.size() << "\n";
     for (auto [w, v] : route) {
         cout << w << " " << v.size();

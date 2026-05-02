@@ -1,4 +1,3 @@
-#pragma once
 
 template<bool directed = true, typename Edge = void, typename Vertex = void>
 class Graph {
@@ -25,6 +24,12 @@ public:
             edge_v res(*this);
             std::swap(res.from, res.to);
             return res;
+        }
+        friend ostream& operator<<(ostream& os, const edge_v &v) {
+            os << "(" << v.from << "->" << v.to;
+            if constexpr (hasEdgeWeight) os << ", " << v.weight;
+            os << ")";
+            return os;
         }
     };
     std::vector<std::vector<std::pair<int, int>>> G;
@@ -72,6 +77,11 @@ public:
         G[e.from].emplace_back(e.to, edges.size());
         if constexpr (!directed) G[e.to].emplace_back(e.from, edges.size());
         edges.emplace_back(e);
+    }
+    void pop_edge() {
+        G[edges.back().from].pop_back();
+        if constexpr (!directed) G[edges.back().to].pop_back();
+        edges.pop_back();
     }
     std::vector<int> in_degree() {
         std::vector<int> res(n());
