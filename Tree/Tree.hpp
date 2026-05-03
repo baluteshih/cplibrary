@@ -57,7 +57,11 @@ public:
     int parent_eid(int u) const {
         return pa[u];
     }
-    super::edge_v& parent_edge(int u) const {
+    super::edge_v& parent_edge(int u) {
+        assert(pa[u] != -1);
+        return this->edge(pa[u]);
+    }
+    super::edge_v parent_edge(int u) const {
         assert(pa[u] != -1);
         return this->edge(pa[u]);
     }
