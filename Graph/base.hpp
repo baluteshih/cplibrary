@@ -1,3 +1,4 @@
+#pragma once
 
 template<bool directed = true, typename Edge = void, typename Vertex = void>
 class Graph {

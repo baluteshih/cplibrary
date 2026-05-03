@@ -4,9 +4,9 @@
 
 template<class T>
 class bounded_flow : public Dinic<T> { // 0-base
-    int real_n;
 public:
     using super = Dinic<T>;
+    int real_n;
     std::vector<T> cnt;
     bounded_flow(int _n) : super(_n + 2), real_n(_n), cnt(real_n + 2) {}
     void add_edge(int u, int v, T lcap, T rcap) {
