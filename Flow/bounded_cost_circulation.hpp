@@ -6,6 +6,7 @@ template<typename T, typename C = T>
 class bounded_cost_circulation : public min_cost_circulation<T, C> { // 0-base
 public:
     using super = min_cost_circulation<T, C>;
+    using super::add_edge;
     int real_n;
     std::vector<T> cnt;
     bounded_cost_circulation(int _n) : super(_n + 2), real_n(_n), cnt(real_n + 2) {}
