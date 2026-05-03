@@ -1,8 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod"
 #include "default_code.hpp"
 
-#include "Numeric/Modint.hpp"
-
+#include "Numeric/DynamicModint.hpp"
 #include "Matrix/Matrix.hpp"
 
 using mint = modint;

@@ -2,6 +2,7 @@
 #include "default_code.hpp"
 
 #include "Numeric/Combination.hpp"
+#include "Numeric/DynamicModint.hpp"
 
 int main() {
     ios::sync_with_stdio(0), cin.tie(0);

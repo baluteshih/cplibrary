@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Numeric/Modint.hpp"
+#include "Numeric/internal_math.hpp"
 
 template<class T>
 requires std::derived_from<T, internal::modint_base>
