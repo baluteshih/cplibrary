@@ -3,28 +3,31 @@
 // Reference: Atcoder Library https://github.com/atcoder/ac-library
 #include "Numeric/internal_math.hpp"
 
-template <int m, std::enable_if_t<(1 <= m)>* = nullptr>
-struct static_modint : internal::static_modint_base {
-    using mint = static_modint;
+template <int id> struct dynamic_modint : internal::modint_base {
+    using mint = dynamic_modint;
 
   public:
-    static constexpr int mod() { return m; }
+    static int mod() { return (int)(bt.umod()); }
+    static void set_mod(int m) {
+        assert(1 <= m);
+        bt = internal::barrett(m);
+    }
     static mint raw(int v) {
         mint x;
         x._v = v;
         return x;
     }
 
-    static_modint() : _v(0) {}
+    dynamic_modint() : _v(0) {}
     template <class T, internal::is_signed_int_t<T>* = nullptr>
-    static_modint(T v) {
-        long long x = (long long)(v % (long long)(umod()));
-        if (x < 0) x += umod();
+    dynamic_modint(T v) {
+        long long x = (long long)(v % (long long)(mod()));
+        if (x < 0) x += mod();
         _v = (unsigned int)(x);
     }
     template <class T, internal::is_unsigned_int_t<T>* = nullptr>
-    static_modint(T v) {
-        _v = (unsigned int)(v % umod());
+    dynamic_modint(T v) {
+        _v = (unsigned int)(v % mod());
     }
 
     unsigned int val() const { return _v; }
@@ -56,14 +59,12 @@ struct static_modint : internal::static_modint_base {
         return *this;
     }
     mint& operator-=(const mint& rhs) {
-        _v -= rhs._v;
-        if (_v >= umod()) _v += umod();
+        _v += mod() - rhs._v;
+        if (_v >= umod()) _v -= umod();
         return *this;
     }
     mint& operator*=(const mint& rhs) {
-        unsigned long long z = _v;
-        z *= rhs._v;
-        _v = (unsigned int)(z % umod());
+        _v = bt.mul(_v, rhs._v);
         return *this;
     }
     mint& operator/=(const mint& rhs) { return *this = *this * rhs.inv(); }
@@ -82,14 +83,9 @@ struct static_modint : internal::static_modint_base {
         return r;
     }
     mint inv() const {
-        if (prime) {
-            assert(_v);
-            return pow(umod() - 2);
-        } else {
-            auto eg = internal::inv_gcd(_v, m);
-            assert(eg.first == 1);
-            return eg.second;
-        }
+        auto eg = internal::inv_gcd(_v, mod());
+        assert(eg.first == 1);
+        return eg.second;
     }
 
     friend mint operator+(const mint& lhs, const mint& rhs) {
@@ -128,9 +124,13 @@ struct static_modint : internal::static_modint_base {
 
   private:
     unsigned int _v;
-    static constexpr unsigned int umod() { return m; }
-    static constexpr bool prime = internal::is_prime<m>;
+    static internal::barrett bt;
+    static unsigned int umod() { return bt.umod(); }
 };
+template <int id> internal::barrett dynamic_modint<id>::bt(998244353);
 
-using modint998244353 = static_modint<998244353>;
-using modint1000000007 = static_modint<1000000007>;
+using modint = dynamic_modint<-1>;
+
+/*
+modint::set_mod(p);
+*/
