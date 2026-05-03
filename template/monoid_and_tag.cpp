@@ -1,5 +1,3 @@
-#include "DataStructure/SegmentTree.hpp"
-
 struct Tag {
     int a;
     Tag(int _a = 0): a(_a) {}
@@ -26,5 +24,3 @@ struct Value {
         return is;
     }
 };
-
-// SegmentTree<Value, Tag> seg;
