@@ -24,6 +24,8 @@ int main() {
         return polar(a, b);   
     });
     ranges::rotate(dots, ranges::min_element(dots, [](const auto &a, const auto &b) {
+        if (sameDirection(Point(-1, 0), a)) return false;
+        if (sameDirection(Point(-1, 0), b)) return true;
         return polar(a, b, Point(-1, 0)); 
     }));
     dots.insert(ranges::min_element(dots, [](const auto &a, const auto &b) {

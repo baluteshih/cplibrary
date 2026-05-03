@@ -119,7 +119,8 @@ struct Pt : Geometry<T, eps> {
         return ua != ub ? ua : sign(cross(a, b)) == 1;
     }
     friend bool polar(const Pt &a, const Pt &b, const Pt &base) {
-        bool ua = sign(cross(base, a)) > 0, ub = sign(cross(base, b)) > 0;
+        bool ua = sign(cross(base, a)) > 0 || sameDirection(base, a);
+        bool ub = sign(cross(base, b)) > 0 || sameDirection(base, b);
         return ua != ub ? ua : sign(cross(a, b)) == 1;
     }
     friend bool parallel(const Pt &a, const Pt &b) {
@@ -135,11 +136,11 @@ struct Pt : Geometry<T, eps> {
         return rotate90(-p);
     }
     template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>
-    Pt<Ret, _eps, _MulT> rotate(const Pt &p, Ret ang) {
+    friend Pt<Ret, _eps, _MulT> rotate(const Pt &p, Ret ang) {
         return {Ret(p.x) * std::cos(ang) - Ret(p.y) * std::sin(ang), Ret(p.x) * std::sin(ang) + Ret(p.y) * std::cos(ang)};
     }
     template <typename Ret = DefaultFloat<T>>
-    Ret angle(const Pt &p) {
+    friend Ret angle(const Pt &p) {
         return std::atan2(Ret(p.y), Ret(p.x));
     }
     friend bool _betweenAngle(const Pt &o, const Pt &a, const Pt &b, const Pt &p, int strict) {

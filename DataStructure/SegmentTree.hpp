@@ -73,6 +73,44 @@ class SegmentTree {
         if (R > mid) range_transform_beats(L, R, mid, r, rt << 1 | 1, tag, tag_condition);
         up(rt);
     }
+    int range_left_search(int L, int R, int l, int r, int rt, const auto &condition) {
+        if (r - l == 1) {
+            if (!condition(seg[rt])) return R;
+            return l;
+        }
+        int mid = (l + r) >> 1;
+        if constexpr (hasTag) down(rt);
+        if (L <= l && R >= r) {
+            if (condition(seg[rt << 1])) return range_left_search(L, R, l, mid, rt << 1, condition);
+            return range_left_search(L, R, mid, r, rt << 1 | 1, condition);
+        }
+        int left = R;
+        if (L < mid) left = range_left_search(L, R, l, mid, rt << 1, condition);
+        if (left == R) {
+            if (R > mid) return range_left_search(L, R, mid, r, rt << 1 | 1, condition);
+            return R;
+        }
+        return left;
+    }
+    int range_right_search(int L, int R, int l, int r, int rt, const auto &condition) {
+        if (r - l == 1) {
+            if (!condition(seg[rt])) return L - 1;
+            return l;
+        }
+        int mid = (l + r) >> 1;
+        if constexpr (hasTag) down(rt);
+        if (L <= l && R >= r) {
+            if (condition(seg[rt << 1 | 1])) return range_right_search(L, R, mid, r, rt << 1 | 1, condition);
+            return range_right_search(L, R, l, mid, rt << 1, condition);
+        }
+        int right = L - 1;
+        if (R > mid) right = range_right_search(L, R, mid, r, rt << 1 | 1, condition);
+        if (right == L - 1) {
+            if (L < mid) return range_right_search(L, R, l, mid, rt << 1, condition);
+            return L - 1;
+        }
+        return right;
+    }
     Value get(int x, int l, int r, int rt) {
         while (r - l > 1) {
             if constexpr (hasTag) down(rt);
@@ -138,6 +176,29 @@ public:
         assert(l <= r);
         if (l < r)
             range_transform_beats(l, r, 0, n, 1, tag, tag_condition);
+    }
+    /*
+    For the given element range [l, r)
+    Perform segment tree binary search within the range with left half first 
+    */
+    int range_left_search(const auto &condition, int l = -1, int r = -1) {
+        if (l == -1 && r == -1) l = 0, r = n;
+        assert(0 <= l && r <= n);
+        assert(l <= r);
+        if (l == r) return r;
+        return range_left_search(l, r, 0, n, 1, condition);
+    }
+    /*
+    For the given element range (l, r]
+    Perform segment tree binary search within the range with right half first 
+    */
+    int range_right_search(const auto &condition, int l = -1, int r = -1) {
+        if (l == -1 && r == -1) l = -1, r = n - 1;
+        ++l, ++r;
+        assert(0 <= l && r <= n);
+        assert(l <= r);
+        if (l == r) return l - 1;
+        return range_right_search(l, r, 0, n, 1, condition);
     }
     void printinfo(int l, int r) {
         assert(0 <= l && r <= n);

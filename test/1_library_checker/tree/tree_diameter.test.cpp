@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 #include "default_code.hpp"
 
-#include "Tree/Tree.cpp"
+#include "Tree/Tree.hpp"
 
 int main() {
     ios::sync_with_stdio(0), cin.tie(0);

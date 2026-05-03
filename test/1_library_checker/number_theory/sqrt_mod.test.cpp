@@ -1,7 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 #include "default_code.hpp"
 
-#include "Numeric/QuadraticResidue.hpp"
+#include "Numeric/quadratic_residue.hpp"
+#include "Numeric/DynamicModint.hpp"
 
 int main() {
     ios::sync_with_stdio(0), cin.tie(0);
@@ -14,7 +15,7 @@ int main() {
         v.set_mod(p);
         v = v.raw(y);
         bool succ;
-        auto res = QuadraticResidue(v, succ);
+        auto res = quadratic_residue(v, succ);
         if (!succ) cout << "-1\n";
         else cout << res << "\n";
     }

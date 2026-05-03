@@ -1,0 +1,17 @@
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_C"
+#define ERROR 0.000001
+#include "default_code.hpp"
+
+#include "Geometry/centers.hpp"
+
+using Point = Pt<int>;
+
+int main() {
+    ios::sync_with_stdio(0), cin.tie(0);
+    Point a, b, c;
+    cin >> a >> b >> c;
+    auto ans = circumcenter(a, b, c);
+    cout << fixed << setprecision(20);
+    cout << ans << " " << dist(ans, decltype(ans)(a)) << "\n";
+}
+
