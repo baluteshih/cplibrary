@@ -32,7 +32,7 @@ public:
         if constexpr (Super::hasT) {
             this->data[ru] = this->data[ru] + this->data[rv]; 
         }
-        potential[rv] = potential[u] - potential[v] - pot; 
+        potential[rv] = P() - potential[v] - pot + potential[u]; 
         return true;
     }
     // return p[u] - p[v]
