@@ -34,8 +34,8 @@ jobs:
         echo "Package path: $PACKAGE_PATH"
         sed -i '97i \            print(path, _error_timestamp, self.get_current_timestamp(path), timestamp, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
         sed -i '154i \        print(depending_files, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '159i \        print(code, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '161i \        print(timestamp, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
+        sed -i '159i \    print(code, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
+        sed -i '161i \    print(timestamp, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
         sed -i '2i \import sys' "$PACKAGE_PATH"
         cat $PACKAGE_PATH
         oj-verify all
