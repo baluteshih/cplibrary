@@ -1,20 +1,25 @@
 #pragma once
 
-template<typename Value = int, typename Tag = void>
+template<typename Value = int, typename Tag = void, bool pushdown = true>
 class SegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
+    static_assert(pushdown || hasTag, "Lazy tag must exist when pushdown is false");
     int n;
     vector<Value> seg;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>, Empty> lazy;
+    Value get_val(int rt) {
+        if constexpr (pushdown) return seg[rt];
+        else return seg[rt] + lazy[rt];
+    }
     void up(int rt) {
-        seg[rt] = seg[rt << 1] + seg[rt << 1 | 1];
+        seg[rt] = get_val(rt << 1) + get_val(rt << 1 | 1);
     }
     void give_tag(int rt, auto tag) requires (hasTag) {
-        seg[rt] = seg[rt] + tag;
+        if constexpr (pushdown) seg[rt] = seg[rt] + tag;
         lazy[rt] = lazy[rt] + tag;
     }
-    void down(int rt) requires (hasTag) {
+    void down(int rt) requires (hasTag && pushdown) {
         give_tag(rt << 1, lazy[rt]);
         give_tag(rt << 1 | 1, lazy[rt]);
         lazy[rt] = Tag();
@@ -29,26 +34,39 @@ class SegmentTree {
     }
     Value range_prod(int L, int R, int l, int r, int rt) {
         if (L <= l && R >= r)
-            return seg[rt];
-        if constexpr (hasTag) down(rt);
+            return get_val(rt);
+        if constexpr (hasTag && pushdown) down(rt);
         int mid = (l + r) >> 1;
-        if (R <= mid) return range_prod(L, R, l, mid, rt << 1);
-        if (L >= mid) return range_prod(L, R, mid, r, rt << 1 | 1);
-        return range_prod(L, R, l, mid, rt << 1) + range_prod(L, R, mid, r, rt << 1 | 1); 
+        if constexpr (pushdown) {
+            if (R <= mid) return range_prod(L, R, l, mid, rt << 1);
+            if (L >= mid) return range_prod(L, R, mid, r, rt << 1 | 1);
+            return range_prod(L, R, l, mid, rt << 1) + range_prod(L, R, mid, r, rt << 1 | 1); 
+        }
+        else {
+            if (R <= mid) return range_prod(L, R, l, mid, rt << 1) + lazy[rt];
+            if (L >= mid) return range_prod(L, R, mid, r, rt << 1 | 1) + lazy[rt];
+            return range_prod(L, R, l, mid, rt << 1) + range_prod(L, R, mid, r, rt << 1 | 1) + lazy[rt];
+        }
     }
     void modify(int x, int l, int r, int rt, const Value &v) {
         if (r - l == 1)
             return seg[rt] = v, void();
-        if constexpr (hasTag) down(rt);
+        if constexpr (hasTag && pushdown) down(rt);
         int mid = (l + r) >> 1;
-        if (x < mid) modify(x, l, mid, rt << 1, v);
-        else modify(x, mid, r, rt << 1 | 1, v);
+        if constexpr (pushdown) {
+            if (x < mid) modify(x, l, mid, rt << 1, v);
+            else modify(x, mid, r, rt << 1 | 1, v);
+        }
+        else {
+            if (x < mid) modify(x, l, mid, rt << 1, v - lazy[rt]);
+            else modify(x, mid, r, rt << 1 | 1, v - lazy[rt]);
+        }
         up(rt);
     }
     void transform(int x, int l, int r, int rt, const auto &func) {
         if (r - l == 1)
             return func(seg[rt]), void();
-        if constexpr (hasTag) down(rt);
+        if constexpr (hasTag && pushdown) down(rt);
         int mid = (l + r) >> 1;
         if (x < mid) transform(x, l, mid, rt << 1, func);
         else transform(x, mid, r, rt << 1 | 1, func);
@@ -57,68 +75,78 @@ class SegmentTree {
     void range_transform(int L, int R, int l, int r, int rt, const auto &tag) requires (hasTag) {
         if (L <= l && R >= r)
             return give_tag(rt, tag);
-        down(rt);
+        if constexpr (pushdown) down(rt);
         int mid = (l + r) >> 1;
         if (L < mid) range_transform(L, R, l, mid, rt << 1, tag);
         if (R > mid) range_transform(L, R, mid, r, rt << 1 | 1, tag);
         up(rt);
     }
-    void range_transform_beats(int L, int R, int l, int r, int rt, const auto &tag, const auto &tag_condition) requires (hasTag) {
-        if (L <= l && R >= r && tag_condition(seg[rt]))
+    void range_transform_beats(int L, int R, int l, int r, int rt, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag) {
+        if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return seg[rt]; else return get_val(rt) + (..., tag_sum); }()))
             return give_tag(rt, tag);
         assert(r - l > 1);
-        down(rt);
+        if constexpr (pushdown) down(rt);
+        else ((tag_sum = tag_sum + lazy[rt]), ...);
         int mid = (l + r) >> 1;
-        if (L < mid) range_transform_beats(L, R, l, mid, rt << 1, tag, tag_condition);
-        if (R > mid) range_transform_beats(L, R, mid, r, rt << 1 | 1, tag, tag_condition);
+        if (L < mid) range_transform_beats(L, R, l, mid, rt << 1, tag, tag_condition, tag_sum...);
+        if (R > mid) range_transform_beats(L, R, mid, r, rt << 1 | 1, tag, tag_condition, tag_sum...);
         up(rt);
     }
-    int range_left_search(int L, int R, int l, int r, int rt, const auto &condition) {
+    int range_left_search(int L, int R, int l, int r, int rt, const auto &condition, auto... tag_sum) {
         if (r - l == 1) {
-            if (!condition(seg[rt])) return R;
+            if (!condition([&]{ if constexpr(pushdown) return seg[rt]; else return get_val(rt) + (..., tag_sum); }()))
+                return R;
             return l;
         }
         int mid = (l + r) >> 1;
-        if constexpr (hasTag) down(rt);
+        if constexpr (hasTag && pushdown) down(rt);
+        if constexpr (!pushdown) ((tag_sum = tag_sum + lazy[rt]), ...);
         if (L <= l && R >= r) {
-            if (condition(seg[rt << 1])) return range_left_search(L, R, l, mid, rt << 1, condition);
-            return range_left_search(L, R, mid, r, rt << 1 | 1, condition);
+            if (condition([&]{ if constexpr(pushdown) return seg[rt << 1]; else return get_val(rt << 1) + (..., tag_sum); }()))
+                return range_left_search(L, R, l, mid, rt << 1, condition, tag_sum...);
+            return range_left_search(L, R, mid, r, rt << 1 | 1, condition, tag_sum...);
         }
         int left = R;
-        if (L < mid) left = range_left_search(L, R, l, mid, rt << 1, condition);
+        if (L < mid) left = range_left_search(L, R, l, mid, rt << 1, condition, tag_sum...);
         if (left == R) {
-            if (R > mid) return range_left_search(L, R, mid, r, rt << 1 | 1, condition);
+            if (R > mid) return range_left_search(L, R, mid, r, rt << 1 | 1, condition, tag_sum...);
             return R;
         }
         return left;
     }
-    int range_right_search(int L, int R, int l, int r, int rt, const auto &condition) {
+    int range_right_search(int L, int R, int l, int r, int rt, const auto &condition, auto... tag_sum) {
         if (r - l == 1) {
-            if (!condition(seg[rt])) return L - 1;
+            if (!condition([&]{ if constexpr(pushdown) return seg[rt]; else return get_val(rt) + (..., tag_sum); }()))
+                return L - 1;
             return l;
         }
         int mid = (l + r) >> 1;
-        if constexpr (hasTag) down(rt);
+        if constexpr (hasTag && pushdown) down(rt);
+        if constexpr (!pushdown) ((tag_sum = tag_sum + lazy[rt]), ...);
         if (L <= l && R >= r) {
-            if (condition(seg[rt << 1 | 1])) return range_right_search(L, R, mid, r, rt << 1 | 1, condition);
-            return range_right_search(L, R, l, mid, rt << 1, condition);
+            if (condition([&]{ if constexpr(pushdown) return seg[rt << 1 | 1]; else return get_val(rt << 1 | 1) + (..., tag_sum); }()))
+                return range_right_search(L, R, mid, r, rt << 1 | 1, condition, tag_sum...);
+            return range_right_search(L, R, l, mid, rt << 1, condition, tag_sum...);
         }
         int right = L - 1;
-        if (R > mid) right = range_right_search(L, R, mid, r, rt << 1 | 1, condition);
+        if (R > mid) right = range_right_search(L, R, mid, r, rt << 1 | 1, condition, tag_sum...);
         if (right == L - 1) {
-            if (L < mid) return range_right_search(L, R, l, mid, rt << 1, condition);
+            if (L < mid) return range_right_search(L, R, l, mid, rt << 1, condition, tag_sum...);
             return L - 1;
         }
         return right;
     }
     Value get(int x, int l, int r, int rt) {
+        [[no_unique_address]] std::conditional_t<!pushdown, Tag, Empty> tag;
         while (r - l > 1) {
-            if constexpr (hasTag) down(rt);
+            if constexpr (hasTag && pushdown) down(rt);
+            if constexpr (!pushdown) tag = tag + lazy[rt];
             int mid = (l + r) >> 1;
             if (x < mid) r = mid, rt = rt << 1;
             else l = mid, rt = rt << 1 | 1;
         }
-        return seg[rt];
+        if constexpr (pushdown) return seg[rt];
+        else return get_val(rt) + tag;
     }
     void printnode(int l, int r, int rt) {
         std::cerr << "[" << l << ", " << r << "): ";
@@ -141,7 +169,7 @@ class SegmentTree {
         printall(l, mid, rt << 1);
         printall(mid, r, rt << 1 | 1);
     }
-public:
+    public:
     SegmentTree(const vector<Value> &data): n(data.size()), seg(n << 2) { 
         if constexpr (hasTag) lazy.resize(n << 2); 
         initialize(0, n, 1, data);
@@ -178,9 +206,9 @@ public:
             range_transform_beats(l, r, 0, n, 1, tag, tag_condition);
     }
     /*
-    For the given element range [l, r)
-    Perform segment tree binary search within the range with left half first 
-    */
+       For the given element range [l, r)
+       Perform segment tree binary search within the range with left half first 
+     */
     int range_left_search(const auto &condition, int l = -1, int r = -1) {
         if (l == -1 && r == -1) l = 0, r = n;
         assert(0 <= l && r <= n);
@@ -189,9 +217,9 @@ public:
         return range_left_search(l, r, 0, n, 1, condition);
     }
     /*
-    For the given element range (l, r]
-    Perform segment tree binary search within the range with right half first 
-    */
+       For the given element range (l, r]
+       Perform segment tree binary search within the range with right half first 
+     */
     int range_right_search(const auto &condition, int l = -1, int r = -1) {
         if (l == -1 && r == -1) l = -1, r = n - 1;
         ++l, ++r;
