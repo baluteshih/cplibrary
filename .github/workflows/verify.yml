@@ -23,13 +23,15 @@ jobs:
       run: |
         pip3 install -U online-judge-verify-helper
         pip3 install "setuptools<81"
-        PACKAGE_PATH=$(python3 -c "import onlinejudge_verify.marker; print(onlinejudge_verify.marker.__file__)")
-        echo "Package path: $PACKAGE_PATH"
-        sed -i '97i \            print(path, _error_timestamp, self.get_current_timestamp(path), timestamp)' "$PACKAGE_PATH"
 
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: oj-verify all
+      run: | 
+        PACKAGE_PATH=$(python3 -c "import onlinejudge_verify.marker; print(onlinejudge_verify.marker.__file__)")
+        echo "Package path: $PACKAGE_PATH"
+        sed -i '97i \            print(path, _error_timestamp, self.get_current_timestamp(path), timestamp)' "$PACKAGE_PATH"
+        cat $PACKAGE_PATH
+        oj-verify all -j 2
