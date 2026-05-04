@@ -105,11 +105,11 @@ int main() {
         ll t;
         cin >> k >> x >> y;
         if (k == 0)
-            cin >> t, seg.range_transform_beats(x, y, Tag(-INF, t, 0), [&](Value &v) {
+            cin >> t, seg.range_transform_beats(x, y, Tag(-INF, t, 0), [&](const Value &v) {
                 return t > v.smx; 
             });
         else if (k == 1)
-            cin >> t, seg.range_transform_beats(x, y, Tag(t, INF, 0), [&](Value &v) {
+            cin >> t, seg.range_transform_beats(x, y, Tag(t, INF, 0), [&](const Value &v) {
                 return t < v.smi;
             });
         else if (k == 2)
