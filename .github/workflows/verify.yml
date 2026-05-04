@@ -31,13 +31,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: | 
-        PACKAGE_PATH=$(python3 -c "import onlinejudge_verify.marker; print(onlinejudge_verify.marker.__file__)")
-        echo "Package path: $PACKAGE_PATH"
-        sed -i '97i \            print(path, _error_timestamp, self.get_current_timestamp(path), timestamp, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '154i \        print(depending_files, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '159i \    print(code, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '161i \    print(timestamp, file=sys.stderr, flush=True)' "$PACKAGE_PATH"
-        sed -i '2i \import sys' "$PACKAGE_PATH"
-        cat $PACKAGE_PATH
-        oj-verify all
+      run: oj-verify all -j 2
