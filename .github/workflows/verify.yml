@@ -34,5 +34,6 @@ jobs:
         echo "Package path: $PACKAGE_PATH"
         sed -i '97i \            print(path, _error_timestamp, self.get_current_timestamp(path), timestamp)' "$PACKAGE_PATH"
         sed -i '92i \        print(self.old_timestamps)' "$PACKAGE_PATH"
+        sed -i '138i \    print("hello???????????")' "$PACKAGE_PATH"
         cat $PACKAGE_PATH
         oj-verify all -j 2
