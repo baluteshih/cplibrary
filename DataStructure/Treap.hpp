@@ -1,36 +1,20 @@
 #pragma once
 
-namespace TreapMeasure {
-    enum class MergeType {
-        PRI,
-        RANDOM
-    };
-    struct size_v {
-        int sz;
-        size_v(int sz_ = 0): sz(sz_) {}
-        size_v operator+(const size_v &rhs) const {
-            return size_v(sz + rhs.sz);
-        }
-        int size() const {
-            return sz; 
-        }
-        friend ostream& operator<<(ostream& os, const size_v &v) {
-            os << v.sz;
-            return os;
-        }
-    };
-}
+#include "DataStructure/DefaultAllocator.hpp"
+#include "Algebra/size_value.hpp"
+
 template<typename Key = void, 
-         typename Value = TreapMeasure::size_v,
+         typename Value = size_v,
          typename Tag = void, 
          bool Rev = false,
-         TreapMeasure::MergeType Mtype = TreapMeasure::MergeType::PRI
+         template<typename> class Allocator = DefaultAllocator,
+         bool persistent = false
 >
 class Treap {
     static constexpr bool hasKey = !std::is_same_v<Key, void>;
     static constexpr bool hasValue = !std::is_same_v<Value, void>;
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
-    static constexpr bool usePri = Mtype == TreapMeasure::MergeType::PRI;
+    static constexpr bool usePri = !persistent;
     static constexpr bool hasSize = requires(Value v) { v.size(); };
     static constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };
     struct Empty {};
@@ -48,7 +32,8 @@ class Treap {
     static_assert(!hasTag || hasValue);
     static inline std::mt19937 rng{880301};
     struct node {
-        node *l = nullptr, *r = nullptr, *f = nullptr;
+        node *l = nullptr, *r = nullptr;
+        [[no_unique_address]] std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();
         [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();
         [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> org = get_default<hasValue, Value>();
         [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> val = get_default<hasValue, Value>();
@@ -61,9 +46,11 @@ class Treap {
                 if (l) val = l->val + org;
                 if (r) val = val + r->val;
             }
-            f = nullptr;
-            if (l) l->f = this;
-            if (r) r->f = this;
+            if constexpr (!persistent) {
+                f = nullptr;
+                if (l) l->f = this;
+                if (r) r->f = this;
+            }
         }
         void give_tag(const auto &tag) requires (hasTag) {
             org = org + tag; 
@@ -79,23 +66,31 @@ class Treap {
             std::swap(l, r);
         }
         void down() requires (hasTag || Rev) {
+            bool need_rev = false;
+            if constexpr (Rev) need_rev = rev;
+            bool need_tag = false;
             if constexpr (hasTag) { 
-                if (l) l->give_tag(lazy);
-                if (r) r->give_tag(lazy);
-                lazy = Tag();
+                if constexpr (std::equality_comparable<Tag>) need_tag = (lazy != Tag());
+                else need_tag = true;
             }
-            if constexpr (Rev) {
-                if (rev) {
-                    if (l) l->reverse();
-                    if (r) r->reverse();
-                    rev = 0;
-                }
+            if (!need_rev && !need_tag) return;
+            if (l) {
+                if constexpr (persistent) l = NodeAlloc::allocate(*l);
+                if constexpr (hasTag) if (need_tag) l->give_tag(lazy);
+                if constexpr (Rev) if (need_rev) l->reverse();
             }
+            if (r) {
+                if constexpr (persistent) r = NodeAlloc::allocate(*r);
+                if constexpr (hasTag) if (need_tag) r->give_tag(lazy);
+                if constexpr (Rev) if (need_rev) r->reverse();
+            }
+            if constexpr (hasTag) lazy = Tag();
+            if constexpr (Rev) rev = 0;
         }
         node() = default;
-        node(const auto &v) {
+        node(const auto &v) requires (!hasKey || !hasValue) {
             if constexpr (hasKey) key = Key(v);
-            if constexpr (hasValue) org = val = Value(v);
+            else org = val = Value(v);
         }
         node(const auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v) {
         }
@@ -114,13 +109,15 @@ class Treap {
             };
             printnode("l", l), std::cerr << ", ";
             printnode("r", r), std::cerr << ", ";
-            printnode("f", f);
+            if constexpr (!persistent) printnode("f", f);
             cerr << "\e[0m\n";
         }
     };
+    using NodeAlloc = Allocator<node>;
     node *root = nullptr;
     static void split(node *source, node *&left, node *&right, const auto &condition) {
         if (!source) return left = right = nullptr, void();
+        if constexpr (persistent) source = NodeAlloc::allocate(*source); 
         if constexpr (hasTag || Rev) source->down();
         if (condition(source)) {
             left = source;
@@ -135,6 +132,7 @@ class Treap {
     }
     static void split_value(node *source, node *&left, node *&right, const auto &left_product, const auto &condition) requires (hasValue) {
         if (!source) return left = right = nullptr, void();
+        if constexpr (persistent) source = NodeAlloc::allocate(*source); 
         if constexpr (hasTag || Rev) source->down();
         Value current = left_product + get_val(source->l) + source->org;
         if (condition(current)) {
@@ -155,27 +153,29 @@ class Treap {
             return get_val(source->l) + source->org + prefix_product(source->r, condition);
         return prefix_product(source->l, condition);
     }
-    static Value prefix_product_value(node *source, const auto &left_product, const auto &condition) requires (hasValue) {
+    static Value prefix_product_cond(node *source, const auto &left_product, const auto &condition) requires (hasValue) {
         if (!source) return left_product;
         if constexpr (hasTag || Rev) source->down();
         Value current = left_product + get_val(source->l) + source->org;
         if (condition(current))
-            return prefix_product_value(source->r, current, condition);
-        return prefix_product_value(source->l, left_product, condition);
+            return prefix_product_cond(source->r, current, condition);
+        return prefix_product_cond(source->l, left_product, condition);
     }
     static node *merge(node *left, node *right) {
         if (!left || !right) return left ? left : right;
         bool useleft = true;
-        if constexpr (Mtype == TreapMeasure::MergeType::PRI)
+        if constexpr (usePri)
             useleft = left->pri < right->pri;
-        if constexpr (Mtype == TreapMeasure::MergeType::RANDOM)
-            useleft = rng() % (get_size(left) + get_size(right)) < get_size(left);
+        else
+            useleft = rng() % (get_size(left) + get_size(right)) < size_t(get_size(left));
         if (useleft) {
+            if constexpr (persistent) left = NodeAlloc::allocate(*left); 
             if constexpr (hasTag || Rev) left->down();
             left->r = merge(left->r, right);
             left->up();
             return left;
         }
+        if constexpr (persistent) right = NodeAlloc::allocate(*right);
         if constexpr (hasTag || Rev) right->down();
         right->l = merge(left, right->l);
         right->up();
@@ -202,7 +202,7 @@ class Treap {
     static int get_size(node *a) requires (hasSize) { 
         return a ? a->val.size() : 0;
     }
-    static void free(node *&ptr) {
+    static void free(node *&ptr) requires (!persistent) {
         if (ptr == nullptr) return;
         free(ptr->l);
         free(ptr->r);
@@ -235,13 +235,13 @@ class Treap {
     node* find_max() const {
         return find_max(root);
     }
-    static void access(node *ptr) {
+    static void access(node *ptr) requires (!persistent) {
         assert(ptr != nullptr);
         if (ptr->f != nullptr)
             access(ptr->f);
         if constexpr (hasTag || Rev) ptr->down();
     }
-    static node* find_next(node *ptr) {
+    static node* find_next(node *ptr) requires (!persistent) {
         assert(ptr != nullptr);
         access(ptr);
         if (ptr->r != nullptr)
@@ -251,7 +251,7 @@ class Treap {
         if (ptr->f == nullptr) return nullptr;
         return ptr->f;
     }
-    static node* find_prev(node *ptr) {
+    static node* find_prev(node *ptr) requires (!persistent) {
         assert(ptr != nullptr);
         access(ptr);
         if (ptr->l != nullptr)
@@ -293,20 +293,23 @@ class Treap {
     }
 public:
     Treap() = default;
-    Treap(node *root_) : root(root_) {
-    }
-    Treap(const auto &v) : root(new node(v)) {
-    }
-    Treap(const auto &k, const auto &v) requires (hasKey && hasValue) : root(new node(k, v)) {
-    }
-    void destruct() {
+    Treap(node *root_) : root(root_) {}
+    Treap(const auto &v) requires (!hasKey || !hasValue) : root(NodeAlloc::allocate(v)) {}
+    Treap(const auto &k, const auto &v) requires (hasKey && hasValue) : root(NodeAlloc::allocate(k, v)) {}
+    void destruct() requires (!persistent) {
         free(root);
     }
     void reverse() requires (Rev) {
-        if (root) root->reverse();
+        if (root) {
+            if constexpr (persistent) root = NodeAlloc::allocate(*root);
+            root->reverse();
+        }
     }
     void transform(const auto &tag) requires (hasTag) {
-        if (root) root->give_tag(tag);
+        if (root) {
+            if constexpr (persistent) root = NodeAlloc::allocate(*root);
+            root->give_tag(tag);
+        }
     }
     Treap& left_merge(auto&& left) requires std::same_as<std::decay_t<decltype(left)>, Treap> {
         root = merge(left.root, root);
@@ -317,9 +320,6 @@ public:
         root = merge(root, right.root);
         right.root = nullptr;
         return *this;
-    }
-    Treap& merge(auto&& right) requires std::same_as<std::decay_t<decltype(right)>, Treap> {
-        return right_merge(right);
     }
     static Treap merge(auto&& left, auto&& right) 
         requires (std::same_as<std::decay_t<decltype(left)>, Treap> &&
@@ -358,28 +358,28 @@ public:
         Iterator(node* ptr, const Treap *tree) : m_ptr(ptr), m_tree(tree) {}
         reference operator*() const { return *m_ptr; }
         auto operator->() const { return m_ptr; }
-        Iterator& operator++() {
+        Iterator& operator++() requires (!persistent) {
             m_ptr = find_next(m_ptr);
             return *this;
         }
-        Iterator operator++(int) {
+        Iterator operator++(int) requires (!persistent) {
             Iterator tmp = *this;
             ++(*this);
             return tmp;
         }
-        Iterator& operator--() {
+        Iterator& operator--() requires (!persistent) {
             if (m_ptr == nullptr) m_ptr = m_tree->find_max();
             else m_ptr = find_prev(m_ptr);
             return *this;
         }
-        Iterator operator--(int) {
+        Iterator operator--(int) requires (!persistent) {
             Iterator tmp = *this;
             --(*this);
             return tmp;
         }
         friend bool operator== (const Iterator& a, const Iterator& b) { return a.m_ptr == b.m_ptr; };
         friend bool operator!= (const Iterator& a, const Iterator& b) { return a.m_ptr != b.m_ptr; };
-        void access_ptr() {
+        void access_ptr() requires (!persistent) {
             access(m_ptr);
         }
     private:
@@ -388,6 +388,7 @@ public:
     };
     Iterator begin() const { return Iterator(find_min(), this); }
     Iterator end() const { return Iterator(nullptr, this); }
+    Iterator rbegin() const { return Iterator(find_max(), this); }
     /*
     Find a node's iterator such that:
     - All nodes on its left have condition(node*) == true
@@ -457,6 +458,14 @@ public:
             return !cmp(v, src);
         }), this);
     }
+    void erase(Iterator it) requires (!persistent) {
+        node* target = it.operator->();
+        if (target->f) {
+            if (target->f->l == target) target->f->l = merge(target->l, target->r);
+            else target->f->r = merge(target->l, target->r);
+        }
+        NodeAlloc::deallocate(target);
+    }
     /*
     Assume that all nodes having condition(node*) == true form a prefix, 
     return a Treap containing these nodes, the rest remain at source
@@ -496,26 +505,6 @@ public:
         return Treap(left);
     }
     /*
-    Assume that all nodes having cmp(prefix_product, v) == true form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
-    template<typename V, typename Comp = std::less<Value>>
-    Treap split_value_lt(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return split_value([&v, &cmp](const Value &src) {
-            return cmp(src, v); 
-        });
-    }
-    /*
-    Assume that all nodes having cmp(v, prefix_product) == false form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
-    template<typename V, typename Comp = std::less<Value>>
-    Treap split_value_leq(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return split_value([&v, &cmp](const Value &src) {
-            return !cmp(v, src);
-        });
-    }
-    /*
     return a Treap containing the left most k nodes, the rest remain at source
     */
     Treap split_size(const int &k) requires (hasSize) {
@@ -553,28 +542,8 @@ public:
     return the product of longest prefix such that the product "res" of them has condition(res) == true
     Assume monotonicity
     */
-    Value prefix_product_value(const auto &condition) requires (hasValue) {
-        return prefix_product_value(root, Value(), condition);
-    }
-    /*
-    return the product of longest prefix such that the product "res" of them has cmp(res, v) == true
-    Assume monotonicity
-    */
-    template<typename V, typename Comp = std::less<Value>>
-    Value prefix_product_value_lt(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return prefix_product_value(root, Value(), [&v, &cmp](const Value &src) {
-            return cmp(src, v);
-        });
-    }
-    /*
-    return the product of longest prefix such that the product "res" of them has cmp(v, res) == false
-    Assume monotonicity
-    */
-    template<typename V, typename Comp = std::less<Value>>
-    Value prefix_product_value_leq(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
-        return prefix_product_value(root, Value(), [&v, &cmp](const Value &src) {
-            return !cmp(v, src);
-        });
+    Value prefix_product_cond(const auto &condition) requires (hasValue) {
+        return prefix_product_cond(root, Value(), condition);
     }
     std::array<Treap, 2> split_range(int l, int r) requires (hasSize) {
         assert(l <= r);
