@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Numeric/internal_math.hpp"
 #include "Matrix/Vector.hpp"
 
 template<class T>
@@ -72,10 +73,10 @@ public:
             std::copy((*this)[i].begin() + l, (*this)[i].begin() + r, res[i].begin());
         return res;
     }
-    static Matrix identity(int n) {
+    static Matrix identity(int n, T one = T(1)) {
         Matrix res(n, n);
         for (int i = 0; i < n; ++i)
-            res[i][i] = 1;
+            res[i][i] = one;
         return res;
     }
     Matrix pow(long long k) const {
