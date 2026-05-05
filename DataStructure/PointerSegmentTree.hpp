@@ -23,7 +23,20 @@ class PointerSegmentTree {
             else return val + lazy;
         }
         void up() {
-            val = l->get_val() + r->get_val();
+            if constexpr (dynamic) {
+                val = Value();
+                if (l) val = l->get_val();
+                if (r) val = val + r->get_val();
+            }
+            else {
+                val = l->get_val() + r->get_val();
+            }
+        }
+        void up(int lft, int rgt) requires (dynamic && hasGet) {
+            if (l) val = l->get_val();
+            else val = Value::get(lft, (lft + rgt) / 2);
+            if (r) val = val + r->get_val();
+            else val = val + Value::get((lft + rgt) / 2, rgt);
         }
         void give_tag(const auto &tag) requires (hasTag) {
             if constexpr (pushdown) val = val + tag;
@@ -89,6 +102,10 @@ class PointerSegmentTree {
         }
         if constexpr (persistent) if (!allocated) p = NodeAlloc::allocate(*p);
     }
+    void update(node *&p, int l, int r) {
+        if constexpr (dynamic && hasGet) p->up(l, r);
+        else p->up();
+    }
     void modify(int x, int l, int r, node *&p, const Value &v) {
         if constexpr (dynamic || persistent) check_node(p, l, r);
         if (r - l == 1)
@@ -103,7 +120,7 @@ class PointerSegmentTree {
             if (x < mid) modify(x, l, mid, p->l, v - p->lazy);
             else modify(x, mid, r, p->r, v - p->lazy);
         }
-        p->up();
+        update(p, l, r);
     }
     void transform(int x, int l, int r, node *&p, const auto &func) {
         if constexpr (dynamic || persistent) check_node(p, l, r);
@@ -113,7 +130,7 @@ class PointerSegmentTree {
         int mid = (l + r) >> 1;
         if (x < mid) transform(x, l, mid, p->l, func);
         else transform(x, mid, r, p->r, func);
-        p->up();
+        update(p, l, r);
     }
     void range_transform(int L, int R, int l, int r, node *&p, const auto &tag) requires (hasTag) {
         if constexpr (dynamic || persistent) check_node(p, l, r);
@@ -123,7 +140,7 @@ class PointerSegmentTree {
         int mid = (l + r) >> 1;
         if (L < mid) range_transform(L, R, l, mid, p->l, tag);
         if (R > mid) range_transform(L, R, mid, r, p->r, tag);
-        p->up();
+        update(p, l, r);
     }
     void range_transform_beats(int L, int R, int l, int r, node *&p, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag) {
         if constexpr (dynamic || persistent) check_node(p, l, r);
@@ -135,7 +152,7 @@ class PointerSegmentTree {
         int mid = (l + r) >> 1;
         if (L < mid) range_transform_beats(L, R, l, mid, p->l, tag, tag_condition, tag_sum...);
         if (R > mid) range_transform_beats(L, R, mid, r, p->r, tag, tag_condition, tag_sum...);
-        p->up();
+        update(p, l, r);
     }
     int range_left_search(int L, int R, int l, int r, node *p, const auto &condition, auto... tag_sum) {
         if constexpr (!dynamic) if (!p) return R;
@@ -207,7 +224,7 @@ class PointerSegmentTree {
         int mid = (l + r) >> 1;
         if (L < mid) range_copy(L, R, l, mid, p->l, q->l);
         if (R > mid) range_copy(L, R, mid, r, p->r, q->r);
-        p->up();
+        update(p, l, r);
     }
     void printnode(int l, int r, node *p) {
         std::cerr << "[" << l << ", " << r << "): ";
