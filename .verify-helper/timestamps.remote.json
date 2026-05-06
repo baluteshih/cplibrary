@@ -82,6 +82,7 @@
 "test/1_library_checker/string/number_of_substrings.test.cpp": "2026-05-04 02:28:30 +0800",
 "test/1_library_checker/string/suffixarray.test.cpp": "2026-05-04 02:28:30 +0800",
 "test/1_library_checker/string/zalgorithm.test.cpp": "2026-02-28 23:10:21 +0800",
+"test/1_library_checker/tree/cartesian_tree.test.cpp": "2026-05-06 17:34:12 +0800",
 "test/1_library_checker/tree/jump_on_tree.test.cpp": "2026-05-06 14:47:46 +0800",
 "test/1_library_checker/tree/lca.test.cpp": "2026-05-06 14:47:46 +0800",
 "test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp": "2026-05-06 14:22:55 +0800",
