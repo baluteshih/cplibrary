@@ -9,7 +9,7 @@ public:
     using super::Tree;
     using super::hasEdgeWeight;
     using super::hasVertexWeight;
-    using super::WeightType;
+    using typename super::WeightType;
     static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;
     static constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && ValidAddableState<WeightType, WeightType>) || 
                                         ((hasEdgeWeight && hasVertexWeight) && ValidAddableState<Vertex, Edge>); 
