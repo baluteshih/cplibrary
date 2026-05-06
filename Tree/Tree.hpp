@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Graph/base.hpp"
+#include "Graph/UnifiedWeight.hpp"
 
 template<typename Edge = void, typename Vertex = void>
 class Tree : public Graph<false, Edge, Vertex> {
@@ -8,6 +9,7 @@ public:
     using super = Graph<false, Edge, Vertex>;
     using super::hasEdgeWeight;
     using super::hasVertexWeight;
+    using WeightType = UnifiedWeight_t<Edge, Vertex>;
     int current_root;
     std::vector<int> pa, dfs_in, dfs_out;
     std::vector<int> preorder, postorder;
@@ -98,24 +100,18 @@ public:
         });
         return res;
     }
-    auto weighted_distance(int root = -1) requires (ValidUnifiedNonEmptyWeight<Edge, Vertex>) {
-        using WeightType = UnifiedWeight_t<Edge, Vertex>;
+    auto weighted_distance(int root = -1) requires (ValidAddableState<Edge, Vertex>) {
         if (current_root == -1 || (root != -1 && current_root != root)) {
             assert(root != -1);
             traverse(root);
         }
         std::vector<WeightType> res(this->n());
         predfs([&](int u) {
-            if constexpr (hasEdgeWeight && hasVertexWeight) {
-                res[u] = this->weight[u];
-                if (u != root) res[u] = parent_edge(u).weight + res[u];
-            }
-            else if constexpr (hasEdgeWeight) {
-                if (u != root) res[u] = parent_edge(u).weight; 
-            }
-            else if constexpr (hasVertexWeight) {
-                res[u] = this->weight[u];
-            }
+            res[u] = res[parent(u)];
+            if constexpr (hasEdgeWeight) if (u != root)
+                res[u] = res[u] + parent_edge(u).weight;
+            if constexpr (hasVertexWeight)
+                res[u] = res[u] + this->weight[u];
         });
         return res;
     }

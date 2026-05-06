@@ -9,9 +9,11 @@ public:
     using super::Tree;
     using super::hasEdgeWeight;
     using super::hasVertexWeight;
-    static_assert(ValidUnifiedWeight<Edge, Vertex>, "Compile Error: Edge and Vertex weights must be the exact same type if both are provided!");
-    using WeightType = UnifiedWeight_t<Edge, Vertex>;
+    using super::WeightType;
     static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;
+    static constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && ValidAddableState<WeightType, WeightType>) || 
+                                        ((hasEdgeWeight && hasVertexWeight) && ValidAddableState<Vertex, Edge>); 
+    static constexpr bool hasSubtract = ValidSubtractableState<WeightType, WeightType>; 
     std::vector<int> dep;
     std::vector<std::vector<int>> pa_table;
     struct Empty {};
@@ -23,7 +25,7 @@ public:
             this->traverse(root);
         }
         this->depth().swap(dep);
-        if constexpr (hasWeight) {
+        if constexpr (hasAddition) {
             this->weighted_distance().swap(rootpath);
         }
     }
@@ -35,12 +37,12 @@ public:
         const int L = std::__lg(this->n()); 
         vector<vector<int>>(L + 1, vector<int>(this->n())).swap(pa_table);
         pa_table[0] = this->parents();
-        if constexpr (hasWeight) {
+        if constexpr (hasAddition) {
             vector<vector<WeightType>>(L + 1, vector<WeightType>(this->n())).swap(data);
             for (int i = 0; i < this->n(); ++i) {
                 if constexpr (this->hasEdgeWeight && this->hasVertexWeight) {
                     data[0][i] = this->weight[i];
-                    if (i != root) data[0][i] = this->parent_edge(i).weight + data[0][i]; 
+                    if (i != root) data[0][i] = data[0][i] + this->parent_edge(i).weight;
                 }
                 else if constexpr (this->hasEdgeWeight) {
                     if (i != root) data[0][i] = this->parent_edge(i).weight; 
@@ -53,7 +55,7 @@ public:
         for (int i = 1; i <= L; ++i)
             for (int j = 0; j < this->n(); ++j) {
                 pa_table[i][j] = pa_table[i - 1][pa_table[i - 1][j]];
-                if constexpr (hasWeight)
+                if constexpr (hasAddition)
                     data[i][j] = data[i - 1][j] + data[i - 1][pa_table[i - 1][j]];
             }
     }
@@ -66,15 +68,42 @@ public:
                 u = pa_table[i][u];
         return pa_table[0][u];
     }
+    // be aware of difference in reverse direction edges, this function only support this when v is an ancestor of u
+    WeightType path_weight(int u, int v) requires (hasAddition) {
+        assert(!pa_table.empty());
+        int L = __lg(this->n());
+        WeightType res = WeightType();
+        if (!this->ancestor(u, v)) {
+            for (int i = L; i >= 0; --i)
+                if (!this->ancestor(pa_table[i][u], v)) {
+                    res = res + data[i][u];
+                    u = pa_table[i][u];
+                }
+            res = res + data[0][u];
+            u = pa_table[0][u];
+        }
+        if constexpr (hasVertexWeight) res = res + this->weight[u];
+        if (!this->ancestor(v, u)) {
+            for (int i = L; i >= 0; --i)
+                if (!this->ancestor(pa_table[i][v], u)) {
+                    res = res + data[i][v];
+                    v = pa_table[i][v];
+                }
+            res = res + data[0][v];
+        }
+        return res;
+    }
     int distance(int u, int v, int _lca = -1) {
         if (dep.empty()) build_rootpath();
         if (_lca == -1) _lca = lca(u, v);
         return dep[u] + dep[v] - dep[_lca] * 2;
     }
-    auto weighted_distance(int u, int v, int _lca = -1) requires (hasWeight) {
+    auto weighted_distance(int u, int v, int _lca = -1) requires (hasAddition && hasSubtract) {
         if (dep.empty()) build_rootpath();
         if (_lca == -1) _lca = lca(u, v);
-        return rootpath[u] + rootpath[v] - rootpath[_lca] * 2;
+        WeightType res = rootpath[u] + rootpath[v] - rootpath[_lca] - rootpath[_lca];
+        if constexpr (hasVertexWeight) res = res + this->weight[_lca];
+        return res;
     }
     int step(int u, int v, int d, int _lca = -1) {
         if (_lca == -1) _lca = lca(u, v);
