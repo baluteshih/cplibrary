@@ -253,6 +253,9 @@ data:
     path: test/1_library_checker/string/zalgorithm.test.cpp
     title: test/1_library_checker/string/zalgorithm.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/cartesian_tree.test.cpp
+    title: test/1_library_checker/tree/cartesian_tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -586,6 +589,7 @@ data:
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/cartesian_tree.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp

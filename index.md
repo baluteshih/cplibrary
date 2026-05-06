@@ -281,6 +281,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/shift.hpp
       title: Polynomial/shift.hpp
+  - name: Sequence
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Sequence/better_position.hpp
+      title: Sequence/better_position.hpp
   - name: String
     pages:
     - icon: ':heavy_check_mark:'
@@ -603,6 +608,9 @@ data:
       title: test/1_library_checker/string/zalgorithm.test.cpp
   - name: test/1_library_checker/tree
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/tree/cartesian_tree.test.cpp
+      title: test/1_library_checker/tree/cartesian_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/jump_on_tree.test.cpp
       title: test/1_library_checker/tree/jump_on_tree.test.cpp
