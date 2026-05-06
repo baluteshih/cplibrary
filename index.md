@@ -20,6 +20,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/min_plus_convolution.hpp
       title: Convolution/min_plus_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/min_plus_convolution_concave.hpp
+      title: Convolution/min_plus_convolution_concave.hpp
   - name: DataStructure
     pages:
     - icon: ':heavy_check_mark:'
@@ -284,6 +287,9 @@ data:
   - name: Sequence
     pages:
     - icon: ':heavy_check_mark:'
+      path: Sequence/SMAWK.hpp
+      title: Sequence/SMAWK.hpp
+    - icon: ':heavy_check_mark:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
   - name: String
@@ -353,8 +359,14 @@ data:
       path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
       title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+      title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
       title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+      title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - name: test/1_library_checker/data_structure
     pages:
     - icon: ':heavy_check_mark:'

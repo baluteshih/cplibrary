@@ -19,8 +19,14 @@ data:
     path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
     title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+    title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+    title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
@@ -522,7 +528,9 @@ data:
   - test/1_library_checker/number_theory/factorize.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/convolution/convolution.test.cpp
+  - test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
   - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
