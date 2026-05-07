@@ -5,6 +5,9 @@ data:
   - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
+  - icon: ':heavy_check_mark:'
+    path: Geometry/PointInAngle.hpp
+    title: Geometry/PointInAngle.hpp
   - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
@@ -51,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+    title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
@@ -308,6 +314,7 @@ data:
   - Geometry/line.hpp
   - Geometry/half_plane_intersection.hpp
   - Geometry/outerTangentBetweenConvex.hpp
+  - Geometry/PointInAngle.hpp
   - Geometry/circle.hpp
   - Geometry/rotating_sweepline.hpp
   - Geometry/polygon.hpp
@@ -352,6 +359,7 @@ data:
   - test/2_aoj/distance.test.cpp
   - test/1_library_checker/geometry/closest_pair.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/6_TIOJ/1503.test.cpp

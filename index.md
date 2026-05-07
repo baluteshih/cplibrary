@@ -95,6 +95,9 @@ data:
     - icon: ':x:'
       path: Geometry/Point3D.hpp
       title: Geometry/Point3D.hpp
+    - icon: ':heavy_check_mark:'
+      path: Geometry/PointInAngle.hpp
+      title: Geometry/PointInAngle.hpp
     - icon: ':question:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
@@ -466,6 +469,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/geometry/closest_pair.test.cpp
       title: test/1_library_checker/geometry/closest_pair.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+      title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/geometry/furthest_pair.test.cpp
       title: test/1_library_checker/geometry/furthest_pair.test.cpp

@@ -121,6 +121,9 @@ data:
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+    title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
   - icon: ':heavy_check_mark:'
@@ -564,6 +567,7 @@ data:
   - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/geometry/closest_pair.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
