@@ -22,6 +22,9 @@ data:
     path: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/incremental_scc.test.cpp
+    title: test/1_library_checker/graph/incremental_scc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   _isVerificationFailed: false
@@ -121,6 +124,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp

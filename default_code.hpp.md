@@ -157,6 +157,9 @@ data:
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/incremental_scc.test.cpp
+    title: test/1_library_checker/graph/incremental_scc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -543,6 +546,7 @@ data:
   - test/1_library_checker/graph/general_matching.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   - test/1_library_checker/graph/dominatortree.test.cpp
   - test/1_library_checker/graph/shortest_path.test.cpp

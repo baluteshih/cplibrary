@@ -176,6 +176,9 @@ data:
       path: Graph/enumerate_c3.hpp
       title: Graph/enumerate_c3.hpp
     - icon: ':heavy_check_mark:'
+      path: Graph/incremental_scc.hpp
+      title: Graph/incremental_scc.hpp
+    - icon: ':heavy_check_mark:'
       path: Graph/minimum_spanning_tree.hpp
       title: Graph/minimum_spanning_tree.hpp
   - name: Matrix
@@ -300,6 +303,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: String/RollingHash.hpp
       title: String/RollingHash.hpp
+    - icon: ':warning:'
+      path: String/kmp.hpp
+      title: String/kmp.hpp
     - icon: ':heavy_check_mark:'
       path: String/manacher.hpp
       title: String/manacher.hpp
@@ -507,6 +513,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/general_matching.test.cpp
       title: test/1_library_checker/graph/general_matching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/graph/incremental_scc.test.cpp
+      title: test/1_library_checker/graph/incremental_scc.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
       title: test/1_library_checker/graph/min_cost_b_flow.test.cpp

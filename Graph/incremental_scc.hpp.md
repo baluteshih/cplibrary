@@ -1,48 +1,39 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: Graph/SCC.hpp
+    title: Graph/SCC.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Graph/incremental_scc.hpp
-    title: Graph/incremental_scc.hpp
-  - icon: ':heavy_check_mark:'
-    path: Misc/2sat.hpp
-    title: Misc/2sat.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/graph/strongly_connected_components.test.cpp
-    title: test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/other/two_sat.test.cpp
-    title: test/1_library_checker/other/two_sat.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
-    \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
-    \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
-    \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
-    \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
-    \    struct Empty {};\n    struct edge_v {\n        int from, to;\n        [[no_unique_address]]\
-    \ std::conditional_t<hasEdgeWeight, Edge, Empty> weight;\n        edge_v() {}\n\
-    \        edge_v(int u, int v) : from(u), to(v) {}\n        template <typename\
-    \ W>\n        edge_v(int u, int v, const W &w) requires(hasEdgeWeight) : from(u),\
-    \ to(v), weight(w) {}\n        template <typename OtherEdge>\n        edge_v(const\
-    \ OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight;\
-    \ }) \n            : from(other.from), to(other.to), weight(other.weight) {}\n\
-    \        template <typename OtherEdge>\n        edge_v(const OtherEdge &other)\
-    \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
-    \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
-    \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+  bundledCode: "#line 2 \"Graph/incremental_scc.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\
+    \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
+    \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
+    \ bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool\
+    \ hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
+    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
+    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
+    \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
+    \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
+    \ <typename OtherEdge>\n        edge_v(const OtherEdge &other) requires(hasEdgeWeight\
+    \ && requires(OtherEdge o) { o.weight; }) \n            : from(other.from), to(other.to),\
+    \ weight(other.weight) {}\n        template <typename OtherEdge>\n        edge_v(const\
+    \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
+    \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
+    \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
+    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -116,41 +107,62 @@ data:
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
     \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n"
-  code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n"
+    \ bln[i]\n#line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are\
+    \ the inserted order\n// return an array t of length m\n// t[i] := the time when\
+    \ edge i belongs to an scc, t[i] = m if never\ntemplate <typename GraphType>\n\
+    std::vector<int> incremental_scc(const GraphType &G) {\n    int n = G.n(), m =\
+    \ G.m();\n    std::vector<int> res(m, m);\n\n    std::vector<int> idx(n, -1);\n\
+    \    auto dc = [&](auto &self, std::vector<std::array<int, 3>> &event, int l,\
+    \ int r) -> void {\n        if (r - l == 1 || event.empty()) return;\n       \
+    \ int mid = (l + r) >> 1;\n        int cnt = 0;\n        for (auto& [i, a, b]\
+    \ : event) {\n            if (idx[a] == -1) idx[a] = cnt++;\n            if (idx[b]\
+    \ == -1) idx[b] = cnt++;\n        }\n        SCC scc(cnt);\n        for (auto&\
+    \ [i, a, b] : event)\n            if (i <= mid)\n                scc.add_edge(idx[a],\
+    \ idx[b]);\n        scc.solve();\n        std::vector<std::array<int, 3>> lft,\
+    \ rgt;\n        for (auto [i, a, b] : event) {\n            a = idx[a], b = idx[b];\n\
+    \            if (i <= mid && scc.bln[a] == scc.bln[b]) {\n                   \
+    \ res[i] = std::min(res[i], mid);\n                    lft.push_back({i, a, b});\n\
+    \            }\n            else rgt.push_back({i, scc.bln[a], scc.bln[b]});\n\
+    \        }\n        for (auto &[i, a, b] : event) idx[a] = idx[b] = -1;\n    \
+    \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
+    \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
+    \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
+    \    return res;\n}\n"
+  code: "#pragma once\n\n#include \"Graph/SCC.hpp\"\n\n// the order of the edges are\
+    \ the inserted order\n// return an array t of length m\n// t[i] := the time when\
+    \ edge i belongs to an scc, t[i] = m if never\ntemplate <typename GraphType>\n\
+    std::vector<int> incremental_scc(const GraphType &G) {\n    int n = G.n(), m =\
+    \ G.m();\n    std::vector<int> res(m, m);\n\n    std::vector<int> idx(n, -1);\n\
+    \    auto dc = [&](auto &self, std::vector<std::array<int, 3>> &event, int l,\
+    \ int r) -> void {\n        if (r - l == 1 || event.empty()) return;\n       \
+    \ int mid = (l + r) >> 1;\n        int cnt = 0;\n        for (auto& [i, a, b]\
+    \ : event) {\n            if (idx[a] == -1) idx[a] = cnt++;\n            if (idx[b]\
+    \ == -1) idx[b] = cnt++;\n        }\n        SCC scc(cnt);\n        for (auto&\
+    \ [i, a, b] : event)\n            if (i <= mid)\n                scc.add_edge(idx[a],\
+    \ idx[b]);\n        scc.solve();\n        std::vector<std::array<int, 3>> lft,\
+    \ rgt;\n        for (auto [i, a, b] : event) {\n            a = idx[a], b = idx[b];\n\
+    \            if (i <= mid && scc.bln[a] == scc.bln[b]) {\n                   \
+    \ res[i] = std::min(res[i], mid);\n                    lft.push_back({i, a, b});\n\
+    \            }\n            else rgt.push_back({i, scc.bln[a], scc.bln[b]});\n\
+    \        }\n        for (auto &[i, a, b] : event) idx[a] = idx[b] = -1;\n    \
+    \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
+    \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
+    \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
+    \    return res;\n}\n"
   dependsOn:
+  - Graph/SCC.hpp
   - Graph/base.hpp
   isVerificationFile: false
-  path: Graph/SCC.hpp
-  requiredBy:
-  - Graph/incremental_scc.hpp
-  - Misc/2sat.hpp
-  timestamp: '2026-05-06 14:22:55+08:00'
+  path: Graph/incremental_scc.hpp
+  requiredBy: []
+  timestamp: '2026-05-08 00:37:04+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/strongly_connected_components.test.cpp
-documentation_of: Graph/SCC.hpp
+documentation_of: Graph/incremental_scc.hpp
 layout: document
 redirect_from:
-- /library/Graph/SCC.hpp
-- /library/Graph/SCC.hpp.html
-title: Graph/SCC.hpp
+- /library/Graph/incremental_scc.hpp
+- /library/Graph/incremental_scc.hpp.html
+title: Graph/incremental_scc.hpp
 ---

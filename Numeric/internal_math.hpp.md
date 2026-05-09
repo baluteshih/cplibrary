@@ -118,6 +118,9 @@ data:
     path: test/1_library_checker/graph/enumerate_triangles.test.cpp
     title: test/1_library_checker/graph/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/incremental_scc.test.cpp
+    title: test/1_library_checker/graph/incremental_scc.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,6 +420,7 @@ data:
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp

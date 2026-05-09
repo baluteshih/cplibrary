@@ -48,6 +48,9 @@ data:
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
   - icon: ':heavy_check_mark:'
+    path: Graph/incremental_scc.hpp
+    title: Graph/incremental_scc.hpp
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/incremental_scc.test.cpp
+    title: test/1_library_checker/graph/incremental_scc.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
@@ -315,6 +321,7 @@ data:
   - Graph/SCC.hpp
   - Graph/Dijkstra.hpp
   - Graph/minimum_spanning_tree.hpp
+  - Graph/incremental_scc.hpp
   - Graph/BipartiteMatching.hpp
   - Graph/ECC.hpp
   - Graph/dominator_tree.hpp
@@ -339,6 +346,7 @@ data:
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/1_library_checker/graph/general_matching.test.cpp
   - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   - test/1_library_checker/graph/dominatortree.test.cpp
   - test/1_library_checker/graph/shortest_path.test.cpp
