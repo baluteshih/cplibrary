@@ -50,6 +50,7 @@
 "test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp": "2026-05-04 02:28:30 +0800",
 "test/1_library_checker/graph/enumerate_triangles.test.cpp": "2026-05-06 14:22:55 +0800",
 "test/1_library_checker/graph/general_matching.test.cpp": "2026-05-06 14:22:55 +0800",
+"test/1_library_checker/graph/incremental_scc.test.cpp": "2026-05-08 00:37:04 +0800",
 "test/1_library_checker/graph/min_cost_b_flow.test.cpp": "2026-05-06 14:22:55 +0800",
 "test/1_library_checker/graph/minimum_spanning_tree.test.cpp": "2026-05-06 14:22:55 +0800",
 "test/1_library_checker/graph/shortest_path.test.cpp": "2026-05-06 14:22:55 +0800",
