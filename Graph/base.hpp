@@ -152,6 +152,17 @@ public:
                 res.add_edge(e.reversed());
         return res;
     }
+    Graph induced(const std::vector<int> &subset) {
+        std::vector<int> idx(n, -1);
+        for (int cnt = 0; int i : subset) idx[i] = cnt++;
+        Graph res(subset.size());
+        for (auto e : edges) {
+            e.from = idx[e.from], e.to = idx[e.to];
+            if (e.to == -1 || e.from == -1) continue;
+            res.add_edge(e);
+        }
+        return res;
+    }
 };
 
 template<typename Edge = void, typename Vertex = void>
