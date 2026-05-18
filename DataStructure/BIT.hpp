@@ -4,10 +4,11 @@ template<class T>
 class BIT { // 0-base
     int n;
     T total_;
-    vector<T> bit;
+    std::vector<T> bit;
 public:
-    BIT(int _n): n(_n), total_(), bit(n + 1) {}
-    void initialize(const std::vector<T> &arr) {
+    BIT(int _n) : n(_n), total_(), bit(n + 1) {}
+    template<typename U>
+    BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {
         for (int x = 1; x <= n; ++x) {
             bit[x] = arr[x - 1];
             int y = x - (x & -x);
@@ -16,7 +17,7 @@ public:
         }
     }
     void modify(int x, T v) {
-        total_ += v;
+        total_ = total_ + v;
         for (++x; x <= n; x += x & -x)
             bit[x] = bit[x] + v;
     }

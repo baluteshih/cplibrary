@@ -8,7 +8,6 @@ int main() {
     ios::sync_with_stdio(0), cin.tie(0);
     int n, q;
     cin >> n >> q;
-    BIT<ll> bit(n);
     HeavyLightDecomposition<> hld(n);
     vector<int> arr(n);
     for (int &i : arr)
@@ -22,7 +21,7 @@ int main() {
     vector<ll> weight(n);
     for (int i = 0; i < n; ++i)
         weight[i] = arr[hld.preorder[i]];
-    bit.initialize(weight);
+    BIT<ll> bit(weight);
     while (q--) {
         int type;
         cin >> type;
