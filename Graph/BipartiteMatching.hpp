@@ -4,7 +4,7 @@
 
 /*
 match_left, match_right
--1 imatch_rightlies no match
+-1 implies no match
 */
 struct BipartiteMatching : public BipartiteGraph<void, void>  { // 0-base
     using super = BipartiteGraph<void, void>;
