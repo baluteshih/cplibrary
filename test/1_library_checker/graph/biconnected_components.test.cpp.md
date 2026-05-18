@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
   - icon: ':question:'

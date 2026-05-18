@@ -168,7 +168,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/shortest_path.test.cpp
     title: test/1_library_checker/graph/shortest_path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
   - icon: ':heavy_check_mark:'

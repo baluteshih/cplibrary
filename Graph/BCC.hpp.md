@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/biconnected_components.test.cpp
     title: test/1_library_checker/graph/biconnected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/BCC.hpp\"\n\r\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
@@ -157,7 +157,7 @@ data:
   path: Graph/BCC.hpp
   requiredBy: []
   timestamp: '2026-05-18 13:56:28+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/biconnected_components.test.cpp
   - test/1_library_checker/graph/st_numbering.test.cpp

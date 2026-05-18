@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/st_numbering
@@ -178,7 +178,7 @@ data:
     \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
     \  return res;\n}\n#line 6 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
     \n\nvoid solve() {\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    if\
-    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph\
+    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph<>\
     \ G(n);\n    while (m--) {\n        int u, v;\n        cin >> u >> v;\n      \
     \  G.add_edge(u, v);\n    }\n    BCC bcc(G);\n    bcc.add_edge(s, t);\n    bcc.solve();\n\
     \    if (bcc.nbcc > 1)\n        cout << \"No\\n\";\n    else {\n        cout <<\
@@ -190,7 +190,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/st_numbering\"\n#include\
     \ \"default_code.hpp\"\n\n#include \"Graph/BCC.hpp\"\n#include \"Graph/bipolar_orientation.hpp\"\
     \n\nvoid solve() {\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    if\
-    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph\
+    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph<>\
     \ G(n);\n    while (m--) {\n        int u, v;\n        cin >> u >> v;\n      \
     \  G.add_edge(u, v);\n    }\n    BCC bcc(G);\n    bcc.add_edge(s, t);\n    bcc.solve();\n\
     \    if (bcc.nbcc > 1)\n        cout << \"No\\n\";\n    else {\n        cout <<\
@@ -207,8 +207,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/st_numbering.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-05-18 14:12:02+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/st_numbering.test.cpp
 layout: document
