@@ -11,7 +11,7 @@ void solve() {
         cout << "No\n";
         return;
     }
-    UndirectedGraph G(n);
+    UndirectedGraph<> G(n);
     while (m--) {
         int u, v;
         cin >> u >> v;
