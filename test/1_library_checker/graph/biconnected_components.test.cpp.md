@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
   - icon: ':question:'
@@ -98,21 +98,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -142,18 +142,19 @@ data:
     \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
     \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
     \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    void solve() {\r\n        for (int i = 0; i < this->n(); ++i)\r\n      \
-    \      if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return std::pair<idx,\
-    \ tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex u belongs\
-    \ to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
+    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
+    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
+    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
+    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
+    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
     \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
     \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n; ++i)\r\n            if (is_ap[i])\r\n \
-    \               newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
+    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
+    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
     \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(bln[j]),\
-    \ nG[bln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to 2\
-    \ * n - 2 nodes!! bln[i] for id\r\n};\r\n#line 5 \"test/1_library_checker/graph/biconnected_components.test.cpp\"\
+    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
+    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
+    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n#line 5 \"test/1_library_checker/graph/biconnected_components.test.cpp\"\
     \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
     \  cin >> n >> m;\n    BCC bcc(n);\n    while (m--) {\n        int u, v;\n   \
     \     cin >> u >> v;\n        bcc.add_edge(u, v);\n    }\n    bcc.solve();\n \
@@ -175,7 +176,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 14:22:55+08:00'
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/biconnected_components.test.cpp

@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
   - icon: ':heavy_check_mark:'
@@ -41,6 +41,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
+  - icon: ':x:'
+    path: Graph/bipolar_orientation.hpp
+    title: Graph/bipolar_orientation.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/dominator_tree.hpp
     title: Graph/dominator_tree.hpp
@@ -102,6 +105,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/shortest_path.test.cpp
     title: test/1_library_checker/graph/shortest_path.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/graph/st_numbering.test.cpp
+    title: test/1_library_checker/graph/st_numbering.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
@@ -207,21 +213,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -281,21 +287,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -313,60 +319,62 @@ data:
   isVerificationFile: false
   path: Graph/base.hpp
   requiredBy:
+  - Flow/min_cost_max_flow.hpp
+  - Flow/bounded_cost_circulation.hpp
+  - Flow/min_cost_circulation_old.hpp
+  - Flow/min_cost_circulation.hpp
+  - Flow/Dinic.hpp
+  - Flow/bounded_flow.hpp
+  - Misc/2sat.hpp
   - Tree/Tree.hpp
-  - Tree/HeavyLightDecomposition.hpp
   - Tree/TreeTools.hpp
+  - Tree/HeavyLightDecomposition.hpp
   - Tree/all_direction_composition.hpp
-  - Graph/Matching.hpp
-  - Graph/SCC.hpp
-  - Graph/Dijkstra.hpp
-  - Graph/minimum_spanning_tree.hpp
-  - Graph/incremental_scc.hpp
-  - Graph/BipartiteMatching.hpp
-  - Graph/ECC.hpp
   - Graph/dominator_tree.hpp
+  - Graph/SCC.hpp
+  - Graph/BipartiteMatching.hpp
+  - Graph/incremental_scc.hpp
+  - Graph/minimum_spanning_tree.hpp
+  - Graph/Matching.hpp
+  - Graph/enumerate_c3.hpp
+  - Graph/Dijkstra.hpp
+  - Graph/ECC.hpp
   - Graph/BCC.hpp
   - Graph/BipartiteGraph.hpp
-  - Graph/enumerate_c3.hpp
-  - Flow/min_cost_circulation_old.hpp
-  - Flow/min_cost_max_flow.hpp
-  - Flow/Dinic.hpp
-  - Flow/bounded_cost_circulation.hpp
-  - Flow/bounded_flow.hpp
-  - Flow/min_cost_circulation.hpp
-  - Misc/2sat.hpp
-  timestamp: '2026-05-06 14:22:55+08:00'
+  - Graph/bipolar_orientation.hpp
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/4_codeforces/106033E.test.cpp
-  - test/2_aoj/minimum_cost_flow.test.cpp
-  - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - test/1_library_checker/other/two_sat.test.cpp
-  - test/1_library_checker/graph/enumerate_triangles.test.cpp
-  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - test/1_library_checker/graph/general_matching.test.cpp
-  - test/1_library_checker/graph/biconnected_components.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - test/1_library_checker/graph/dominatortree.test.cpp
-  - test/1_library_checker/graph/shortest_path.test.cpp
-  - test/1_library_checker/graph/cycle_detection_directed.test.cpp
-  - test/1_library_checker/graph/bipartitematching.test.cpp
-  - test/1_library_checker/graph/two_edge_connected_components.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  - test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/tree_diameter.test.cpp
-  - test/1_library_checker/tree/jump_on_tree.test.cpp
-  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - test/7_loj/maxflow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
   - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/bounded_flow.test.cpp
+  - test/7_loj/maxflow.test.cpp
+  - test/4_codeforces/106033E.test.cpp
+  - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/graph/two_edge_connected_components.test.cpp
+  - test/1_library_checker/graph/shortest_path.test.cpp
+  - test/1_library_checker/graph/dominatortree.test.cpp
+  - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/bipartitematching.test.cpp
+  - test/1_library_checker/graph/cycle_detection_directed.test.cpp
+  - test/1_library_checker/graph/general_matching.test.cpp
+  - test/1_library_checker/graph/enumerate_triangles.test.cpp
+  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/strongly_connected_components.test.cpp
+  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/graph/st_numbering.test.cpp
+  - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
+  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/lca.test.cpp
+  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/tree_diameter.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/2_aoj/minimum_cost_flow.test.cpp
+  - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
 documentation_of: Graph/base.hpp
 layout: document
 redirect_from:

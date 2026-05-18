@@ -123,12 +123,12 @@ data:
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
 documentation_of: DataStructure/DisjointSet.hpp
 layout: document
 redirect_from:

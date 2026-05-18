@@ -37,8 +37,8 @@ data:
   isVerificationFile: false
   path: Numeric/mod_pow.hpp
   requiredBy:
-  - Numeric/Binomial.hpp
   - Numeric/primitive_root.hpp
+  - Numeric/Binomial.hpp
   timestamp: '2026-05-04 10:37:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

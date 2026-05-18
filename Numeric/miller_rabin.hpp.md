@@ -63,15 +63,15 @@ data:
   isVerificationFile: false
   path: Numeric/miller_rabin.hpp
   requiredBy:
-  - Numeric/Binomial.hpp
   - Numeric/primitive_root.hpp
   - Numeric/pollard_rho.hpp
+  - Numeric/Binomial.hpp
   timestamp: '2026-02-28 23:10:21+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
+  - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
 documentation_of: Numeric/miller_rabin.hpp
 layout: document

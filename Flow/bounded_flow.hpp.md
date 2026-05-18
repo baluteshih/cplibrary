@@ -70,21 +70,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -185,7 +185,7 @@ data:
   isVerificationFile: false
   path: Flow/bounded_flow.hpp
   requiredBy: []
-  timestamp: '2026-05-06 14:22:55+08:00'
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/7_loj/max_bounded_flow.test.cpp

@@ -48,11 +48,11 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/3_qoj/17153.test.cpp
-  - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
+  - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
 documentation_of: Algebra/size_value.hpp
 layout: document
 redirect_from:

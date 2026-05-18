@@ -72,19 +72,19 @@ data:
   isVerificationFile: false
   path: Misc/cyc_bitonic_search.hpp
   requiredBy:
-  - Geometry/outerTangentBetweenConvex.hpp
-  - Geometry/convex.hpp
   - Geometry/furthest_pair.hpp
+  - Geometry/convex.hpp
+  - Geometry/outerTangentBetweenConvex.hpp
   timestamp: '2026-04-07 01:16:28+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/4_codeforces/101242J.test.cpp
-  - test/4_codeforces/104114B.test.cpp
   - test/3_qoj/2162.test.cpp
-  - test/2_aoj/convex_cut.test.cpp
+  - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/101242J.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
+  - test/2_aoj/convex_cut.test.cpp
 documentation_of: Misc/cyc_bitonic_search.hpp
 layout: document
 redirect_from:

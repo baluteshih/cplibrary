@@ -300,14 +300,14 @@ data:
   timestamp: '2026-05-04 15:56:36+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
-  - test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
-  - test/1_library_checker/data_structure/predecessor_problem.test.cpp
-  - test/1_library_checker/data_structure/range_add_range_min.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp
+  - test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/predecessor_problem.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
+  - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document

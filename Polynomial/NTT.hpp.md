@@ -319,38 +319,38 @@ data:
   isVerificationFile: false
   path: Polynomial/NTT.hpp
   requiredBy:
+  - Polynomial/Bostan_Mori.hpp
+  - Polynomial/convolution_any_mod.hpp
+  - Polynomial/shift.hpp
+  - Polynomial/interpolate.hpp
+  - Polynomial/Sqrt.hpp
+  - Polynomial/lagrange_interpolate_iota.hpp
+  - Polynomial/linear_recursion.hpp
+  - Polynomial/Polynomial.hpp
+  - Misc/bigint.hpp
   - Numbers/bell_number.hpp
   - Numbers/partition_number.hpp
-  - Polynomial/interpolate.hpp
-  - Polynomial/lagrange_interpolate_iota.hpp
-  - Polynomial/Sqrt.hpp
-  - Polynomial/convolution_any_mod.hpp
-  - Polynomial/Polynomial.hpp
-  - Polynomial/shift.hpp
-  - Polynomial/linear_recursion.hpp
-  - Polynomial/Bostan_Mori.hpp
-  - Misc/bigint.hpp
   timestamp: '2026-05-04 10:37:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/1_library_checker/convolution/convolution.test.cpp
-  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
+  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
+  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
+  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
+  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
+  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
 documentation_of: Polynomial/NTT.hpp
 layout: document
 redirect_from:

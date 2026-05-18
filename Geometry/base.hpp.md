@@ -311,57 +311,57 @@ data:
   isVerificationFile: false
   path: Geometry/base.hpp
   requiredBy:
-  - Geometry/line.hpp
-  - Geometry/half_plane_intersection.hpp
-  - Geometry/outerTangentBetweenConvex.hpp
-  - Geometry/PointInAngle.hpp
-  - Geometry/circle.hpp
   - Geometry/rotating_sweepline.hpp
-  - Geometry/polygon.hpp
-  - Geometry/closest_pair.hpp
-  - Geometry/convex.hpp
-  - Geometry/convexHull3D.hpp
-  - Geometry/minimum_enclosing_circle.hpp
-  - Geometry/Point3D.hpp
   - Geometry/centers.hpp
-  - Geometry/furthest_pair.hpp
   - Geometry/circle_cover.hpp
+  - Geometry/minimum_enclosing_circle.hpp
+  - Geometry/circle.hpp
+  - Geometry/furthest_pair.hpp
+  - Geometry/convex.hpp
+  - Geometry/outerTangentBetweenConvex.hpp
+  - Geometry/polygon.hpp
+  - Geometry/convexHull3D.hpp
+  - Geometry/line.hpp
+  - Geometry/Point3D.hpp
+  - Geometry/closest_pair.hpp
+  - Geometry/half_plane_intersection.hpp
+  - Geometry/PointInAngle.hpp
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/5_NCOJ/123.test.cpp
-  - test/5_NCOJ/929.test.cpp
-  - test/4_codeforces/101242J.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/101673A.test.cpp
   - test/3_qoj/2162.test.cpp
   - test/3_qoj/6445.test.cpp
-  - test/2_aoj/area.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
+  - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/101673A.test.cpp
+  - test/4_codeforces/101242J.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
+  - test/1_library_checker/geometry/static_convex_hull.test.cpp
+  - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+  - test/1_library_checker/geometry/closest_pair.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/geometry/furthest_pair.test.cpp
+  - test/5_NCOJ/929.test.cpp
+  - test/5_NCOJ/123.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/common_tangent.test.cpp
+  - test/2_aoj/parallel-orthogonal.test.cpp
+  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
+  - test/2_aoj/distance.test.cpp
   - test/2_aoj/cross_points_of_circles.test.cpp
   - test/2_aoj/counter-clockwise.test.cpp
-  - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - test/2_aoj/intersection.test.cpp
-  - test/2_aoj/projection.test.cpp
-  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/2_aoj/polygon-point_containment.test.cpp
-  - test/2_aoj/common_tangent.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/2_aoj/reflection.test.cpp
   - test/2_aoj/cross_point.test.cpp
-  - test/2_aoj/parallel-orthogonal.test.cpp
   - test/2_aoj/convex_cut.test.cpp
+  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
+  - test/2_aoj/intersection.test.cpp
+  - test/2_aoj/projection.test.cpp
+  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
+  - test/2_aoj/type_of_circle.test.cpp
+  - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - test/2_aoj/distance.test.cpp
-  - test/1_library_checker/geometry/closest_pair.test.cpp
-  - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - test/1_library_checker/geometry/furthest_pair.test.cpp
+  - test/2_aoj/area.test.cpp
+  - test/2_aoj/polygon-point_containment.test.cpp
   - test/6_TIOJ/1503.test.cpp
 documentation_of: Geometry/base.hpp
 layout: document

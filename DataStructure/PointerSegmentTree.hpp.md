@@ -385,10 +385,10 @@ data:
   timestamp: '2026-05-06 01:14:34+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
 documentation_of: DataStructure/PointerSegmentTree.hpp
 layout: document
 redirect_from:

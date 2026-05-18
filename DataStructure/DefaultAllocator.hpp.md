@@ -55,21 +55,21 @@ data:
   isVerificationFile: false
   path: DataStructure/DefaultAllocator.hpp
   requiredBy:
-  - DataStructure/PointerSegmentTree.hpp
   - DataStructure/Treap.hpp
+  - DataStructure/PointerSegmentTree.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/3_qoj/17153.test.cpp
-  - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
+  - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
 documentation_of: DataStructure/DefaultAllocator.hpp
 layout: document
 redirect_from:

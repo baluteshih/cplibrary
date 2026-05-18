@@ -159,8 +159,8 @@ data:
   timestamp: '2026-05-04 20:54:41+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
 documentation_of: DataStructure/ZkwSegmentTree.hpp
 layout: document

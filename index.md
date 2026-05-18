@@ -142,7 +142,7 @@ data:
       title: Geometry/rotating_sweepline.hpp
   - name: Graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/BCC.hpp
       title: Graph/BCC.hpp
     - icon: ':heavy_check_mark:'
@@ -169,6 +169,9 @@ data:
     - icon: ':question:'
       path: Graph/base.hpp
       title: Graph/base.hpp
+    - icon: ':x:'
+      path: Graph/bipolar_orientation.hpp
+      title: Graph/bipolar_orientation.hpp
     - icon: ':heavy_check_mark:'
       path: Graph/dominator_tree.hpp
       title: Graph/dominator_tree.hpp
@@ -525,6 +528,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/shortest_path.test.cpp
       title: test/1_library_checker/graph/shortest_path.test.cpp
+    - icon: ':x:'
+      path: test/1_library_checker/graph/st_numbering.test.cpp
+      title: test/1_library_checker/graph/st_numbering.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/strongly_connected_components.test.cpp
       title: test/1_library_checker/graph/strongly_connected_components.test.cpp

@@ -102,21 +102,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -147,41 +147,41 @@ data:
     \ BipartiteGraph>> to_bipartite(Graph<false, Edge, Vertex> &graph) {\n       \
     \ std::vector<int> color(graph.n(), -1), numbering(graph.n());\n        auto dfs\
     \ = [&](auto self, int u, int c) -> bool {\n            color[u] = c;\n      \
-    \      for (auto [v, eid] : graph.adj(u))\n                if (color[v] == -1\
-    \ && !self(self, v, c ^ 1))\n                    return false;\n             \
-    \   else if (color[v] == color[u])\n                    return false;\n      \
-    \      return true;\n        };\n        int cnt[2] = {};\n        for (int i\
-    \ = 0; i < graph.n(); ++i) {\n            if (color[i] == -1 && !dfs(dfs, i, 0))\n\
-    \                return std::nullopt; \n            numbering[i] = cnt[color[i]]++;\n\
-    \        }\n        BipartiteGraph res(cnt[0], cnt[1]);\n        for (int i =\
-    \ 0; i < graph.m(); ++i) {\n            const auto &e = graph.edge(i);\n     \
-    \       int u = e.from;\n            int v = e.to;\n            if (color[u] ==\
-    \ 1) std::swap(u, v);\n            u = numbering[u], v = numbering[v];\n     \
-    \       if constexpr (super::hasEdgeWeight) res.add_edge(u, v, e.weight);\n  \
-    \          else res.add_edge(u, v);\n        }\n        if constexpr (super::hasVertexWeight)\
-    \ res.set_vertex_weight(graph.vertex_weight());\n        return res;\n    }\n\
-    };\n#line 4 \"Graph/BipartiteMatching.hpp\"\n\n/*\nmatch_left, match_right\n-1\
-    \ imatch_rightlies no match\n*/\nstruct BipartiteMatching : public BipartiteGraph<void,\
-    \ void>  { // 0-base\n    using super = BipartiteGraph<void, void>;\n    std::vector<int>\
-    \ match_right, match_left;\n    std::vector<int> dis, cur;\n    BipartiteMatching(int\
-    \ l, int r) : super(l, r), match_right(l), match_left(r), dis(l + 1), cur(l) {}\
-    \ \n    bool dfs(int u) {\n        for (int &i = cur[u]; i < ssize(this->adj(u));\
-    \ ++i) {\n            int e = this->adj(u)[i].first;\n            if (match_left[e]\
-    \ == this->n() || (dis[match_left[e]] == dis[u] + 1 && dfs(match_left[e])))\n\
-    \                return match_right[match_left[e] = u] = e, 1;\n        }\n  \
-    \      return dis[u] = -1, 0;\n    }\n    bool bfs() {\n        std::queue<int>\
-    \ q;\n        std::ranges::fill(dis, -1);\n        for (int i = 0; i < this->n();\
-    \ ++i)\n            if (!~match_right[i])\n                q.push(i), dis[i] =\
-    \ 0;\n        while (!q.empty()) {\n            int u = q.front();\n         \
-    \   q.pop();\n            if (u == this->n()) continue;\n            for (auto\
-    \ [e, eid] : this->adj(u))\n                if (!~dis[match_left[e]])\n      \
-    \              q.push(match_left[e]), dis[match_left[e]] = dis[u] + 1;\n     \
-    \   }\n        return dis[this->n()] != -1;\n    }\n    int matching() {\n   \
-    \     int res = 0;\n        std::ranges::fill(match_right, -1);\n        std::ranges::fill(match_left,\
-    \ this->n());\n        while (bfs()) {\n            std::ranges::fill(cur, 0);\n\
-    \            for (int i = 0; i < this->n(); ++i)\n                res += (!~match_right[i]\
-    \ && dfs(i));\n        }\n        std::ranges::replace(match_left, this->n(),\
-    \ -1);\n        return res;\n    }\n};\n#line 5 \"test/1_library_checker/graph/bipartitematching.test.cpp\"\
+    \      for (auto [v, eid] : graph[u])\n                if (color[v] == -1 && !self(self,\
+    \ v, c ^ 1))\n                    return false;\n                else if (color[v]\
+    \ == color[u])\n                    return false;\n            return true;\n\
+    \        };\n        int cnt[2] = {};\n        for (int i = 0; i < graph.n();\
+    \ ++i) {\n            if (color[i] == -1 && !dfs(dfs, i, 0))\n               \
+    \ return std::nullopt; \n            numbering[i] = cnt[color[i]]++;\n       \
+    \ }\n        BipartiteGraph res(cnt[0], cnt[1]);\n        for (int i = 0; i <\
+    \ graph.m(); ++i) {\n            const auto &e = graph.edge(i);\n            int\
+    \ u = e.from;\n            int v = e.to;\n            if (color[u] == 1) std::swap(u,\
+    \ v);\n            u = numbering[u], v = numbering[v];\n            if constexpr\
+    \ (super::hasEdgeWeight) res.add_edge(u, v, e.weight);\n            else res.add_edge(u,\
+    \ v);\n        }\n        if constexpr (super::hasVertexWeight) res.set_vertex_weight(graph.vertex_weight());\n\
+    \        return res;\n    }\n};\n#line 4 \"Graph/BipartiteMatching.hpp\"\n\n/*\n\
+    match_left, match_right\n-1 imatch_rightlies no match\n*/\nstruct BipartiteMatching\
+    \ : public BipartiteGraph<void, void>  { // 0-base\n    using super = BipartiteGraph<void,\
+    \ void>;\n    std::vector<int> match_right, match_left;\n    std::vector<int>\
+    \ dis, cur;\n    BipartiteMatching(int l, int r) : super(l, r), match_right(l),\
+    \ match_left(r), dis(l + 1), cur(l) {} \n    bool dfs(int u) {\n        for (int\
+    \ &i = cur[u]; i < ssize((*this)[u]); ++i) {\n            int e = (*this)[u][i].first;\n\
+    \            if (match_left[e] == this->n() || (dis[match_left[e]] == dis[u] +\
+    \ 1 && dfs(match_left[e])))\n                return match_right[match_left[e]\
+    \ = u] = e, 1;\n        }\n        return dis[u] = -1, 0;\n    }\n    bool bfs()\
+    \ {\n        std::queue<int> q;\n        std::ranges::fill(dis, -1);\n       \
+    \ for (int i = 0; i < this->n(); ++i)\n            if (!~match_right[i])\n   \
+    \             q.push(i), dis[i] = 0;\n        while (!q.empty()) {\n         \
+    \   int u = q.front();\n            q.pop();\n            if (u == this->n())\
+    \ continue;\n            for (auto [e, eid] : (*this)[u])\n                if\
+    \ (!~dis[match_left[e]])\n                    q.push(match_left[e]), dis[match_left[e]]\
+    \ = dis[u] + 1;\n        }\n        return dis[this->n()] != -1;\n    }\n    int\
+    \ matching() {\n        int res = 0;\n        std::ranges::fill(match_right, -1);\n\
+    \        std::ranges::fill(match_left, this->n());\n        while (bfs()) {\n\
+    \            std::ranges::fill(cur, 0);\n            for (int i = 0; i < this->n();\
+    \ ++i)\n                res += (!~match_right[i] && dfs(i));\n        }\n    \
+    \    std::ranges::replace(match_left, this->n(), -1);\n        return res;\n \
+    \   }\n};\n#line 5 \"test/1_library_checker/graph/bipartitematching.test.cpp\"\
     \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int l, r, m;\n\
     \    cin >> l >> r >> m;\n    BipartiteMatching mch(l, r);\n    while (m--) {\n\
     \        int u, v;\n        cin >> u >> v;\n        mch.add_edge(u, v);\n    }\n\
@@ -203,7 +203,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 14:22:55+08:00'
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/bipartitematching.test.cpp

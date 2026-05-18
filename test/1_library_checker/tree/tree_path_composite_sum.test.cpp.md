@@ -253,21 +253,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -381,16 +381,16 @@ data:
     \ bool hasVertexWeight =  Tree<Edge, Vertex>::hasVertexWeight;\n    std::vector<UnifiedWeight_t<Edge,\
     \ Vertex>> dp(tree.n()), res(tree.n()), recv(tree.n());\n    if (tree.current_root\
     \ == -1) tree.traverse(); \n    tree.postdfs([&](int u) {\n        for (auto [v,\
-    \ eid] : tree.adj(u))\n            if (v != tree.parent(u)) {\n              \
-    \  if constexpr (hasEdgeWeight) dp[v] = dp[v] + tree.edge(eid).weight;\n     \
-    \           dp[u] = dp[u] + dp[v];\n            }\n        if constexpr (hasVertexWeight)\
+    \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                if\
+    \ constexpr (hasEdgeWeight) dp[v] = dp[v] + tree.edge(eid).weight;\n         \
+    \       dp[u] = dp[u] + dp[v];\n            }\n        if constexpr (hasVertexWeight)\
     \ dp[u] = dp[u] + tree.vertex(u);\n    });\n    std::vector<SwagQueue<UnifiedWeight_t<Edge,\
     \ Vertex>>> swag(tree.n());\n    tree.predfs([&](int u) {\n        if (tree.parent(u)\
     \ != u) {\n            swag[tree.parent(u)].pop();\n            recv[u] = swag[tree.parent(u)].prod();\n\
     \            if constexpr (hasVertexWeight) recv[u] = recv[u] + tree.vertex(tree.parent(u));\n\
     \            if constexpr (hasEdgeWeight) recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
     \            swag[tree.parent(u)].push(dp[u]);\n        }\n        for (auto [v,\
-    \ eid] : tree.adj(u))\n            if (v != tree.parent(u))\n                swag[u].push(dp[v]);\n\
+    \ eid] : tree[u])\n            if (v != tree.parent(u))\n                swag[u].push(dp[v]);\n\
     \        swag[u].push(recv[u]);\n        res[u] = swag[u].prod();\n        if\
     \ constexpr (hasVertexWeight) res[u] = res[u] + tree.vertex(u); \n    });\n  \
     \  return res;\n}\n#line 6 \"test/1_library_checker/tree/tree_path_composite_sum.test.cpp\"\
@@ -445,7 +445,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 14:47:46+08:00'
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/tree_path_composite_sum.test.cpp

@@ -342,34 +342,34 @@ data:
   isVerificationFile: false
   path: Geometry/polygon.hpp
   requiredBy:
-  - Geometry/outerTangentBetweenConvex.hpp
-  - Geometry/circle.hpp
-  - Geometry/convex.hpp
-  - Geometry/minimum_enclosing_circle.hpp
-  - Geometry/furthest_pair.hpp
   - Geometry/circle_cover.hpp
+  - Geometry/minimum_enclosing_circle.hpp
+  - Geometry/circle.hpp
+  - Geometry/furthest_pair.hpp
+  - Geometry/convex.hpp
+  - Geometry/outerTangentBetweenConvex.hpp
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/4_codeforces/101242J.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/101673A.test.cpp
   - test/3_qoj/2162.test.cpp
   - test/3_qoj/6445.test.cpp
-  - test/2_aoj/area.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
-  - test/2_aoj/cross_points_of_circles.test.cpp
-  - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/2_aoj/polygon-point_containment.test.cpp
-  - test/2_aoj/common_tangent.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
-  - test/2_aoj/convex_cut.test.cpp
-  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
+  - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/101673A.test.cpp
+  - test/4_codeforces/101242J.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/common_tangent.test.cpp
+  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
+  - test/2_aoj/cross_points_of_circles.test.cpp
+  - test/2_aoj/tangent_to_a_circle.test.cpp
+  - test/2_aoj/convex_cut.test.cpp
+  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
+  - test/2_aoj/type_of_circle.test.cpp
+  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
+  - test/2_aoj/area.test.cpp
+  - test/2_aoj/polygon-point_containment.test.cpp
   - test/6_TIOJ/1503.test.cpp
 documentation_of: Geometry/polygon.hpp
 layout: document

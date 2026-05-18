@@ -210,8 +210,8 @@ data:
   timestamp: '2026-05-04 10:37:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
 documentation_of: Numeric/DynamicModint.hpp
 layout: document

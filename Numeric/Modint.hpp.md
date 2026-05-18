@@ -363,63 +363,63 @@ data:
   isVerificationFile: false
   path: Numeric/Modint.hpp
   requiredBy:
+  - Polynomial/Bostan_Mori.hpp
+  - Polynomial/convolution_any_mod.hpp
+  - Polynomial/shift.hpp
+  - Polynomial/interpolate.hpp
+  - Polynomial/Sqrt.hpp
+  - Polynomial/lagrange_interpolate_iota.hpp
+  - Polynomial/NTT.hpp
+  - Polynomial/linear_recursion.hpp
+  - Polynomial/Polynomial.hpp
+  - Misc/bigint.hpp
   - Numbers/bell_number.hpp
   - Numbers/partition_number.hpp
-  - Polynomial/interpolate.hpp
-  - Polynomial/lagrange_interpolate_iota.hpp
-  - Polynomial/Sqrt.hpp
-  - Polynomial/convolution_any_mod.hpp
-  - Polynomial/Polynomial.hpp
-  - Polynomial/NTT.hpp
-  - Polynomial/shift.hpp
-  - Polynomial/linear_recursion.hpp
-  - Polynomial/Bostan_Mori.hpp
   - Numeric/quadratic_residue.hpp
-  - Misc/bigint.hpp
   timestamp: '2026-05-04 10:37:09+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/5_NCOJ/929.test.cpp
-  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - test/1_library_checker/convolution/convolution.test.cpp
-  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/1_library_checker/graph/enumerate_triangles.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/string/longest_common_substring.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
+  - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
+  - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
   - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - test/1_library_checker/biginteger/multiplication.test.cpp
-  - test/1_library_checker/biginteger/addition.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-  - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
-  - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
-  - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
-  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
+  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - test/1_library_checker/string/longest_common_substring.test.cpp
+  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/convolution.test.cpp
+  - test/1_library_checker/graph/enumerate_triangles.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
+  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
+  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
+  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
+  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
+  - test/5_NCOJ/929.test.cpp
 documentation_of: Numeric/Modint.hpp
 layout: document
 redirect_from:

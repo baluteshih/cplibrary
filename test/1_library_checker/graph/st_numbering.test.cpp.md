@@ -2,22 +2,59 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: Graph/BCC.hpp
+    title: Graph/BCC.hpp
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/graph/biconnected_components.test.cpp
-    title: test/1_library_checker/graph/biconnected_components.test.cpp
   - icon: ':x:'
-    path: test/1_library_checker/graph/st_numbering.test.cpp
-    title: test/1_library_checker/graph/st_numbering.test.cpp
+    path: Graph/bipolar_orientation.hpp
+    title: Graph/bipolar_orientation.hpp
+  - icon: ':question:'
+    path: default_code.hpp
+    title: default_code.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: true
-  _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"Graph/BCC.hpp\"\n\r\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/st_numbering
+    links:
+    - https://judge.yosupo.jp/problem/st_numbering
+  bundledCode: "#line 1 \"test/1_library_checker/graph/st_numbering.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/st_numbering\"\n#line 2 \"default_code.hpp\"\
+    \n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
+    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
+    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
+    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
+    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
+    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
+    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
+    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
+    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
+    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
+    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
+    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
+    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
+    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
+    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
+    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
+    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
+    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
+    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
+    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
+    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
+    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
+    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
+    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
+    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
+    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
+    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
+    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
+    \ vals.end());\n}\n#line 3 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
+    \n\n#line 2 \"Graph/BCC.hpp\"\n\r\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
     \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
     \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
@@ -120,51 +157,63 @@ data:
     \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
     \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
     \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n"
-  code: "#pragma once\r\n\r\n#include \"Graph/base.hpp\"\r\n\r\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge,\
-    \ Vertex> { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n   \
-    \ int dft, nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
-    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
-    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
-    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
-    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
-    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
-    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
-    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
-    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
-    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
-    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
-    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
-    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
-    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
-    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
-    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
-    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
-    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
-    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
-    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
-    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
-    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n"
+    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n#line 2 \"Graph/bipolar_orientation.hpp\"\
+    \n\n#line 4 \"Graph/bipolar_orientation.hpp\"\n\n// there exists bipolar orientation\
+    \ iff the graph is biconnected after adding the edge (s, t)\ntemplate<typename\
+    \ Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false, Edge,\
+    \ Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n \
+    \   int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
+    \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
+    \ low(n), pa(n, -1), sgn(n), ord;\n    auto dfs = [&](auto self, int u) -> void\
+    \ {\n        ord.push_back(u);\n        low[u] = vis[u] = ord.size();\n      \
+    \  for (auto [v, eid] : G[u])\n            if (!vis[v])\n                pa[v]\
+    \ = u, self(self, v), low[u] = std::min(low[u], low[v]);\n            else\n \
+    \               low[u] = std::min(low[u], vis[v]);\n    };\n    dfs(dfs, s);\n\
+    \    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s] = t, prv[t] = s, sgn[s]\
+    \ = -1;\n    for (int i : ord)\n        if (i != s && i != t) {\n            int\
+    \ p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l] > 0)\n             \
+    \   nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n            else\n  \
+    \              prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]] = i;\n         \
+    \   sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n    for (int x =\
+    \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
+    \  return res;\n}\n#line 6 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
+    \n\nvoid solve() {\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    if\
+    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph\
+    \ G(n);\n    while (m--) {\n        int u, v;\n        cin >> u >> v;\n      \
+    \  G.add_edge(u, v);\n    }\n    BCC bcc(G);\n    bcc.add_edge(s, t);\n    bcc.solve();\n\
+    \    if (bcc.nbcc > 1)\n        cout << \"No\\n\";\n    else {\n        cout <<\
+    \ \"Yes\\n\";\n        auto res = bipolar_orientation(G, s, t);\n        vector<int>\
+    \ ans(n);\n        for (int i = 0; i < n; ++i) ans[res[i]] = i;\n        for (int\
+    \ i = 0; i < n; ++i)\n            cout << ans[i] << \" \\n\"[i + 1 == n];\n  \
+    \  }\n}\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int t;\n\
+    \    cin >> t;\n    while (t--) {\n        solve();\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/st_numbering\"\n#include\
+    \ \"default_code.hpp\"\n\n#include \"Graph/BCC.hpp\"\n#include \"Graph/bipolar_orientation.hpp\"\
+    \n\nvoid solve() {\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    if\
+    \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph\
+    \ G(n);\n    while (m--) {\n        int u, v;\n        cin >> u >> v;\n      \
+    \  G.add_edge(u, v);\n    }\n    BCC bcc(G);\n    bcc.add_edge(s, t);\n    bcc.solve();\n\
+    \    if (bcc.nbcc > 1)\n        cout << \"No\\n\";\n    else {\n        cout <<\
+    \ \"Yes\\n\";\n        auto res = bipolar_orientation(G, s, t);\n        vector<int>\
+    \ ans(n);\n        for (int i = 0; i < n; ++i) ans[res[i]] = i;\n        for (int\
+    \ i = 0; i < n; ++i)\n            cout << ans[i] << \" \\n\"[i + 1 == n];\n  \
+    \  }\n}\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int t;\n\
+    \    cin >> t;\n    while (t--) {\n        solve();\n    }\n}\n"
   dependsOn:
+  - default_code.hpp
+  - Graph/BCC.hpp
   - Graph/base.hpp
-  isVerificationFile: false
-  path: Graph/BCC.hpp
+  - Graph/bipolar_orientation.hpp
+  isVerificationFile: true
+  path: test/1_library_checker/graph/st_numbering.test.cpp
   requiredBy: []
   timestamp: '2026-05-18 13:56:28+08:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/1_library_checker/graph/biconnected_components.test.cpp
-  - test/1_library_checker/graph/st_numbering.test.cpp
-documentation_of: Graph/BCC.hpp
+  verificationStatus: TEST_WRONG_ANSWER
+  verifiedWith: []
+documentation_of: test/1_library_checker/graph/st_numbering.test.cpp
 layout: document
 redirect_from:
-- /library/Graph/BCC.hpp
-- /library/Graph/BCC.hpp.html
-title: Graph/BCC.hpp
+- /verify/test/1_library_checker/graph/st_numbering.test.cpp
+- /verify/test/1_library_checker/graph/st_numbering.test.cpp.html
+title: test/1_library_checker/graph/st_numbering.test.cpp
 ---

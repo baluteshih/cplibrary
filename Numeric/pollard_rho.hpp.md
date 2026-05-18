@@ -76,13 +76,13 @@ data:
   isVerificationFile: false
   path: Numeric/pollard_rho.hpp
   requiredBy:
-  - Numeric/Binomial.hpp
   - Numeric/primitive_root.hpp
+  - Numeric/Binomial.hpp
   timestamp: '2026-02-28 23:10:21+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
+  - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
 documentation_of: Numeric/pollard_rho.hpp
 layout: document

@@ -173,8 +173,8 @@ data:
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp
+  - test/5_NCOJ/123.test.cpp
 documentation_of: Geometry/rotating_sweepline.hpp
 layout: document
 redirect_from:

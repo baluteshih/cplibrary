@@ -6,20 +6,17 @@ data:
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/graph/biconnected_components.test.cpp
-    title: test/1_library_checker/graph/biconnected_components.test.cpp
   - icon: ':x:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Graph/BCC.hpp\"\n\r\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
-    \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
-    \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
+  bundledCode: "#line 2 \"Graph/bipolar_orientation.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
+    \n\ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
+    class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
     \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
     \    struct Empty {};\n    struct edge_v {\n        int from, to;\n        [[no_unique_address]]\
@@ -91,80 +88,57 @@ data:
     \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
     \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge =\
-    \ void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge, Vertex>\
-    \ { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n    int dft,\
-    \ nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
-    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
-    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
-    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
-    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
-    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
-    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
-    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
-    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
-    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
-    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
-    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
-    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
-    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
-    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
-    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
-    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
-    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
-    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
-    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
-    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
-    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n"
-  code: "#pragma once\r\n\r\n#include \"Graph/base.hpp\"\r\n\r\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge,\
-    \ Vertex> { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n   \
-    \ int dft, nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
-    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
-    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
-    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
-    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
-    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
-    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
-    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
-    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
-    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
-    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
-    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
-    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
-    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
-    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
-    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
-    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
-    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
-    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
-    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
-    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
-    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n"
+    \ Vertex>::Graph;\n};\n#line 4 \"Graph/bipolar_orientation.hpp\"\n\n// there exists\
+    \ bipolar orientation iff the graph is biconnected after adding the edge (s, t)\n\
+    template<typename Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false,\
+    \ Edge, Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n\
+    \    int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
+    \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
+    \ low(n), pa(n, -1), sgn(n), ord;\n    auto dfs = [&](auto self, int u) -> void\
+    \ {\n        ord.push_back(u);\n        low[u] = vis[u] = ord.size();\n      \
+    \  for (auto [v, eid] : G[u])\n            if (!vis[v])\n                pa[v]\
+    \ = u, self(self, v), low[u] = std::min(low[u], low[v]);\n            else\n \
+    \               low[u] = std::min(low[u], vis[v]);\n    };\n    dfs(dfs, s);\n\
+    \    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s] = t, prv[t] = s, sgn[s]\
+    \ = -1;\n    for (int i : ord)\n        if (i != s && i != t) {\n            int\
+    \ p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l] > 0)\n             \
+    \   nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n            else\n  \
+    \              prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]] = i;\n         \
+    \   sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n    for (int x =\
+    \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
+    \  return res;\n}\n"
+  code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n// there exists bipolar orientation\
+    \ iff the graph is biconnected after adding the edge (s, t)\ntemplate<typename\
+    \ Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false, Edge,\
+    \ Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n \
+    \   int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
+    \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
+    \ low(n), pa(n, -1), sgn(n), ord;\n    auto dfs = [&](auto self, int u) -> void\
+    \ {\n        ord.push_back(u);\n        low[u] = vis[u] = ord.size();\n      \
+    \  for (auto [v, eid] : G[u])\n            if (!vis[v])\n                pa[v]\
+    \ = u, self(self, v), low[u] = std::min(low[u], low[v]);\n            else\n \
+    \               low[u] = std::min(low[u], vis[v]);\n    };\n    dfs(dfs, s);\n\
+    \    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s] = t, prv[t] = s, sgn[s]\
+    \ = -1;\n    for (int i : ord)\n        if (i != s && i != t) {\n            int\
+    \ p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l] > 0)\n             \
+    \   nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n            else\n  \
+    \              prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]] = i;\n         \
+    \   sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n    for (int x =\
+    \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
+    \  return res;\n}\n"
   dependsOn:
   - Graph/base.hpp
   isVerificationFile: false
-  path: Graph/BCC.hpp
+  path: Graph/bipolar_orientation.hpp
   requiredBy: []
   timestamp: '2026-05-18 13:56:28+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/1_library_checker/graph/biconnected_components.test.cpp
   - test/1_library_checker/graph/st_numbering.test.cpp
-documentation_of: Graph/BCC.hpp
+documentation_of: Graph/bipolar_orientation.hpp
 layout: document
 redirect_from:
-- /library/Graph/BCC.hpp
-- /library/Graph/BCC.hpp.html
-title: Graph/BCC.hpp
+- /library/Graph/bipolar_orientation.hpp
+- /library/Graph/bipolar_orientation.hpp.html
+title: Graph/bipolar_orientation.hpp
 ---

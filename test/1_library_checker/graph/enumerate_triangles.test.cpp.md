@@ -105,21 +105,21 @@ data:
     \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
     \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
     \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& adj(int idx) {\n\
-    \        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>& adj(int\
-    \ idx) const {\n        return G[idx];\n    }\n    Graph reversed() const {\n\
-    \        Graph res(n());\n        for (auto &e : edges)\n            res.add_edge(e.reversed());\n\
-    \        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n     \
-    \   return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>> cycle()\
-    \ {\n        std::vector<int> vis(this->n());\n        std::vector<int> res_v,\
-    \ res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self, int u,\
-    \ int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid] : G[u])\
-    \ {\n                if (eid == f || vis[v] == 2) continue;\n                if\
-    \ (vis[v] == 1) {\n                    res_v.push_back(u);\n                 \
-    \   res_e.push_back(eid);\n                    cyc_end = v;\n                \
-    \    return 1;\n                }\n                int rt = self(self, v, eid);\n\
-    \                if (rt) {\n                    if (rt == 1) { \n            \
-    \            res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
     \              return rt;\n                }\n            }\n            vis[u]\
     \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
@@ -135,15 +135,15 @@ data:
     \ Vertex>::Graph;\n};\n#line 4 \"Graph/enumerate_c3.hpp\"\n\ntemplate<typename\
     \ G>\nvoid enumerate_c3(const G &_graph, auto func) {\n    std::vector<int> ord(_graph.n()),\
     \ rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n    for (int i = 0; i < _graph.n();\
-    \ ++i)\n        ++cnt[_graph.adj(i).size()];\n    std::partial_sum(cnt.rbegin(),\
-    \ cnt.rend(), cnt.rbegin());\n    for (int i = 0; i < _graph.n(); ++i)\n     \
-    \   ord[rk[i] = --cnt[_graph.adj(i).size()]] = i;\n    auto graph = _graph.oriented(rk);\
-    \ \n    for (int x : ord) {\n        for (auto [y, _] : graph.adj(x)) vis[y] =\
-    \ 1;\n        for (auto [y, _] : graph.adj(x))\n            for (auto [z, __]\
-    \ : graph.adj(y))\n                if (vis[z])\n                    func(x, y,\
-    \ z);\n        for (auto [y, _] : graph.adj(x)) vis[y] = 0;\n    }\n}\n#line 2\
-    \ \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \ ++i)\n        ++cnt[_graph[i].size()];\n    std::partial_sum(cnt.rbegin(), cnt.rend(),\
+    \ cnt.rbegin());\n    for (int i = 0; i < _graph.n(); ++i)\n        ord[rk[i]\
+    \ = --cnt[_graph[i].size()]] = i;\n    auto graph = _graph.oriented(rk); \n  \
+    \  for (int x : ord) {\n        for (auto [y, _] : graph[x]) vis[y] = 1;\n   \
+    \     for (auto [y, _] : graph[x])\n            for (auto [z, __] : graph[y])\n\
+    \                if (vis[z])\n                    func(x, y, z);\n        for\
+    \ (auto [y, _] : graph[x]) vis[y] = 0;\n    }\n}\n#line 2 \"Numeric/Modint.hpp\"\
+    \n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line\
+    \ 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#line 7 \"Numeric/internal_math.hpp\"\n#include <type_traits>\n\n#ifdef _MSC_VER\n\
     #include <intrin.h>\n#endif\n\nnamespace internal {\n\n// @param m `1 <= m`\n\
     // @return x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n\
@@ -304,7 +304,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 14:22:55+08:00'
+  timestamp: '2026-05-18 13:56:28+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/enumerate_triangles.test.cpp
