@@ -123,13 +123,18 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/dominator_tree.hpp\"\n\n// return the parent\
-    \ of each vertex, where parent[root] = root\ntemplate<typename Edge = void, typename\
-    \ Vertex = void>\nstd::vector<int> dominator_tree(const Graph<true, Edge, Vertex>\
-    \ &G, int root) {\n    int n = G.n();\n    auto rG = G.reversed();\n    std::vector<std::vector<int>>\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/dominator_tree.hpp\"\n\n// return the parent of each vertex, where\
+    \ parent[root] = root\ntemplate<typename Edge = void, typename Vertex = void>\n\
+    std::vector<int> dominator_tree(const Graph<true, Edge, Vertex> &G, int root)\
+    \ {\n    int n = G.n();\n    auto rG = G.reversed();\n    std::vector<std::vector<int>>\
     \ tree(n);\n    int Time;\n    std::vector<int> pa(n), dfn(n, -1), id(n), semi(n),\
     \ idom(n), best(n);\n    auto dfs = [&](auto self, int u) -> void {\n        id[dfn[u]\
     \ = Time++] = u;\n        for (auto [v, eid] : G[u])\n            if (dfn[v] ==\
@@ -168,7 +173,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/dominatortree.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/dominatortree.test.cpp

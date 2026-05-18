@@ -122,18 +122,23 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename\
-    \ T, typename C = T>\nstruct CostFlowWeight {\n    T cap;\n    C cost;\n    T\
-    \ flow;\n    CostFlowWeight() : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T\
-    \ c, C w, T f = 0) : cap(c), cost(w), flow(f) {}\n    friend ostream& operator<<(ostream&\
-    \ os, const CostFlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.cost\
-    \ << \", \" << v.flow << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename\
-    \ T, typename C = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T,\
-    \ C>, void> { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T,\
-    \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename T, typename C = T>\n\
+    struct CostFlowWeight {\n    T cap;\n    C cost;\n    T flow;\n    CostFlowWeight()\
+    \ : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T c, C w, T f = 0) : cap(c),\
+    \ cost(w), flow(f) {}\n    friend ostream& operator<<(ostream& os, const CostFlowWeight\
+    \ &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \", \" << v.flow\
+    \ << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T, typename C\
+    \ = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T, C>, void>\
+    \ { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T, C>, void>;\n\
+    \    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
     \ up;\n    template<bool bellmanford = true>\n    bool shortest_path(int s, int\
     \ t) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
     \ std::numeric_limits<C>::max());\n        std::conditional_t<bellmanford, std::queue<int>,\
@@ -183,7 +188,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp

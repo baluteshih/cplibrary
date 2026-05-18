@@ -62,13 +62,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
   _extendedVerifiedWith:
@@ -117,10 +117,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
   - icon: ':heavy_check_mark:'
@@ -129,7 +129,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -237,10 +237,14 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n"
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n"
   code: "#pragma once\n\ntemplate<bool directed = true, typename Edge = void, typename\
     \ Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool hasEdgeWeight\
     \ = !std::is_same_v<Edge, void>;\n    static constexpr bool hasVertexWeight =\
@@ -311,10 +315,14 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n"
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Graph/base.hpp
@@ -342,7 +350,7 @@ data:
   - Graph/BCC.hpp
   - Graph/BipartiteGraph.hpp
   - Graph/bipolar_orientation.hpp
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/7_loj/max_bounded_flow.test.cpp

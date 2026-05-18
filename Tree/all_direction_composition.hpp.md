@@ -1,29 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
-    path: DataStructure/SwagQueue.hpp
-    title: DataStructure/SwagQueue.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/all_direction_composition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -97,16 +94,21 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
-    \n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
+    \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ =\n    (!std::same_as<A, void> || !std::same_as<B, void>) ||\n    requires(const\
+    \ =\n    (std::same_as<A, void> && std::same_as<B, void>) ||\n    requires(const\
     \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
     \ a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept ValidSubtractableState\
-    \ = \n    (!std::same_as<A, void> || !std::same_as<B, void>) ||\n    requires(const\
+    \ = \n    (std::same_as<A, void> && std::same_as<B, void>) ||\n    requires(const\
     \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
     \ a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\n\ntemplate <typename Edge,\
     \ typename Vertex>\nstruct UnifiedWeight {\n    using type = std::conditional_t<!std::is_same_v<Vertex,\
@@ -183,69 +185,68 @@ data:
     \ long> res(this->n());\n        postdfs([&](int u) {\n            res[u] = seed;\n\
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
-    \        });\n        return res;\n    }\n};\n#line 2 \"DataStructure/SwagQueue.hpp\"\
-    \n\ntemplate<typename T>\nclass SwagQueue {\n    int sz = 0;\n    std::vector<T>\
-    \ data, cum_l;\n    T cum_r;\npublic:\n    SwagQueue() : cum_l(1, T()), cum_r()\
-    \ {}\n    int size() { return sz; }\n    void push(T x) {\n        ++sz;\n   \
-    \     cum_r = cum_r + x;\n        data.push_back(x);\n    }\n    void pop() {\n\
-    \        --sz;\n        cum_l.pop_back();\n        if (cum_l.empty()) {\n    \
-    \        cum_l.push_back(T());\n            cum_r = T();\n            while (int(data.size())\
-    \ > 1) {\n                cum_l.push_back(data.back() + cum_l.back());\n     \
-    \           data.pop_back();\n            }\n            data.pop_back();\n  \
-    \      }\n    }\n    T lprod() { return cum_l.back(); }\n    T rprod() { return\
-    \ cum_r; }\n    T prod() { return lprod() + rprod(); }\n};\n#line 5 \"Tree/all_direction_composition.hpp\"\
+    \        });\n        return res;\n    }\n};\n#line 4 \"Tree/all_direction_composition.hpp\"\
     \n\ntemplate<typename Edge, typename Vertex>\nrequires (ValidAddableState<Vertex,\
-    \ Vertex> && ValidAddableState<Vertex, Edge>)\nstd::vector<UnifiedWeight_t<Edge,\
-    \ Vertex>> all_direction_composition(Tree<Edge, Vertex> &tree) {\n    static constexpr\
-    \ bool hasEdgeWeight = Tree<Edge, Vertex>::hasEdgeWeight;\n    static constexpr\
-    \ bool hasVertexWeight =  Tree<Edge, Vertex>::hasVertexWeight;\n    std::vector<UnifiedWeight_t<Edge,\
-    \ Vertex>> dp(tree.n()), res(tree.n()), recv(tree.n());\n    if (tree.current_root\
+    \ Vertex> && ValidAddableState<Vertex, Edge>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge,\
+    \ Vertex> &tree) {\n    static_assert(Tree<Edge, Vertex>::hasEdgeWeight, \"Must\
+    \ have edge weight in all_direction_composition\");\n    static_assert(Tree<Edge,\
+    \ Vertex>::hasVertexWeight, \"Must have vertex weight in all_direction_composition\"\
+    );\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n    if (tree.current_root\
     \ == -1) tree.traverse(); \n    tree.postdfs([&](int u) {\n        for (auto [v,\
-    \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                if\
-    \ constexpr (hasEdgeWeight) dp[v] = dp[v] + tree.edge(eid).weight;\n         \
-    \       dp[u] = dp[u] + dp[v];\n            }\n        if constexpr (hasVertexWeight)\
-    \ dp[u] = dp[u] + tree.vertex(u);\n    });\n    std::vector<SwagQueue<UnifiedWeight_t<Edge,\
-    \ Vertex>>> swag(tree.n());\n    tree.predfs([&](int u) {\n        if (tree.parent(u)\
-    \ != u) {\n            swag[tree.parent(u)].pop();\n            recv[u] = swag[tree.parent(u)].prod();\n\
-    \            if constexpr (hasVertexWeight) recv[u] = recv[u] + tree.vertex(tree.parent(u));\n\
-    \            if constexpr (hasEdgeWeight) recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
-    \            swag[tree.parent(u)].push(dp[u]);\n        }\n        for (auto [v,\
-    \ eid] : tree[u])\n            if (v != tree.parent(u))\n                swag[u].push(dp[v]);\n\
-    \        swag[u].push(recv[u]);\n        res[u] = swag[u].prod();\n        if\
-    \ constexpr (hasVertexWeight) res[u] = res[u] + tree.vertex(u); \n    });\n  \
-    \  return res;\n}\n"
-  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n#include \"DataStructure/SwagQueue.hpp\"\
-    \n\ntemplate<typename Edge, typename Vertex>\nrequires (ValidAddableState<Vertex,\
-    \ Vertex> && ValidAddableState<Vertex, Edge>)\nstd::vector<UnifiedWeight_t<Edge,\
-    \ Vertex>> all_direction_composition(Tree<Edge, Vertex> &tree) {\n    static constexpr\
-    \ bool hasEdgeWeight = Tree<Edge, Vertex>::hasEdgeWeight;\n    static constexpr\
-    \ bool hasVertexWeight =  Tree<Edge, Vertex>::hasVertexWeight;\n    std::vector<UnifiedWeight_t<Edge,\
-    \ Vertex>> dp(tree.n()), res(tree.n()), recv(tree.n());\n    if (tree.current_root\
-    \ == -1) tree.traverse(); \n    tree.postdfs([&](int u) {\n        for (auto [v,\
-    \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                if\
-    \ constexpr (hasEdgeWeight) dp[v] = dp[v] + tree.edge(eid).weight;\n         \
-    \       dp[u] = dp[u] + dp[v];\n            }\n        if constexpr (hasVertexWeight)\
-    \ dp[u] = dp[u] + tree.vertex(u);\n    });\n    std::vector<SwagQueue<UnifiedWeight_t<Edge,\
-    \ Vertex>>> swag(tree.n());\n    tree.predfs([&](int u) {\n        if (tree.parent(u)\
-    \ != u) {\n            swag[tree.parent(u)].pop();\n            recv[u] = swag[tree.parent(u)].prod();\n\
-    \            if constexpr (hasVertexWeight) recv[u] = recv[u] + tree.vertex(tree.parent(u));\n\
-    \            if constexpr (hasEdgeWeight) recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
-    \            swag[tree.parent(u)].push(dp[u]);\n        }\n        for (auto [v,\
-    \ eid] : tree[u])\n            if (v != tree.parent(u))\n                swag[u].push(dp[v]);\n\
-    \        swag[u].push(recv[u]);\n        res[u] = swag[u].prod();\n        if\
-    \ constexpr (hasVertexWeight) res[u] = res[u] + tree.vertex(u); \n    });\n  \
-    \  return res;\n}\n"
+    \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                dp[v]\
+    \ = dp[v] + tree.edge(eid).weight;\n                dp[u] = dp[u] + dp[v];\n \
+    \           }\n        dp[u] = dp[u] + tree.vertex(u);\n    });\n    if constexpr\
+    \ (ValidSubtractableState<Vertex, Vertex>) {\n        tree.predfs([&](int u) {\n\
+    \            if (tree.parent(u) != u) {\n                recv[u] = recv[tree.parent(u)]\
+    \ - dp[u];\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
+    \            }\n            for (auto [v, eid] : tree[u])\n                if\
+    \ (v != tree.parent(u))\n                    recv[u] = recv[u] + dp[v];\n    \
+    \        recv[u] = recv[u] + tree.vertex(u); \n        });\n    }\n    else {\n\
+    \        tree.predfs([&](int u) {\n            if (tree.parent(u) != u)\n    \
+    \            recv[u] = recv[u] + tree.parent_edge(u).weight;\n            recv[u]\
+    \ = recv[u] + tree.vertex(u); \n            for (auto [v, eid] : tree[u])\n  \
+    \              if (v != tree.parent(u)) {\n                    recv[v] = recv[u];\n\
+    \                    recv[u] = recv[u] + dp[v];\n                }\n         \
+    \   Vertex sum = Vertex(); \n            for (auto [v, eid] : tree[u] | std::views::reverse)\n\
+    \                if (v != tree.parent(u)) {\n                    recv[v] = recv[v]\
+    \ + sum;\n                    sum = dp[v] + sum;\n                }\n        });\n\
+    \    }\n    return recv;\n}\n"
+  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n\ntemplate<typename Edge, typename\
+    \ Vertex>\nrequires (ValidAddableState<Vertex, Vertex> && ValidAddableState<Vertex,\
+    \ Edge>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree)\
+    \ {\n    static_assert(Tree<Edge, Vertex>::hasEdgeWeight, \"Must have edge weight\
+    \ in all_direction_composition\");\n    static_assert(Tree<Edge, Vertex>::hasVertexWeight,\
+    \ \"Must have vertex weight in all_direction_composition\");\n    std::vector<Vertex>\
+    \ dp(tree.n()), recv(tree.n());\n    if (tree.current_root == -1) tree.traverse();\
+    \ \n    tree.postdfs([&](int u) {\n        for (auto [v, eid] : tree[u])\n   \
+    \         if (v != tree.parent(u)) {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n\
+    \                dp[u] = dp[u] + dp[v];\n            }\n        dp[u] = dp[u]\
+    \ + tree.vertex(u);\n    });\n    if constexpr (ValidSubtractableState<Vertex,\
+    \ Vertex>) {\n        tree.predfs([&](int u) {\n            if (tree.parent(u)\
+    \ != u) {\n                recv[u] = recv[tree.parent(u)] - dp[u];\n         \
+    \       recv[u] = recv[u] + tree.parent_edge(u).weight;\n            }\n     \
+    \       for (auto [v, eid] : tree[u])\n                if (v != tree.parent(u))\n\
+    \                    recv[u] = recv[u] + dp[v];\n            recv[u] = recv[u]\
+    \ + tree.vertex(u); \n        });\n    }\n    else {\n        tree.predfs([&](int\
+    \ u) {\n            if (tree.parent(u) != u)\n                recv[u] = recv[u]\
+    \ + tree.parent_edge(u).weight;\n            recv[u] = recv[u] + tree.vertex(u);\
+    \ \n            for (auto [v, eid] : tree[u])\n                if (v != tree.parent(u))\
+    \ {\n                    recv[v] = recv[u];\n                    recv[u] = recv[u]\
+    \ + dp[v];\n                }\n            Vertex sum = Vertex(); \n         \
+    \   for (auto [v, eid] : tree[u] | std::views::reverse)\n                if (v\
+    \ != tree.parent(u)) {\n                    recv[v] = recv[v] + sum;\n       \
+    \             sum = dp[v] + sum;\n                }\n        });\n    }\n    return\
+    \ recv;\n}\n"
   dependsOn:
   - Tree/Tree.hpp
   - Graph/base.hpp
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
-  - DataStructure/SwagQueue.hpp
   isVerificationFile: false
   path: Tree/all_direction_composition.hpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-05-19 02:16:25+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: Tree/all_direction_composition.hpp

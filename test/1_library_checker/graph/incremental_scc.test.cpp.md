@@ -271,25 +271,30 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void, typename Vertex =\
+    \ void>\nstruct SCC : public Graph<true, Edge, Vertex>  { // 0-base\n    using\
+    \ super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n    std::vector<int>\
+    \ low, dfn, bln, instack, stk;\n    void dfs(int u) {\n        low[u] = dfn[u]\
+    \ = ++dft;\n        instack[u] = 1, stk.push_back(u);\n        for (auto [v, eid]\
+    \ : this->G[u])\n            if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u],\
+    \ low[v]);\n            else if (instack[v] && dfn[v] < dfn[u])\n            \
+    \    low[u] = std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n   \
+    \         for (; stk.back() != u; stk.pop_back())\n                bln[stk.back()]\
+    \ = nscc, instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++,\
+    \ stk.pop_back();\n        }\n    }\n    SCC(int n): super(n), dft(), nscc(),\
+    \ low(n), dfn(n), bln(n), instack(n) {}\n    void solve() {\n        for (int\
+    \ i = 0; i < this->n(); ++i)\n            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>>\
+    \ components() {\n        std::vector<std::vector<int>> res(nscc);\n        for\
+    \ (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n   \
+    \     std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
     \ bln[i]\n#line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are\
     \ the inserted order\n// return an array t of length m\n// t[i] := the time when\
     \ edge i belongs to an scc, t[i] = m if never\ntemplate <typename GraphType>\n\
@@ -389,7 +394,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/incremental_scc.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp

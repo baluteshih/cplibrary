@@ -125,58 +125,62 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge =\
-    \ void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge, Vertex>\
-    \ { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n    int dft,\
-    \ nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
-    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
-    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
-    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
-    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
-    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
-    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
-    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
-    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
-    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
-    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
-    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
-    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
-    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
-    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
-    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
-    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
-    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
-    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
-    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
-    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
-    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n#line 2 \"Graph/bipolar_orientation.hpp\"\
-    \n\n#line 4 \"Graph/bipolar_orientation.hpp\"\n\n// there exists bipolar orientation\
-    \ iff the graph is biconnected after adding the edge (s, t)\ntemplate<typename\
-    \ Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false, Edge,\
-    \ Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n \
-    \   int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
-    \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
-    \ low(n), pa(n, -1), sgn(n), ord;\n    auto dfs = [&](auto self, int u) -> void\
-    \ {\n        ord.push_back(u);\n        low[u] = vis[u] = ord.size();\n      \
-    \  for (auto [v, eid] : G[u])\n            if (!vis[v])\n                pa[v]\
-    \ = u, self(self, v), low[u] = std::min(low[u], low[v]);\n            else\n \
-    \               low[u] = std::min(low[u], vis[v]);\n    };\n    dfs(dfs, s);\n\
-    \    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s] = t, prv[t] = s, sgn[s]\
-    \ = -1;\n    for (int i : ord)\n        if (i != s && i != t) {\n            int\
-    \ p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l] > 0)\n             \
-    \   nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n            else\n  \
-    \              prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]] = i;\n         \
-    \   sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n    for (int x =\
-    \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
-    \  return res;\n}\n#line 6 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge = void, typename Vertex\
+    \ = void>\r\nstruct BCC : public Graph<false, Edge, Vertex> { // 0-base\r\n  \
+    \  using super = Graph<false, Edge, Vertex>;\r\n    int dft, nbcc;\r\n    std::vector<int>\
+    \ low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>> bcc;\r\n   \
+    \ void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n        for (;\
+    \ stk.back() != u; stk.pop_back())\r\n            bln[stk.back()] = nbcc, bcc[nbcc].push_back(stk.back());\r\
+    \n        stk.pop_back(), bln[u] = nbcc++;\r\n    }\r\n    void dfs(int u, int\
+    \ f) {\r\n        int child = 0;\r\n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\
+    \n        for (auto [v, eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n \
+    \               dfs(v, u), ++child;\r\n                low[u] = std::min(low[u],\
+    \ low[v]);\r\n                if (dfn[u] <= low[v]) {\r\n                    is_ap[u]\
+    \ = 1, bln[u] = nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\
+    \n                }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n \
+    \               low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child\
+    \ < 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n  \
+    \  }\r\n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n)\
+    \ {}\r\n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()),\
+    \ bln(G.n()), is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0;\
+    \ i < this->n(); ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n   \
+    \ /*\r\n    Return std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex\
+    \ index of the vertex u belongs to\r\n    */\r\n    std::pair<std::vector<int>,\
+    \ std::vector<std::vector<int>>> block_cut_tree() const {\r\n        int count\
+    \ = nbcc;\r\n        std::vector<int> cir, newbln(bln);\r\n        std::vector<std::vector<int>>\
+    \ nG;\r\n        cir.resize(count);\r\n        for (int i = 0; i < this->n();\
+    \ ++i)\r\n            if (is_ap[i])\r\n                newbln[i] = count++;\r\n\
+    \        cir.resize(count, 1), nG.resize(count);\r\n        for (int i = 0; i\
+    \ < count && !cir[i]; ++i)\r\n            for (int j : bcc[i])\r\n           \
+    \     if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]), nG[newbln[j]].push_back(i);\r\
+    \n        return {newbln, nG};\r\n    } // up to 2 * n - 2 nodes!! bln[i] for\
+    \ id\r\n};\r\n#line 2 \"Graph/bipolar_orientation.hpp\"\n\n#line 4 \"Graph/bipolar_orientation.hpp\"\
+    \n\n// there exists bipolar orientation iff the graph is biconnected after adding\
+    \ the edge (s, t)\ntemplate<typename Edge, typename Vertex>\nstd::vector<int>\
+    \ bipolar_orientation(Graph<false, Edge, Vertex> &G, int s, int t) {\n    assert(s\
+    \ != t);\n    assert(G.m() > 0);\n    int n = G.n();\n    assert(0 <= s && s <\
+    \ n);\n    assert(0 <= t && t < n);\n    G[s].insert(G[s].begin(), std::make_pair(t,\
+    \ -1));\n    std::vector<int> vis(n), low(n), pa(n, -1), sgn(n), ord;\n    auto\
+    \ dfs = [&](auto self, int u) -> void {\n        ord.push_back(u);\n        low[u]\
+    \ = vis[u] = ord.size();\n        for (auto [v, eid] : G[u])\n            if (!vis[v])\n\
+    \                pa[v] = u, self(self, v), low[u] = std::min(low[u], low[v]);\n\
+    \            else\n                low[u] = std::min(low[u], vis[v]);\n    };\n\
+    \    dfs(dfs, s);\n    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s]\
+    \ = t, prv[t] = s, sgn[s] = -1;\n    for (int i : ord)\n        if (i != s &&\
+    \ i != t) {\n            int p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l]\
+    \ > 0)\n                nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n\
+    \            else\n                prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]]\
+    \ = i;\n            sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n\
+    \    for (int x = s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n\
+    \    return res;\n}\n#line 6 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
     \n\nvoid solve() {\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    if\
     \ (m == 0) {\n        cout << \"No\\n\";\n        return;\n    }\n    UndirectedGraph<>\
     \ G(n);\n    while (m--) {\n        int u, v;\n        cin >> u >> v;\n      \
@@ -207,7 +211,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/st_numbering.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 14:12:02+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/st_numbering.test.cpp

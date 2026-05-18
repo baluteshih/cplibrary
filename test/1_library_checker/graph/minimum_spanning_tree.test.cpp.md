@@ -126,18 +126,23 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename\
-    \ T = void, bool undo_tag = false>\nclass DisjointSet {\nprotected:\n    static\
-    \ constexpr bool hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int>\
-    \ boss, sz;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasT,\
-    \ std::vector<T>, Empty> data;\n    [[no_unique_address]] std::conditional_t<undo_tag,\
-    \ std::vector<std::pair<int*, int>>, Empty> cache;\n    [[no_unique_address]]\
-    \ std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*, T>>, Empty> data_cache;\n\
-    public:\n    DisjointSet(int n_): n(n_), boss(n), sz(n, 1) {\n        std::iota(boss.begin(),\
-    \ boss.end(), 0);\n        if constexpr (hasT) data.resize(n);\n    }\n    DisjointSet(const\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool\
+    \ undo_tag = false>\nclass DisjointSet {\nprotected:\n    static constexpr bool\
+    \ hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int> boss, sz;\n\
+    \    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasT, std::vector<T>,\
+    \ Empty> data;\n    [[no_unique_address]] std::conditional_t<undo_tag, std::vector<std::pair<int*,\
+    \ int>>, Empty> cache;\n    [[no_unique_address]] std::conditional_t<undo_tag\
+    \ && hasT, std::vector<std::pair<T*, T>>, Empty> data_cache;\npublic:\n    DisjointSet(int\
+    \ n_): n(n_), boss(n), sz(n, 1) {\n        std::iota(boss.begin(), boss.end(),\
+    \ 0);\n        if constexpr (hasT) data.resize(n);\n    }\n    DisjointSet(const\
     \ std::vector<T> &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1),\
     \ data(data_) {\n        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual\
     \ int leader(int u) {\n        if (boss[u] == u) return u;\n        if constexpr\
@@ -201,7 +206,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/minimum_spanning_tree.test.cpp

@@ -85,26 +85,30 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/ECC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct ECC : public Graph<false, Edge, Vertex> { //\
-    \ 0-base\n    using super = Graph<false, Edge, Vertex>;\n    int dft;\n    std::vector<int>\
-    \ low, dfn, stk;\n    void dfs(int u, int f) {\n        dfn[u] = low[u] = ++dft,\
-    \ stk.push_back(u);\n        for (auto [v, e] : this->G[u])\n            if (!dfn[v])\n\
-    \                dfs(v, e), low[u] = std::min(low[u], low[v]);\n            else\
-    \ if (e != f)\n                low[u] = std::min(low[u], dfn[v]);\n        if\
-    \ (low[u] == dfn[u]) {\n            if (f != -1) is_bridge[f] = 1;\n         \
-    \   for (; stk.back() != u; stk.pop_back())\n                bln[stk.back()] =\
-    \ necc;\n            bln[u] = necc++, stk.pop_back();\n        }\n    }\n    int\
-    \ necc;\n    std::vector<int> bln, is_bridge;\n    ECC(int n): super(n), dft(),\
-    \ low(n), dfn(n), necc(), bln(n) {}\n    void solve() {\n        necc = dft =\
-    \ 0;\n        is_bridge.resize(this->edges.size());\n        for (int i = 0; i\
-    \ < this->n(); ++i)\n            if (!dfn[i]) dfs(i, -1);\n    }\n    std::vector<std::vector<int>>\
-    \ components() {\n        std::vector<std::vector<int>> res(necc);\n        for\
-    \ (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n   \
-    \     return res;\n    }\n}; // ecc_id(i): bln[i]\n"
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/ECC.hpp\"\n\ntemplate<typename Edge = void, typename Vertex =\
+    \ void>\nstruct ECC : public Graph<false, Edge, Vertex> { // 0-base\n    using\
+    \ super = Graph<false, Edge, Vertex>;\n    int dft;\n    std::vector<int> low,\
+    \ dfn, stk;\n    void dfs(int u, int f) {\n        dfn[u] = low[u] = ++dft, stk.push_back(u);\n\
+    \        for (auto [v, e] : this->G[u])\n            if (!dfn[v])\n          \
+    \      dfs(v, e), low[u] = std::min(low[u], low[v]);\n            else if (e !=\
+    \ f)\n                low[u] = std::min(low[u], dfn[v]);\n        if (low[u] ==\
+    \ dfn[u]) {\n            if (f != -1) is_bridge[f] = 1;\n            for (; stk.back()\
+    \ != u; stk.pop_back())\n                bln[stk.back()] = necc;\n           \
+    \ bln[u] = necc++, stk.pop_back();\n        }\n    }\n    int necc;\n    std::vector<int>\
+    \ bln, is_bridge;\n    ECC(int n): super(n), dft(), low(n), dfn(n), necc(), bln(n)\
+    \ {}\n    void solve() {\n        necc = dft = 0;\n        is_bridge.resize(this->edges.size());\n\
+    \        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i]) dfs(i,\
+    \ -1);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res(necc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
+    \        return res;\n    }\n}; // ecc_id(i): bln[i]\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename Edge = void,\
     \ typename Vertex = void>\nstruct ECC : public Graph<false, Edge, Vertex> { //\
     \ 0-base\n    using super = Graph<false, Edge, Vertex>;\n    int dft;\n    std::vector<int>\
@@ -127,7 +131,7 @@ data:
   isVerificationFile: false
   path: Graph/ECC.hpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/two_edge_connected_components.test.cpp

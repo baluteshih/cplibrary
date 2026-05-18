@@ -85,35 +85,40 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/Matching.hpp\"\n\n/*\nmatch[u] = -1 implies\
-    \ no match\n*/\nstruct Matching : public Graph<false, void, void> { // 0-base\n\
-    \    using super = Graph<false, void, void>;\n    std::queue<int> q;\n    std::vector<int>\
-    \ fa, s, vis, pre, match;\n    int Find(int u)\n    { return u == fa[u] ? u :\
-    \ fa[u] = Find(fa[u]); }\n    int LCA(int x, int y) {\n        static int tk =\
-    \ 0; tk++; x = Find(x); y = Find(y);\n        for (;; swap(x, y)) if (x != this->n())\
-    \ {\n            if (vis[x] == tk) return x;\n            vis[x] = tk;\n     \
-    \       x = Find(pre[match[x]]);\n        }\n    }\n    void Blossom(int x, int\
-    \ y, int l) {\n        for (; Find(x) != l; x = pre[y]) {\n            pre[x]\
-    \ = y, y = match[x];\n            if (s[y] == 1) q.push(y), s[y] = 0;\n      \
-    \      for (int z: {x, y}) if (fa[z] == z) fa[z] = l;\n        }\n    }\n    bool\
-    \ Bfs(int r) {\n        iota(ALL(fa), 0); fill(ALL(s), -1);\n        q = queue<int>();\
-    \ q.push(r); s[r] = 0;\n        for (; !q.empty(); q.pop()) {\n            for\
-    \ (int x = q.front(); auto [u, eid] : (*this)[x])\n                if (s[u] ==\
-    \ -1) {\n                    if (pre[u] = x, s[u] = 1, match[u] == this->n())\
-    \ {\n                        for (int a = u, b = x, last; b != this->n(); a =\
-    \ last, b = pre[a])\n                            last = match[b], match[b] = a,\
-    \ match[a] = b;\n                        return true;\n                    }\n\
-    \                    q.push(match[u]); s[match[u]] = 0;\n                } else\
-    \ if (!s[u] && Find(u) != Find(x)) {\n                    int l = LCA(u, x);\n\
-    \                    Blossom(x, u, l); Blossom(u, x, l);\n                }\n\
-    \        }\n        return false;\n    }\n    Matching(int n) : super(n), fa(n\
-    \ + 1), s(n + 1), vis(n + 1), pre(n + 1, n), match(n + 1, n) {}\n    int solve()\
-    \ {\n        int ans = 0;\n        for (int x = 0; x < this->n(); ++x)\n     \
-    \       if (match[x] == this->n())\n                ans += Bfs(x);\n        std::ranges::replace(match,\
-    \ this->n(), -1);\n        return ans;\n    }\n};\n"
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/Matching.hpp\"\n\n/*\nmatch[u] = -1 implies no match\n*/\nstruct\
+    \ Matching : public Graph<false, void, void> { // 0-base\n    using super = Graph<false,\
+    \ void, void>;\n    std::queue<int> q;\n    std::vector<int> fa, s, vis, pre,\
+    \ match;\n    int Find(int u)\n    { return u == fa[u] ? u : fa[u] = Find(fa[u]);\
+    \ }\n    int LCA(int x, int y) {\n        static int tk = 0; tk++; x = Find(x);\
+    \ y = Find(y);\n        for (;; swap(x, y)) if (x != this->n()) {\n          \
+    \  if (vis[x] == tk) return x;\n            vis[x] = tk;\n            x = Find(pre[match[x]]);\n\
+    \        }\n    }\n    void Blossom(int x, int y, int l) {\n        for (; Find(x)\
+    \ != l; x = pre[y]) {\n            pre[x] = y, y = match[x];\n            if (s[y]\
+    \ == 1) q.push(y), s[y] = 0;\n            for (int z: {x, y}) if (fa[z] == z)\
+    \ fa[z] = l;\n        }\n    }\n    bool Bfs(int r) {\n        iota(ALL(fa), 0);\
+    \ fill(ALL(s), -1);\n        q = queue<int>(); q.push(r); s[r] = 0;\n        for\
+    \ (; !q.empty(); q.pop()) {\n            for (int x = q.front(); auto [u, eid]\
+    \ : (*this)[x])\n                if (s[u] == -1) {\n                    if (pre[u]\
+    \ = x, s[u] = 1, match[u] == this->n()) {\n                        for (int a\
+    \ = u, b = x, last; b != this->n(); a = last, b = pre[a])\n                  \
+    \          last = match[b], match[b] = a, match[a] = b;\n                    \
+    \    return true;\n                    }\n                    q.push(match[u]);\
+    \ s[match[u]] = 0;\n                } else if (!s[u] && Find(u) != Find(x)) {\n\
+    \                    int l = LCA(u, x);\n                    Blossom(x, u, l);\
+    \ Blossom(u, x, l);\n                }\n        }\n        return false;\n   \
+    \ }\n    Matching(int n) : super(n), fa(n + 1), s(n + 1), vis(n + 1), pre(n +\
+    \ 1, n), match(n + 1, n) {}\n    int solve() {\n        int ans = 0;\n       \
+    \ for (int x = 0; x < this->n(); ++x)\n            if (match[x] == this->n())\n\
+    \                ans += Bfs(x);\n        std::ranges::replace(match, this->n(),\
+    \ -1);\n        return ans;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n/*\nmatch[u] = -1 implies\
     \ no match\n*/\nstruct Matching : public Graph<false, void, void> { // 0-base\n\
     \    using super = Graph<false, void, void>;\n    std::queue<int> q;\n    std::vector<int>\
@@ -145,7 +150,7 @@ data:
   isVerificationFile: false
   path: Graph/Matching.hpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/general_matching.test.cpp

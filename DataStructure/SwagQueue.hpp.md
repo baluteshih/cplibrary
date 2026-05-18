@@ -1,17 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: Tree/all_direction_composition.hpp
-    title: Tree/all_direction_composition.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-    title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -42,13 +36,11 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/SwagQueue.hpp
-  requiredBy:
-  - Tree/all_direction_composition.hpp
+  requiredBy: []
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
-  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: DataStructure/SwagQueue.hpp
 layout: document
 redirect_from:

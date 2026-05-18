@@ -126,42 +126,47 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/BipartiteGraph.hpp\"\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass BipartiteGraph : public Graph<true,\
-    \ Edge, Vertex> {\n    using super = Graph<true, Edge, Vertex>;\nprotected:\n\
-    \    int rsize;\npublic:\n    BipartiteGraph(int _l, int _r) : super(_l), rsize(_r)\
-    \ {} \n    int l() const { return this->G.size(); }\n    int r() const { return\
-    \ rsize; }\n    std::vector<int> out_degree() override {\n        std::vector<int>\
-    \ res(rsize);\n        for (auto &e : this->edges)\n            ++res[e.from];\n\
-    \        return res;\n    }\n    BipartiteGraph reversed() {\n        Graph res(rsize,\
-    \ this->n());\n        for (auto &e : this->edges) {\n            if constexpr\
-    \ (super::hasEdgeWeight) res.add_edge(e.to, e.from, e.weight);\n            else\
-    \ res.add_edge(e.to, e.from);\n        }\n        if constexpr (super::hasVertexWeight)\
-    \ res.set_vertex_weight(this->weight);\n        return res;\n    }\n    /*\n \
-    \   return a pair of (color, BipartiteGraph),\n    where u on the left of the\
-    \ BipartiteGraph iff color[u] == 0\n    the new numbering of u will be the count\
-    \ of the number of same color nodes on its left\n    */\n    static std::optional<std::pair<std::vector<int>,\
-    \ BipartiteGraph>> to_bipartite(Graph<false, Edge, Vertex> &graph) {\n       \
-    \ std::vector<int> color(graph.n(), -1), numbering(graph.n());\n        auto dfs\
-    \ = [&](auto self, int u, int c) -> bool {\n            color[u] = c;\n      \
-    \      for (auto [v, eid] : graph[u])\n                if (color[v] == -1 && !self(self,\
-    \ v, c ^ 1))\n                    return false;\n                else if (color[v]\
-    \ == color[u])\n                    return false;\n            return true;\n\
-    \        };\n        int cnt[2] = {};\n        for (int i = 0; i < graph.n();\
-    \ ++i) {\n            if (color[i] == -1 && !dfs(dfs, i, 0))\n               \
-    \ return std::nullopt; \n            numbering[i] = cnt[color[i]]++;\n       \
-    \ }\n        BipartiteGraph res(cnt[0], cnt[1]);\n        for (int i = 0; i <\
-    \ graph.m(); ++i) {\n            const auto &e = graph.edge(i);\n            int\
-    \ u = e.from;\n            int v = e.to;\n            if (color[u] == 1) std::swap(u,\
-    \ v);\n            u = numbering[u], v = numbering[v];\n            if constexpr\
-    \ (super::hasEdgeWeight) res.add_edge(u, v, e.weight);\n            else res.add_edge(u,\
-    \ v);\n        }\n        if constexpr (super::hasVertexWeight) res.set_vertex_weight(graph.vertex_weight());\n\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 4 \"Graph/BipartiteGraph.hpp\"\n\ntemplate<typename Edge = void, typename\
+    \ Vertex = void>\nclass BipartiteGraph : public Graph<true, Edge, Vertex> {\n\
+    \    using super = Graph<true, Edge, Vertex>;\nprotected:\n    int rsize;\npublic:\n\
+    \    BipartiteGraph(int _l, int _r) : super(_l), rsize(_r) {} \n    int l() const\
+    \ { return this->G.size(); }\n    int r() const { return rsize; }\n    std::vector<int>\
+    \ out_degree() override {\n        std::vector<int> res(rsize);\n        for (auto\
+    \ &e : this->edges)\n            ++res[e.from];\n        return res;\n    }\n\
+    \    BipartiteGraph reversed() {\n        Graph res(rsize, this->n());\n     \
+    \   for (auto &e : this->edges) {\n            if constexpr (super::hasEdgeWeight)\
+    \ res.add_edge(e.to, e.from, e.weight);\n            else res.add_edge(e.to, e.from);\n\
+    \        }\n        if constexpr (super::hasVertexWeight) res.set_vertex_weight(this->weight);\n\
+    \        return res;\n    }\n    /*\n    return a pair of (color, BipartiteGraph),\n\
+    \    where u on the left of the BipartiteGraph iff color[u] == 0\n    the new\
+    \ numbering of u will be the count of the number of same color nodes on its left\n\
+    \    */\n    static std::optional<std::pair<std::vector<int>, BipartiteGraph>>\
+    \ to_bipartite(Graph<false, Edge, Vertex> &graph) {\n        std::vector<int>\
+    \ color(graph.n(), -1), numbering(graph.n());\n        auto dfs = [&](auto self,\
+    \ int u, int c) -> bool {\n            color[u] = c;\n            for (auto [v,\
+    \ eid] : graph[u])\n                if (color[v] == -1 && !self(self, v, c ^ 1))\n\
+    \                    return false;\n                else if (color[v] == color[u])\n\
+    \                    return false;\n            return true;\n        };\n   \
+    \     int cnt[2] = {};\n        for (int i = 0; i < graph.n(); ++i) {\n      \
+    \      if (color[i] == -1 && !dfs(dfs, i, 0))\n                return std::nullopt;\
+    \ \n            numbering[i] = cnt[color[i]]++;\n        }\n        BipartiteGraph\
+    \ res(cnt[0], cnt[1]);\n        for (int i = 0; i < graph.m(); ++i) {\n      \
+    \      const auto &e = graph.edge(i);\n            int u = e.from;\n         \
+    \   int v = e.to;\n            if (color[u] == 1) std::swap(u, v);\n         \
+    \   u = numbering[u], v = numbering[v];\n            if constexpr (super::hasEdgeWeight)\
+    \ res.add_edge(u, v, e.weight);\n            else res.add_edge(u, v);\n      \
+    \  }\n        if constexpr (super::hasVertexWeight) res.set_vertex_weight(graph.vertex_weight());\n\
     \        return res;\n    }\n};\n#line 4 \"Graph/BipartiteMatching.hpp\"\n\n/*\n\
-    match_left, match_right\n-1 imatch_rightlies no match\n*/\nstruct BipartiteMatching\
-    \ : public BipartiteGraph<void, void>  { // 0-base\n    using super = BipartiteGraph<void,\
+    match_left, match_right\n-1 implies no match\n*/\nstruct BipartiteMatching : public\
+    \ BipartiteGraph<void, void>  { // 0-base\n    using super = BipartiteGraph<void,\
     \ void>;\n    std::vector<int> match_right, match_left;\n    std::vector<int>\
     \ dis, cur;\n    BipartiteMatching(int l, int r) : super(l, r), match_right(l),\
     \ match_left(r), dis(l + 1), cur(l) {} \n    bool dfs(int u) {\n        for (int\
@@ -203,7 +208,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/bipartitematching.test.cpp

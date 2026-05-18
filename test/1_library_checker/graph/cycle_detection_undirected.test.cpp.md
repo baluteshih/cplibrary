@@ -119,17 +119,22 @@ data:
     \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
-    \                res.add_edge(e.reversed());\n        return res;\n    }\n};\n\
-    \ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 5 \"test/1_library_checker/graph/cycle_detection_undirected.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    UndirectedGraph<> graph(n);\n    for (int i = 0; i < m;\
-    \ ++i) {\n        int u, v;\n        cin >> u >> v;\n        graph.add_edge(u,\
-    \ v);\n    }\n    auto [res_v, res_e] = graph.cycle();\n    if (res_v.empty())\
-    \ cout << \"-1\\n\";\n    else {\n        cout << res_v.size() << \"\\n\";\n \
-    \       for (int i = 0; i < int(res_v.size()); ++i)\n            cout << res_v[i]\
-    \ << \" \\n\"[i + 1 == int(res_v.size())];\n        for (int i = 0; i < int(res_e.size());\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 5 \"test/1_library_checker/graph/cycle_detection_undirected.test.cpp\"\n\
+    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n    cin\
+    \ >> n >> m;\n    UndirectedGraph<> graph(n);\n    for (int i = 0; i < m; ++i)\
+    \ {\n        int u, v;\n        cin >> u >> v;\n        graph.add_edge(u, v);\n\
+    \    }\n    auto [res_v, res_e] = graph.cycle();\n    if (res_v.empty()) cout\
+    \ << \"-1\\n\";\n    else {\n        cout << res_v.size() << \"\\n\";\n      \
+    \  for (int i = 0; i < int(res_v.size()); ++i)\n            cout << res_v[i] <<\
+    \ \" \\n\"[i + 1 == int(res_v.size())];\n        for (int i = 0; i < int(res_e.size());\
     \ ++i)\n            cout << res_e[i] << \" \\n\"[i + 1 == int(res_e.size())];\n\
     \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection_undirected\"\
@@ -149,7 +154,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   requiredBy: []
-  timestamp: '2026-05-18 13:56:28+08:00'
+  timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
