@@ -30,7 +30,7 @@ struct Matching : public Graph<false, void, void> { // 0-base
         iota(ALL(fa), 0); fill(ALL(s), -1);
         q = queue<int>(); q.push(r); s[r] = 0;
         for (; !q.empty(); q.pop()) {
-            for (int x = q.front(); auto [u, eid] : this->adj(x))
+            for (int x = q.front(); auto [u, eid] : (*this)[x])
                 if (s[u] == -1) {
                     if (pre[u] = x, s[u] = 1, match[u] == this->n()) {
                         for (int a = u, b = x, last; b != this->n(); a = last, b = pre[a])

@@ -35,7 +35,7 @@ public:
         std::vector<int> color(graph.n(), -1), numbering(graph.n());
         auto dfs = [&](auto self, int u, int c) -> bool {
             color[u] = c;
-            for (auto [v, eid] : graph.adj(u))
+            for (auto [v, eid] : graph[u])
                 if (color[v] == -1 && !self(self, v, c ^ 1))
                     return false;
                 else if (color[v] == color[u])

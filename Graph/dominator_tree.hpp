@@ -2,6 +2,7 @@
 
 #include "Graph/base.hpp"
 
+// return the parent of each vertex, where parent[root] = root
 template<typename Edge = void, typename Vertex = void>
 std::vector<int> dominator_tree(const Graph<true, Edge, Vertex> &G, int root) {
     int n = G.n();
@@ -11,7 +12,7 @@ std::vector<int> dominator_tree(const Graph<true, Edge, Vertex> &G, int root) {
     std::vector<int> pa(n), dfn(n, -1), id(n), semi(n), idom(n), best(n);
     auto dfs = [&](auto self, int u) -> void {
         id[dfn[u] = Time++] = u;
-        for (auto [v, eid] : G.adj(u))
+        for (auto [v, eid] : G[u])
             if (dfn[v] == -1)
                 self(self, v), pa[dfn[v]] = dfn[u];
     };
@@ -28,7 +29,7 @@ std::vector<int> dominator_tree(const Graph<true, Edge, Vertex> &G, int root) {
     dfs(dfs, root);
     for (int i = Time - 1; i > 0; --i) {
         int u = id[i];
-        for (auto [v, eid] : rG.adj(u))
+        for (auto [v, eid] : rG[u])
             if ((v = dfn[v]) != -1) {
                 find(find, v, i);
                 semi[i] = std::min(semi[i], semi[best[v]]);

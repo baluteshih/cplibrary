@@ -96,10 +96,10 @@ public:
             ++res[e.from];
         return res;
     }
-    std::vector<std::pair<int, int>>& adj(int idx) {
+    std::vector<std::pair<int, int>>& operator[](int idx) {
         return G[idx];
     }
-    const std::vector<std::pair<int, int>>& adj(int idx) const {
+    const std::vector<std::pair<int, int>>& operator[](int idx) const {
         return G[idx];
     }
     Graph reversed() const {

@@ -31,6 +31,7 @@ struct BCC : public Graph<false, Edge, Vertex> { // 0-base
         if (f == -1 && child == 0) make_bcc(u);
     }
     BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}
+    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()), is_ap(G.n()) {}
     void solve() {
         for (int i = 0; i < this->n(); ++i)
             if (!dfn[i]) dfs(i, -1);
@@ -44,14 +45,14 @@ struct BCC : public Graph<false, Edge, Vertex> { // 0-base
         std::vector<int> cir, newbln(bln);
         std::vector<std::vector<int>> nG;
         cir.resize(count);
-        for (int i = 0; i < this->n; ++i)
+        for (int i = 0; i < this->n(); ++i)
             if (is_ap[i])
                 newbln[i] = count++;
         cir.resize(count, 1), nG.resize(count);
         for (int i = 0; i < count && !cir[i]; ++i)
             for (int j : bcc[i])
                 if (is_ap[j])
-                    nG[i].push_back(bln[j]), nG[bln[j]].push_back(i);
+                    nG[i].push_back(newbln[j]), nG[newbln[j]].push_back(i);
         return {newbln, nG};
     } // up to 2 * n - 2 nodes!! bln[i] for id
 };

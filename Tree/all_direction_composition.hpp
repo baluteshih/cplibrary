@@ -11,7 +11,7 @@ std::vector<UnifiedWeight_t<Edge, Vertex>> all_direction_composition(Tree<Edge, 
     std::vector<UnifiedWeight_t<Edge, Vertex>> dp(tree.n()), res(tree.n()), recv(tree.n());
     if (tree.current_root == -1) tree.traverse(); 
     tree.postdfs([&](int u) {
-        for (auto [v, eid] : tree.adj(u))
+        for (auto [v, eid] : tree[u])
             if (v != tree.parent(u)) {
                 if constexpr (hasEdgeWeight) dp[v] = dp[v] + tree.edge(eid).weight;
                 dp[u] = dp[u] + dp[v];
@@ -27,7 +27,7 @@ std::vector<UnifiedWeight_t<Edge, Vertex>> all_direction_composition(Tree<Edge, 
             if constexpr (hasEdgeWeight) recv[u] = recv[u] + tree.parent_edge(u).weight;
             swag[tree.parent(u)].push(dp[u]);
         }
-        for (auto [v, eid] : tree.adj(u))
+        for (auto [v, eid] : tree[u])
             if (v != tree.parent(u))
                 swag[u].push(dp[v]);
         swag[u].push(recv[u]);

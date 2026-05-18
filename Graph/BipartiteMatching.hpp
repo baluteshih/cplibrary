@@ -12,8 +12,8 @@ struct BipartiteMatching : public BipartiteGraph<void, void>  { // 0-base
     std::vector<int> dis, cur;
     BipartiteMatching(int l, int r) : super(l, r), match_right(l), match_left(r), dis(l + 1), cur(l) {} 
     bool dfs(int u) {
-        for (int &i = cur[u]; i < ssize(this->adj(u)); ++i) {
-            int e = this->adj(u)[i].first;
+        for (int &i = cur[u]; i < ssize((*this)[u]); ++i) {
+            int e = (*this)[u][i].first;
             if (match_left[e] == this->n() || (dis[match_left[e]] == dis[u] + 1 && dfs(match_left[e])))
                 return match_right[match_left[e] = u] = e, 1;
         }
@@ -29,7 +29,7 @@ struct BipartiteMatching : public BipartiteGraph<void, void>  { // 0-base
             int u = q.front();
             q.pop();
             if (u == this->n()) continue;
-            for (auto [e, eid] : this->adj(u))
+            for (auto [e, eid] : (*this)[u])
                 if (!~dis[match_left[e]])
                     q.push(match_left[e]), dis[match_left[e]] = dis[u] + 1;
         }
