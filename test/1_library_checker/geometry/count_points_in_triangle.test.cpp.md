@@ -132,36 +132,37 @@ data:
     \ Pt &p, int strict) {\n        if (side(o, a, b) >= 0) return _betweenAngle(o,\
     \ a, b, p, strict);\n        return !_betweenAngle(o, b, a, p, !strict);\n   \
     \ }\n};\n#line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT { //\
-    \ 0-base\n    int n;\n    T total_;\n    vector<T> bit;\npublic:\n    BIT(int\
-    \ _n): n(_n), total_(), bit(n + 1) {}\n    void initialize(const std::vector<T>\
-    \ &arr) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x\
-    \ - 1];\n            int y = x - (x & -x);\n            for (int i = x - 1; i\
-    \ > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n        }\n  \
-    \  }\n    void modify(int x, T v) {\n        total_ += v;\n        for (++x; x\
-    \ <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n    T prefix(int\
-    \ x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n            res\
-    \ = res + bit[x];\n        return res;\n    }\n    T suffix(int x) requires requires(T\
-    \ x, T y) { x - y; } {\n        return total_ - prefix(x);\n    }\n    T range(int\
-    \ l, int r) requires requires(T x, T y) { x - y; } { // [l, r)\n        if (l\
-    \ >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n        return\
-    \ res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n & (n -\
-    \ 1)) == 0);\n        ++k;\n        int res = 0;\n        for (int i = n >> 1;\
-    \ i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n                k -=\
-    \ bit[res += i];\n        }\n        return res;\n    }\n    T total() {\n   \
-    \     return total_;\n    }\n};\n#line 5 \"Geometry/PointInAngle.hpp\"\n\n// cnt[i][j]\
-    \ = weight sum of points k s.t. strictly above ij, and i < k < j\n// cnt2[i][j]\
-    \ = weight sum of points k s.t. strictly in ij\n// preprocess space: O(n^2), time:\
-    \ O(n(n+m)log(n+m)), query time: O(1)\ntemplate<typename T, typename Point>\n\
-    struct PointInAngle {\n    std::vector<int> pl;\n    std::vector<Point> pts;\n\
-    \    std::vector<std::vector<T>> cnt, cnt2;\n    std::vector<T> cnt3;\n    PointInAngle(const\
-    \ std::vector<Point> &_pts, const std::vector<T> weight, const std::vector<Point>\
-    \ &extra = {}, const std::vector<T> extra_weight = {}) : pl(_pts.size()), pts(_pts)\
-    \ {\n        assert(_pts.size() == weight.size());\n        assert(extra.size()\
-    \ == extra_weight.size());\n        pts.insert(pts.end(), extra.begin(), extra.end());\n\
-    \        std::ranges::sort(pts), pts.erase(std::ranges::unique(pts).begin(), pts.end());\n\
-    \        int n = pts.size();\n        cnt.resize(n, std::vector<T>(n));\n    \
-    \    cnt2.resize(n, std::vector<T>(n));\n        cnt3.resize(n);\n        for\
-    \ (int i = 0; i < int(_pts.size()); ++i) {\n            pl[i] = std::ranges::lower_bound(pts,\
+    \ 0-base\n    int n;\n    T total_;\n    std::vector<T> bit;\npublic:\n    BIT(int\
+    \ _n) : n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n    BIT(const\
+    \ std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(),\
+    \ T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x]\
+    \ = arr[x - 1];\n            int y = x - (x & -x);\n            for (int i = x\
+    \ - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n      \
+    \  }\n    }\n    void modify(int x, T v) {\n        total_ = total_ + v;\n   \
+    \     for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n\
+    \    T prefix(int x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n\
+    \            res = res + bit[x];\n        return res;\n    }\n    T suffix(int\
+    \ x) requires requires(T x, T y) { x - y; } {\n        return total_ - prefix(x);\n\
+    \    }\n    T range(int l, int r) requires requires(T x, T y) { x - y; } { //\
+    \ [l, r)\n        if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l\
+    \ - 1);\n        return res;\n    }\n    int kth(int k) { // 0-base query\n  \
+    \      assert((n & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n     \
+    \   for (int i = n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n\
+    \                k -= bit[res += i];\n        }\n        return res;\n    }\n\
+    \    T total() {\n        return total_;\n    }\n};\n#line 5 \"Geometry/PointInAngle.hpp\"\
+    \n\n// cnt[i][j] = weight sum of points k s.t. strictly above ij, and i < k <\
+    \ j\n// cnt2[i][j] = weight sum of points k s.t. strictly in ij\n// preprocess\
+    \ space: O(n^2), time: O(n(n+m)log(n+m)), query time: O(1)\ntemplate<typename\
+    \ T, typename Point>\nstruct PointInAngle {\n    std::vector<int> pl;\n    std::vector<Point>\
+    \ pts;\n    std::vector<std::vector<T>> cnt, cnt2;\n    std::vector<T> cnt3;\n\
+    \    PointInAngle(const std::vector<Point> &_pts, const std::vector<T> weight,\
+    \ const std::vector<Point> &extra = {}, const std::vector<T> extra_weight = {})\
+    \ : pl(_pts.size()), pts(_pts) {\n        assert(_pts.size() == weight.size());\n\
+    \        assert(extra.size() == extra_weight.size());\n        pts.insert(pts.end(),\
+    \ extra.begin(), extra.end());\n        std::ranges::sort(pts), pts.erase(std::ranges::unique(pts).begin(),\
+    \ pts.end());\n        int n = pts.size();\n        cnt.resize(n, std::vector<T>(n));\n\
+    \        cnt2.resize(n, std::vector<T>(n));\n        cnt3.resize(n);\n       \
+    \ for (int i = 0; i < int(_pts.size()); ++i) {\n            pl[i] = std::ranges::lower_bound(pts,\
     \ _pts[i]) - pts.begin();\n            cnt3[pl[i]] = cnt3[pl[i]] + weight[i];\n\
     \        }\n        for (int i = 0; i < int(extra.size()); ++i) {\n          \
     \  int idx = std::ranges::lower_bound(pts, extra[i]) - pts.begin();\n        \
@@ -213,7 +214,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   requiredBy: []
-  timestamp: '2026-05-07 16:20:41+08:00'
+  timestamp: '2026-05-18 14:22:06+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
