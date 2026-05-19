@@ -18,10 +18,10 @@ struct EdgeWeight {
 struct VertexWeight {
     mint val, sz;
     VertexWeight(mint _v = 0, mint _sz = 0): val(_v), sz(_sz) {}
-    VertexWeight operator+(const EdgeWeight &rhs) {
+    VertexWeight operator+(const EdgeWeight &rhs) const {
         return VertexWeight(rhs.a * val + rhs.b * sz, sz);
     }
-    VertexWeight operator+(const VertexWeight &rhs) {
+    VertexWeight operator+(const VertexWeight &rhs) const {
         return VertexWeight(val + rhs.val, sz + rhs.sz);
     }
     friend ostream& operator<<(ostream& os, const VertexWeight &v) {

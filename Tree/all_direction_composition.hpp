@@ -5,8 +5,6 @@
 template<typename Edge, typename Vertex>
 requires (ValidAddableState<Vertex, Vertex> && ValidAddableState<Vertex, Edge>)
 std::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree) {
-    static_assert(Tree<Edge, Vertex>::hasEdgeWeight, "Must have edge weight in all_direction_composition");
-    static_assert(Tree<Edge, Vertex>::hasVertexWeight, "Must have vertex weight in all_direction_composition");
     std::vector<Vertex> dp(tree.n()), recv(tree.n());
     if (tree.current_root == -1) tree.traverse(); 
     tree.postdfs([&](int u) {
