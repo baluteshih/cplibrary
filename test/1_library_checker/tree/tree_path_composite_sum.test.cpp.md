@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
@@ -16,10 +16,10 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
@@ -285,44 +285,42 @@ data:
     #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
     \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ =\n    (std::same_as<A, void> && std::same_as<B, void>) ||\n    requires(const\
-    \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
-    \ a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept ValidSubtractableState\
-    \ = \n    (std::same_as<A, void> && std::same_as<B, void>) ||\n    requires(const\
-    \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
-    \ a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\n\ntemplate <typename Edge,\
-    \ typename Vertex>\nstruct UnifiedWeight {\n    using type = std::conditional_t<!std::is_same_v<Vertex,\
-    \ void>, Vertex, Edge>;\n};\n\ntemplate <typename Edge, typename Vertex>\nusing\
-    \ UnifiedWeight_t = typename UnifiedWeight<Edge, Vertex>::type;\n#line 5 \"Tree/Tree.hpp\"\
-    \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
-    \ Graph<false, Edge, Vertex> {\npublic:\n    using super = Graph<false, Edge,\
-    \ Vertex>;\n    using super::hasEdgeWeight;\n    using super::hasVertexWeight;\n\
-    \    using WeightType = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n\
-    \    std::vector<int> pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n\
-    \    Tree(int n): super(n), current_root(-1) {}\n    Tree(const super &graph,\
-    \ const std::vector<int> &edge_index): super(graph.n()), current_root(-1) {\n\
-    \        assert(int(edge_index.size()) + 1 == this->n());\n        for (int eid\
-    \ : edge_index)\n            this->add_edge(graph.edge(eid));\n    }\n    void\
-    \ traverse(int root = 0) {\n        current_root = root;\n        std::vector<int>(this->n()).swap(pa);\n\
-    \        std::vector<int>(this->n()).swap(dfs_in);\n        std::vector<int>(this->n()).swap(dfs_out);\n\
-    \        preorder.clear(), preorder.reserve(this->n());\n        postorder.clear(),\
-    \ postorder.reserve(this->n());\n        int dft = -1;\n        auto dfs = [&](auto&\
-    \ self, int u, int f) -> void {\n            pa[u] = f;\n            dfs_in[u]\
-    \ = ++dft;\n            preorder.push_back(u);\n            for (auto [v, eid]\
-    \ : this->G[u])\n                if (eid != f)\n                    self(self,\
-    \ v, eid);\n            dfs_out[u] = dft;\n            postorder.push_back(u);\n\
-    \        };\n        dfs(dfs, root, -1);\n    }\n    bool ancestor(int u, int\
-    \ v) const {\n        return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];\n\
-    \    }\n    void run_order(const std::vector<int> &order, const auto &func) {\n\
-    \        for (int i : order)\n            func(i);\n    }\n    void predfs(const\
-    \ auto &func) {\n        run_order(preorder, func);\n    }\n    void postdfs(const\
-    \ auto &func) {\n        run_order(postorder, func);\n    }\n    int parent(int\
-    \ u) const {\n        if (pa[u] == -1) return u;\n        return this->opposite(u,\
-    \ pa[u]);\n    }\n    int parent_eid(int u) const {\n        return pa[u];\n \
-    \   }\n    super::edge_v& parent_edge(int u) {\n        assert(pa[u] != -1);\n\
-    \        return this->edge(pa[u]);\n    }\n    super::edge_v parent_edge(int u)\
-    \ const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n \
-    \   }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
+    \ =\n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
+    \ A>& b) {\n        a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept\
+    \ ValidSubtractableState = \n    requires(const ReplaceVoid<A, B>& a, \n     \
+    \        const ReplaceVoid<B, A>& b) {\n        a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
+    \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
+    \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
+    \ UnifiedWeight<Edge, Vertex>::type;\n#line 5 \"Tree/Tree.hpp\"\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass Tree : public Graph<false, Edge,\
+    \ Vertex> {\npublic:\n    using super = Graph<false, Edge, Vertex>;\n    using\
+    \ super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using WeightType\
+    \ = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n    std::vector<int>\
+    \ pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n    Tree(int\
+    \ n): super(n), current_root(-1) {}\n    Tree(const super &graph, const std::vector<int>\
+    \ &edge_index): super(graph.n()), current_root(-1) {\n        assert(int(edge_index.size())\
+    \ + 1 == this->n());\n        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
+    \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
+    \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
+    \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
+    \ preorder.reserve(this->n());\n        postorder.clear(), postorder.reserve(this->n());\n\
+    \        int dft = -1;\n        auto dfs = [&](auto& self, int u, int f) -> void\
+    \ {\n            pa[u] = f;\n            dfs_in[u] = ++dft;\n            preorder.push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (eid != f)\n\
+    \                    self(self, v, eid);\n            dfs_out[u] = dft;\n    \
+    \        postorder.push_back(u);\n        };\n        dfs(dfs, root, -1);\n  \
+    \  }\n    bool ancestor(int u, int v) const {\n        return dfs_in[u] <= dfs_in[v]\
+    \ && dfs_out[v] <= dfs_out[u];\n    }\n    void run_order(const std::vector<int>\
+    \ &order, const auto &func) {\n        for (int i : order)\n            func(i);\n\
+    \    }\n    void predfs(const auto &func) {\n        run_order(preorder, func);\n\
+    \    }\n    void postdfs(const auto &func) {\n        run_order(postorder, func);\n\
+    \    }\n    int parent(int u) const {\n        if (pa[u] == -1) return u;\n  \
+    \      return this->opposite(u, pa[u]);\n    }\n    int parent_eid(int u) const\
+    \ {\n        return pa[u];\n    }\n    super::edge_v& parent_edge(int u) {\n \
+    \       assert(pa[u] != -1);\n        return this->edge(pa[u]);\n    }\n    super::edge_v\
+    \ parent_edge(int u) const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n\
+    \    }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
     \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
     \ -1);\n            traverse(root);\n        }\n        std::vector<int> res(this->n());\n\
     \        for (int i = 0; i < this->n(); ++i)\n            res[i] = parent(i);\n\
@@ -368,41 +366,39 @@ data:
     \        });\n        return res;\n    }\n};\n#line 4 \"Tree/all_direction_composition.hpp\"\
     \n\ntemplate<typename Edge, typename Vertex>\nrequires (ValidAddableState<Vertex,\
     \ Vertex> && ValidAddableState<Vertex, Edge>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge,\
-    \ Vertex> &tree) {\n    static_assert(Tree<Edge, Vertex>::hasEdgeWeight, \"Must\
-    \ have edge weight in all_direction_composition\");\n    static_assert(Tree<Edge,\
-    \ Vertex>::hasVertexWeight, \"Must have vertex weight in all_direction_composition\"\
-    );\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n    if (tree.current_root\
-    \ == -1) tree.traverse(); \n    tree.postdfs([&](int u) {\n        for (auto [v,\
-    \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                dp[v]\
-    \ = dp[v] + tree.edge(eid).weight;\n                dp[u] = dp[u] + dp[v];\n \
-    \           }\n        dp[u] = dp[u] + tree.vertex(u);\n    });\n    if constexpr\
-    \ (ValidSubtractableState<Vertex, Vertex>) {\n        tree.predfs([&](int u) {\n\
-    \            if (tree.parent(u) != u) {\n                recv[u] = recv[tree.parent(u)]\
-    \ - dp[u];\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
-    \            }\n            for (auto [v, eid] : tree[u])\n                if\
-    \ (v != tree.parent(u))\n                    recv[u] = recv[u] + dp[v];\n    \
-    \        recv[u] = recv[u] + tree.vertex(u); \n        });\n    }\n    else {\n\
-    \        tree.predfs([&](int u) {\n            if (tree.parent(u) != u)\n    \
-    \            recv[u] = recv[u] + tree.parent_edge(u).weight;\n            recv[u]\
-    \ = recv[u] + tree.vertex(u); \n            for (auto [v, eid] : tree[u])\n  \
-    \              if (v != tree.parent(u)) {\n                    recv[v] = recv[u];\n\
-    \                    recv[u] = recv[u] + dp[v];\n                }\n         \
-    \   Vertex sum = Vertex(); \n            for (auto [v, eid] : tree[u] | std::views::reverse)\n\
-    \                if (v != tree.parent(u)) {\n                    recv[v] = recv[v]\
-    \ + sum;\n                    sum = dp[v] + sum;\n                }\n        });\n\
-    \    }\n    return recv;\n}\n#line 6 \"test/1_library_checker/tree/tree_path_composite_sum.test.cpp\"\
-    \n\nusing mint = modint998244353;\n\nstruct EdgeWeight {\n    mint a, b;\n   \
-    \ EdgeWeight(mint _a = 0, mint _b = 0): a(_a), b(_b) {}\n    friend istream& operator>>(istream&\
+    \ Vertex> &tree) {\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n  \
+    \  if (tree.current_root == -1) tree.traverse(); \n    tree.postdfs([&](int u)\
+    \ {\n        for (auto [v, eid] : tree[u])\n            if (v != tree.parent(u))\
+    \ {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n                dp[u]\
+    \ = dp[u] + dp[v];\n            }\n        dp[u] = dp[u] + tree.vertex(u);\n \
+    \   });\n    if constexpr (ValidSubtractableState<Vertex, Vertex>) {\n       \
+    \ tree.predfs([&](int u) {\n            if (tree.parent(u) != u) {\n         \
+    \       recv[u] = recv[tree.parent(u)] - dp[u];\n                recv[u] = recv[u]\
+    \ + tree.parent_edge(u).weight;\n            }\n            for (auto [v, eid]\
+    \ : tree[u])\n                if (v != tree.parent(u))\n                    recv[u]\
+    \ = recv[u] + dp[v];\n            recv[u] = recv[u] + tree.vertex(u); \n     \
+    \   });\n    }\n    else {\n        tree.predfs([&](int u) {\n            if (tree.parent(u)\
+    \ != u)\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n   \
+    \         recv[u] = recv[u] + tree.vertex(u); \n            for (auto [v, eid]\
+    \ : tree[u])\n                if (v != tree.parent(u)) {\n                   \
+    \ recv[v] = recv[u];\n                    recv[u] = recv[u] + dp[v];\n       \
+    \         }\n            Vertex sum = Vertex(); \n            for (auto [v, eid]\
+    \ : tree[u] | std::views::reverse)\n                if (v != tree.parent(u)) {\n\
+    \                    recv[v] = recv[v] + sum;\n                    sum = dp[v]\
+    \ + sum;\n                }\n        });\n    }\n    return recv;\n}\n#line 6\
+    \ \"test/1_library_checker/tree/tree_path_composite_sum.test.cpp\"\n\nusing mint\
+    \ = modint998244353;\n\nstruct EdgeWeight {\n    mint a, b;\n    EdgeWeight(mint\
+    \ _a = 0, mint _b = 0): a(_a), b(_b) {}\n    friend istream& operator>>(istream&\
     \ is, EdgeWeight &v) {\n        is >> v.a >> v.b;\n        return is;\n    }\n\
     };\n\nstruct VertexWeight {\n    mint val, sz;\n    VertexWeight(mint _v = 0,\
     \ mint _sz = 0): val(_v), sz(_sz) {}\n    VertexWeight operator+(const EdgeWeight\
-    \ &rhs) {\n        return VertexWeight(rhs.a * val + rhs.b * sz, sz);\n    }\n\
-    \    VertexWeight operator+(const VertexWeight &rhs) {\n        return VertexWeight(val\
-    \ + rhs.val, sz + rhs.sz);\n    }\n    friend ostream& operator<<(ostream& os,\
-    \ const VertexWeight &v) {\n        os << v.val;\n        return os;\n    }\n\
-    \    friend istream& operator>>(istream& is, VertexWeight &v) {\n        is >>\
-    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nint main() {\n \
-    \   ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n    Tree<EdgeWeight,\
+    \ &rhs) const {\n        return VertexWeight(rhs.a * val + rhs.b * sz, sz);\n\
+    \    }\n    VertexWeight operator+(const VertexWeight &rhs) const {\n        return\
+    \ VertexWeight(val + rhs.val, sz + rhs.sz);\n    }\n    friend ostream& operator<<(ostream&\
+    \ os, const VertexWeight &v) {\n        os << v.val;\n        return os;\n   \
+    \ }\n    friend istream& operator>>(istream& is, VertexWeight &v) {\n        is\
+    \ >> v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nint main() {\n\
+    \    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n    Tree<EdgeWeight,\
     \ VertexWeight> tree(n);\n    vector<VertexWeight> arr(n);\n    for (auto &v :\
     \ arr)\n        cin >> v;\n    tree.set_vertex_weight(arr);\n    for (int i =\
     \ 1; i < n; ++i) {\n        int u, v;\n        EdgeWeight w;\n        cin >> u\
@@ -416,19 +412,20 @@ data:
     \ b(_b) {}\n    friend istream& operator>>(istream& is, EdgeWeight &v) {\n   \
     \     is >> v.a >> v.b;\n        return is;\n    }\n};\n\nstruct VertexWeight\
     \ {\n    mint val, sz;\n    VertexWeight(mint _v = 0, mint _sz = 0): val(_v),\
-    \ sz(_sz) {}\n    VertexWeight operator+(const EdgeWeight &rhs) {\n        return\
-    \ VertexWeight(rhs.a * val + rhs.b * sz, sz);\n    }\n    VertexWeight operator+(const\
-    \ VertexWeight &rhs) {\n        return VertexWeight(val + rhs.val, sz + rhs.sz);\n\
-    \    }\n    friend ostream& operator<<(ostream& os, const VertexWeight &v) {\n\
-    \        os << v.val;\n        return os;\n    }\n    friend istream& operator>>(istream&\
-    \ is, VertexWeight &v) {\n        is >> v.val;\n        v.sz = 1;\n        return\
-    \ is;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n \
-    \   int n;\n    cin >> n;\n    Tree<EdgeWeight, VertexWeight> tree(n);\n    vector<VertexWeight>\
-    \ arr(n);\n    for (auto &v : arr)\n        cin >> v;\n    tree.set_vertex_weight(arr);\n\
-    \    for (int i = 1; i < n; ++i) {\n        int u, v;\n        EdgeWeight w;\n\
-    \        cin >> u >> v >> w;\n        tree.add_edge(u, v, w);\n    }\n    auto\
-    \ res = all_direction_composition(tree);\n    for (int i = 0; i < n; ++i)\n  \
-    \      cout << res[i] << \" \\n\"[i + 1 == n];\n}\n"
+    \ sz(_sz) {}\n    VertexWeight operator+(const EdgeWeight &rhs) const {\n    \
+    \    return VertexWeight(rhs.a * val + rhs.b * sz, sz);\n    }\n    VertexWeight\
+    \ operator+(const VertexWeight &rhs) const {\n        return VertexWeight(val\
+    \ + rhs.val, sz + rhs.sz);\n    }\n    friend ostream& operator<<(ostream& os,\
+    \ const VertexWeight &v) {\n        os << v.val;\n        return os;\n    }\n\
+    \    friend istream& operator>>(istream& is, VertexWeight &v) {\n        is >>\
+    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nint main() {\n \
+    \   ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n    Tree<EdgeWeight,\
+    \ VertexWeight> tree(n);\n    vector<VertexWeight> arr(n);\n    for (auto &v :\
+    \ arr)\n        cin >> v;\n    tree.set_vertex_weight(arr);\n    for (int i =\
+    \ 1; i < n; ++i) {\n        int u, v;\n        EdgeWeight w;\n        cin >> u\
+    \ >> v >> w;\n        tree.add_edge(u, v, w);\n    }\n    auto res = all_direction_composition(tree);\n\
+    \    for (int i = 0; i < n; ++i)\n        cout << res[i] << \" \\n\"[i + 1 ==\
+    \ n];\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/Modint.hpp
@@ -441,8 +438,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-05-19 13:54:46+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 layout: document
