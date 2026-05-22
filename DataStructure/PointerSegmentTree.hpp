@@ -42,16 +42,17 @@ class PointerSegmentTree {
             if constexpr (pushdown) val = val + tag;
             lazy = lazy + tag;
         }
-        void down() requires (hasTag && pushdown) {
+        void down(int lbnd, int rbnd) requires (hasTag && pushdown) {
             bool need_tag = false;
             if constexpr (hasTag) { 
                 if constexpr (std::equality_comparable<Tag>) need_tag = (lazy != Tag());
                 else need_tag = true;
             }
             if (!need_tag) return;
-            if constexpr (persistent) {
-                if constexpr (persistent) l = NodeAlloc::allocate(*l);
-                if constexpr (persistent) r = NodeAlloc::allocate(*r);
+            if constexpr (dynamic || persistent) {
+                int mid = (lbnd + rbnd) >> 1;
+                check_node(l, lbnd, mid);
+                check_node(r, mid, rbnd);
             }
             l->give_tag(lazy);
             r->give_tag(lazy);
@@ -71,6 +72,15 @@ class PointerSegmentTree {
         initialize(mid, r, p->r, data);
         p->up();
     }
+    static void check_node(node *&p, int l, int r) requires (dynamic || persistent) {
+        bool allocated = false; 
+        if constexpr (dynamic) if (!p) {
+            allocated = true;
+            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l, r));
+            else p = NodeAlloc::allocate();
+        }
+        if constexpr (persistent) if (!allocated) p = NodeAlloc::allocate(*p);
+    }
     Value range_prod(int L, int R, int l, int r, node *p) {
         if constexpr (dynamic) {
             if (!p) {
@@ -80,7 +90,7 @@ class PointerSegmentTree {
         }
         if (L <= l && R >= r)
             return p->get_val();
-        if constexpr (hasTag && pushdown) p->down();
+        if constexpr (hasTag && pushdown) p->down(l, r);
         int mid = (l + r) >> 1;
         if constexpr (pushdown) {
             if (R <= mid) return range_prod(L, R, l, mid, p->l);
@@ -93,15 +103,6 @@ class PointerSegmentTree {
             return range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r) + p->lazy;
         }
     }
-    void check_node(node *&p, int l, int r) requires (dynamic || persistent) {
-        bool allocated = false; 
-        if constexpr (dynamic) if (!p) {
-            allocated = true;
-            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l, r));
-            else p = NodeAlloc::allocate();
-        }
-        if constexpr (persistent) if (!allocated) p = NodeAlloc::allocate(*p);
-    }
     void update(node *&p, int l, int r) {
         if constexpr (dynamic && hasGet) p->up(l, r);
         else p->up();
@@ -110,7 +111,7 @@ class PointerSegmentTree {
         if constexpr (dynamic || persistent) check_node(p, l, r);
         if (r - l == 1)
             return p->val = v, void();
-        if constexpr (hasTag && pushdown) p->down();
+        if constexpr (hasTag && pushdown) p->down(l, r);
         int mid = (l + r) >> 1;
         if constexpr (pushdown) {
             if (x < mid) modify(x, l, mid, p->l, v);
@@ -126,7 +127,7 @@ class PointerSegmentTree {
         if constexpr (dynamic || persistent) check_node(p, l, r);
         if (r - l == 1)
             return func(p->val), void();
-        if constexpr (hasTag && pushdown) p->down();
+        if constexpr (hasTag && pushdown) p->down(l, r);
         int mid = (l + r) >> 1;
         if (x < mid) transform(x, l, mid, p->l, func);
         else transform(x, mid, r, p->r, func);
@@ -136,7 +137,7 @@ class PointerSegmentTree {
         if constexpr (dynamic || persistent) check_node(p, l, r);
         if (L <= l && R >= r)
             return p->give_tag(tag);
-        if constexpr (pushdown) p->down();
+        if constexpr (pushdown) p->down(l, r);
         int mid = (l + r) >> 1;
         if (L < mid) range_transform(L, R, l, mid, p->l, tag);
         if (R > mid) range_transform(L, R, mid, r, p->r, tag);
@@ -147,7 +148,7 @@ class PointerSegmentTree {
         if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum); }()))
             return p->give_tag(tag);
         assert(r - l > 1);
-        if constexpr (pushdown) p->down();
+        if constexpr (pushdown) p->down(l, r);
         else ((tag_sum = tag_sum + p->lazy), ...);
         int mid = (l + r) >> 1;
         if (L < mid) range_transform_beats(L, R, l, mid, p->l, tag, tag_condition, tag_sum...);
@@ -162,7 +163,7 @@ class PointerSegmentTree {
             return l;
         }
         int mid = (l + r) >> 1;
-        if constexpr (hasTag && pushdown) p->down();
+        if constexpr (hasTag && pushdown) p->down(l, r);
         if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);
         if (L <= l && R >= r) {
             if (p->l && condition([&]{ if constexpr(pushdown) return p->l->val; else return p->l->get_val() + (..., tag_sum); }()))
@@ -185,7 +186,7 @@ class PointerSegmentTree {
             return l;
         }
         int mid = (l + r) >> 1;
-        if constexpr (hasTag && pushdown) p->down();
+        if constexpr (hasTag && pushdown) p->down(l, r);
         if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);
         if (L <= l && R >= r) {
             if (p->r && condition([&]{ if constexpr(pushdown) return p->r->val; else return p->r->get_val() + (..., tag_sum); }()))
@@ -203,7 +204,7 @@ class PointerSegmentTree {
     Value get(int x, int l, int r, node *p) {
         [[no_unique_address]] std::conditional_t<!pushdown, Tag, Empty> tag;
         while (r - l > 1) {
-            if constexpr (hasTag && pushdown) p->down();
+            if constexpr (hasTag && pushdown) p->down(l, r);
             if constexpr (!pushdown) tag = tag + p->lazy;
             int mid = (l + r) >> 1;
             if (x < mid) r = mid, p = p->l;
@@ -220,7 +221,7 @@ class PointerSegmentTree {
         if (L <= l && R >= r)
             return p = q, void();
         if constexpr (dynamic || persistent) check_node(p, l, r);
-        if constexpr (hasTag && pushdown) p->down(), q->down();
+        if constexpr (hasTag && pushdown) p->down(l, r), q->down(l, r);
         int mid = (l + r) >> 1;
         if (L < mid) range_copy(L, R, l, mid, p->l, q->l);
         if (R > mid) range_copy(L, R, mid, r, p->r, q->r);
