@@ -49,6 +49,9 @@ data:
     path: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - icon: ':heavy_check_mark:'
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
@@ -520,12 +526,14 @@ data:
   - test/1_library_checker/data_structure/range_add_range_min.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/predecessor_problem.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite.test.cpp

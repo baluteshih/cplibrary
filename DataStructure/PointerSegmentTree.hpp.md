@@ -10,11 +10,17 @@ data:
     path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
@@ -48,139 +54,139 @@ data:
     \            if (r) val = val + r->get_val();\n            else val = val + Value::get((lft\
     \ + rgt) / 2, rgt);\n        }\n        void give_tag(const auto &tag) requires\
     \ (hasTag) {\n            if constexpr (pushdown) val = val + tag;\n         \
-    \   lazy = lazy + tag;\n        }\n        void down() requires (hasTag && pushdown)\
-    \ {\n            bool need_tag = false;\n            if constexpr (hasTag) { \n\
-    \                if constexpr (std::equality_comparable<Tag>) need_tag = (lazy\
-    \ != Tag());\n                else need_tag = true;\n            }\n         \
-    \   if (!need_tag) return;\n            if constexpr (persistent) {\n        \
-    \        if constexpr (persistent) l = NodeAlloc::allocate(*l);\n            \
-    \    if constexpr (persistent) r = NodeAlloc::allocate(*r);\n            }\n \
-    \           l->give_tag(lazy);\n            r->give_tag(lazy);\n            lazy\
+    \   lazy = lazy + tag;\n        }\n        void down(int lbnd, int rbnd) requires\
+    \ (hasTag && pushdown) {\n            bool need_tag = false;\n            if constexpr\
+    \ (hasTag) { \n                if constexpr (std::equality_comparable<Tag>) need_tag\
+    \ = (lazy != Tag());\n                else need_tag = true;\n            }\n \
+    \           if (!need_tag) return;\n            if constexpr (dynamic || persistent)\
+    \ {\n                int mid = (lbnd + rbnd) >> 1;\n                check_node(l,\
+    \ lbnd, mid);\n                check_node(r, mid, rbnd);\n            }\n    \
+    \        l->give_tag(lazy);\n            r->give_tag(lazy);\n            lazy\
     \ = Tag();\n        }\n        node() = default;\n        node(const auto &v)\
     \ : val(v) {}\n    };\n    node *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n\
     \    void initialize(int l, int r, node *&p, const vector<Value> &data) {\n  \
     \      if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
     \ void();\n        p = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n\
     \        initialize(l, mid, p->l, data);\n        initialize(mid, r, p->r, data);\n\
-    \        p->up();\n    }\n    Value range_prod(int L, int R, int l, int r, node\
-    \ *p) {\n        if constexpr (dynamic) {\n            if (!p) {\n           \
-    \     if constexpr (hasGet) return Value::get(std::max(L, l), std::min(R, r));\n\
-    \                return Value();\n            }\n        }\n        if (L <= l\
-    \ && R >= r)\n            return p->get_val();\n        if constexpr (hasTag &&\
-    \ pushdown) p->down();\n        int mid = (l + r) >> 1;\n        if constexpr\
-    \ (pushdown) {\n            if (R <= mid) return range_prod(L, R, l, mid, p->l);\n\
-    \            if (L >= mid) return range_prod(L, R, mid, r, p->r);\n          \
-    \  return range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r); \n\
-    \        }\n        else {\n            if (R <= mid) return range_prod(L, R,\
-    \ l, mid, p->l) + p->lazy;\n            if (L >= mid) return range_prod(L, R,\
-    \ mid, r, p->r) + p->lazy;\n            return range_prod(L, R, l, mid, p->l)\
-    \ + range_prod(L, R, mid, r, p->r) + p->lazy;\n        }\n    }\n    void check_node(node\
-    \ *&p, int l, int r) requires (dynamic || persistent) {\n        bool allocated\
-    \ = false; \n        if constexpr (dynamic) if (!p) {\n            allocated =\
-    \ true;\n            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l,\
-    \ r));\n            else p = NodeAlloc::allocate();\n        }\n        if constexpr\
-    \ (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n    }\n    void update(node\
-    \ *&p, int l, int r) {\n        if constexpr (dynamic && hasGet) p->up(l, r);\n\
-    \        else p->up();\n    }\n    void modify(int x, int l, int r, node *&p,\
-    \ const Value &v) {\n        if constexpr (dynamic || persistent) check_node(p,\
-    \ l, r);\n        if (r - l == 1)\n            return p->val = v, void();\n  \
-    \      if constexpr (hasTag && pushdown) p->down();\n        int mid = (l + r)\
-    \ >> 1;\n        if constexpr (pushdown) {\n            if (x < mid) modify(x,\
-    \ l, mid, p->l, v);\n            else modify(x, mid, r, p->r, v);\n        }\n\
-    \        else {\n            if (x < mid) modify(x, l, mid, p->l, v - p->lazy);\n\
-    \            else modify(x, mid, r, p->r, v - p->lazy);\n        }\n        update(p,\
-    \ l, r);\n    }\n    void transform(int x, int l, int r, node *&p, const auto\
-    \ &func) {\n        if constexpr (dynamic || persistent) check_node(p, l, r);\n\
-    \        if (r - l == 1)\n            return func(p->val), void();\n        if\
-    \ constexpr (hasTag && pushdown) p->down();\n        int mid = (l + r) >> 1;\n\
-    \        if (x < mid) transform(x, l, mid, p->l, func);\n        else transform(x,\
-    \ mid, r, p->r, func);\n        update(p, l, r);\n    }\n    void range_transform(int\
-    \ L, int R, int l, int r, node *&p, const auto &tag) requires (hasTag) {\n   \
-    \     if constexpr (dynamic || persistent) check_node(p, l, r);\n        if (L\
-    \ <= l && R >= r)\n            return p->give_tag(tag);\n        if constexpr\
-    \ (pushdown) p->down();\n        int mid = (l + r) >> 1;\n        if (L < mid)\
-    \ range_transform(L, R, l, mid, p->l, tag);\n        if (R > mid) range_transform(L,\
-    \ R, mid, r, p->r, tag);\n        update(p, l, r);\n    }\n    void range_transform_beats(int\
-    \ L, int R, int l, int r, node *&p, const auto &tag, const auto &tag_condition,\
-    \ auto... tag_sum) requires (hasTag) {\n        if constexpr (dynamic || persistent)\
-    \ check_node(p, l, r);\n        if (L <= l && R >= r && tag_condition([&]{ if\
-    \ constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum);\
-    \ }()))\n            return p->give_tag(tag);\n        assert(r - l > 1);\n  \
-    \      if constexpr (pushdown) p->down();\n        else ((tag_sum = tag_sum +\
-    \ p->lazy), ...);\n        int mid = (l + r) >> 1;\n        if (L < mid) range_transform_beats(L,\
-    \ R, l, mid, p->l, tag, tag_condition, tag_sum...);\n        if (R > mid) range_transform_beats(L,\
-    \ R, mid, r, p->r, tag, tag_condition, tag_sum...);\n        update(p, l, r);\n\
-    \    }\n    int range_left_search(int L, int R, int l, int r, node *p, const auto\
-    \ &condition, auto... tag_sum) {\n        if constexpr (!dynamic) if (!p) return\
-    \ R;\n        if (r - l == 1) {\n            if (!condition([&]{ if constexpr(pushdown)\
-    \ return p->val; else return p->get_val() + (..., tag_sum); }()))\n          \
-    \      return R;\n            return l;\n        }\n        int mid = (l + r)\
-    \ >> 1;\n        if constexpr (hasTag && pushdown) p->down();\n        if constexpr\
-    \ (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);\n        if (L <= l && R >=\
-    \ r) {\n            if (p->l && condition([&]{ if constexpr(pushdown) return p->l->val;\
-    \ else return p->l->get_val() + (..., tag_sum); }()))\n                return\
-    \ range_left_search(L, R, l, mid, p->l, condition, tag_sum...);\n            return\
-    \ range_left_search(L, R, mid, r, p->r, condition, tag_sum...);\n        }\n \
-    \       int left = R;\n        if (L < mid) left = range_left_search(L, R, l,\
-    \ mid, p->l, condition, tag_sum...);\n        if (left == R) {\n            if\
-    \ (R > mid) return range_left_search(L, R, mid, r, p->r, condition, tag_sum...);\n\
-    \            return R;\n        }\n        return left;\n    }\n    int range_right_search(int\
+    \        p->up();\n    }\n    static void check_node(node *&p, int l, int r) requires\
+    \ (dynamic || persistent) {\n        bool allocated = false; \n        if constexpr\
+    \ (dynamic) if (!p) {\n            allocated = true;\n            if constexpr\
+    \ (hasGet) p = NodeAlloc::allocate(Value::get(l, r));\n            else p = NodeAlloc::allocate();\n\
+    \        }\n        if constexpr (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n\
+    \    }\n    Value range_prod(int L, int R, int l, int r, node *p) {\n        if\
+    \ constexpr (dynamic) {\n            if (!p) {\n                if constexpr (hasGet)\
+    \ return Value::get(std::max(L, l), std::min(R, r));\n                return Value();\n\
+    \            }\n        }\n        if (L <= l && R >= r)\n            return p->get_val();\n\
+    \        if constexpr (hasTag && pushdown) p->down(l, r);\n        int mid = (l\
+    \ + r) >> 1;\n        if constexpr (pushdown) {\n            if (R <= mid) return\
+    \ range_prod(L, R, l, mid, p->l);\n            if (L >= mid) return range_prod(L,\
+    \ R, mid, r, p->r);\n            return range_prod(L, R, l, mid, p->l) + range_prod(L,\
+    \ R, mid, r, p->r); \n        }\n        else {\n            if (R <= mid) return\
+    \ range_prod(L, R, l, mid, p->l) + p->lazy;\n            if (L >= mid) return\
+    \ range_prod(L, R, mid, r, p->r) + p->lazy;\n            return range_prod(L,\
+    \ R, l, mid, p->l) + range_prod(L, R, mid, r, p->r) + p->lazy;\n        }\n  \
+    \  }\n    void update(node *&p, int l, int r) {\n        if constexpr (dynamic\
+    \ && hasGet) p->up(l, r);\n        else p->up();\n    }\n    void modify(int x,\
+    \ int l, int r, node *&p, const Value &v) {\n        if constexpr (dynamic ||\
+    \ persistent) check_node(p, l, r);\n        if (r - l == 1)\n            return\
+    \ p->val = v, void();\n        if constexpr (hasTag && pushdown) p->down(l, r);\n\
+    \        int mid = (l + r) >> 1;\n        if constexpr (pushdown) {\n        \
+    \    if (x < mid) modify(x, l, mid, p->l, v);\n            else modify(x, mid,\
+    \ r, p->r, v);\n        }\n        else {\n            if (x < mid) modify(x,\
+    \ l, mid, p->l, v - p->lazy);\n            else modify(x, mid, r, p->r, v - p->lazy);\n\
+    \        }\n        update(p, l, r);\n    }\n    void transform(int x, int l,\
+    \ int r, node *&p, const auto &func) {\n        if constexpr (dynamic || persistent)\
+    \ check_node(p, l, r);\n        if (r - l == 1)\n            return func(p->val),\
+    \ void();\n        if constexpr (hasTag && pushdown) p->down(l, r);\n        int\
+    \ mid = (l + r) >> 1;\n        if (x < mid) transform(x, l, mid, p->l, func);\n\
+    \        else transform(x, mid, r, p->r, func);\n        update(p, l, r);\n  \
+    \  }\n    void range_transform(int L, int R, int l, int r, node *&p, const auto\
+    \ &tag) requires (hasTag) {\n        if constexpr (dynamic || persistent) check_node(p,\
+    \ l, r);\n        if (L <= l && R >= r)\n            return p->give_tag(tag);\n\
+    \        if constexpr (pushdown) p->down(l, r);\n        int mid = (l + r) >>\
+    \ 1;\n        if (L < mid) range_transform(L, R, l, mid, p->l, tag);\n       \
+    \ if (R > mid) range_transform(L, R, mid, r, p->r, tag);\n        update(p, l,\
+    \ r);\n    }\n    void range_transform_beats(int L, int R, int l, int r, node\
+    \ *&p, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag)\
+    \ {\n        if constexpr (dynamic || persistent) check_node(p, l, r);\n     \
+    \   if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return p->val;\
+    \ else return p->get_val() + (..., tag_sum); }()))\n            return p->give_tag(tag);\n\
+    \        assert(r - l > 1);\n        if constexpr (pushdown) p->down(l, r);\n\
+    \        else ((tag_sum = tag_sum + p->lazy), ...);\n        int mid = (l + r)\
+    \ >> 1;\n        if (L < mid) range_transform_beats(L, R, l, mid, p->l, tag, tag_condition,\
+    \ tag_sum...);\n        if (R > mid) range_transform_beats(L, R, mid, r, p->r,\
+    \ tag, tag_condition, tag_sum...);\n        update(p, l, r);\n    }\n    int range_left_search(int\
     \ L, int R, int l, int r, node *p, const auto &condition, auto... tag_sum) {\n\
-    \        if constexpr (!dynamic) if (!p) return L - 1;\n        if (r - l == 1)\
-    \ {\n            if (!condition([&]{ if constexpr(pushdown) return p->val; else\
-    \ return p->get_val() + (..., tag_sum); }()))\n                return L - 1;\n\
-    \            return l;\n        }\n        int mid = (l + r) >> 1;\n        if\
-    \ constexpr (hasTag && pushdown) p->down();\n        if constexpr (!pushdown)\
-    \ ((tag_sum = tag_sum + p->lazy), ...);\n        if (L <= l && R >= r) {\n   \
-    \         if (p->r && condition([&]{ if constexpr(pushdown) return p->r->val;\
-    \ else return p->r->get_val() + (..., tag_sum); }()))\n                return\
-    \ range_right_search(L, R, mid, r, p->r, condition, tag_sum...);\n           \
-    \ return range_right_search(L, R, l, mid, p->l, condition, tag_sum...);\n    \
-    \    }\n        int right = L - 1;\n        if (R > mid) right = range_right_search(L,\
-    \ R, mid, r, p->r, condition, tag_sum...);\n        if (right == L - 1) {\n  \
-    \          if (L < mid) return range_right_search(L, R, l, mid, p->l, condition,\
-    \ tag_sum...);\n            return L - 1;\n        }\n        return right;\n\
-    \    }\n    Value get(int x, int l, int r, node *p) {\n        [[no_unique_address]]\
-    \ std::conditional_t<!pushdown, Tag, Empty> tag;\n        while (r - l > 1) {\n\
-    \            if constexpr (hasTag && pushdown) p->down();\n            if constexpr\
-    \ (!pushdown) tag = tag + p->lazy;\n            int mid = (l + r) >> 1;\n    \
-    \        if (x < mid) r = mid, p = p->l;\n            else l = mid, p = p->r;\n\
-    \            if constexpr (dynamic || persistent) if (!p) {\n                if\
-    \ constexpr (hasGet) return Value::get(x, x + 1) + tag;\n                else\
-    \ return Value() + tag;\n            }\n        }\n        if constexpr (pushdown)\
-    \ return p->val;\n        else return p->get_val() + tag;\n    }\n    void range_copy(int\
-    \ L, int R, int l, int r, node *&p, node *&q) requires (pushdown && persistent)\
-    \ {\n        if (L <= l && R >= r)\n            return p = q, void();\n      \
-    \  if constexpr (dynamic || persistent) check_node(p, l, r);\n        if constexpr\
-    \ (hasTag && pushdown) p->down(), q->down();\n        int mid = (l + r) >> 1;\n\
-    \        if (L < mid) range_copy(L, R, l, mid, p->l, q->l);\n        if (R > mid)\
-    \ range_copy(L, R, mid, r, p->r, q->r);\n        update(p, l, r);\n    }\n   \
-    \ void printnode(int l, int r, node *p) {\n        std::cerr << \"[\" << l <<\
-    \ \", \" << r << \"): \";\n        if constexpr (hasTag) std::cerr << \"val =\
-    \ \" << p->val << \", tag = \" << p->lazy;\n        else std::cerr << p->val;\n\
-    \        std::cerr << \"\\n\";\n    }\n    void printinfo(int L, int R, int l,\
-    \ int r, node *p) {\n        printnode(l, r, p);\n        if (L <= l && R >= r)\n\
-    \            return;\n        int mid = (l + r) >> 1;\n        if (L < mid) printinfo(L,\
-    \ R, l, mid, p->l);\n        if (R > mid) printinfo(L, R, mid, r, p->r);\n   \
-    \ }\n    void printall(int l, int r, node *p) {\n        printnode(l, r, p);\n\
-    \        if (r - l == 1) return;\n        int mid = (l + r) >> 1;\n        printall(l,\
-    \ mid, p->l);\n        printall(mid, r, p->r);\n    }\npublic:\n    PointerSegmentTree(const\
-    \ vector<Value> &data): n(data.size()), root(nullptr) { \n        initialize(0,\
-    \ n, root, data);\n    }\n    PointerSegmentTree(int size) requires (!dynamic)\
-    \ : PointerSegmentTree(vector<Value>(size)) {}\n    PointerSegmentTree(int size\
-    \ = 0) requires (dynamic || persistent) : n(size), root(nullptr) {}\n    Value\
-    \ get(int x) {\n        assert(0 <= x && x < n);\n        return get(x, 0, n,\
-    \ root);\n    }\n    Value range_prod(int l, int r) {\n        assert(0 <= l &&\
-    \ r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n   \
-    \     return range_prod(l, r, 0, n, root);\n    }\n    void modify(int x, const\
-    \ Value &v) {\n        assert(0 <= x && x < n);\n        modify(x, 0, n, root,\
-    \ v);\n    }\n    void transform(int x, const auto &func) {\n        assert(0\
-    \ <= x && x < n);\n        transform(x, 0, n, root, func);\n    }\n    void range_transform(int\
-    \ l, int r, const auto &tag) requires (hasTag) {\n        assert(0 <= l && r <=\
-    \ n);\n        assert(l <= r);\n        if (l < r)\n            range_transform(l,\
-    \ r, 0, n, root, tag);\n    }\n    void range_transform_beats(int l, int r, const\
-    \ auto &tag, const auto &tag_condition) requires (hasTag) {\n        assert(0\
-    \ <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n            range_transform_beats(l,\
+    \        if constexpr (!dynamic) if (!p) return R;\n        if (r - l == 1) {\n\
+    \            if (!condition([&]{ if constexpr(pushdown) return p->val; else return\
+    \ p->get_val() + (..., tag_sum); }()))\n                return R;\n          \
+    \  return l;\n        }\n        int mid = (l + r) >> 1;\n        if constexpr\
+    \ (hasTag && pushdown) p->down(l, r);\n        if constexpr (!pushdown) ((tag_sum\
+    \ = tag_sum + p->lazy), ...);\n        if (L <= l && R >= r) {\n            if\
+    \ (p->l && condition([&]{ if constexpr(pushdown) return p->l->val; else return\
+    \ p->l->get_val() + (..., tag_sum); }()))\n                return range_left_search(L,\
+    \ R, l, mid, p->l, condition, tag_sum...);\n            return range_left_search(L,\
+    \ R, mid, r, p->r, condition, tag_sum...);\n        }\n        int left = R;\n\
+    \        if (L < mid) left = range_left_search(L, R, l, mid, p->l, condition,\
+    \ tag_sum...);\n        if (left == R) {\n            if (R > mid) return range_left_search(L,\
+    \ R, mid, r, p->r, condition, tag_sum...);\n            return R;\n        }\n\
+    \        return left;\n    }\n    int range_right_search(int L, int R, int l,\
+    \ int r, node *p, const auto &condition, auto... tag_sum) {\n        if constexpr\
+    \ (!dynamic) if (!p) return L - 1;\n        if (r - l == 1) {\n            if\
+    \ (!condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val()\
+    \ + (..., tag_sum); }()))\n                return L - 1;\n            return l;\n\
+    \        }\n        int mid = (l + r) >> 1;\n        if constexpr (hasTag && pushdown)\
+    \ p->down(l, r);\n        if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy),\
+    \ ...);\n        if (L <= l && R >= r) {\n            if (p->r && condition([&]{\
+    \ if constexpr(pushdown) return p->r->val; else return p->r->get_val() + (...,\
+    \ tag_sum); }()))\n                return range_right_search(L, R, mid, r, p->r,\
+    \ condition, tag_sum...);\n            return range_right_search(L, R, l, mid,\
+    \ p->l, condition, tag_sum...);\n        }\n        int right = L - 1;\n     \
+    \   if (R > mid) right = range_right_search(L, R, mid, r, p->r, condition, tag_sum...);\n\
+    \        if (right == L - 1) {\n            if (L < mid) return range_right_search(L,\
+    \ R, l, mid, p->l, condition, tag_sum...);\n            return L - 1;\n      \
+    \  }\n        return right;\n    }\n    Value get(int x, int l, int r, node *p)\
+    \ {\n        [[no_unique_address]] std::conditional_t<!pushdown, Tag, Empty> tag;\n\
+    \        while (r - l > 1) {\n            if constexpr (hasTag && pushdown) p->down(l,\
+    \ r);\n            if constexpr (!pushdown) tag = tag + p->lazy;\n           \
+    \ int mid = (l + r) >> 1;\n            if (x < mid) r = mid, p = p->l;\n     \
+    \       else l = mid, p = p->r;\n            if constexpr (dynamic || persistent)\
+    \ if (!p) {\n                if constexpr (hasGet) return Value::get(x, x + 1)\
+    \ + tag;\n                else return Value() + tag;\n            }\n        }\n\
+    \        if constexpr (pushdown) return p->val;\n        else return p->get_val()\
+    \ + tag;\n    }\n    void range_copy(int L, int R, int l, int r, node *&p, node\
+    \ *&q) requires (pushdown && persistent) {\n        if (L <= l && R >= r)\n  \
+    \          return p = q, void();\n        if constexpr (dynamic || persistent)\
+    \ check_node(p, l, r);\n        if constexpr (hasTag && pushdown) p->down(l, r),\
+    \ q->down(l, r);\n        int mid = (l + r) >> 1;\n        if (L < mid) range_copy(L,\
+    \ R, l, mid, p->l, q->l);\n        if (R > mid) range_copy(L, R, mid, r, p->r,\
+    \ q->r);\n        update(p, l, r);\n    }\n    void printnode(int l, int r, node\
+    \ *p) {\n        std::cerr << \"[\" << l << \", \" << r << \"): \";\n        if\
+    \ constexpr (hasTag) std::cerr << \"val = \" << p->val << \", tag = \" << p->lazy;\n\
+    \        else std::cerr << p->val;\n        std::cerr << \"\\n\";\n    }\n   \
+    \ void printinfo(int L, int R, int l, int r, node *p) {\n        printnode(l,\
+    \ r, p);\n        if (L <= l && R >= r)\n            return;\n        int mid\
+    \ = (l + r) >> 1;\n        if (L < mid) printinfo(L, R, l, mid, p->l);\n     \
+    \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
+    \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
+    \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
+    \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
+    \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
+    \ n(size), root(nullptr) {}\n    Value get(int x) {\n        assert(0 <= x &&\
+    \ x < n);\n        return get(x, 0, n, root);\n    }\n    Value range_prod(int\
+    \ l, int r) {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n  \
+    \      if (l == r) return Value();\n        return range_prod(l, r, 0, n, root);\n\
+    \    }\n    void modify(int x, const Value &v) {\n        assert(0 <= x && x <\
+    \ n);\n        modify(x, 0, n, root, v);\n    }\n    void transform(int x, const\
+    \ auto &func) {\n        assert(0 <= x && x < n);\n        transform(x, 0, n,\
+    \ root, func);\n    }\n    void range_transform(int l, int r, const auto &tag)\
+    \ requires (hasTag) {\n        assert(0 <= l && r <= n);\n        assert(l <=\
+    \ r);\n        if (l < r)\n            range_transform(l, r, 0, n, root, tag);\n\
+    \    }\n    void range_transform_beats(int l, int r, const auto &tag, const auto\
+    \ &tag_condition) requires (hasTag) {\n        assert(0 <= l && r <= n);\n   \
+    \     assert(l <= r);\n        if (l < r)\n            range_transform_beats(l,\
     \ r, 0, n, root, tag, tag_condition);\n    }\n    /*\n       For the given element\
     \ range [l, r)\n       Perform segment tree binary search within the range with\
     \ left half first \n       return fail if the node is empty\n     */\n    int\
@@ -224,138 +230,139 @@ data:
     \            else val = val + Value::get((lft + rgt) / 2, rgt);\n        }\n \
     \       void give_tag(const auto &tag) requires (hasTag) {\n            if constexpr\
     \ (pushdown) val = val + tag;\n            lazy = lazy + tag;\n        }\n   \
-    \     void down() requires (hasTag && pushdown) {\n            bool need_tag =\
-    \ false;\n            if constexpr (hasTag) { \n                if constexpr (std::equality_comparable<Tag>)\
-    \ need_tag = (lazy != Tag());\n                else need_tag = true;\n       \
-    \     }\n            if (!need_tag) return;\n            if constexpr (persistent)\
-    \ {\n                if constexpr (persistent) l = NodeAlloc::allocate(*l);\n\
-    \                if constexpr (persistent) r = NodeAlloc::allocate(*r);\n    \
-    \        }\n            l->give_tag(lazy);\n            r->give_tag(lazy);\n \
-    \           lazy = Tag();\n        }\n        node() = default;\n        node(const\
-    \ auto &v) : val(v) {}\n    };\n    node *root = nullptr;\n    using NodeAlloc\
-    \ = Allocator<node>;\n    void initialize(int l, int r, node *&p, const vector<Value>\
-    \ &data) {\n        if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
-    \ void();\n        p = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n\
-    \        initialize(l, mid, p->l, data);\n        initialize(mid, r, p->r, data);\n\
-    \        p->up();\n    }\n    Value range_prod(int L, int R, int l, int r, node\
-    \ *p) {\n        if constexpr (dynamic) {\n            if (!p) {\n           \
-    \     if constexpr (hasGet) return Value::get(std::max(L, l), std::min(R, r));\n\
-    \                return Value();\n            }\n        }\n        if (L <= l\
-    \ && R >= r)\n            return p->get_val();\n        if constexpr (hasTag &&\
-    \ pushdown) p->down();\n        int mid = (l + r) >> 1;\n        if constexpr\
-    \ (pushdown) {\n            if (R <= mid) return range_prod(L, R, l, mid, p->l);\n\
-    \            if (L >= mid) return range_prod(L, R, mid, r, p->r);\n          \
-    \  return range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r); \n\
-    \        }\n        else {\n            if (R <= mid) return range_prod(L, R,\
-    \ l, mid, p->l) + p->lazy;\n            if (L >= mid) return range_prod(L, R,\
-    \ mid, r, p->r) + p->lazy;\n            return range_prod(L, R, l, mid, p->l)\
-    \ + range_prod(L, R, mid, r, p->r) + p->lazy;\n        }\n    }\n    void check_node(node\
-    \ *&p, int l, int r) requires (dynamic || persistent) {\n        bool allocated\
-    \ = false; \n        if constexpr (dynamic) if (!p) {\n            allocated =\
-    \ true;\n            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l,\
+    \     void down(int lbnd, int rbnd) requires (hasTag && pushdown) {\n        \
+    \    bool need_tag = false;\n            if constexpr (hasTag) { \n          \
+    \      if constexpr (std::equality_comparable<Tag>) need_tag = (lazy != Tag());\n\
+    \                else need_tag = true;\n            }\n            if (!need_tag)\
+    \ return;\n            if constexpr (dynamic || persistent) {\n              \
+    \  int mid = (lbnd + rbnd) >> 1;\n                check_node(l, lbnd, mid);\n\
+    \                check_node(r, mid, rbnd);\n            }\n            l->give_tag(lazy);\n\
+    \            r->give_tag(lazy);\n            lazy = Tag();\n        }\n      \
+    \  node() = default;\n        node(const auto &v) : val(v) {}\n    };\n    node\
+    \ *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n    void initialize(int\
+    \ l, int r, node *&p, const vector<Value> &data) {\n        if (r - l == 1) \n\
+    \            return p = NodeAlloc::allocate(data[l]), void();\n        p = NodeAlloc::allocate();\n\
+    \        int mid = (l + r) >> 1;\n        initialize(l, mid, p->l, data);\n  \
+    \      initialize(mid, r, p->r, data);\n        p->up();\n    }\n    static void\
+    \ check_node(node *&p, int l, int r) requires (dynamic || persistent) {\n    \
+    \    bool allocated = false; \n        if constexpr (dynamic) if (!p) {\n    \
+    \        allocated = true;\n            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l,\
     \ r));\n            else p = NodeAlloc::allocate();\n        }\n        if constexpr\
-    \ (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n    }\n    void update(node\
-    \ *&p, int l, int r) {\n        if constexpr (dynamic && hasGet) p->up(l, r);\n\
-    \        else p->up();\n    }\n    void modify(int x, int l, int r, node *&p,\
-    \ const Value &v) {\n        if constexpr (dynamic || persistent) check_node(p,\
-    \ l, r);\n        if (r - l == 1)\n            return p->val = v, void();\n  \
-    \      if constexpr (hasTag && pushdown) p->down();\n        int mid = (l + r)\
-    \ >> 1;\n        if constexpr (pushdown) {\n            if (x < mid) modify(x,\
-    \ l, mid, p->l, v);\n            else modify(x, mid, r, p->r, v);\n        }\n\
-    \        else {\n            if (x < mid) modify(x, l, mid, p->l, v - p->lazy);\n\
-    \            else modify(x, mid, r, p->r, v - p->lazy);\n        }\n        update(p,\
-    \ l, r);\n    }\n    void transform(int x, int l, int r, node *&p, const auto\
-    \ &func) {\n        if constexpr (dynamic || persistent) check_node(p, l, r);\n\
-    \        if (r - l == 1)\n            return func(p->val), void();\n        if\
-    \ constexpr (hasTag && pushdown) p->down();\n        int mid = (l + r) >> 1;\n\
-    \        if (x < mid) transform(x, l, mid, p->l, func);\n        else transform(x,\
-    \ mid, r, p->r, func);\n        update(p, l, r);\n    }\n    void range_transform(int\
-    \ L, int R, int l, int r, node *&p, const auto &tag) requires (hasTag) {\n   \
-    \     if constexpr (dynamic || persistent) check_node(p, l, r);\n        if (L\
-    \ <= l && R >= r)\n            return p->give_tag(tag);\n        if constexpr\
-    \ (pushdown) p->down();\n        int mid = (l + r) >> 1;\n        if (L < mid)\
-    \ range_transform(L, R, l, mid, p->l, tag);\n        if (R > mid) range_transform(L,\
-    \ R, mid, r, p->r, tag);\n        update(p, l, r);\n    }\n    void range_transform_beats(int\
-    \ L, int R, int l, int r, node *&p, const auto &tag, const auto &tag_condition,\
-    \ auto... tag_sum) requires (hasTag) {\n        if constexpr (dynamic || persistent)\
-    \ check_node(p, l, r);\n        if (L <= l && R >= r && tag_condition([&]{ if\
-    \ constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum);\
-    \ }()))\n            return p->give_tag(tag);\n        assert(r - l > 1);\n  \
-    \      if constexpr (pushdown) p->down();\n        else ((tag_sum = tag_sum +\
-    \ p->lazy), ...);\n        int mid = (l + r) >> 1;\n        if (L < mid) range_transform_beats(L,\
-    \ R, l, mid, p->l, tag, tag_condition, tag_sum...);\n        if (R > mid) range_transform_beats(L,\
-    \ R, mid, r, p->r, tag, tag_condition, tag_sum...);\n        update(p, l, r);\n\
-    \    }\n    int range_left_search(int L, int R, int l, int r, node *p, const auto\
-    \ &condition, auto... tag_sum) {\n        if constexpr (!dynamic) if (!p) return\
-    \ R;\n        if (r - l == 1) {\n            if (!condition([&]{ if constexpr(pushdown)\
-    \ return p->val; else return p->get_val() + (..., tag_sum); }()))\n          \
-    \      return R;\n            return l;\n        }\n        int mid = (l + r)\
-    \ >> 1;\n        if constexpr (hasTag && pushdown) p->down();\n        if constexpr\
-    \ (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);\n        if (L <= l && R >=\
-    \ r) {\n            if (p->l && condition([&]{ if constexpr(pushdown) return p->l->val;\
-    \ else return p->l->get_val() + (..., tag_sum); }()))\n                return\
-    \ range_left_search(L, R, l, mid, p->l, condition, tag_sum...);\n            return\
-    \ range_left_search(L, R, mid, r, p->r, condition, tag_sum...);\n        }\n \
-    \       int left = R;\n        if (L < mid) left = range_left_search(L, R, l,\
-    \ mid, p->l, condition, tag_sum...);\n        if (left == R) {\n            if\
-    \ (R > mid) return range_left_search(L, R, mid, r, p->r, condition, tag_sum...);\n\
-    \            return R;\n        }\n        return left;\n    }\n    int range_right_search(int\
+    \ (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n    }\n    Value\
+    \ range_prod(int L, int R, int l, int r, node *p) {\n        if constexpr (dynamic)\
+    \ {\n            if (!p) {\n                if constexpr (hasGet) return Value::get(std::max(L,\
+    \ l), std::min(R, r));\n                return Value();\n            }\n     \
+    \   }\n        if (L <= l && R >= r)\n            return p->get_val();\n     \
+    \   if constexpr (hasTag && pushdown) p->down(l, r);\n        int mid = (l + r)\
+    \ >> 1;\n        if constexpr (pushdown) {\n            if (R <= mid) return range_prod(L,\
+    \ R, l, mid, p->l);\n            if (L >= mid) return range_prod(L, R, mid, r,\
+    \ p->r);\n            return range_prod(L, R, l, mid, p->l) + range_prod(L, R,\
+    \ mid, r, p->r); \n        }\n        else {\n            if (R <= mid) return\
+    \ range_prod(L, R, l, mid, p->l) + p->lazy;\n            if (L >= mid) return\
+    \ range_prod(L, R, mid, r, p->r) + p->lazy;\n            return range_prod(L,\
+    \ R, l, mid, p->l) + range_prod(L, R, mid, r, p->r) + p->lazy;\n        }\n  \
+    \  }\n    void update(node *&p, int l, int r) {\n        if constexpr (dynamic\
+    \ && hasGet) p->up(l, r);\n        else p->up();\n    }\n    void modify(int x,\
+    \ int l, int r, node *&p, const Value &v) {\n        if constexpr (dynamic ||\
+    \ persistent) check_node(p, l, r);\n        if (r - l == 1)\n            return\
+    \ p->val = v, void();\n        if constexpr (hasTag && pushdown) p->down(l, r);\n\
+    \        int mid = (l + r) >> 1;\n        if constexpr (pushdown) {\n        \
+    \    if (x < mid) modify(x, l, mid, p->l, v);\n            else modify(x, mid,\
+    \ r, p->r, v);\n        }\n        else {\n            if (x < mid) modify(x,\
+    \ l, mid, p->l, v - p->lazy);\n            else modify(x, mid, r, p->r, v - p->lazy);\n\
+    \        }\n        update(p, l, r);\n    }\n    void transform(int x, int l,\
+    \ int r, node *&p, const auto &func) {\n        if constexpr (dynamic || persistent)\
+    \ check_node(p, l, r);\n        if (r - l == 1)\n            return func(p->val),\
+    \ void();\n        if constexpr (hasTag && pushdown) p->down(l, r);\n        int\
+    \ mid = (l + r) >> 1;\n        if (x < mid) transform(x, l, mid, p->l, func);\n\
+    \        else transform(x, mid, r, p->r, func);\n        update(p, l, r);\n  \
+    \  }\n    void range_transform(int L, int R, int l, int r, node *&p, const auto\
+    \ &tag) requires (hasTag) {\n        if constexpr (dynamic || persistent) check_node(p,\
+    \ l, r);\n        if (L <= l && R >= r)\n            return p->give_tag(tag);\n\
+    \        if constexpr (pushdown) p->down(l, r);\n        int mid = (l + r) >>\
+    \ 1;\n        if (L < mid) range_transform(L, R, l, mid, p->l, tag);\n       \
+    \ if (R > mid) range_transform(L, R, mid, r, p->r, tag);\n        update(p, l,\
+    \ r);\n    }\n    void range_transform_beats(int L, int R, int l, int r, node\
+    \ *&p, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag)\
+    \ {\n        if constexpr (dynamic || persistent) check_node(p, l, r);\n     \
+    \   if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return p->val;\
+    \ else return p->get_val() + (..., tag_sum); }()))\n            return p->give_tag(tag);\n\
+    \        assert(r - l > 1);\n        if constexpr (pushdown) p->down(l, r);\n\
+    \        else ((tag_sum = tag_sum + p->lazy), ...);\n        int mid = (l + r)\
+    \ >> 1;\n        if (L < mid) range_transform_beats(L, R, l, mid, p->l, tag, tag_condition,\
+    \ tag_sum...);\n        if (R > mid) range_transform_beats(L, R, mid, r, p->r,\
+    \ tag, tag_condition, tag_sum...);\n        update(p, l, r);\n    }\n    int range_left_search(int\
     \ L, int R, int l, int r, node *p, const auto &condition, auto... tag_sum) {\n\
-    \        if constexpr (!dynamic) if (!p) return L - 1;\n        if (r - l == 1)\
-    \ {\n            if (!condition([&]{ if constexpr(pushdown) return p->val; else\
-    \ return p->get_val() + (..., tag_sum); }()))\n                return L - 1;\n\
-    \            return l;\n        }\n        int mid = (l + r) >> 1;\n        if\
-    \ constexpr (hasTag && pushdown) p->down();\n        if constexpr (!pushdown)\
-    \ ((tag_sum = tag_sum + p->lazy), ...);\n        if (L <= l && R >= r) {\n   \
-    \         if (p->r && condition([&]{ if constexpr(pushdown) return p->r->val;\
-    \ else return p->r->get_val() + (..., tag_sum); }()))\n                return\
-    \ range_right_search(L, R, mid, r, p->r, condition, tag_sum...);\n           \
-    \ return range_right_search(L, R, l, mid, p->l, condition, tag_sum...);\n    \
-    \    }\n        int right = L - 1;\n        if (R > mid) right = range_right_search(L,\
-    \ R, mid, r, p->r, condition, tag_sum...);\n        if (right == L - 1) {\n  \
-    \          if (L < mid) return range_right_search(L, R, l, mid, p->l, condition,\
-    \ tag_sum...);\n            return L - 1;\n        }\n        return right;\n\
-    \    }\n    Value get(int x, int l, int r, node *p) {\n        [[no_unique_address]]\
-    \ std::conditional_t<!pushdown, Tag, Empty> tag;\n        while (r - l > 1) {\n\
-    \            if constexpr (hasTag && pushdown) p->down();\n            if constexpr\
-    \ (!pushdown) tag = tag + p->lazy;\n            int mid = (l + r) >> 1;\n    \
-    \        if (x < mid) r = mid, p = p->l;\n            else l = mid, p = p->r;\n\
-    \            if constexpr (dynamic || persistent) if (!p) {\n                if\
-    \ constexpr (hasGet) return Value::get(x, x + 1) + tag;\n                else\
-    \ return Value() + tag;\n            }\n        }\n        if constexpr (pushdown)\
-    \ return p->val;\n        else return p->get_val() + tag;\n    }\n    void range_copy(int\
-    \ L, int R, int l, int r, node *&p, node *&q) requires (pushdown && persistent)\
-    \ {\n        if (L <= l && R >= r)\n            return p = q, void();\n      \
-    \  if constexpr (dynamic || persistent) check_node(p, l, r);\n        if constexpr\
-    \ (hasTag && pushdown) p->down(), q->down();\n        int mid = (l + r) >> 1;\n\
-    \        if (L < mid) range_copy(L, R, l, mid, p->l, q->l);\n        if (R > mid)\
-    \ range_copy(L, R, mid, r, p->r, q->r);\n        update(p, l, r);\n    }\n   \
-    \ void printnode(int l, int r, node *p) {\n        std::cerr << \"[\" << l <<\
-    \ \", \" << r << \"): \";\n        if constexpr (hasTag) std::cerr << \"val =\
-    \ \" << p->val << \", tag = \" << p->lazy;\n        else std::cerr << p->val;\n\
-    \        std::cerr << \"\\n\";\n    }\n    void printinfo(int L, int R, int l,\
-    \ int r, node *p) {\n        printnode(l, r, p);\n        if (L <= l && R >= r)\n\
-    \            return;\n        int mid = (l + r) >> 1;\n        if (L < mid) printinfo(L,\
-    \ R, l, mid, p->l);\n        if (R > mid) printinfo(L, R, mid, r, p->r);\n   \
-    \ }\n    void printall(int l, int r, node *p) {\n        printnode(l, r, p);\n\
-    \        if (r - l == 1) return;\n        int mid = (l + r) >> 1;\n        printall(l,\
-    \ mid, p->l);\n        printall(mid, r, p->r);\n    }\npublic:\n    PointerSegmentTree(const\
-    \ vector<Value> &data): n(data.size()), root(nullptr) { \n        initialize(0,\
-    \ n, root, data);\n    }\n    PointerSegmentTree(int size) requires (!dynamic)\
-    \ : PointerSegmentTree(vector<Value>(size)) {}\n    PointerSegmentTree(int size\
-    \ = 0) requires (dynamic || persistent) : n(size), root(nullptr) {}\n    Value\
-    \ get(int x) {\n        assert(0 <= x && x < n);\n        return get(x, 0, n,\
-    \ root);\n    }\n    Value range_prod(int l, int r) {\n        assert(0 <= l &&\
-    \ r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n   \
-    \     return range_prod(l, r, 0, n, root);\n    }\n    void modify(int x, const\
-    \ Value &v) {\n        assert(0 <= x && x < n);\n        modify(x, 0, n, root,\
-    \ v);\n    }\n    void transform(int x, const auto &func) {\n        assert(0\
-    \ <= x && x < n);\n        transform(x, 0, n, root, func);\n    }\n    void range_transform(int\
-    \ l, int r, const auto &tag) requires (hasTag) {\n        assert(0 <= l && r <=\
-    \ n);\n        assert(l <= r);\n        if (l < r)\n            range_transform(l,\
-    \ r, 0, n, root, tag);\n    }\n    void range_transform_beats(int l, int r, const\
-    \ auto &tag, const auto &tag_condition) requires (hasTag) {\n        assert(0\
-    \ <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n            range_transform_beats(l,\
+    \        if constexpr (!dynamic) if (!p) return R;\n        if (r - l == 1) {\n\
+    \            if (!condition([&]{ if constexpr(pushdown) return p->val; else return\
+    \ p->get_val() + (..., tag_sum); }()))\n                return R;\n          \
+    \  return l;\n        }\n        int mid = (l + r) >> 1;\n        if constexpr\
+    \ (hasTag && pushdown) p->down(l, r);\n        if constexpr (!pushdown) ((tag_sum\
+    \ = tag_sum + p->lazy), ...);\n        if (L <= l && R >= r) {\n            if\
+    \ (p->l && condition([&]{ if constexpr(pushdown) return p->l->val; else return\
+    \ p->l->get_val() + (..., tag_sum); }()))\n                return range_left_search(L,\
+    \ R, l, mid, p->l, condition, tag_sum...);\n            return range_left_search(L,\
+    \ R, mid, r, p->r, condition, tag_sum...);\n        }\n        int left = R;\n\
+    \        if (L < mid) left = range_left_search(L, R, l, mid, p->l, condition,\
+    \ tag_sum...);\n        if (left == R) {\n            if (R > mid) return range_left_search(L,\
+    \ R, mid, r, p->r, condition, tag_sum...);\n            return R;\n        }\n\
+    \        return left;\n    }\n    int range_right_search(int L, int R, int l,\
+    \ int r, node *p, const auto &condition, auto... tag_sum) {\n        if constexpr\
+    \ (!dynamic) if (!p) return L - 1;\n        if (r - l == 1) {\n            if\
+    \ (!condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val()\
+    \ + (..., tag_sum); }()))\n                return L - 1;\n            return l;\n\
+    \        }\n        int mid = (l + r) >> 1;\n        if constexpr (hasTag && pushdown)\
+    \ p->down(l, r);\n        if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy),\
+    \ ...);\n        if (L <= l && R >= r) {\n            if (p->r && condition([&]{\
+    \ if constexpr(pushdown) return p->r->val; else return p->r->get_val() + (...,\
+    \ tag_sum); }()))\n                return range_right_search(L, R, mid, r, p->r,\
+    \ condition, tag_sum...);\n            return range_right_search(L, R, l, mid,\
+    \ p->l, condition, tag_sum...);\n        }\n        int right = L - 1;\n     \
+    \   if (R > mid) right = range_right_search(L, R, mid, r, p->r, condition, tag_sum...);\n\
+    \        if (right == L - 1) {\n            if (L < mid) return range_right_search(L,\
+    \ R, l, mid, p->l, condition, tag_sum...);\n            return L - 1;\n      \
+    \  }\n        return right;\n    }\n    Value get(int x, int l, int r, node *p)\
+    \ {\n        [[no_unique_address]] std::conditional_t<!pushdown, Tag, Empty> tag;\n\
+    \        while (r - l > 1) {\n            if constexpr (hasTag && pushdown) p->down(l,\
+    \ r);\n            if constexpr (!pushdown) tag = tag + p->lazy;\n           \
+    \ int mid = (l + r) >> 1;\n            if (x < mid) r = mid, p = p->l;\n     \
+    \       else l = mid, p = p->r;\n            if constexpr (dynamic || persistent)\
+    \ if (!p) {\n                if constexpr (hasGet) return Value::get(x, x + 1)\
+    \ + tag;\n                else return Value() + tag;\n            }\n        }\n\
+    \        if constexpr (pushdown) return p->val;\n        else return p->get_val()\
+    \ + tag;\n    }\n    void range_copy(int L, int R, int l, int r, node *&p, node\
+    \ *&q) requires (pushdown && persistent) {\n        if (L <= l && R >= r)\n  \
+    \          return p = q, void();\n        if constexpr (dynamic || persistent)\
+    \ check_node(p, l, r);\n        if constexpr (hasTag && pushdown) p->down(l, r),\
+    \ q->down(l, r);\n        int mid = (l + r) >> 1;\n        if (L < mid) range_copy(L,\
+    \ R, l, mid, p->l, q->l);\n        if (R > mid) range_copy(L, R, mid, r, p->r,\
+    \ q->r);\n        update(p, l, r);\n    }\n    void printnode(int l, int r, node\
+    \ *p) {\n        std::cerr << \"[\" << l << \", \" << r << \"): \";\n        if\
+    \ constexpr (hasTag) std::cerr << \"val = \" << p->val << \", tag = \" << p->lazy;\n\
+    \        else std::cerr << p->val;\n        std::cerr << \"\\n\";\n    }\n   \
+    \ void printinfo(int L, int R, int l, int r, node *p) {\n        printnode(l,\
+    \ r, p);\n        if (L <= l && R >= r)\n            return;\n        int mid\
+    \ = (l + r) >> 1;\n        if (L < mid) printinfo(L, R, l, mid, p->l);\n     \
+    \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
+    \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
+    \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
+    \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
+    \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
+    \ n(size), root(nullptr) {}\n    Value get(int x) {\n        assert(0 <= x &&\
+    \ x < n);\n        return get(x, 0, n, root);\n    }\n    Value range_prod(int\
+    \ l, int r) {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n  \
+    \      if (l == r) return Value();\n        return range_prod(l, r, 0, n, root);\n\
+    \    }\n    void modify(int x, const Value &v) {\n        assert(0 <= x && x <\
+    \ n);\n        modify(x, 0, n, root, v);\n    }\n    void transform(int x, const\
+    \ auto &func) {\n        assert(0 <= x && x < n);\n        transform(x, 0, n,\
+    \ root, func);\n    }\n    void range_transform(int l, int r, const auto &tag)\
+    \ requires (hasTag) {\n        assert(0 <= l && r <= n);\n        assert(l <=\
+    \ r);\n        if (l < r)\n            range_transform(l, r, 0, n, root, tag);\n\
+    \    }\n    void range_transform_beats(int l, int r, const auto &tag, const auto\
+    \ &tag_condition) requires (hasTag) {\n        assert(0 <= l && r <= n);\n   \
+    \     assert(l <= r);\n        if (l < r)\n            range_transform_beats(l,\
     \ r, 0, n, root, tag, tag_condition);\n    }\n    /*\n       For the given element\
     \ range [l, r)\n       Perform segment tree binary search within the range with\
     \ left half first \n       return fail if the node is empty\n     */\n    int\
@@ -382,13 +389,15 @@ data:
   isVerificationFile: false
   path: DataStructure/PointerSegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-05-06 01:14:34+08:00'
+  timestamp: '2026-05-23 01:18:48+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
 documentation_of: DataStructure/PointerSegmentTree.hpp
 layout: document
 redirect_from:

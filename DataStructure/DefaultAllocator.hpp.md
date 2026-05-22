@@ -16,11 +16,17 @@ data:
     path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
     title: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
@@ -67,9 +73,11 @@ data:
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
 documentation_of: DataStructure/DefaultAllocator.hpp
 layout: document
 redirect_from:

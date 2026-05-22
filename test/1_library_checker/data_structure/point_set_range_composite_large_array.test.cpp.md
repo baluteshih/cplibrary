@@ -23,11 +23,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
+    PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite_large_array
     links:
-    - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
+    - https://judge.yosupo.jp/problem/point_set_range_composite_large_array
+  bundledCode: "#line 1 \"test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite_large_array\"\
     \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
     typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
     #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
@@ -57,7 +57,7 @@ data:
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
     \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
     \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp\"\
+    }\n#line 3 \"test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#line 7 \"Numeric/internal_math.hpp\"\n#include <type_traits>\n\n#ifdef _MSC_VER\n\
@@ -194,8 +194,7 @@ data:
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
-    #line 5 \"test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp\"\
-    \n\n#line 2 \"DataStructure/PointerSegmentTree.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
+    #line 2 \"DataStructure/PointerSegmentTree.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 4 \"DataStructure/PointerSegmentTree.hpp\"\
@@ -373,35 +372,34 @@ data:
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l,\
     \ r, 0, n, root);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
     \ {\n        std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, root);\n\
-    \        cerr << \"\\e[0m\\n\";\n    }\n};\n#line 7 \"test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp\"\
+    \        cerr << \"\\e[0m\\n\";\n    }\n};\n#line 6 \"test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nstruct Value {\n    mint x, y; \n    Value(mint\
-    \ _x = 0, mint _y = 0): x(_x), y(_y) {}\n    Value operator+(const Value &rhs)\
+    \ _x = 1, mint _y = 0): x(_x), y(_y) {}\n    Value operator+(const Value &rhs)\
     \ {\n        return Value(x * rhs.x, y * rhs.x + rhs.y);\n    }\n    friend istream&\
     \ operator>>(istream& is, Value &v) {\n        is >> v.x >> v.y;\n        return\
     \ is;\n    }\n    mint apply(mint a) {\n        return x * a + y;\n    }\n};\n\
-    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n    cin\
-    \ >> n >> q;\n    vector<Value> arr(n);\n    for (auto &v : arr)\n        cin\
-    \ >> v;\n    PointerSegmentTree<Value> seg(arr);\n    while (q--) {\n        int\
+    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
+    \  cin >> n >> q;\n    PointerSegmentTree<Value, void, true, DefaultAllocator,\
+    \ true> seg(n);\n    while (q--) {\n        int t;\n        cin >> t;\n      \
+    \  if (t == 0) {\n            int p;\n            Value v;\n            cin >>\
+    \ p >> v;\n            seg.modify(p, v);\n        }\n        else {\n        \
+    \    int l, r;\n            mint x;\n            cin >> l >> r >> x;\n       \
+    \     cout << seg.range_prod(l, r).apply(x) << \"\\n\";\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite_large_array\"\
+    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    DataStructure/PointerSegmentTree.hpp\"\n\nusing mint = modint998244353;\n\nstruct\
+    \ Value {\n    mint x, y; \n    Value(mint _x = 1, mint _y = 0): x(_x), y(_y)\
+    \ {}\n    Value operator+(const Value &rhs) {\n        return Value(x * rhs.x,\
+    \ y * rhs.x + rhs.y);\n    }\n    friend istream& operator>>(istream& is, Value\
+    \ &v) {\n        is >> v.x >> v.y;\n        return is;\n    }\n    mint apply(mint\
+    \ a) {\n        return x * a + y;\n    }\n};\n\n\nint main() {\n    ios::sync_with_stdio(0),\
+    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    PointerSegmentTree<Value,\
+    \ void, true, DefaultAllocator, true> seg(n);\n    while (q--) {\n        int\
     \ t;\n        cin >> t;\n        if (t == 0) {\n            int p;\n         \
     \   Value v;\n            cin >> p >> v;\n            seg.modify(p, v);\n    \
     \    }\n        else {\n            int l, r;\n            mint x;\n         \
     \   cin >> l >> r >> x;\n            cout << seg.range_prod(l, r).apply(x) <<\
     \ \"\\n\";\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n\n#include\
-    \ \"DataStructure/PointerSegmentTree.hpp\"\n\nusing mint = modint998244353;\n\n\
-    struct Value {\n    mint x, y; \n    Value(mint _x = 0, mint _y = 0): x(_x), y(_y)\
-    \ {}\n    Value operator+(const Value &rhs) {\n        return Value(x * rhs.x,\
-    \ y * rhs.x + rhs.y);\n    }\n    friend istream& operator>>(istream& is, Value\
-    \ &v) {\n        is >> v.x >> v.y;\n        return is;\n    }\n    mint apply(mint\
-    \ a) {\n        return x * a + y;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    vector<Value> arr(n);\n\
-    \    for (auto &v : arr)\n        cin >> v;\n    PointerSegmentTree<Value> seg(arr);\n\
-    \    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 0) {\n\
-    \            int p;\n            Value v;\n            cin >> p >> v;\n      \
-    \      seg.modify(p, v);\n        }\n        else {\n            int l, r;\n \
-    \           mint x;\n            cin >> l >> r >> x;\n            cout << seg.range_prod(l,\
-    \ r).apply(x) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/Modint.hpp
@@ -409,15 +407,15 @@ data:
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/DefaultAllocator.hpp
   isVerificationFile: true
-  path: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  path: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   requiredBy: []
   timestamp: '2026-05-23 01:18:48+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+documentation_of: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
-- /verify/test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp.html
-title: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+- /verify/test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+- /verify/test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp.html
+title: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
 ---
