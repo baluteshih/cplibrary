@@ -13,7 +13,7 @@ struct PoolAllocator {
         T* p = &pool[ptr++];
         return new (p) T(std::forward<Args>(args)...);
     }
-    static void deallocate(T* p) {}
+    static void deallocate([[maybe_unused]] T* p) {}
     static void reset() { ptr = 0; }
 };
 

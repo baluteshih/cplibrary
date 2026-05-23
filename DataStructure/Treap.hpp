@@ -3,6 +3,10 @@
 #include "DataStructure/DefaultAllocator.hpp"
 #include "Algebra/size_value.hpp"
 
+#ifndef RNGSEED
+    #define RNGSEED 880301
+#endif
+
 template<typename Key = void, 
          typename Value = size_v,
          typename Tag = void, 
@@ -30,7 +34,7 @@ class Treap {
     }
     static_assert(hasKey || hasValue);
     static_assert(!hasTag || hasValue);
-    static inline std::mt19937 rng{880301};
+    static inline std::mt19937 rng{RNGSEED};
     struct node {
         node *l = nullptr, *r = nullptr;
         [[no_unique_address]] std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();
@@ -458,11 +462,18 @@ public:
             return !cmp(v, src);
         }), this);
     }
+    template<bool try_access = true>
     void erase(Iterator it) requires (!persistent) {
-        node* target = it.operator->();
-        if (target->f) {
-            if (target->f->l == target) target->f->l = merge(target->l, target->r);
-            else target->f->r = merge(target->l, target->r);
+        if constexpr (try_access)
+            access(it);
+        node *target = it.operator->();
+        node *parent = target->f;
+        node *&point_to = !parent ? root : parent->l == target ? parent->l : parent->r;
+        point_to = merge(target->l, target->r);
+        while (parent) {
+            node *grand = parent->f;
+            parent->up();
+            parent = grand;
         }
         NodeAlloc::deallocate(target);
     }
