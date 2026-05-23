@@ -7,6 +7,9 @@ data:
     title: DataStructure/Treap.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,7 @@ data:
   - test/8_luogu/P5055.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
 documentation_of: Algebra/size_value.hpp

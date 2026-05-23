@@ -66,20 +66,21 @@ data:
     \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
     \    }\n    int size() const {\n        return sz; \n    }\n    friend ostream&\
     \ operator<<(ostream& os, const size_v &v) {\n        os << v.sz;\n        return\
-    \ os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\ntemplate<typename Key\
-    \ = void, \n         typename Value = size_v,\n         typename Tag = void, \n\
-    \         bool Rev = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
-    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
-    \ hasKey = !std::is_same_v<Key, void>;\n    static constexpr bool hasValue = !std::is_same_v<Value,\
-    \ void>;\n    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n   \
-    \ static constexpr bool usePri = !persistent;\n    static constexpr bool hasSize\
-    \ = requires(Value v) { v.size(); };\n    static constexpr bool hasValueReverse\
-    \ = requires(Value v) { v.reverse(); };\n    struct Empty {};\n    template <bool\
-    \ Condition, typename T>\n    static auto get_default() {\n        if constexpr\
-    \ (Condition) return T();\n        else return Empty{};\n    }\n    template <bool\
-    \ Condition>\n    static auto get_pri() {\n        if constexpr (Condition) return\
-    \ rng();\n        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
-    \    static_assert(!hasTag || hasValue);\n    static inline std::mt19937 rng{880301};\n\
+    \ os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n   \
+    \ #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n         typename\
+    \ Value = size_v,\n         typename Tag = void, \n         bool Rev = false,\n\
+    \         template<typename> class Allocator = DefaultAllocator,\n         bool\
+    \ persistent = false\n>\nclass Treap {\n    static constexpr bool hasKey = !std::is_same_v<Key,\
+    \ void>;\n    static constexpr bool hasValue = !std::is_same_v<Value, void>;\n\
+    \    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static constexpr\
+    \ bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
+    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
+    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
+    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
+    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
+    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
+    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
+    \    static_assert(!hasTag || hasValue);\n    static inline std::mt19937 rng{RNGSEED};\n\
     \    struct node {\n        node *l = nullptr, *r = nullptr;\n        [[no_unique_address]]\
     \ std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();\n\
     \        [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey,\
@@ -287,12 +288,15 @@ data:
     \ V, typename Comp = std::less<Value>>\n    Iterator upper_bound_value(const V\
     \ &v, const Comp &cmp = Comp()) requires (hasValue) {\n        return Iterator(find_value([&v,\
     \ &cmp](const Value &src) { \n            return !cmp(v, src);\n        }), this);\n\
-    \    }\n    void erase(Iterator it) requires (!persistent) {\n        node* target\
-    \ = it.operator->();\n        if (target->f) {\n            if (target->f->l ==\
-    \ target) target->f->l = merge(target->l, target->r);\n            else target->f->r\
-    \ = merge(target->l, target->r);\n        }\n        NodeAlloc::deallocate(target);\n\
-    \    }\n    /*\n    Assume that all nodes having condition(node*) == true form\
-    \ a prefix, \n    return a Treap containing these nodes, the rest remain at source\n\
+    \    }\n    template<bool try_access = true>\n    void erase(Iterator it) requires\
+    \ (!persistent) {\n        if constexpr (try_access)\n            access(it);\n\
+    \        node *target = it.operator->();\n        node *parent = target->f;\n\
+    \        node *&point_to = !parent ? root : parent->l == target ? parent->l :\
+    \ parent->r;\n        point_to = merge(target->l, target->r);\n        while (parent)\
+    \ {\n            node *grand = parent->f;\n            parent->up();\n       \
+    \     parent = grand;\n        }\n        NodeAlloc::deallocate(target);\n   \
+    \ }\n    /*\n    Assume that all nodes having condition(node*) == true form a\
+    \ prefix, \n    return a Treap containing these nodes, the rest remain at source\n\
     \    */\n    Treap split_key(const auto &condition) {\n        node *left;\n \
     \       split(root, left, root, condition);\n        return Treap(left);\n   \
     \ }\n    /*\n    Assume that all nodes having cmp(key, k) == true form a prefix,\
@@ -348,24 +352,24 @@ data:
     \ PoolAllocator {\n    static T pool[_POOL_SIZE];\n    static int ptr;\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        T* p = &pool[ptr++];\n\
     \        return new (p) T(std::forward<Args>(args)...);\n    }\n    static void\
-    \ deallocate(T* p) {}\n    static void reset() { ptr = 0; }\n};\n\ntemplate<typename\
-    \ T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\ntemplate<typename\
-    \ T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr = 0;\n#line 9 \"test/8_luogu/P3835_pool.test.cpp\"\
-    \n\nusing treap = Treap<int, size_v, void, false, PoolAllocator, true>;\n\nint\
-    \ main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n\
-    \    vector<treap> tree(n + 1);\n    for (int i = 1; i <= n; ++i) {\n        int\
-    \ v, op, x;\n        cin >> v >> op >> x;\n        tree[i] = tree[v];\n      \
-    \  if (op == 1) {\n            auto lft = tree[i].split_key_lt(x);\n         \
-    \   tree[i].left_merge(treap(x, 1)).left_merge(lft);\n        }\n        else\
-    \ if (op == 2) {\n            auto lft = tree[i].split_key_lt(x);\n          \
-    \  if (!tree[i].empty()) {\n                auto it = tree[i].begin();\n     \
-    \           if (it->key == x) tree[i].split_size(1);\n            }\n        \
-    \    tree[i].left_merge(lft);\n        }\n        else if (op == 3) {\n      \
-    \      cout << tree[i].prefix_product_key_lt(x).size() + 1 << \"\\n\"; \n    \
-    \    }\n        else if (op == 4) {\n            cout << tree[i].kth(x)->key <<\
-    \ \"\\n\";\n        }\n        else if (op == 5) {\n            auto lft = tree[i].split_key_lt(x);\n\
-    \            if (!lft.empty()) cout << lft.rbegin()->key << \"\\n\";\n       \
-    \     else cout << -2147483647 << \"\\n\";\n            tree[i].left_merge(lft);\n\
+    \ deallocate([[maybe_unused]] T* p) {}\n    static void reset() { ptr = 0; }\n\
+    };\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\
+    \ntemplate<typename T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr\
+    \ = 0;\n#line 9 \"test/8_luogu/P3835_pool.test.cpp\"\n\nusing treap = Treap<int,\
+    \ size_v, void, false, PoolAllocator, true>;\n\nint main() {\n    ios::sync_with_stdio(0),\
+    \ cin.tie(0);\n    int n;\n    cin >> n;\n    vector<treap> tree(n + 1);\n   \
+    \ for (int i = 1; i <= n; ++i) {\n        int v, op, x;\n        cin >> v >> op\
+    \ >> x;\n        tree[i] = tree[v];\n        if (op == 1) {\n            auto\
+    \ lft = tree[i].split_key_lt(x);\n            tree[i].left_merge(treap(x, 1)).left_merge(lft);\n\
+    \        }\n        else if (op == 2) {\n            auto lft = tree[i].split_key_lt(x);\n\
+    \            if (!tree[i].empty()) {\n                auto it = tree[i].begin();\n\
+    \                if (it->key == x) tree[i].split_size(1);\n            }\n   \
+    \         tree[i].left_merge(lft);\n        }\n        else if (op == 3) {\n \
+    \           cout << tree[i].prefix_product_key_lt(x).size() + 1 << \"\\n\"; \n\
+    \        }\n        else if (op == 4) {\n            cout << tree[i].kth(x)->key\
+    \ << \"\\n\";\n        }\n        else if (op == 5) {\n            auto lft =\
+    \ tree[i].split_key_lt(x);\n            if (!lft.empty()) cout << lft.rbegin()->key\
+    \ << \"\\n\";\n            else cout << -2147483647 << \"\\n\";\n            tree[i].left_merge(lft);\n\
     \        }\n        else {\n            auto it = tree[i].upper_bound(x);\n  \
     \          if (it != tree[i].end()) cout << it->key << \"\\n\";\n            else\
     \ cout << 2147483647 << \"\\n\";\n        }\n    }\n}\n"
@@ -399,7 +403,7 @@ data:
   isVerificationFile: true
   path: test/8_luogu/P3835_pool.test.cpp
   requiredBy: []
-  timestamp: '2026-05-05 22:01:14+08:00'
+  timestamp: '2026-05-23 21:25:29+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/8_luogu/P3835_pool.test.cpp

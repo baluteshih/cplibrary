@@ -31,6 +31,9 @@ data:
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
     title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
@@ -510,6 +513,7 @@ data:
   - test/8_luogu/P3835_pool.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp

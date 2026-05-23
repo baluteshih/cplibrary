@@ -19,23 +19,24 @@ data:
     \ = POOL_SIZE>\nstruct PoolAllocator {\n    static T pool[_POOL_SIZE];\n    static\
     \ int ptr;\n    template<typename... Args>\n    static T* allocate(Args&&... args)\
     \ { \n        T* p = &pool[ptr++];\n        return new (p) T(std::forward<Args>(args)...);\n\
-    \    }\n    static void deallocate(T* p) {}\n    static void reset() { ptr = 0;\
-    \ }\n};\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\
-    \ntemplate<typename T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr\
-    \ = 0;\n"
+    \    }\n    static void deallocate([[maybe_unused]] T* p) {}\n    static void\
+    \ reset() { ptr = 0; }\n};\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T,\
+    \ _POOL_SIZE>::pool[_POOL_SIZE];\n\ntemplate<typename T, int _POOL_SIZE>\nint\
+    \ PoolAllocator<T, _POOL_SIZE>::ptr = 0;\n"
   code: "#pragma once\n\n#ifndef POOL_SIZE\n    #define POOL_SIZE 10000000\n#endif\n\
     \ntemplate<typename T, int _POOL_SIZE = POOL_SIZE>\nstruct PoolAllocator {\n \
     \   static T pool[_POOL_SIZE];\n    static int ptr;\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        T* p = &pool[ptr++];\n\
     \        return new (p) T(std::forward<Args>(args)...);\n    }\n    static void\
-    \ deallocate(T* p) {}\n    static void reset() { ptr = 0; }\n};\n\ntemplate<typename\
-    \ T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\ntemplate<typename\
-    \ T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr = 0;\n"
+    \ deallocate([[maybe_unused]] T* p) {}\n    static void reset() { ptr = 0; }\n\
+    };\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\
+    \ntemplate<typename T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr\
+    \ = 0;\n"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/PoolAllocator.hpp
   requiredBy: []
-  timestamp: '2026-05-05 22:01:14+08:00'
+  timestamp: '2026-05-23 21:25:29+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/8_luogu/P5055.test.cpp

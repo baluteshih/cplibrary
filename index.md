@@ -385,6 +385,9 @@ data:
       path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
       title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+      title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
       title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
