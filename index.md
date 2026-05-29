@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':warning:'
@@ -17,7 +17,7 @@ data:
       title: Algebra/size_value.hpp
   - name: Convolution
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -52,7 +52,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: DataStructure/PotentialDisjointSet.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/SegmentTree.hpp
       title: DataStructure/SegmentTree.hpp
     - icon: ':heavy_check_mark:'
@@ -166,7 +166,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
     - icon: ':question:'
@@ -189,10 +189,10 @@ data:
       title: Graph/minimum_spanning_tree.hpp
   - name: Matrix
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Matrix/Matrix.hpp
       title: Matrix/Matrix.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Matrix/Vector.hpp
       title: Matrix/Vector.hpp
   - name: Misc
@@ -203,7 +203,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/DynamicHull.hpp
       title: Misc/DynamicHull.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Misc/MultiInt.hpp
       title: Misc/MultiInt.hpp
     - icon: ':heavy_check_mark:'
@@ -231,22 +231,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/Binomial.hpp
       title: Numeric/Binomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Combination.hpp
       title: Numeric/Combination.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/DynamicModint.hpp
       title: Numeric/DynamicModint.hpp
     - icon: ':question:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
+      path: Numeric/barrett.hpp
+      title: Numeric/barrett.hpp
+    - icon: ':question:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -264,33 +267,33 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/primitive_root.hpp
       title: Numeric/primitive_root.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Numeric/quadratic_residue.hpp
       title: Numeric/quadratic_residue.hpp
   - name: Polynomial
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/Polynomial.hpp
       title: Polynomial/Polynomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/Sqrt.hpp
       title: Polynomial/Sqrt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/interpolate.hpp
       title: Polynomial/interpolate.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/lagrange_interpolate_iota.hpp
       title: Polynomial/lagrange_interpolate_iota.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/linear_recursion.hpp
       title: Polynomial/linear_recursion.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Polynomial/shift.hpp
       title: Polynomial/shift.hpp
   - name: Sequence
@@ -303,7 +306,7 @@ data:
       title: Sequence/better_position.hpp
   - name: String
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: String/RollingHash.hpp
       title: String/RollingHash.hpp
     - icon: ':warning:'
@@ -320,16 +323,16 @@ data:
       title: String/z_algo.hpp
   - name: Tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
     - icon: ':heavy_check_mark:'
       path: Tree/TreeTools.hpp
       title: Tree/TreeTools.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
     - icon: ':warning:'
@@ -569,7 +572,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
       title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
       title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - name: test/1_library_checker/number_theory
@@ -583,12 +586,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/primitive_root.test.cpp
       title: test/1_library_checker/number_theory/primitive_root.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
       title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - name: test/1_library_checker/other
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
@@ -596,37 +599,37 @@ data:
       title: test/1_library_checker/other/two_sat.test.cpp
   - name: test/1_library_checker/polynomial
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
       title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
       title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
       title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
       title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
       title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
       title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
       title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
       title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
       title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - name: test/1_library_checker/sample
@@ -639,7 +642,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/string/enumerate_palindromes.test.cpp
       title: test/1_library_checker/string/enumerate_palindromes.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/string/longest_common_substring.test.cpp
       title: test/1_library_checker/string/longest_common_substring.test.cpp
     - icon: ':heavy_check_mark:'
@@ -656,7 +659,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
       title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -671,7 +674,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_diameter.test.cpp
       title: test/1_library_checker/tree/tree_diameter.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
       title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -680,7 +683,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - name: test/2_aoj

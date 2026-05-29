@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/all_direction_composition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -238,7 +238,7 @@ data:
   path: Tree/all_direction_composition.hpp
   requiredBy: []
   timestamp: '2026-05-19 13:54:46+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: Tree/all_direction_composition.hpp

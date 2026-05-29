@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':heavy_check_mark:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
   - icon: ':warning:'
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -42,12 +42,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
@@ -76,7 +76,7 @@ data:
   - Tree/all_direction_composition.hpp
   - Tree/TreeTools.hpp
   timestamp: '2026-05-19 13:54:46+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/lca.test.cpp

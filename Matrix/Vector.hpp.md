@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
   _extendedVerifiedWith:
@@ -27,12 +27,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename T, class Allocator\
@@ -90,7 +90,7 @@ data:
   requiredBy:
   - Matrix/Matrix.hpp
   timestamp: '2026-02-27 19:30:58+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp

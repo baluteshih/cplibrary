@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
     title: DataStructure/BIT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'

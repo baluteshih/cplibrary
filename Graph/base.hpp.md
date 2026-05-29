@@ -59,16 +59,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':heavy_check_mark:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
   - icon: ':warning:'
@@ -132,7 +132,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -141,7 +141,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
