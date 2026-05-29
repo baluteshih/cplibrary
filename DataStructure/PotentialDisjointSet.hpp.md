@@ -104,8 +104,8 @@ data:
   timestamp: '2026-05-04 14:30:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
 documentation_of: DataStructure/PotentialDisjointSet.hpp
 layout: document
 redirect_from:

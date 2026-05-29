@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
+  - icon: ':warning:'
+    path: Tree/centroid_divide_and_conquer.hpp
+    title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
@@ -67,21 +70,22 @@ data:
   isVerificationFile: false
   path: Graph/UnifiedWeight.hpp
   requiredBy:
+  - Tree/centroid_divide_and_conquer.hpp
   - Tree/Tree.hpp
-  - Tree/TreeTools.hpp
   - Tree/HeavyLightDecomposition.hpp
   - Tree/all_direction_composition.hpp
+  - Tree/TreeTools.hpp
   timestamp: '2026-05-19 13:54:46+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/tree_diameter.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: Graph/UnifiedWeight.hpp
 layout: document
 redirect_from:

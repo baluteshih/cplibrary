@@ -69,8 +69,8 @@ data:
   isVerificationFile: false
   path: DataStructure/BIT.hpp
   requiredBy:
-  - Geometry/PointInAngle.hpp
   - DataStructure/OrderedSet.hpp
+  - Geometry/PointInAngle.hpp
   timestamp: '2026-05-18 14:22:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

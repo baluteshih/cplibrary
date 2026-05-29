@@ -193,10 +193,13 @@ data:
     \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
     \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
     \                    w[s + j] = w[s + j - 1] * dw;\n            }\n        }\n\
-    \    }\npublic:\n    static void ntt(vector<T> &a, bool inv = false) { //0 <=\
-    \ a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) == 0);\n \
-    \       if ((int)maxsize() < n) set_upper_bound(n);\n        for (int i = 0, j\
-    \ = 1; j < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>=\
+    \    }\npublic:\n    static constexpr int ntt_max_limit = []() {\n        unsigned\
+    \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
+    \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
+    \ limit;\n    }();\n    static void ntt(vector<T> &a, bool inv = false) { //0\
+    \ <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) == 0);\n\
+    \        if ((int)maxsize() < n) set_upper_bound(n);\n        for (int i = 0,\
+    \ j = 1; j < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>=\
     \ 1);\n            if (j < i) swap(a[i], a[j]);\n        }\n        for (int s\
     \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
     \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
@@ -207,10 +210,11 @@ data:
     \    static size_t maxsize() {\n        return max_size;\n    }\n    static vector<T>\
     \ convolution(vector<T> a, vector<T> b) {\n        if (a.empty() || b.empty())\
     \ return vector<T>();\n        int n = 1, sz = int(a.size()) + int(b.size()) -\
-    \ 1;\n        while (n < sz) n <<= 1;\n        a.resize(n), b.resize(n);\n   \
-    \     ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i] =\
-    \ a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n        return a;\n\
-    \    }\n};\n#line 2 \"Numeric/crt.hpp\"\n\n// source: https://maspypy.github.io/library/mod/crt3.hpp\n\
+    \ 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"\
+    the result length exceeds the limit of the prime can support\");\n        a.resize(n),\
+    \ b.resize(n);\n        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n\
+    \            a[i] = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n\
+    \        return a;\n    }\n};\n#line 2 \"Numeric/crt.hpp\"\n\n// source: https://maspypy.github.io/library/mod/crt3.hpp\n\
     \nconstexpr unsigned int mod_pow_constexpr(unsigned long long a, unsigned long\
     \ long n, unsigned int mod) {\n    a %= mod;\n    unsigned long long res = 1;\n\
     \    for (int i = 0; i < 32; ++i) {\n        if (n & 1) res = res * a % mod;\n\
@@ -417,11 +421,11 @@ data:
   isVerificationFile: false
   path: Misc/bigint.hpp
   requiredBy: []
-  timestamp: '2026-05-04 10:37:09+08:00'
+  timestamp: '2026-05-29 20:18:47+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
+  - test/1_library_checker/biginteger/multiplication.test.cpp
 documentation_of: Misc/bigint.hpp
 layout: document
 redirect_from:

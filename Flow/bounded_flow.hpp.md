@@ -193,8 +193,8 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/7_loj/max_bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/bounded_flow.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
 documentation_of: Flow/bounded_flow.hpp
 layout: document
 redirect_from:

@@ -189,9 +189,12 @@ data:
     \            T dw = root.pow((T::mod() - 1) / max_size);\n            for (int\
     \ s = max_size / 2; s; s >>= 1, dw *= dw) {\n                w[s] = 1;\n     \
     \           for (int j = 1; j < s; ++j) \n                    w[s + j] = w[s +\
-    \ j - 1] * dw;\n            }\n        }\n    }\npublic:\n    static void ntt(vector<T>\
-    \ &a, bool inv = false) { //0 <= a[i] < P\n        int n = a.size();\n       \
-    \ assert((n & (n - 1)) == 0);\n        if ((int)maxsize() < n) set_upper_bound(n);\n\
+    \ j - 1] * dw;\n            }\n        }\n    }\npublic:\n    static constexpr\
+    \ int ntt_max_limit = []() {\n        unsigned int m = T::mod() - 1;\n       \
+    \ int limit = 1;\n        while ((m & 1) == 0) {\n            limit <<= 1;\n \
+    \           m >>= 1;\n        }\n        return limit;\n    }();\n    static void\
+    \ ntt(vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        int n = a.size();\n\
+    \        assert((n & (n - 1)) == 0);\n        if ((int)maxsize() < n) set_upper_bound(n);\n\
     \        for (int i = 0, j = 1; j < n - 1; ++j) {\n            for (int k = n\
     \ >> 1; (i ^= k) < k; k >>= 1);\n            if (j < i) swap(a[i], a[j]);\n  \
     \      }\n        for (int s = 1; s < n; s <<= 1) {\n            for (int i =\
@@ -204,56 +207,58 @@ data:
     \ max_size;\n    }\n    static vector<T> convolution(vector<T> a, vector<T> b)\
     \ {\n        if (a.empty() || b.empty()) return vector<T>();\n        int n =\
     \ 1, sz = int(a.size()) + int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n\
-    \        a.resize(n), b.resize(n);\n        ntt(a), ntt(b);\n        for (int\
-    \ i = 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n        ntt(a, true);\n\
-    \        a.resize(sz);\n        return a;\n    }\n};\n#line 4 \"Polynomial/Polynomial.hpp\"\
-    \n\ntemplate<class T>\nclass Poly : public std::vector<T> {\n    using std::vector<T>::vector;\n\
-    \    int n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
-    \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
-    \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
-    \  std::copy_n(p.data(), min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
-    \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
-    \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
-    \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
-    \ strip() {\n        while (!this->empty() && this->back() == 0)\n           \
-    \ this->pop_back();\n        return *this;\n    }\n    Poly operator+(const Poly\
-    \ &rhs) const { // n() == rhs.n()\n        Poly res(*this);\n        for (int\
-    \ i = 0; i < n(); ++i)\n            res[i] += rhs[i];\n        return res;\n \
-    \   }\n    Poly operator-(const Poly &rhs) const { // n() == rhs.n()\n       \
-    \ Poly res(*this);\n        for (int i = 0; i < n(); ++i)\n            res[i]\
-    \ -= rhs[i];\n        return res;\n    }\n    Poly operator*(const T &rhs) const\
-    \ {\n        Poly res(*this);\n        for (int i = 0; i < n(); ++i)\n       \
-    \     res[i] *= rhs;\n        return res;\n    }\n    Poly operator*(const Poly\
-    \ &rhs) const { // 5e5/185ms\n        return NTT<T>::convolution(*this, rhs);\n\
-    \    }\n    Poly &dft(int len) {\n        assert((len & (len - 1)) == 0);\n  \
-    \      isz(len);\n        NTT<T>::ntt(*this);\n        return *this;\n    }\n\
-    \    Poly &idft(int len) {\n        assert((len & (len - 1)) == 0);\n        isz(len);\n\
-    \        NTT<T>::ntt(*this, true);\n        return *this;\n    }\n    Poly Inv()\
-    \ const { // (*this)[0] != 0, 5e5/212ms\n        if (n() == 1) return {(*this)[0].inv()};\n\
-    \        int m = ceilpow2(n() * 2);\n        Poly Xi = Poly(*this, (n() + 1) /\
-    \ 2).Inv().isz(m);\n        Poly Y(*this, m);\n        Xi.dft(m), Y.dft(m);\n\
-    \        for (int i = 0; i < m; ++i)\n            Xi[i] *= (2 - Xi[i] * Y[i]);\n\
-    \        return Xi.idft(m).isz(n());\n    }\n    Poly Dx() const {\n        Poly\
-    \ ret(n() - 1);\n        for (int i = 0; i < ret.n(); ++i)\n            ret[i]\
-    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(max(1, ret.n()));\n    }\n\
-    \    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i = 0; i\
-    \ < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n       \
-    \ return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n  \
-    \      return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
-    \ (*this)[0] == 0, 5e5/886ms\n        if (n() == 1) return {1};\n        Poly\
-    \ X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n        Poly Y = X.Ln(); Y[0]\
-    \ = -1;\n        return (X * (*this - Y)).isz(n());\n    }\n    // M := P(P -\
-    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(ll k) const {\n    \
-    \    int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n       \
-    \ if (nz * min(k, (ll)n()) >= n()) return Poly(n());\n        if (!k) return Poly(Poly\
-    \ {1}, n());\n        Poly X(this->data() + nz, this->data() + nz + n() - nz *\
-    \ k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
-    \    }\n    Poly _tmul(int nn, const Poly &rhs) const {\n        Poly Y = ((*this)\
-    \ * rhs).isz(n() + nn - 1);\n        return Poly(Y.data() + n() - 1, Y.data()\
-    \ + Y.n());\n    }\n    std::vector<T> _eval(const std::vector<T> &x, const std::vector<Poly>\
-    \ &up) const {\n        const int m = (int)x.size();\n        if (!m) return {};\n\
-    \        std::vector<Poly> down(m * 2);\n        down[1] = Poly(up[1]).irev().isz(n()).Inv().irev()._tmul(m,\
+    \        assert(n <= ntt_max_limit && \"the result length exceeds the limit of\
+    \ the prime can support\");\n        a.resize(n), b.resize(n);\n        ntt(a),\
+    \ ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n\
+    \        ntt(a, true);\n        a.resize(sz);\n        return a;\n    }\n};\n\
+    #line 4 \"Polynomial/Polynomial.hpp\"\n\ntemplate<class T>\nclass Poly : public\
+    \ std::vector<T> {\n    using std::vector<T>::vector;\n    int n() const { return\
+    \ (int)this->size(); } // n() >= 1\n    static int ceilpow2(int sz) {\n      \
+    \  int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n    }\npublic:\n\
+    \    Poly(const Poly &p, int m) : std::vector<T>(m) {\n        std::copy_n(p.data(),\
+    \ min(p.n(), m), this->data());\n    }\n    Poly(const std::vector<T> &v) : std::vector<T>(move(v))\
+    \ {}\n    Poly& irev() { return reverse(this->data(), this->data() + n()), *this;\
+    \ }\n    Poly& isz(int m) { return this->resize(m), *this; }\n    Poly& imul(const\
+    \ Poly &rhs) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i]\
+    \ *= rhs[i];\n        return *this;\n    }\n    Poly& strip() {\n        while\
+    \ (!this->empty() && this->back() == 0)\n            this->pop_back();\n     \
+    \   return *this;\n    }\n    Poly operator+(const Poly &rhs) const { // n() ==\
+    \ rhs.n()\n        Poly res(*this);\n        for (int i = 0; i < n(); ++i)\n \
+    \           res[i] += rhs[i];\n        return res;\n    }\n    Poly operator-(const\
+    \ Poly &rhs) const { // n() == rhs.n()\n        Poly res(*this);\n        for\
+    \ (int i = 0; i < n(); ++i)\n            res[i] -= rhs[i];\n        return res;\n\
+    \    }\n    Poly operator*(const T &rhs) const {\n        Poly res(*this);\n \
+    \       for (int i = 0; i < n(); ++i)\n            res[i] *= rhs;\n        return\
+    \ res;\n    }\n    Poly operator*(const Poly &rhs) const { // 5e5/185ms\n    \
+    \    return NTT<T>::convolution(*this, rhs);\n    }\n    Poly &dft(int len) {\n\
+    \        assert((len & (len - 1)) == 0);\n        isz(len);\n        NTT<T>::ntt(*this);\n\
+    \        return *this;\n    }\n    Poly &idft(int len) {\n        assert((len\
+    \ & (len - 1)) == 0);\n        isz(len);\n        NTT<T>::ntt(*this, true);\n\
+    \        return *this;\n    }\n    Poly Inv() const { // (*this)[0] != 0, 5e5/212ms\n\
+    \        if (n() == 1) return {(*this)[0].inv()};\n        int m = ceilpow2(n()\
+    \ * 2);\n        Poly Xi = Poly(*this, (n() + 1) / 2).Inv().isz(m);\n        Poly\
+    \ Y(*this, m);\n        Xi.dft(m), Y.dft(m);\n        for (int i = 0; i < m; ++i)\n\
+    \            Xi[i] *= (2 - Xi[i] * Y[i]);\n        return Xi.idft(m).isz(n());\n\
+    \    }\n    Poly Dx() const {\n        Poly ret(n() - 1);\n        for (int i\
+    \ = 0; i < ret.n(); ++i)\n            ret[i] = (i + 1) * (*this)[i + 1];\n   \
+    \     return ret.isz(max(1, ret.n()));\n    }\n    Poly Sx() const {\n       \
+    \ Poly ret(n() + 1);\n        for (int i = 0; i < n(); ++i)\n            ret[i\
+    \ + 1] = T(i + 1).inv() * (*this)[i];\n        return ret;\n    }\n    Poly Ln()\
+    \ const { // (*this)[0] == 1, 5e5/406ms\n        return (Dx() * Inv()).Sx().isz(n());\n\
+    \    }\n    Poly Exp() const { // (*this)[0] == 0, 5e5/886ms\n        if (n()\
+    \ == 1) return {1};\n        Poly X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n\
+    \        Poly Y = X.Ln(); Y[0] = -1;\n        return (X * (*this - Y)).isz(n());\n\
+    \    }\n    // M := P(P - 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly\
+    \ Pow(ll k) const {\n        int nz = 0;\n        while (nz < n() && (*this)[nz]\
+    \ == 0) ++nz;\n        if (nz * min(k, (ll)n()) >= n()) return Poly(n());\n  \
+    \      if (!k) return Poly(Poly {1}, n());\n        Poly X(this->data() + nz,\
+    \ this->data() + nz + n() - nz * k);\n        return ((X.Ln() * T(k)).Exp() *\
+    \ X[0].pow(k)).irev().isz(n()).irev();\n    }\n    Poly _tmul(int nn, const Poly\
+    \ &rhs) const {\n        Poly Y = ((*this) * rhs).isz(n() + nn - 1);\n       \
+    \ return Poly(Y.data() + n() - 1, Y.data() + Y.n());\n    }\n    std::vector<T>\
+    \ _eval(const std::vector<T> &x, const std::vector<Poly> &up) const {\n      \
+    \  const int m = (int)x.size();\n        if (!m) return {};\n        std::vector<Poly>\
+    \ down(m * 2);\n        down[1] = Poly(up[1]).irev().isz(n()).Inv().irev()._tmul(m,\
     \ *this);\n        for (int i = 2; i < m * 2; ++i)\n            down[i] = up[i\
     \ ^ 1]._tmul(up[i].n() - 1, down[i / 2]);\n        std::vector<T> y(m);\n    \
     \    for (int i = 0; i < m; ++i) y[i] = down[m + i][0];\n        return y;\n \
@@ -291,7 +296,7 @@ data:
   isVerificationFile: false
   path: Numbers/partition_number.hpp
   requiredBy: []
-  timestamp: '2026-05-04 10:46:53+08:00'
+  timestamp: '2026-05-29 20:18:47+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp

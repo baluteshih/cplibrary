@@ -189,9 +189,9 @@ data:
   timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/2_aoj/minimum_cost_flow.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
+  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
 documentation_of: Flow/min_cost_max_flow.hpp
 layout: document
 redirect_from:

@@ -39,8 +39,8 @@ data:
   timestamp: '2026-05-23 21:25:29+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/8_luogu/P5055.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
+  - test/8_luogu/P5055.test.cpp
 documentation_of: DataStructure/PoolAllocator.hpp
 layout: document
 redirect_from:

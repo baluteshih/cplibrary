@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: Convolution/convolution.hpp
-    title: Convolution/convolution.hpp
   - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
@@ -19,58 +16,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/convolution.test.cpp
+    title: test/1_library_checker/convolution/convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+    title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+    title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
-    links:
-    - https://judge.yosupo.jp/problem/convolution_mod_1000000007
-  bundledCode: "#line 1 \"test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp\"\
-    \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    \n#line 7 \"Numeric/internal_math.hpp\"\n#include <type_traits>\n\n#ifdef _MSC_VER\n\
-    #include <intrin.h>\n#endif\n\nnamespace internal {\n\n// @param m `1 <= m`\n\
-    // @return x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n\
-    \    x %= m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication\
-    \ by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
+    links: []
+  bundledCode: "#line 2 \"Convolution/convolution.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\
+    \n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line\
+    \ 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#include <utility>\n#include <cassert>\n#include <numeric>\n#include <type_traits>\n\
+    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\n\n// @param\
+    \ m `1 <= m`\n// @return x mod m\nconstexpr long long safe_mod(long long x, long\
+    \ long m) {\n    x %= m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast\
+    \ modular multiplication by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
     // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
     \   unsigned long long im;\n    explicit barrett(unsigned int m) : _m(m), im((unsigned\
     \ long long)(-1) / m + 1) {}\n    unsigned int umod() const { return _m; }\n \
@@ -200,55 +169,54 @@ data:
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
-    #line 2 \"Convolution/convolution.hpp\"\n\n#line 2 \"Polynomial/NTT.hpp\"\n\n\
-    #line 2 \"Numeric/internal_primitive_root.hpp\"\n\n#line 4 \"Numeric/internal_primitive_root.hpp\"\
-    \n\n// reference: Atcoder Library https://github.com/atcoder/ac-library\n\nnamespace\
-    \ internal { \n// Compile time primitive root\n// @param m must be prime\n// @return\
-    \ primitive root (and minimum in now)\nconstexpr int primitive_root_constexpr(int\
-    \ m) {\n    if (m == 2) return 1;\n    if (m == 167772161) return 3;\n    if (m\
-    \ == 469762049) return 3;\n    if (m == 754974721) return 11;\n    if (m == 998244353)\
-    \ return 3;\n    int divs[20] = {};\n    divs[0] = 2;\n    int cnt = 1;\n    int\
-    \ x = (m - 1) / 2;\n    while (x % 2 == 0) x /= 2;\n    for (int i = 3; (long\
-    \ long)(i)*i <= x; i += 2) {\n        if (x % i == 0) {\n            divs[cnt++]\
-    \ = i;\n            while (x % i == 0) {\n                x /= i;\n          \
-    \  }\n        }\n    }\n    if (x > 1) {\n        divs[cnt++] = x;\n    }\n  \
-    \  for (int g = 2;; g++) {\n        bool ok = true;\n        for (int i = 0; i\
-    \ < cnt; i++) {\n            if (pow_mod_constexpr(g, (m - 1) / divs[i], m) ==\
-    \ 1) {\n                ok = false;\n                break;\n            }\n \
-    \       }\n        if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int\
-    \ primitive_root = primitive_root_constexpr(m);\n}  // namespace internal\n#line\
-    \ 5 \"Polynomial/NTT.hpp\"\n\ntemplate<typename T>\nrequires std::derived_from<T,\
-    \ internal::modint_base>\nclass NTT {\n    inline static int max_size = 1;\n \
-    \   inline static std::vector<T> w{1, T(1)};\n    inline static const T root =\
-    \ internal::primitive_root_constexpr(T::mod());\n    static void set_upper_bound(int\
-    \ n) {\n        if (max_size < n) {\n            while (max_size <= n) max_size\
-    \ <<= 1;\n            w.resize(max_size);\n            std::ranges::fill(w, 1);\n\
-    \            T dw = root.pow((T::mod() - 1) / max_size);\n            for (int\
-    \ s = max_size / 2; s; s >>= 1, dw *= dw) {\n                w[s] = 1;\n     \
-    \           for (int j = 1; j < s; ++j) \n                    w[s + j] = w[s +\
-    \ j - 1] * dw;\n            }\n        }\n    }\npublic:\n    static constexpr\
-    \ int ntt_max_limit = []() {\n        unsigned int m = T::mod() - 1;\n       \
-    \ int limit = 1;\n        while ((m & 1) == 0) {\n            limit <<= 1;\n \
-    \           m >>= 1;\n        }\n        return limit;\n    }();\n    static void\
-    \ ntt(vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        int n = a.size();\n\
-    \        assert((n & (n - 1)) == 0);\n        if ((int)maxsize() < n) set_upper_bound(n);\n\
-    \        for (int i = 0, j = 1; j < n - 1; ++j) {\n            for (int k = n\
-    \ >> 1; (i ^= k) < k; k >>= 1);\n            if (j < i) swap(a[i], a[j]);\n  \
-    \      }\n        for (int s = 1; s < n; s <<= 1) {\n            for (int i =\
-    \ 0; i < n; i += s * 2) {\n                for (int j = 0; j < s; ++j) {\n   \
-    \                 T tmp = a[i + s + j] * w[s + j];\n                    a[i +\
-    \ s + j] = a[i + j] - tmp;\n                    a[i + j] += tmp;\n           \
-    \     }\n            }\n        }\n        if (!inv) return;\n        T iv = T(n).inv();\
-    \ \n        reverse(a.begin() + 1, a.begin() + n);\n        for (int i = 0; i\
-    \ < n; ++i) a[i] *= iv;\n    }\n    static size_t maxsize() {\n        return\
-    \ max_size;\n    }\n    static vector<T> convolution(vector<T> a, vector<T> b)\
-    \ {\n        if (a.empty() || b.empty()) return vector<T>();\n        int n =\
-    \ 1, sz = int(a.size()) + int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n\
-    \        assert(n <= ntt_max_limit && \"the result length exceeds the limit of\
-    \ the prime can support\");\n        a.resize(n), b.resize(n);\n        ntt(a),\
-    \ ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n\
-    \        ntt(a, true);\n        a.resize(sz);\n        return a;\n    }\n};\n\
-    #line 2 \"Numeric/crt.hpp\"\n\n// source: https://maspypy.github.io/library/mod/crt3.hpp\n\
+    #line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/internal_primitive_root.hpp\"\
+    \n\n#line 4 \"Numeric/internal_primitive_root.hpp\"\n\n// reference: Atcoder Library\
+    \ https://github.com/atcoder/ac-library\n\nnamespace internal { \n// Compile time\
+    \ primitive root\n// @param m must be prime\n// @return primitive root (and minimum\
+    \ in now)\nconstexpr int primitive_root_constexpr(int m) {\n    if (m == 2) return\
+    \ 1;\n    if (m == 167772161) return 3;\n    if (m == 469762049) return 3;\n \
+    \   if (m == 754974721) return 11;\n    if (m == 998244353) return 3;\n    int\
+    \ divs[20] = {};\n    divs[0] = 2;\n    int cnt = 1;\n    int x = (m - 1) / 2;\n\
+    \    while (x % 2 == 0) x /= 2;\n    for (int i = 3; (long long)(i)*i <= x; i\
+    \ += 2) {\n        if (x % i == 0) {\n            divs[cnt++] = i;\n         \
+    \   while (x % i == 0) {\n                x /= i;\n            }\n        }\n\
+    \    }\n    if (x > 1) {\n        divs[cnt++] = x;\n    }\n    for (int g = 2;;\
+    \ g++) {\n        bool ok = true;\n        for (int i = 0; i < cnt; i++) {\n \
+    \           if (pow_mod_constexpr(g, (m - 1) / divs[i], m) == 1) {\n         \
+    \       ok = false;\n                break;\n            }\n        }\n      \
+    \  if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
+    \ = primitive_root_constexpr(m);\n}  // namespace internal\n#line 5 \"Polynomial/NTT.hpp\"\
+    \n\ntemplate<typename T>\nrequires std::derived_from<T, internal::modint_base>\n\
+    class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
+    \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
+    \    static void set_upper_bound(int n) {\n        if (max_size < n) {\n     \
+    \       while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
+    \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
+    \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
+    \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
+    \                    w[s + j] = w[s + j - 1] * dw;\n            }\n        }\n\
+    \    }\npublic:\n    static constexpr int ntt_max_limit = []() {\n        unsigned\
+    \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
+    \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
+    \ limit;\n    }();\n    static void ntt(vector<T> &a, bool inv = false) { //0\
+    \ <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) == 0);\n\
+    \        if ((int)maxsize() < n) set_upper_bound(n);\n        for (int i = 0,\
+    \ j = 1; j < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>=\
+    \ 1);\n            if (j < i) swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        reverse(a.begin()\
+    \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
+    \    static size_t maxsize() {\n        return max_size;\n    }\n    static vector<T>\
+    \ convolution(vector<T> a, vector<T> b) {\n        if (a.empty() || b.empty())\
+    \ return vector<T>();\n        int n = 1, sz = int(a.size()) + int(b.size()) -\
+    \ 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"\
+    the result length exceeds the limit of the prime can support\");\n        a.resize(n),\
+    \ b.resize(n);\n        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n\
+    \            a[i] = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n\
+    \        return a;\n    }\n};\n#line 2 \"Numeric/crt.hpp\"\n\n// source: https://maspypy.github.io/library/mod/crt3.hpp\n\
     \nconstexpr unsigned int mod_pow_constexpr(unsigned long long a, unsigned long\
     \ long n, unsigned int mod) {\n    a %= mod;\n    unsigned long long res = 1;\n\
     \    for (int i = 0; i < 32; ++i) {\n        if (n & 1) res = res * a % mod;\n\
@@ -293,39 +261,57 @@ data:
     \                      std::get<1>(res)[i].val());\n        else if constexpr\
     \ (C == 3)\n            c[i] = CRT3<T, p0, p1, p2>(std::get<0>(res)[i].val(),\n\
     \                                       std::get<1>(res)[i].val(),\n         \
-    \                              std::get<2>(res)[i].val());\n    return c;\n}\n\
-    #line 6 \"test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp\"\
-    \n\nusing mint = modint1000000007;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    vector<mint> a(n),\
-    \ b(m);\n    for (auto &i : a)\n        cin >> i;\n    for (auto &i : b)\n   \
-    \     cin >> i;\n    auto c = convolution<3>(a, b);\n    for (int i = 0; i < SZ(c);\
-    \ ++i)\n        cout << c[i] << \" \\n\"[i + 1 == SZ(c)]; \n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
-    Convolution/convolution.hpp\"\n\nusing mint = modint1000000007;\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n    std::cin >>\
-    \ n >> m;\n    vector<mint> a(n), b(m);\n    for (auto &i : a)\n        cin >>\
-    \ i;\n    for (auto &i : b)\n        cin >> i;\n    auto c = convolution<3>(a,\
-    \ b);\n    for (int i = 0; i < SZ(c); ++i)\n        cout << c[i] << \" \\n\"[i\
-    \ + 1 == SZ(c)]; \n}\n"
+    \                              std::get<2>(res)[i].val());\n    return c;\n}\n"
+  code: "#pragma once\n\n#include \"Numeric/Modint.hpp\"\n#include \"Polynomial/NTT.hpp\"\
+    \n#include \"Numeric/crt.hpp\"\n\ntemplate<int C = 1, typename T = modint998244353>\n\
+    std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {\n    static_assert(1\
+    \ <= C && C <= 3, \"NTT convolution must use 1, 2, or 3 primes.\");\n    if (a.empty()\
+    \ || b.empty()) return std::vector<T>();\n\n    if constexpr (std::derived_from<T,\
+    \ internal::modint_base>) {\n        int sz = a.size() + b.size() - 1;\n     \
+    \   if (std::bit_ceil((unsigned int)sz) <= NTT<T>::ntt_max_limit)\n          \
+    \  return NTT<T>::convolution(a, b);\n    }\n    \n    static constexpr int p0\
+    \ = 167772161;\n    static constexpr int p1 = 469762049;\n    static constexpr\
+    \ int p2 = 754974721;\n\n    auto get_val = [](const T& x) {\n        if constexpr\
+    \ (std::derived_from<T, internal::modint_base>) return x.val();\n        else\
+    \ return x;\n    };\n\n    auto do_ntt = [&](auto P_tag) {\n        constexpr\
+    \ int P = decltype(P_tag)::value;\n        using mint = static_modint<P>;\n  \
+    \      std::vector<mint> a_mint(a.size()), b_mint(b.size());\n        for (int\
+    \ i = 0; i < int(a.size()); ++i) a_mint[i] = get_val(a[i]);\n        for (int\
+    \ i = 0; i < int(b.size()); ++i) b_mint[i] = get_val(b[i]);\n        return NTT<mint>::convolution(a_mint,\
+    \ b_mint);\n    };\n\n    auto res = [&]() {\n        if constexpr (C == 1)\n\
+    \            return std::make_tuple(do_ntt(std::integral_constant<int, p0>{}));\n\
+    \        else if constexpr (C == 2)\n            return std::make_tuple(do_ntt(std::integral_constant<int,\
+    \ p0>{}),\n                                   do_ntt(std::integral_constant<int,\
+    \ p1>{}));\n        else\n            return std::make_tuple(do_ntt(std::integral_constant<int,\
+    \ p0>{}),\n                                   do_ntt(std::integral_constant<int,\
+    \ p1>{}),\n                                   do_ntt(std::integral_constant<int,\
+    \ p2>{}));\n    }();\n\n    std::vector<T> c(std::get<0>(res).size());\n    for\
+    \ (int i = 0; i < int(c.size()); ++i)\n        if constexpr (C == 1)\n       \
+    \     c[i] = T(std::get<0>(res)[i].val());\n        else if constexpr (C == 2)\n\
+    \            c[i] = CRT2<T, p0, p1>(std::get<0>(res)[i].val(),\n             \
+    \                      std::get<1>(res)[i].val());\n        else if constexpr\
+    \ (C == 3)\n            c[i] = CRT3<T, p0, p1, p2>(std::get<0>(res)[i].val(),\n\
+    \                                       std::get<1>(res)[i].val(),\n         \
+    \                              std::get<2>(res)[i].val());\n    return c;\n}\n"
   dependsOn:
-  - default_code.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
-  - Convolution/convolution.hpp
   - Polynomial/NTT.hpp
   - Numeric/internal_primitive_root.hpp
   - Numeric/crt.hpp
-  isVerificationFile: true
-  path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  isVerificationFile: false
+  path: Convolution/convolution.hpp
   requiredBy: []
   timestamp: '2026-05-29 21:28:48+08:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/convolution.test.cpp
+  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+documentation_of: Convolution/convolution.hpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
-- /verify/test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp.html
-title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+- /library/Convolution/convolution.hpp
+- /library/Convolution/convolution.hpp.html
+title: Convolution/convolution.hpp
 ---

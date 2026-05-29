@@ -219,9 +219,9 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/7_loj/max_bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
-  - test/7_loj/bounded_flow.test.cpp
   - test/7_loj/maxflow.test.cpp
+  - test/7_loj/bounded_flow.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
   - test/4_codeforces/106033E.test.cpp
 documentation_of: Flow/Dinic.hpp
 layout: document

@@ -18,6 +18,9 @@ data:
   - name: Convolution
     pages:
     - icon: ':heavy_check_mark:'
+      path: Convolution/convolution.hpp
+      title: Convolution/convolution.hpp
+    - icon: ':heavy_check_mark:'
       path: Convolution/min_plus_convolution.hpp
       title: Convolution/min_plus_convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -279,9 +282,6 @@ data:
       path: Polynomial/Sqrt.hpp
       title: Polynomial/Sqrt.hpp
     - icon: ':heavy_check_mark:'
-      path: Polynomial/convolution_any_mod.hpp
-      title: Polynomial/convolution_any_mod.hpp
-    - icon: ':heavy_check_mark:'
       path: Polynomial/interpolate.hpp
       title: Polynomial/interpolate.hpp
     - icon: ':heavy_check_mark:'
@@ -332,6 +332,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
+    - icon: ':warning:'
+      path: Tree/centroid_divide_and_conquer.hpp
+      title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
     - icon: ':question:'
@@ -653,6 +656,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+      title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/jump_on_tree.test.cpp
       title: test/1_library_checker/tree/jump_on_tree.test.cpp

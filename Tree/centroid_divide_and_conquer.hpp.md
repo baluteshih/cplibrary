@@ -14,22 +14,13 @@ data:
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-    title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-    title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Tree/HeavyLightDecomposition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
+  bundledCode: "#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
     \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
     \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
     \ bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool\
@@ -189,106 +180,104 @@ data:
     \ long> res(this->n());\n        postdfs([&](int u) {\n            res[u] = seed;\n\
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
-    \        });\n        return res;\n    }\n};\n#line 4 \"Tree/HeavyLightDecomposition.hpp\"\
-    \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass HeavyLightDecomposition\
-    \ : public Tree<Edge, Vertex> {\npublic:\n    using super = Tree<Edge, Vertex>;\n\
-    \    HeavyLightDecomposition(int n): super(n) {} \n    HeavyLightDecomposition(const\
-    \ super &tree): super(tree) {}\n    std::vector<int> sz, top, dep, tail;\n   \
-    \ void build(int root = 0) {\n        this->current_root = root;\n        std::vector<int>(this->n()).swap(this->pa);\n\
-    \        std::vector<int>(this->n()).swap(this->dfs_in);\n        std::vector<int>(this->n()).swap(this->dfs_out);\n\
-    \        std::vector<int>(this->n(), 1).swap(sz);\n        std::vector<int>(this->n()).swap(top);\n\
-    \        std::vector<int>(this->n()).swap(dep);\n        std::vector<int>(this->n()).swap(tail);\n\
-    \        this->preorder.clear(), this->preorder.reserve(this->n());\n        this->postorder.clear(),\
-    \ this->postorder.reserve(this->n());\n        auto dfs_sz = [&](auto& self, int\
-    \ u, int f) -> void {\n            int max_sub = 0;\n            for (int i =\
-    \ 0; i < int(this->G[u].size()); ++i) {\n                auto [v, eid] = this->G[u][i];\n\
-    \                if (eid == f) continue;\n                self(self, v, eid);\n\
-    \                sz[u] += sz[v];\n                if (sz[v] > max_sub) {\n   \
-    \                 max_sub = sz[v];\n                    std::swap(this->G[u][0],\
-    \ this->G[u][i]); \n                }\n            }\n        };\n        dfs_sz(dfs_sz,\
-    \ root, -1);\n        this->traverse(root);\n        this->predfs([&](int u) {\n\
-    \            int f = this->parent(u);\n            if (u == f || this->opposite(f,\
-    \ this->G[f][0].second) != u)\n                top[u] = u;\n            else\n\
-    \                top[u] = top[f];\n            tail[top[u]] = u;\n           \
-    \ if (u != f) dep[u] = dep[f] + 1;\n        });\n    }\n    int lca(int u, int\
-    \ v) const {\n        while (top[u] != top[v]) {\n            if (dep[top[u]]\
-    \ > dep[top[v]]) u = this->parent(top[u]);\n            else v = this->parent(top[v]);\n\
-    \        }\n        return dep[u] < dep[v] ? u : v;\n    }\n    // func(int l,\
-    \ int r, bool is_up), intervals are [l, r), is_up is true if the interval is towarding\
-    \ to the root\n    template <bool is_edge, class F>\n    void work_path(int u,\
-    \ int v, F func) const {\n        std::vector<std::pair<int, int>> up_path, down_path;\n\
-    \        while (top[u] != top[v]) {\n            if (dep[top[u]] > dep[top[v]])\
-    \ {\n                up_path.emplace_back(this->dfs_in[top[u]], this->dfs_in[u]\
-    \ + 1);\n                u = this->parent(top[u]);\n            }\n          \
-    \  else {\n                down_path.emplace_back(this->dfs_in[top[v]], this->dfs_in[v]\
-    \ + 1);\n                v = this->parent(top[v]);\n            }\n        }\n\
-    \        if (dep[u] < dep[v])\n            down_path.emplace_back(this->dfs_in[u]\
-    \ + is_edge, this->dfs_in[v] + 1);\n        else if (dep[u] > dep[v] || !is_edge)\n\
-    \            up_path.emplace_back(this->dfs_in[v] + is_edge, this->dfs_in[u] +\
-    \ 1);\n        for (auto [l, r] : up_path) func(l, r, true);\n        std::reverse(down_path.begin(),\
-    \ down_path.end());\n        for (auto [l, r] : down_path) func(l, r, false);\n\
-    \    }\n    // func(int l, int r), intervals are [l, r), intervals could be empty\n\
-    \    template <bool is_edge, class F>\n    void work_subtree(int u, F func) const\
-    \ {\n        func(this->dfs_in[u] + is_edge, this->dfs_out[u] + 1);\n    }\n};\n"
-  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nclass HeavyLightDecomposition : public Tree<Edge, Vertex>\
-    \ {\npublic:\n    using super = Tree<Edge, Vertex>;\n    HeavyLightDecomposition(int\
-    \ n): super(n) {} \n    HeavyLightDecomposition(const super &tree): super(tree)\
-    \ {}\n    std::vector<int> sz, top, dep, tail;\n    void build(int root = 0) {\n\
-    \        this->current_root = root;\n        std::vector<int>(this->n()).swap(this->pa);\n\
-    \        std::vector<int>(this->n()).swap(this->dfs_in);\n        std::vector<int>(this->n()).swap(this->dfs_out);\n\
-    \        std::vector<int>(this->n(), 1).swap(sz);\n        std::vector<int>(this->n()).swap(top);\n\
-    \        std::vector<int>(this->n()).swap(dep);\n        std::vector<int>(this->n()).swap(tail);\n\
-    \        this->preorder.clear(), this->preorder.reserve(this->n());\n        this->postorder.clear(),\
-    \ this->postorder.reserve(this->n());\n        auto dfs_sz = [&](auto& self, int\
-    \ u, int f) -> void {\n            int max_sub = 0;\n            for (int i =\
-    \ 0; i < int(this->G[u].size()); ++i) {\n                auto [v, eid] = this->G[u][i];\n\
-    \                if (eid == f) continue;\n                self(self, v, eid);\n\
-    \                sz[u] += sz[v];\n                if (sz[v] > max_sub) {\n   \
-    \                 max_sub = sz[v];\n                    std::swap(this->G[u][0],\
-    \ this->G[u][i]); \n                }\n            }\n        };\n        dfs_sz(dfs_sz,\
-    \ root, -1);\n        this->traverse(root);\n        this->predfs([&](int u) {\n\
-    \            int f = this->parent(u);\n            if (u == f || this->opposite(f,\
-    \ this->G[f][0].second) != u)\n                top[u] = u;\n            else\n\
-    \                top[u] = top[f];\n            tail[top[u]] = u;\n           \
-    \ if (u != f) dep[u] = dep[f] + 1;\n        });\n    }\n    int lca(int u, int\
-    \ v) const {\n        while (top[u] != top[v]) {\n            if (dep[top[u]]\
-    \ > dep[top[v]]) u = this->parent(top[u]);\n            else v = this->parent(top[v]);\n\
-    \        }\n        return dep[u] < dep[v] ? u : v;\n    }\n    // func(int l,\
-    \ int r, bool is_up), intervals are [l, r), is_up is true if the interval is towarding\
-    \ to the root\n    template <bool is_edge, class F>\n    void work_path(int u,\
-    \ int v, F func) const {\n        std::vector<std::pair<int, int>> up_path, down_path;\n\
-    \        while (top[u] != top[v]) {\n            if (dep[top[u]] > dep[top[v]])\
-    \ {\n                up_path.emplace_back(this->dfs_in[top[u]], this->dfs_in[u]\
-    \ + 1);\n                u = this->parent(top[u]);\n            }\n          \
-    \  else {\n                down_path.emplace_back(this->dfs_in[top[v]], this->dfs_in[v]\
-    \ + 1);\n                v = this->parent(top[v]);\n            }\n        }\n\
-    \        if (dep[u] < dep[v])\n            down_path.emplace_back(this->dfs_in[u]\
-    \ + is_edge, this->dfs_in[v] + 1);\n        else if (dep[u] > dep[v] || !is_edge)\n\
-    \            up_path.emplace_back(this->dfs_in[v] + is_edge, this->dfs_in[u] +\
-    \ 1);\n        for (auto [l, r] : up_path) func(l, r, true);\n        std::reverse(down_path.begin(),\
-    \ down_path.end());\n        for (auto [l, r] : down_path) func(l, r, false);\n\
-    \    }\n    // func(int l, int r), intervals are [l, r), intervals could be empty\n\
-    \    template <bool is_edge, class F>\n    void work_subtree(int u, F func) const\
-    \ {\n        func(this->dfs_in[u] + is_edge, this->dfs_out[u] + 1);\n    }\n};\n"
+    \        });\n        return res;\n    }\n};\n#line 4 \"Tree/centroid_divide_and_conquer.hpp\"\
+    \n\nstruct NullFunc {\n    constexpr void operator()(auto&&...) const {}\n};\n\
+    \n/*\nmerge_func: void merge_func(int c, std::vector<std::vector<int>> groups);\n\
+    \    - c: the center, groups: subtrees with pre-order\npre_func: void pre_func(int\
+    \ u, int f);\n    - u: current vertex, f: parent\n    - the center would be called\
+    \ at first with pre_func(c, -1);\npost_func: void post_func(int u, std::vector<int>\
+    \ child);\n    - u: current vertex, child: child vertices\n*/\n\ntemplate<typename\
+    \ _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post\
+    \ = NullFunc>\nvoid centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func =\
+    \ NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func = NullFunc{})\
+    \ {\n    constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>,\
+    \ NullFunc>;\n    constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>,\
+    \ NullFunc>;\n    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
+    \ NullFunc>;\n    int n = tree.n();\n    std::vector<int> done(n), sz(n);\n  \
+    \  auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) -> void\
+    \ {\n        int mxsz = 0;\n        sz[u] = 1;\n        for (auto [v, eid] : tree[u])\n\
+    \            if (!done[v] && v != f) {\n                self(self, v, u, mx, c,\
+    \ num);\n                sz[u] += sz[v];\n                mxsz = std::max(mxsz,\
+    \ sz[v]);\n            }\n        if (mx > std::max(mxsz, num - sz[u]))\n    \
+    \        mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto dfs = [&](auto\
+    \ self, int u, int f, auto &g) -> void {\n        if constexpr (useMerge) g.push_back(u);\n\
+    \        if constexpr (usePre) pre_func(u, f);\n        [[no_unique_address]]\
+    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
+    \        for (auto [v, eid] : tree[u])\n            if (!done[v] && v != f) {\n\
+    \                self(self, v, u, g);\n                if constexpr (usePost)\
+    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(u,\
+    \ child);\n    };\n    auto cut = [&](auto self, int u, int num) -> void {\n \
+    \       int mx = n + 1, c = 0;\n        get_cent(get_cent, u, -1, mx, c, num);\n\
+    \        done[c] = 1;\n        [[no_unique_address]] std::conditional_t<useMerge,\
+    \ std::vector<std::vector<int>>, typename _Tree::Empty> groups;\n        if constexpr\
+    \ (usePre) pre_func(c, -1);\n        [[no_unique_address]] std::conditional_t<usePost,\
+    \ std::vector<int>, typename _Tree::Empty> child;\n        for (auto [v, eid]\
+    \ : tree[c])\n            if (!done[v]) {\n                if constexpr (useMerge)\
+    \ {\n                    groups.emplace_back();\n                    groups.back().reserve(sz[v]\
+    \ > sz[c] ? num - sz[c] : sz[v]);\n                    dfs(dfs, v, c, groups.back());\n\
+    \                }\n                else dfs(dfs, v, c, groups);\n           \
+    \     if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
+    \ (usePost) post_func(c, child);\n        if constexpr (useMerge) merge_func(c,\
+    \ groups);\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if (sz[v] > sz[c])\n                    self(self, v, num - sz[c]);\n\
+    \                else\n                    self(self, v, sz[v]);\n           \
+    \ }\n        done[c] = 0;\n    };\n    cut(cut, 0, n);\n}\n"
+  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n\nstruct NullFunc {\n    constexpr\
+    \ void operator()(auto&&...) const {}\n};\n\n/*\nmerge_func: void merge_func(int\
+    \ c, std::vector<std::vector<int>> groups);\n    - c: the center, groups: subtrees\
+    \ with pre-order\npre_func: void pre_func(int u, int f);\n    - u: current vertex,\
+    \ f: parent\n    - the center would be called at first with pre_func(c, -1);\n\
+    post_func: void post_func(int u, std::vector<int> child);\n    - u: current vertex,\
+    \ child: child vertices\n*/\n\ntemplate<typename _Tree, typename F_Pre = NullFunc,\
+    \ typename F_Merge = NullFunc, typename F_Post = NullFunc>\nvoid centroid_divide_and_conquer(_Tree\
+    \ &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post\
+    \ post_func = NullFunc{}) {\n    constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>,\
+    \ NullFunc>;\n    constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>,\
+    \ NullFunc>;\n    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
+    \ NullFunc>;\n    int n = tree.n();\n    std::vector<int> done(n), sz(n);\n  \
+    \  auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) -> void\
+    \ {\n        int mxsz = 0;\n        sz[u] = 1;\n        for (auto [v, eid] : tree[u])\n\
+    \            if (!done[v] && v != f) {\n                self(self, v, u, mx, c,\
+    \ num);\n                sz[u] += sz[v];\n                mxsz = std::max(mxsz,\
+    \ sz[v]);\n            }\n        if (mx > std::max(mxsz, num - sz[u]))\n    \
+    \        mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto dfs = [&](auto\
+    \ self, int u, int f, auto &g) -> void {\n        if constexpr (useMerge) g.push_back(u);\n\
+    \        if constexpr (usePre) pre_func(u, f);\n        [[no_unique_address]]\
+    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
+    \        for (auto [v, eid] : tree[u])\n            if (!done[v] && v != f) {\n\
+    \                self(self, v, u, g);\n                if constexpr (usePost)\
+    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(u,\
+    \ child);\n    };\n    auto cut = [&](auto self, int u, int num) -> void {\n \
+    \       int mx = n + 1, c = 0;\n        get_cent(get_cent, u, -1, mx, c, num);\n\
+    \        done[c] = 1;\n        [[no_unique_address]] std::conditional_t<useMerge,\
+    \ std::vector<std::vector<int>>, typename _Tree::Empty> groups;\n        if constexpr\
+    \ (usePre) pre_func(c, -1);\n        [[no_unique_address]] std::conditional_t<usePost,\
+    \ std::vector<int>, typename _Tree::Empty> child;\n        for (auto [v, eid]\
+    \ : tree[c])\n            if (!done[v]) {\n                if constexpr (useMerge)\
+    \ {\n                    groups.emplace_back();\n                    groups.back().reserve(sz[v]\
+    \ > sz[c] ? num - sz[c] : sz[v]);\n                    dfs(dfs, v, c, groups.back());\n\
+    \                }\n                else dfs(dfs, v, c, groups);\n           \
+    \     if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
+    \ (usePost) post_func(c, child);\n        if constexpr (useMerge) merge_func(c,\
+    \ groups);\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if (sz[v] > sz[c])\n                    self(self, v, num - sz[c]);\n\
+    \                else\n                    self(self, v, sz[v]);\n           \
+    \ }\n        done[c] = 0;\n    };\n    cut(cut, 0, n);\n}\n"
   dependsOn:
   - Tree/Tree.hpp
   - Graph/base.hpp
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
   isVerificationFile: false
-  path: Tree/HeavyLightDecomposition.hpp
+  path: Tree/centroid_divide_and_conquer.hpp
   requiredBy: []
-  timestamp: '2026-05-19 13:54:46+08:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-documentation_of: Tree/HeavyLightDecomposition.hpp
+  timestamp: '2026-05-29 21:28:48+08:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: Tree/centroid_divide_and_conquer.hpp
 layout: document
 redirect_from:
-- /library/Tree/HeavyLightDecomposition.hpp
-- /library/Tree/HeavyLightDecomposition.hpp.html
-title: Tree/HeavyLightDecomposition.hpp
+- /library/Tree/centroid_divide_and_conquer.hpp
+- /library/Tree/centroid_divide_and_conquer.hpp.html
+title: Tree/centroid_divide_and_conquer.hpp
 ---
