@@ -2,6 +2,7 @@
 
 // Reference: Atcoder Library https://github.com/atcoder/ac-library
 #include "Numeric/internal_math.hpp"
+#include "Numeric/barrett.hpp"
 
 template <int id> struct dynamic_modint : internal::modint_base {
     using mint = dynamic_modint;
@@ -10,7 +11,7 @@ template <int id> struct dynamic_modint : internal::modint_base {
     static int mod() { return (int)(bt.umod()); }
     static void set_mod(int m) {
         assert(1 <= m);
-        bt = internal::barrett(m);
+        bt = barrett(m);
     }
     static mint raw(int v) {
         mint x;
@@ -124,10 +125,10 @@ template <int id> struct dynamic_modint : internal::modint_base {
 
   private:
     unsigned int _v;
-    static internal::barrett bt;
+    static barrett bt;
     static unsigned int umod() { return bt.umod(); }
 };
-template <int id> internal::barrett dynamic_modint<id>::bt(998244353);
+template <int id> barrett dynamic_modint<id>::bt(998244353);
 
 using modint = dynamic_modint<-1>;
 

@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Numeric/internal_math.hpp"
+#include "Numeric/barrett.hpp"
 #include "Numeric/primitive_root.hpp"
 #include "Numeric/pollard_rho.hpp"
 #include "Numeric/mod_inv.hpp"
 
 // source: https://maspypy.github.io/library/mod/binomial.hpp
 struct BinomialPrimePower {
-    using barrett = internal::barrett;
     int p, e, pp, root, ord;
     std::vector<int> exp, log_fact, power;
     barrett bt_p, bt_pp;
@@ -81,7 +81,6 @@ struct BinomialPrimePower {
 };
 
 struct Binomial {
-    using barrett = internal::barrett;
     int mod;
     std::vector<BinomialPrimePower> BPP;
     std::vector<int> crt_coef;
