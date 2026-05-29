@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 #include "default_code.hpp"
 
-#include "Polynomial/NTT.hpp"
+#include "Convolution/convolution.hpp"
 
 using mint = modint998244353;
 
@@ -14,7 +14,7 @@ int main() {
         cin >> i;
     for (auto &i : brr)
         cin >> i;
-    arr = NTT<mint>::convolution(arr, brr);
+    arr = convolution(arr, brr);
     for (int i = 0; i < SZ(arr); ++i)
         cout << arr[i] << " \n"[i + 1 == SZ(arr)];
 }

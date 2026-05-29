@@ -4,10 +4,16 @@
 #include "Polynomial/NTT.hpp"
 #include "Numeric/crt.hpp"
 
-template<int C, typename T>
+template<int C = 1, typename T = modint998244353>
 std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
     static_assert(1 <= C && C <= 3, "NTT convolution must use 1, 2, or 3 primes.");
     if (a.empty() || b.empty()) return std::vector<T>();
+
+    if constexpr (std::derived_from<T, internal::modint_base>) {
+        int sz = a.size() + b.size() - 1;
+        if (std::bit_ceil((unsigned int)sz) <= NTT<T>::ntt_max_limit)
+            return NTT<T>::convolution(a, b);
+    }
     
     static constexpr int p0 = 167772161;
     static constexpr int p1 = 469762049;

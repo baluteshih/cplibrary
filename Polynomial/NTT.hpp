@@ -23,6 +23,15 @@ class NTT {
         }
     }
 public:
+    static constexpr int ntt_max_limit = []() {
+        unsigned int m = T::mod() - 1;
+        int limit = 1;
+        while ((m & 1) == 0) {
+            limit <<= 1;
+            m >>= 1;
+        }
+        return limit;
+    }();
     static void ntt(vector<T> &a, bool inv = false) { //0 <= a[i] < P
         int n = a.size();
         assert((n & (n - 1)) == 0);
@@ -52,6 +61,7 @@ public:
         if (a.empty() || b.empty()) return vector<T>();
         int n = 1, sz = int(a.size()) + int(b.size()) - 1;
         while (n < sz) n <<= 1;
+        assert(n <= ntt_max_limit && "the result length exceeds the limit of the prime can support");
         a.resize(n), b.resize(n);
         ntt(a), ntt(b);
         for (int i = 0; i < n; ++i)
