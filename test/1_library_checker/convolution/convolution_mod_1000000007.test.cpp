@@ -2,7 +2,7 @@
 #include "default_code.hpp"
 
 #include "Numeric/Modint.hpp"
-#include "Polynomial/convolution_any_mod.hpp"
+#include "Convolution/convolution.hpp"
 
 using mint = modint1000000007;
 
@@ -15,7 +15,7 @@ int main() {
         cin >> i;
     for (auto &i : b)
         cin >> i;
-    auto c = convolution_any_mod(a, b);
+    auto c = convolution<3>(a, b);
     for (int i = 0; i < SZ(c); ++i)
         cout << c[i] << " \n"[i + 1 == SZ(c)]; 
 }
