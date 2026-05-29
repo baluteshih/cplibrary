@@ -19,12 +19,17 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
     static constexpr int p1 = 469762049;
     static constexpr int p2 = 754974721;
 
+    auto get_val = [](const T& x) {
+        if constexpr (std::derived_from<T, internal::modint_base>) return x.val();
+        else return x;
+    };
+
     auto do_ntt = [&](auto P_tag) {
         constexpr int P = decltype(P_tag)::value;
         using mint = static_modint<P>;
         std::vector<mint> a_mint(a.size()), b_mint(b.size());
-        for (int i = 0; i < int(a.size()); ++i) a_mint[i] = a[i].val();
-        for (int i = 0; i < int(b.size()); ++i) b_mint[i] = b[i].val();
+        for (int i = 0; i < int(a.size()); ++i) a_mint[i] = get_val(a[i]);
+        for (int i = 0; i < int(b.size()); ++i) b_mint[i] = get_val(b[i]);
         return NTT<mint>::convolution(a_mint, b_mint);
     };
 
