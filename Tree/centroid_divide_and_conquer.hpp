@@ -14,15 +14,16 @@ pre_func: void pre_func(int u, int f);
     - the center would be called at first with pre_func(c, -1);
 post_func: void post_func(int u, std::vector<int> child);
     - u: current vertex, child: child vertices
+return value: c_pa[u]: the centroid parent of u
 */
 
 template<typename _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc>
-void centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func = NullFunc{}) {
+std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func = NullFunc{}) {
     constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>, NullFunc>;
     constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>, NullFunc>;
     constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>, NullFunc>;
     int n = tree.n();
-    std::vector<int> done(n), sz(n);
+    std::vector<int> done(n), sz(n), res(n);
     auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) -> void {
         int mxsz = 0;
         sz[u] = 1;
@@ -46,10 +47,10 @@ void centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Mer
             }
         if constexpr (usePost) post_func(u, child);
     };
-    auto cut = [&](auto self, int u, int num) -> void {
+    auto cut = [&](auto self, int u, int f, int num) -> void {
         int mx = n + 1, c = 0;
         get_cent(get_cent, u, -1, mx, c, num);
-        done[c] = 1;
+        done[c] = 1, res[c] = f;
         [[no_unique_address]] std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty> groups;
         if constexpr (usePre) pre_func(c, -1);
         [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
@@ -68,11 +69,12 @@ void centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Mer
         for (auto [v, eid] : tree[c])
             if (!done[v]) {
                 if (sz[v] > sz[c])
-                    self(self, v, num - sz[c]);
+                    self(self, v, c, num - sz[c]);
                 else
-                    self(self, v, sz[v]);
+                    self(self, v, c, sz[v]);
             }
         done[c] = 0;
     };
-    cut(cut, 0, n);
+    cut(cut, 0, -1, n);
+    return res;
 }

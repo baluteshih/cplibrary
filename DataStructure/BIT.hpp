@@ -2,10 +2,10 @@
 
 template<class T>
 class BIT { // 0-base
+public:
     int n;
     T total_;
     std::vector<T> bit;
-public:
     BIT(int _n) : n(_n), total_(), bit(n + 1) {}
     template<typename U>
     BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {

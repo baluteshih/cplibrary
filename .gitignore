@@ -276,3 +276,6 @@ TSWLatexianTemp*
 
 # not_ready
 not_ready/
+
+# ctags
+tags
