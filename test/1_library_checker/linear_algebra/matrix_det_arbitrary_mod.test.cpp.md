@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/barrett.hpp
     title: Numeric/barrett.hpp
   - icon: ':question:'

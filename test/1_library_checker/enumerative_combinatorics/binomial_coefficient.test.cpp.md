@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Binomial.hpp
     title: Numeric/Binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/barrett.hpp
     title: Numeric/barrett.hpp
   - icon: ':question:'

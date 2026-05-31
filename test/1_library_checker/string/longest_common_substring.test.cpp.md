@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Misc/MultiInt.hpp
     title: Misc/MultiInt.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: String/RollingHash.hpp
     title: String/RollingHash.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/longest_common_substring
@@ -272,7 +272,7 @@ data:
   path: test/1_library_checker/string/longest_common_substring.test.cpp
   requiredBy: []
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/string/longest_common_substring.test.cpp
 layout: document

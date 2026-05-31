@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: DataStructure/BIT.hpp
   _extendedRequiredBy: []
@@ -15,27 +15,27 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/OrderedSet.hpp\"\n\n#line 2 \"DataStructure/BIT.hpp\"\
-    \n\ntemplate<class T>\nclass BIT { // 0-base\n    int n;\n    T total_;\n    std::vector<T>\
-    \ bit;\npublic:\n    BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    template<typename\
-    \ U>\n    BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(),\
-    \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
-    \         bit[x] = arr[x - 1];\n            int y = x - (x & -x);\n          \
-    \  for (int i = x - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] +\
-    \ bit[i];\n        }\n    }\n    void modify(int x, T v) {\n        total_ = total_\
-    \ + v;\n        for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] +\
-    \ v;\n    }\n    T prefix(int x) {\n        T res = T();\n        for (++x; x;\
-    \ x -= x & -x)\n            res = res + bit[x];\n        return res;\n    }\n\
-    \    T suffix(int x) requires requires(T x, T y) { x - y; } {\n        return\
-    \ total_ - prefix(x);\n    }\n    T range(int l, int r) requires requires(T x,\
-    \ T y) { x - y; } { // [l, r)\n        if (l >= r) return T();\n        T res\
-    \ = prefix(r - 1) - prefix(l - 1);\n        return res;\n    }\n    int kth(int\
-    \ k) { // 0-base query\n        assert((n & (n - 1)) == 0);\n        ++k;\n  \
-    \      int res = 0;\n        for (int i = n >> 1; i >= 1; i >>= 1) {\n       \
-    \     if (bit[res + i] < k)\n                k -= bit[res += i];\n        }\n\
-    \        return res;\n    }\n    T total() {\n        return total_;\n    }\n\
-    };\n#line 4 \"DataStructure/OrderedSet.hpp\"\n\ntemplate<class T>\nclass OrderedSet\
-    \ {\n    vector<T> vals;\n    vector<bool> vis;\n    BIT<int> bit;\n    static\
-    \ vector<T> sort_and_unique(vector<T> _vals) {\n        ranges::sort(_vals);\n\
+    \n\ntemplate<class T>\nclass BIT { // 0-base\npublic:\n    int n;\n    T total_;\n\
+    \    std::vector<T> bit;\n    BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n \
+    \   template<typename U>\n    BIT(const std::vector<U> &arr) : n(arr.size()),\
+    \ total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {\n       \
+    \ for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x - 1];\n         \
+    \   int y = x - (x & -x);\n            for (int i = x - 1; i > y; i -= i & -i)\n\
+    \                bit[x] = bit[x] + bit[i];\n        }\n    }\n    void modify(int\
+    \ x, T v) {\n        total_ = total_ + v;\n        for (++x; x <= n; x += x &\
+    \ -x)\n            bit[x] = bit[x] + v;\n    }\n    T prefix(int x) {\n      \
+    \  T res = T();\n        for (++x; x; x -= x & -x)\n            res = res + bit[x];\n\
+    \        return res;\n    }\n    T suffix(int x) requires requires(T x, T y) {\
+    \ x - y; } {\n        return total_ - prefix(x);\n    }\n    T range(int l, int\
+    \ r) requires requires(T x, T y) { x - y; } { // [l, r)\n        if (l >= r) return\
+    \ T();\n        T res = prefix(r - 1) - prefix(l - 1);\n        return res;\n\
+    \    }\n    int kth(int k) { // 0-base query\n        assert((n & (n - 1)) ==\
+    \ 0);\n        ++k;\n        int res = 0;\n        for (int i = n >> 1; i >= 1;\
+    \ i >>= 1) {\n            if (bit[res + i] < k)\n                k -= bit[res\
+    \ += i];\n        }\n        return res;\n    }\n    T total() {\n        return\
+    \ total_;\n    }\n};\n#line 4 \"DataStructure/OrderedSet.hpp\"\n\ntemplate<class\
+    \ T>\nclass OrderedSet {\n    vector<T> vals;\n    vector<bool> vis;\n    BIT<int>\
+    \ bit;\n    static vector<T> sort_and_unique(vector<T> _vals) {\n        ranges::sort(_vals);\n\
     \        _vals.erase(ranges::unique(_vals).begin(), _vals.end());\n        return\
     \ _vals;\n    }\n    int idx(int x) {\n        auto it = ranges::lower_bound(vals,\
     \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
@@ -90,7 +90,7 @@ data:
   isVerificationFile: false
   path: DataStructure/OrderedSet.hpp
   requiredBy: []
-  timestamp: '2026-05-18 14:22:06+08:00'
+  timestamp: '2026-05-31 14:29:47+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/ordered_set.test.cpp

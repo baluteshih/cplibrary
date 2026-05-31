@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   _extendedRequiredBy:
@@ -20,22 +20,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/partition_number.hpp
     title: Numbers/partition_number.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Sqrt.hpp
     title: Polynomial/Sqrt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/interpolate.hpp
     title: Polynomial/interpolate.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -45,45 +45,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
     title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
     title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
     title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2 \"Polynomial/NTT.hpp\"\
@@ -382,7 +382,7 @@ data:
   - Numbers/partition_number.hpp
   - Numbers/bell_number.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp

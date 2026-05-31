@@ -19,15 +19,21 @@ data:
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+    title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+    title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT\
-    \ { // 0-base\n    int n;\n    T total_;\n    std::vector<T> bit;\npublic:\n \
+    \ { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T> bit;\n \
     \   BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n \
     \   BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(),\
     \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
@@ -46,8 +52,8 @@ data:
     \     if (bit[res + i] < k)\n                k -= bit[res += i];\n        }\n\
     \        return res;\n    }\n    T total() {\n        return total_;\n    }\n\
     };\n"
-  code: "#pragma once\n\ntemplate<class T>\nclass BIT { // 0-base\n    int n;\n  \
-    \  T total_;\n    std::vector<T> bit;\npublic:\n    BIT(int _n) : n(_n), total_(),\
+  code: "#pragma once\n\ntemplate<class T>\nclass BIT { // 0-base\npublic:\n    int\
+    \ n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n) : n(_n), total_(),\
     \ bit(n + 1) {}\n    template<typename U>\n    BIT(const std::vector<U> &arr)\
     \ : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n\
     \ + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x -\
@@ -71,13 +77,15 @@ data:
   requiredBy:
   - DataStructure/OrderedSet.hpp
   - Geometry/PointInAngle.hpp
-  timestamp: '2026-05-18 14:22:06+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-05-31 14:29:47+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
 documentation_of: DataStructure/BIT.hpp
 layout: document
 redirect_from:

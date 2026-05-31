@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: DataStructure/BIT.hpp
   - icon: ':question:'
@@ -266,8 +266,8 @@ data:
     \    template <bool is_edge, class F>\n    void work_subtree(int u, F func) const\
     \ {\n        func(this->dfs_in[u] + is_edge, this->dfs_out[u] + 1);\n    }\n};\n\
     #line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT { // 0-base\n\
-    \    int n;\n    T total_;\n    std::vector<T> bit;\npublic:\n    BIT(int _n)\
-    \ : n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n    BIT(const std::vector<U>\
+    public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n) :\
+    \ n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n    BIT(const std::vector<U>\
     \ &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())),\
     \ bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x\
     \ - 1];\n            int y = x - (x & -x);\n            for (int i = x - 1; i\
@@ -323,7 +323,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 13:54:46+08:00'
+  timestamp: '2026-05-31 14:29:47+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_add_path_sum.test.cpp

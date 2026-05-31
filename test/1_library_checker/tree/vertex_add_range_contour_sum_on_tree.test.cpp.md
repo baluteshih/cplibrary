@@ -5,38 +5,76 @@ data:
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
+    path: DataStructure/BIT.hpp
+    title: DataStructure/BIT.hpp
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':question:'
-    path: Tree/Tree.hpp
-    title: Tree/Tree.hpp
-  _extendedRequiredBy:
-  - icon: ':question:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
   - icon: ':question:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-    title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-    title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  _isVerificationFailed: true
-  _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  - icon: ':question:'
+    path: Tree/Tree.hpp
+    title: Tree/Tree.hpp
+  - icon: ':question:'
+    path: Tree/centroid_divide_and_conquer.hpp
+    title: Tree/centroid_divide_and_conquer.hpp
+  - icon: ':question:'
+    path: default_code.hpp
+    title: default_code.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
-    \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
-    \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
-    \ bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool\
-    \ hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
+    links:
+    - https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
+  bundledCode: "#line 1 \"test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree\"\
+    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
+    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
+    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
+    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
+    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
+    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
+    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
+    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
+    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
+    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
+    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
+    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
+    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
+    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
+    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
+    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
+    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
+    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
+    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
+    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
+    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
+    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
+    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
+    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
+    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
+    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
+    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
+    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
+    }\n#line 3 \"test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp\"\
+    \n\n#line 2 \"Tree/CentroidDS/DistanceSolver.hpp\"\n\n#line 2 \"Tree/CentroidTree.hpp\"\
+    \n\n#line 2 \"Tree/Tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
+    \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
+    \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
+    \ constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
     \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
     \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
     \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
@@ -192,51 +230,9 @@ data:
     \ long> res(this->n());\n        postdfs([&](int u) {\n            res[u] = seed;\n\
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
-    \        });\n        return res;\n    }\n};\n#line 4 \"Tree/centroid_divide_and_conquer.hpp\"\
-    \n\nstruct NullFunc {\n    constexpr void operator()(auto&&...) const {}\n};\n\
-    \n/*\nmerge_func: void merge_func(int c, std::vector<std::vector<int>> groups);\n\
-    \    - c: the center, groups: subtrees with pre-order\npre_func: void pre_func(int\
-    \ u, int f);\n    - u: current vertex, f: parent\n    - the center would be called\
-    \ at first with pre_func(c, -1);\npost_func: void post_func(int u, std::vector<int>\
-    \ child);\n    - u: current vertex, child: child vertices\nreturn value: c_pa[u]:\
-    \ the centroid parent of u\n*/\n\ntemplate<typename _Tree, typename F_Pre = NullFunc,\
-    \ typename F_Merge = NullFunc, typename F_Post = NullFunc>\nstd::vector<int> centroid_divide_and_conquer(_Tree\
-    \ &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post\
-    \ post_func = NullFunc{}) {\n    constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>,\
-    \ NullFunc>;\n    constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>,\
-    \ NullFunc>;\n    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
-    \ NullFunc>;\n    int n = tree.n();\n    std::vector<int> done(n), sz(n), res(n);\n\
-    \    auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) ->\
-    \ void {\n        int mxsz = 0;\n        sz[u] = 1;\n        for (auto [v, eid]\
-    \ : tree[u])\n            if (!done[v] && v != f) {\n                self(self,\
-    \ v, u, mx, c, num);\n                sz[u] += sz[v];\n                mxsz =\
-    \ std::max(mxsz, sz[v]);\n            }\n        if (mx > std::max(mxsz, num -\
-    \ sz[u]))\n            mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto\
-    \ dfs = [&](auto self, int u, int f, auto &g) -> void {\n        if constexpr\
-    \ (useMerge) g.push_back(u);\n        if constexpr (usePre) pre_func(u, f);\n\
-    \        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename\
-    \ _Tree::Empty> child;\n        for (auto [v, eid] : tree[u])\n            if\
-    \ (!done[v] && v != f) {\n                self(self, v, u, g);\n             \
-    \   if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
-    \ (usePost) post_func(u, child);\n    };\n    auto cut = [&](auto self, int u,\
-    \ int f, int num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent,\
-    \ u, -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        [[no_unique_address]]\
-    \ std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty>\
-    \ groups;\n        if constexpr (usePre) pre_func(c, -1);\n        [[no_unique_address]]\
-    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
-    \        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n        \
-    \        if constexpr (useMerge) {\n                    groups.emplace_back();\n\
-    \                    groups.back().reserve(sz[v] > sz[c] ? num - sz[c] : sz[v]);\n\
-    \                    dfs(dfs, v, c, groups.back());\n                }\n     \
-    \           else dfs(dfs, v, c, groups);\n                if constexpr (usePost)\
-    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(c,\
-    \ child);\n        if constexpr (useMerge) merge_func(c, groups);\n        for\
-    \ (auto [v, eid] : tree[c])\n            if (!done[v]) {\n                if (sz[v]\
-    \ > sz[c])\n                    self(self, v, c, num - sz[c]);\n             \
-    \   else\n                    self(self, v, c, sz[v]);\n            }\n      \
-    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n"
-  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n\nstruct NullFunc {\n    constexpr\
-    \ void operator()(auto&&...) const {}\n};\n\n/*\nmerge_func: void merge_func(int\
+    \        });\n        return res;\n    }\n};\n#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\
+    \n\n#line 4 \"Tree/centroid_divide_and_conquer.hpp\"\n\nstruct NullFunc {\n  \
+    \  constexpr void operator()(auto&&...) const {}\n};\n\n/*\nmerge_func: void merge_func(int\
     \ c, std::vector<std::vector<int>> groups);\n    - c: the center, groups: subtrees\
     \ with pre-order\npre_func: void pre_func(int u, int f);\n    - u: current vertex,\
     \ f: parent\n    - the center would be called at first with pre_func(c, -1);\n\
@@ -277,26 +273,116 @@ data:
     \ (auto [v, eid] : tree[c])\n            if (!done[v]) {\n                if (sz[v]\
     \ > sz[c])\n                    self(self, v, c, num - sz[c]);\n             \
     \   else\n                    self(self, v, c, sz[v]);\n            }\n      \
-    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n"
+    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n#line 5\
+    \ \"Tree/CentroidTree.hpp\"\n\ntemplate<typename Edge = void, typename Vertex\
+    \ = void>\nclass CentroidTree : public Tree<Edge, Vertex> {\npublic:\n    std::vector<int>\
+    \ c_pa;\n    using super = Tree<Edge, Vertex>;\n    CentroidTree(int n): super(n)\
+    \ {} \n    CentroidTree(const super &tree): super(tree) {}\n    template<typename\
+    \ F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc>\n\
+    \    void build(F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{},\
+    \ F_Post post_func = NullFunc{}) {\n        c_pa = centroid_divide_and_conquer(*this,\
+    \ pre_func, merge_func, post_func);\n    }\n    /*\n    action(c, prev_c)\n  \
+    \      - c: current centorid\n        - prev_c: previous centroid, -1 if none\n\
+    \    */\n    void climb(int u, auto action) const {\n        int c = u, prev_c\
+    \ = -1;\n        while (c != -1) {\n            action(c, prev_c);\n         \
+    \   prev_c = c;\n            c = c_pa[c];\n        }\n    }\n};\n#line 4 \"Tree/CentroidDS/DistanceSolver.hpp\"\
+    \n\ntemplate<typename DS>\nclass DistanceSolver : public CentroidTree<void, void>\
+    \ {\npublic:\n    using super = CentroidTree<void, void>;\n    std::vector<std::vector<int>>\
+    \ c_dist;\n    std::vector<DS> tr_self, tr_parent;\n    DistanceSolver(int n)\
+    \ : super(n), c_dist(n), tr_self(n, 0), tr_parent(n, 0) {}\n    void build() {\n\
+    \        std::vector<int> dis(this->n());\n        super::build([&](int u, int\
+    \ f) {\n            if (f == -1) dis[u] = 0;\n            else dis[u] = dis[f]\
+    \ + 1;\n            c_dist[u].push_back(dis[u]);\n        }, [&](int c, const\
+    \ std::vector<std::vector<int>> &groups) {\n            int mx = 1;\n        \
+    \    for (auto &vec : groups)\n                for (auto v : vec)\n          \
+    \          mx = std::max(mx, dis[v] + 1);\n            tr_self[c] = DS(mx);\n\
+    \            if (int(c_dist[c].size()) >= 2) {\n                mx = c_dist[c][int(c_dist[c].size())\
+    \ - 2] + 1;\n                for (auto &vec : groups)\n                    for\
+    \ (auto v : vec)\n                        mx = std::max(mx, c_dist[v][int(c_dist[v].size())\
+    \ - 2] + 1);\n                tr_parent[c] = DS(mx);\n            }\n        });\n\
+    \        for (int i = 0; i < this->n(); ++i) std::ranges::reverse(c_dist[i]);\n\
+    \    }\n    /*\n    action(ds, d, prev)\n        - ds: the data structure on the\
+    \ corresponding centroid\n        - d: the distance from u to the centroid\n \
+    \       - prev: whether using prev centroid\n    */\n    template<typename Func>\n\
+    \    void climb(int u, Func action) {\n        int jump_steps = 0;\n        super::climb(u,\
+    \ [&](int c, int prev_c) {\n            action(tr_self[c], c_dist[u][jump_steps],\
+    \ false);\n            if (prev_c != -1)\n                action(tr_parent[prev_c],\
+    \ c_dist[u][jump_steps], true);\n            ++jump_steps;\n        });\n    }\n\
+    };\n#line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT { // 0-base\n\
+    public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n) :\
+    \ n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n    BIT(const std::vector<U>\
+    \ &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())),\
+    \ bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x\
+    \ - 1];\n            int y = x - (x & -x);\n            for (int i = x - 1; i\
+    \ > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n        }\n  \
+    \  }\n    void modify(int x, T v) {\n        total_ = total_ + v;\n        for\
+    \ (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n    T prefix(int\
+    \ x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n            res\
+    \ = res + bit[x];\n        return res;\n    }\n    T suffix(int x) requires requires(T\
+    \ x, T y) { x - y; } {\n        return total_ - prefix(x);\n    }\n    T range(int\
+    \ l, int r) requires requires(T x, T y) { x - y; } { // [l, r)\n        if (l\
+    \ >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n        return\
+    \ res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n & (n -\
+    \ 1)) == 0);\n        ++k;\n        int res = 0;\n        for (int i = n >> 1;\
+    \ i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n                k -=\
+    \ bit[res += i];\n        }\n        return res;\n    }\n    T total() {\n   \
+    \     return total_;\n    }\n};\n#line 6 \"test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp\"\
+    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
+    \  cin >> n >> q;\n    vector<int> arr(n);\n    for (int &i : arr)\n        cin\
+    \ >> i;\n    DistanceSolver<BIT<ll>> tree(n);\n    for (int i = 1; i < n; ++i)\
+    \ {\n        int u, v;\n        cin >> u >> v;\n        tree.add_edge(u, v);\n\
+    \    }\n    tree.build();\n    for (int i = 0; i < n; ++i)\n        tree.climb(i,\
+    \ [&](auto &ds, int d, [[maybe_unused]] bool prev) {\n            ds.modify(d,\
+    \ arr[i]);\n        });\n    auto range_query = [&](auto &ds, int l, int r) {\n\
+    \        l = max(l, 0), r = min(r, ds.n);\n        if (l >= r) return 0LL;\n \
+    \       return ds.range(l, r);\n    };\n    while (q--) {\n        int op, p;\n\
+    \        cin >> op >> p;\n        if (op == 0) {\n            int x;\n       \
+    \     cin >> x;\n            tree.climb(p, [&](auto &ds, int d, [[maybe_unused]]\
+    \ bool prev) {\n                ds.modify(d, x); \n            });\n        }\n\
+    \        else {\n            int l, r;\n            cin >> l >> r;\n         \
+    \   ll ans = 0;\n            tree.climb(p, [&](auto &ds, int d, bool prev) {\n\
+    \                ll res = range_query(ds, l - d, r - d);\n                if (prev)\
+    \ ans -= res;\n                else ans += res;\n            });\n           \
+    \ cout << ans << \"\\n\";\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree\"\
+    \n#include \"default_code.hpp\"\n\n#include \"Tree/CentroidDS/DistanceSolver.hpp\"\
+    \n#include \"DataStructure/BIT.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
+    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    vector<int> arr(n);\n  \
+    \  for (int &i : arr)\n        cin >> i;\n    DistanceSolver<BIT<ll>> tree(n);\n\
+    \    for (int i = 1; i < n; ++i) {\n        int u, v;\n        cin >> u >> v;\n\
+    \        tree.add_edge(u, v);\n    }\n    tree.build();\n    for (int i = 0; i\
+    \ < n; ++i)\n        tree.climb(i, [&](auto &ds, int d, [[maybe_unused]] bool\
+    \ prev) {\n            ds.modify(d, arr[i]);\n        });\n    auto range_query\
+    \ = [&](auto &ds, int l, int r) {\n        l = max(l, 0), r = min(r, ds.n);\n\
+    \        if (l >= r) return 0LL;\n        return ds.range(l, r);\n    };\n   \
+    \ while (q--) {\n        int op, p;\n        cin >> op >> p;\n        if (op ==\
+    \ 0) {\n            int x;\n            cin >> x;\n            tree.climb(p, [&](auto\
+    \ &ds, int d, [[maybe_unused]] bool prev) {\n                ds.modify(d, x);\
+    \ \n            });\n        }\n        else {\n            int l, r;\n      \
+    \      cin >> l >> r;\n            ll ans = 0;\n            tree.climb(p, [&](auto\
+    \ &ds, int d, bool prev) {\n                ll res = range_query(ds, l - d, r\
+    \ - d);\n                if (prev) ans -= res;\n                else ans += res;\n\
+    \            });\n            cout << ans << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
+  - default_code.hpp
+  - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/CentroidTree.hpp
   - Tree/Tree.hpp
   - Graph/base.hpp
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
-  isVerificationFile: false
-  path: Tree/centroid_divide_and_conquer.hpp
-  requiredBy:
-  - Tree/CentroidTree.hpp
-  - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/centroid_divide_and_conquer.hpp
+  - DataStructure/BIT.hpp
+  isVerificationFile: true
+  path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  requiredBy: []
   timestamp: '2026-05-31 14:29:47+08:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-documentation_of: Tree/centroid_divide_and_conquer.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
 layout: document
 redirect_from:
-- /library/Tree/centroid_divide_and_conquer.hpp
-- /library/Tree/centroid_divide_and_conquer.hpp.html
-title: Tree/centroid_divide_and_conquer.hpp
+- /verify/test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+- /verify/test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp.html
+title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
 ---

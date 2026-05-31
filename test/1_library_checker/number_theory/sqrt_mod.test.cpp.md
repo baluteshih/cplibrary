@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
   - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/barrett.hpp
     title: Numeric/barrett.hpp
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/quadratic_residue.hpp
     title: Numeric/quadratic_residue.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
@@ -268,7 +268,7 @@ data:
   path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
   requiredBy: []
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/sqrt_mod.test.cpp
 layout: document

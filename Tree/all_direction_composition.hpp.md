@@ -15,12 +15,12 @@ data:
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/all_direction_composition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -238,7 +238,7 @@ data:
   path: Tree/all_direction_composition.hpp
   requiredBy: []
   timestamp: '2026-05-19 13:54:46+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: Tree/all_direction_composition.hpp

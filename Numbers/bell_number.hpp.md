@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':question:'
@@ -10,13 +10,13 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy: []

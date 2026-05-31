@@ -6,6 +6,12 @@ data:
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
+    path: Tree/CentroidDS/DistanceSolver.hpp
+    title: Tree/CentroidDS/DistanceSolver.hpp
+  - icon: ':question:'
+    path: Tree/CentroidTree.hpp
+    title: Tree/CentroidTree.hpp
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
   - icon: ':question:'
@@ -14,10 +20,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':warning:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -33,15 +39,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+    title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+    title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
@@ -69,10 +81,12 @@ data:
   path: Algebra/ValidOperation.hpp
   requiredBy:
   - Tree/centroid_divide_and_conquer.hpp
+  - Tree/CentroidTree.hpp
   - Tree/Tree.hpp
   - Tree/HeavyLightDecomposition.hpp
   - Tree/all_direction_composition.hpp
   - Tree/TreeTools.hpp
+  - Tree/CentroidDS/DistanceSolver.hpp
   - Graph/UnifiedWeight.hpp
   timestamp: '2026-05-19 13:54:46+08:00'
   verificationStatus: LIBRARY_SOME_WA
@@ -80,11 +94,13 @@ data:
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - test/1_library_checker/tree/tree_diameter.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
+  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
 documentation_of: Algebra/ValidOperation.hpp
 layout: document
 redirect_from:

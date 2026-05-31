@@ -7,26 +7,26 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/Bostan_Mori.hpp\"\n   \n#line 2 \"Polynomial/Polynomial.hpp\"\
@@ -277,7 +277,7 @@ data:
   requiredBy:
   - Polynomial/linear_recursion.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: Polynomial/Bostan_Mori.hpp

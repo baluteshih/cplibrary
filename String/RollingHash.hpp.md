@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Misc/MultiInt.hpp
     title: Misc/MultiInt.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"String/RollingHash.hpp\"\n\n#line 2 \"Misc/MultiInt.hpp\"\
@@ -121,7 +121,7 @@ data:
   path: String/RollingHash.hpp
   requiredBy: []
   timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/string/longest_common_substring.test.cpp
 documentation_of: String/RollingHash.hpp
