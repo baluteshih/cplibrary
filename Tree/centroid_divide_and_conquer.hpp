@@ -39,7 +39,7 @@ std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullF
     auto dfs = [&](auto self, int u, int f, auto &g) -> void {
         if constexpr (useMerge) g.push_back(u);
         if constexpr (usePre) pre_func(u, f);
-        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
+        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
         for (auto [v, eid] : tree[u])
             if (!done[v] && v != f) {
                 self(self, v, u, g);
@@ -51,9 +51,9 @@ std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullF
         int mx = n + 1, c = 0;
         get_cent(get_cent, u, -1, mx, c, num);
         done[c] = 1, res[c] = f;
-        [[no_unique_address]] std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty> groups;
+        std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty> groups;
         if constexpr (usePre) pre_func(c, -1);
-        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
+        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
         for (auto [v, eid] : tree[c])
             if (!done[v]) {
                 if constexpr (useMerge) {
