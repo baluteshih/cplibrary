@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -214,27 +214,27 @@ data:
     \ sz[u]))\n            mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto\
     \ dfs = [&](auto self, int u, int f, auto &g) -> void {\n        if constexpr\
     \ (useMerge) g.push_back(u);\n        if constexpr (usePre) pre_func(u, f);\n\
-    \        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename\
-    \ _Tree::Empty> child;\n        for (auto [v, eid] : tree[u])\n            if\
-    \ (!done[v] && v != f) {\n                self(self, v, u, g);\n             \
-    \   if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
-    \ (usePost) post_func(u, child);\n    };\n    auto cut = [&](auto self, int u,\
-    \ int f, int num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent,\
-    \ u, -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        [[no_unique_address]]\
-    \ std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty>\
-    \ groups;\n        if constexpr (usePre) pre_func(c, -1);\n        [[no_unique_address]]\
-    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
-    \        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n        \
-    \        if constexpr (useMerge) {\n                    groups.emplace_back();\n\
-    \                    groups.back().reserve(sz[v] > sz[c] ? num - sz[c] : sz[v]);\n\
-    \                    dfs(dfs, v, c, groups.back());\n                }\n     \
-    \           else dfs(dfs, v, c, groups);\n                if constexpr (usePost)\
-    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(c,\
-    \ child);\n        if constexpr (useMerge) merge_func(c, groups);\n        for\
-    \ (auto [v, eid] : tree[c])\n            if (!done[v]) {\n                if (sz[v]\
-    \ > sz[c])\n                    self(self, v, c, num - sz[c]);\n             \
-    \   else\n                    self(self, v, c, sz[v]);\n            }\n      \
-    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n"
+    \        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty>\
+    \ child;\n        for (auto [v, eid] : tree[u])\n            if (!done[v] && v\
+    \ != f) {\n                self(self, v, u, g);\n                if constexpr\
+    \ (usePost) child.push_back(v);\n            }\n        if constexpr (usePost)\
+    \ post_func(u, child);\n    };\n    auto cut = [&](auto self, int u, int f, int\
+    \ num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent, u,\
+    \ -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        std::conditional_t<useMerge,\
+    \ std::vector<std::vector<int>>, typename _Tree::Empty> groups;\n        if constexpr\
+    \ (usePre) pre_func(c, -1);\n        std::conditional_t<usePost, std::vector<int>,\
+    \ typename _Tree::Empty> child;\n        for (auto [v, eid] : tree[c])\n     \
+    \       if (!done[v]) {\n                if constexpr (useMerge) {\n         \
+    \           groups.emplace_back();\n                    groups.back().reserve(sz[v]\
+    \ > sz[c] ? num - sz[c] : sz[v]);\n                    dfs(dfs, v, c, groups.back());\n\
+    \                }\n                else dfs(dfs, v, c, groups);\n           \
+    \     if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
+    \ (usePost) post_func(c, child);\n        if constexpr (useMerge) merge_func(c,\
+    \ groups);\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if (sz[v] > sz[c])\n                    self(self, v, c, num\
+    \ - sz[c]);\n                else\n                    self(self, v, c, sz[v]);\n\
+    \            }\n        done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return\
+    \ res;\n}\n"
   code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n\nstruct NullFunc {\n    constexpr\
     \ void operator()(auto&&...) const {}\n};\n\n/*\nmerge_func: void merge_func(int\
     \ c, std::vector<std::vector<int>> groups);\n    - c: the center, groups: subtrees\
@@ -257,27 +257,27 @@ data:
     \ sz[u]))\n            mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto\
     \ dfs = [&](auto self, int u, int f, auto &g) -> void {\n        if constexpr\
     \ (useMerge) g.push_back(u);\n        if constexpr (usePre) pre_func(u, f);\n\
-    \        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename\
-    \ _Tree::Empty> child;\n        for (auto [v, eid] : tree[u])\n            if\
-    \ (!done[v] && v != f) {\n                self(self, v, u, g);\n             \
-    \   if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
-    \ (usePost) post_func(u, child);\n    };\n    auto cut = [&](auto self, int u,\
-    \ int f, int num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent,\
-    \ u, -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        [[no_unique_address]]\
-    \ std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty>\
-    \ groups;\n        if constexpr (usePre) pre_func(c, -1);\n        [[no_unique_address]]\
-    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
-    \        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n        \
-    \        if constexpr (useMerge) {\n                    groups.emplace_back();\n\
-    \                    groups.back().reserve(sz[v] > sz[c] ? num - sz[c] : sz[v]);\n\
-    \                    dfs(dfs, v, c, groups.back());\n                }\n     \
-    \           else dfs(dfs, v, c, groups);\n                if constexpr (usePost)\
-    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(c,\
-    \ child);\n        if constexpr (useMerge) merge_func(c, groups);\n        for\
-    \ (auto [v, eid] : tree[c])\n            if (!done[v]) {\n                if (sz[v]\
-    \ > sz[c])\n                    self(self, v, c, num - sz[c]);\n             \
-    \   else\n                    self(self, v, c, sz[v]);\n            }\n      \
-    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n"
+    \        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty>\
+    \ child;\n        for (auto [v, eid] : tree[u])\n            if (!done[v] && v\
+    \ != f) {\n                self(self, v, u, g);\n                if constexpr\
+    \ (usePost) child.push_back(v);\n            }\n        if constexpr (usePost)\
+    \ post_func(u, child);\n    };\n    auto cut = [&](auto self, int u, int f, int\
+    \ num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent, u,\
+    \ -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        std::conditional_t<useMerge,\
+    \ std::vector<std::vector<int>>, typename _Tree::Empty> groups;\n        if constexpr\
+    \ (usePre) pre_func(c, -1);\n        std::conditional_t<usePost, std::vector<int>,\
+    \ typename _Tree::Empty> child;\n        for (auto [v, eid] : tree[c])\n     \
+    \       if (!done[v]) {\n                if constexpr (useMerge) {\n         \
+    \           groups.emplace_back();\n                    groups.back().reserve(sz[v]\
+    \ > sz[c] ? num - sz[c] : sz[v]);\n                    dfs(dfs, v, c, groups.back());\n\
+    \                }\n                else dfs(dfs, v, c, groups);\n           \
+    \     if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
+    \ (usePost) post_func(c, child);\n        if constexpr (useMerge) merge_func(c,\
+    \ groups);\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if (sz[v] > sz[c])\n                    self(self, v, c, num\
+    \ - sz[c]);\n                else\n                    self(self, v, c, sz[v]);\n\
+    \            }\n        done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return\
+    \ res;\n}\n"
   dependsOn:
   - Tree/Tree.hpp
   - Graph/base.hpp
@@ -288,8 +288,8 @@ data:
   requiredBy:
   - Tree/CentroidTree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
-  timestamp: '2026-05-31 14:29:47+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-05-31 14:44:55+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

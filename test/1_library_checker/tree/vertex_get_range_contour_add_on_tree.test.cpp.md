@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
     title: DataStructure/BIT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree
@@ -253,34 +253,33 @@ data:
     \ sz[u]))\n            mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto\
     \ dfs = [&](auto self, int u, int f, auto &g) -> void {\n        if constexpr\
     \ (useMerge) g.push_back(u);\n        if constexpr (usePre) pre_func(u, f);\n\
-    \        [[no_unique_address]] std::conditional_t<usePost, std::vector<int>, typename\
-    \ _Tree::Empty> child;\n        for (auto [v, eid] : tree[u])\n            if\
-    \ (!done[v] && v != f) {\n                self(self, v, u, g);\n             \
-    \   if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
-    \ (usePost) post_func(u, child);\n    };\n    auto cut = [&](auto self, int u,\
-    \ int f, int num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent,\
-    \ u, -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        [[no_unique_address]]\
-    \ std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty>\
-    \ groups;\n        if constexpr (usePre) pre_func(c, -1);\n        [[no_unique_address]]\
-    \ std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;\n\
-    \        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n        \
-    \        if constexpr (useMerge) {\n                    groups.emplace_back();\n\
-    \                    groups.back().reserve(sz[v] > sz[c] ? num - sz[c] : sz[v]);\n\
-    \                    dfs(dfs, v, c, groups.back());\n                }\n     \
-    \           else dfs(dfs, v, c, groups);\n                if constexpr (usePost)\
-    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(c,\
-    \ child);\n        if constexpr (useMerge) merge_func(c, groups);\n        for\
-    \ (auto [v, eid] : tree[c])\n            if (!done[v]) {\n                if (sz[v]\
-    \ > sz[c])\n                    self(self, v, c, num - sz[c]);\n             \
-    \   else\n                    self(self, v, c, sz[v]);\n            }\n      \
-    \  done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return res;\n}\n#line 5\
-    \ \"Tree/CentroidTree.hpp\"\n\ntemplate<typename Edge = void, typename Vertex\
-    \ = void>\nclass CentroidTree : public Tree<Edge, Vertex> {\npublic:\n    std::vector<int>\
-    \ c_pa;\n    using super = Tree<Edge, Vertex>;\n    CentroidTree(int n): super(n)\
-    \ {} \n    CentroidTree(const super &tree): super(tree) {}\n    template<typename\
-    \ F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc>\n\
-    \    void build(F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{},\
-    \ F_Post post_func = NullFunc{}) {\n        c_pa = centroid_divide_and_conquer(*this,\
+    \        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty>\
+    \ child;\n        for (auto [v, eid] : tree[u])\n            if (!done[v] && v\
+    \ != f) {\n                self(self, v, u, g);\n                if constexpr\
+    \ (usePost) child.push_back(v);\n            }\n        if constexpr (usePost)\
+    \ post_func(u, child);\n    };\n    auto cut = [&](auto self, int u, int f, int\
+    \ num) -> void {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent, u,\
+    \ -1, mx, c, num);\n        done[c] = 1, res[c] = f;\n        std::conditional_t<useMerge,\
+    \ std::vector<std::vector<int>>, typename _Tree::Empty> groups;\n        if constexpr\
+    \ (usePre) pre_func(c, -1);\n        std::conditional_t<usePost, std::vector<int>,\
+    \ typename _Tree::Empty> child;\n        for (auto [v, eid] : tree[c])\n     \
+    \       if (!done[v]) {\n                if constexpr (useMerge) {\n         \
+    \           groups.emplace_back();\n                    groups.back().reserve(sz[v]\
+    \ > sz[c] ? num - sz[c] : sz[v]);\n                    dfs(dfs, v, c, groups.back());\n\
+    \                }\n                else dfs(dfs, v, c, groups);\n           \
+    \     if constexpr (usePost) child.push_back(v);\n            }\n        if constexpr\
+    \ (usePost) post_func(c, child);\n        if constexpr (useMerge) merge_func(c,\
+    \ groups);\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if (sz[v] > sz[c])\n                    self(self, v, c, num\
+    \ - sz[c]);\n                else\n                    self(self, v, c, sz[v]);\n\
+    \            }\n        done[c] = 0;\n    };\n    cut(cut, 0, -1, n);\n    return\
+    \ res;\n}\n#line 5 \"Tree/CentroidTree.hpp\"\n\ntemplate<typename Edge = void,\
+    \ typename Vertex = void>\nclass CentroidTree : public Tree<Edge, Vertex> {\n\
+    public:\n    std::vector<int> c_pa;\n    using super = Tree<Edge, Vertex>;\n \
+    \   CentroidTree(int n): super(n) {} \n    CentroidTree(const super &tree): super(tree)\
+    \ {}\n    template<typename F_Pre = NullFunc, typename F_Merge = NullFunc, typename\
+    \ F_Post = NullFunc>\n    void build(F_Pre pre_func = NullFunc{}, F_Merge merge_func\
+    \ = NullFunc{}, F_Post post_func = NullFunc{}) {\n        c_pa = centroid_divide_and_conquer(*this,\
     \ pre_func, merge_func, post_func);\n    }\n    /*\n    action(c, prev_c)\n  \
     \      - c: current centorid\n        - prev_c: previous centroid, -1 if none\n\
     \    */\n    void climb(int u, auto action) const {\n        int c = u, prev_c\
@@ -372,8 +371,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-05-31 14:29:47+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-05-31 14:44:55+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
 layout: document
