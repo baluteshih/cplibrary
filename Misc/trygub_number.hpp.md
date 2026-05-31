@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/blog/entry/115626
@@ -37,7 +37,7 @@ data:
   path: Misc/trygub_number.hpp
   requiredBy: []
   timestamp: '2026-05-04 15:02:52+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/7_loj/2302.test.cpp
 documentation_of: Misc/trygub_number.hpp

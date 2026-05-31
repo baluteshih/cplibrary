@@ -1,12 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: Flow/Dinic.hpp
-    title: Flow/Dinic.hpp
-  - icon: ':heavy_check_mark:'
-    path: Flow/bounded_flow.hpp
-    title: Flow/bounded_flow.hpp
+  - icon: ':question:'
+    path: Flow/min_cost_max_flow.hpp
+    title: Flow/min_cost_max_flow.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
@@ -15,22 +12,22 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     IGNORE: ''
     IGNORE_IF_GCC: ''
     links:
-    - https://loj.ac/p/117
-  bundledCode: "#line 1 \"test/7_loj/min_bounded_flow.test.cpp\"\n#define PROBLEM\
-    \ \"https://loj.ac/p/117\"\n#define IGNORE\n#line 2 \"default_code.hpp\"\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef pair<int,\
-    \ int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n#define\
-    \ SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class A,\
-    \ class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os <<\
-    \ \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
+    - https://loj.ac/p/102
+  bundledCode: "#line 1 \"test/7_loj/min_cost_max_flow.test.cpp\"\n#define PROBLEM\
+    \ \"https://loj.ac/p/102\"\n#define IGNORE\n\n#line 2 \"default_code.hpp\"\n\n\
+    #include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
+    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
+    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
+    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
+    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
     \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
     \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
     \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
@@ -54,8 +51,7 @@ data:
     \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
     \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
     \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 4 \"test/7_loj/min_bounded_flow.test.cpp\"\n\n#line 2\
-    \ \"Flow/bounded_flow.hpp\"\n\n#line 2 \"Flow/Dinic.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
+    \ vals.end());\n}\n#line 2 \"Flow/min_cost_max_flow.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
     \n\ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
     class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
@@ -134,101 +130,69 @@ data:
     \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
     \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
     \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Flow/Dinic.hpp\"\n\ntemplate<typename T>\nstruct FlowWeight {\n    T\
-    \ cap, flow;\n    FlowWeight() : cap(0), flow(0) {}\n    FlowWeight(T c, T f =\
-    \ 0) : cap(c), flow(f) {}\n    friend ostream& operator<<(ostream& os, const FlowWeight\
-    \ &v) {\n        os << \"[\" << v.cap << \", \" << v.flow << \"]\";\n        return\
-    \ os;\n    }\n};\n\ntemplate<class T>\nclass Dinic : public Graph<true, FlowWeight<T>,\
-    \ void> { // 0-base\npublic:\n    using super = Graph<true, FlowWeight<T>, void>;\n\
-    \    std::vector<int> dis, cur;\n    T dfs(int u, T push_cap, int t) {\n     \
-    \   if (u == t || push_cap == 0) return push_cap;\n        for (int &i = cur[u];\
-    \ i < std::ssize(this->G[u]); ++i) {\n            auto [v, eid] = this->G[u][i];\n\
-    \            auto &w = this->edges[eid].weight;\n            if (dis[v] == dis[u]\
-    \ + 1 && w.cap > w.flow) {\n                T df = dfs(v, std::min(w.cap - w.flow,\
-    \ push_cap), t);\n                if (df > T(0)) {\n                    w.flow\
-    \ += df;\n                    this->edges[eid ^ 1].weight.flow -= df;\n      \
-    \              return df;\n                }\n            }\n        }\n     \
-    \   dis[u] = -1;\n        return 0;\n    }\n    bool bfs(int s, int t) {\n   \
-    \     std::ranges::fill(dis, -1);\n        std::queue<int> q;\n        q.push(s);\n\
-    \        dis[s] = 0;\n        while (!q.empty()) {\n            int u = q.front();\n\
-    \            q.pop();\n            for (auto [v, eid] : this->G[u]) {\n      \
-    \          auto &w = this->edges[eid].weight;\n                if (dis[v] == -1\
-    \ && w.cap > w.flow) {\n                    dis[v] = dis[u] + 1;\n           \
-    \         q.push(v);\n                }\n            }\n        }\n        return\
-    \ dis[t] != -1;\n    }\n    Dinic(int _n) : super(_n), dis(_n), cur(_n) {}\n \
-    \   void add_edge(int u, int v, T cap) {\n        super::add_edge(u, v, FlowWeight<T>(cap,\
-    \ 0));\n        super::add_edge(v, u, FlowWeight<T>(0, 0));\n    }\n    T maxflow(int\
-    \ s, int t) {\n        T flow = 0, df;\n        while (bfs(s, t)) {\n        \
-    \    std::ranges::fill(cur, 0);\n            while ((df = dfs(s, std::numeric_limits<T>::max(),\
-    \ t)) > 0)\n                flow += df;\n        }\n        return flow;\n   \
-    \ }\n    std::vector<std::pair<T, std::vector<int>>> get_route(int s, int t) {\n\
-    \        std::vector<std::pair<T, std::vector<int>>> res;\n        auto backup_edges\
-    \ = this->edges; \n        for (auto &e : this->edges) {\n            if (e.weight.cap\
-    \ > 0) e.weight.cap = e.weight.flow;\n            e.weight.flow = 0;\n       \
-    \ }\n\n        std::vector<int> stk;\n        auto route = [&](auto self, int\
-    \ u, T push_cap) -> T {\n            if (u == t || push_cap == 0) {\n        \
-    \        if (push_cap > 0) stk.push_back(u);\n                return push_cap;\n\
-    \            }\n            for (int &i = cur[u]; i < std::ssize(this->G[u]);\
-    \ ++i) {\n                auto [v, eid] = this->G[u][i];\n                auto\
-    \ &w = this->edges[eid].weight;\n                if (dis[v] == dis[u] + 1 && w.cap\
-    \ > w.flow) {\n                    T df = self(self, v, std::min(w.cap - w.flow,\
-    \ push_cap));\n                    if (df > 0) {\n                        w.flow\
-    \ += df;\n                        stk.push_back(u);\n                        return\
-    \ df;\n                    }\n                }\n            }\n            dis[u]\
-    \ = -1;\n            return 0;\n        };\n\n        while (bfs(s, t)) {\n  \
-    \          std::ranges::fill(cur, 0);\n            T df;\n            while ((df\
-    \ = route(route, s, std::numeric_limits<T>::max())) > 0) {\n                std::ranges::reverse(stk);\n\
-    \                res.emplace_back(df, stk);\n                stk.clear();\n  \
-    \          }\n        }\n        \n        this->edges = std::move(backup_edges);\
-    \ \n        return res;\n    }\n    void reset() {\n        for (auto &e : this->edges)\
-    \ e.weight.flow = 0;\n    }\n    T get_flow(int s) {\n        T res = T();\n \
-    \       for (auto [v, eid] : this->G[s])\n            res += this->edges[eid].weight.flow;\n\
-    \        return res;\n    }\n};\n#line 4 \"Flow/bounded_flow.hpp\"\n\ntemplate<class\
-    \ T>\nclass bounded_flow : public Dinic<T> { // 0-base\npublic:\n    using super\
-    \ = Dinic<T>;\n    int real_n;\n    std::vector<T> cnt;\n    bounded_flow(int\
-    \ _n) : super(_n + 2), real_n(_n), cnt(real_n + 2) {}\n    void add_edge(int u,\
-    \ int v, T lcap, T rcap) {\n        cnt[u] -= lcap, cnt[v] += lcap;\n        super::super::add_edge(u,\
-    \ v, FlowWeight<T>(rcap, lcap));\n        super::super::add_edge(v, u, FlowWeight<T>(0,\
-    \ 0));\n    }\n    bool solve() {\n        T sum = 0;\n        int added_cnt =\
-    \ 0;\n        bool res = true;\n        for (int i = 0; i < real_n; ++i)\n   \
-    \         if (cnt[i] > 0)\n                super::add_edge(real_n, i, cnt[i]),\
-    \ sum += cnt[i], ++added_cnt;\n            else if (cnt[i] < 0)\n            \
-    \    super::add_edge(i, real_n + 1, -cnt[i]), ++added_cnt;\n        if (sum !=\
-    \ this->maxflow(real_n, real_n + 1)) res = false;\n        while (added_cnt--)\
-    \ this->pop_edge(), this->pop_edge();\n        return res;\n    }\n    bool solve(int\
-    \ s, int t) {\n        super::add_edge(t, s, std::numeric_limits<T>::max());\n\
-    \        bool res = solve();\n        this->pop_edge(), this->pop_edge();\n  \
-    \      return res;\n    }\n};\n#line 6 \"test/7_loj/min_bounded_flow.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m, s, t;\n\
-    \    cin >> n >> m >> s >> t;\n    --s, --t;\n    bounded_flow<ll> flow(n);\n\
-    \    for (int i = 0; i < m; ++i) {\n        int u, v, l, r;\n        cin >> u\
-    \ >> v >> l >> r;\n        --u, --v;\n        flow.add_edge(u, v, l, r);\n   \
-    \ }\n    if (!flow.solve(s, t)) cout << \"please go home to sleep\\n\";\n    else\
-    \ {\n        flow.maxflow(t, s);\n        cout << flow.get_flow(s) << \"\\n\"\
-    ;\n    }\n}\n"
-  code: "#define PROBLEM \"https://loj.ac/p/117\"\n#define IGNORE\n#include \"default_code.hpp\"\
-    \n\n#include \"Flow/bounded_flow.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, m, s, t;\n    cin >> n >> m >> s >> t;\n    --s, --t;\n\
-    \    bounded_flow<ll> flow(n);\n    for (int i = 0; i < m; ++i) {\n        int\
-    \ u, v, l, r;\n        cin >> u >> v >> l >> r;\n        --u, --v;\n        flow.add_edge(u,\
-    \ v, l, r);\n    }\n    if (!flow.solve(s, t)) cout << \"please go home to sleep\\\
-    n\";\n    else {\n        flow.maxflow(t, s);\n        cout << flow.get_flow(s)\
-    \ << \"\\n\";\n    }\n}\n"
+    #line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename T, typename C = T>\n\
+    struct CostFlowWeight {\n    T cap;\n    C cost;\n    T flow;\n    CostFlowWeight()\
+    \ : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T c, C w, T f = 0) : cap(c),\
+    \ cost(w), flow(f) {}\n    friend ostream& operator<<(ostream& os, const CostFlowWeight\
+    \ &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \", \" << v.flow\
+    \ << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T, typename C\
+    \ = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T, C>, void>\
+    \ { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T, C>, void>;\n\
+    \    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
+    \ up;\n    template<bool bellmanford = true>\n    bool shortest_path(int s, int\
+    \ t) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
+    \ std::numeric_limits<C>::max());\n        std::conditional_t<bellmanford, std::queue<int>,\
+    \ std::priority_queue<std::pair<C, int>, std::vector<std::pair<C, int>>, std::greater<std::pair<C,\
+    \ int>>>> q;\n        auto relax = [&](int u, C d, T cap, int eid) {\n       \
+    \     if (cap > 0 && dis[u] > d) {\n                dis[u] = d, up[u] = cap, past[u]\
+    \ = eid;\n                if constexpr (!bellmanford) q.emplace(dis[u], u);\n\
+    \                else if (!inq[u]) inq[u] = 1, q.push(u);\n            }\n   \
+    \     };\n        relax(s, 0, std::numeric_limits<T>::max(), -1);\n        while\
+    \ (!q.empty()) {\n            C d;\n            int u;\n            if constexpr\
+    \ (bellmanford) u = q.front();\n            else std::tie(d, u) = q.top();\n \
+    \           q.pop();\n            if constexpr (bellmanford) inq[u] = 0;\n   \
+    \         else if (dis[u] != d) continue;\n            for (auto [v, eid] : this->G[u])\
+    \ {\n                auto &w = this->edges[eid].weight;\n                C d2\
+    \ = dis[u] + w.cost + pot[u] - pot[v];\n                relax(v, d2, std::min(up[u],\
+    \ w.cap - w.flow), eid);\n            }\n        }\n        return dis[t] != std::numeric_limits<C>::max();\n\
+    \    }\n    min_cost_max_flow(int _n) : super(_n), past(_n), dis(_n), pot(_n),\
+    \ up(_n) {} \n    template<bool bellmanford = true, bool neg = true>\n    std::pair<T,\
+    \ C> solve(int s, int t) {\n        T flow = 0;\n        C cost = 0;\n       \
+    \ if constexpr (neg) shortest_path<true>(s, t), dis = pot;\n        for (; shortest_path<bellmanford>(s,\
+    \ t); dis = pot) {\n            for (int i = 0; i < this->n(); ++i) dis[i] +=\
+    \ pot[i] - pot[s];\n            flow += up[t], cost += dis[t] * up[t];\n     \
+    \       for (int i = t; past[i] != -1; i = this->edges[past[i]].from) {\n    \
+    \            this->edges[past[i]].weight.flow += up[t];\n                this->edges[past[i]\
+    \ ^ 1].weight.flow -= up[t];\n            }\n        }\n        return std::make_pair(flow,\
+    \ cost);\n    }\n    void add_edge(int a, int b, T cap, C cost) {\n        super::add_edge(a,\
+    \ b, CostFlowWeight(cap, cost, T(0)));\n        super::add_edge(b, a, CostFlowWeight(T(0),\
+    \ -cost, T(0)));\n    }\n};\n#line 6 \"test/7_loj/min_cost_max_flow.test.cpp\"\
+    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
+    \  cin >> n >> m;\n    min_cost_max_flow<int, ll> mcmf(n);\n\n    while (m--)\
+    \ {\n        int u, v, c, d;\n        cin >> u >> v >> c >> d;\n        --u, --v;\n\
+    \        mcmf.add_edge(u, v, c, d);\n    }\n\n    auto [flow, cost] = mcmf.solve<true>(0,\
+    \ n - 1);\n    cout << flow << \" \" << cost << \"\\n\";\n}\n"
+  code: "#define PROBLEM \"https://loj.ac/p/102\"\n#define IGNORE\n\n#include \"default_code.hpp\"\
+    \n#include \"Flow/min_cost_max_flow.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
+    \ cin.tie(0);\n    int n, m;\n    cin >> n >> m;\n    min_cost_max_flow<int, ll>\
+    \ mcmf(n);\n\n    while (m--) {\n        int u, v, c, d;\n        cin >> u >>\
+    \ v >> c >> d;\n        --u, --v;\n        mcmf.add_edge(u, v, c, d);\n    }\n\
+    \n    auto [flow, cost] = mcmf.solve<true>(0, n - 1);\n    cout << flow << \"\
+    \ \" << cost << \"\\n\";\n}\n"
   dependsOn:
   - default_code.hpp
-  - Flow/bounded_flow.hpp
-  - Flow/Dinic.hpp
+  - Flow/min_cost_max_flow.hpp
   - Graph/base.hpp
   isVerificationFile: true
-  path: test/7_loj/min_bounded_flow.test.cpp
+  path: test/7_loj/min_cost_max_flow.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-05-31 20:50:19+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/7_loj/min_bounded_flow.test.cpp
+documentation_of: test/7_loj/min_cost_max_flow.test.cpp
 layout: document
 redirect_from:
-- /verify/test/7_loj/min_bounded_flow.test.cpp
-- /verify/test/7_loj/min_bounded_flow.test.cpp.html
-title: test/7_loj/min_bounded_flow.test.cpp
+- /verify/test/7_loj/min_cost_max_flow.test.cpp
+- /verify/test/7_loj/min_cost_max_flow.test.cpp.html
+title: test/7_loj/min_cost_max_flow.test.cpp
 ---

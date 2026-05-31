@@ -387,49 +387,52 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
   - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/maxflow.test.cpp
     title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
   - icon: ':x:'
+    path: test/7_loj/min_cost_max_flow.test.cpp
+    title: test/7_loj/min_cost_max_flow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
   _isVerificationFailed: true
@@ -508,6 +511,7 @@ data:
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
+  - test/7_loj/min_cost_max_flow.test.cpp
   - test/7_loj/maxflow.test.cpp
   - test/7_loj/bounded_flow.test.cpp
   - test/7_loj/2302.test.cpp

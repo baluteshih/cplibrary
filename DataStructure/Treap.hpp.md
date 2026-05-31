@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: DataStructure/DefaultAllocator.hpp
   _extendedRequiredBy: []
@@ -21,18 +21,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
@@ -611,7 +611,7 @@ data:
   path: DataStructure/Treap.hpp
   requiredBy: []
   timestamp: '2026-05-23 21:25:29+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp

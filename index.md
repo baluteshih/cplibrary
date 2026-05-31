@@ -12,7 +12,7 @@ data:
     - icon: ':warning:'
       path: Algebra/min_plus.hpp
       title: Algebra/min_plus.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/size_value.hpp
       title: Algebra/size_value.hpp
   - name: Convolution
@@ -34,7 +34,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: DataStructure/CatTree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/DefaultAllocator.hpp
       title: DataStructure/DefaultAllocator.hpp
     - icon: ':heavy_check_mark:'
@@ -46,7 +46,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PointerSegmentTree.hpp
       title: DataStructure/PointerSegmentTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PoolAllocator.hpp
       title: DataStructure/PoolAllocator.hpp
     - icon: ':heavy_check_mark:'
@@ -67,7 +67,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagQueue.hpp
       title: DataStructure/SwagQueue.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Treap.hpp
       title: DataStructure/Treap.hpp
     - icon: ':heavy_check_mark:'
@@ -75,13 +75,13 @@ data:
       title: DataStructure/ZkwSegmentTree.hpp
   - name: Flow
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
     - icon: ':heavy_check_mark:'
@@ -90,7 +90,7 @@ data:
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -116,7 +116,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/closest_pair.hpp
       title: Geometry/closest_pair.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/convex.hpp
       title: Geometry/convex.hpp
     - icon: ':heavy_check_mark:'
@@ -140,7 +140,7 @@ data:
     - icon: ':question:'
       path: Geometry/polygon.hpp
       title: Geometry/polygon.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/rotating_sweepline.hpp
       title: Geometry/rotating_sweepline.hpp
   - name: Graph
@@ -209,13 +209,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/bigint.hpp
       title: Misc/bigint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Misc/cyc_bitonic_search.hpp
       title: Misc/cyc_bitonic_search.hpp
     - icon: ':heavy_check_mark:'
       path: Misc/i128.hpp
       title: Misc/i128.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Misc/trygub_number.hpp
       title: Misc/trygub_number.hpp
   - name: Numbers
@@ -237,7 +237,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/DynamicModint.hpp
       title: Numeric/DynamicModint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -246,7 +246,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -781,24 +781,24 @@ data:
       title: test/3_qoj/6445.test.cpp
   - name: test/4_codeforces
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/4_codeforces/101242J.test.cpp
       title: test/4_codeforces/101242J.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/4_codeforces/101673A.test.cpp
       title: test/4_codeforces/101673A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/4_codeforces/104114B.test.cpp
       title: test/4_codeforces/104114B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/4_codeforces/106033E.test.cpp
       title: test/4_codeforces/106033E.test.cpp
   - name: test/5_NCOJ
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/5_NCOJ/123.test.cpp
       title: test/5_NCOJ/123.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/5_NCOJ/929.test.cpp
       title: test/5_NCOJ/929.test.cpp
   - name: test/6_TIOJ
@@ -808,30 +808,33 @@ data:
       title: test/6_TIOJ/1503.test.cpp
   - name: test/7_loj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/2302.test.cpp
       title: test/7_loj/2302.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/bounded_flow.test.cpp
       title: test/7_loj/bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/max_bounded_flow.test.cpp
       title: test/7_loj/max_bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/maxflow.test.cpp
       title: test/7_loj/maxflow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/min_bounded_flow.test.cpp
       title: test/7_loj/min_bounded_flow.test.cpp
+    - icon: ':x:'
+      path: test/7_loj/min_cost_max_flow.test.cpp
+      title: test/7_loj/min_cost_max_flow.test.cpp
   - name: test/8_luogu
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P3835.test.cpp
       title: test/8_luogu/P3835.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P3835_pool.test.cpp
       title: test/8_luogu/P3835_pool.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P5055.test.cpp
       title: test/8_luogu/P5055.test.cpp
 layout: toppage

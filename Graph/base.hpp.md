@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
   - icon: ':heavy_check_mark:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: Flow/min_cost_circulation_old.hpp
     title: Flow/min_cost_circulation_old.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -162,21 +162,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/maxflow.test.cpp
     title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
+  - icon: ':x:'
+    path: test/7_loj/min_cost_max_flow.test.cpp
+    title: test/7_loj/min_cost_max_flow.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -372,6 +375,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/7_loj/max_bounded_flow.test.cpp
+  - test/7_loj/min_cost_max_flow.test.cpp
   - test/7_loj/maxflow.test.cpp
   - test/7_loj/bounded_flow.test.cpp
   - test/7_loj/min_bounded_flow.test.cpp

@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PointerSegmentTree.hpp
     title: DataStructure/PointerSegmentTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: DataStructure/Treap.hpp
   _extendedVerifiedWith:
@@ -39,18 +39,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
@@ -67,7 +67,7 @@ data:
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/Treap.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
