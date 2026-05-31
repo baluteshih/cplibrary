@@ -90,7 +90,7 @@ data:
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -169,7 +169,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -823,7 +823,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/7_loj/min_bounded_flow.test.cpp
       title: test/7_loj/min_bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/min_cost_max_flow.test.cpp
       title: test/7_loj/min_cost_max_flow.test.cpp
   - name: test/8_luogu

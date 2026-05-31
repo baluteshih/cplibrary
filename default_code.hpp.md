@@ -423,7 +423,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_cost_max_flow.test.cpp
     title: test/7_loj/min_cost_max_flow.test.cpp
   - icon: ':heavy_check_mark:'
