@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
   - icon: ':x:'

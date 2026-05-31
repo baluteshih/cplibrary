@@ -95,7 +95,7 @@ data:
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/Point3D.hpp
       title: Geometry/Point3D.hpp
     - icon: ':heavy_check_mark:'
@@ -104,7 +104,7 @@ data:
     - icon: ':question:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/centers.hpp
       title: Geometry/centers.hpp
     - icon: ':question:'
@@ -119,19 +119,19 @@ data:
     - icon: ':question:'
       path: Geometry/convex.hpp
       title: Geometry/convex.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/convexHull3D.hpp
       title: Geometry/convexHull3D.hpp
     - icon: ':heavy_check_mark:'
       path: Geometry/furthest_pair.hpp
       title: Geometry/furthest_pair.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/half_plane_intersection.hpp
       title: Geometry/half_plane_intersection.hpp
     - icon: ':question:'
       path: Geometry/line.hpp
       title: Geometry/line.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/minimum_enclosing_circle.hpp
       title: Geometry/minimum_enclosing_circle.hpp
     - icon: ':heavy_check_mark:'
@@ -770,13 +770,13 @@ data:
       title: test/2_aoj/type_of_circle.test.cpp
   - name: test/3_qoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/3_qoj/17153.test.cpp
       title: test/3_qoj/17153.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/3_qoj/2162.test.cpp
       title: test/3_qoj/2162.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/3_qoj/6445.test.cpp
       title: test/3_qoj/6445.test.cpp
   - name: test/4_codeforces
