@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
     title: DataStructure/OrderedSet.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

@@ -405,7 +405,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
   - icon: ':heavy_check_mark:'
@@ -435,9 +435,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
@@ -505,7 +505,7 @@ data:
   path: default_code.hpp
   requiredBy: []
   timestamp: '2026-02-27 19:30:58+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp

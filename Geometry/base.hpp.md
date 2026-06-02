@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
@@ -32,7 +32,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   - icon: ':heavy_check_mark:'
@@ -41,7 +41,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   - icon: ':heavy_check_mark:'
@@ -147,12 +147,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing\
@@ -327,7 +327,7 @@ data:
   - Geometry/centers.hpp
   - Geometry/convexHull3D.hpp
   timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/5_NCOJ/929.test.cpp
   - test/5_NCOJ/123.test.cpp

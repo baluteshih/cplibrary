@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: DataStructure/Treap.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

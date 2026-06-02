@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
@@ -235,12 +235,12 @@ data:
     \n\ntemplate<int C = 1, typename T = modint998244353>\nstd::vector<T> convolution(std::vector<T>\
     \ a, std::vector<T> b) {\n    static_assert(1 <= C && C <= 3, \"NTT convolution\
     \ must use 1, 2, or 3 primes.\");\n    if (a.empty() || b.empty()) return std::vector<T>();\n\
-    \n    if constexpr (std::derived_from<T, internal::modint_base>) {\n        int\
-    \ sz = a.size() + b.size() - 1;\n        if (std::bit_ceil((unsigned int)sz) <=\
-    \ NTT<T>::ntt_max_limit)\n            return NTT<T>::convolution(a, b);\n    }\n\
-    \    \n    static constexpr int p0 = 167772161;\n    static constexpr int p1 =\
-    \ 469762049;\n    static constexpr int p2 = 754974721;\n\n    auto get_val = [](const\
-    \ T& x) {\n        if constexpr (std::derived_from<T, internal::modint_base>)\
+    \n    if constexpr (std::derived_from<T, internal::static_modint_base>) {\n  \
+    \      int sz = a.size() + b.size() - 1;\n        if (std::bit_ceil((unsigned\
+    \ int)sz) <= NTT<T>::ntt_max_limit)\n            return NTT<T>::convolution(a,\
+    \ b);\n    }\n    \n    static constexpr int p0 = 167772161;\n    static constexpr\
+    \ int p1 = 469762049;\n    static constexpr int p2 = 754974721;\n\n    auto get_val\
+    \ = [](const T& x) {\n        if constexpr (std::derived_from<T, internal::modint_base>)\
     \ return x.val();\n        else return x;\n    };\n\n    auto do_ntt = [&](auto\
     \ P_tag) {\n        constexpr int P = decltype(P_tag)::value;\n        using mint\
     \ = static_modint<P>;\n        std::vector<mint> a_mint(a.size()), b_mint(b.size());\n\
@@ -286,7 +286,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-02 13:54:51+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp

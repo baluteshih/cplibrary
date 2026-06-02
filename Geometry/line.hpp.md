@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   _extendedVerifiedWith:
@@ -117,12 +117,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/line.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n \
@@ -346,7 +346,7 @@ data:
   - Geometry/half_plane_intersection.hpp
   - Geometry/centers.hpp
   timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/convex_cut.test.cpp

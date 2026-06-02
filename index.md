@@ -101,16 +101,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/PointInAngle.hpp
       title: Geometry/PointInAngle.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
     - icon: ':heavy_check_mark:'
       path: Geometry/centers.hpp
       title: Geometry/centers.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/circle.hpp
       title: Geometry/circle.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/circle_cover.hpp
       title: Geometry/circle_cover.hpp
     - icon: ':heavy_check_mark:'
@@ -128,7 +128,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/half_plane_intersection.hpp
       title: Geometry/half_plane_intersection.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/line.hpp
       title: Geometry/line.hpp
     - icon: ':heavy_check_mark:'
@@ -137,7 +137,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/outerTangentBetweenConvex.hpp
       title: Geometry/outerTangentBetweenConvex.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/polygon.hpp
       title: Geometry/polygon.hpp
     - icon: ':heavy_check_mark:'
@@ -348,7 +348,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: default_code.hpp
       title: default_code.hpp
   - name: template
@@ -803,7 +803,7 @@ data:
       title: test/5_NCOJ/929.test.cpp
   - name: test/6_TIOJ
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/6_TIOJ/1503.test.cpp
       title: test/6_TIOJ/1503.test.cpp
   - name: test/7_loj

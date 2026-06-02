@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
