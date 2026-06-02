@@ -133,6 +133,7 @@
 "test/4_codeforces/106033E.test.cpp": "2026-05-19 02:16:25 +0800",
 "test/5_NCOJ/123.test.cpp": "2026-05-04 02:28:30 +0800",
 "test/5_NCOJ/929.test.cpp": "2026-05-29 21:39:52 +0800",
+"test/6_TIOJ/1503.test.cpp": "2026-06-02 14:27:04 +0800",
 "test/7_loj/2302.test.cpp": "2026-05-04 15:02:52 +0800",
 "test/7_loj/bounded_flow.test.cpp": "2026-05-19 02:16:25 +0800",
 "test/7_loj/max_bounded_flow.test.cpp": "2026-05-19 02:16:25 +0800",
