@@ -9,7 +9,7 @@ std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
     static_assert(1 <= C && C <= 3, "NTT convolution must use 1, 2, or 3 primes.");
     if (a.empty() || b.empty()) return std::vector<T>();
 
-    if constexpr (std::derived_from<T, internal::modint_base>) {
+    if constexpr (std::derived_from<T, internal::static_modint_base>) {
         int sz = a.size() + b.size() - 1;
         if (std::bit_ceil((unsigned int)sz) <= NTT<T>::ntt_max_limit)
             return NTT<T>::convolution(a, b);
