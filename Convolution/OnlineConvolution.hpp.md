@@ -10,116 +10,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: Convolution/OnlineConvolution.hpp
-    title: Convolution/OnlineConvolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: Convolution/convolution.hpp
-    title: Convolution/convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: Misc/bigint.hpp
-    title: Misc/bigint.hpp
-  - icon: ':heavy_check_mark:'
-    path: Numbers/bell_number.hpp
-    title: Numbers/bell_number.hpp
-  - icon: ':heavy_check_mark:'
-    path: Numbers/partition_number.hpp
-    title: Numbers/partition_number.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/Bostan_Mori.hpp
-    title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/Polynomial.hpp
-    title: Polynomial/Polynomial.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/Sqrt.hpp
-    title: Polynomial/Sqrt.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/interpolate.hpp
-    title: Polynomial/interpolate.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/lagrange_interpolate_iota.hpp
-    title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/linear_recursion.hpp
-    title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
-    path: Polynomial/shift.hpp
-    title: Polynomial/shift.hpp
+    path: Polynomial/NTT.hpp
+    title: Polynomial/NTT.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/biginteger/addition.test.cpp
-    title: test/1_library_checker/biginteger/addition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/biginteger/multiplication.test.cpp
-    title: test/1_library_checker/biginteger/multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/convolution.test.cpp
-    title: test/1_library_checker/convolution/convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
-    title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/convolution_online.test.cpp
     title: test/1_library_checker/convolution/convolution_online.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-    title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-    title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-    title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-    title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-    title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\
-    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line 2\
-    \ \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
-    \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
-    \ x += m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x,\
-    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    links:
+    - https://maspypy.github.io/library/poly/online/online_convolution.hpp
+  bundledCode: "#line 2 \"Convolution/OnlineConvolution.hpp\"\n\n// source: https://maspypy.github.io/library/poly/online/online_convolution.hpp\n\
+    \n#line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference:\
+    \ Atcoder Library https://github.com/atcoder/ac-library\n#line 2 \"Numeric/internal_math.hpp\"\
+    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
+    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long\
+    \ long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x +=\
+    \ m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x, long\
+    \ long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
     \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
     \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
     \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int\
@@ -263,85 +175,60 @@ data:
     \        assert(n <= ntt_max_limit && \"the result length exceeds the limit of\
     \ the prime can support\");\n        a.resize(n), b.resize(n);\n        ntt(a),\
     \ ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n\
-    \        ntt(a, true);\n        a.resize(sz);\n        return a;\n    }\n};\n"
-  code: "#pragma once\n\n#include \"Numeric/Modint.hpp\"\n#include \"Numeric/internal_primitive_root.hpp\"\
-    \n\ntemplate<typename T>\nrequires std::derived_from<T, internal::modint_base>\n\
-    class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
-    \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
-    \    static void set_upper_bound(int n) {\n        if (max_size < n) {\n     \
-    \       while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
-    \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
-    \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
-    \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
-    \                    w[s + j] = w[s + j - 1] * dw;\n            }\n        }\n\
-    \    }\npublic:\n    static constexpr int ntt_max_limit = []() {\n        unsigned\
-    \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
-    \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
-    \ limit;\n    }();\n    static void ntt(vector<T> &a, bool inv = false) { //0\
-    \ <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) == 0);\n\
-    \        if ((int)maxsize() < n) set_upper_bound(n);\n        for (int i = 0,\
-    \ j = 1; j < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>=\
-    \ 1);\n            if (j < i) swap(a[i], a[j]);\n        }\n        for (int s\
-    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
-    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
-    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
-    \                   a[i + j] += tmp;\n                }\n            }\n     \
-    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        reverse(a.begin()\
-    \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
-    \    static size_t maxsize() {\n        return max_size;\n    }\n    static vector<T>\
-    \ convolution(vector<T> a, vector<T> b) {\n        if (a.empty() || b.empty())\
-    \ return vector<T>();\n        int n = 1, sz = int(a.size()) + int(b.size()) -\
-    \ 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"\
-    the result length exceeds the limit of the prime can support\");\n        a.resize(n),\
-    \ b.resize(n);\n        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n\
-    \            a[i] = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n\
-    \        return a;\n    }\n};\n"
+    \        ntt(a, true);\n        a.resize(sz);\n        return a;\n    }\n};\n\
+    #line 6 \"Convolution/OnlineConvolution.hpp\"\n\ntemplate<typename T>\nstruct\
+    \ OnlineConvolution {\n    std::vector<T> f, g, h, fm, gm;\n    int p;\n    \n\
+    \    OnlineConvolution() : p(0) {}\n\n    T query(int idx, T f_i, T g_i) {\n \
+    \       assert(idx == p);\n        f.push_back(f_i), g.push_back(g_i);\n     \
+    \   int z = __builtin_ctz(p + 2), w = 1 << z, s;\n        std::vector<T> b0, b1;\n\
+    \        if (p + 2 == w) {\n            b0 = f, b0.resize(2 * w);\n          \
+    \  NTT<T>::ntt(b0, false);\n            b1 = g, b1.resize(2 * w);\n          \
+    \  NTT<T>::ntt(b1, false);\n            fm.resize(w << 1), gm.resize(w << 1);\n\
+    \            for (int i = 0; i < w; ++i) fm[i + w] = b0[i * 2], gm[i + w] = b1[i\
+    \ * 2];\n            for (int i = 0; i < 2 * w; ++i) b0[i] *= b1[i];\n       \
+    \     s = w - 2;\n            h.resize(2 * s + 2);\n        }\n        else {\n\
+    \            b0.assign(f.end() - w, f.end()), b0.resize(2 * w);\n            NTT<T>::ntt(b0,\
+    \ false);\n            for (int i = 0; i < 2 * w; ++i) b0[i] *= gm[i + (w << 1)];\n\
+    \            b1.assign(g.end() - w, g.end()), b1.resize(2 * w);\n            NTT<T>::ntt(b1,\
+    \ false);\n            for (int i = 0; i < 2 * w; ++i) b0[i] += b1[i] * fm[i +\
+    \ (w << 1)];\n            s = w - 1;\n        }\n        NTT<T>::ntt(b0, true);\n\
+    \        for (int i = 0; i <= s; ++i) h[p + i] += b0[s + i];\n        return h[p++];\n\
+    \    }\n};\n"
+  code: "#pragma once\n\n// source: https://maspypy.github.io/library/poly/online/online_convolution.hpp\n\
+    \n#include \"Polynomial/NTT.hpp\"\n\ntemplate<typename T>\nstruct OnlineConvolution\
+    \ {\n    std::vector<T> f, g, h, fm, gm;\n    int p;\n    \n    OnlineConvolution()\
+    \ : p(0) {}\n\n    T query(int idx, T f_i, T g_i) {\n        assert(idx == p);\n\
+    \        f.push_back(f_i), g.push_back(g_i);\n        int z = __builtin_ctz(p\
+    \ + 2), w = 1 << z, s;\n        std::vector<T> b0, b1;\n        if (p + 2 == w)\
+    \ {\n            b0 = f, b0.resize(2 * w);\n            NTT<T>::ntt(b0, false);\n\
+    \            b1 = g, b1.resize(2 * w);\n            NTT<T>::ntt(b1, false);\n\
+    \            fm.resize(w << 1), gm.resize(w << 1);\n            for (int i = 0;\
+    \ i < w; ++i) fm[i + w] = b0[i * 2], gm[i + w] = b1[i * 2];\n            for (int\
+    \ i = 0; i < 2 * w; ++i) b0[i] *= b1[i];\n            s = w - 2;\n           \
+    \ h.resize(2 * s + 2);\n        }\n        else {\n            b0.assign(f.end()\
+    \ - w, f.end()), b0.resize(2 * w);\n            NTT<T>::ntt(b0, false);\n    \
+    \        for (int i = 0; i < 2 * w; ++i) b0[i] *= gm[i + (w << 1)];\n        \
+    \    b1.assign(g.end() - w, g.end()), b1.resize(2 * w);\n            NTT<T>::ntt(b1,\
+    \ false);\n            for (int i = 0; i < 2 * w; ++i) b0[i] += b1[i] * fm[i +\
+    \ (w << 1)];\n            s = w - 1;\n        }\n        NTT<T>::ntt(b0, true);\n\
+    \        for (int i = 0; i <= s; ++i) h[p + i] += b0[s + i];\n        return h[p++];\n\
+    \    }\n};\n"
   dependsOn:
+  - Polynomial/NTT.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - Numeric/internal_primitive_root.hpp
   isVerificationFile: false
-  path: Polynomial/NTT.hpp
-  requiredBy:
-  - Misc/bigint.hpp
-  - Convolution/convolution.hpp
-  - Convolution/OnlineConvolution.hpp
-  - Polynomial/shift.hpp
-  - Polynomial/Sqrt.hpp
-  - Polynomial/lagrange_interpolate_iota.hpp
-  - Polynomial/Bostan_Mori.hpp
-  - Polynomial/interpolate.hpp
-  - Polynomial/linear_recursion.hpp
-  - Polynomial/Polynomial.hpp
-  - Numbers/partition_number.hpp
-  - Numbers/bell_number.hpp
-  timestamp: '2026-05-29 21:39:52+08:00'
+  path: Convolution/OnlineConvolution.hpp
+  requiredBy: []
+  timestamp: '2026-06-02 20:15:10+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/biginteger/addition.test.cpp
-  - test/1_library_checker/biginteger/multiplication.test.cpp
-  - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
-  - test/1_library_checker/convolution/convolution.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-documentation_of: Polynomial/NTT.hpp
+documentation_of: Convolution/OnlineConvolution.hpp
 layout: document
 redirect_from:
-- /library/Polynomial/NTT.hpp
-- /library/Polynomial/NTT.hpp.html
-title: Polynomial/NTT.hpp
+- /library/Convolution/OnlineConvolution.hpp
+- /library/Convolution/OnlineConvolution.hpp.html
+title: Convolution/OnlineConvolution.hpp
 ---
