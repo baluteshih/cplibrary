@@ -33,7 +33,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: DataStructure/BIT.hpp
-      title: DataStructure/BIT.hpp
+      title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: DataStructure/CatTree.hpp

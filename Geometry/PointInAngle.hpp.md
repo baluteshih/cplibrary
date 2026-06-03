@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
-    title: DataStructure/BIT.hpp
+    title: Binary Indexed Tree (BIT)
   - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp

@@ -6,7 +6,7 @@ data:
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
-    title: DataStructure/BIT.hpp
+    title: Binary Indexed Tree (BIT)
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
