@@ -36,13 +36,13 @@ data:
       title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
-      title: DataStructure/CatTree.hpp
+      title: Cat Tree
     - icon: ':heavy_check_mark:'
       path: DataStructure/DefaultAllocator.hpp
       title: DataStructure/DefaultAllocator.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
-      title: DataStructure/DisjointSet.hpp
+      title: Disjoint Set Union (DSU)
     - icon: ':heavy_check_mark:'
       path: DataStructure/OrderedSet.hpp
       title: DataStructure/OrderedSet.hpp
@@ -75,7 +75,7 @@ data:
       title: DataStructure/Treap.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/ZkwSegmentTree.hpp
-      title: DataStructure/ZkwSegmentTree.hpp
+      title: Zkw Segment Tree
   - name: Flow
     pages:
     - icon: ':heavy_check_mark:'

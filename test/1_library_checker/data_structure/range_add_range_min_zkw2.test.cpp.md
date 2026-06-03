@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: DataStructure/ZkwSegmentTree.hpp
-    title: DataStructure/ZkwSegmentTree.hpp
+    title: Zkw Segment Tree
   - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp

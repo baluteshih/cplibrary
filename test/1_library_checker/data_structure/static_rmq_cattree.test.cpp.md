@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: DataStructure/CatTree.hpp
-    title: DataStructure/CatTree.hpp
+    title: Cat Tree
   - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
