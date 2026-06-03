@@ -28,7 +28,7 @@ public:
         return res;
     }
     T suffix(int x) requires requires(T x, T y) { x - y; } {
-        return total_ - prefix(x);
+        return total_ - prefix(x - 1);
     }
     T range(int l, int r) requires requires(T x, T y) { x - y; } { // [l, r)
         if (l >= r) return T();
