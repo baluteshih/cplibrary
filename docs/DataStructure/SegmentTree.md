@@ -12,8 +12,8 @@ template<typename Value = int, typename Tag = void, bool pushdown = true>
 class SegmentTree;
 ```
 
-* `Value`: The type of elements stored in the leaves and internal nodes.
-    * Must support `operator+` for merging two `Value` objects (commutative or non-commutative depending on usage).
+* `Value`: The type of elements.
+    * Must support associative property `operator+` for merging two `Value` objects (commutative or non-commutative depending on usage).
     * Must have a default constructor `Value()` acting as the identity element.
 * `Tag`: The type of lazy tags. Use `void` if no lazy propagation is needed.
     * Must support `operator+` for tag composition (`Tag + Tag`) and applying to a value (`Value + Tag`).
@@ -96,14 +96,14 @@ void transform(int x, const auto &func);
 * `func` is a callable (e.g., lambda) that takes a `Value&`.
 * $O(\log N)$ time
 
-Applies `func` to the leaf node at index `x`.
+Applies `func(Value &node)` to the leaf node at index `x`.
 
 ---
 
 ## range_transform
 
 ```cpp
-void range_transform(int l, int r, const auto &tag);
+void range_transform(int l, int r, const Tag &tag);
 ```
 
 * Requires `Tag` not to be `void`.
@@ -120,9 +120,12 @@ void range_transform_beats(int l, int r, const auto &tag, const auto &tag_condit
 ```
 
 * Requires `Tag` not to be `void`.
-* $O(\text{amortized } \log^2 N)$ or $O(\log N)$ depending on the condition.
+* `tag_condition`
+    * A callable (e.g., lambda) that takes a `Value&`
+    * Return value: a `bool` value. `true` if the tag can be directly applied to a node's subtree.
+* Amortized $O(\log^2 N)$ or $O(\log N)$ depending on different scenario.
 
-Performs a "Segment Tree Beats" update on the range `[l, r)`. Use `tag_condition(Value &node)` determines whether the tag can be applied to a node's subtree.
+Performs a "Segment Tree Beats" update on the range `[l, r)`.
 
 ---
 
@@ -133,10 +136,13 @@ int range_left_search(const auto &condition, int l = -1, int r = -1);
 ```
 
 * $O(\log N)$ time
+* `condition`
+    * A callable (e.g., lambda) that takes a `Value&`.
+    * Return value: a `bool` value. `true` if the target is located within the node's subtree.
 
-Perform segment tree binary search within the range $[l, r)$ with left half first. Use `condition(Value &node)` to navigate.
-- If not found, returns `r`.
-- If `l` and `r` are not provided, searches the entire tree.
+Perform segment tree binary search within the range $[l, r)$ with left half first.
+* If not found, returns `r`.
+* If `l` and `r` are not provided, searches the entire tree.
 
 ---
 
@@ -147,10 +153,13 @@ int range_right_search(const auto &condition, int l = -1, int r = -1);
 ```
 
 * $O(\log N)$ time
+* `condition`
+    * A callable (e.g., lambda) that takes a `Value&`.
+    * Return value: a `bool` value. `true` if the target is located within the node's subtree.
 
-Perform segment tree binary search within the range $(l, r]$ with right half first. Use `condition(Value &node)` to navigate.
-- If not found, returns `l`.
-- If `l` and `r` are not provided, searches the entire tree.
+Perform segment tree binary search within the range $(l, r]$ with right half first.
+* If not found, returns `l`.
+* If `l` and `r` are not provided, searches the entire tree.
 
 ---
 
