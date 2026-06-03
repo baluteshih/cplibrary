@@ -1,4 +1,7 @@
-# Binary Indexed Tree (BIT)
+---
+title: Binary Indexed Tree (BIT)
+documentation_of: ../../DataStructure/BIT.hpp
+---
 
 A generic, $0$-based Binary Indexed Tree (Fenwick Tree) supporting point modifications, range queries, and binary lifting.
 
