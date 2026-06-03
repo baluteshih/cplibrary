@@ -205,10 +205,6 @@ class SegmentTree {
         if (l < r)
             range_transform_beats(l, r, 0, n, 1, tag, tag_condition);
     }
-    /*
-       For the given element range [l, r)
-       Perform segment tree binary search within the range with left half first 
-     */
     int range_left_search(const auto &condition, int l = -1, int r = -1) {
         if (l == -1 && r == -1) l = 0, r = n;
         assert(0 <= l && r <= n);
@@ -216,10 +212,6 @@ class SegmentTree {
         if (l == r) return r;
         return range_left_search(l, r, 0, n, 1, condition);
     }
-    /*
-       For the given element range (l, r]
-       Perform segment tree binary search within the range with right half first 
-     */
     int range_right_search(const auto &condition, int l = -1, int r = -1) {
         if (l == -1 && r == -1) l = -1, r = n - 1;
         ++l, ++r;
