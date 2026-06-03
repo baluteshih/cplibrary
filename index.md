@@ -57,7 +57,7 @@ data:
       title: DataStructure/PotentialDisjointSet.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
-      title: DataStructure/SegmentTree.hpp
+      title: Segment Tree
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: DataStructure/SparseTable.hpp

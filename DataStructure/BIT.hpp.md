@@ -169,7 +169,7 @@ T suffix(int x);
 * `x` is specified as $0$-indexed.
 * $O(\log N)$ time
 
-Returns the suffix sum of `[x, n-1]`.
+Returns the suffix sum of `[x, n-1]`.  
 *Note: Requires type `T` to support `operator-`.*
 
 ---
@@ -183,7 +183,7 @@ T range(int l, int r);
 * `l` and `r` are specified as $0$-indexed.
 * $O(\log N)$ time
 
-Returns the sum of the half-open interval `[l, r)`. If $l \ge r$, it returns `T()`.
+Returns the sum of the half-open interval `[l, r)`. If $l \ge r$, it returns `T()`.  
 *Note: Requires type `T` to support `operator-`.*
 
 ---

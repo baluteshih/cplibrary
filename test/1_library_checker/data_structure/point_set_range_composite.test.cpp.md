@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
-    title: DataStructure/SegmentTree.hpp
+    title: Segment Tree
   - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
@@ -270,24 +270,20 @@ data:
     \ r, 0, n, 1, tag);\n    }\n    void range_transform_beats(int l, int r, const\
     \ auto &tag, const auto &tag_condition) requires (hasTag) {\n        assert(0\
     \ <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n            range_transform_beats(l,\
-    \ r, 0, n, 1, tag, tag_condition);\n    }\n    /*\n       For the given element\
-    \ range [l, r)\n       Perform segment tree binary search within the range with\
-    \ left half first \n     */\n    int range_left_search(const auto &condition,\
-    \ int l = -1, int r = -1) {\n        if (l == -1 && r == -1) l = 0, r = n;\n \
-    \       assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l == r)\
-    \ return r;\n        return range_left_search(l, r, 0, n, 1, condition);\n   \
-    \ }\n    /*\n       For the given element range (l, r]\n       Perform segment\
-    \ tree binary search within the range with right half first \n     */\n    int\
-    \ range_right_search(const auto &condition, int l = -1, int r = -1) {\n      \
-    \  if (l == -1 && r == -1) l = -1, r = n - 1;\n        ++l, ++r;\n        assert(0\
-    \ <= l && r <= n);\n        assert(l <= r);\n        if (l == r) return l - 1;\n\
-    \        return range_right_search(l, r, 0, n, 1, condition);\n    }\n    void\
-    \ printinfo(int l, int r) {\n        assert(0 <= l && r <= n);\n        assert(l\
-    \ <= r);\n        std::cerr << \"\\e[1;33mInfo [\" << l << \", \" << r << \"):\\\
-    n\";\n        if (l < r) \n            printinfo(l, r, 0, n, 1);\n        cerr\
-    \ << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr << \"\\e[1;33mInfo\
-    \ all:\\n\";\n        printall(0, n, 1);\n        cerr << \"\\e[0m\\n\";\n   \
-    \ }\n};\n#line 7 \"test/1_library_checker/data_structure/point_set_range_composite.test.cpp\"\
+    \ r, 0, n, 1, tag, tag_condition);\n    }\n    int range_left_search(const auto\
+    \ &condition, int l = -1, int r = -1) {\n        if (l == -1 && r == -1) l = 0,\
+    \ r = n;\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n       \
+    \ if (l == r) return r;\n        return range_left_search(l, r, 0, n, 1, condition);\n\
+    \    }\n    int range_right_search(const auto &condition, int l = -1, int r =\
+    \ -1) {\n        if (l == -1 && r == -1) l = -1, r = n - 1;\n        ++l, ++r;\n\
+    \        assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l ==\
+    \ r) return l - 1;\n        return range_right_search(l, r, 0, n, 1, condition);\n\
+    \    }\n    void printinfo(int l, int r) {\n        assert(0 <= l && r <= n);\n\
+    \        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo [\" << l << \"\
+    , \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l, r, 0, n,\
+    \ 1);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
+    \ << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n        cerr << \"\
+    \\e[0m\\n\";\n    }\n};\n#line 7 \"test/1_library_checker/data_structure/point_set_range_composite.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nstruct Value {\n    mint x, y; \n    Value(mint\
     \ _x = 0, mint _y = 0): x(_x), y(_y) {}\n    Value operator+(const Value &rhs)\
     \ {\n        return Value(x * rhs.x, y * rhs.x + rhs.y);\n    }\n    friend istream&\
@@ -324,7 +320,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-03 16:23:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
