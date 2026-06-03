@@ -104,14 +104,14 @@ data:
     \     for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n\
     \    T prefix(int x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n\
     \            res = res + bit[x];\n        return res;\n    }\n    T suffix(int\
-    \ x) requires requires(T x, T y) { x - y; } {\n        return total_ - prefix(x);\n\
-    \    }\n    T range(int l, int r) requires requires(T x, T y) { x - y; } { //\
-    \ [l, r)\n        if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l\
-    \ - 1);\n        return res;\n    }\n    int kth(int k) { // 0-base query\n  \
-    \      assert((n & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n     \
-    \   for (int i = n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n\
-    \                k -= bit[res += i];\n        }\n        return res;\n    }\n\
-    \    T total() {\n        return total_;\n    }\n};\n#line 5 \"Geometry/PointInAngle.hpp\"\
+    \ x) requires requires(T x, T y) { x - y; } {\n        return total_ - prefix(x\
+    \ - 1);\n    }\n    T range(int l, int r) requires requires(T x, T y) { x - y;\
+    \ } { // [l, r)\n        if (l >= r) return T();\n        T res = prefix(r - 1)\
+    \ - prefix(l - 1);\n        return res;\n    }\n    int kth(int k) { // 0-base\
+    \ query\n        assert((n & (n - 1)) == 0);\n        ++k;\n        int res =\
+    \ 0;\n        for (int i = n >> 1; i >= 1; i >>= 1) {\n            if (bit[res\
+    \ + i] < k)\n                k -= bit[res += i];\n        }\n        return res;\n\
+    \    }\n    T total() {\n        return total_;\n    }\n};\n#line 5 \"Geometry/PointInAngle.hpp\"\
     \n\n// cnt[i][j] = weight sum of points k s.t. strictly above ij, and i < k <\
     \ j\n// cnt2[i][j] = weight sum of points k s.t. strictly in ij\n// preprocess\
     \ space: O(n^2), time: O(n(n+m)log(n+m)), query time: O(1)\ntemplate<typename\
@@ -199,7 +199,7 @@ data:
   isVerificationFile: false
   path: Geometry/PointInAngle.hpp
   requiredBy: []
-  timestamp: '2026-05-31 14:29:47+08:00'
+  timestamp: '2026-06-03 13:51:43+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp

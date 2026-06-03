@@ -44,8 +44,8 @@ data:
     \ v;\n    }\n    T prefix(int x) {\n        T res = T();\n        for (++x; x;\
     \ x -= x & -x)\n            res = res + bit[x];\n        return res;\n    }\n\
     \    T suffix(int x) requires requires(T x, T y) { x - y; } {\n        return\
-    \ total_ - prefix(x);\n    }\n    T range(int l, int r) requires requires(T x,\
-    \ T y) { x - y; } { // [l, r)\n        if (l >= r) return T();\n        T res\
+    \ total_ - prefix(x - 1);\n    }\n    T range(int l, int r) requires requires(T\
+    \ x, T y) { x - y; } { // [l, r)\n        if (l >= r) return T();\n        T res\
     \ = prefix(r - 1) - prefix(l - 1);\n        return res;\n    }\n    int kth(int\
     \ k) { // 0-base query\n        assert((n & (n - 1)) == 0);\n        ++k;\n  \
     \      int res = 0;\n        for (int i = n >> 1; i >= 1; i >>= 1) {\n       \
@@ -63,7 +63,7 @@ data:
     \ x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n    T prefix(int\
     \ x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n            res\
     \ = res + bit[x];\n        return res;\n    }\n    T suffix(int x) requires requires(T\
-    \ x, T y) { x - y; } {\n        return total_ - prefix(x);\n    }\n    T range(int\
+    \ x, T y) { x - y; } {\n        return total_ - prefix(x - 1);\n    }\n    T range(int\
     \ l, int r) requires requires(T x, T y) { x - y; } { // [l, r)\n        if (l\
     \ >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n        return\
     \ res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n & (n -\
@@ -77,7 +77,7 @@ data:
   requiredBy:
   - DataStructure/OrderedSet.hpp
   - Geometry/PointInAngle.hpp
-  timestamp: '2026-05-31 14:29:47+08:00'
+  timestamp: '2026-06-03 13:51:43+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
