@@ -38,7 +38,7 @@ int main() {
         else if (op == 1) erase(x);
         else if (op == 2) {
             if (tree.size() < x) cout << "-1\n";
-            else cout << tree.kth(x)->key << "\n";
+            else cout << tree.kth(x - 1)->key << "\n";
         }
         else if (op == 3) {
             cout << tree.prefix_product_key_leq(x) << "\n";

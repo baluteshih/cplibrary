@@ -66,7 +66,7 @@ int main() {
         else if (t == 1) {
             int i;
             cin >> i;
-            tree.erase<false>(tree.kth(i + 1));
+            tree.erase<false>(tree.kth(i));
         }
         else if (t == 2) {
             int l, r;

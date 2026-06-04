@@ -393,69 +393,30 @@ public:
     Iterator begin() const { return Iterator(find_min(), this); }
     Iterator end() const { return Iterator(nullptr, this); }
     Iterator rbegin() const { return Iterator(find_max(), this); }
-    /*
-    Find a node's iterator such that:
-    - All nodes on its left have condition(node*) == true
-    - All nodes on its right have condition(node*) == false
-    - The node itself has condition(node*) == false
-    Assume this is possible
-    */
     Iterator bound_condition(const auto &condition) {
         return Iterator(find(condition), this);
     }
-    /*
-    Find a node's iterator such that:
-    - The product "res" of all nodes on its left have condition(res) == true
-    - The node itself has condition(res + node->org) == false
-    Assume this is possible
-    */
     Iterator bound_condition_value(const auto &condition) requires (hasValue) {
         return Iterator(find_value(condition), this);
     }
-    /*
-    Find a node's iterator such that:
-    - All nodes on its left have cmp(key, k) == true
-    - All nodes on its right have cmp(key, k) == false
-    - The node itself has cmp(key, k) == false
-    Assume this is possible
-    */
     template<typename K, typename Comp = std::less<Key>>
     Iterator lower_bound(const K &k, const Comp &cmp = Comp()) requires (hasKey) {
         return Iterator(find([&k, &cmp](node *src) { 
             return cmp(src->key, k);
         }), this);
     }
-    /*
-    Find a node's iterator such that:
-    - All nodes on its left have cmp(k, key) == false
-    - All nodes on its right have cmp(k, key) == true
-    - The node itself has cmp(k, key) == true
-    Assume this is possible
-    */
     template<typename K, typename Comp = std::less<Key>>
     Iterator upper_bound(const K &k, const Comp &cmp = Comp()) requires (hasKey) {
         return Iterator(find([&k, &cmp](node *src) { 
             return !cmp(k, src->key);
         }), this);
     }
-    /*
-    Find a node's iterator such that:
-    - The product "res" of all nodes on its left have cmp(res, v) == true
-    - The node itself has cmp(res + node->org, k) == false
-    Assume this is possible
-    */
     template<typename V, typename Comp = std::less<Value>>
     Iterator lower_bound_value(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
         return Iterator(find_value([&v, &cmp](const Value &src) { 
             return cmp(src, v);
         }), this);
     }
-    /*
-    Find a node's iterator such that:
-    - The product "res" of all nodes on its left have cmp(v, res) == false
-    - The node itself has cmp(k, res + node->org) == true
-    Assume this is possible
-    */
     template<typename V, typename Comp = std::less<Value>>
     Iterator upper_bound_value(const V &v, const Comp &cmp = Comp()) requires (hasValue) {
         return Iterator(find_value([&v, &cmp](const Value &src) { 
@@ -477,47 +438,28 @@ public:
         }
         NodeAlloc::deallocate(target);
     }
-    /*
-    Assume that all nodes having condition(node*) == true form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
     Treap split_key(const auto &condition) {
         node *left;
         split(root, left, root, condition);
         return Treap(left);
     }
-    /*
-    Assume that all nodes having cmp(key, k) == true form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
     template<typename K, typename Comp = std::less<Key>>
     Treap split_key_lt(const K &k, const Comp &cmp = Comp()) requires (hasKey) {
         return split_key([&k, &cmp](node *src) {
             return cmp(src->key, k); 
         });
     }
-    /*
-    Assume that all nodes having cmp(k, key) == false form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
     template<typename K, typename Comp = std::less<Key>>
     Treap split_key_leq(const K &k, const Comp &cmp = Comp()) requires (hasKey) {
         return split_key([&k, &cmp](node *src) {
             return !cmp(k, src->key); 
         });
     }
-    /*
-    Assume that all nodes having condition(prefix_product) == true form a prefix, 
-    return a Treap containing these nodes, the rest remain at source
-    */
     Treap split_value(const auto &condition) requires (hasValue) {
         node *left;
         split_value(root, left, root, Value(), condition);
         return Treap(left);
     }
-    /*
-    return a Treap containing the left most k nodes, the rest remain at source
-    */
     Treap split_size(const int &k) requires (hasSize) {
         return split_value([&k](const Value &src) {
             return src.size() <= k;  
@@ -529,30 +471,18 @@ public:
     Value product() requires (hasValue) {
         return get_val(root);
     }
-    /*
-    return the product of all the nodes that cmp(key, k) == true
-    Assume these nodes form a prefix
-    */
     template<typename K, typename Comp = std::less<Key>>
     Value prefix_product_key_lt(const K &k, const Comp &cmp = Comp()) requires (hasKey && hasValue) {
         return prefix_product(root, [&k, &cmp](node *src) {
             return cmp(src->key, k);
         });
     }
-    /*
-    return the product of all the nodes that cmp(k, key) == false
-    Assume these nodes form a prefix
-    */
     template<typename K, typename Comp = std::less<Key>>
     Value prefix_product_key_leq(const K &k, const Comp &cmp = Comp()) requires (hasKey && hasValue) {
         return prefix_product(root, [&k, &cmp](node *src) {
             return !cmp(k, src->key);
         });
     }
-    /*
-    return the product of longest prefix such that the product "res" of them has condition(res) == true
-    Assume monotonicity
-    */
     Value prefix_product_cond(const auto &condition) requires (hasValue) {
         return prefix_product_cond(root, Value(), condition);
     }
@@ -579,12 +509,9 @@ public:
         if (!empty()) reverse();
         this->left_merge(left).right_merge(right);
     }
-    /*
-    1-base
-    */
     Iterator kth(int k) requires (hasSize) {
         return Iterator(find_value([&k](const Value &v) {
-            return v.size() < k;
+            return v.size() <= k;
         }), this);
     }
 };

@@ -12,7 +12,8 @@ template<typename T>
 class Discretization;
 ```
 
-* `T`: The type of elements being discretized. Must support comparison operators like `<` and `==`.
+* `T`: The type of elements being discretized.
+    * Must support comparison operators like `<` and `==`.
 
 ---
 

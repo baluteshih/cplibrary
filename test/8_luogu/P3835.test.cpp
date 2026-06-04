@@ -31,7 +31,7 @@ int main() {
             cout << tree[i].prefix_product_key_lt(x).size() + 1 << "\n"; 
         }
         else if (op == 4) {
-            cout << tree[i].kth(x)->key << "\n";
+            cout << tree[i].kth(x - 1)->key << "\n";
         }
         else if (op == 5) {
             auto lft = tree[i].split_key_lt(x);

@@ -1,49 +1,47 @@
 ---
-title: Segment Tree
-documentation_of: ../../DataStructure/SegmentTree.hpp
+title: Pointer Segment Tree
+documentation_of: ../../DataStructure/PointerSegmentTree.hpp
 ---
 
-A versatile, $0$-based Segment Tree supporting point/range updates and various queries including binary search and Segment Tree Beats.
+A pointer-based Segment Tree that supports dynamic node allocation, persistence, and various optimizations like tag permanentization.
 
 ## Template Parameters
 
 ```cpp
-template<typename Value = int, typename Tag = void, bool pushdown = true>
-class SegmentTree;
+template<
+    typename Value = int, 
+    typename Tag = void, 
+    bool pushdown = true, 
+    template<typename> class Allocator = DefaultAllocator, 
+    bool dynamic = false, 
+    bool persistent = false
+>
+class PointerSegmentTree;
 ```
 
 * `Value`: The type of elements.
     * Must support associative property `operator+` for merging two `Value` objects (commutative or non-commutative depending on usage).
     * Must have a default constructor `Value()` acting as the identity element.
-* `Tag`: The type of lazy tags. Use `void` if no lazy propagation is needed.
+* `Tag`: The type of lazy tags.
     * Must support `operator+` for tag composition (`Tag + Tag`) and applying to a value (`Value + Tag`).
     * Must have a default constructor `Tag()` acting as the identity tag.
 * `pushdown`: If `true`, uses standard lazy propagation. If `false`, uses tag permanentization (requires commutative operations in some cases).
+* `Allocator`: The allocator used for node management (e.g., `DefaultAllocator`, `PoolAllocator`, `StackPoolAllocator`).
+* `dynamic`: If `true`, nodes are allocated only when needed (dynamic Segment Tree).
+* `persistent`: If `true`, operations create new nodes to maintain previous versions (persistent Segment Tree).
 
 ---
 
-## Constructor (Size)
+## Constructor
 
 ```cpp
-SegmentTree(int size);
+PointerSegmentTree(const vector<Value> &data);
+PointerSegmentTree(int size); // requires !dynamic
+PointerSegmentTree(int size = 0); // requires dynamic || persistent
 ```
 
-* `size` is the number of elements.
-* $O(N)$ time
-
-Constructs a Segment Tree of given size, initialized with `Value()`.
-
----
-
-## Constructor (Array)
-
-```cpp
-SegmentTree(const vector<Value> &data);
-```
-
-* $O(N)$ time
-
-Constructs a Segment Tree from an existing array.
+* $O(N)$ for `vector` and `size` (non-dynamic) constructors.
+* $O(1)$ for dynamic/persistent constructors.
 
 ---
 
@@ -53,7 +51,6 @@ Constructs a Segment Tree from an existing array.
 Value get(int x);
 ```
 
-* `x` is $0$-indexed.
 * $O(\log N)$ time
 
 Returns the value at index `x`.
@@ -79,7 +76,6 @@ Returns the product (sum) of the range `[l, r)`. Returns `Value()` if `l == r`.
 void modify(int x, const Value &v);
 ```
 
-* `x` is $0$-indexed.
 * $O(\log N)$ time
 
 Sets the value at index `x` to `v`.
@@ -103,7 +99,7 @@ Applies `func(Value &node)` to the leaf node at index `x`.
 ## range_transform
 
 ```cpp
-void range_transform(int l, int r, const Tag &tag);
+void range_transform(int l, int r, const auto &tag);
 ```
 
 * Requires `Tag` not to be `void`.
@@ -160,6 +156,19 @@ int range_right_search(const auto &condition, int l = -1, int r = -1);
 Perform segment tree binary search within the range $(l, r]$ with right half first.
 * Return the found index; if not found, returns `l`.
 * If `l` and `r` are not provided, searches the entire tree.
+
+---
+
+## range_copy
+
+```cpp
+void range_copy(int l, int r, PointerSegmentTree &other);
+```
+
+* Requires `pushdown && persistent`.
+* $O(\log N)$ time
+
+Copies the range `[l, r)` from `other` to this tree by sharing nodes.
 
 ---
 
