@@ -41,6 +41,9 @@ data:
       path: DataStructure/DefaultAllocator.hpp
       title: DataStructure/DefaultAllocator.hpp
     - icon: ':heavy_check_mark:'
+      path: DataStructure/Discretization.hpp
+      title: DataStructure/Discretization.hpp
+    - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
     - icon: ':heavy_check_mark:'
