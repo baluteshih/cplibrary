@@ -6,10 +6,10 @@ data:
     title: Binary Indexed Tree (BIT)
   - icon: ':heavy_check_mark:'
     path: DataStructure/Discretization.hpp
-    title: DataStructure/Discretization.hpp
+    title: Discretization
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
-    title: DataStructure/OrderedSet.hpp
+    title: Ordered Set
   - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
-    title: DataStructure/SparseTable.hpp
+    title: Sparse Table
   - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp

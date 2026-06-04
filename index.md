@@ -42,13 +42,13 @@ data:
       title: DataStructure/DefaultAllocator.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/Discretization.hpp
-      title: DataStructure/Discretization.hpp
+      title: Discretization
     - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
     - icon: ':heavy_check_mark:'
       path: DataStructure/OrderedSet.hpp
-      title: DataStructure/OrderedSet.hpp
+      title: Ordered Set
     - icon: ':heavy_check_mark:'
       path: DataStructure/PointerSegmentTree.hpp
       title: DataStructure/PointerSegmentTree.hpp
@@ -63,16 +63,16 @@ data:
       title: Segment Tree
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
-      title: DataStructure/SparseTable.hpp
+      title: Sparse Table
     - icon: ':warning:'
       path: DataStructure/StackPoolAllocator.hpp
       title: DataStructure/StackPoolAllocator.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagDeque.hpp
-      title: DataStructure/SwagDeque.hpp
+      title: SWAG Deque
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagQueue.hpp
-      title: DataStructure/SwagQueue.hpp
+      title: SWAG Queue
     - icon: ':heavy_check_mark:'
       path: DataStructure/Treap.hpp
       title: DataStructure/Treap.hpp
