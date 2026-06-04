@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PotentialDisjointSet.hpp
-    title: DataStructure/PotentialDisjointSet.hpp
+    title: Potential Disjoint Set
   - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp

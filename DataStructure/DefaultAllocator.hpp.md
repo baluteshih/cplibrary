@@ -4,10 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PointerSegmentTree.hpp
-    title: DataStructure/PointerSegmentTree.hpp
-  - icon: ':heavy_check_mark:'
+    title: Pointer Segment Tree
+  - icon: ':question:'
     path: DataStructure/Treap.hpp
-    title: DataStructure/Treap.hpp
+    title: Treap
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -36,21 +36,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
@@ -67,7 +67,7 @@ data:
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/Treap.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
@@ -84,8 +84,41 @@ data:
   - test/3_qoj/17153.test.cpp
 documentation_of: DataStructure/DefaultAllocator.hpp
 layout: document
-redirect_from:
-- /library/DataStructure/DefaultAllocator.hpp
-- /library/DataStructure/DefaultAllocator.hpp.html
-title: DataStructure/DefaultAllocator.hpp
+title: Default Allocator
 ---
+
+A simple wrapper around `new` and `delete` for memory allocation.
+
+## Template Parameters
+
+```cpp
+template<typename T>
+struct DefaultAllocator;
+```
+
+* `T`: The type of elements to allocate.
+
+---
+
+## allocate
+
+```cpp
+template<typename... Args>
+static T* allocate(Args&&... args);
+```
+
+* $O(1)$ time (average)
+
+Allocates memory for an object of type `T` and constructs it using the provided arguments.
+
+---
+
+## deallocate
+
+```cpp
+static void deallocate(T* p);
+```
+
+* $O(1)$ time (average)
+
+Destructs the object and deallocates the memory pointed to by `p`.

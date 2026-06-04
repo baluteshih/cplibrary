@@ -6,7 +6,7 @@ data:
     title: Disjoint Set Union (DSU)
   - icon: ':heavy_check_mark:'
     path: DataStructure/PotentialDisjointSet.hpp
-    title: DataStructure/PotentialDisjointSet.hpp
+    title: Potential Disjoint Set
   - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

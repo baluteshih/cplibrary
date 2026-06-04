@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/primitive_root.hpp
     title: Numeric/primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

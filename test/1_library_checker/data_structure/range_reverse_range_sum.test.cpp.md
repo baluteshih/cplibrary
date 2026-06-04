@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
-    title: DataStructure/DefaultAllocator.hpp
-  - icon: ':heavy_check_mark:'
+    title: Default Allocator
+  - icon: ':question:'
     path: DataStructure/Treap.hpp
-    title: DataStructure/Treap.hpp
-  - icon: ':heavy_check_mark:'
+    title: Treap
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
@@ -250,40 +250,22 @@ data:
     \ {\n            access(m_ptr);\n        }\n    private:\n        node* m_ptr;\n\
     \        const Treap* m_tree;\n    };\n    Iterator begin() const { return Iterator(find_min(),\
     \ this); }\n    Iterator end() const { return Iterator(nullptr, this); }\n   \
-    \ Iterator rbegin() const { return Iterator(find_max(), this); }\n    /*\n   \
-    \ Find a node's iterator such that:\n    - All nodes on its left have condition(node*)\
-    \ == true\n    - All nodes on its right have condition(node*) == false\n    -\
-    \ The node itself has condition(node*) == false\n    Assume this is possible\n\
-    \    */\n    Iterator bound_condition(const auto &condition) {\n        return\
-    \ Iterator(find(condition), this);\n    }\n    /*\n    Find a node's iterator\
-    \ such that:\n    - The product \"res\" of all nodes on its left have condition(res)\
-    \ == true\n    - The node itself has condition(res + node->org) == false\n   \
-    \ Assume this is possible\n    */\n    Iterator bound_condition_value(const auto\
-    \ &condition) requires (hasValue) {\n        return Iterator(find_value(condition),\
-    \ this);\n    }\n    /*\n    Find a node's iterator such that:\n    - All nodes\
-    \ on its left have cmp(key, k) == true\n    - All nodes on its right have cmp(key,\
-    \ k) == false\n    - The node itself has cmp(key, k) == false\n    Assume this\
-    \ is possible\n    */\n    template<typename K, typename Comp = std::less<Key>>\n\
-    \    Iterator lower_bound(const K &k, const Comp &cmp = Comp()) requires (hasKey)\
-    \ {\n        return Iterator(find([&k, &cmp](node *src) { \n            return\
-    \ cmp(src->key, k);\n        }), this);\n    }\n    /*\n    Find a node's iterator\
-    \ such that:\n    - All nodes on its left have cmp(k, key) == false\n    - All\
-    \ nodes on its right have cmp(k, key) == true\n    - The node itself has cmp(k,\
-    \ key) == true\n    Assume this is possible\n    */\n    template<typename K,\
-    \ typename Comp = std::less<Key>>\n    Iterator upper_bound(const K &k, const\
-    \ Comp &cmp = Comp()) requires (hasKey) {\n        return Iterator(find([&k, &cmp](node\
-    \ *src) { \n            return !cmp(k, src->key);\n        }), this);\n    }\n\
-    \    /*\n    Find a node's iterator such that:\n    - The product \"res\" of all\
-    \ nodes on its left have cmp(res, v) == true\n    - The node itself has cmp(res\
-    \ + node->org, k) == false\n    Assume this is possible\n    */\n    template<typename\
-    \ V, typename Comp = std::less<Value>>\n    Iterator lower_bound_value(const V\
-    \ &v, const Comp &cmp = Comp()) requires (hasValue) {\n        return Iterator(find_value([&v,\
-    \ &cmp](const Value &src) { \n            return cmp(src, v);\n        }), this);\n\
-    \    }\n    /*\n    Find a node's iterator such that:\n    - The product \"res\"\
-    \ of all nodes on its left have cmp(v, res) == false\n    - The node itself has\
-    \ cmp(k, res + node->org) == true\n    Assume this is possible\n    */\n    template<typename\
-    \ V, typename Comp = std::less<Value>>\n    Iterator upper_bound_value(const V\
-    \ &v, const Comp &cmp = Comp()) requires (hasValue) {\n        return Iterator(find_value([&v,\
+    \ Iterator rbegin() const { return Iterator(find_max(), this); }\n    Iterator\
+    \ bound_condition(const auto &condition) {\n        return Iterator(find(condition),\
+    \ this);\n    }\n    Iterator bound_condition_value(const auto &condition) requires\
+    \ (hasValue) {\n        return Iterator(find_value(condition), this);\n    }\n\
+    \    template<typename K, typename Comp = std::less<Key>>\n    Iterator lower_bound(const\
+    \ K &k, const Comp &cmp = Comp()) requires (hasKey) {\n        return Iterator(find([&k,\
+    \ &cmp](node *src) { \n            return cmp(src->key, k);\n        }), this);\n\
+    \    }\n    template<typename K, typename Comp = std::less<Key>>\n    Iterator\
+    \ upper_bound(const K &k, const Comp &cmp = Comp()) requires (hasKey) {\n    \
+    \    return Iterator(find([&k, &cmp](node *src) { \n            return !cmp(k,\
+    \ src->key);\n        }), this);\n    }\n    template<typename V, typename Comp\
+    \ = std::less<Value>>\n    Iterator lower_bound_value(const V &v, const Comp &cmp\
+    \ = Comp()) requires (hasValue) {\n        return Iterator(find_value([&v, &cmp](const\
+    \ Value &src) { \n            return cmp(src, v);\n        }), this);\n    }\n\
+    \    template<typename V, typename Comp = std::less<Value>>\n    Iterator upper_bound_value(const\
+    \ V &v, const Comp &cmp = Comp()) requires (hasValue) {\n        return Iterator(find_value([&v,\
     \ &cmp](const Value &src) { \n            return !cmp(v, src);\n        }), this);\n\
     \    }\n    template<bool try_access = true>\n    void erase(Iterator it) requires\
     \ (!persistent) {\n        if constexpr (try_access)\n            access(it);\n\
@@ -292,62 +274,48 @@ data:
     \ parent->r;\n        point_to = merge(target->l, target->r);\n        while (parent)\
     \ {\n            node *grand = parent->f;\n            parent->up();\n       \
     \     parent = grand;\n        }\n        NodeAlloc::deallocate(target);\n   \
-    \ }\n    /*\n    Assume that all nodes having condition(node*) == true form a\
-    \ prefix, \n    return a Treap containing these nodes, the rest remain at source\n\
-    \    */\n    Treap split_key(const auto &condition) {\n        node *left;\n \
-    \       split(root, left, root, condition);\n        return Treap(left);\n   \
-    \ }\n    /*\n    Assume that all nodes having cmp(key, k) == true form a prefix,\
-    \ \n    return a Treap containing these nodes, the rest remain at source\n   \
-    \ */\n    template<typename K, typename Comp = std::less<Key>>\n    Treap split_key_lt(const\
+    \ }\n    Treap split_key(const auto &condition) {\n        node *left;\n     \
+    \   split(root, left, root, condition);\n        return Treap(left);\n    }\n\
+    \    template<typename K, typename Comp = std::less<Key>>\n    Treap split_key_lt(const\
     \ K &k, const Comp &cmp = Comp()) requires (hasKey) {\n        return split_key([&k,\
     \ &cmp](node *src) {\n            return cmp(src->key, k); \n        });\n   \
-    \ }\n    /*\n    Assume that all nodes having cmp(k, key) == false form a prefix,\
-    \ \n    return a Treap containing these nodes, the rest remain at source\n   \
-    \ */\n    template<typename K, typename Comp = std::less<Key>>\n    Treap split_key_leq(const\
+    \ }\n    template<typename K, typename Comp = std::less<Key>>\n    Treap split_key_leq(const\
     \ K &k, const Comp &cmp = Comp()) requires (hasKey) {\n        return split_key([&k,\
     \ &cmp](node *src) {\n            return !cmp(k, src->key); \n        });\n  \
-    \  }\n    /*\n    Assume that all nodes having condition(prefix_product) == true\
-    \ form a prefix, \n    return a Treap containing these nodes, the rest remain\
-    \ at source\n    */\n    Treap split_value(const auto &condition) requires (hasValue)\
-    \ {\n        node *left;\n        split_value(root, left, root, Value(), condition);\n\
-    \        return Treap(left);\n    }\n    /*\n    return a Treap containing the\
-    \ left most k nodes, the rest remain at source\n    */\n    Treap split_size(const\
-    \ int &k) requires (hasSize) {\n        return split_value([&k](const Value &src)\
-    \ {\n            return src.size() <= k;  \n        });\n    }\n    Key get_key()\
-    \ requires (hasKey) {\n        return get_key(root);\n    }\n    Value product()\
-    \ requires (hasValue) {\n        return get_val(root);\n    }\n    /*\n    return\
-    \ the product of all the nodes that cmp(key, k) == true\n    Assume these nodes\
-    \ form a prefix\n    */\n    template<typename K, typename Comp = std::less<Key>>\n\
-    \    Value prefix_product_key_lt(const K &k, const Comp &cmp = Comp()) requires\
-    \ (hasKey && hasValue) {\n        return prefix_product(root, [&k, &cmp](node\
-    \ *src) {\n            return cmp(src->key, k);\n        });\n    }\n    /*\n\
-    \    return the product of all the nodes that cmp(k, key) == false\n    Assume\
-    \ these nodes form a prefix\n    */\n    template<typename K, typename Comp =\
-    \ std::less<Key>>\n    Value prefix_product_key_leq(const K &k, const Comp &cmp\
-    \ = Comp()) requires (hasKey && hasValue) {\n        return prefix_product(root,\
-    \ [&k, &cmp](node *src) {\n            return !cmp(k, src->key);\n        });\n\
-    \    }\n    /*\n    return the product of longest prefix such that the product\
-    \ \"res\" of them has condition(res) == true\n    Assume monotonicity\n    */\n\
-    \    Value prefix_product_cond(const auto &condition) requires (hasValue) {\n\
-    \        return prefix_product_cond(root, Value(), condition);\n    }\n    std::array<Treap,\
-    \ 2> split_range(int l, int r) requires (hasSize) {\n        assert(l <= r);\n\
-    \        Treap left = split_size(l);\n        Treap right = split_size(r - l);\n\
-    \        swap(right);\n        return {left, right};\n    }\n    Value range_prod(int\
-    \ l, int r) requires (hasValue && hasSize) {\n        auto [left, right] = split_range(l,\
-    \ r);\n        Value res = product();\n        this->left_merge(left).right_merge(right);\n\
-    \        return res;\n    }\n    void range_transform(int l, int r, const auto\
-    \ &tag) requires (hasTag && hasSize) {\n        auto [left, right] = split_range(l,\
-    \ r);\n        if (!empty()) transform(tag);\n        this->left_merge(left).right_merge(right);\n\
-    \    }\n    void range_reverse(int l, int r) requires (Rev && hasSize) {\n   \
-    \     auto [left, right] = split_range(l, r);\n        if (!empty()) reverse();\n\
-    \        this->left_merge(left).right_merge(right);\n    }\n    /*\n    1-base\n\
-    \    */\n    Iterator kth(int k) requires (hasSize) {\n        return Iterator(find_value([&k](const\
-    \ Value &v) {\n            return v.size() < k;\n        }), this);\n    }\n};\n\
-    #line 5 \"test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp\"\
-    \n\nstruct Value {\n    ll sum;\n    int sz;\n    Value(ll sum_ = 0, int sz_ =\
-    \ 0): sum(sum_), sz(sz_) {}\n    Value operator+(const Value &rhs) const {\n \
-    \       return Value(sum + rhs.sum, sz + rhs.sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    friend ostream& operator<<(ostream& os, const\
+    \  }\n    Treap split_value(const auto &condition) requires (hasValue) {\n   \
+    \     node *left;\n        split_value(root, left, root, Value(), condition);\n\
+    \        return Treap(left);\n    }\n    Treap split_size(const int &k) requires\
+    \ (hasSize) {\n        return split_value([&k](const Value &src) {\n         \
+    \   return src.size() <= k;  \n        });\n    }\n    Key get_key() requires\
+    \ (hasKey) {\n        return get_key(root);\n    }\n    Value product() requires\
+    \ (hasValue) {\n        return get_val(root);\n    }\n    template<typename K,\
+    \ typename Comp = std::less<Key>>\n    Value prefix_product_key_lt(const K &k,\
+    \ const Comp &cmp = Comp()) requires (hasKey && hasValue) {\n        return prefix_product(root,\
+    \ [&k, &cmp](node *src) {\n            return cmp(src->key, k);\n        });\n\
+    \    }\n    template<typename K, typename Comp = std::less<Key>>\n    Value prefix_product_key_leq(const\
+    \ K &k, const Comp &cmp = Comp()) requires (hasKey && hasValue) {\n        return\
+    \ prefix_product(root, [&k, &cmp](node *src) {\n            return !cmp(k, src->key);\n\
+    \        });\n    }\n    Value prefix_product_cond(const auto &condition) requires\
+    \ (hasValue) {\n        return prefix_product_cond(root, Value(), condition);\n\
+    \    }\n    std::array<Treap, 2> split_range(int l, int r) requires (hasSize)\
+    \ {\n        assert(l <= r);\n        Treap left = split_size(l);\n        Treap\
+    \ right = split_size(r - l);\n        swap(right);\n        return {left, right};\n\
+    \    }\n    Value range_prod(int l, int r) requires (hasValue && hasSize) {\n\
+    \        auto [left, right] = split_range(l, r);\n        Value res = product();\n\
+    \        this->left_merge(left).right_merge(right);\n        return res;\n   \
+    \ }\n    void range_transform(int l, int r, const auto &tag) requires (hasTag\
+    \ && hasSize) {\n        auto [left, right] = split_range(l, r);\n        if (!empty())\
+    \ transform(tag);\n        this->left_merge(left).right_merge(right);\n    }\n\
+    \    void range_reverse(int l, int r) requires (Rev && hasSize) {\n        auto\
+    \ [left, right] = split_range(l, r);\n        if (!empty()) reverse();\n     \
+    \   this->left_merge(left).right_merge(right);\n    }\n    Iterator kth(int k)\
+    \ requires (hasSize) {\n        return Iterator(find_value([&k](const Value &v)\
+    \ {\n            return v.size() <= k;\n        }), this);\n    }\n};\n#line 5\
+    \ \"test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp\"\n\
+    \nstruct Value {\n    ll sum;\n    int sz;\n    Value(ll sum_ = 0, int sz_ = 0):\
+    \ sum(sum_), sz(sz_) {}\n    Value operator+(const Value &rhs) const {\n     \
+    \   return Value(sum + rhs.sum, sz + rhs.sz);\n    }\n    int size() const {\n\
+    \        return sz; \n    }\n    friend ostream& operator<<(ostream& os, const\
     \ Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\nusing treap\
     \ = Treap<void, Value, void, true>;\n\nint main() {\n    ios::sync_with_stdio(0),\
     \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    treap tree;\n    for (int\
@@ -376,7 +344,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-05-23 21:25:29+08:00'
+  timestamp: '2026-06-04 19:49:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp

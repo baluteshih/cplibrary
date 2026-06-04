@@ -444,7 +444,7 @@ int range_left_search(const auto &condition, int l = -1, int r = -1);
     * Return value: a `bool` value. `true` if the target is located within the node's subtree.
 
 Perform segment tree binary search within the range $[l, r)$ with left half first.
-* If not found, returns `r`.
+* Return the found index; if not found, returns `r`.
 * If `l` and `r` are not provided, searches the entire tree.
 
 ---
@@ -461,7 +461,7 @@ int range_right_search(const auto &condition, int l = -1, int r = -1);
     * Return value: a `bool` value. `true` if the target is located within the node's subtree.
 
 Perform segment tree binary search within the range $(l, r]$ with right half first.
-* If not found, returns `l`.
+* Return the found index; if not found, returns `l`.
 * If `l` and `r` are not provided, searches the entire tree.
 
 ---

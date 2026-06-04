@@ -12,7 +12,7 @@ data:
     - icon: ':warning:'
       path: Algebra/min_plus.hpp
       title: Algebra/min_plus.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/size_value.hpp
       title: Algebra/size_value.hpp
   - name: Convolution
@@ -37,9 +37,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: Cat Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/DefaultAllocator.hpp
-      title: DataStructure/DefaultAllocator.hpp
+      title: Default Allocator
     - icon: ':heavy_check_mark:'
       path: DataStructure/Discretization.hpp
       title: Discretization
@@ -51,13 +51,13 @@ data:
       title: Ordered Set
     - icon: ':heavy_check_mark:'
       path: DataStructure/PointerSegmentTree.hpp
-      title: DataStructure/PointerSegmentTree.hpp
-    - icon: ':heavy_check_mark:'
+      title: Pointer Segment Tree
+    - icon: ':x:'
       path: DataStructure/PoolAllocator.hpp
-      title: DataStructure/PoolAllocator.hpp
+      title: Pool Allocator
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
-      title: DataStructure/PotentialDisjointSet.hpp
+      title: Potential Disjoint Set
     - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
@@ -66,16 +66,16 @@ data:
       title: Sparse Table
     - icon: ':warning:'
       path: DataStructure/StackPoolAllocator.hpp
-      title: DataStructure/StackPoolAllocator.hpp
+      title: Stack Pool Allocator
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagDeque.hpp
       title: SWAG Deque
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagQueue.hpp
       title: SWAG Queue
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/Treap.hpp
-      title: DataStructure/Treap.hpp
+      title: Treap
     - icon: ':heavy_check_mark:'
       path: DataStructure/ZkwSegmentTree.hpp
       title: Zkw Segment Tree
@@ -354,7 +354,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: default_code.hpp
       title: default_code.hpp
   - name: template
@@ -779,7 +779,7 @@ data:
       title: test/2_aoj/type_of_circle.test.cpp
   - name: test/3_qoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/3_qoj/17153.test.cpp
       title: test/3_qoj/17153.test.cpp
     - icon: ':heavy_check_mark:'
@@ -837,13 +837,13 @@ data:
       title: test/7_loj/min_cost_max_flow.test.cpp
   - name: test/8_luogu
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/8_luogu/P3835.test.cpp
       title: test/8_luogu/P3835.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/8_luogu/P3835_pool.test.cpp
       title: test/8_luogu/P3835_pool.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/8_luogu/P5055.test.cpp
       title: test/8_luogu/P5055.test.cpp
 layout: toppage

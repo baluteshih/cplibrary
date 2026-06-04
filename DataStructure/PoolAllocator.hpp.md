@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/PoolAllocator.hpp\"\n\n#ifndef POOL_SIZE\n\
@@ -37,14 +37,61 @@ data:
   path: DataStructure/PoolAllocator.hpp
   requiredBy: []
   timestamp: '2026-05-23 21:25:29+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P5055.test.cpp
 documentation_of: DataStructure/PoolAllocator.hpp
 layout: document
-redirect_from:
-- /library/DataStructure/PoolAllocator.hpp
-- /library/DataStructure/PoolAllocator.hpp.html
-title: DataStructure/PoolAllocator.hpp
+title: Pool Allocator
 ---
+
+A fast memory allocator that uses a pre-allocated static pool. Note that `deallocate` does nothing; use `reset` to reclaim all memory.
+
+## Template Parameters
+
+```cpp
+template<typename T, int _POOL_SIZE = POOL_SIZE>
+struct PoolAllocator;
+```
+
+* `T`: The type of elements to allocate.
+* `_POOL_SIZE`: The maximum number of elements that can be allocated. Defaults to a defined value `POOL_SIZE` (with default value $10^7$).
+    * To modify the defined value `POOL_SIZE`, define this variable before including header.
+
+---
+
+## allocate
+
+```cpp
+template<typename... Args>
+static T* allocate(Args&&... args);
+```
+
+* $O(1)$ time
+
+Allocates memory for an object of type `T` from the pool and constructs it using the provided arguments.
+
+---
+
+## deallocate
+
+```cpp
+static void deallocate(T* p);
+```
+
+* $O(1)$ time
+
+Does nothing.
+
+---
+
+## reset
+
+```cpp
+static void reset();
+```
+
+* $O(1)$ time
+
+Resets the pool pointer, effectively reclaiming all allocated memory. Existing pointers become invalid.

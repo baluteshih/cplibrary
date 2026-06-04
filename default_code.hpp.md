@@ -381,7 +381,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
   - icon: ':heavy_check_mark:'
@@ -429,18 +429,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/min_cost_max_flow.test.cpp
     title: test/7_loj/min_cost_max_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
@@ -508,7 +508,7 @@ data:
   path: default_code.hpp
   requiredBy: []
   timestamp: '2026-02-27 19:30:58+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp

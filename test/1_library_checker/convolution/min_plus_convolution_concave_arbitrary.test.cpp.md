@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Convolution/min_plus_convolution_concave.hpp
     title: Convolution/min_plus_convolution_concave.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
