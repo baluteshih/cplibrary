@@ -59,6 +59,7 @@ struct node {
 * `lazy`: The pending lazy tag to be propagated to children.
 * `rev`: A flag indicating if the subtree needs to be reversed.
 * `pri`: A random priority used to maintain the Treap's balanced heap property.
+    * To change the seed of the random engine, define the variable `RNGSEED` before including header.
 
 ### `operator<<`
 

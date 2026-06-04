@@ -73,11 +73,11 @@ int main() {
 
     for (int i = 0; i <= n; ++i) {
         for (auto [b, qid] : qry[i]) {
-            if (b <= lft.size()) ans[qid] = lft.kth(b)->key;
+            if (b <= lft.size()) ans[qid] = lft.kth(b - 1)->key;
             else {
                 b -= lft.size();
-                if (b <= mid.size()) ans[qid] = mid.kth(b)->key;
-                else ans[qid] = rgt.kth(b - mid.size())->key;
+                if (b <= mid.size()) ans[qid] = mid.kth(b - 1)->key;
+                else ans[qid] = rgt.kth(b - mid.size() - 1)->key;
             }
         }
         if ((lft.product() + mid.product() + rgt.product()).inc)
