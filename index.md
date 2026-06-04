@@ -12,7 +12,7 @@ data:
     - icon: ':warning:'
       path: Algebra/min_plus.hpp
       title: Algebra/min_plus.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/size_value.hpp
       title: Algebra/size_value.hpp
   - name: Convolution
@@ -37,7 +37,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: Cat Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
     - icon: ':heavy_check_mark:'
@@ -52,7 +52,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PointerSegmentTree.hpp
       title: Pointer Segment Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PoolAllocator.hpp
       title: Pool Allocator
     - icon: ':heavy_check_mark:'
@@ -73,7 +73,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SwagQueue.hpp
       title: SWAG Queue
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Treap.hpp
       title: Treap
     - icon: ':heavy_check_mark:'
@@ -354,7 +354,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: default_code.hpp
       title: default_code.hpp
   - name: template
@@ -779,7 +779,7 @@ data:
       title: test/2_aoj/type_of_circle.test.cpp
   - name: test/3_qoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/3_qoj/17153.test.cpp
       title: test/3_qoj/17153.test.cpp
     - icon: ':heavy_check_mark:'
@@ -837,13 +837,13 @@ data:
       title: test/7_loj/min_cost_max_flow.test.cpp
   - name: test/8_luogu
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P3835.test.cpp
       title: test/8_luogu/P3835.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P3835_pool.test.cpp
       title: test/8_luogu/P3835_pool.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/8_luogu/P5055.test.cpp
       title: test/8_luogu/P5055.test.cpp
 layout: toppage
