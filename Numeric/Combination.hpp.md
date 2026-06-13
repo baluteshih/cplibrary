@@ -131,16 +131,16 @@ data:
   isVerificationFile: false
   path: Numeric/Combination.hpp
   requiredBy:
-  - Polynomial/shift.hpp
-  - Polynomial/lagrange_interpolate_iota.hpp
   - Numbers/bell_number.hpp
+  - Polynomial/lagrange_interpolate_iota.hpp
+  - Polynomial/shift.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
 documentation_of: Numeric/Combination.hpp
 layout: document
 redirect_from:

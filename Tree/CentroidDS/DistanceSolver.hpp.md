@@ -306,8 +306,8 @@ data:
   timestamp: '2026-05-31 14:44:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
 documentation_of: Tree/CentroidDS/DistanceSolver.hpp
 layout: document
 redirect_from:

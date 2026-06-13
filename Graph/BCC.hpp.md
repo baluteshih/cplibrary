@@ -164,8 +164,8 @@ data:
   timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/st_numbering.test.cpp
   - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/st_numbering.test.cpp
 documentation_of: Graph/BCC.hpp
 layout: document
 redirect_from:

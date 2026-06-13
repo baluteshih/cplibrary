@@ -80,12 +80,12 @@ data:
   timestamp: '2026-06-03 13:51:43+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/ordered_set.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/data_structure/ordered_set.test.cpp
 documentation_of: DataStructure/BIT.hpp
 layout: document
 title: Binary Indexed Tree (BIT)

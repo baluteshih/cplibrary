@@ -3,8 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: DataStructure/LeftistTree.hpp
+    title: Leftist Tree
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
+  - icon: ':heavy_check_mark:'
+    path: Graph/minimum_arborescence.hpp
+    title: Graph/minimum_arborescence.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -15,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/directedmst.test.cpp
+    title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
@@ -46,16 +55,19 @@ data:
   isVerificationFile: false
   path: Algebra/size_value.hpp
   requiredBy:
+  - Graph/minimum_arborescence.hpp
+  - DataStructure/LeftistTree.hpp
   - DataStructure/Treap.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/graph/directedmst.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/3_qoj/17153.test.cpp
 documentation_of: Algebra/size_value.hpp
 layout: document

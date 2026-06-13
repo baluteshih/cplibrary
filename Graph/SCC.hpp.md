@@ -144,14 +144,14 @@ data:
   isVerificationFile: false
   path: Graph/SCC.hpp
   requiredBy:
-  - Misc/2sat.hpp
   - Graph/incremental_scc.hpp
+  - Misc/2sat.hpp
   timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - test/1_library_checker/other/two_sat.test.cpp
 documentation_of: Graph/SCC.hpp
 layout: document
 redirect_from:

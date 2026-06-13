@@ -281,7 +281,7 @@ data:
     \        return a ? a->val : Default;\n    }\n    static int get_size(node *a)\
     \ requires (hasSize) { \n        return a ? a->val.size() : 0;\n    }\n    static\
     \ void free(node *&ptr) requires (!persistent) {\n        if (ptr == nullptr)\
-    \ return;\n        free(ptr->l);\n        free(ptr->r);\n        delete ptr;\n\
+    \ return;\n        free(ptr->l);\n        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n\
     \        ptr = nullptr;\n    }\n    static node* find_min(node *start) {\n   \
     \     if (!start) return nullptr;\n        node *res = start;\n        while (true)\
     \ {\n            if constexpr (hasTag || Rev) res->down();\n            if (res->l)\
@@ -485,7 +485,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-04 19:49:38+08:00'
+  timestamp: '2026-06-13 18:42:24+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

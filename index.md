@@ -47,6 +47,9 @@ data:
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
     - icon: ':heavy_check_mark:'
+      path: DataStructure/LeftistTree.hpp
+      title: Leftist Tree
+    - icon: ':heavy_check_mark:'
       path: DataStructure/OrderedSet.hpp
       title: Ordered Set
     - icon: ':heavy_check_mark:'
@@ -191,6 +194,9 @@ data:
       path: Graph/incremental_scc.hpp
       title: Graph/incremental_scc.hpp
     - icon: ':heavy_check_mark:'
+      path: Graph/minimum_arborescence.hpp
+      title: Graph/minimum_arborescence.hpp
+    - icon: ':heavy_check_mark:'
       path: Graph/minimum_spanning_tree.hpp
       title: Graph/minimum_spanning_tree.hpp
   - name: Matrix
@@ -243,6 +249,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/DynamicModint.hpp
       title: Numeric/DynamicModint.hpp
+    - icon: ':warning:'
+      path: Numeric/Fraction.hpp
+      title: Numeric/Fraction.hpp
     - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
@@ -536,6 +545,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
       title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/graph/directedmst.test.cpp
+      title: test/1_library_checker/graph/directedmst.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/dominatortree.test.cpp
       title: test/1_library_checker/graph/dominatortree.test.cpp

@@ -416,13 +416,13 @@ data:
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/2_aoj/convex_cut.test.cpp
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
-  - test/4_codeforces/104114B.test.cpp
   - test/4_codeforces/101242J.test.cpp
+  - test/4_codeforces/104114B.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/3_qoj/2162.test.cpp
+  - test/2_aoj/convex_cut.test.cpp
 documentation_of: Geometry/convex.hpp
 layout: document
 redirect_from:

@@ -54,6 +54,9 @@ data:
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
   - icon: ':heavy_check_mark:'
+    path: Graph/minimum_arborescence.hpp
+    title: Graph/minimum_arborescence.hpp
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -93,6 +96,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
     title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/directedmst.test.cpp
+    title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/dominatortree.test.cpp
     title: test/1_library_checker/graph/dominatortree.test.cpp
@@ -345,68 +351,70 @@ data:
   isVerificationFile: false
   path: Graph/base.hpp
   requiredBy:
-  - Tree/centroid_divide_and_conquer.hpp
-  - Tree/CentroidTree.hpp
-  - Tree/Tree.hpp
-  - Tree/HeavyLightDecomposition.hpp
-  - Tree/all_direction_composition.hpp
-  - Tree/TreeTools.hpp
-  - Tree/CentroidDS/DistanceSolver.hpp
-  - Misc/2sat.hpp
-  - Graph/BipartiteGraph.hpp
-  - Graph/incremental_scc.hpp
-  - Graph/Dijkstra.hpp
-  - Graph/BCC.hpp
-  - Graph/dominator_tree.hpp
-  - Graph/Matching.hpp
-  - Graph/ECC.hpp
-  - Graph/enumerate_c3.hpp
   - Graph/BipartiteMatching.hpp
+  - Graph/minimum_arborescence.hpp
+  - Graph/enumerate_c3.hpp
+  - Graph/dominator_tree.hpp
+  - Graph/BCC.hpp
   - Graph/SCC.hpp
+  - Graph/Dijkstra.hpp
   - Graph/minimum_spanning_tree.hpp
+  - Graph/ECC.hpp
+  - Graph/incremental_scc.hpp
+  - Graph/Matching.hpp
   - Graph/bipolar_orientation.hpp
+  - Graph/BipartiteGraph.hpp
+  - Tree/Tree.hpp
+  - Tree/centroid_divide_and_conquer.hpp
+  - Tree/all_direction_composition.hpp
+  - Tree/CentroidTree.hpp
+  - Tree/HeavyLightDecomposition.hpp
+  - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/TreeTools.hpp
+  - Flow/min_cost_circulation.hpp
+  - Flow/min_cost_max_flow.hpp
+  - Flow/bounded_cost_circulation.hpp
   - Flow/min_cost_circulation_old.hpp
   - Flow/bounded_flow.hpp
   - Flow/Dinic.hpp
-  - Flow/bounded_cost_circulation.hpp
-  - Flow/min_cost_circulation.hpp
-  - Flow/min_cost_max_flow.hpp
+  - Misc/2sat.hpp
   timestamp: '2026-05-19 02:16:25+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/7_loj/max_bounded_flow.test.cpp
-  - test/7_loj/min_cost_max_flow.test.cpp
-  - test/7_loj/maxflow.test.cpp
-  - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
-  - test/2_aoj/minimum_cost_flow.test.cpp
-  - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - test/1_library_checker/graph/enumerate_triangles.test.cpp
-  - test/1_library_checker/graph/st_numbering.test.cpp
-  - test/1_library_checker/graph/bipartitematching.test.cpp
-  - test/1_library_checker/graph/two_edge_connected_components.test.cpp
-  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - test/1_library_checker/graph/shortest_path.test.cpp
-  - test/1_library_checker/graph/dominatortree.test.cpp
-  - test/1_library_checker/graph/cycle_detection_directed.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - test/1_library_checker/graph/biconnected_components.test.cpp
-  - test/1_library_checker/graph/general_matching.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/tree/jump_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/tree_diameter.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
+  - test/1_library_checker/graph/bipartitematching.test.cpp
+  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
+  - test/1_library_checker/graph/shortest_path.test.cpp
+  - test/1_library_checker/graph/directedmst.test.cpp
+  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/st_numbering.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/general_matching.test.cpp
+  - test/1_library_checker/graph/cycle_detection_directed.test.cpp
+  - test/1_library_checker/graph/strongly_connected_components.test.cpp
+  - test/1_library_checker/graph/enumerate_triangles.test.cpp
+  - test/1_library_checker/graph/two_edge_connected_components.test.cpp
+  - test/1_library_checker/graph/dominatortree.test.cpp
   - test/4_codeforces/106033E.test.cpp
+  - test/7_loj/bounded_flow.test.cpp
+  - test/7_loj/min_cost_max_flow.test.cpp
+  - test/7_loj/maxflow.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
+  - test/7_loj/max_bounded_flow.test.cpp
+  - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
+  - test/2_aoj/minimum_cost_flow.test.cpp
 documentation_of: Graph/base.hpp
 layout: document
 redirect_from:

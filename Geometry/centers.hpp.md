@@ -233,10 +233,10 @@ data:
   timestamp: '2026-05-04 02:28:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/2_aoj/incircle_of_a_triangle.test.cpp
-  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/3_qoj/6445.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
+  - test/2_aoj/incircle_of_a_triangle.test.cpp
 documentation_of: Geometry/centers.hpp
 layout: document
 redirect_from:
