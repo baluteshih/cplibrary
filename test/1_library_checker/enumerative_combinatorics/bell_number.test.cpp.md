@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bell_number
@@ -191,8 +191,8 @@ data:
     \n\ntemplate<typename T>\nrequires std::derived_from<T, internal::modint_base>\n\
     class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
     \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
-    \    static void ensure_upper_bound(int n) {\n        if (max_size < n) {\n  \
-    \          while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
+    \    static void set_upper_bound(int n) {\n        if (max_size < n) {\n     \
+    \       while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
     \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
     \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
     \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
@@ -200,26 +200,26 @@ data:
     \    }\npublic:\n    static constexpr int ntt_max_limit = []() {\n        unsigned\
     \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
     \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
-    \ limit;\n    }();\n    template<bool inv = false>\n    static void ntt(std::vector<T>\
-    \ &a) { //0 <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1))\
-    \ == 0);\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j < n\
-    \ - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n    \
-    \        if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s = 1;\
-    \ s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n      \
-    \          for (int j = 0; j < s; ++j) {\n                    T tmp = a[i + s\
-    \ + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n     \
-    \               a[i + j] += tmp;\n                }\n            }\n        }\n\
-    \        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ limit;\n    }();\n    static void ntt(vector<T> &a, bool inv = false) { //0\
+    \ <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) == 0);\n\
+    \        if ((int)maxsize() < n) set_upper_bound(n);\n        for (int i = 0,\
+    \ j = 1; j < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>=\
+    \ 1);\n            if (j < i) swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        reverse(a.begin()\
     \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
-    \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
-    \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
-    \ b.empty()) return std::vector<T>();\n        int n = 1, sz = int(a.size()) +\
-    \ int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit\
-    \ && \"the result length exceeds the limit of the prime can support\");\n    \
-    \    a.resize(n), b.resize(n);\n        ntt(a), ntt(b);\n        for (int i =\
-    \ 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n        ntt<true>(a);\n   \
-    \     a.resize(sz);\n        return a;\n    }\n};\n#line 4 \"Polynomial/Polynomial.hpp\"\
-    \n\ntemplate<class T>\nclass Poly : public std::vector<T> {\n    using std::vector<T>::vector;\n\
+    \    static size_t maxsize() {\n        return max_size;\n    }\n    static vector<T>\
+    \ convolution(vector<T> a, vector<T> b) {\n        if (a.empty() || b.empty())\
+    \ return vector<T>();\n        int n = 1, sz = int(a.size()) + int(b.size()) -\
+    \ 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"\
+    the result length exceeds the limit of the prime can support\");\n        a.resize(n),\
+    \ b.resize(n);\n        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n\
+    \            a[i] = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n\
+    \        return a;\n    }\n};\n#line 4 \"Polynomial/Polynomial.hpp\"\n\ntemplate<class\
+    \ T>\nclass Poly : public std::vector<T> {\n    using std::vector<T>::vector;\n\
     \    int n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
@@ -241,7 +241,7 @@ data:
     \    }\n    Poly &dft(int len) {\n        assert((len & (len - 1)) == 0);\n  \
     \      isz(len);\n        NTT<T>::ntt(*this);\n        return *this;\n    }\n\
     \    Poly &idft(int len) {\n        assert((len & (len - 1)) == 0);\n        isz(len);\n\
-    \        NTT<T>::ntt<true>(*this);\n        return *this;\n    }\n    Poly Inv()\
+    \        NTT<T>::ntt(*this, true);\n        return *this;\n    }\n    Poly Inv()\
     \ const { // (*this)[0] != 0, 5e5/212ms\n        if (n() == 1) return {(*this)[0].inv()};\n\
     \        int m = ceilpow2(n() * 2);\n        Poly Xi = Poly(*this, (n() + 1) /\
     \ 2).Inv().isz(m);\n        Poly Y(*this, m);\n        Xi.dft(m), Y.dft(m);\n\
@@ -327,8 +327,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   requiredBy: []
-  timestamp: '2026-06-13 20:52:08+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-05-29 21:39:52+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
 layout: document

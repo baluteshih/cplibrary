@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/cyc_bitonic_search.hpp
     title: Misc/cyc_bitonic_search.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
