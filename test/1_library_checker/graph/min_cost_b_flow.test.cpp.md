@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
