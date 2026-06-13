@@ -210,7 +210,7 @@ class Treap {
         if (ptr == nullptr) return;
         free(ptr->l);
         free(ptr->r);
-        delete ptr;
+        NodeAlloc::deallocate(ptr);
         ptr = nullptr;
     }
     static node* find_min(node *start) {
