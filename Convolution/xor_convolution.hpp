@@ -6,8 +6,12 @@
 template<typename T>
 std::vector<T> xor_convolution(std::vector<T> a, std::vector<T> b) {
     assert(a.size() == b.size());
-    bitwise_transform::transform<bitwise_transform::popcount>(a);  
-    bitwise_transform::transform<bitwise_transform::popcount>(b);
+    if (a == b) 
+        bitwise_transform::transform<bitwise_transform::popcount>(a), b = a;
+    else {
+        bitwise_transform::transform<bitwise_transform::popcount>(a);
+        bitwise_transform::transform<bitwise_transform::popcount>(b);
+    }
     int n = a.size();
     for (int i = 0; i < n; ++i) a[i] *= b[i];
     bitwise_transform::transform<bitwise_transform::popcount>(a);
