@@ -189,10 +189,11 @@ data:
     \ arr[std::popcount(static_cast<unsigned int>(i))][i];\n        return res;\n\
     \    }\n}\n#line 4 \"Convolution/and_convolution.hpp\"\n\ntemplate<typename T>\n\
     std::vector<T> and_convolution(std::vector<T> a, std::vector<T> b) {\n    assert(a.size()\
-    \ == b.size());\n    bitwise_transform::transform<bitwise_transform::superset,\
-    \ bitwise_transform::zeta>(a);  \n    bitwise_transform::transform<bitwise_transform::superset,\
-    \ bitwise_transform::zeta>(b);\n    int n = a.size();\n    for (int i = 0; i <\
-    \ n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::superset,\
+    \ == b.size());\n    if (a == b)\n        bitwise_transform::transform<bitwise_transform::superset,\
+    \ bitwise_transform::zeta>(a), b = a;\n    else {\n        bitwise_transform::transform<bitwise_transform::superset,\
+    \ bitwise_transform::zeta>(a);  \n        bitwise_transform::transform<bitwise_transform::superset,\
+    \ bitwise_transform::zeta>(b);\n    }\n    int n = a.size();\n    for (int i =\
+    \ 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::superset,\
     \ bitwise_transform::mobius>(a);\n    return a;\n}\n#line 6 \"test/1_library_checker/convolution/bitwise_and_convolution.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0),\
     \ cin.tie(0);\n    int n;\n    cin >> n;\n    n = 1 << n;\n    vector<mint> arr(n),\
@@ -216,7 +217,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   requiredBy: []
-  timestamp: '2026-06-14 15:20:09+08:00'
+  timestamp: '2026-06-14 22:25:05+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp

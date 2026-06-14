@@ -189,9 +189,10 @@ data:
     \ arr[std::popcount(static_cast<unsigned int>(i))][i];\n        return res;\n\
     \    }\n}\n#line 5 \"Convolution/xor_convolution.hpp\"\n\ntemplate<typename T>\n\
     std::vector<T> xor_convolution(std::vector<T> a, std::vector<T> b) {\n    assert(a.size()\
-    \ == b.size());\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\
-    \  \n    bitwise_transform::transform<bitwise_transform::popcount>(b);\n    int\
-    \ n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \ == b.size());\n    if (a == b) \n        bitwise_transform::transform<bitwise_transform::popcount>(a),\
+    \ b = a;\n    else {\n        bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \        bitwise_transform::transform<bitwise_transform::popcount>(b);\n    }\n\
+    \    int n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
     \    if constexpr (std::derived_from<T, internal::modint_base>) {\n        T inv\
     \ = T(n).inv();\n        for (int i = 0; i < n; ++i) a[i] *= inv;\n    }\n   \
     \ else {\n        for (int i = 0; i < n; ++i) a[i] /= n;\n    }\n    return a;\n\
@@ -218,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
   requiredBy: []
-  timestamp: '2026-06-14 15:20:09+08:00'
+  timestamp: '2026-06-14 22:25:05+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp

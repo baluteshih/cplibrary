@@ -39,23 +39,26 @@ data:
     \ arr[std::popcount(static_cast<unsigned int>(i))][i];\n        return res;\n\
     \    }\n}\n#line 4 \"Convolution/or_convolution.hpp\"\n\ntemplate<typename T>\n\
     std::vector<T> or_convolution(std::vector<T> a, std::vector<T> b) {\n    assert(a.size()\
-    \ == b.size());\n    bitwise_transform::transform<bitwise_transform::subset, bitwise_transform::zeta>(a);\
-    \  \n    bitwise_transform::transform<bitwise_transform::subset, bitwise_transform::zeta>(b);\n\
-    \    int n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::subset,\
+    \ == b.size());\n    if (a == b)\n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(a), b = a; \n    else {\n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(a);  \n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(b);\n    }\n    int n = a.size();\n    for (int i =\
+    \ 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::subset,\
     \ bitwise_transform::mobius>(a);\n    return a;\n}\n"
   code: "#pragma once\n\n#include \"Convolution/bitwise_transform.hpp\"\n\ntemplate<typename\
     \ T>\nstd::vector<T> or_convolution(std::vector<T> a, std::vector<T> b) {\n  \
-    \  assert(a.size() == b.size());\n    bitwise_transform::transform<bitwise_transform::subset,\
-    \ bitwise_transform::zeta>(a);  \n    bitwise_transform::transform<bitwise_transform::subset,\
-    \ bitwise_transform::zeta>(b);\n    int n = a.size();\n    for (int i = 0; i <\
-    \ n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::subset,\
+    \  assert(a.size() == b.size());\n    if (a == b)\n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(a), b = a; \n    else {\n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(a);  \n        bitwise_transform::transform<bitwise_transform::subset,\
+    \ bitwise_transform::zeta>(b);\n    }\n    int n = a.size();\n    for (int i =\
+    \ 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::subset,\
     \ bitwise_transform::mobius>(a);\n    return a;\n}\n"
   dependsOn:
   - Convolution/bitwise_transform.hpp
   isVerificationFile: false
   path: Convolution/or_convolution.hpp
   requiredBy: []
-  timestamp: '2026-06-14 15:20:09+08:00'
+  timestamp: '2026-06-14 22:25:05+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Convolution/or_convolution.hpp

@@ -101,18 +101,21 @@ data:
     \   template <class T> using is_modint_t = std::enable_if_t<is_modint<T>::value>;\n\
     }  // namespace internal\n#line 5 \"Convolution/xor_convolution.hpp\"\n\ntemplate<typename\
     \ T>\nstd::vector<T> xor_convolution(std::vector<T> a, std::vector<T> b) {\n \
-    \   assert(a.size() == b.size());\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\
-    \  \n    bitwise_transform::transform<bitwise_transform::popcount>(b);\n    int\
-    \ n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \   assert(a.size() == b.size());\n    if (a == b) \n        bitwise_transform::transform<bitwise_transform::popcount>(a),\
+    \ b = a;\n    else {\n        bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \        bitwise_transform::transform<bitwise_transform::popcount>(b);\n    }\n\
+    \    int n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
     \    if constexpr (std::derived_from<T, internal::modint_base>) {\n        T inv\
     \ = T(n).inv();\n        for (int i = 0; i < n; ++i) a[i] *= inv;\n    }\n   \
     \ else {\n        for (int i = 0; i < n; ++i) a[i] /= n;\n    }\n    return a;\n\
     }\n"
   code: "#pragma once\n\n#include \"Convolution/bitwise_transform.hpp\"\n#include\
     \ \"Numeric/internal_math.hpp\"\n\ntemplate<typename T>\nstd::vector<T> xor_convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n    assert(a.size() == b.size());\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\
-    \  \n    bitwise_transform::transform<bitwise_transform::popcount>(b);\n    int\
-    \ n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \ a, std::vector<T> b) {\n    assert(a.size() == b.size());\n    if (a == b) \n\
+    \        bitwise_transform::transform<bitwise_transform::popcount>(a), b = a;\n\
+    \    else {\n        bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
+    \        bitwise_transform::transform<bitwise_transform::popcount>(b);\n    }\n\
+    \    int n = a.size();\n    for (int i = 0; i < n; ++i) a[i] *= b[i];\n    bitwise_transform::transform<bitwise_transform::popcount>(a);\n\
     \    if constexpr (std::derived_from<T, internal::modint_base>) {\n        T inv\
     \ = T(n).inv();\n        for (int i = 0; i < n; ++i) a[i] *= inv;\n    }\n   \
     \ else {\n        for (int i = 0; i < n; ++i) a[i] /= n;\n    }\n    return a;\n\
@@ -123,7 +126,7 @@ data:
   isVerificationFile: false
   path: Convolution/xor_convolution.hpp
   requiredBy: []
-  timestamp: '2026-06-14 15:20:09+08:00'
+  timestamp: '2026-06-14 22:25:05+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
