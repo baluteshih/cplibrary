@@ -55,6 +55,12 @@ data:
     path: test/1_library_checker/biginteger/multiplication.test.cpp
     title: test/1_library_checker/biginteger/multiplication.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+    title: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+    title: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/convolution.test.cpp
     title: test/1_library_checker/convolution/convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -171,6 +177,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
+    title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
@@ -365,6 +374,7 @@ data:
   timestamp: '2026-05-29 21:39:52+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
   - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
@@ -374,6 +384,8 @@ data:
   - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+  - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp

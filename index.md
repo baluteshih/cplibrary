@@ -21,6 +21,12 @@ data:
       path: Convolution/OnlineConvolution.hpp
       title: Convolution/OnlineConvolution.hpp
     - icon: ':heavy_check_mark:'
+      path: Convolution/and_convolution.hpp
+      title: Convolution/and_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/bitwise_transform.hpp
+      title: Convolution/bitwise_transform.hpp
+    - icon: ':heavy_check_mark:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -29,6 +35,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/min_plus_convolution_concave.hpp
       title: Convolution/min_plus_convolution_concave.hpp
+    - icon: ':warning:'
+      path: Convolution/or_convolution.hpp
+      title: Convolution/or_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/subset_convolution.hpp
+      title: Convolution/subset_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/xor_convolution.hpp
+      title: Convolution/xor_convolution.hpp
   - name: DataStructure
     pages:
     - icon: ':heavy_check_mark:'
@@ -394,6 +409,12 @@ data:
   - name: test/1_library_checker/convolution
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+      title: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+      title: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/convolution/convolution.test.cpp
       title: test/1_library_checker/convolution/convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -666,6 +687,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
       title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
+  - name: test/1_library_checker/set_power_series
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
+      title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - name: test/1_library_checker/string
     pages:
     - icon: ':heavy_check_mark:'
