@@ -14,14 +14,17 @@ pre_func: void pre_func(int u, int f);
     - the center would be called at first with pre_func(c, -1);
 post_func: void post_func(int u, std::vector<int> child);
     - u: current vertex, child: child vertices
+post_merge_func: void post_merge_func(int c, std::vector<int> cent_child);
+    - c: the center, cent_child: c's center children 
 return value: c_pa[u]: the centroid parent of u
 */
 
-template<typename _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc>
-std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func = NullFunc{}) {
+template<typename _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc, typename F_PMerge = NullFunc>
+std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func = NullFunc{}, F_PMerge post_merge_func = NullFunc{}) {
     constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>, NullFunc>;
     constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>, NullFunc>;
     constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>, NullFunc>;
+    constexpr bool usePostMerge  = !std::is_same_v<std::decay_t<decltype(post_merge_func)>, NullFunc>;
     int n = tree.n();
     std::vector<int> done(n), sz(n), res(n);
     auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) -> void {
@@ -47,10 +50,10 @@ std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullF
             }
         if constexpr (usePost) post_func(u, child);
     };
-    auto cut = [&](auto self, int u, int f, int num) -> void {
+    auto cut = [&](auto self, int u, int num) -> int {
         int mx = n + 1, c = 0;
         get_cent(get_cent, u, -1, mx, c, num);
-        done[c] = 1, res[c] = f;
+        done[c] = 1;
         std::conditional_t<useMerge, std::vector<std::vector<int>>, typename _Tree::Empty> groups;
         if constexpr (usePre) pre_func(c, -1);
         std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty> child;
@@ -66,15 +69,21 @@ std::vector<int> centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullF
             }
         if constexpr (usePost) post_func(c, child);
         if constexpr (useMerge) merge_func(c, groups);
+        std::conditional_t<usePostMerge, std::vector<int>, typename _Tree::Empty> cent_child;
         for (auto [v, eid] : tree[c])
             if (!done[v]) {
+                int ch;
                 if (sz[v] > sz[c])
-                    self(self, v, c, num - sz[c]);
+                    ch = self(self, v, num - sz[c]);
                 else
-                    self(self, v, c, sz[v]);
+                    ch = self(self, v, sz[v]);
+                res[ch] = c;
+                if constexpr (usePostMerge) cent_child.push_back(ch);
             }
+        if constexpr (usePostMerge) post_merge_func(c, cent_child);
         done[c] = 0;
+        return c;
     };
-    cut(cut, 0, -1, n);
+    res[cut(cut, 0, n)] = -1;
     return res;
 }
