@@ -133,6 +133,9 @@ data:
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+    title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -382,6 +385,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp

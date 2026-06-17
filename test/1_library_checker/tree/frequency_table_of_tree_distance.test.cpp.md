@@ -2,8 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
+  - icon: ':heavy_check_mark:'
     path: Convolution/convolution.hpp
     title: Convolution/convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/UnifiedWeight.hpp
+    title: Graph/UnifiedWeight.hpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/base.hpp
+    title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
@@ -20,6 +29,12 @@ data:
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   - icon: ':heavy_check_mark:'
+    path: Tree/Tree.hpp
+    title: Tree/Tree.hpp
+  - icon: ':heavy_check_mark:'
+    path: Tree/centroid_divide_and_conquer.hpp
+    title: Tree/centroid_divide_and_conquer.hpp
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
@@ -29,18 +44,18 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod
+    - https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
   bundledCode: "#line 1 \"test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#line 2\
-    \ \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef\
-    \ long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define\
-    \ X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(),\
-    \ v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream& os, const\
-    \ pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second << \")\"\
-    ;\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer = requires(T&\
-    \ a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
+    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
+    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
+    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
+    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
+    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
+    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
     \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
     \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
     \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
@@ -64,9 +79,218 @@ data:
     \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
     \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
     }\n#line 3 \"test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp\"\
-    \n\n#line 2 \"Convolution/convolution.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\
-    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line 2\
-    \ \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n\n#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
+    \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
+    \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
+    \ bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool\
+    \ hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
+    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
+    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
+    \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
+    \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
+    \ <typename OtherEdge>\n        edge_v(const OtherEdge &other) requires(hasEdgeWeight\
+    \ && requires(OtherEdge o) { o.weight; }) \n            : from(other.from), to(other.to),\
+    \ weight(other.weight) {}\n        template <typename OtherEdge>\n        edge_v(const\
+    \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
+    \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
+    \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
+    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
+    \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
+    \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
+    \ int>>> G;\n    std::vector<edge_v> edges;\n    [[no_unique_address]] std::conditional_t<hasVertexWeight,\
+    \ std::vector<Vertex>, Empty> weight;\n    Graph(int _n) : G(_n) {\n        if\
+    \ constexpr (hasVertexWeight) weight.resize(_n);\n    }\n    int n() const { return\
+    \ G.size(); }\n    int m() const { return edges.size(); }\n    int opposite(int\
+    \ u, int eid) const { return edges[eid].from ^ edges[eid].to ^ u; }\n    auto&\
+    \ edge(int idx) {\n        return edges[idx]; \n    }\n    auto &vertex(int idx)\
+    \ requires (hasVertexWeight) {\n        return weight[idx];\n    }\n    const\
+    \ auto& edge(int idx) const {\n        return edges[idx]; \n    }\n    const auto\
+    \ &vertex(int idx) const requires (hasVertexWeight) {\n        return weight[idx];\n\
+    \    }\n    auto &vertex_weight() requires (hasVertexWeight) {\n        return\
+    \ weight;\n    }\n    const auto &vertex_weight() const requires (hasVertexWeight)\
+    \ {\n        return weight;\n    }\n    void set_vertex_weight(const auto &vec)\
+    \ {\n        for (int i = 0; i < n(); ++i)\n            weight[i] = vec[i];\n\
+    \    }\n    void add_edge(int u, int v, const auto &w) requires (hasEdgeWeight)\
+    \ {\n        G[u].emplace_back(v, edges.size());\n        if constexpr (!directed)\
+    \ G[v].emplace_back(u, edges.size());\n        edges.emplace_back(u, v, w);\n\
+    \    }\n    void add_edge(int u, int v) requires (!hasEdgeWeight) {\n        G[u].emplace_back(v,\
+    \ edges.size());\n        if constexpr (!directed) G[v].emplace_back(u, edges.size());\n\
+    \        edges.emplace_back(u, v);\n    }\n    void add_edge(const edge_v &e)\
+    \ {\n        G[e.from].emplace_back(e.to, edges.size());\n        if constexpr\
+    \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
+    \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
+    \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
+    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
+    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
+    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \                    }\n                    if (cyc_end == u) rt = 2;\n      \
+    \              return rt;\n                }\n            }\n            vis[u]\
+    \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i)\n            if (!vis[i] && dfs(dfs, i, -1))\n                break;\n\
+    \        std::ranges::reverse(res_v);\n        std::ranges::reverse(res_e);\n\
+    \        return std::make_pair(res_v, res_e);\n    }\n    Graph<true, Edge, Vertex>\
+    \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
+    \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
+    \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
+    \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
+    \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
+    \ =\n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
+    \ A>& b) {\n        a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept\
+    \ ValidSubtractableState = \n    requires(const ReplaceVoid<A, B>& a, \n     \
+    \        const ReplaceVoid<B, A>& b) {\n        a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
+    \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
+    \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
+    \ UnifiedWeight<Edge, Vertex>::type;\n#line 5 \"Tree/Tree.hpp\"\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass Tree : public Graph<false, Edge,\
+    \ Vertex> {\npublic:\n    using super = Graph<false, Edge, Vertex>;\n    using\
+    \ super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using WeightType\
+    \ = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n    std::vector<int>\
+    \ pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n    Tree(int\
+    \ n): super(n), current_root(-1) {}\n    Tree(const super &graph, const std::vector<int>\
+    \ &edge_index): super(graph.n()), current_root(-1) {\n        assert(int(edge_index.size())\
+    \ + 1 == this->n());\n        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
+    \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
+    \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
+    \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
+    \ preorder.reserve(this->n());\n        postorder.clear(), postorder.reserve(this->n());\n\
+    \        int dft = -1;\n        auto dfs = [&](auto& self, int u, int f) -> void\
+    \ {\n            pa[u] = f;\n            dfs_in[u] = ++dft;\n            preorder.push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (eid != f)\n\
+    \                    self(self, v, eid);\n            dfs_out[u] = dft;\n    \
+    \        postorder.push_back(u);\n        };\n        dfs(dfs, root, -1);\n  \
+    \  }\n    bool ancestor(int u, int v) const {\n        return dfs_in[u] <= dfs_in[v]\
+    \ && dfs_out[v] <= dfs_out[u];\n    }\n    void run_order(const std::vector<int>\
+    \ &order, const auto &func) {\n        for (int i : order)\n            func(i);\n\
+    \    }\n    void predfs(const auto &func) {\n        run_order(preorder, func);\n\
+    \    }\n    void postdfs(const auto &func) {\n        run_order(postorder, func);\n\
+    \    }\n    int parent(int u) const {\n        if (pa[u] == -1) return u;\n  \
+    \      return this->opposite(u, pa[u]);\n    }\n    int parent_eid(int u) const\
+    \ {\n        return pa[u];\n    }\n    super::edge_v& parent_edge(int u) {\n \
+    \       assert(pa[u] != -1);\n        return this->edge(pa[u]);\n    }\n    super::edge_v\
+    \ parent_edge(int u) const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n\
+    \    }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
+    \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
+    \ -1);\n            traverse(root);\n        }\n        std::vector<int> res(this->n());\n\
+    \        for (int i = 0; i < this->n(); ++i)\n            res[i] = parent(i);\n\
+    \        return res;\n    }\n    std::vector<int> depth(int root = -1) {\n   \
+    \     if (current_root == -1 || (root != -1 && current_root != root)) {\n    \
+    \        assert(root != -1);\n            traverse(root);\n        }\n       \
+    \ std::vector<int> res(this->n(), -1);\n        predfs([&](int u) {\n        \
+    \    res[u] = res[parent(u)] + 1;\n        });\n        return res;\n    }\n \
+    \   auto distance_edge(int root = -1) requires (hasEdgeWeight) {\n        if (current_root\
+    \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
+    \ -1);\n            traverse(root);\n        }\n        std::vector<Edge> res(this->n());\n\
+    \        predfs([&](int u) {\n            if (parent_eid(u) != -1)\n         \
+    \       res[u] = res[parent(u)] + parent_edge(u).weight;\n        });\n      \
+    \  return res;\n    }\n    auto weighted_distance(int root = -1) requires (ValidAddableState<Edge,\
+    \ Vertex>) {\n        if (current_root == -1 || (root != -1 && current_root !=\
+    \ root)) {\n            assert(root != -1);\n            traverse(root);\n   \
+    \     }\n        std::vector<WeightType> res(this->n());\n        predfs([&](int\
+    \ u) {\n            res[u] = res[parent(u)];\n            if constexpr (hasEdgeWeight)\
+    \ if (u != root)\n                res[u] = res[u] + parent_edge(u).weight;\n \
+    \           if constexpr (hasVertexWeight)\n                res[u] = res[u] +\
+    \ this->weight[u];\n        });\n        return res;\n    }\n    std::vector<int>\
+    \ subtree_size(int root = -1) {\n        if (current_root == -1 || (root != -1\
+    \ && current_root != root)) {\n            assert(root != -1);\n            traverse(root);\n\
+    \        }\n        std::vector<int> res(this->n(), 1);\n        predfs([&](int\
+    \ u) {\n            for (auto [v, eid] : this->G[u])\n                if (eid\
+    \ != parent_eid(u))\n                    res[u] += res[v];\n        });\n    \
+    \    return res;\n    }\n    std::vector<int> path(int u, int v, int root = -1)\
+    \ {\n        if (current_root == -1 || (root != -1 && current_root != root)) {\n\
+    \            if (root == -1) root = 0;\n            traverse(root);\n        }\n\
+    \        std::vector<int> lft, rgt;\n        while (!ancestor(v, u)) {\n     \
+    \       rgt.push_back(v);\n            v = parent(v);\n        }\n        while\
+    \ (u != v) {\n            lft.push_back(u);\n            u = parent(u);\n    \
+    \    }\n        lft.push_back(u);\n        lft.insert(lft.end(), rgt.rbegin(),\
+    \ rgt.rend());\n        return lft; \n    }\n    unsigned long long shift_hash_value(unsigned\
+    \ long long z) {\n        z ^= z >> 12; z ^= z << 25; z ^= z >> 27;\n        return\
+    \ z * 2685821657736338717LL;\n    }\n    std::vector<unsigned long long> hash_values(int\
+    \ root = -1, unsigned long long seed = 7122) {\n        if (current_root == -1\
+    \ || (root != -1 && current_root != root)) {\n            if (root == -1) root\
+    \ = 0;\n            traverse(root);\n        }\n        std::vector<unsigned long\
+    \ long> res(this->n());\n        postdfs([&](int u) {\n            res[u] = seed;\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
+    \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
+    \        });\n        return res;\n    }\n};\n#line 4 \"Tree/centroid_divide_and_conquer.hpp\"\
+    \n\nstruct NullFunc {\n    constexpr void operator()(auto&&...) const {}\n};\n\
+    \n/*\nmerge_func: void merge_func(int c, std::vector<std::vector<int>> groups);\n\
+    \    - c: the center, groups: subtrees with pre-order\npre_func: void pre_func(int\
+    \ u, int f);\n    - u: current vertex, f: parent\n    - the center would be called\
+    \ at first with pre_func(c, -1);\npost_func: void post_func(int u, std::vector<int>\
+    \ child);\n    - u: current vertex, child: child vertices\npost_merge_func: void\
+    \ post_merge_func(int c, std::vector<int> cent_child);\n    - c: the center, cent_child:\
+    \ c's center children \nreturn value: c_pa[u]: the centroid parent of u\n*/\n\n\
+    template<typename _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc,\
+    \ typename F_Post = NullFunc, typename F_PMerge = NullFunc>\nstd::vector<int>\
+    \ centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge\
+    \ merge_func = NullFunc{}, F_Post post_func = NullFunc{}, F_PMerge post_merge_func\
+    \ = NullFunc{}) {\n    constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>,\
+    \ NullFunc>;\n    constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>,\
+    \ NullFunc>;\n    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
+    \ NullFunc>;\n    constexpr bool usePostMerge  = !std::is_same_v<std::decay_t<decltype(post_merge_func)>,\
+    \ NullFunc>;\n    int n = tree.n();\n    std::vector<int> done(n), sz(n), res(n);\n\
+    \    auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) ->\
+    \ void {\n        int mxsz = 0;\n        sz[u] = 1;\n        for (auto [v, eid]\
+    \ : tree[u])\n            if (!done[v] && v != f) {\n                self(self,\
+    \ v, u, mx, c, num);\n                sz[u] += sz[v];\n                mxsz =\
+    \ std::max(mxsz, sz[v]);\n            }\n        if (mx > std::max(mxsz, num -\
+    \ sz[u]))\n            mx = std::max(mxsz, num - sz[u]), c = u;\n    };\n    auto\
+    \ dfs = [&](auto self, int u, int f, auto &g) -> void {\n        if constexpr\
+    \ (useMerge) g.push_back(u);\n        if constexpr (usePre) pre_func(u, f);\n\
+    \        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty>\
+    \ child;\n        for (auto [v, eid] : tree[u])\n            if (!done[v] && v\
+    \ != f) {\n                self(self, v, u, g);\n                if constexpr\
+    \ (usePost) child.push_back(v);\n            }\n        if constexpr (usePost)\
+    \ post_func(u, child);\n    };\n    auto cut = [&](auto self, int u, int num)\
+    \ -> int {\n        int mx = n + 1, c = 0;\n        get_cent(get_cent, u, -1,\
+    \ mx, c, num);\n        done[c] = 1;\n        std::conditional_t<useMerge, std::vector<std::vector<int>>,\
+    \ typename _Tree::Empty> groups;\n        if constexpr (usePre) pre_func(c, -1);\n\
+    \        std::conditional_t<usePost, std::vector<int>, typename _Tree::Empty>\
+    \ child;\n        for (auto [v, eid] : tree[c])\n            if (!done[v]) {\n\
+    \                if constexpr (useMerge) {\n                    groups.emplace_back();\n\
+    \                    groups.back().reserve(sz[v] > sz[c] ? num - sz[c] : sz[v]);\n\
+    \                    dfs(dfs, v, c, groups.back());\n                }\n     \
+    \           else dfs(dfs, v, c, groups);\n                if constexpr (usePost)\
+    \ child.push_back(v);\n            }\n        if constexpr (usePost) post_func(c,\
+    \ child);\n        if constexpr (useMerge) merge_func(c, groups);\n        std::conditional_t<usePostMerge,\
+    \ std::vector<int>, typename _Tree::Empty> cent_child;\n        for (auto [v,\
+    \ eid] : tree[c])\n            if (!done[v]) {\n                int ch;\n    \
+    \            if (sz[v] > sz[c])\n                    ch = self(self, v, num -\
+    \ sz[c]);\n                else\n                    ch = self(self, v, sz[v]);\n\
+    \                res[ch] = c;\n                if constexpr (usePostMerge) cent_child.push_back(ch);\n\
+    \            }\n        if constexpr (usePostMerge) post_merge_func(c, cent_child);\n\
+    \        done[c] = 0;\n        return c;\n    };\n    res[cut(cut, 0, n)] = -1;\n\
+    \    return res;\n}\n#line 2 \"Convolution/convolution.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\
+    \n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line\
+    \ 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
     \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
     \ x += m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x,\
@@ -261,21 +485,53 @@ data:
     \ (C == 3)\n            c[i] = CRT3<T, p0, p1, p2>(std::get<0>(res)[i].val(),\n\
     \                                       std::get<1>(res)[i].val(),\n         \
     \                              std::get<2>(res)[i].val());\n    return c;\n}\n\
-    #line 5 \"test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp\"\
+    #line 6 \"test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, m;\n    cin >> n >> m;\n    vector<mint> arr(n), brr(m);\n\
-    \    for (auto &i : arr)\n        cin >> i;\n    for (auto &i : brr)\n       \
-    \ cin >> i;\n    arr = convolution(arr, brr);\n    for (int i = 0; i < SZ(arr);\
-    \ ++i)\n        cout << arr[i] << \" \\n\"[i + 1 == SZ(arr)];\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n#include\
-    \ \"default_code.hpp\"\n\n#include \"Convolution/convolution.hpp\"\n\nusing mint\
-    \ = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, m;\n    cin >> n >> m;\n    vector<mint> arr(n), brr(m);\n    for\
-    \ (auto &i : arr)\n        cin >> i;\n    for (auto &i : brr)\n        cin >>\
-    \ i;\n    arr = convolution(arr, brr);\n    for (int i = 0; i < SZ(arr); ++i)\n\
-    \        cout << arr[i] << \" \\n\"[i + 1 == SZ(arr)];\n}\n"
+    \ cin.tie(0);\n    int n;\n    cin >> n;\n    Tree tree(n);\n    for (int i =\
+    \ 1; i < n; ++i) {\n        int u, v;\n        cin >> u >> v;\n        tree.add_edge(u,\
+    \ v);\n    }\n    vector<int> depth(n);\n    vector<ll> ans(n);\n    centroid_divide_and_conquer(tree,\
+    \ [&](int u, int f) {\n        if (f == -1) depth[u] = 0;\n        else depth[u]\
+    \ = depth[f] + 1;\n    }, [&](int c, const vector<vector<int>> &groups) {\n  \
+    \      (void)c;\n        if (groups.empty()) return;\n        int mx = 0;\n  \
+    \      for (auto &vec : groups)\n            for (auto v : vec)\n            \
+    \    chmax(mx, depth[v] + 1);\n        vector<ll> cnt(mx);\n        cnt[0] = 1;\n\
+    \        for (auto &vec : groups)\n            for (auto v : vec)\n          \
+    \      ++cnt[depth[v]];\n        convolution<2>(cnt, cnt).swap(cnt);\n       \
+    \ for (int i = 0; i < int(cnt.size()); ++i)\n            ans[i] += cnt[i];\n \
+    \       for (auto &vec : groups) {\n            mx = 0;\n            for (auto\
+    \ v : vec)\n                chmax(mx, depth[v] + 1);\n            std::vector<ll>(mx).swap(cnt);\n\
+    \            for (auto v : vec)\n                ++cnt[depth[v]];\n          \
+    \  convolution<2>(cnt, cnt).swap(cnt);\n            for (int i = 0; i < int(cnt.size());\
+    \ ++i)\n                ans[i] -= cnt[i];\n        }\n    });\n    for (int i\
+    \ = 1; i < n; ++i)\n        cout << ans[i] / 2 << \" \\n\"[i + 1 == n];\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n#include \"default_code.hpp\"\n\n#include \"Tree/centroid_divide_and_conquer.hpp\"\
+    \n#include \"Convolution/convolution.hpp\"\n\nusing mint = modint998244353;\n\n\
+    int main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >>\
+    \ n;\n    Tree tree(n);\n    for (int i = 1; i < n; ++i) {\n        int u, v;\n\
+    \        cin >> u >> v;\n        tree.add_edge(u, v);\n    }\n    vector<int>\
+    \ depth(n);\n    vector<ll> ans(n);\n    centroid_divide_and_conquer(tree, [&](int\
+    \ u, int f) {\n        if (f == -1) depth[u] = 0;\n        else depth[u] = depth[f]\
+    \ + 1;\n    }, [&](int c, const vector<vector<int>> &groups) {\n        (void)c;\n\
+    \        if (groups.empty()) return;\n        int mx = 0;\n        for (auto &vec\
+    \ : groups)\n            for (auto v : vec)\n                chmax(mx, depth[v]\
+    \ + 1);\n        vector<ll> cnt(mx);\n        cnt[0] = 1;\n        for (auto &vec\
+    \ : groups)\n            for (auto v : vec)\n                ++cnt[depth[v]];\n\
+    \        convolution<2>(cnt, cnt).swap(cnt);\n        for (int i = 0; i < int(cnt.size());\
+    \ ++i)\n            ans[i] += cnt[i];\n        for (auto &vec : groups) {\n  \
+    \          mx = 0;\n            for (auto v : vec)\n                chmax(mx,\
+    \ depth[v] + 1);\n            std::vector<ll>(mx).swap(cnt);\n            for\
+    \ (auto v : vec)\n                ++cnt[depth[v]];\n            convolution<2>(cnt,\
+    \ cnt).swap(cnt);\n            for (int i = 0; i < int(cnt.size()); ++i)\n   \
+    \             ans[i] -= cnt[i];\n        }\n    });\n    for (int i = 1; i < n;\
+    \ ++i)\n        cout << ans[i] / 2 << \" \\n\"[i + 1 == n];\n}\n"
   dependsOn:
   - default_code.hpp
+  - Tree/centroid_divide_and_conquer.hpp
+  - Tree/Tree.hpp
+  - Graph/base.hpp
+  - Graph/UnifiedWeight.hpp
+  - Algebra/ValidOperation.hpp
   - Convolution/convolution.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
@@ -285,7 +541,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2026-06-02 13:54:51+08:00'
+  timestamp: '2026-06-17 20:26:53+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
