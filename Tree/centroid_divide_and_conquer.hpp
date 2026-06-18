@@ -1,17 +1,14 @@
 #pragma once
 
 #include "Tree/Tree.hpp"
-
-struct NullFunc {
-    constexpr void operator()(auto&&...) const {}
-};
+#include "Algebra/NullFunc.hpp"
 
 /*
-merge_func: void merge_func(int c, std::vector<std::vector<int>> groups);
-    - c: the center, groups: subtrees with pre-order
 pre_func: void pre_func(int u, int f);
     - u: current vertex, f: parent
     - the center would be called at first with pre_func(c, -1);
+merge_func: void merge_func(int c, std::vector<std::vector<int>> groups);
+    - c: the center, groups: subtrees with pre-order
 post_func: void post_func(int u, std::vector<int> child);
     - u: current vertex, child: child vertices
 post_merge_func: void post_merge_func(int c, std::vector<int> cent_child);
