@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
@@ -70,7 +70,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -186,8 +186,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/other/two_sat.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/other/two_sat.test.cpp
 layout: document

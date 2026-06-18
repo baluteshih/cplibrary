@@ -10,53 +10,56 @@ data:
   - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
+  - icon: ':question:'
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A
     links:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A
   bundledCode: "#line 1 \"test/2_aoj/area.test.cpp\"\n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A\"\
-    \n#include <bits/stdc++.h>\n#line 4 \"test/2_aoj/area.test.cpp\"\n\n#line 2 \"\
-    Geometry/polygon.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename\
-    \ T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>, T,\
-    \ double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if constexpr\
-    \ (std::is_same_v<T, float>)\n        return T(1e-6);\n    else if constexpr (std::is_same_v<T,\
-    \ double>)\n        return T(1e-9);\n    else if constexpr (std::is_same_v<T,\
-    \ long double>)\n        return T(1e-12);\n    else\n        return T(0); \n}\n\
-    \ntemplate <typename T, T eps = get_default_eps<T>()>\nstruct Geometry {\n   \
-    \ static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>) {\n\
-    \            return (x > eps) - (x < -eps); \n        }\n        else {\n    \
-    \        return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T a,\
-    \ T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T eps\
-    \ = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n\
-    \    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT,\
-    \ eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n   \
-    \ Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream&\
-    \ operator>>(std::istream &is, Pt &p) { return is >> p.x >> p.y; }\n    friend\
-    \ std::ostream& operator<<(std::ostream &os, const Pt &p) { return os << p.x <<\
-    \ ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n   \
-    \     return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend bool\
-    \ operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \n#line 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/2_aoj/area.test.cpp\"\
+    \n\n#line 2 \"Geometry/polygon.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n    \n\
+    template <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
+    \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
+    \ constexpr (std::is_same_v<T, float>)\n        return T(1e-6);\n    else if constexpr\
+    \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
+    \ (std::is_same_v<T, long double>)\n        return T(1e-12);\n    else\n     \
+    \   return T(0); \n}\n\ntemplate <typename T, T eps = get_default_eps<T>()>\n\
+    struct Geometry {\n    static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>)\
+    \ {\n            return (x > eps) - (x < -eps); \n        }\n        else {\n\
+    \            return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T\
+    \ a, T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T\
+    \ eps = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps>\
+    \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
+    \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
+    \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -213,28 +216,28 @@ data:
     \       }\n                res += Ret(cross(A, B)) * sum;\n            }\n   \
     \     return res / 2;\n    }\n};\n\ntemplate <typename PointType>\nstruct PolygonType;\n\
     \ntemplate <typename T, T eps, typename MulT>\nstruct PolygonType<Pt<T, eps, MulT>>\
-    \ {\n    using type = Polygon<T, eps, MulT>;\n};\n#line 6 \"test/2_aoj/area.test.cpp\"\
+    \ {\n    using type = Polygon<T, eps, MulT>;\n};\n#line 5 \"test/2_aoj/area.test.cpp\"\
     \n\nusing polygon = Polygon<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    polygon poly(n);\n   \
     \ for (auto &p : poly)\n        std::cin >> p;\n    int res = poly.area();\n \
     \   if (res % 2 == 0) std::cout << res / 2 << \".0\\n\";\n    else std::cout <<\
     \ res / 2 << \".5\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A\"\
-    \n#include <bits/stdc++.h>\n#include <cassert>\n\n#include \"Geometry/polygon.hpp\"\
-    \n\nusing polygon = Polygon<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    polygon poly(n);\n   \
-    \ for (auto &p : poly)\n        std::cin >> p;\n    int res = poly.area();\n \
-    \   if (res % 2 == 0) std::cout << res / 2 << \".0\\n\";\n    else std::cout <<\
-    \ res / 2 << \".5\\n\";\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Geometry/polygon.hpp\"\n\nusing polygon\
+    \ = Polygon<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n;\n    std::cin >> n;\n    polygon poly(n);\n    for (auto &p : poly)\n\
+    \        std::cin >> p;\n    int res = poly.area();\n    if (res % 2 == 0) std::cout\
+    \ << res / 2 << \".0\\n\";\n    else std::cout << res / 2 << \".5\\n\";\n}\n"
   dependsOn:
+  - assumption.hpp
   - Geometry/polygon.hpp
   - Geometry/base.hpp
   - Geometry/line.hpp
   isVerificationFile: true
   path: test/2_aoj/area.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/2_aoj/area.test.cpp
 layout: document

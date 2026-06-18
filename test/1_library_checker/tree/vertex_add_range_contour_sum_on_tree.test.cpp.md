@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   - icon: ':question:'
@@ -33,9 +33,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
@@ -89,7 +89,7 @@ data:
     \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
     \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
     \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
-    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -386,8 +386,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 20:44:31+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
 layout: document

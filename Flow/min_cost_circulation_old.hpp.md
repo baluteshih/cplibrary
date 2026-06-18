@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -27,7 +27,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -94,12 +94,12 @@ data:
     \ C = T>\nstruct CostCirculationFlowWeight {\n    T fcap;\n    C cost;\n    T\
     \ cap, flow;\n    CostCirculationFlowWeight() : cap(0), fcap(0), cost(0), flow(0)\
     \ {}\n    CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c), cost(w),\
-    \ cap(cc), flow(f) {}\n    friend ostream& operator<<(ostream& os, const CostCirculationFlowWeight\
-    \ &v) {\n        os << \"[\" << v.fcap << \", \" << v.cost << \", \" << v.cap\
-    \ << \", \" << v.flow << \"]\";\n        return os;\n    }\n};\n\n// O(VE * ElogC)\n\
-    template<typename T, typename C = T>\nclass min_cost_circulation : public Graph<true,\
-    \ CostCirculationFlowWeight<T, C>, void> { // 0-base\npublic:\n    using super\
-    \ = Graph<true, CostCirculationFlowWeight<T, C>, void>;\n    std::vector<int>\
+    \ cap(cc), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ CostCirculationFlowWeight &v) {\n        os << \"[\" << v.fcap << \", \" <<\
+    \ v.cost << \", \" << v.cap << \", \" << v.flow << \"]\";\n        return os;\n\
+    \    }\n};\n\n// O(VE * ElogC)\ntemplate<typename T, typename C = T>\nclass min_cost_circulation\
+    \ : public Graph<true, CostCirculationFlowWeight<T, C>, void> { // 0-base\npublic:\n\
+    \    using super = Graph<true, CostCirculationFlowWeight<T, C>, void>;\n    std::vector<int>\
     \ past;\n    std::vector<C> dis, pot;\n    void BellmanFord(int s) {\n       \
     \ std::vector<int> inq(this->n());\n        std::ranges::fill(dis, std::numeric_limits<C>::max());\n\
     \        std::queue<int> q;\n        auto relax = [&](int u, C d, int eid) {\n\
@@ -134,12 +134,12 @@ data:
     \ C = T>\nstruct CostCirculationFlowWeight {\n    T fcap;\n    C cost;\n    T\
     \ cap, flow;\n    CostCirculationFlowWeight() : cap(0), fcap(0), cost(0), flow(0)\
     \ {}\n    CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c), cost(w),\
-    \ cap(cc), flow(f) {}\n    friend ostream& operator<<(ostream& os, const CostCirculationFlowWeight\
-    \ &v) {\n        os << \"[\" << v.fcap << \", \" << v.cost << \", \" << v.cap\
-    \ << \", \" << v.flow << \"]\";\n        return os;\n    }\n};\n\n// O(VE * ElogC)\n\
-    template<typename T, typename C = T>\nclass min_cost_circulation : public Graph<true,\
-    \ CostCirculationFlowWeight<T, C>, void> { // 0-base\npublic:\n    using super\
-    \ = Graph<true, CostCirculationFlowWeight<T, C>, void>;\n    std::vector<int>\
+    \ cap(cc), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ CostCirculationFlowWeight &v) {\n        os << \"[\" << v.fcap << \", \" <<\
+    \ v.cost << \", \" << v.cap << \", \" << v.flow << \"]\";\n        return os;\n\
+    \    }\n};\n\n// O(VE * ElogC)\ntemplate<typename T, typename C = T>\nclass min_cost_circulation\
+    \ : public Graph<true, CostCirculationFlowWeight<T, C>, void> { // 0-base\npublic:\n\
+    \    using super = Graph<true, CostCirculationFlowWeight<T, C>, void>;\n    std::vector<int>\
     \ past;\n    std::vector<C> dis, pot;\n    void BellmanFord(int s) {\n       \
     \ std::vector<int> inq(this->n());\n        std::ranges::fill(dis, std::numeric_limits<C>::max());\n\
     \        std::queue<int> q;\n        auto relax = [&](int u, C d, int eid) {\n\
@@ -175,7 +175,7 @@ data:
   isVerificationFile: false
   path: Flow/min_cost_circulation_old.hpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
+  timestamp: '2026-06-18 22:20:51+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Flow/min_cost_circulation_old.hpp

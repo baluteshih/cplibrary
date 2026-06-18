@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Misc/2sat.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2\
@@ -33,7 +33,7 @@ data:
     \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
     \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
     \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
-    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -136,8 +136,8 @@ data:
   isVerificationFile: false
   path: Misc/2sat.hpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
 documentation_of: Misc/2sat.hpp

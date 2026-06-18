@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/minimum_arborescence.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -45,7 +45,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -152,8 +152,8 @@ data:
     Algebra/size_value.hpp\"\n\nstruct size_v {\n    int sz;\n    size_v(int sz_ =\
     \ 0): sz(sz_) {}\n    size_v operator+(const size_v &rhs) const {\n        return\
     \ size_v(sz + rhs.sz);\n    }\n    int size() const {\n        return sz; \n \
-    \   }\n    friend ostream& operator<<(ostream& os, const size_v &v) {\n      \
-    \  os << v.sz;\n        return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
+    \   }\n    friend std::ostream& operator<<(std::ostream& os, const size_v &v)\
+    \ {\n        os << v.sz;\n        return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
@@ -186,19 +186,19 @@ data:
     \                r->give_tag(lazy);\n            }\n            lazy = Tag();\n\
     \        }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
     \ : key(v) {}\n        node(const auto &k, const auto &v) requires (hasInfo) :\
-    \ key(k), info(v) {}\n        friend ostream& operator<<(ostream& os, const node\
-    \ &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key << \",\
-    \ info = \" << v.info << \"}\";\n            else os << v.key;\n            return\
-    \ os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root\
-    \ = nullptr;\n    int sz = 0;\n    static node *merge(node *left, node *right)\
-    \ {\n        if (!left || !right) return left ? left : right;\n        if (right->key\
-    \ < left->key) std::swap(left, right);\n        if constexpr (persistent) left\
-    \ = NodeAlloc::allocate(*left); \n        left->down();\n        left->r = merge(left->r,\
-    \ right);\n        left->up();\n        return left;\n    }\n    void erase(node\
-    \ *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n   \
-    \     o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n   \
-    \     NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr) requires\
-    \ (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
+    \ key(k), info(v) {}\n        friend std::ostream& operator<<(std::ostream& os,\
+    \ const node &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key\
+    \ << \", info = \" << v.info << \"}\";\n            else os << v.key;\n      \
+    \      return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
+    \    node *root = nullptr;\n    int sz = 0;\n    static node *merge(node *left,\
+    \ node *right) {\n        if (!left || !right) return left ? left : right;\n \
+    \       if (right->key < left->key) std::swap(left, right);\n        if constexpr\
+    \ (persistent) left = NodeAlloc::allocate(*left); \n        left->down();\n  \
+    \      left->r = merge(left->r, right);\n        left->up();\n        return left;\n\
+    \    }\n    void erase(node *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n\
+    \        o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n\
+    \        NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr)\
+    \ requires (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
     \        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n        ptr = nullptr;\n\
     \    }\n    static int get_rank(node *p) { return p ? p->rank : -1; }\npublic:\n\
     \    LeftistTree() = default;\n    LeftistTree(node *root_) : root(root_) {}\n\
@@ -270,8 +270,8 @@ data:
   isVerificationFile: false
   path: Graph/minimum_arborescence.hpp
   requiredBy: []
-  timestamp: '2026-06-13 18:42:24+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp
 documentation_of: Graph/minimum_arborescence.hpp

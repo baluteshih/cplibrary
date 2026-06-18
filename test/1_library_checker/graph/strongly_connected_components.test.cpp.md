@@ -1,56 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
     links:
     - https://judge.yosupo.jp/problem/scc
   bundledCode: "#line 1 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#line 2 \"default_code.hpp\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
-    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
-    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
-    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
-    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
-    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
-    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
-    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
-    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
-    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
-    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
-    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
-    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
-    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
-    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
-    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
-    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
-    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
-    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
-    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
-    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
-    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
-    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
-    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
-    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
-    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
-    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 3 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#line 2 \"assumption.hpp\"\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
     \n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
     \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
     \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
@@ -66,7 +38,7 @@ data:
     \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
     \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
     \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
-    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -146,28 +118,30 @@ data:
     \ (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n   \
     \     std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
     \ bln[i]\n#line 5 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    SCC scc(n);\n    while (m--) {\n        int u, v;\n   \
-    \     cin >> u >> v;\n        scc.add_edge(u, v);\n    }\n    scc.solve();\n \
-    \   auto ans = scc.components();\n    cout << SZ(ans) << \"\\n\";\n    for (auto\
-    \ &v : ans) {\n        cout << SZ(v);\n        for (int i : v)\n            cout\
-    \ << \" \" << i;\n        cout << \"\\n\";\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"default_code.hpp\"\
-    \n\n#include \"Graph/SCC.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, m;\n    cin >> n >> m;\n    SCC scc(n);\n    while (m--) {\n     \
-    \   int u, v;\n        cin >> u >> v;\n        scc.add_edge(u, v);\n    }\n  \
-    \  scc.solve();\n    auto ans = scc.components();\n    cout << SZ(ans) << \"\\\
-    n\";\n    for (auto &v : ans) {\n        cout << SZ(v);\n        for (int i :\
-    \ v)\n            cout << \" \" << i;\n        cout << \"\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m;\n    std::cin >> n >> m;\n    SCC scc(n);\n    while (m--) {\n       \
+    \ int u, v;\n        std::cin >> u >> v;\n        scc.add_edge(u, v);\n    }\n\
+    \    scc.solve();\n    auto ans = scc.components();\n    std::cout << ans.size()\
+    \ << \"\\n\";\n    for (auto &v : ans) {\n        std::cout << v.size();\n   \
+    \     for (int i : v)\n            std::cout << \" \" << i;\n        std::cout\
+    \ << \"\\n\";\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"assumption.hpp\"\
+    \n\n#include \"Graph/SCC.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    SCC scc(n);\n\
+    \    while (m--) {\n        int u, v;\n        std::cin >> u >> v;\n        scc.add_edge(u,\
+    \ v);\n    }\n    scc.solve();\n    auto ans = scc.components();\n    std::cout\
+    \ << ans.size() << \"\\n\";\n    for (auto &v : ans) {\n        std::cout << v.size();\n\
+    \        for (int i : v)\n            std::cout << \" \" << i;\n        std::cout\
+    \ << \"\\n\";\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Graph/SCC.hpp
   - Graph/base.hpp
   isVerificationFile: true
   path: test/1_library_checker/graph/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/strongly_connected_components.test.cpp
 layout: document

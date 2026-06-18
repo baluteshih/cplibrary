@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     IGNORE: ''
@@ -67,7 +67,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -133,12 +133,12 @@ data:
     #line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename T, typename C = T>\n\
     struct CostFlowWeight {\n    T cap;\n    C cost;\n    T flow;\n    CostFlowWeight()\
     \ : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T c, C w, T f = 0) : cap(c),\
-    \ cost(w), flow(f) {}\n    friend ostream& operator<<(ostream& os, const CostFlowWeight\
-    \ &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \", \" << v.flow\
-    \ << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T, typename C\
-    \ = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T, C>, void>\
-    \ { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T, C>, void>;\n\
-    \    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
+    \ cost(w), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ CostFlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \"\
+    , \" << v.flow << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T,\
+    \ typename C = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T,\
+    \ C>, void> { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T,\
+    \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
     \ up;\n    template<bool bellmanford = true>\n    bool shortest_path(int s, int\
     \ t) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
     \ std::numeric_limits<C>::max());\n        std::conditional_t<bellmanford, std::queue<int>,\
@@ -186,8 +186,8 @@ data:
   isVerificationFile: true
   path: test/7_loj/min_cost_max_flow.test.cpp
   requiredBy: []
-  timestamp: '2026-05-31 20:50:19+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/7_loj/min_cost_max_flow.test.cpp
 layout: document

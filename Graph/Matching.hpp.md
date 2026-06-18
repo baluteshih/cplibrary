@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/Matching.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
@@ -30,7 +30,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -98,60 +98,62 @@ data:
     \ void, void>;\n    std::queue<int> q;\n    std::vector<int> fa, s, vis, pre,\
     \ match;\n    int Find(int u)\n    { return u == fa[u] ? u : fa[u] = Find(fa[u]);\
     \ }\n    int LCA(int x, int y) {\n        static int tk = 0; tk++; x = Find(x);\
-    \ y = Find(y);\n        for (;; swap(x, y)) if (x != this->n()) {\n          \
-    \  if (vis[x] == tk) return x;\n            vis[x] = tk;\n            x = Find(pre[match[x]]);\n\
-    \        }\n    }\n    void Blossom(int x, int y, int l) {\n        for (; Find(x)\
-    \ != l; x = pre[y]) {\n            pre[x] = y, y = match[x];\n            if (s[y]\
-    \ == 1) q.push(y), s[y] = 0;\n            for (int z: {x, y}) if (fa[z] == z)\
-    \ fa[z] = l;\n        }\n    }\n    bool Bfs(int r) {\n        iota(ALL(fa), 0);\
-    \ fill(ALL(s), -1);\n        q = queue<int>(); q.push(r); s[r] = 0;\n        for\
-    \ (; !q.empty(); q.pop()) {\n            for (int x = q.front(); auto [u, eid]\
-    \ : (*this)[x])\n                if (s[u] == -1) {\n                    if (pre[u]\
-    \ = x, s[u] = 1, match[u] == this->n()) {\n                        for (int a\
-    \ = u, b = x, last; b != this->n(); a = last, b = pre[a])\n                  \
-    \          last = match[b], match[b] = a, match[a] = b;\n                    \
-    \    return true;\n                    }\n                    q.push(match[u]);\
-    \ s[match[u]] = 0;\n                } else if (!s[u] && Find(u) != Find(x)) {\n\
-    \                    int l = LCA(u, x);\n                    Blossom(x, u, l);\
-    \ Blossom(u, x, l);\n                }\n        }\n        return false;\n   \
-    \ }\n    Matching(int n) : super(n), fa(n + 1), s(n + 1), vis(n + 1), pre(n +\
-    \ 1, n), match(n + 1, n) {}\n    int solve() {\n        int ans = 0;\n       \
-    \ for (int x = 0; x < this->n(); ++x)\n            if (match[x] == this->n())\n\
-    \                ans += Bfs(x);\n        std::ranges::replace(match, this->n(),\
-    \ -1);\n        return ans;\n    }\n};\n"
+    \ y = Find(y);\n        for (;; std::swap(x, y)) if (x != this->n()) {\n     \
+    \       if (vis[x] == tk) return x;\n            vis[x] = tk;\n            x =\
+    \ Find(pre[match[x]]);\n        }\n    }\n    void Blossom(int x, int y, int l)\
+    \ {\n        for (; Find(x) != l; x = pre[y]) {\n            pre[x] = y, y = match[x];\n\
+    \            if (s[y] == 1) q.push(y), s[y] = 0;\n            for (int z: {x,\
+    \ y}) if (fa[z] == z) fa[z] = l;\n        }\n    }\n    bool Bfs(int r) {\n  \
+    \      std::iota(fa.begin(), fa.end(), 0); std::ranges::fill(s, -1);\n       \
+    \ q = std::queue<int>(); q.push(r); s[r] = 0;\n        for (; !q.empty(); q.pop())\
+    \ {\n            for (int x = q.front(); auto [u, eid] : (*this)[x])\n       \
+    \         if (s[u] == -1) {\n                    if (pre[u] = x, s[u] = 1, match[u]\
+    \ == this->n()) {\n                        for (int a = u, b = x, last; b != this->n();\
+    \ a = last, b = pre[a])\n                            last = match[b], match[b]\
+    \ = a, match[a] = b;\n                        return true;\n                 \
+    \   }\n                    q.push(match[u]); s[match[u]] = 0;\n              \
+    \  } else if (!s[u] && Find(u) != Find(x)) {\n                    int l = LCA(u,\
+    \ x);\n                    Blossom(x, u, l); Blossom(u, x, l);\n             \
+    \   }\n        }\n        return false;\n    }\n    Matching(int n) : super(n),\
+    \ fa(n + 1), s(n + 1), vis(n + 1), pre(n + 1, n), match(n + 1, n) {}\n    int\
+    \ solve() {\n        int ans = 0;\n        for (int x = 0; x < this->n(); ++x)\n\
+    \            if (match[x] == this->n())\n                ans += Bfs(x);\n    \
+    \    std::ranges::replace(match, this->n(), -1);\n        return ans;\n    }\n\
+    };\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n/*\nmatch[u] = -1 implies\
     \ no match\n*/\nstruct Matching : public Graph<false, void, void> { // 0-base\n\
     \    using super = Graph<false, void, void>;\n    std::queue<int> q;\n    std::vector<int>\
     \ fa, s, vis, pre, match;\n    int Find(int u)\n    { return u == fa[u] ? u :\
     \ fa[u] = Find(fa[u]); }\n    int LCA(int x, int y) {\n        static int tk =\
-    \ 0; tk++; x = Find(x); y = Find(y);\n        for (;; swap(x, y)) if (x != this->n())\
-    \ {\n            if (vis[x] == tk) return x;\n            vis[x] = tk;\n     \
-    \       x = Find(pre[match[x]]);\n        }\n    }\n    void Blossom(int x, int\
-    \ y, int l) {\n        for (; Find(x) != l; x = pre[y]) {\n            pre[x]\
-    \ = y, y = match[x];\n            if (s[y] == 1) q.push(y), s[y] = 0;\n      \
-    \      for (int z: {x, y}) if (fa[z] == z) fa[z] = l;\n        }\n    }\n    bool\
-    \ Bfs(int r) {\n        iota(ALL(fa), 0); fill(ALL(s), -1);\n        q = queue<int>();\
-    \ q.push(r); s[r] = 0;\n        for (; !q.empty(); q.pop()) {\n            for\
-    \ (int x = q.front(); auto [u, eid] : (*this)[x])\n                if (s[u] ==\
-    \ -1) {\n                    if (pre[u] = x, s[u] = 1, match[u] == this->n())\
-    \ {\n                        for (int a = u, b = x, last; b != this->n(); a =\
-    \ last, b = pre[a])\n                            last = match[b], match[b] = a,\
-    \ match[a] = b;\n                        return true;\n                    }\n\
-    \                    q.push(match[u]); s[match[u]] = 0;\n                } else\
-    \ if (!s[u] && Find(u) != Find(x)) {\n                    int l = LCA(u, x);\n\
-    \                    Blossom(x, u, l); Blossom(u, x, l);\n                }\n\
-    \        }\n        return false;\n    }\n    Matching(int n) : super(n), fa(n\
-    \ + 1), s(n + 1), vis(n + 1), pre(n + 1, n), match(n + 1, n) {}\n    int solve()\
-    \ {\n        int ans = 0;\n        for (int x = 0; x < this->n(); ++x)\n     \
-    \       if (match[x] == this->n())\n                ans += Bfs(x);\n        std::ranges::replace(match,\
-    \ this->n(), -1);\n        return ans;\n    }\n};\n"
+    \ 0; tk++; x = Find(x); y = Find(y);\n        for (;; std::swap(x, y)) if (x !=\
+    \ this->n()) {\n            if (vis[x] == tk) return x;\n            vis[x] =\
+    \ tk;\n            x = Find(pre[match[x]]);\n        }\n    }\n    void Blossom(int\
+    \ x, int y, int l) {\n        for (; Find(x) != l; x = pre[y]) {\n           \
+    \ pre[x] = y, y = match[x];\n            if (s[y] == 1) q.push(y), s[y] = 0;\n\
+    \            for (int z: {x, y}) if (fa[z] == z) fa[z] = l;\n        }\n    }\n\
+    \    bool Bfs(int r) {\n        std::iota(fa.begin(), fa.end(), 0); std::ranges::fill(s,\
+    \ -1);\n        q = std::queue<int>(); q.push(r); s[r] = 0;\n        for (; !q.empty();\
+    \ q.pop()) {\n            for (int x = q.front(); auto [u, eid] : (*this)[x])\n\
+    \                if (s[u] == -1) {\n                    if (pre[u] = x, s[u] =\
+    \ 1, match[u] == this->n()) {\n                        for (int a = u, b = x,\
+    \ last; b != this->n(); a = last, b = pre[a])\n                            last\
+    \ = match[b], match[b] = a, match[a] = b;\n                        return true;\n\
+    \                    }\n                    q.push(match[u]); s[match[u]] = 0;\n\
+    \                } else if (!s[u] && Find(u) != Find(x)) {\n                 \
+    \   int l = LCA(u, x);\n                    Blossom(x, u, l); Blossom(u, x, l);\n\
+    \                }\n        }\n        return false;\n    }\n    Matching(int\
+    \ n) : super(n), fa(n + 1), s(n + 1), vis(n + 1), pre(n + 1, n), match(n + 1,\
+    \ n) {}\n    int solve() {\n        int ans = 0;\n        for (int x = 0; x <\
+    \ this->n(); ++x)\n            if (match[x] == this->n())\n                ans\
+    \ += Bfs(x);\n        std::ranges::replace(match, this->n(), -1);\n        return\
+    \ ans;\n    }\n};\n"
   dependsOn:
   - Graph/base.hpp
   isVerificationFile: false
   path: Graph/Matching.hpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/general_matching.test.cpp
 documentation_of: Graph/Matching.hpp

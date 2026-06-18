@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/bitwise_transform.hpp
     title: Convolution/bitwise_transform.hpp
   - icon: ':question:'

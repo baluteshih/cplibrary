@@ -8,19 +8,19 @@ data:
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Sqrt.hpp
     title: Polynomial/Sqrt.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Numeric/quadratic_residue.hpp\"\n\nint jacobi(int a, int\
@@ -123,11 +123,11 @@ data:
     \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
     \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
     \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
@@ -165,8 +165,8 @@ data:
   path: Numeric/quadratic_residue.hpp
   requiredBy:
   - Polynomial/Sqrt.hpp
-  timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp

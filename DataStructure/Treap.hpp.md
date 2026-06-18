@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   _extendedRequiredBy: []
@@ -18,21 +18,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
@@ -41,22 +41,22 @@ data:
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/size_value.hpp\"\
     \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
     \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
-    \    }\n    int size() const {\n        return sz; \n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const size_v &v) {\n        os << v.sz;\n        return\
-    \ os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n   \
-    \ #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n         typename\
-    \ Value = size_v,\n         typename Tag = void, \n         bool Rev = false,\n\
-    \         template<typename> class Allocator = DefaultAllocator,\n         bool\
-    \ persistent = false\n>\nclass Treap {\n    static constexpr bool hasKey = !std::is_same_v<Key,\
-    \ void>;\n    static constexpr bool hasValue = !std::is_same_v<Value, void>;\n\
-    \    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static constexpr\
-    \ bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
-    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
-    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
-    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
-    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
-    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
-    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n\
+    \    #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n      \
+    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
+    \ = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
+    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
+    \ hasKey = !std::is_same_v<Key, void>;\n    static constexpr bool hasValue = !std::is_same_v<Value,\
+    \ void>;\n    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n   \
+    \ static constexpr bool usePri = !persistent;\n    static constexpr bool hasSize\
+    \ = requires(Value v) { v.size(); };\n    static constexpr bool hasValueReverse\
+    \ = requires(Value v) { v.reverse(); };\n    struct Empty {};\n    template <bool\
+    \ Condition, typename T>\n    static auto get_default() {\n        if constexpr\
+    \ (Condition) return T();\n        else return Empty{};\n    }\n    template <bool\
+    \ Condition>\n    static auto get_pri() {\n        if constexpr (Condition) return\
+    \ rng();\n        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
     \    static_assert(!hasTag || hasValue);\n    static inline std::mt19937 rng{RNGSEED};\n\
     \    struct node {\n        node *l = nullptr, *r = nullptr;\n        [[no_unique_address]]\
     \ std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();\n\
@@ -546,8 +546,8 @@ data:
   isVerificationFile: false
   path: DataStructure/Treap.hpp
   requiredBy: []
-  timestamp: '2026-06-13 18:42:24+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

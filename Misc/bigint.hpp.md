@@ -4,16 +4,16 @@ data:
   - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/crt.hpp
     title: Numeric/crt.hpp
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   _extendedRequiredBy: []
@@ -126,11 +126,11 @@ data:
     \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
     \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
     \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
@@ -282,12 +282,13 @@ data:
     \     for (int i = 0; i < LOG; ++i) {\n                s += '0' + (x % 10);\n\
     \                x = x / 10;\n            }\n        }\n        while (s.back()\
     \ == '0') s.pop_back();\n        if (sgn == -1) s += '-';\n        std::ranges::reverse(s);\n\
-    \        return s;\n    }\n    friend istream& operator>>(istream &is, bint &p)\
-    \ {\n        std::string s;\n        auto &res = is >> s;\n        p = bint(s);\n\
-    \        return res;\n    }\n    friend ostream& operator<<(ostream &os, const\
-    \ bint &p) { return os << p.to_string(); }\n    // ignore overflow \n    ll to_ll()\
-    \ {\n        ll x = 0;\n        for (int i = dat.size() - 1; i >= 0; --i)\n  \
-    \          x = MOD * x + dat[i];\n        return sgn * x;\n    }\n};\n"
+    \        return s;\n    }\n    friend std::istream& operator>>(std::istream &is,\
+    \ bint &p) {\n        std::string s;\n        auto &res = is >> s;\n        p\
+    \ = bint(s);\n        return res;\n    }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const bint &p) { return os << p.to_string(); }\n    // ignore overflow\
+    \ \n    long long to_ll() {\n        long long x = 0;\n        for (int i = dat.size()\
+    \ - 1; i >= 0; --i)\n            x = MOD * x + dat[i];\n        return sgn * x;\n\
+    \    }\n};\n"
   code: "#pragma once\n\n#include \"Numeric/Modint.hpp\"\n#include \"Polynomial/NTT.hpp\"\
     \n#include \"Numeric/crt.hpp\"\n\n// source https://maspypy.github.io/library/bigint/base.hpp\
     \ \nstruct BigInteger {\n    static constexpr long long TEN[] = {\n        1LL,\n\
@@ -373,12 +374,13 @@ data:
     \     for (int i = 0; i < LOG; ++i) {\n                s += '0' + (x % 10);\n\
     \                x = x / 10;\n            }\n        }\n        while (s.back()\
     \ == '0') s.pop_back();\n        if (sgn == -1) s += '-';\n        std::ranges::reverse(s);\n\
-    \        return s;\n    }\n    friend istream& operator>>(istream &is, bint &p)\
-    \ {\n        std::string s;\n        auto &res = is >> s;\n        p = bint(s);\n\
-    \        return res;\n    }\n    friend ostream& operator<<(ostream &os, const\
-    \ bint &p) { return os << p.to_string(); }\n    // ignore overflow \n    ll to_ll()\
-    \ {\n        ll x = 0;\n        for (int i = dat.size() - 1; i >= 0; --i)\n  \
-    \          x = MOD * x + dat[i];\n        return sgn * x;\n    }\n};\n"
+    \        return s;\n    }\n    friend std::istream& operator>>(std::istream &is,\
+    \ bint &p) {\n        std::string s;\n        auto &res = is >> s;\n        p\
+    \ = bint(s);\n        return res;\n    }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const bint &p) { return os << p.to_string(); }\n    // ignore overflow\
+    \ \n    long long to_ll() {\n        long long x = 0;\n        for (int i = dat.size()\
+    \ - 1; i >= 0; --i)\n            x = MOD * x + dat[i];\n        return sgn * x;\n\
+    \    }\n};\n"
   dependsOn:
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
@@ -388,7 +390,7 @@ data:
   isVerificationFile: false
   path: Misc/bigint.hpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-18 22:20:51+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/biginteger/addition.test.cpp

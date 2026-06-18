@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/minimum_spanning_tree
@@ -71,7 +71,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -182,22 +182,22 @@ data:
     \ \n    });\n    DisjointSet dsu(graph.n());\n    std::vector<int> res;\n    for\
     \ (int i : idx)\n        if (dsu.merge(graph.edge(i).from, graph.edge(i).to))\n\
     \            res.push_back(i);\n    return res;\n}\n#line 5 \"test/1_library_checker/graph/minimum_spanning_tree.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for (int i = 0; i <\
-    \ m; ++i) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
-    \ b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n    ll ans = 0;\n\
-    \    for (int i : res)\n        ans += graph.edge(i).weight;\n    cout << ans\
-    \ << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n        cout << res[i] <<\
-    \ \" \\n\"[i + 2 == n]; \n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m;\n    std::cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for\
+    \ (int i = 0; i < m; ++i) {\n        int a, b, c;\n        std::cin >> a >> b\
+    \ >> c;\n        graph.add_edge(a, b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n\
+    \    long long ans = 0;\n    for (int i : res)\n        ans += graph.edge(i).weight;\n\
+    \    std::cout << ans << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n     \
+    \   std::cout << res[i] << \" \\n\"[i + 2 == n]; \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\
     \n#include \"default_code.hpp\"\n\n#include \"Graph/minimum_spanning_tree.hpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for (int i = 0; i <\
-    \ m; ++i) {\n        int a, b, c;\n        cin >> a >> b >> c;\n        graph.add_edge(a,\
-    \ b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n    ll ans = 0;\n\
-    \    for (int i : res)\n        ans += graph.edge(i).weight;\n    cout << ans\
-    \ << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n        cout << res[i] <<\
-    \ \" \\n\"[i + 2 == n]; \n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m;\n    std::cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for\
+    \ (int i = 0; i < m; ++i) {\n        int a, b, c;\n        std::cin >> a >> b\
+    \ >> c;\n        graph.add_edge(a, b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n\
+    \    long long ans = 0;\n    for (int i : res)\n        ans += graph.edge(i).weight;\n\
+    \    std::cout << ans << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n     \
+    \   std::cout << res[i] << \" \\n\"[i + 2 == n]; \n}\n"
   dependsOn:
   - default_code.hpp
   - Graph/minimum_spanning_tree.hpp
@@ -206,8 +206,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
 layout: document

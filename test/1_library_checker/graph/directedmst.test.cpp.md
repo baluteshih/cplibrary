@@ -1,77 +1,49 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
     links:
     - https://judge.yosupo.jp/problem/directedmst
   bundledCode: "#line 1 \"test/1_library_checker/graph/directedmst.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\n#line 2 \"default_code.hpp\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
-    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
-    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
-    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
-    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
-    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
-    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
-    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
-    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
-    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
-    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
-    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
-    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
-    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
-    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
-    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
-    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
-    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
-    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
-    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
-    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
-    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
-    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
-    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
-    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
-    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
-    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 3 \"test/1_library_checker/graph/directedmst.test.cpp\"\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\n#line 2 \"assumption.hpp\"\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/directedmst.test.cpp\"\
     \n\n#line 2 \"Graph/minimum_arborescence.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\
     \ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
     class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
@@ -88,7 +60,7 @@ data:
     \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
     \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
     \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -195,8 +167,8 @@ data:
     Algebra/size_value.hpp\"\n\nstruct size_v {\n    int sz;\n    size_v(int sz_ =\
     \ 0): sz(sz_) {}\n    size_v operator+(const size_v &rhs) const {\n        return\
     \ size_v(sz + rhs.sz);\n    }\n    int size() const {\n        return sz; \n \
-    \   }\n    friend ostream& operator<<(ostream& os, const size_v &v) {\n      \
-    \  os << v.sz;\n        return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
+    \   }\n    friend std::ostream& operator<<(std::ostream& os, const size_v &v)\
+    \ {\n        os << v.sz;\n        return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
@@ -229,19 +201,19 @@ data:
     \                r->give_tag(lazy);\n            }\n            lazy = Tag();\n\
     \        }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
     \ : key(v) {}\n        node(const auto &k, const auto &v) requires (hasInfo) :\
-    \ key(k), info(v) {}\n        friend ostream& operator<<(ostream& os, const node\
-    \ &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key << \",\
-    \ info = \" << v.info << \"}\";\n            else os << v.key;\n            return\
-    \ os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root\
-    \ = nullptr;\n    int sz = 0;\n    static node *merge(node *left, node *right)\
-    \ {\n        if (!left || !right) return left ? left : right;\n        if (right->key\
-    \ < left->key) std::swap(left, right);\n        if constexpr (persistent) left\
-    \ = NodeAlloc::allocate(*left); \n        left->down();\n        left->r = merge(left->r,\
-    \ right);\n        left->up();\n        return left;\n    }\n    void erase(node\
-    \ *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n   \
-    \     o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n   \
-    \     NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr) requires\
-    \ (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
+    \ key(k), info(v) {}\n        friend std::ostream& operator<<(std::ostream& os,\
+    \ const node &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key\
+    \ << \", info = \" << v.info << \"}\";\n            else os << v.key;\n      \
+    \      return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
+    \    node *root = nullptr;\n    int sz = 0;\n    static node *merge(node *left,\
+    \ node *right) {\n        if (!left || !right) return left ? left : right;\n \
+    \       if (right->key < left->key) std::swap(left, right);\n        if constexpr\
+    \ (persistent) left = NodeAlloc::allocate(*left); \n        left->down();\n  \
+    \      left->r = merge(left->r, right);\n        left->up();\n        return left;\n\
+    \    }\n    void erase(node *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n\
+    \        o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n\
+    \        NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr)\
+    \ requires (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
     \        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n        ptr = nullptr;\n\
     \    }\n    static int get_rank(node *p) { return p ? p->rank : -1; }\npublic:\n\
     \    LeftistTree() = default;\n    LeftistTree(node *root_) : root(root_) {}\n\
@@ -357,28 +329,28 @@ data:
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 6 \"test/1_library_checker/graph/directedmst.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m, s;\n\
-    \    cin >> n >> m >> s;\n    Graph<true, ll> G(n);\n    while (m--) {\n     \
-    \   int u, v, w;\n        cin >> u >> v >> w;\n        G.add_edge(u, v, w);\n\
-    \    }\n    if (n == 1)\n        return cout << \"0\\n0\\n\", 0;\n    auto res\
-    \ = minimum_arborescence(G, s);\n    assert(!res.empty());\n    ll sum = 0;\n\
-    \    Tree tree(n);\n    for (int i : res) {\n        tree.add_edge(G.edge(i).from,\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m, s;\n    std::cin >> n >> m >> s;\n    Graph<true, long long> G(n);\n \
+    \   while (m--) {\n        int u, v, w;\n        std::cin >> u >> v >> w;\n  \
+    \      G.add_edge(u, v, w);\n    }\n    if (n == 1)\n        return std::cout\
+    \ << \"0\\n0\\n\", 0;\n    auto res = minimum_arborescence(G, s);\n    assert(!res.empty());\n\
+    \    long long sum = 0;\n    Tree tree(n);\n    for (int i : res) {\n        tree.add_edge(G.edge(i).from,\
     \ G.edge(i).to);\n        sum += G.edge(i).weight;\n    }\n    tree.traverse(s);\n\
-    \    cout << sum << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        cout <<\
-    \ tree.parent(i) << \" \\n\"[i + 1 == n];\n}\n"
+    \    std::cout << sum << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout\
+    \ << tree.parent(i) << \" \\n\"[i + 1 == n];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\n#include\
-    \ \"default_code.hpp\"\n\n#include \"Graph/minimum_arborescence.hpp\"\n#include\
-    \ \"Tree/Tree.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, m, s;\n    cin >> n >> m >> s;\n    Graph<true, ll> G(n);\n    while\
-    \ (m--) {\n        int u, v, w;\n        cin >> u >> v >> w;\n        G.add_edge(u,\
-    \ v, w);\n    }\n    if (n == 1)\n        return cout << \"0\\n0\\n\", 0;\n  \
-    \  auto res = minimum_arborescence(G, s);\n    assert(!res.empty());\n    ll sum\
-    \ = 0;\n    Tree tree(n);\n    for (int i : res) {\n        tree.add_edge(G.edge(i).from,\
+    \ \"assumption.hpp\"\n\n#include \"Graph/minimum_arborescence.hpp\"\n#include\
+    \ \"Tree/Tree.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, m, s;\n    std::cin >> n >> m >> s;\n    Graph<true, long long> G(n);\n\
+    \    while (m--) {\n        int u, v, w;\n        std::cin >> u >> v >> w;\n \
+    \       G.add_edge(u, v, w);\n    }\n    if (n == 1)\n        return std::cout\
+    \ << \"0\\n0\\n\", 0;\n    auto res = minimum_arborescence(G, s);\n    assert(!res.empty());\n\
+    \    long long sum = 0;\n    Tree tree(n);\n    for (int i : res) {\n        tree.add_edge(G.edge(i).from,\
     \ G.edge(i).to);\n        sum += G.edge(i).weight;\n    }\n    tree.traverse(s);\n\
-    \    cout << sum << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        cout <<\
-    \ tree.parent(i) << \" \\n\"[i + 1 == n];\n}\n"
+    \    std::cout << sum << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout\
+    \ << tree.parent(i) << \" \\n\"[i + 1 == n];\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Graph/minimum_arborescence.hpp
   - Graph/base.hpp
   - DataStructure/DisjointSet.hpp
@@ -391,8 +363,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2026-06-13 18:42:24+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/directedmst.test.cpp
 layout: document

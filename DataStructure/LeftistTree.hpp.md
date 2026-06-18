@@ -1,36 +1,36 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/LeftistTree.hpp\"\n\n#line 2 \"Algebra/size_value.hpp\"\
     \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
     \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
-    \    }\n    int size() const {\n        return sz; \n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const size_v &v) {\n        os << v.sz;\n        return\
-    \ os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
-    \ T>\nstruct DefaultAllocator {\n    template<typename... Args>\n    static T*\
-    \ allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\n\
+    template<typename T>\nstruct DefaultAllocator {\n    template<typename... Args>\n\
+    \    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
     \n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
@@ -61,19 +61,19 @@ data:
     \                r->give_tag(lazy);\n            }\n            lazy = Tag();\n\
     \        }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
     \ : key(v) {}\n        node(const auto &k, const auto &v) requires (hasInfo) :\
-    \ key(k), info(v) {}\n        friend ostream& operator<<(ostream& os, const node\
-    \ &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key << \",\
-    \ info = \" << v.info << \"}\";\n            else os << v.key;\n            return\
-    \ os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root\
-    \ = nullptr;\n    int sz = 0;\n    static node *merge(node *left, node *right)\
-    \ {\n        if (!left || !right) return left ? left : right;\n        if (right->key\
-    \ < left->key) std::swap(left, right);\n        if constexpr (persistent) left\
-    \ = NodeAlloc::allocate(*left); \n        left->down();\n        left->r = merge(left->r,\
-    \ right);\n        left->up();\n        return left;\n    }\n    void erase(node\
-    \ *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n   \
-    \     o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n   \
-    \     NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr) requires\
-    \ (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
+    \ key(k), info(v) {}\n        friend std::ostream& operator<<(std::ostream& os,\
+    \ const node &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key\
+    \ << \", info = \" << v.info << \"}\";\n            else os << v.key;\n      \
+    \      return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
+    \    node *root = nullptr;\n    int sz = 0;\n    static node *merge(node *left,\
+    \ node *right) {\n        if (!left || !right) return left ? left : right;\n \
+    \       if (right->key < left->key) std::swap(left, right);\n        if constexpr\
+    \ (persistent) left = NodeAlloc::allocate(*left); \n        left->down();\n  \
+    \      left->r = merge(left->r, right);\n        left->up();\n        return left;\n\
+    \    }\n    void erase(node *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n\
+    \        o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n\
+    \        NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr)\
+    \ requires (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
     \        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n        ptr = nullptr;\n\
     \    }\n    static int get_rank(node *p) { return p ? p->rank : -1; }\npublic:\n\
     \    LeftistTree() = default;\n    LeftistTree(node *root_) : root(root_) {}\n\
@@ -118,19 +118,19 @@ data:
     \                r->give_tag(lazy);\n            }\n            lazy = Tag();\n\
     \        }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
     \ : key(v) {}\n        node(const auto &k, const auto &v) requires (hasInfo) :\
-    \ key(k), info(v) {}\n        friend ostream& operator<<(ostream& os, const node\
-    \ &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key << \",\
-    \ info = \" << v.info << \"}\";\n            else os << v.key;\n            return\
-    \ os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root\
-    \ = nullptr;\n    int sz = 0;\n    static node *merge(node *left, node *right)\
-    \ {\n        if (!left || !right) return left ? left : right;\n        if (right->key\
-    \ < left->key) std::swap(left, right);\n        if constexpr (persistent) left\
-    \ = NodeAlloc::allocate(*left); \n        left->down();\n        left->r = merge(left->r,\
-    \ right);\n        left->up();\n        return left;\n    }\n    void erase(node\
-    \ *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n   \
-    \     o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n   \
-    \     NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr) requires\
-    \ (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
+    \ key(k), info(v) {}\n        friend std::ostream& operator<<(std::ostream& os,\
+    \ const node &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key\
+    \ << \", info = \" << v.info << \"}\";\n            else os << v.key;\n      \
+    \      return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
+    \    node *root = nullptr;\n    int sz = 0;\n    static node *merge(node *left,\
+    \ node *right) {\n        if (!left || !right) return left ? left : right;\n \
+    \       if (right->key < left->key) std::swap(left, right);\n        if constexpr\
+    \ (persistent) left = NodeAlloc::allocate(*left); \n        left->down();\n  \
+    \      left->r = merge(left->r, right);\n        left->up();\n        return left;\n\
+    \    }\n    void erase(node *&o) {\n        if constexpr (persistent) o = NodeAlloc::allocate(*o);\n\
+    \        o->down();\n        node *tmp = o;\n        o = merge(o->l, o->r);\n\
+    \        NodeAlloc::deallocate(tmp);\n    }\n    static void free(node *&ptr)\
+    \ requires (!persistent) {\n        if (ptr == nullptr) return;\n        free(ptr->l);\n\
     \        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n        ptr = nullptr;\n\
     \    }\n    static int get_rank(node *p) { return p ? p->rank : -1; }\npublic:\n\
     \    LeftistTree() = default;\n    LeftistTree(node *root_) : root(root_) {}\n\
@@ -158,8 +158,8 @@ data:
   path: DataStructure/LeftistTree.hpp
   requiredBy:
   - Graph/minimum_arborescence.hpp
-  timestamp: '2026-06-13 18:42:24+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp
 documentation_of: DataStructure/LeftistTree.hpp

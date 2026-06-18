@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/bitwise_transform.hpp
     title: Convolution/bitwise_transform.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Convolution/subset_convolution.hpp\"\n\n#line 2 \"Convolution/bitwise_transform.hpp\"\
@@ -62,7 +62,7 @@ data:
   path: Convolution/subset_convolution.hpp
   requiredBy: []
   timestamp: '2026-06-14 15:20:09+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
 documentation_of: Convolution/subset_convolution.hpp

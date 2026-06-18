@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/bitwise_transform.hpp
     title: Convolution/bitwise_transform.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Convolution/subset_convolution.hpp
     title: Convolution/subset_convolution.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
@@ -153,11 +153,11 @@ data:
     \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
     \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
     \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
@@ -218,8 +218,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2026-06-14 15:20:09+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/set_power_series/subset_convolution.test.cpp
 layout: document

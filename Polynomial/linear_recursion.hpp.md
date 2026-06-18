@@ -7,26 +7,26 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/linear_recursion.hpp\"\n\n#line 2 \"Polynomial/Bostan_Mori.hpp\"\
@@ -126,11 +126,11 @@ data:
     \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
     \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
     \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
@@ -276,8 +276,8 @@ data:
   isVerificationFile: false
   path: Polynomial/linear_recursion.hpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: Polynomial/linear_recursion.hpp

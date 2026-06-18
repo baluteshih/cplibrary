@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':question:'
@@ -156,11 +156,11 @@ data:
     \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
     \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
     \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
@@ -170,22 +170,22 @@ data:
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/size_value.hpp\"\
     \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
     \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
-    \    }\n    int size() const {\n        return sz; \n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const size_v &v) {\n        os << v.sz;\n        return\
-    \ os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n   \
-    \ #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n         typename\
-    \ Value = size_v,\n         typename Tag = void, \n         bool Rev = false,\n\
-    \         template<typename> class Allocator = DefaultAllocator,\n         bool\
-    \ persistent = false\n>\nclass Treap {\n    static constexpr bool hasKey = !std::is_same_v<Key,\
-    \ void>;\n    static constexpr bool hasValue = !std::is_same_v<Value, void>;\n\
-    \    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static constexpr\
-    \ bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
-    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
-    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
-    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
-    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
-    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
-    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n\
+    \    #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n      \
+    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
+    \ = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
+    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
+    \ hasKey = !std::is_same_v<Key, void>;\n    static constexpr bool hasValue = !std::is_same_v<Value,\
+    \ void>;\n    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n   \
+    \ static constexpr bool usePri = !persistent;\n    static constexpr bool hasSize\
+    \ = requires(Value v) { v.size(); };\n    static constexpr bool hasValueReverse\
+    \ = requires(Value v) { v.reverse(); };\n    struct Empty {};\n    template <bool\
+    \ Condition, typename T>\n    static auto get_default() {\n        if constexpr\
+    \ (Condition) return T();\n        else return Empty{};\n    }\n    template <bool\
+    \ Condition>\n    static auto get_pri() {\n        if constexpr (Condition) return\
+    \ rng();\n        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
     \    static_assert(!hasTag || hasValue);\n    static inline std::mt19937 rng{RNGSEED};\n\
     \    struct node {\n        node *l = nullptr, *r = nullptr;\n        [[no_unique_address]]\
     \ std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();\n\
@@ -485,7 +485,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-13 18:42:24+08:00'
+  timestamp: '2026-06-18 22:20:51+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

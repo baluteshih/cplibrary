@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/Dijkstra.hpp
     title: Graph/Dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -67,7 +67,7 @@ data:
     \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
     \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
     \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
-    \            return res;\n        }\n        friend ostream& operator<<(ostream&\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -151,24 +151,24 @@ data:
     \ != x; x = parent[x]) {\n            if (vertex) res.push_back(parent[x]);\n\
     \            else res.push_back(parent_edge[x]);\n        }\n        std::ranges::reverse(res);\n\
     \        return res;\n    }\n};\n#line 5 \"test/1_library_checker/graph/shortest_path.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m, s, t;\n\
-    \    cin >> n >> m >> s >> t;\n    Dijkstra<ll> dijk(n);\n    while (m--) {\n\
-    \        int u, v, w;\n        cin >> u >> v >> w;\n        dijk.add_edge(u, v,\
-    \ w);\n    }\n    dijk.solve(s);\n    if (!dijk.has_path[t]) {\n        cout <<\
-    \ \"-1\\n\";\n        return 0;\n    }\n    auto path = dijk.path(t);\n    cout\
-    \ << dijk.dis[t] << \" \" << SZ(path) - 1 << \"\\n\";\n    for (int i = 0; i +\
-    \ 1 < SZ(path); ++i) {\n        cout << path[i] << \" \" << path[i + 1] << \"\\\
-    n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m, s, t;\n    std::cin >> n >> m >> s >> t;\n    Dijkstra<long long> dijk(n);\n\
+    \    while (m--) {\n        int u, v, w;\n        std::cin >> u >> v >> w;\n \
+    \       dijk.add_edge(u, v, w);\n    }\n    dijk.solve(s);\n    if (!dijk.has_path[t])\
+    \ {\n        std::cout << \"-1\\n\";\n        return 0;\n    }\n    auto path\
+    \ = dijk.path(t);\n    std::cout << dijk.dis[t] << \" \" << int(path.size()) -\
+    \ 1 << \"\\n\";\n    for (int i = 0; i + 1 < int(path.size()); ++i) {\n      \
+    \  std::cout << path[i] << \" \" << path[i + 1] << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n#include\
     \ \"default_code.hpp\"\n\n#include \"Graph/Dijkstra.hpp\"\n\nint main() {\n  \
-    \  ios::sync_with_stdio(0), cin.tie(0);\n    int n, m, s, t;\n    cin >> n >>\
-    \ m >> s >> t;\n    Dijkstra<ll> dijk(n);\n    while (m--) {\n        int u, v,\
-    \ w;\n        cin >> u >> v >> w;\n        dijk.add_edge(u, v, w);\n    }\n  \
-    \  dijk.solve(s);\n    if (!dijk.has_path[t]) {\n        cout << \"-1\\n\";\n\
-    \        return 0;\n    }\n    auto path = dijk.path(t);\n    cout << dijk.dis[t]\
-    \ << \" \" << SZ(path) - 1 << \"\\n\";\n    for (int i = 0; i + 1 < SZ(path);\
-    \ ++i) {\n        cout << path[i] << \" \" << path[i + 1] << \"\\n\";\n    }\n\
-    }\n"
+    \  std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, m, s, t;\n    std::cin\
+    \ >> n >> m >> s >> t;\n    Dijkstra<long long> dijk(n);\n    while (m--) {\n\
+    \        int u, v, w;\n        std::cin >> u >> v >> w;\n        dijk.add_edge(u,\
+    \ v, w);\n    }\n    dijk.solve(s);\n    if (!dijk.has_path[t]) {\n        std::cout\
+    \ << \"-1\\n\";\n        return 0;\n    }\n    auto path = dijk.path(t);\n   \
+    \ std::cout << dijk.dis[t] << \" \" << int(path.size()) - 1 << \"\\n\";\n    for\
+    \ (int i = 0; i + 1 < int(path.size()); ++i) {\n        std::cout << path[i] <<\
+    \ \" \" << path[i + 1] << \"\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Graph/Dijkstra.hpp
@@ -176,8 +176,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2026-05-19 02:16:25+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-18 22:20:51+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/shortest_path.test.cpp
 layout: document
