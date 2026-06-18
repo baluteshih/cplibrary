@@ -1,18 +1,19 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A"
-#include "default_code.hpp"
+#include <bits/stdc++.h>
+#include <cassert>
 
 #include "Geometry/polygon.hpp"
 
 using polygon = Polygon<int>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n;
-    cin >> n;
+    std::cin >> n;
     polygon poly(n);
     for (auto &p : poly)
-        cin >> p;
+        std::cin >> p;
     int res = poly.area();
-    if (res % 2 == 0) cout << res / 2 << ".0\n";
-    else cout << res / 2 << ".5\n";
+    if (res % 2 == 0) std::cout << res / 2 << ".0\n";
+    else std::cout << res / 2 << ".5\n";
 }

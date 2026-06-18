@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_A"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Geometry/circle.hpp"
 
 using cir = Circle<int>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     cir a, b;
-    cin >> a.o >> a.r >> b.o >> b.r;
-    cout << typeOfCircles(a, b) << "\n";
+    std::cin >> a.o >> a.r >> b.o >> b.r;
+    std::cout << typeOfCircles(a, b) << "\n";
 }

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_2_D"
 #define ERROR 0.00000001
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Geometry/line.hpp"
 
@@ -8,13 +8,13 @@ using Point = Pt<int>;
 using Line = Ln<int>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int q;
-    cin >> q;
-    cout << fixed << setprecision(10);
+    std::cin >> q;
+    std::cout << std::fixed << std::setprecision(10);
     while (q--) {
         Line l1, l2;
-        cin >> l1[0] >> l1[1] >> l2[0] >> l2[1];
-        cout << segDist<double>(l1, l2) << "\n"; 
+        std::cin >> l1[0] >> l1[1] >> l2[0] >> l2[1];
+        std::cout << segDist<double>(l1, l2) << "\n"; 
     }
 }

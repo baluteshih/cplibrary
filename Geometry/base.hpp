@@ -39,8 +39,8 @@ struct Pt : Geometry<T, eps> {
     T x = 0, y = 0;
     Pt() : x(0), y(0) {}
     Pt(T x_, T y_) : x(x_), y(y_) {}
-    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y; }
-    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x << ' ' << p.y; }
+    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x >> p.y; }
+    friend std::ostream& operator<<(std::ostream &os, const Pt &p) { return os << p.x << ' ' << p.y; }
     friend bool operator==(const Pt &a, const Pt &b) { 
         return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; 
     }

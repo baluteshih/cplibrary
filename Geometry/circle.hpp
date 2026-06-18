@@ -103,7 +103,7 @@ struct Circle : Geometry<T, eps> {
     friend std::vector<Ln<Ret, _eps, _MulT>> internalTangent(const Circle &c1, const Circle &c2) {
         auto [o1, r1] = Circle<Ret, _eps, _MulT>(c1);
         auto [o2, r2] = Circle<Ret, _eps, _MulT>(c2);
-        vector<Ln<Ret, _eps, _MulT>> res;
+        std::vector<Ln<Ret, _eps, _MulT>> res;
         auto p = (o1 * r2 + o2 * r1) / (r1 + r2);
         auto ps = pointCircleTangent(p, Circle<Ret, _eps, _MulT>(c1)), qs = pointCircleTangent(p, Circle<Ret, _eps, _MulT>(c2));
         for (int i = 0; i < int(std::min(ps.size(), qs.size())); i++)

@@ -10,7 +10,7 @@ Circle<T, eps, MulT> minimum_enclosing_circle(const std::vector<Point> &_dots) {
     std::vector<Pt<T, eps, MulT>> dots(_dots.begin(), _dots.end());
     std::ranges::shuffle(dots, rng);
     Circle<T, eps, MulT> res(dots[0], 0);
-    for (int i = 1; i < SZ(dots); ++i) 
+    for (int i = 1; i < int(dots.size()); ++i) 
         if (dist(dots[i], res.o) > res.r) {
             res.o = dots[i], res.r = 0;
             for (int j = 0; j < i; ++j)

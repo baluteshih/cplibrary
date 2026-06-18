@@ -9,7 +9,7 @@ template <typename Point>
 PolygonType<Point>::type convexHull(std::vector<Point> dots, bool sort_and_unique = true) {
     if (sort_and_unique) {
         std::ranges::sort(dots);
-        dots.erase(ranges::unique(dots).begin(), dots.end());
+        dots.erase(std::ranges::unique(dots).begin(), dots.end());
     }
     int n = dots.size();
     if (n <= 1) { return dots; }
@@ -29,7 +29,7 @@ template <typename Point>
 std::pair<typename PolygonType<Point>::type, typename PolygonType<Point>::type> convexHullParts(std::vector<Point> dots, bool sort_and_unique = true) {
     if (sort_and_unique) {
         std::ranges::sort(dots);
-        dots.erase(ranges::unique(dots).begin(), dots.end());
+        dots.erase(std::ranges::unique(dots).begin(), dots.end());
     }
     int n = dots.size();
     if (n <= 1) { return std::make_pair(dots, dots); }
@@ -53,7 +53,7 @@ template <typename Point>
 PolygonType<Point>::type convexHullNonstrict(std::vector<Point> dots, bool sort_and_unique = true) {
     if (sort_and_unique) {
         std::ranges::sort(dots);
-        dots.erase(ranges::unique(dots).begin(), dots.end());
+        dots.erase(std::ranges::unique(dots).begin(), dots.end());
     }
     int n = dots.size();
     if (n <= 1) { return dots; }
@@ -124,7 +124,7 @@ std::pair<int, int> tangentLineToConvex(const Point &p, const typename PolygonTy
 
 template <typename Point>
 int tangentDirection(const Point &dir, const typename PolygonType<Point>::type &C) {
-  return cyc_bitonic_search(SZ(C), [&](int a, int b) {
+  return cyc_bitonic_search(C.size(), [&](int a, int b) {
     return Point::cmp(cross(dir, C[a]), cross(dir, C[b])) > 0;
   });
 }
@@ -136,7 +136,7 @@ std::pair<int, int> lineIntersectConvex(const Ln<T, eps, MulT> &ln, const Polygo
     };
     int A = tangentDirection(-direction(ln), C);
     int B = tangentDirection(direction(ln), C);
-    int n = SZ(C);
+    int n = C.size();
     if (cmpL(A) < 0 || cmpL(B) > 0)
         return std::make_pair(-1, -1); // no collision
     auto gao = [&](int l, int r) {
