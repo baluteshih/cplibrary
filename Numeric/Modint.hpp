@@ -113,11 +113,11 @@ struct static_modint : internal::static_modint_base {
     friend std::strong_ordering operator<=>(const mint& lhs, const mint& rhs) {
         return lhs._v <=> rhs._v;
     }
-    friend ostream& operator<<(ostream& os, const mint& v) {
+    friend std::ostream& operator<<(std::ostream& os, const mint& v) {
         os << v._v;
         return os;
     }
-    friend istream& operator>>(istream& is, mint& v) {
+    friend std::istream& operator>>(std::istream& is, mint& v) {
         long long x;
         is >> x;
         x %= (long long)(umod());

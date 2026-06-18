@@ -52,7 +52,7 @@ class LeftistTree {
         node() = default;
         node(const auto &v) requires (!hasInfo) : key(v) {}
         node(const auto &k, const auto &v) requires (hasInfo) : key(k), info(v) {}
-        friend ostream& operator<<(ostream& os, const node &v) {
+        friend std::ostream& operator<<(std::ostream& os, const node &v) {
             if constexpr (hasInfo) os << "{key = " << v.key << ", info = " << v.info << "}";
             else os << v.key;
             return os;

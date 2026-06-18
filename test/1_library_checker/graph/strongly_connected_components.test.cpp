@@ -1,25 +1,25 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Graph/SCC.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m;
-    cin >> n >> m;
+    std::cin >> n >> m;
     SCC scc(n);
     while (m--) {
         int u, v;
-        cin >> u >> v;
+        std::cin >> u >> v;
         scc.add_edge(u, v);
     }
     scc.solve();
     auto ans = scc.components();
-    cout << SZ(ans) << "\n";
+    std::cout << ans.size() << "\n";
     for (auto &v : ans) {
-        cout << SZ(v);
+        std::cout << v.size();
         for (int i : v)
-            cout << " " << i;
-        cout << "\n";
+            std::cout << " " << i;
+        std::cout << "\n";
     }
 }

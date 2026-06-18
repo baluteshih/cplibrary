@@ -26,7 +26,7 @@ public:
             std::swap(res.from, res.to);
             return res;
         }
-        friend ostream& operator<<(ostream& os, const edge_v &v) {
+        friend std::ostream& operator<<(std::ostream& os, const edge_v &v) {
             os << "(" << v.from << "->" << v.to;
             if constexpr (hasEdgeWeight) os << ", " << v.weight;
             os << ")";

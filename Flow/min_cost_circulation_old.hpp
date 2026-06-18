@@ -9,7 +9,7 @@ struct CostCirculationFlowWeight {
     T cap, flow;
     CostCirculationFlowWeight() : cap(0), fcap(0), cost(0), flow(0) {}
     CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c), cost(w), cap(cc), flow(f) {}
-    friend ostream& operator<<(ostream& os, const CostCirculationFlowWeight &v) {
+    friend std::ostream& operator<<(std::ostream& os, const CostCirculationFlowWeight &v) {
         os << "[" << v.fcap << ", " << v.cost << ", " << v.cap << ", " << v.flow << "]";
         return os;
     }

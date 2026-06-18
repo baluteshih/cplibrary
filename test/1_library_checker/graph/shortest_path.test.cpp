@@ -4,23 +4,23 @@
 #include "Graph/Dijkstra.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m, s, t;
-    cin >> n >> m >> s >> t;
-    Dijkstra<ll> dijk(n);
+    std::cin >> n >> m >> s >> t;
+    Dijkstra<long long> dijk(n);
     while (m--) {
         int u, v, w;
-        cin >> u >> v >> w;
+        std::cin >> u >> v >> w;
         dijk.add_edge(u, v, w);
     }
     dijk.solve(s);
     if (!dijk.has_path[t]) {
-        cout << "-1\n";
+        std::cout << "-1\n";
         return 0;
     }
     auto path = dijk.path(t);
-    cout << dijk.dis[t] << " " << SZ(path) - 1 << "\n";
-    for (int i = 0; i + 1 < SZ(path); ++i) {
-        cout << path[i] << " " << path[i + 1] << "\n";
+    std::cout << dijk.dis[t] << " " << int(path.size()) - 1 << "\n";
+    for (int i = 0; i + 1 < int(path.size()); ++i) {
+        std::cout << path[i] << " " << path[i + 1] << "\n";
     }
 }

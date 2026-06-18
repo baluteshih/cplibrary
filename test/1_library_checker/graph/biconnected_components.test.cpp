@@ -1,24 +1,24 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/biconnected_components"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Graph/BCC.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m;
-    cin >> n >> m;
+    std::cin >> n >> m;
     BCC bcc(n);
     while (m--) {
         int u, v;
-        cin >> u >> v;
+        std::cin >> u >> v;
         bcc.add_edge(u, v);
     }
     bcc.solve();
-    cout << bcc.nbcc << "\n";
+    std::cout << bcc.nbcc << "\n";
     for (auto &v : bcc.bcc) {
-        cout << SZ(v);
+        std::cout << v.size();
         for (int i : v)
-            cout << " " << i;
-        cout << "\n";
+            std::cout << " " << i;
+        std::cout << "\n";
     }
 }

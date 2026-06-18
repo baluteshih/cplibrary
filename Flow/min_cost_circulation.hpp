@@ -19,7 +19,7 @@ public:
         return pi[x] = phi(fa[x]) - this->edges[fae[x]].weight.cost;
     }
     int lca(int u, int v) {
-        for (; u != -1 || v != -1; swap(u, v))
+        for (; u != -1 || v != -1; std::swap(u, v))
             if (u != -1) {
                 if (vis[u] == visc) return u;
                 vis[u] = visc;
@@ -32,7 +32,7 @@ public:
         ++visc;
         if (int w = lca(u, v); w == -1) {
             while (v != -1)
-                swap(x ^= 1, fae[v]), swap(u, fa[v]), swap(u, v);
+                std::swap(x ^= 1, fae[v]), std::swap(u, fa[v]), std::swap(u, v);
         }
         else {
             int z = u, dir = 0;
@@ -50,9 +50,9 @@ public:
                 this->edges[i].weight.flow -= f;
                 this->edges[i ^ 1].weight.flow += f;
             }
-            if (dir) x ^= 1, swap(u, v);
+            if (dir) x ^= 1, std::swap(u, v);
             while (u != z)
-                swap(x ^= 1, fae[v]), swap(u, fa[v]), swap(u, v);
+                std::swap(x ^= 1, fae[v]), std::swap(u, fa[v]), std::swap(u, v);
         }
     }
     void dfs(int u) {

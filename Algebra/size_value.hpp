@@ -9,7 +9,7 @@ struct size_v {
     int size() const {
         return sz; 
     }
-    friend ostream& operator<<(ostream& os, const size_v &v) {
+    friend std::ostream& operator<<(std::ostream& os, const size_v &v) {
         os << v.sz;
         return os;
     }

@@ -1,20 +1,20 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Graph/BipartiteMatching.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int l, r, m;
-    cin >> l >> r >> m;
+    std::cin >> l >> r >> m;
     BipartiteMatching mch(l, r);
     while (m--) {
         int u, v;
-        cin >> u >> v;
+        std::cin >> u >> v;
         mch.add_edge(u, v);
     }
-    cout << mch.matching() << "\n";
+    std::cout << mch.matching() << "\n";
     for (int i = 0; i < l; ++i)
         if (~mch.match_right[i])
-            cout << i << " " << mch.match_right[i] << "\n";
+            std::cout << i << " " << mch.match_right[i] << "\n";
 }

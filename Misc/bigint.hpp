@@ -202,16 +202,16 @@ struct BigInteger {
         std::ranges::reverse(s);
         return s;
     }
-    friend istream& operator>>(istream &is, bint &p) {
+    friend std::istream& operator>>(std::istream &is, bint &p) {
         std::string s;
         auto &res = is >> s;
         p = bint(s);
         return res;
     }
-    friend ostream& operator<<(ostream &os, const bint &p) { return os << p.to_string(); }
+    friend std::ostream& operator<<(std::ostream &os, const bint &p) { return os << p.to_string(); }
     // ignore overflow 
-    ll to_ll() {
-        ll x = 0;
+    long long to_ll() {
+        long long x = 0;
         for (int i = dat.size() - 1; i >= 0; --i)
             x = MOD * x + dat[i];
         return sgn * x;

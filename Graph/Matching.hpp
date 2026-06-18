@@ -13,7 +13,7 @@ struct Matching : public Graph<false, void, void> { // 0-base
     { return u == fa[u] ? u : fa[u] = Find(fa[u]); }
     int LCA(int x, int y) {
         static int tk = 0; tk++; x = Find(x); y = Find(y);
-        for (;; swap(x, y)) if (x != this->n()) {
+        for (;; std::swap(x, y)) if (x != this->n()) {
             if (vis[x] == tk) return x;
             vis[x] = tk;
             x = Find(pre[match[x]]);
@@ -27,8 +27,8 @@ struct Matching : public Graph<false, void, void> { // 0-base
         }
     }
     bool Bfs(int r) {
-        iota(ALL(fa), 0); fill(ALL(s), -1);
-        q = queue<int>(); q.push(r); s[r] = 0;
+        std::iota(fa.begin(), fa.end(), 0); std::ranges::fill(s, -1);
+        q = std::queue<int>(); q.push(r); s[r] = 0;
         for (; !q.empty(); q.pop()) {
             for (int x = q.front(); auto [u, eid] : (*this)[x])
                 if (s[u] == -1) {
