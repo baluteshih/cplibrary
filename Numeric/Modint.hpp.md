@@ -70,6 +70,12 @@ data:
     path: test/1_library_checker/convolution/convolution_online.test.cpp
     title: test/1_library_checker/convolution/convolution_online.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/gcd_convolution.test.cpp
+    title: test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/lcm_convolution.test.cpp
+    title: test/1_library_checker/convolution/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -384,6 +390,8 @@ data:
   - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - test/1_library_checker/convolution/lcm_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp

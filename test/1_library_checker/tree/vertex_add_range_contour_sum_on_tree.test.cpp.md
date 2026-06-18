@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/NullFunc.hpp
+    title: Algebra/NullFunc.hpp
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -231,22 +234,22 @@ data:
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\
-    \n\n#line 4 \"Tree/centroid_divide_and_conquer.hpp\"\n\nstruct NullFunc {\n  \
-    \  constexpr void operator()(auto&&...) const {}\n};\n\n/*\nmerge_func: void merge_func(int\
-    \ c, std::vector<std::vector<int>> groups);\n    - c: the center, groups: subtrees\
-    \ with pre-order\npre_func: void pre_func(int u, int f);\n    - u: current vertex,\
-    \ f: parent\n    - the center would be called at first with pre_func(c, -1);\n\
-    post_func: void post_func(int u, std::vector<int> child);\n    - u: current vertex,\
-    \ child: child vertices\npost_merge_func: void post_merge_func(int c, std::vector<int>\
-    \ cent_child);\n    - c: the center, cent_child: c's center children \nreturn\
-    \ value: c_pa[u]: the centroid parent of u\n*/\n\ntemplate<typename _Tree, typename\
-    \ F_Pre = NullFunc, typename F_Merge = NullFunc, typename F_Post = NullFunc, typename\
-    \ F_PMerge = NullFunc>\nstd::vector<int> centroid_divide_and_conquer(_Tree &tree,\
-    \ F_Pre pre_func = NullFunc{}, F_Merge merge_func = NullFunc{}, F_Post post_func\
-    \ = NullFunc{}, F_PMerge post_merge_func = NullFunc{}) {\n    constexpr bool useMerge\
-    \ = !std::is_same_v<std::decay_t<decltype(merge_func)>, NullFunc>;\n    constexpr\
-    \ bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>, NullFunc>;\n\
-    \    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
+    \n\n#line 2 \"Algebra/NullFunc.hpp\"\n\nstruct NullFunc {\n    constexpr void\
+    \ operator()(auto&&...) const {}\n};\n#line 5 \"Tree/centroid_divide_and_conquer.hpp\"\
+    \n\n/*\npre_func: void pre_func(int u, int f);\n    - u: current vertex, f: parent\n\
+    \    - the center would be called at first with pre_func(c, -1);\nmerge_func:\
+    \ void merge_func(int c, std::vector<std::vector<int>> groups);\n    - c: the\
+    \ center, groups: subtrees with pre-order\npost_func: void post_func(int u, std::vector<int>\
+    \ child);\n    - u: current vertex, child: child vertices\npost_merge_func: void\
+    \ post_merge_func(int c, std::vector<int> cent_child);\n    - c: the center, cent_child:\
+    \ c's center children \nreturn value: c_pa[u]: the centroid parent of u\n*/\n\n\
+    template<typename _Tree, typename F_Pre = NullFunc, typename F_Merge = NullFunc,\
+    \ typename F_Post = NullFunc, typename F_PMerge = NullFunc>\nstd::vector<int>\
+    \ centroid_divide_and_conquer(_Tree &tree, F_Pre pre_func = NullFunc{}, F_Merge\
+    \ merge_func = NullFunc{}, F_Post post_func = NullFunc{}, F_PMerge post_merge_func\
+    \ = NullFunc{}) {\n    constexpr bool useMerge = !std::is_same_v<std::decay_t<decltype(merge_func)>,\
+    \ NullFunc>;\n    constexpr bool usePre   = !std::is_same_v<std::decay_t<decltype(pre_func)>,\
+    \ NullFunc>;\n    constexpr bool usePost  = !std::is_same_v<std::decay_t<decltype(post_func)>,\
     \ NullFunc>;\n    constexpr bool usePostMerge  = !std::is_same_v<std::decay_t<decltype(post_merge_func)>,\
     \ NullFunc>;\n    int n = tree.n();\n    std::vector<int> done(n), sz(n), res(n);\n\
     \    auto get_cent = [&](auto self, int u, int f, int &mx, int &c, int num) ->\
@@ -378,11 +381,12 @@ data:
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
   - Tree/centroid_divide_and_conquer.hpp
+  - Algebra/NullFunc.hpp
   - DataStructure/BIT.hpp
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-17 20:26:53+08:00'
+  timestamp: '2026-06-18 20:44:31+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

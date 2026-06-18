@@ -4,6 +4,9 @@ data:
   - name: Algebra
     pages:
     - icon: ':heavy_check_mark:'
+      path: Algebra/NullFunc.hpp
+      title: Algebra/NullFunc.hpp
+    - icon: ':heavy_check_mark:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':warning:'
@@ -29,6 +32,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/gcd_convolution.hpp
+      title: Convolution/gcd_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: Convolution/lcm_convolution.hpp
+      title: Convolution/lcm_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: Convolution/min_plus_convolution.hpp
       title: Convolution/min_plus_convolution.hpp
@@ -277,6 +286,9 @@ data:
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':heavy_check_mark:'
+      path: Numeric/factor_transform.hpp
+      title: Numeric/factor_transform.hpp
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -294,6 +306,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/pollard_rho.hpp
       title: Numeric/pollard_rho.hpp
+    - icon: ':heavy_check_mark:'
+      path: Numeric/prime_work.hpp
+      title: Numeric/prime_work.hpp
     - icon: ':heavy_check_mark:'
       path: Numeric/primitive_root.hpp
       title: Numeric/primitive_root.hpp
@@ -423,6 +438,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/convolution/convolution_online.test.cpp
       title: test/1_library_checker/convolution/convolution_online.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/gcd_convolution.test.cpp
+      title: test/1_library_checker/convolution/gcd_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/convolution/lcm_convolution.test.cpp
+      title: test/1_library_checker/convolution/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
       title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp

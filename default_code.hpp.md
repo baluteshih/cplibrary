@@ -28,6 +28,12 @@ data:
     path: test/1_library_checker/convolution/convolution_online.test.cpp
     title: test/1_library_checker/convolution/convolution_online.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/gcd_convolution.test.cpp
+    title: test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/lcm_convolution.test.cpp
+    title: test/1_library_checker/convolution/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
   - icon: ':heavy_check_mark:'
@@ -536,6 +542,8 @@ data:
   - test/1_library_checker/convolution/convolution_online.test.cpp
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+  - test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - test/1_library_checker/convolution/lcm_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
