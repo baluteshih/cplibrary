@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   - icon: ':heavy_check_mark:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -29,36 +29,8 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_E
   bundledCode: "#line 1 \"test/2_aoj/cross_points_of_circles.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_E\"\n#define\
-    \ ERROR 0.000001\n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\ntypedef long long ll;\ntypedef pair<int, int> pii;\ntypedef\
-    \ pair<ll, ll> pll;\n#define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n\
-    #define ALL(v) v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 4 \"test/2_aoj/cross_points_of_circles.test.cpp\"\n\n#line 2 \"Geometry/circle.hpp\"\
+    \ ERROR 0.000001\n#line 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line\
+    \ 4 \"test/2_aoj/cross_points_of_circles.test.cpp\"\n\n#line 2 \"Geometry/circle.hpp\"\
     \n\n#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing DefaultFloat\
     \ = std::conditional_t<std::is_floating_point_v<T>, T, double>;\n\ntemplate <typename\
     \ T>\nconstexpr T get_default_eps() {\n    if constexpr (std::is_same_v<T, float>)\n\
@@ -73,8 +45,8 @@ data:
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
     \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
     \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend istream& operator>>(istream\
-    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend ostream& operator<<(ostream\
+    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
     \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
@@ -139,8 +111,8 @@ data:
     \ eps> {\n    using value_type = T;\n    using Point = Pt<T, eps, MulT>;\n   \
     \ std::array<Point, 2> l;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT,\
     \ eps>::cmp;\n    static constexpr T eps_val = eps;\n    Ln() {}\n    Ln(const\
-    \ Point &a, const Point &b) : l{a, b} {}\n    friend istream& operator>>(istream\
-    \ &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend ostream& operator<<(ostream\
+    \ Point &a, const Point &b) : l{a, b} {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename\
     \ U, U _eps, typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0],\
     \ other.l[1]} {}\n    friend int side(const Point &p, const Ln &l) { \n      \
@@ -315,8 +287,8 @@ data:
     \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend std::vector<Ln<Ret,\
     \ _eps, _MulT>> internalTangent(const Circle &c1, const Circle &c2) {\n      \
     \  auto [o1, r1] = Circle<Ret, _eps, _MulT>(c1);\n        auto [o2, r2] = Circle<Ret,\
-    \ _eps, _MulT>(c2);\n        vector<Ln<Ret, _eps, _MulT>> res;\n        auto p\
-    \ = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
+    \ _eps, _MulT>(c2);\n        std::vector<Ln<Ret, _eps, _MulT>> res;\n        auto\
+    \ p = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
     \ Circle<Ret, _eps, _MulT>(c1)), qs = pointCircleTangent(p, Circle<Ret, _eps,\
     \ _MulT>(c2));\n        for (int i = 0; i < int(std::min(ps.size(), qs.size()));\
     \ i++)\n            res.emplace_back(ps[i], qs[i]);\n        return res;\n   \
@@ -350,20 +322,20 @@ data:
     \ = Ret(b.r) * Ret(b.r) * std::sin(alpha) * std::cos(alpha);\n            res\
     \ += s - t;\n            std::swap(a, b);\n        }\n        return res;\n  \
     \  }\n};\n#line 6 \"test/2_aoj/cross_points_of_circles.test.cpp\"\n\nusing cir\
-    \ = Circle<int>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n \
-    \   cir a, b;\n    cin >> a.o >> a.r >> b.o >> b.r;\n    auto res = circleIntersection(a,\
-    \ b);\n    assert(!res.empty());\n    if (res[0] > res[1]) swap(res[0], res[1]);\n\
-    \    cout << fixed << setprecision(8) << res[0] << \" \" << res[1] << \"\\n\"\
-    ;\n}\n\n"
+    \ = Circle<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    cir a, b;\n    std::cin >> a.o >> a.r >> b.o >> b.r;\n    auto res = circleIntersection(a,\
+    \ b);\n    assert(!res.empty());\n    if (res[0] > res[1]) std::swap(res[0], res[1]);\n\
+    \    std::cout << std::fixed << std::setprecision(8) << res[0] << \" \" << res[1]\
+    \ << \"\\n\";\n}\n\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_E\"\
-    \n#define ERROR 0.000001\n#include \"default_code.hpp\"\n\n#include \"Geometry/circle.hpp\"\
-    \n\nusing cir = Circle<int>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    cir a, b;\n    cin >> a.o >> a.r >> b.o >> b.r;\n    auto res = circleIntersection(a,\
-    \ b);\n    assert(!res.empty());\n    if (res[0] > res[1]) swap(res[0], res[1]);\n\
-    \    cout << fixed << setprecision(8) << res[0] << \" \" << res[1] << \"\\n\"\
-    ;\n}\n\n"
+    \n#define ERROR 0.000001\n#include \"assumption.hpp\"\n\n#include \"Geometry/circle.hpp\"\
+    \n\nusing cir = Circle<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    cir a, b;\n    std::cin >> a.o >> a.r >> b.o >> b.r;\n\
+    \    auto res = circleIntersection(a, b);\n    assert(!res.empty());\n    if (res[0]\
+    \ > res[1]) std::swap(res[0], res[1]);\n    std::cout << std::fixed << std::setprecision(8)\
+    \ << res[0] << \" \" << res[1] << \"\\n\";\n}\n\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Geometry/circle.hpp
   - Geometry/base.hpp
   - Geometry/line.hpp
@@ -371,7 +343,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/cross_points_of_circles.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/cross_points_of_circles.test.cpp

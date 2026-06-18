@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Misc/cyc_bitonic_search.hpp
     title: Misc/cyc_bitonic_search.hpp
   - icon: ':heavy_check_mark:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -33,36 +33,8 @@ data:
     links:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#line 2 \"default_code.hpp\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
-    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
-    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
-    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
-    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
-    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
-    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
-    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
-    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
-    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
-    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
-    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
-    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
-    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
-    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
-    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
-    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
-    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
-    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
-    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
-    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
-    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
-    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
-    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
-    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
-    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
-    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 3 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#line 2 \"assumption.hpp\"\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\
     \n\n#line 2 \"Geometry/outerTangentBetweenConvex.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
     \n    \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
     \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
@@ -78,26 +50,26 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y;\
-    \ }\n    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x\
-    \ << ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n\
-    \        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend\
-    \ bool operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -145,14 +117,14 @@ data:
     \    using Point = Pt<T, eps, MulT>;\n    std::array<Point, 2> l;\n    using Geometry<MulT,\
     \ eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val\
     \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
-    \   friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1];\
-    \ }\n    friend ostream& operator<<(ostream &os, const Ln &p) { return os << p.l[0]\
-    \ << ' ' << p.l[1]; }\n    template <typename U, U _eps, typename _MulT>\n   \
-    \ Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]} {}\n    friend\
-    \ int side(const Point &p, const Ln &l) { \n        return side(p, l[0], l[1]);\n\
-    \    }\n    Point& operator[](int index) {\n        return l[index];\n    }\n\
-    \    const Point& operator[](int index) const {\n        return l[index];\n  \
-    \  }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
+    \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
+    \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
+    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
+    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
+    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
+    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
+    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
+    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
     \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
     \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
     \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
@@ -273,7 +245,7 @@ data:
     \            ++res[i];\n        res[i] %= n;\n    }\n    return res;\n}\n#line\
     \ 7 \"Geometry/convex.hpp\"\n\ntemplate <typename Point>\nPolygonType<Point>::type\
     \ convexHull(std::vector<Point> dots, bool sort_and_unique = true) {\n    if (sort_and_unique)\
-    \ {\n        std::ranges::sort(dots);\n        dots.erase(ranges::unique(dots).begin(),\
+    \ {\n        std::ranges::sort(dots);\n        dots.erase(std::ranges::unique(dots).begin(),\
     \ dots.end());\n    }\n    int n = dots.size();\n    if (n <= 1) { return dots;\
     \ }\n    std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i = 0; i\
     \ < n; res[j++] = dots[i++]) {\n        while (j >= 2 && side(res[j - 2], res[j\
@@ -283,89 +255,89 @@ data:
     \ntemplate <typename Point>\nstd::pair<typename PolygonType<Point>::type, typename\
     \ PolygonType<Point>::type> convexHullParts(std::vector<Point> dots, bool sort_and_unique\
     \ = true) {\n    if (sort_and_unique) {\n        std::ranges::sort(dots);\n  \
-    \      dots.erase(ranges::unique(dots).begin(), dots.end());\n    }\n    int n\
-    \ = dots.size();\n    if (n <= 1) { return std::make_pair(dots, dots); }\n   \
-    \ std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i = 0; i < n; res[j++]\
-    \ = dots[i++]) {\n        while (j >= 2 && side(res[j - 2], res[j - 1], dots[i])\
-    \ <= 0) { j--; }\n    }\n    int k = j;\n    for (int i = n - 2; i >= 0; res[j++]\
-    \ = dots[i--]) {\n        while (j > k && side(res[j - 2], res[j - 1], dots[i])\
-    \ <= 0) { j--; }\n    }\n    std::vector<Point> lower(res.begin(), res.begin()\
-    \ + k);\n    std::vector<Point> upper(res.begin() + k - 1, res.begin() + j);\n\
-    \    std::ranges::reverse(upper);\n    return std::make_pair(lower, upper);\n\
+    \      dots.erase(std::ranges::unique(dots).begin(), dots.end());\n    }\n   \
+    \ int n = dots.size();\n    if (n <= 1) { return std::make_pair(dots, dots); }\n\
+    \    std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i = 0; i < n;\
+    \ res[j++] = dots[i++]) {\n        while (j >= 2 && side(res[j - 2], res[j - 1],\
+    \ dots[i]) <= 0) { j--; }\n    }\n    int k = j;\n    for (int i = n - 2; i >=\
+    \ 0; res[j++] = dots[i--]) {\n        while (j > k && side(res[j - 2], res[j -\
+    \ 1], dots[i]) <= 0) { j--; }\n    }\n    std::vector<Point> lower(res.begin(),\
+    \ res.begin() + k);\n    std::vector<Point> upper(res.begin() + k - 1, res.begin()\
+    \ + j);\n    std::ranges::reverse(upper);\n    return std::make_pair(lower, upper);\n\
     }\n\n// warning : if all point on same line will return {1, 2, 3, 2}\ntemplate\
     \ <typename Point>\nPolygonType<Point>::type convexHullNonstrict(std::vector<Point>\
     \ dots, bool sort_and_unique = true) {\n    if (sort_and_unique) {\n        std::ranges::sort(dots);\n\
-    \        dots.erase(ranges::unique(dots).begin(), dots.end());\n    }\n    int\
-    \ n = dots.size();\n    if (n <= 1) { return dots; }\n    std::vector<Point> res(2\
-    \ * n);\n    int j = 0;\n    for (int i = 0; i < n; res[j++] = dots[i++]) {\n\
-    \        while (j >= 2 && side(res[j - 2], res[j - 1], dots[i]) < 0) { j--; }\n\
-    \    }\n    for (int i = n - 2, k = j; i >= 0; res[j++] = dots[i--]) {\n     \
-    \   while (j > k && side(res[j - 2], res[j - 1], dots[i]) < 0) { j--; }\n    }\n\
-    \    res.resize(j - 1);\n    return res;\n}\n\n// a and b are nonempty, need reorder\n\
-    template <typename polygon>\npolygon convexMinkowski(polygon a, polygon b) {\n\
-    \    a = convexHull(a), b = convexHull(b);\n    int n = a.size(), m = b.size();\n\
-    \    if (n != 1) { std::swap(n, m), std::swap(a, b); }\n    if (n == 1) {\n  \
-    \      for (auto &p : b) { p = p + a[0]; }\n        return b;\n    }\n    a.push_back(a[0]),\
-    \ a.push_back(a[1]);\n    b.push_back(b[0]), b.push_back(b[1]);\n    polygon c;\n\
-    \    for (int i = 0, j = 0; i < n || j < m; ) {\n        c.push_back(a[i] + b[j]);\n\
-    \        int s = sign(cross(a[i + 1] - a[i], b[j + 1] - b[j]));\n        if (i\
-    \ < n && s >= 0) { i++; }\n        if (j < m && s <= 0) { j++; }\n    }\n    return\
-    \ c;\n}\n\n// 1: in, 0: on, -1: out\ntemplate <typename Point>\nint pointInConvex(const\
-    \ Point &p, const typename PolygonType<Point>::type &a) {\n    int n = a.size();\n\
-    \    if (n < 3) { return pointOnSeg(p, Ln(a[0], a.back())) ? 0 : -1; }\n    if\
-    \ (side(p, a[1], a[0]) >= 0) {\n        return pointOnSeg(p, Ln(a[1], a[0])) ?\
-    \ 0 : -1;\n    }\n    if (side(p, a[0], a.back()) >= 0) {\n        return pointOnSeg(p,\
-    \ Ln(a[0], a.back())) ? 0 : -1;\n    }\n    int l = 1, r = n - 2;\n    while (l\
-    \ < r) {\n        int m = (l + r + 1) >> 1;\n        if (side(p, a[0], a[m]) >=\
-    \ 0) l = m;\n        else r = m - 1;\n    }\n    return side(p, a[l], a[l + 1]);\n\
-    }\n\n/* The point should be strictly out of hull\n   return arbitrary point on\
-    \ the tangent line */\ntemplate <typename Point>\nstd::pair<int, int> tangentLineToConvex(const\
-    \ Point &p, const typename PolygonType<Point>::type &a) {\n    auto gao = [&](int\
-    \ s) {\n        return cyc_bitonic_search(a.size(), \n        [&](int x, int y)\
-    \ { return side(p, a[x], a[y]) == s; });\n    };\n    return std::make_pair(gao(1),\
-    \ gao(-1));\n}\n\ntemplate <typename Point>\nint tangentDirection(const Point\
-    \ &dir, const typename PolygonType<Point>::type &C) {\n  return cyc_bitonic_search(SZ(C),\
-    \ [&](int a, int b) {\n    return Point::cmp(cross(dir, C[a]), cross(dir, C[b]))\
-    \ > 0;\n  });\n}\n\ntemplate<typename T, T eps = get_default_eps<T>(), typename\
-    \ MulT = T>\nstd::pair<int, int> lineIntersectConvex(const Ln<T, eps, MulT> &ln,\
-    \ const Polygon<T, eps, MulT> &C) {\n    auto cmpL = [&](int i) {\n        return\
-    \ Ln<T, eps, MulT>::sign(cross(C[i] - ln[0], direction(ln)));\n    };\n    int\
-    \ A = tangentDirection(-direction(ln), C);\n    int B = tangentDirection(direction(ln),\
-    \ C);\n    int n = SZ(C);\n    if (cmpL(A) < 0 || cmpL(B) > 0)\n        return\
-    \ std::make_pair(-1, -1); // no collision\n    auto gao = [&](int l, int r) {\n\
-    \        for (int t = l; (l + 1) % n != r; ) {\n            int m = ((l + r +\
-    \ (l < r ? 0 : n)) / 2) % n;\n            (cmpL(m) == cmpL(t) ? l : r) = m;\n\
-    \        }\n        return (l + !cmpL(r)) % n;\n    };\n    std::pair<int, int>\
-    \ res = std::make_pair(gao(B, A), gao(A, B)); // (i, j)\n    if (res.first ==\
-    \ res.second) // touching the corner i\n        return std::make_pair(res.first,\
-    \ -1);\n    if (!cmpL(res.first) && !cmpL(res.second)) // along side i, i+1\n\
-    \        switch ((res.first - res.second + n + 1) % n) {\n            case 0:\
-    \ return std::make_pair(res.first, res.first);\n            case 2: return std::make_pair(res.second,\
-    \ res.second);\n        }\n    /* crossing sides (i, i+1) and (j, j+1)\n     \
-    \  crossing corner i is treated as side (i, i+1)\n       returned in the same\
-    \ order as the line hits the convex */\n    return res;\n} // convex cut: (r,\
-    \ l]\n#line 5 \"Geometry/outerTangentBetweenConvex.hpp\"\n\n/* The two convex\
-    \ should not intersect\nreturn a pair (i, j) such that P[i], Q[j] is the tangent\
-    \ line such that all points located in their left side\ncall outerTangentBetweenConvex(Q,\
-    \ P) to get another tangent line \n\nreference: David Kirkpatrick and Jack Snoeyink.\
-    \ 1994. Computing Common Tangents Without a Separating Line. Technical Report.\
-    \ University of British Columbia, CAN.\n*/\ntemplate <typename polygon>\nstd::pair<int,\
-    \ int> outerTangentBetweenConvex(const polygon &P, const polygon &Q) {\n    using\
-    \ Point = polygon::Point;\n    assert(!P.empty() && !Q.empty());\n    if (P.size()\
-    \ == 1 && Q.size() == 1) return std::make_pair(0, 0);\n    if (P.size() == 1)\
-    \ return std::make_pair(0, tangentLineToConvex(P[0], Q).first); \n    if (Q.size()\
-    \ == 1) return std::make_pair(tangentLineToConvex(Q[0], P).second, 0);\n    struct\
-    \ Info {\n        int n, dir, st, end, tent;\n        bool wrap;\n        Point\
-    \ tang_p1, tang_p2;\n        bool done() { return (end - tent) == dir; }\n   \
-    \     bool refined() { return st != tent; }\n    };\n    auto refine = [&](const\
-    \ auto &_P, Info &Pinfo, const auto &_Q, Info &Qinfo) {\n        int mid = Pinfo.tent\
-    \ + (Pinfo.end - Pinfo.tent) / 2;\n        Point pm = _P.at(mid), pm1 = _P.at(mid\
-    \ + Pinfo.dir);\n        if (Qinfo.refined() && side(Qinfo.tang_p1, Qinfo.tang_p2,\
-    \ pm) != 1) {\n            Point qt = _Q.at(Qinfo.tent);\n            if ((Qinfo.dir\
-    \ == 1) != (side(_P[0], qt, pm) == 1))\n                Qinfo.st = Qinfo.tent;\n\
-    \            else {\n                Qinfo.end = Qinfo.tent;\n               \
-    \ Qinfo.tent = Qinfo.st;\n                Pinfo.st = Pinfo.tent;\n           \
-    \ }\n        }\n        Point qend = _Q.at(Qinfo.end), qt = _Q.at(Qinfo.tent);\n\
+    \        dots.erase(std::ranges::unique(dots).begin(), dots.end());\n    }\n \
+    \   int n = dots.size();\n    if (n <= 1) { return dots; }\n    std::vector<Point>\
+    \ res(2 * n);\n    int j = 0;\n    for (int i = 0; i < n; res[j++] = dots[i++])\
+    \ {\n        while (j >= 2 && side(res[j - 2], res[j - 1], dots[i]) < 0) { j--;\
+    \ }\n    }\n    for (int i = n - 2, k = j; i >= 0; res[j++] = dots[i--]) {\n \
+    \       while (j > k && side(res[j - 2], res[j - 1], dots[i]) < 0) { j--; }\n\
+    \    }\n    res.resize(j - 1);\n    return res;\n}\n\n// a and b are nonempty,\
+    \ need reorder\ntemplate <typename polygon>\npolygon convexMinkowski(polygon a,\
+    \ polygon b) {\n    a = convexHull(a), b = convexHull(b);\n    int n = a.size(),\
+    \ m = b.size();\n    if (n != 1) { std::swap(n, m), std::swap(a, b); }\n    if\
+    \ (n == 1) {\n        for (auto &p : b) { p = p + a[0]; }\n        return b;\n\
+    \    }\n    a.push_back(a[0]), a.push_back(a[1]);\n    b.push_back(b[0]), b.push_back(b[1]);\n\
+    \    polygon c;\n    for (int i = 0, j = 0; i < n || j < m; ) {\n        c.push_back(a[i]\
+    \ + b[j]);\n        int s = sign(cross(a[i + 1] - a[i], b[j + 1] - b[j]));\n \
+    \       if (i < n && s >= 0) { i++; }\n        if (j < m && s <= 0) { j++; }\n\
+    \    }\n    return c;\n}\n\n// 1: in, 0: on, -1: out\ntemplate <typename Point>\n\
+    int pointInConvex(const Point &p, const typename PolygonType<Point>::type &a)\
+    \ {\n    int n = a.size();\n    if (n < 3) { return pointOnSeg(p, Ln(a[0], a.back()))\
+    \ ? 0 : -1; }\n    if (side(p, a[1], a[0]) >= 0) {\n        return pointOnSeg(p,\
+    \ Ln(a[1], a[0])) ? 0 : -1;\n    }\n    if (side(p, a[0], a.back()) >= 0) {\n\
+    \        return pointOnSeg(p, Ln(a[0], a.back())) ? 0 : -1;\n    }\n    int l\
+    \ = 1, r = n - 2;\n    while (l < r) {\n        int m = (l + r + 1) >> 1;\n  \
+    \      if (side(p, a[0], a[m]) >= 0) l = m;\n        else r = m - 1;\n    }\n\
+    \    return side(p, a[l], a[l + 1]);\n}\n\n/* The point should be strictly out\
+    \ of hull\n   return arbitrary point on the tangent line */\ntemplate <typename\
+    \ Point>\nstd::pair<int, int> tangentLineToConvex(const Point &p, const typename\
+    \ PolygonType<Point>::type &a) {\n    auto gao = [&](int s) {\n        return\
+    \ cyc_bitonic_search(a.size(), \n        [&](int x, int y) { return side(p, a[x],\
+    \ a[y]) == s; });\n    };\n    return std::make_pair(gao(1), gao(-1));\n}\n\n\
+    template <typename Point>\nint tangentDirection(const Point &dir, const typename\
+    \ PolygonType<Point>::type &C) {\n  return cyc_bitonic_search(C.size(), [&](int\
+    \ a, int b) {\n    return Point::cmp(cross(dir, C[a]), cross(dir, C[b])) > 0;\n\
+    \  });\n}\n\ntemplate<typename T, T eps = get_default_eps<T>(), typename MulT\
+    \ = T>\nstd::pair<int, int> lineIntersectConvex(const Ln<T, eps, MulT> &ln, const\
+    \ Polygon<T, eps, MulT> &C) {\n    auto cmpL = [&](int i) {\n        return Ln<T,\
+    \ eps, MulT>::sign(cross(C[i] - ln[0], direction(ln)));\n    };\n    int A = tangentDirection(-direction(ln),\
+    \ C);\n    int B = tangentDirection(direction(ln), C);\n    int n = C.size();\n\
+    \    if (cmpL(A) < 0 || cmpL(B) > 0)\n        return std::make_pair(-1, -1); //\
+    \ no collision\n    auto gao = [&](int l, int r) {\n        for (int t = l; (l\
+    \ + 1) % n != r; ) {\n            int m = ((l + r + (l < r ? 0 : n)) / 2) % n;\n\
+    \            (cmpL(m) == cmpL(t) ? l : r) = m;\n        }\n        return (l +\
+    \ !cmpL(r)) % n;\n    };\n    std::pair<int, int> res = std::make_pair(gao(B,\
+    \ A), gao(A, B)); // (i, j)\n    if (res.first == res.second) // touching the\
+    \ corner i\n        return std::make_pair(res.first, -1);\n    if (!cmpL(res.first)\
+    \ && !cmpL(res.second)) // along side i, i+1\n        switch ((res.first - res.second\
+    \ + n + 1) % n) {\n            case 0: return std::make_pair(res.first, res.first);\n\
+    \            case 2: return std::make_pair(res.second, res.second);\n        }\n\
+    \    /* crossing sides (i, i+1) and (j, j+1)\n       crossing corner i is treated\
+    \ as side (i, i+1)\n       returned in the same order as the line hits the convex\
+    \ */\n    return res;\n} // convex cut: (r, l]\n#line 5 \"Geometry/outerTangentBetweenConvex.hpp\"\
+    \n\n/* The two convex should not intersect\nreturn a pair (i, j) such that P[i],\
+    \ Q[j] is the tangent line such that all points located in their left side\ncall\
+    \ outerTangentBetweenConvex(Q, P) to get another tangent line \n\nreference: David\
+    \ Kirkpatrick and Jack Snoeyink. 1994. Computing Common Tangents Without a Separating\
+    \ Line. Technical Report. University of British Columbia, CAN.\n*/\ntemplate <typename\
+    \ polygon>\nstd::pair<int, int> outerTangentBetweenConvex(const polygon &P, const\
+    \ polygon &Q) {\n    using Point = polygon::Point;\n    assert(!P.empty() && !Q.empty());\n\
+    \    if (P.size() == 1 && Q.size() == 1) return std::make_pair(0, 0);\n    if\
+    \ (P.size() == 1) return std::make_pair(0, tangentLineToConvex(P[0], Q).first);\
+    \ \n    if (Q.size() == 1) return std::make_pair(tangentLineToConvex(Q[0], P).second,\
+    \ 0);\n    struct Info {\n        int n, dir, st, end, tent;\n        bool wrap;\n\
+    \        Point tang_p1, tang_p2;\n        bool done() { return (end - tent) ==\
+    \ dir; }\n        bool refined() { return st != tent; }\n    };\n    auto refine\
+    \ = [&](const auto &_P, Info &Pinfo, const auto &_Q, Info &Qinfo) {\n        int\
+    \ mid = Pinfo.tent + (Pinfo.end - Pinfo.tent) / 2;\n        Point pm = _P.at(mid),\
+    \ pm1 = _P.at(mid + Pinfo.dir);\n        if (Qinfo.refined() && side(Qinfo.tang_p1,\
+    \ Qinfo.tang_p2, pm) != 1) {\n            Point qt = _Q.at(Qinfo.tent);\n    \
+    \        if ((Qinfo.dir == 1) != (side(_P[0], qt, pm) == 1))\n               \
+    \ Qinfo.st = Qinfo.tent;\n            else {\n                Qinfo.end = Qinfo.tent;\n\
+    \                Qinfo.tent = Qinfo.st;\n                Pinfo.st = Pinfo.tent;\n\
+    \            }\n        }\n        Point qend = _Q.at(Qinfo.end), qt = _Q.at(Qinfo.tent);\n\
     \        bool left_base = side(_Q[0], pm, _P[0]) == -1;\n        int action =\
     \ 2;\n        if (Pinfo.wrap && (left_base != (mid > Pinfo.n)))\n            action\
     \ = !left_base;\n        else if (side(pm, pm1, _Q[0]) != Pinfo.dir)\n       \
@@ -386,46 +358,48 @@ data:
     \ Pinfo, Q, Qinfo);\n        if (!Qinfo.done()) refine(Q, Qinfo, P, Pinfo);\n\
     \    }\n\n    return std::make_pair(Pinfo.end % Pinfo.n, Qinfo.end % Qinfo.n);\n\
     }\n#line 5 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\n\nusing Point\
-    \ = Pt<ll>;\nusing polygon = Polygon<ll>;\n\npair<polygon, polygon> gen_poly(int\
-    \ n, int m, const int maxc) {\n    static mt19937 rng(880301);\n    Point sep;\n\
-    \    while (sep == Point(0, 0)) {\n        sep.x = int(rng() % 11) - 5;\n    \
-    \    sep.y = int(rng() % 11) - 5;\n    }\n    vector<Point> P, Q;\n    while (int(P.size())\
-    \ < n || int(Q.size()) < m) {\n        Point pt; \n        pt.x = int(rng() %\
-    \ (2 * maxc + 1)) - maxc;\n        pt.y = int(rng() % (2 * maxc + 1)) - maxc;\n\
-    \        int dir = side(Point(0, 0), sep, pt);\n        if (dir == 1 && int(P.size())\
-    \ < n) P.push_back(pt);\n        else if (dir == -1 && int(Q.size()) < m) Q.push_back(pt);\n\
-    \    }\n    return make_pair(convexHull(P), convexHull(Q));\n}\n\nvoid check(int\
-    \ a, int b, polygon &P, polygon &Q) {\n    assert(a >= 0 && a < int(P.size()));\n\
-    \    assert(b >= 0 && b < int(Q.size()));\n    for (auto &p : P)\n        assert(side(P[a],\
-    \ Q[b], p) >= 0);\n    for (auto &p : Q)\n        assert(side(P[a], Q[b], p) >=\
-    \ 0);\n}\n\nvoid test() {\n    const int MAXC = 1'000'000'000;\n    vector<int>\
-    \ sz{1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 10, 100, 1000, 10000, 100000}; \n   \
-    \ for (int n : sz)\n        for (int m : sz) {\n            auto [P, Q] = gen_poly(n,\
-    \ m, MAXC);\n            auto [a, b] = outerTangentBetweenConvex(P, Q);\n    \
-    \        check(a, b, P, Q);\n        }\n}\n\nint main() {\n    test();\n    int\
-    \ a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include \"default_code.hpp\"\
-    \n\n#include \"Geometry/outerTangentBetweenConvex.hpp\"\n\nusing Point = Pt<ll>;\n\
-    using polygon = Polygon<ll>;\n\npair<polygon, polygon> gen_poly(int n, int m,\
-    \ const int maxc) {\n    static mt19937 rng(880301);\n    Point sep;\n    while\
-    \ (sep == Point(0, 0)) {\n        sep.x = int(rng() % 11) - 5;\n        sep.y\
-    \ = int(rng() % 11) - 5;\n    }\n    vector<Point> P, Q;\n    while (int(P.size())\
-    \ < n || int(Q.size()) < m) {\n        Point pt; \n        pt.x = int(rng() %\
-    \ (2 * maxc + 1)) - maxc;\n        pt.y = int(rng() % (2 * maxc + 1)) - maxc;\n\
-    \        int dir = side(Point(0, 0), sep, pt);\n        if (dir == 1 && int(P.size())\
-    \ < n) P.push_back(pt);\n        else if (dir == -1 && int(Q.size()) < m) Q.push_back(pt);\n\
-    \    }\n    return make_pair(convexHull(P), convexHull(Q));\n}\n\nvoid check(int\
-    \ a, int b, polygon &P, polygon &Q) {\n    assert(a >= 0 && a < int(P.size()));\n\
-    \    assert(b >= 0 && b < int(Q.size()));\n    for (auto &p : P)\n        assert(side(P[a],\
-    \ Q[b], p) >= 0);\n    for (auto &p : Q)\n        assert(side(P[a], Q[b], p) >=\
-    \ 0);\n}\n\nvoid test() {\n    const int MAXC = 1'000'000'000;\n    vector<int>\
-    \ sz{1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 10, 100, 1000, 10000, 100000}; \n   \
-    \ for (int n : sz)\n        for (int m : sz) {\n            auto [P, Q] = gen_poly(n,\
-    \ m, MAXC);\n            auto [a, b] = outerTangentBetweenConvex(P, Q);\n    \
-    \        check(a, b, P, Q);\n        }\n}\n\nint main() {\n    test();\n    int\
-    \ a, b;\n    cin >> a >> b;\n    cout << a + b << \"\\n\";\n}\n"
+    \ = Pt<long long>;\nusing polygon = Polygon<long long>;\n\nstd::pair<polygon,\
+    \ polygon> gen_poly(int n, int m, const int maxc) {\n    static std::mt19937 rng(880301);\n\
+    \    Point sep;\n    while (sep == Point(0, 0)) {\n        sep.x = int(rng() %\
+    \ 11) - 5;\n        sep.y = int(rng() % 11) - 5;\n    }\n    std::vector<Point>\
+    \ P, Q;\n    while (int(P.size()) < n || int(Q.size()) < m) {\n        Point pt;\
+    \ \n        pt.x = int(rng() % (2 * maxc + 1)) - maxc;\n        pt.y = int(rng()\
+    \ % (2 * maxc + 1)) - maxc;\n        int dir = side(Point(0, 0), sep, pt);\n \
+    \       if (dir == 1 && int(P.size()) < n) P.push_back(pt);\n        else if (dir\
+    \ == -1 && int(Q.size()) < m) Q.push_back(pt);\n    }\n    return std::make_pair(convexHull(P),\
+    \ convexHull(Q));\n}\n\nvoid check(int a, int b, polygon &P, polygon &Q) {\n \
+    \   assert(a >= 0 && a < int(P.size()));\n    assert(b >= 0 && b < int(Q.size()));\n\
+    \    for (auto &p : P)\n        assert(side(P[a], Q[b], p) >= 0);\n    for (auto\
+    \ &p : Q)\n        assert(side(P[a], Q[b], p) >= 0);\n}\n\nvoid test() {\n   \
+    \ const int MAXC = 1'000'000'000;\n    std::vector<int> sz{1, 2, 2, 2, 2, 3, 3,\
+    \ 3, 3, 3, 3, 5, 10, 100, 1000, 10000, 100000}; \n    for (int n : sz)\n     \
+    \   for (int m : sz) {\n            auto [P, Q] = gen_poly(n, m, MAXC);\n    \
+    \        auto [a, b] = outerTangentBetweenConvex(P, Q);\n            check(a,\
+    \ b, P, Q);\n        }\n}\n\nint main() {\n    test();\n    int a, b;\n    std::cin\
+    \ >> a >> b;\n    std::cout << a + b << \"\\n\";\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include \"assumption.hpp\"\
+    \n\n#include \"Geometry/outerTangentBetweenConvex.hpp\"\n\nusing Point = Pt<long\
+    \ long>;\nusing polygon = Polygon<long long>;\n\nstd::pair<polygon, polygon> gen_poly(int\
+    \ n, int m, const int maxc) {\n    static std::mt19937 rng(880301);\n    Point\
+    \ sep;\n    while (sep == Point(0, 0)) {\n        sep.x = int(rng() % 11) - 5;\n\
+    \        sep.y = int(rng() % 11) - 5;\n    }\n    std::vector<Point> P, Q;\n \
+    \   while (int(P.size()) < n || int(Q.size()) < m) {\n        Point pt; \n   \
+    \     pt.x = int(rng() % (2 * maxc + 1)) - maxc;\n        pt.y = int(rng() % (2\
+    \ * maxc + 1)) - maxc;\n        int dir = side(Point(0, 0), sep, pt);\n      \
+    \  if (dir == 1 && int(P.size()) < n) P.push_back(pt);\n        else if (dir ==\
+    \ -1 && int(Q.size()) < m) Q.push_back(pt);\n    }\n    return std::make_pair(convexHull(P),\
+    \ convexHull(Q));\n}\n\nvoid check(int a, int b, polygon &P, polygon &Q) {\n \
+    \   assert(a >= 0 && a < int(P.size()));\n    assert(b >= 0 && b < int(Q.size()));\n\
+    \    for (auto &p : P)\n        assert(side(P[a], Q[b], p) >= 0);\n    for (auto\
+    \ &p : Q)\n        assert(side(P[a], Q[b], p) >= 0);\n}\n\nvoid test() {\n   \
+    \ const int MAXC = 1'000'000'000;\n    std::vector<int> sz{1, 2, 2, 2, 2, 3, 3,\
+    \ 3, 3, 3, 3, 5, 10, 100, 1000, 10000, 100000}; \n    for (int n : sz)\n     \
+    \   for (int m : sz) {\n            auto [P, Q] = gen_poly(n, m, MAXC);\n    \
+    \        auto [a, b] = outerTangentBetweenConvex(P, Q);\n            check(a,\
+    \ b, P, Q);\n        }\n}\n\nint main() {\n    test();\n    int a, b;\n    std::cin\
+    \ >> a >> b;\n    std::cout << a + b << \"\\n\";\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Geometry/outerTangentBetweenConvex.hpp
   - Geometry/base.hpp
   - Geometry/convex.hpp
@@ -435,7 +409,7 @@ data:
   isVerificationFile: true
   path: test/0_custom/outerTangentBetweenConvex.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/0_custom/outerTangentBetweenConvex.test.cpp

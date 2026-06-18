@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   _extendedRequiredBy: []
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/minimum_enclosing_circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -44,26 +44,26 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y;\
-    \ }\n    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x\
-    \ << ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n\
-    \        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend\
-    \ bool operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -111,14 +111,14 @@ data:
     \    using Point = Pt<T, eps, MulT>;\n    std::array<Point, 2> l;\n    using Geometry<MulT,\
     \ eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val\
     \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
-    \   friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1];\
-    \ }\n    friend ostream& operator<<(ostream &os, const Ln &p) { return os << p.l[0]\
-    \ << ' ' << p.l[1]; }\n    template <typename U, U _eps, typename _MulT>\n   \
-    \ Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]} {}\n    friend\
-    \ int side(const Point &p, const Ln &l) { \n        return side(p, l[0], l[1]);\n\
-    \    }\n    Point& operator[](int index) {\n        return l[index];\n    }\n\
-    \    const Point& operator[](int index) const {\n        return l[index];\n  \
-    \  }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
+    \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
+    \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
+    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
+    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
+    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
+    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
+    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
+    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
     \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
     \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
     \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
@@ -287,8 +287,8 @@ data:
     \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend std::vector<Ln<Ret,\
     \ _eps, _MulT>> internalTangent(const Circle &c1, const Circle &c2) {\n      \
     \  auto [o1, r1] = Circle<Ret, _eps, _MulT>(c1);\n        auto [o2, r2] = Circle<Ret,\
-    \ _eps, _MulT>(c2);\n        vector<Ln<Ret, _eps, _MulT>> res;\n        auto p\
-    \ = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
+    \ _eps, _MulT>(c2);\n        std::vector<Ln<Ret, _eps, _MulT>> res;\n        auto\
+    \ p = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
     \ Circle<Ret, _eps, _MulT>(c1)), qs = pointCircleTangent(p, Circle<Ret, _eps,\
     \ _MulT>(c2));\n        for (int i = 0; i < int(std::min(ps.size(), qs.size()));\
     \ i++)\n            res.emplace_back(ps[i], qs[i]);\n        return res;\n   \
@@ -353,7 +353,7 @@ data:
     \ typename MulT = T>\nCircle<T, eps, MulT> minimum_enclosing_circle(const std::vector<Point>\
     \ &_dots) {\n    static std::mt19937 rng(880301);\n    std::vector<Pt<T, eps,\
     \ MulT>> dots(_dots.begin(), _dots.end());\n    std::ranges::shuffle(dots, rng);\n\
-    \    Circle<T, eps, MulT> res(dots[0], 0);\n    for (int i = 1; i < SZ(dots);\
+    \    Circle<T, eps, MulT> res(dots[0], 0);\n    for (int i = 1; i < int(dots.size());\
     \ ++i) \n        if (dist(dots[i], res.o) > res.r) {\n            res.o = dots[i],\
     \ res.r = 0;\n            for (int j = 0; j < i; ++j)\n                if (dist(dots[j],\
     \ res.o) > res.r) {\n                    res.o = (dots[i] + dots[j]) / 2;\n  \
@@ -369,15 +369,15 @@ data:
     \ minimum_enclosing_circle(const std::vector<Point> &_dots) {\n    static std::mt19937\
     \ rng(880301);\n    std::vector<Pt<T, eps, MulT>> dots(_dots.begin(), _dots.end());\n\
     \    std::ranges::shuffle(dots, rng);\n    Circle<T, eps, MulT> res(dots[0], 0);\n\
-    \    for (int i = 1; i < SZ(dots); ++i) \n        if (dist(dots[i], res.o) > res.r)\
-    \ {\n            res.o = dots[i], res.r = 0;\n            for (int j = 0; j <\
-    \ i; ++j)\n                if (dist(dots[j], res.o) > res.r) {\n             \
-    \       res.o = (dots[i] + dots[j]) / 2;\n                    res.r = dist(dots[i],\
-    \ res.o);\n                    for (int k = 0; k < j; ++k)\n                 \
-    \       if (dist(dots[k], res.o) > res.r) {\n                            res.o\
-    \ = circumcenter(dots[i], dots[j], dots[k]);\n                            res.r\
-    \ = dist(dots[i], res.o);\n                        }\n                }\n    \
-    \    }\n    return res;\n}\n"
+    \    for (int i = 1; i < int(dots.size()); ++i) \n        if (dist(dots[i], res.o)\
+    \ > res.r) {\n            res.o = dots[i], res.r = 0;\n            for (int j\
+    \ = 0; j < i; ++j)\n                if (dist(dots[j], res.o) > res.r) {\n    \
+    \                res.o = (dots[i] + dots[j]) / 2;\n                    res.r =\
+    \ dist(dots[i], res.o);\n                    for (int k = 0; k < j; ++k)\n   \
+    \                     if (dist(dots[k], res.o) > res.r) {\n                  \
+    \          res.o = circumcenter(dots[i], dots[j], dots[k]);\n                \
+    \            res.r = dist(dots[i], res.o);\n                        }\n      \
+    \          }\n        }\n    return res;\n}\n"
   dependsOn:
   - Geometry/base.hpp
   - Geometry/circle.hpp
@@ -387,8 +387,8 @@ data:
   isVerificationFile: false
   path: Geometry/minimum_enclosing_circle.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 21:56:55+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/3_qoj/6445.test.cpp
   - test/2_aoj/minimum_enclosing_circle.test.cpp

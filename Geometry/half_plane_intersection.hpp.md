@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/half_plane_intersection.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -32,26 +32,26 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y;\
-    \ }\n    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x\
-    \ << ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n\
-    \        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend\
-    \ bool operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -98,8 +98,8 @@ data:
     \ eps> {\n    using value_type = T;\n    using Point = Pt<T, eps, MulT>;\n   \
     \ std::array<Point, 2> l;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT,\
     \ eps>::cmp;\n    static constexpr T eps_val = eps;\n    Ln() {}\n    Ln(const\
-    \ Point &a, const Point &b) : l{a, b} {}\n    friend istream& operator>>(istream\
-    \ &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend ostream& operator<<(ostream\
+    \ Point &a, const Point &b) : l{a, b} {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename\
     \ U, U _eps, typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0],\
     \ other.l[1]} {}\n    friend int side(const Point &p, const Ln &l) { \n      \
@@ -211,8 +211,8 @@ data:
   isVerificationFile: false
   path: Geometry/half_plane_intersection.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 21:56:55+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/3_qoj/2162.test.cpp
 documentation_of: Geometry/half_plane_intersection.hpp

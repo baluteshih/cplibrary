@@ -2,49 +2,49 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/closest_pair.hpp
     title: Geometry/closest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/rotating_sweepline.hpp
     title: Geometry/rotating_sweepline.hpp
   _extendedVerifiedWith:
@@ -126,33 +126,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing\
@@ -169,8 +169,8 @@ data:
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
     \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
     \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend istream& operator>>(istream\
-    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend ostream& operator<<(ostream\
+    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
     \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
@@ -245,26 +245,26 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y;\
-    \ }\n    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x\
-    \ << ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n\
-    \        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend\
-    \ bool operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -326,8 +326,8 @@ data:
   - Geometry/polygon.hpp
   - Geometry/convexHull3D.hpp
   - Geometry/half_plane_intersection.hpp
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 21:56:55+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/geometry/closest_pair.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp

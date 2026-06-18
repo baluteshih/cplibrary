@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/MultiInt.hpp
     title: Misc/MultiInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
     path: String/RollingHash.hpp
     title: String/RollingHash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

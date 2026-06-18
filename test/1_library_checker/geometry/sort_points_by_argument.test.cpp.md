@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
@@ -63,8 +63,8 @@ data:
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
     \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
     \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend istream& operator>>(istream\
-    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend ostream& operator<<(ostream\
+    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
     \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/sort_points_by_argument.test.cpp

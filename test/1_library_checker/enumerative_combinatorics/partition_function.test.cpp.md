@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/partition_number.hpp
     title: Numbers/partition_number.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

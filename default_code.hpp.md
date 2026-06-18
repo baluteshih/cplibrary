@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/0_custom/outerTangentBetweenConvex.test.cpp
-    title: test/0_custom/outerTangentBetweenConvex.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/biginteger/addition.test.cpp
     title: test/1_library_checker/biginteger/addition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -334,99 +331,39 @@ data:
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/2_aoj/area.test.cpp
-    title: test/2_aoj/area.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-    title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-    title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/common_tangent.test.cpp
-    title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/convex_cut.test.cpp
-    title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/counter-clockwise.test.cpp
-    title: test/2_aoj/counter-clockwise.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/cross_point.test.cpp
-    title: test/2_aoj/cross_point.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-    title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/cross_points_of_circles.test.cpp
-    title: test/2_aoj/cross_points_of_circles.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/distance.test.cpp
-    title: test/2_aoj/distance.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/incircle_of_a_triangle.test.cpp
-    title: test/2_aoj/incircle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/intersection.test.cpp
-    title: test/2_aoj/intersection.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-    title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/2_aoj/minimum_enclosing_circle.test.cpp
-    title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/parallel-orthogonal.test.cpp
-    title: test/2_aoj/parallel-orthogonal.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/polygon-point_containment.test.cpp
-    title: test/2_aoj/polygon-point_containment.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/projection.test.cpp
-    title: test/2_aoj/projection.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/reflection.test.cpp
-    title: test/2_aoj/reflection.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/tangent_to_a_circle.test.cpp
-    title: test/2_aoj/tangent_to_a_circle.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/2_aoj/type_of_circle.test.cpp
-    title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
   - icon: ':heavy_check_mark:'
@@ -456,9 +393,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
@@ -526,7 +463,7 @@ data:
   path: default_code.hpp
   requiredBy: []
   timestamp: '2026-02-27 19:30:58+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -650,34 +587,13 @@ data:
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/3_qoj/2162.test.cpp
   - test/3_qoj/6445.test.cpp
   - test/3_qoj/17153.test.cpp
   - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - test/2_aoj/cross_points_of_circles.test.cpp
   - test/2_aoj/minimum_cost_flow.test.cpp
-  - test/2_aoj/counter-clockwise.test.cpp
-  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/polygon-point_containment.test.cpp
-  - test/2_aoj/area.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
-  - test/2_aoj/parallel-orthogonal.test.cpp
-  - test/2_aoj/cross_point.test.cpp
-  - test/2_aoj/reflection.test.cpp
-  - test/2_aoj/intersection.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
-  - test/2_aoj/distance.test.cpp
-  - test/2_aoj/convex_cut.test.cpp
-  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - test/2_aoj/incircle_of_a_triangle.test.cpp
-  - test/2_aoj/projection.test.cpp
-  - test/2_aoj/common_tangent.test.cpp
   - test/6_TIOJ/1503.test.cpp
 documentation_of: default_code.hpp
 layout: document

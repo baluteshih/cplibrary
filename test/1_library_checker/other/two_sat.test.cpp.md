@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

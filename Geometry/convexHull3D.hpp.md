@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/convexHull3D.hpp\"\n\n#line 2 \"Geometry/Point3D.hpp\"\
@@ -32,8 +32,8 @@ data:
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
     \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
     \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend istream& operator>>(istream\
-    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend ostream& operator<<(ostream\
+    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
     \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
@@ -259,8 +259,8 @@ data:
   isVerificationFile: false
   path: Geometry/convexHull3D.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 21:56:55+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/3_qoj/6445.test.cpp
 documentation_of: Geometry/convexHull3D.hpp

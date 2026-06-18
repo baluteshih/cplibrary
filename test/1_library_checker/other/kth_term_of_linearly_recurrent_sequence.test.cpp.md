@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []

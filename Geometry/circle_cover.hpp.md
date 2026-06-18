@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/circle_cover.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -38,26 +38,26 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt &p) { return is >> p.x >> p.y;\
-    \ }\n    friend ostream& operator<<(ostream &os, const Pt &p) { return os << p.x\
-    \ << ' ' << p.y; }\n    friend bool operator==(const Pt &a, const Pt &b) { \n\
-    \        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n    }\n    friend\
-    \ bool operator!=(const Pt &a, const Pt &b) { return !(a == b); }\n    Pt operator-()\
-    \ { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a) {\n        x += a.x,\
-    \ y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const Pt &a) {\n\
-    \        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt& operator*=(T\
-    \ d) {\n        x *= d, y *= d;\n        return *this;\n    }\n    Pt& operator/=(T\
-    \ d) {\n        x /= d, y /= d;\n        return *this;\n    }\n    friend Pt operator+(const\
-    \ Pt &a, const Pt &b) { return Pt(a) += b; }\n    friend Pt operator-(const Pt\
-    \ &a, const Pt &b) { return Pt(a) -= b; }\n    friend Pt operator*(const Pt &a,\
-    \ T d) { return Pt(a) *= d; }\n    friend Pt operator/(const Pt &a, T d) { return\
-    \ Pt(a) /= d; }\n    friend bool operator<(const Pt &a, const Pt &b) {\n     \
-    \   int sx = cmp(a.x, b.x);\n        return sx != 0 ? sx == -1 : cmp(a.y, b.y)\
-    \ == -1;\n    }\n    friend bool operator>(const Pt &a, const Pt &b) { return\
-    \ b < a; }\n    friend bool operator<=(const Pt &a, const Pt &b) { return !(b\
-    \ < a); }\n    friend bool operator>=(const Pt &a, const Pt &b) { return !(a <\
-    \ b); }\n    template <typename U, U _eps, typename _MulT>\n    Pt(const Pt<U,\
-    \ _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
+    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
+    \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
+    \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
+    \    Pt(const Pt<U, _eps, _MulT>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y))\
     \ {}\n    friend MulT dot(const Pt &a, const Pt &b) {\n        return MulT(a.x)\
     \ * MulT(b.x) + MulT(a.y) * MulT(b.y);\n    }\n    friend MulT cross(const Pt\
     \ &a, const Pt &b) {\n        return MulT(a.x) * MulT(b.y) - MulT(a.y) * MulT(b.x);\n\
@@ -105,14 +105,14 @@ data:
     \    using Point = Pt<T, eps, MulT>;\n    std::array<Point, 2> l;\n    using Geometry<MulT,\
     \ eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val\
     \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
-    \   friend istream& operator>>(istream &is, Ln &p) { return is >> p.l[0] >> p.l[1];\
-    \ }\n    friend ostream& operator<<(ostream &os, const Ln &p) { return os << p.l[0]\
-    \ << ' ' << p.l[1]; }\n    template <typename U, U _eps, typename _MulT>\n   \
-    \ Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]} {}\n    friend\
-    \ int side(const Point &p, const Ln &l) { \n        return side(p, l[0], l[1]);\n\
-    \    }\n    Point& operator[](int index) {\n        return l[index];\n    }\n\
-    \    const Point& operator[](int index) const {\n        return l[index];\n  \
-    \  }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
+    \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
+    \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
+    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
+    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
+    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
+    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
+    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
+    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
     \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
     \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
     \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
@@ -281,8 +281,8 @@ data:
     \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend std::vector<Ln<Ret,\
     \ _eps, _MulT>> internalTangent(const Circle &c1, const Circle &c2) {\n      \
     \  auto [o1, r1] = Circle<Ret, _eps, _MulT>(c1);\n        auto [o2, r2] = Circle<Ret,\
-    \ _eps, _MulT>(c2);\n        vector<Ln<Ret, _eps, _MulT>> res;\n        auto p\
-    \ = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
+    \ _eps, _MulT>(c2);\n        std::vector<Ln<Ret, _eps, _MulT>> res;\n        auto\
+    \ p = (o1 * r2 + o2 * r1) / (r1 + r2);\n        auto ps = pointCircleTangent(p,\
     \ Circle<Ret, _eps, _MulT>(c1)), qs = pointCircleTangent(p, Circle<Ret, _eps,\
     \ _MulT>(c2));\n        for (int i = 0; i < int(std::min(ps.size(), qs.size()));\
     \ i++)\n            res.emplace_back(ps[i], qs[i]);\n        return res;\n   \
@@ -382,8 +382,8 @@ data:
   isVerificationFile: false
   path: Geometry/circle_cover.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-18 21:56:55+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/6_TIOJ/1503.test.cpp
 documentation_of: Geometry/circle_cover.hpp
