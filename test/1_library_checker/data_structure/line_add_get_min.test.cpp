@@ -4,27 +4,27 @@
 #include "Misc/DynamicHull.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
-    DynamicHull<ll> hull;
+    std::cin >> n >> q;
+    DynamicHull<long long> hull;
     for (int i = 0; i < n; ++i) {
-        ll a, b;
-        cin >> a >> b;
+        long long a, b;
+        std::cin >> a >> b;
         hull.addline(-a, -b);
     }
     while (q--) {
         int type;
-        cin >> type;
+        std::cin >> type;
         if (type == 0) {
-            ll a, b;
-            cin >> a >> b;
+            long long a, b;
+            std::cin >> a >> b;
             hull.addline(-a, -b);
         }
         else {
-            ll p;
-            cin >> p;
-            cout << -hull.query(p) << "\n";
+            long long p;
+            std::cin >> p;
+            std::cout << -hull.query(p) << "\n";
         }
     }
 }

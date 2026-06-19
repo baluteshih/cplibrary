@@ -98,7 +98,7 @@ class Treap {
         }
         node(const auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v) {
         }
-        friend ostream& operator<<(ostream& os, const node &v) {
+        friend std::ostream& operator<<(std::ostream& os, const node &v) {
             if constexpr (hasKey && hasValue) os << "{key = " << v.key << ", org = " << v.org << "}";
             else if constexpr (hasKey) os << v.key;
             else os << v.org;
@@ -114,7 +114,7 @@ class Treap {
             printnode("l", l), std::cerr << ", ";
             printnode("r", r), std::cerr << ", ";
             if constexpr (!persistent) printnode("f", f);
-            cerr << "\e[0m\n";
+            std::cerr << "\e[0m\n";
         }
     };
     using NodeAlloc = Allocator<node>;

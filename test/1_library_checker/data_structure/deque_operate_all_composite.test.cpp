@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/deque_operate_all_composite"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Modint.hpp"
 #include "DataStructure/SwagDeque.hpp"
@@ -18,21 +18,21 @@ struct Value {
 };
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int q;
-    cin >> q;
+    std::cin >> q;
     SwagDeque<Value> dq;
     while (q--) {
         int type;
-        cin >> type;
+        std::cin >> type;
         if (type == 0) {
             mint a, b;
-            cin >> a >> b;
+            std::cin >> a >> b;
             dq.push_front(Value(a, b));
         }
         else if (type == 1) {
             mint a, b;
-            cin >> a >> b;
+            std::cin >> a >> b;
             dq.push_back(Value(a, b));
         }
         else if (type == 2) {
@@ -43,8 +43,8 @@ int main() {
         }
         else {
             mint x;
-            cin >> x;
-            cout << dq.prod().get_val(x) << "\n";
+            std::cin >> x;
+            std::cout << dq.prod().get_val(x) << "\n";
         }
     }
 }

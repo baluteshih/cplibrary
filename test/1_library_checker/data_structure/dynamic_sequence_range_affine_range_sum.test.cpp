@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Modint.hpp"
 #include "DataStructure/Treap.hpp"
@@ -30,11 +30,11 @@ struct Value {
     static Value get(int l, int r) {
         return Value(0, r - l);
     }
-    friend ostream& operator<<(ostream& os, const Value &v) {
+    friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.val;
         return os;
     }
-    friend istream& operator>>(istream& is, Value &v) {
+    friend std::istream& operator>>(std::istream& is, Value &v) {
         is >> v.val;
         v.sz = 1;
         return is;
@@ -44,45 +44,45 @@ struct Value {
 using treap = Treap<void, Value, Tag, true>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
+    std::cin >> n >> q;
     treap tree;
     for (int i = 0; i < n; ++i) {
         Value v;
-        cin >> v;
+        std::cin >> v;
         tree.push_back(v);
     }
     while (q--) {
         int t;
-        cin >> t;
+        std::cin >> t;
         if (t == 0) {
             int i;
             Value v;
-            cin >> i >> v;
+            std::cin >> i >> v;
             auto lft = tree.split_size(i);
             tree.left_merge(treap(v)).left_merge(lft);
         }
         else if (t == 1) {
             int i;
-            cin >> i;
+            std::cin >> i;
             tree.erase<false>(tree.kth(i));
         }
         else if (t == 2) {
             int l, r;
-            cin >> l >> r;
+            std::cin >> l >> r;
             tree.range_reverse(l, r);
         }
         else if (t == 3) {
             int l, r;
             Tag tag;
-            cin >> l >> r >> tag.a >> tag.b;
+            std::cin >> l >> r >> tag.a >> tag.b;
             tree.range_transform(l, r, tag);
         }
         else {
             int l, r;
-            cin >> l >> r;
-            cout << tree.range_prod(l, r) << "\n";
+            std::cin >> l >> r;
+            std::cout << tree.range_prod(l, r) << "\n";
         }
     }
 }
