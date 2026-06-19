@@ -1,30 +1,30 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "DataStructure/SegmentTree.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
-    vector<ll> arr(n);
+    std::cin >> n >> q;
+    std::vector<long long> arr(n);
     for (auto &v : arr)
-        cin >> v;
-    SegmentTree<ll> seg(arr);
+        std::cin >> v;
+    SegmentTree<long long> seg(arr);
     while (q--) {
         int t;
-        cin >> t;
+        std::cin >> t;
         if (t == 0) {
             int p, x;
-            cin >> p >> x;
-            seg.transform(p, [&](ll &a) {
+            std::cin >> p >> x;
+            seg.transform(p, [&](long long &a) {
                 a += x;
             });
         }
         else {
             int l, r;
-            cin >> l >> r;
-            cout << seg.range_prod(l, r) << "\n";
+            std::cin >> l >> r;
+            std::cout << seg.range_prod(l, r) << "\n";
         }
     }
 }

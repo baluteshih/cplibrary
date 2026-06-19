@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind_with_potential"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "DataStructure/PotentialDisjointSet.hpp"
 
@@ -8,24 +8,24 @@
 using mint = modint998244353;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
+    std::cin >> n >> q;
     PotentialDisjointSet<mint> djs(n);
     while (q--) {
         int t, u, v;
-        cin >> t >> u >> v;
+        std::cin >> t >> u >> v;
         if (t == 0) {
             bool succ = true;
             mint x;
-            cin >> x;
+            std::cin >> x;
             if (djs.same(u, v)) succ = (djs.diff(u, v) == x);
             else djs.merge(u, v, x);
-            cout << succ << "\n";
+            std::cout << succ << "\n";
         }
         else {
-            if (djs.same(u, v)) cout << djs.diff(u, v) << "\n";
-            else cout << "-1\n";
+            if (djs.same(u, v)) std::cout << djs.diff(u, v) << "\n";
+            else std::cout << "-1\n";
         }
     }
 }

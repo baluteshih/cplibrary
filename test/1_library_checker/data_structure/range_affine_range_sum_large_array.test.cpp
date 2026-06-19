@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum_large_array"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Modint.hpp"
 #include "DataStructure/PointerSegmentTree.hpp"
@@ -27,7 +27,7 @@ struct Value {
     static Value get(int l, int r) {
         return Value(0, r - l);
     }
-    friend ostream& operator<<(ostream& os, const Value &v) {
+    friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.mul;
         return os;
     }
@@ -35,23 +35,23 @@ struct Value {
 
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
+    std::cin >> n >> q;
     PointerSegmentTree<Value, Tag, true, DefaultAllocator, true> seg(n);
     while (q--) {
         int t;
-        cin >> t;
+        std::cin >> t;
         if (t == 0) {
             int l, r;
             Tag tag;
-            cin >> l >> r >> tag.a >> tag.b;
+            std::cin >> l >> r >> tag.a >> tag.b;
             seg.range_transform(l, r, tag);
         }
         else {
             int l, r;
-            cin >> l >> r;
-            cout << seg.range_prod(l, r) << "\n";
+            std::cin >> l >> r;
+            std::cout << seg.range_prod(l, r) << "\n";
         }
     }
 }

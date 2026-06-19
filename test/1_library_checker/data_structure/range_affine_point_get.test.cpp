@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_point_get"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "DataStructure/SegmentTree.hpp"
 
@@ -18,43 +18,43 @@ struct Tag {
 struct Value {
     mint val;
     Value(mint _val = 0): val(_val) {}
-    Value operator+(const Value &rhs) {
+    Value operator+([[maybe_unused]] const Value &rhs) {
         return *this;
     }
     Value operator+(const Tag &tag) {
         return Value(tag.mul * val + tag.add);
     }
-    friend ostream& operator<<(ostream& os, const Value &v) {
+    friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.val;
         return os;
     }
-    friend istream& operator>>(istream& is, Value &v) {
+    friend std::istream& operator>>(std::istream& is, Value &v) {
         is >> v.val;
         return is;
     }
 };
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
-    vector<Value> arr(n);
+    std::cin >> n >> q;
+    std::vector<Value> arr(n);
     for (auto &v : arr)
-        cin >> v;
+        std::cin >> v;
     SegmentTree<Value, Tag> seg(arr);
     while (q--) {
         int t;
-        cin >> t;
+        std::cin >> t;
         if (t == 0) {
             int l, r;
             Tag tag;
-            cin >> l >> r >> tag.mul >> tag.add;
+            std::cin >> l >> r >> tag.mul >> tag.add;
             seg.range_transform(l, r, tag);
         }
         else {
             int x;
-            cin >> x;
-            cout << seg.get(x) << "\n";
+            std::cin >> x;
+            std::cout << seg.get(x) << "\n";
         }
     }
 }

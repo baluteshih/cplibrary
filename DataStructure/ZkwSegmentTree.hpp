@@ -5,7 +5,7 @@ class ZkwSegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
     static_assert(pushdown || hasTag, "Lazy tag must exist when pushdown is false");
     int n;
-    vector<Value> seg;
+    std::vector<Value> seg;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>, Empty> lazy;
     Value get_val(int rt) {
@@ -61,7 +61,7 @@ class ZkwSegmentTree {
         return m;
     }
 public:
-    ZkwSegmentTree(const vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { 
+    ZkwSegmentTree(const std::vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { 
         if constexpr (hasTag) lazy.resize(n << 1); 
         for (int i = 0; i < int(data.size()); ++i) seg[i + n] = data[i];
         for (int i = n - 1; i > 0; --i) up(i);
@@ -139,12 +139,12 @@ public:
                 if (r & 1) printnode(--r);
             }
         }
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
     void printall() {
         std::cerr << "\e[1;33mInfo all:\n";
         for (int i = 1; i < n + n; ++i)
             printnode(i);
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
 };

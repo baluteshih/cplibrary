@@ -63,7 +63,7 @@ class PointerSegmentTree {
     };
     node *root = nullptr;
     using NodeAlloc = Allocator<node>;
-    void initialize(int l, int r, node *&p, const vector<Value> &data) {
+    void initialize(int l, int r, node *&p, const std::vector<Value> &data) {
         if (r - l == 1) 
             return p = NodeAlloc::allocate(data[l]), void();
         p = NodeAlloc::allocate();
@@ -249,7 +249,7 @@ class PointerSegmentTree {
         printall(mid, r, p->r);
     }
 public:
-    PointerSegmentTree(const vector<Value> &data): n(data.size()), root(nullptr) { 
+    PointerSegmentTree(const std::vector<Value> &data): n(data.size()), root(nullptr) { 
         initialize(0, n, root, data);
     }
     PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size)) {}
@@ -320,11 +320,11 @@ public:
         std::cerr << "\e[1;33mInfo [" << l << ", " << r << "):\n";
         if (l < r) 
             printinfo(l, r, 0, n, root);
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
     void printall() {
         std::cerr << "\e[1;33mInfo all:\n";
         printall(0, n, root);
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
 };

@@ -5,7 +5,7 @@ class CatTree {
     int n;
     std::vector<int> mid;
     std::vector<std::vector<Value>> lft, rgt;
-    void initialize(int l, int r, int rt, const vector<Value> &data) {
+    void initialize(int l, int r, int rt, const std::vector<Value> &data) {
         if (r - l == 1) {
             lft[rt].push_back(data[l]);
             return;
