@@ -2,10 +2,10 @@
 
 // a is concave, i.e. a[i + 1] - a[i] >= a[i + 2] - a[i + 1]
 template<typename T>
-vector<T> min_plus_convolution_concave(vector<T> &a, vector<T> &b) {
+std::vector<T> min_plus_convolution_concave(std::vector<T> &a, std::vector<T> &b) {
     static constexpr T inf = std::numeric_limits<T>::max();
     int n = a.size(), m = b.size();
-    vector<T> c(n + m - 1, inf);
+    std::vector<T> c(n + m - 1, inf);
     auto cal_min = [&](int k, int l, int r) -> std::pair<int, T> {
         r = std::min({r, k + 1, m});
         l = std::max({l, k - (n - 1), 0});

@@ -1,20 +1,20 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Convolution/convolution.hpp"
 
 using mint = modint998244353;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m;
-    cin >> n >> m;
-    vector<mint> arr(n), brr(m);
+    std::cin >> n >> m;
+    std::vector<mint> arr(n), brr(m);
     for (auto &i : arr)
-        cin >> i;
+        std::cin >> i;
     for (auto &i : brr)
-        cin >> i;
+        std::cin >> i;
     arr = convolution(arr, brr);
-    for (int i = 0; i < SZ(arr); ++i)
-        cout << arr[i] << " \n"[i + 1 == SZ(arr)];
+    for (int i = 0; i < int(arr.size()); ++i)
+        std::cout << arr[i] << " \n"[i + 1 == int(arr.size())];
 }
