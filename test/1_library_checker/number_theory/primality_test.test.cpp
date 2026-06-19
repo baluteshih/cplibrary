@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/primality_test"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/miller_rabin.hpp"
 

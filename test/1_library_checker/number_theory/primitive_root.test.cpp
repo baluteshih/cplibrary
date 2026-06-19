@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/primitive_root"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/primitive_root.hpp"
 

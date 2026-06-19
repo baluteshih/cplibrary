@@ -8,8 +8,8 @@ struct Line {
     bool operator<(T x) const { return p < x; }
 };
 template<typename T, T kInf = 1'000'000'000'000'000'000LL>
-struct DynamicHull : multiset<Line<T>, less<>> {
-    using iterator = multiset<Line<T>, less<>>::iterator; 
+struct DynamicHull : std::multiset<Line<T>, std::less<>> {
+    using iterator = std::multiset<Line<T>, std::less<>>::iterator; 
     T Div(T a, T b) { return a / b - ((a ^ b) < 0 && a % b); }
     bool isect(iterator x, iterator y) {
         if (y == this->end()) { x->p = kInf; return 0; }

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Convolution/min_plus_convolution.hpp"
 

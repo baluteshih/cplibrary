@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Binomial.hpp"
 
@@ -9,7 +9,7 @@ int main() {
     std::cin >> t >> m;
     Binomial binom(m);
     while (t--) {
-        ll n, k;
+        long long n, k;
         std::cin >> n >> k;
         std::cout << binom.C(n, k) << "\n";
     }

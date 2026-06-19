@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Combination.hpp"
 #include "Numeric/DynamicModint.hpp"
@@ -10,7 +10,7 @@ int main() {
     std::cin >> t >> m;
     modint v;
     v.set_mod(m);
-    Combination<modint> comb(min(10000000, m - 1), v);
+    Combination<modint> comb(std::min(10000000, m - 1), v);
     while (t--) {
         int n, k;
         std::cin >> n >> k;

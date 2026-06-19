@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Misc/DynamicHull.hpp"
 

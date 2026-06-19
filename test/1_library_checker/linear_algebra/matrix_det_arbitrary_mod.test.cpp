@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/DynamicModint.hpp"
 #include "Matrix/Matrix.hpp"
@@ -7,14 +7,14 @@
 using mint = modint;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m;
     std::cin >> n >> m;
     modint::set_mod(m);
     Matrix<mint> A(n);
     for (auto &row : A)
         for (auto &v : row)
-            cin >> v;
+            std::cin >> v;
     auto res = A.det<Matrix<mint>::gauss_mode::euclidean>();
-    cout << res << "\n";
+    std::cout << res << "\n";
 }

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/quadratic_residue.hpp"
 #include "Numeric/DynamicModint.hpp"

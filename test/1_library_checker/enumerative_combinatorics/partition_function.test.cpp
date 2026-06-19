@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/partition_function"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Numeric/Modint.hpp"
 #include "Numbers/partition_number.hpp"
