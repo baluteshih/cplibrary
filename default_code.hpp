@@ -1,6 +1,6 @@
 #pragma once
 
-#include <bits/stdc++.h>
+#include "assumption.hpp"
 using namespace std;
 typedef long long ll;
 typedef pair<int, int> pii;
@@ -75,10 +75,4 @@ vector<int> count_array(const auto &container, int sz = -1) {
     vector<int> res(sz);
     for (auto x : container) ++res[x];
     return res;
-}
-
-template<class T>
-void discretization(vector<T> &vals) {
-    ranges::sort(vals);
-    vals.erase(ranges::unique(vals).begin(), vals.end());
 }

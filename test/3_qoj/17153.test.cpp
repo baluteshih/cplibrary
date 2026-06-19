@@ -1,6 +1,6 @@
 #define PROBLEM "https://qoj.ac/problem/17153"
 #define IGNORE
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "DataStructure/Treap.hpp"
 
@@ -10,15 +10,15 @@ struct Value {
     Value(int k) : mx(k), mi(k), sz(1), inc(1), rinc(1) {}
     Value operator+(const Value &rhs) const {
         Value res;
-        res.mx = max(mx, rhs.mx);
-        res.mi = min(mi, rhs.mi);
+        res.mx = std::max(mx, rhs.mx);
+        res.mi = std::min(mi, rhs.mi);
         res.sz = sz + rhs.sz;
         res.inc = inc && rhs.inc && mx < rhs.mi;
         res.rinc = rinc && rhs.rinc && mi > rhs.mx;
         return res;
     }
     void reverse() {
-        swap(inc, rinc);
+        std::swap(inc, rinc);
     }
     int size() const {
         return sz;
@@ -28,20 +28,20 @@ struct Value {
 using treap = Treap<int, Value, void, true>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
-    cin >> n >> q;
-    vector<int> ans(q, -1);
-    vector<vector<pii>> qry(n + 1);
+    std::cin >> n >> q;
+    std::vector<int> ans(q, -1);
+    std::vector<std::vector<std::pair<int, int>>> qry(n + 1);
     treap lft, mid, rgt;
     for (int i = 0; i < n; ++i) {
         int x;
-        cin >> x;
+        std::cin >> x;
         mid.push_back(x, Value(x));
     }
     for (int i = 0; i < q; ++i) {
         int t, b;
-        cin >> t >> b;
+        std::cin >> t >> b;
         if (t > n) continue;
         qry[t].emplace_back(b, i);
     }
@@ -53,7 +53,7 @@ int main() {
         int cur = nxtrgt.product().mx;
         while (true) {
             treap a = mid.split_value([&](const Value &src) {
-                return src.mx <= cur; 
+                return src.mx <= cur;
             });
             a.reverse();
             nxtmid.left_merge(a);
@@ -63,7 +63,7 @@ int main() {
             nxtrgt.right_merge(p);
         }
         treap b = rgt.split_value([&](const Value &src) {
-            return src.mx <= cur; 
+            return src.mx <= cur;
         });
         b.reverse();
         nxtlft = b;
@@ -82,8 +82,8 @@ int main() {
         }
         if ((lft.product() + mid.product() + rgt.product()).inc)
             break;
-        operation(); 
+        operation();
     }
     for (int i = 0; i < q; ++i)
-        cout << ans[i] << "\n";
+        std::cout << ans[i] << "\n";
 }

@@ -10,13 +10,13 @@
 using treap = Treap<int, size_v, void, false, PoolAllocator, true>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n;
-    cin >> n;
-    vector<treap> tree(n + 1);
+    std::cin >> n;
+    std::vector<treap> tree(n + 1);
     for (int i = 1; i <= n; ++i) {
         int v, op, x;
-        cin >> v >> op >> x;
+        std::cin >> v >> op >> x;
         tree[i] = tree[v];
         if (op == 1) {
             auto lft = tree[i].split_key_lt(x);
@@ -31,21 +31,21 @@ int main() {
             tree[i].left_merge(lft);
         }
         else if (op == 3) {
-            cout << tree[i].prefix_product_key_lt(x).size() + 1 << "\n"; 
+            std::cout << tree[i].prefix_product_key_lt(x).size() + 1 << "\n"; 
         }
         else if (op == 4) {
-            cout << tree[i].kth(x - 1)->key << "\n";
+            std::cout << tree[i].kth(x - 1)->key << "\n";
         }
         else if (op == 5) {
             auto lft = tree[i].split_key_lt(x);
-            if (!lft.empty()) cout << lft.rbegin()->key << "\n";
-            else cout << -2147483647 << "\n";
+            if (!lft.empty()) std::cout << lft.rbegin()->key << "\n";
+            else std::cout << -2147483647 << "\n";
             tree[i].left_merge(lft);
         }
         else {
             auto it = tree[i].upper_bound(x);
-            if (it != tree[i].end()) cout << it->key << "\n";
-            else cout << 2147483647 << "\n";
+            if (it != tree[i].end()) std::cout << it->key << "\n";
+            else std::cout << 2147483647 << "\n";
         }
     }
 }

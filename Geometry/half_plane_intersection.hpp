@@ -16,19 +16,19 @@ bool line_contain(const Line &l0, const Line &l1, const Line &l2, bool strict = 
 }
 
 template<typename Line, typename MulT = typename Line::value_type, MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val : get_default_eps<MulT>()>
-std::vector<Line> half_plane_intersection(vector<Line> arr) {
-    std::sort(ALL(arr), [&](const Line &a, const Line &b) -> int {
+std::vector<Line> half_plane_intersection(std::vector<Line> arr) {
+    std::ranges::sort(arr, [&](const Line &a, const Line &b) -> int {
         if (!sameDirection(a, b))
             return polar(direction(a), direction(b));
         return side(a[0], a[1], b[1]) < 0;
     });
     std::deque<Line> dq(1, arr[0]);
     auto pop_back = [&](int t, const Line &p) {
-        while (SZ(dq) >= t && !line_contain<Line, MulT, eps>(p, dq[SZ(dq) - 2], dq.back()))
+        while (int(dq.size()) >= t && !line_contain<Line, MulT, eps>(p, dq[int(dq.size()) - 2], dq.back()))
             dq.pop_back();
     };
     auto pop_front = [&](int t, const Line &p) {
-        while (SZ(dq) >= t && !line_contain<Line, MulT, eps>(p, dq[0], dq[1]))
+        while (int(dq.size()) >= t && !line_contain<Line, MulT, eps>(p, dq[0], dq[1]))
             dq.pop_front();
     };
     for (auto p : arr)

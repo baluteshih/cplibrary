@@ -11,8 +11,8 @@ struct Pt3 : Geometry<T, eps> {
     T x = 0, y = 0, z = 0;
     Pt3() : x(0), y(0), z(0) {}
     Pt3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}
-    friend istream& operator>>(istream &is, Pt3 &p) { return is >> p.x >> p.y >> p.z; }
-    friend ostream& operator<<(ostream &os, const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }
+    friend std::istream& operator>>(std::istream &is, Pt3 &p) { return is >> p.x >> p.y >> p.z; }
+    friend std::ostream& operator<<(std::ostream &os, const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }
     friend bool operator==(const Pt3 &a, const Pt3 &b) {
         return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0 && cmp(a.z, b.z) == 0; 
     }

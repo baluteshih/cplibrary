@@ -28,7 +28,7 @@ void rotating_sweepline(const std::vector<Point> &pts, auto init_order, auto upd
     std::ranges::sort(e.begin(), e.end(), [&](const Event &a, const Event &b) {
         return polar(a.dir, b.dir, init);
     });
-    vector<int> ord(n), pos(n);
+    std::vector<int> ord(n), pos(n);
     std::iota(ord.begin(), ord.end(), 0);
     std::ranges::sort(ord, [&](int a, int b) {
         auto va = cross(init, pts[a]);
@@ -42,7 +42,7 @@ void rotating_sweepline(const std::vector<Point> &pts, auto init_order, auto upd
         std::vector<std::pair<int, int>> tmp;
         for (; j < int(e.size()) && !polar(e[i].dir, e[j].dir, init); ++j)
             tmp.emplace_back(e[j].u, e[j].v);
-        ranges::sort(tmp, [&](const std::pair<int, int> &x, const std::pair<int, int> &y) {
+        std::ranges::sort(tmp, [&](const std::pair<int, int> &x, const std::pair<int, int> &y) {
             return std::make_pair(pos[x.first], pos[x.second]) < std::make_pair(pos[y.first], pos[y.second]);
         });
         for (int k = 0; k < int(tmp.size()); ) {

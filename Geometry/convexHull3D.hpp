@@ -20,9 +20,9 @@ struct convexHull3D : Geometry<T, eps> {
         int n = P.size();
         if (n <= 2) return; // be careful about edge case
         // ensure first 4 points are not coplanar
-        swap(P[1], *std::ranges::find_if(P, [&](auto p) { return sign(square(P[0] - p)) != 0; }));
-        swap(P[2], *std::ranges::find_if(P, [&](auto p) { return sign(square(cross(p, P[0], P[1]))) != 0; }));
-        swap(P[3], *std::ranges::find_if(P, [&](auto p) { return sign(volume(P[0], P[1], P[2], p)) != 0; }));
+        std::swap(P[1], *std::ranges::find_if(P, [&](auto p) { return sign(square(P[0] - p)) != 0; }));
+        std::swap(P[2], *std::ranges::find_if(P, [&](auto p) { return sign(square(cross(p, P[0], P[1]))) != 0; }));
+        std::swap(P[3], *std::ranges::find_if(P, [&](auto p) { return sign(volume(P[0], P[1], P[2], p)) != 0; }));
         std::vector<std::vector<int>> flag(n, std::vector<int>(n));
         res.emplace_back(0, 1, 2);
         res.emplace_back(2, 1, 0);

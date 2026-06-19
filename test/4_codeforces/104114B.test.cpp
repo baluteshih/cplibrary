@@ -1,11 +1,11 @@
 #define PROBLEM "https://codeforces.com/gym/104114/problem/B"
 #define IGNORE
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Geometry/convex.hpp"
 
-using Point = Pt<ll>;
-using polygon = Polygon<ll>;
+using Point = Pt<long long>;
+using polygon = Polygon<long long>;
 
 const int MAXC = 1000000;
 
@@ -15,23 +15,23 @@ struct Event {
 };
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m;
-    cin >> n >> m;
-    vector<Point> arr(n);
+    std::cin >> n >> m;
+    std::vector<Point> arr(n);
     for (auto &p : arr) {
         double x, y;
-        cin >> x >> y;
-        p = Point(round(x * MAXC), round(y * MAXC));
+        std::cin >> x >> y;
+        p = Point(std::round(x * MAXC), std::round(y * MAXC));
     }
-    vector<Point> brr(m);
+    std::vector<Point> brr(m);
     for (auto &p : brr) {
         double x, y;
-        cin >> x >> y;
-        p = Point(round(x * MAXC), round(y * MAXC));
+        std::cin >> x >> y;
+        p = Point(std::round(x * MAXC), std::round(y * MAXC));
     }
     auto convex = convexHull(brr);
-    vector<Event> event;
+    std::vector<Event> event;
     int cur = 0;
     for (int i = 0; i < n; ++i) {
         if (pointInConvex(arr[i], convex) >= 0) continue;
@@ -46,14 +46,14 @@ int main() {
         event.push_back(Event{lft, 1});
         event.push_back(Event{rgt, -1});
     }
-    ranges::sort(event, [&](auto &a, auto &b) {
+    std::ranges::sort(event, [&](auto &a, auto &b) {
         return polar(a.vec, b.vec);
     });
     int ans = cur;
-    for (int i = 0, j = 0; i < SZ(event); i = j) {
-        while (j < SZ(event) && sameDirection(event[i].vec, event[j].vec))
+    for (int i = 0, j = 0; i < int(event.size()); i = j) {
+        while (j < int(event.size()) && sameDirection(event[i].vec, event[j].vec))
             cur += event[j].v, ++j;
-        ans = max(ans, cur);
+        ans = std::max(ans, cur);
     }
-    cout << ans << "\n";
+    std::cout << ans << "\n";
 }
