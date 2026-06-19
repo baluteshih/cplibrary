@@ -16,7 +16,7 @@ public:
         std::copy_n(p.data(), std::min(p.n(), m), this->data());
     }
     Poly(const std::vector<T> &v) : std::vector<T>(move(v)) {}
-    Poly& irev() { return reverse(this->data(), this->data() + n()), *this; }
+    Poly& irev() { return std::reverse(this->data(), this->data() + n()), *this; }
     Poly& isz(int m) { return this->resize(m), *this; }
     Poly& imul(const Poly &rhs) {
         for (int i = 0; i < n(); ++i)
@@ -127,6 +127,14 @@ public:
     }
     std::vector<T> Eval(const std::vector<T> &x) const { // 1e5/696ms
         auto up = _tree1(x); return _eval(x, up);
+    }
+    T eval(T x) const {
+        T base = 1, res = 0;
+        for (int i = 0; i < n(); ++i) {
+            res += base * (*this)[i];
+            base *= x;
+        }
+        return res;
     }
     std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0, 5e5/330ms
         if (n() < rhs.n()) return {{0}, *this};
