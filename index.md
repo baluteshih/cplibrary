@@ -349,6 +349,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
+    - icon: ':heavy_check_mark:'
+      path: Sequence/mo_solver.hpp
+      title: Sequence/mo_solver.hpp
   - name: String
     pages:
     - icon: ':heavy_check_mark:'
@@ -524,6 +527,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+      title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_rmq.test.cpp
       title: test/1_library_checker/data_structure/static_rmq.test.cpp

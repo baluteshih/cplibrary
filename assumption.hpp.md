@@ -112,6 +112,9 @@ data:
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+    title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq.test.cpp
     title: test/1_library_checker/data_structure/static_rmq.test.cpp
   - icon: ':heavy_check_mark:'
@@ -527,6 +530,7 @@ data:
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/line_add_get_min.test.cpp
+  - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
