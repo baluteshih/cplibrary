@@ -396,7 +396,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: default_code.hpp
       title: default_code.hpp
   - name: template

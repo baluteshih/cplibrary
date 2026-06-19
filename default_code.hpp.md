@@ -5,13 +5,10 @@ data:
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/8_luogu/P3835_pool.test.cpp
-    title: test/8_luogu/P3835_pool.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"default_code.hpp\"\n\n#line 2 \"assumption.hpp\"\n\n#include\
@@ -77,9 +74,8 @@ data:
   path: default_code.hpp
   requiredBy: []
   timestamp: '2026-06-19 23:20:06+08:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/8_luogu/P3835_pool.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: default_code.hpp
 layout: document
 redirect_from:
