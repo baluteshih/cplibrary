@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_triangles
@@ -28,24 +28,24 @@ data:
     - https://judge.yosupo.jp/problem/enumerate_triangles
   bundledCode: "#line 1 \"test/1_library_checker/graph/enumerate_triangles.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_triangles\"\n#line\
-    \ 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/enumerate_triangles.test.cpp\"\
-    \n\n#line 2 \"Graph/enumerate_c3.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
-    \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
-    \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
-    \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
-    \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
-    \    struct Empty {};\n    struct edge_v {\n        int from, to;\n        [[no_unique_address]]\
-    \ std::conditional_t<hasEdgeWeight, Edge, Empty> weight;\n        edge_v() {}\n\
-    \        edge_v(int u, int v) : from(u), to(v) {}\n        template <typename\
-    \ W>\n        edge_v(int u, int v, const W &w) requires(hasEdgeWeight) : from(u),\
-    \ to(v), weight(w) {}\n        template <typename OtherEdge>\n        edge_v(const\
-    \ OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight;\
-    \ }) \n            : from(other.from), to(other.to), weight(other.weight) {}\n\
-    \        template <typename OtherEdge>\n        edge_v(const OtherEdge &other)\
-    \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
-    \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
-    \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
+    \ 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"test/1_library_checker/graph/enumerate_triangles.test.cpp\"\n\n#line 2 \"\
+    Graph/enumerate_c3.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
+    \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
+    \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
+    \ constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
+    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
+    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
+    \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
+    \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
+    \ <typename OtherEdge>\n        edge_v(const OtherEdge &other) requires(hasEdgeWeight\
+    \ && requires(OtherEdge o) { o.weight; }) \n            : from(other.from), to(other.to),\
+    \ weight(other.weight) {}\n        template <typename OtherEdge>\n        edge_v(const\
+    \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
+    \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
+    \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -247,8 +247,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 13:11:38+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/enumerate_triangles.test.cpp
 layout: document

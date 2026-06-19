@@ -8,17 +8,17 @@ data:
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
     title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/incircle_of_a_triangle.test.cpp
     title: test/2_aoj/incircle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/3_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/centers.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -231,7 +231,7 @@ data:
   requiredBy:
   - Geometry/minimum_enclosing_circle.hpp
   timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/3_qoj/6445.test.cpp
   - test/2_aoj/minimum_enclosing_circle.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'
@@ -22,7 +22,7 @@ data:
     - https://judge.yosupo.jp/problem/scc
   bundledCode: "#line 1 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#line 2 \"assumption.hpp\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
+    \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
     \n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
     \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
     \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/strongly_connected_components.test.cpp

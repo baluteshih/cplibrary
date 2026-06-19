@@ -9,9 +9,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cycle_detection
@@ -19,13 +19,14 @@ data:
     - https://judge.yosupo.jp/problem/cycle_detection
   bundledCode: "#line 1 \"test/1_library_checker/graph/cycle_detection_directed.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection\"\n#line 2\
-    \ \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/cycle_detection_directed.test.cpp\"\
-    \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
-    \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
-    \ bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool\
-    \ hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
-    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
-    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3\
+    \ \"test/1_library_checker/graph/cycle_detection_directed.test.cpp\"\n\n#line\
+    \ 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge = void,\
+    \ typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool hasEdgeWeight\
+    \ = !std::is_same_v<Edge, void>;\n    static constexpr bool hasVertexWeight =\
+    \ !std::is_same_v<Vertex, void>;\n    using edge_value_type = Edge;\n    using\
+    \ vertex_value_type = Vertex;\n    struct Empty {};\n    struct edge_v {\n   \
+    \     int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
     \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
     \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
     \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
@@ -119,8 +120,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/cycle_detection_directed.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 13:11:38+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/cycle_detection_directed.test.cpp
 layout: document

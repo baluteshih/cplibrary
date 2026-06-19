@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_A
@@ -28,7 +28,7 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_A
   bundledCode: "#line 1 \"test/2_aoj/type_of_circle.test.cpp\"\n#define PROBLEM \"\
     https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_A\"\n#line 2 \"\
-    assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/2_aoj/type_of_circle.test.cpp\"\
+    assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/2_aoj/type_of_circle.test.cpp\"\
     \n\n#line 2 \"Geometry/circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n    \ntemplate\
     \ <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
     \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
@@ -338,8 +338,8 @@ data:
   isVerificationFile: true
   path: test/2_aoj/type_of_circle.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-19 13:11:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/2_aoj/type_of_circle.test.cpp
 layout: document

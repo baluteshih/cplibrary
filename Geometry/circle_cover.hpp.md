@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':question:'

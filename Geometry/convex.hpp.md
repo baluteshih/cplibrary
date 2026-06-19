@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/static_convex_hull.test.cpp
     title: test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
   - icon: ':x:'

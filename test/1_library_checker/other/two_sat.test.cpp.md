@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'

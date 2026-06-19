@@ -6,7 +6,7 @@ data:
     - icon: ':x:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':warning:'
@@ -64,13 +64,13 @@ data:
     - icon: ':question:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/Discretization.hpp
       title: Discretization
     - icon: ':question:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/LeftistTree.hpp
       title: Leftist Tree
     - icon: ':heavy_check_mark:'
@@ -137,10 +137,10 @@ data:
     - icon: ':question:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: Geometry/centers.hpp
       title: Geometry/centers.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: Geometry/circle.hpp
       title: Geometry/circle.hpp
     - icon: ':x:'
@@ -164,7 +164,7 @@ data:
     - icon: ':question:'
       path: Geometry/line.hpp
       title: Geometry/line.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: Geometry/minimum_enclosing_circle.hpp
       title: Geometry/minimum_enclosing_circle.hpp
     - icon: ':heavy_check_mark:'
@@ -193,13 +193,13 @@ data:
     - icon: ':x:'
       path: Graph/ECC.hpp
       title: Graph/ECC.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/Matching.hpp
       title: Graph/Matching.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
     - icon: ':question:'
@@ -208,16 +208,16 @@ data:
     - icon: ':x:'
       path: Graph/bipolar_orientation.hpp
       title: Graph/bipolar_orientation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/dominator_tree.hpp
       title: Graph/dominator_tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/enumerate_c3.hpp
       title: Graph/enumerate_c3.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/incremental_scc.hpp
       title: Graph/incremental_scc.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/minimum_arborescence.hpp
       title: Graph/minimum_arborescence.hpp
     - icon: ':x:'
@@ -346,7 +346,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/SMAWK.hpp
       title: Sequence/SMAWK.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
   - name: String
@@ -379,7 +379,7 @@ data:
     - icon: ':x:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
     - icon: ':x:'
@@ -584,28 +584,28 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/bipartitematching.test.cpp
       title: test/1_library_checker/graph/bipartitematching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/cycle_detection_directed.test.cpp
       title: test/1_library_checker/graph/cycle_detection_directed.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
       title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/directedmst.test.cpp
       title: test/1_library_checker/graph/directedmst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/dominatortree.test.cpp
       title: test/1_library_checker/graph/dominatortree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/enumerate_triangles.test.cpp
       title: test/1_library_checker/graph/enumerate_triangles.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/general_matching.test.cpp
       title: test/1_library_checker/graph/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/incremental_scc.test.cpp
       title: test/1_library_checker/graph/incremental_scc.test.cpp
     - icon: ':x:'
@@ -735,7 +735,7 @@ data:
       title: test/1_library_checker/string/zalgorithm.test.cpp
   - name: test/1_library_checker/tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
     - icon: ':x:'
@@ -776,40 +776,40 @@ data:
     - icon: ':x:'
       path: test/2_aoj/area.test.cpp
       title: test/2_aoj/area.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
       title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
       title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/common_tangent.test.cpp
       title: test/2_aoj/common_tangent.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/convex_cut.test.cpp
       title: test/2_aoj/convex_cut.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/counter-clockwise.test.cpp
       title: test/2_aoj/counter-clockwise.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/cross_point.test.cpp
       title: test/2_aoj/cross_point.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
       title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/cross_points_of_circles.test.cpp
       title: test/2_aoj/cross_points_of_circles.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/distance.test.cpp
       title: test/2_aoj/distance.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/incircle_of_a_triangle.test.cpp
       title: test/2_aoj/incircle_of_a_triangle.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/intersection.test.cpp
       title: test/2_aoj/intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
       title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     - icon: ':x:'
@@ -818,25 +818,25 @@ data:
     - icon: ':x:'
       path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
       title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/minimum_enclosing_circle.test.cpp
       title: test/2_aoj/minimum_enclosing_circle.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/parallel-orthogonal.test.cpp
       title: test/2_aoj/parallel-orthogonal.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/polygon-point_containment.test.cpp
       title: test/2_aoj/polygon-point_containment.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/projection.test.cpp
       title: test/2_aoj/projection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/reflection.test.cpp
       title: test/2_aoj/reflection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/tangent_to_a_circle.test.cpp
       title: test/2_aoj/tangent_to_a_circle.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/type_of_circle.test.cpp
       title: test/2_aoj/type_of_circle.test.cpp
   - name: test/3_qoj

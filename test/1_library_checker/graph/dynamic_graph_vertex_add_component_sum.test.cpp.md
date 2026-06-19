@@ -9,9 +9,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
@@ -19,7 +19,8 @@ data:
     - https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
   bundledCode: "#line 1 \"test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
-    \n#line 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp\"\
     \n\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool\
     \ undo_tag = false>\nclass DisjointSet {\nprotected:\n    static constexpr bool\
     \ hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int> boss, sz;\n\
@@ -138,8 +139,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 13:11:38+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
 layout: document

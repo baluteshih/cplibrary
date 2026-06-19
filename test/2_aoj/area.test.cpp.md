@@ -24,9 +24,9 @@ data:
     links:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A
   bundledCode: "#line 1 \"test/2_aoj/area.test.cpp\"\n#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_3_A\"\
-    \n#line 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/2_aoj/area.test.cpp\"\
-    \n\n#line 2 \"Geometry/polygon.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n    \n\
-    template <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/2_aoj/area.test.cpp\"\n\n#line 2 \"Geometry/polygon.hpp\"\n\n#line\
+    \ 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
     \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
     \ constexpr (std::is_same_v<T, float>)\n        return T(1e-6);\n    else if constexpr\
     \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
@@ -236,7 +236,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/area.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/2_aoj/area.test.cpp

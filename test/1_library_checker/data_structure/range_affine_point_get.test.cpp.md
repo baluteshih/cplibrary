@@ -59,7 +59,7 @@ data:
     \ typename Tag = void, bool pushdown = true>\nclass SegmentTree {\n    static\
     \ constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static_assert(pushdown\
     \ || hasTag, \"Lazy tag must exist when pushdown is false\");\n    int n;\n  \
-    \  vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
+    \  std::vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
     \ std::vector<Tag>, Empty> lazy;\n    Value get_val(int rt) {\n        if constexpr\
     \ (pushdown) return seg[rt];\n        else return seg[rt] + lazy[rt];\n    }\n\
     \    void up(int rt) {\n        seg[rt] = get_val(rt << 1) + get_val(rt << 1 |\
@@ -68,7 +68,7 @@ data:
     \ + tag;\n    }\n    void down(int rt) requires (hasTag && pushdown) {\n     \
     \   give_tag(rt << 1, lazy[rt]);\n        give_tag(rt << 1 | 1, lazy[rt]);\n \
     \       lazy[rt] = Tag();\n    }\n    void initialize(int l, int r, int rt, const\
-    \ vector<Value> &data) {\n        if (r - l == 1) \n            return seg[rt]\
+    \ std::vector<Value> &data) {\n        if (r - l == 1) \n            return seg[rt]\
     \ = data[l], void();\n        int mid = (l + r) >> 1;\n        initialize(l, mid,\
     \ rt << 1, data);\n        initialize(mid, r, rt << 1 | 1, data);\n        up(rt);\n\
     \    }\n    Value range_prod(int L, int R, int l, int r, int rt) {\n        if\
@@ -151,7 +151,7 @@ data:
     \ 1);\n    }\n    void printall(int l, int r, int rt) {\n        printnode(l,\
     \ r, rt);\n        if (r - l == 1) return;\n        int mid = (l + r) >> 1;\n\
     \        printall(l, mid, rt << 1);\n        printall(mid, r, rt << 1 | 1);\n\
-    \    }\n    public:\n    SegmentTree(const vector<Value> &data): n(data.size()),\
+    \    }\npublic:\n    SegmentTree(const std::vector<Value> &data): n(data.size()),\
     \ seg(n << 2) { \n        if constexpr (hasTag) lazy.resize(n << 2); \n      \
     \  initialize(0, n, 1, data);\n    }\n    SegmentTree(int size): SegmentTree(vector<Value>(size))\
     \ {}\n    Value get(int x) {\n        assert(0 <= x && x < n);\n        return\
@@ -177,9 +177,9 @@ data:
     \    }\n    void printinfo(int l, int r) {\n        assert(0 <= l && r <= n);\n\
     \        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo [\" << l << \"\
     , \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l, r, 0, n,\
-    \ 1);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
-    \ << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n        cerr << \"\
-    \\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/range_affine_point_get.test.cpp\"\
+    \ 1);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n   \
+    \     std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n  \
+    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/range_affine_point_get.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -327,7 +327,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_affine_point_get.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_affine_point_get.test.cpp

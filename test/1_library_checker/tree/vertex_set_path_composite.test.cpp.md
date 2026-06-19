@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
@@ -22,12 +22,12 @@ data:
   - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -40,37 +40,9 @@ data:
     - https://judge.yosupo.jp/problem/vertex_set_path_composite
   bundledCode: "#line 1 \"test/1_library_checker/tree/vertex_set_path_composite.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/tree/vertex_set_path_composite.test.cpp\"\n\
-    \n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/tree/vertex_set_path_composite.test.cpp\"\n\n\
+    #line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
     \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
@@ -377,7 +349,7 @@ data:
     #line 2 \"DataStructure/SegmentTree.hpp\"\n\ntemplate<typename Value = int, typename\
     \ Tag = void, bool pushdown = true>\nclass SegmentTree {\n    static constexpr\
     \ bool hasTag = !std::is_same_v<Tag, void>;\n    static_assert(pushdown || hasTag,\
-    \ \"Lazy tag must exist when pushdown is false\");\n    int n;\n    vector<Value>\
+    \ \"Lazy tag must exist when pushdown is false\");\n    int n;\n    std::vector<Value>\
     \ seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
     \ std::vector<Tag>, Empty> lazy;\n    Value get_val(int rt) {\n        if constexpr\
     \ (pushdown) return seg[rt];\n        else return seg[rt] + lazy[rt];\n    }\n\
@@ -387,7 +359,7 @@ data:
     \ + tag;\n    }\n    void down(int rt) requires (hasTag && pushdown) {\n     \
     \   give_tag(rt << 1, lazy[rt]);\n        give_tag(rt << 1 | 1, lazy[rt]);\n \
     \       lazy[rt] = Tag();\n    }\n    void initialize(int l, int r, int rt, const\
-    \ vector<Value> &data) {\n        if (r - l == 1) \n            return seg[rt]\
+    \ std::vector<Value> &data) {\n        if (r - l == 1) \n            return seg[rt]\
     \ = data[l], void();\n        int mid = (l + r) >> 1;\n        initialize(l, mid,\
     \ rt << 1, data);\n        initialize(mid, r, rt << 1 | 1, data);\n        up(rt);\n\
     \    }\n    Value range_prod(int L, int R, int l, int r, int rt) {\n        if\
@@ -470,7 +442,7 @@ data:
     \ 1);\n    }\n    void printall(int l, int r, int rt) {\n        printnode(l,\
     \ r, rt);\n        if (r - l == 1) return;\n        int mid = (l + r) >> 1;\n\
     \        printall(l, mid, rt << 1);\n        printall(mid, r, rt << 1 | 1);\n\
-    \    }\n    public:\n    SegmentTree(const vector<Value> &data): n(data.size()),\
+    \    }\npublic:\n    SegmentTree(const std::vector<Value> &data): n(data.size()),\
     \ seg(n << 2) { \n        if constexpr (hasTag) lazy.resize(n << 2); \n      \
     \  initialize(0, n, 1, data);\n    }\n    SegmentTree(int size): SegmentTree(vector<Value>(size))\
     \ {}\n    Value get(int x) {\n        assert(0 <= x && x < n);\n        return\
@@ -496,62 +468,66 @@ data:
     \    }\n    void printinfo(int l, int r) {\n        assert(0 <= l && r <= n);\n\
     \        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo [\" << l << \"\
     , \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l, r, 0, n,\
-    \ 1);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
-    \ << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n        cerr << \"\
-    \\e[0m\\n\";\n    }\n};\n#line 7 \"test/1_library_checker/tree/vertex_set_path_composite.test.cpp\"\
+    \ 1);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n   \
+    \     std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n  \
+    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 7 \"test/1_library_checker/tree/vertex_set_path_composite.test.cpp\"\
     \n\nusing mint = modint998244353;\n\ntemplate<bool rv = false>\nstruct Value {\n\
     \    mint a, b;\n    Value(mint _a = 0, mint _b = 0): a(_a), b(_b) {}\n    template<typename\
     \ Vother>\n    Value(const Vother &v): a(v.a), b(v.b) {}\n    Value operator+(const\
     \ Value &rhs) {\n        if constexpr (rv) return Value(a * rhs.a, rhs.a * b +\
     \ rhs.b);\n        else return Value(a * rhs.a, a * rhs.b + b);\n    }\n    mint\
-    \ get_val(mint x) {\n        return a * x + b;\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const Value &v) {\n        os << v.a << \" \" << v.b;\n        return os;\n\
-    \    }\n    friend istream& operator>>(istream& is, Value &v) {\n        is >>\
-    \ v.a >> v.b;\n        return is;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    HeavyLightDecomposition<>\
-    \ hld(n);\n    vector<Value<false>> arr(n);\n    for (auto &i : arr)\n       \
-    \ cin >> i;\n    for (int i = 1; i < n; ++i) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        hld.add_edge(u, v);\n    }\n    hld.build();\n    vector<Value<false>>\
-    \ weight(n);\n    for (int i = 0; i < n; ++i)\n        weight[i] = arr[hld.preorder[i]];\n\
-    \    vector<Value<true>> rweight(weight.begin(), weight.end());\n    SegmentTree<Value<false>>\
+    \ get_val(mint x) {\n        return a * x + b;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.a << \" \" <<\
+    \ v.b;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
+    \ is, Value &v) {\n        is >> v.a >> v.b;\n        return is;\n    }\n};\n\n\
+    int main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n\
+    \    std::cin >> n >> q;\n    HeavyLightDecomposition<> hld(n);\n    std::vector<Value<false>>\
+    \ arr(n);\n    for (auto &i : arr)\n        std::cin >> i;\n    for (int i = 1;\
+    \ i < n; ++i) {\n        int u, v;\n        std::cin >> u >> v;\n        hld.add_edge(u,\
+    \ v);\n    }\n    hld.build();\n    std::vector<Value<false>> weight(n);\n   \
+    \ for (int i = 0; i < n; ++i)\n        weight[i] = arr[hld.preorder[i]];\n   \
+    \ std::vector<Value<true>> rweight(weight.begin(), weight.end());\n    SegmentTree<Value<false>>\
     \ seg(weight);\n    SegmentTree<Value<true>> rseg(rweight);\n    while (q--) {\n\
-    \        int type;\n        cin >> type;\n        if (type == 0) {\n         \
-    \   int p;\n            Value v;\n            cin >> p >> v;\n            seg.modify(hld.dfs_in[p],\
-    \ v);\n            rseg.modify(hld.dfs_in[p], v);\n        }\n        else {\n\
-    \            int u, v;\n            mint x;\n            cin >> u >> v >> x;\n\
-    \            hld.work_path<false>(u, v, [&](int l, int r, bool is_up) {\n    \
-    \            if (is_up) x = seg.range_prod(l, r).get_val(x); \n              \
-    \  else x = rseg.range_prod(l, r).get_val(x);\n            }); \n            cout\
-    \ << x << \"\\n\";\n        }\n    }\n}\n"
+    \        int type;\n        std::cin >> type;\n        if (type == 0) {\n    \
+    \        int p;\n            Value v;\n            std::cin >> p >> v;\n     \
+    \       seg.modify(hld.dfs_in[p], v);\n            rseg.modify(hld.dfs_in[p],\
+    \ v);\n        }\n        else {\n            int u, v;\n            mint x;\n\
+    \            std::cin >> u >> v >> x;\n            hld.work_path<false>(u, v,\
+    \ [&](int l, int r, bool is_up) {\n                if (is_up) x = seg.range_prod(l,\
+    \ r).get_val(x); \n                else x = rseg.range_prod(l, r).get_val(x);\n\
+    \            }); \n            std::cout << x << \"\\n\";\n        }\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     Tree/HeavyLightDecomposition.hpp\"\n#include \"DataStructure/SegmentTree.hpp\"\
     \n\nusing mint = modint998244353;\n\ntemplate<bool rv = false>\nstruct Value {\n\
     \    mint a, b;\n    Value(mint _a = 0, mint _b = 0): a(_a), b(_b) {}\n    template<typename\
     \ Vother>\n    Value(const Vother &v): a(v.a), b(v.b) {}\n    Value operator+(const\
     \ Value &rhs) {\n        if constexpr (rv) return Value(a * rhs.a, rhs.a * b +\
     \ rhs.b);\n        else return Value(a * rhs.a, a * rhs.b + b);\n    }\n    mint\
-    \ get_val(mint x) {\n        return a * x + b;\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const Value &v) {\n        os << v.a << \" \" << v.b;\n        return os;\n\
-    \    }\n    friend istream& operator>>(istream& is, Value &v) {\n        is >>\
-    \ v.a >> v.b;\n        return is;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    HeavyLightDecomposition<>\
-    \ hld(n);\n    vector<Value<false>> arr(n);\n    for (auto &i : arr)\n       \
-    \ cin >> i;\n    for (int i = 1; i < n; ++i) {\n        int u, v;\n        cin\
-    \ >> u >> v;\n        hld.add_edge(u, v);\n    }\n    hld.build();\n    vector<Value<false>>\
-    \ weight(n);\n    for (int i = 0; i < n; ++i)\n        weight[i] = arr[hld.preorder[i]];\n\
-    \    vector<Value<true>> rweight(weight.begin(), weight.end());\n    SegmentTree<Value<false>>\
+    \ get_val(mint x) {\n        return a * x + b;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.a << \" \" <<\
+    \ v.b;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
+    \ is, Value &v) {\n        is >> v.a >> v.b;\n        return is;\n    }\n};\n\n\
+    int main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n\
+    \    std::cin >> n >> q;\n    HeavyLightDecomposition<> hld(n);\n    std::vector<Value<false>>\
+    \ arr(n);\n    for (auto &i : arr)\n        std::cin >> i;\n    for (int i = 1;\
+    \ i < n; ++i) {\n        int u, v;\n        std::cin >> u >> v;\n        hld.add_edge(u,\
+    \ v);\n    }\n    hld.build();\n    std::vector<Value<false>> weight(n);\n   \
+    \ for (int i = 0; i < n; ++i)\n        weight[i] = arr[hld.preorder[i]];\n   \
+    \ std::vector<Value<true>> rweight(weight.begin(), weight.end());\n    SegmentTree<Value<false>>\
     \ seg(weight);\n    SegmentTree<Value<true>> rseg(rweight);\n    while (q--) {\n\
-    \        int type;\n        cin >> type;\n        if (type == 0) {\n         \
-    \   int p;\n            Value v;\n            cin >> p >> v;\n            seg.modify(hld.dfs_in[p],\
-    \ v);\n            rseg.modify(hld.dfs_in[p], v);\n        }\n        else {\n\
-    \            int u, v;\n            mint x;\n            cin >> u >> v >> x;\n\
-    \            hld.work_path<false>(u, v, [&](int l, int r, bool is_up) {\n    \
-    \            if (is_up) x = seg.range_prod(l, r).get_val(x); \n              \
-    \  else x = rseg.range_prod(l, r).get_val(x);\n            }); \n            cout\
-    \ << x << \"\\n\";\n        }\n    }\n}\n"
+    \        int type;\n        std::cin >> type;\n        if (type == 0) {\n    \
+    \        int p;\n            Value v;\n            std::cin >> p >> v;\n     \
+    \       seg.modify(hld.dfs_in[p], v);\n            rseg.modify(hld.dfs_in[p],\
+    \ v);\n        }\n        else {\n            int u, v;\n            mint x;\n\
+    \            std::cin >> u >> v >> x;\n            hld.work_path<false>(u, v,\
+    \ [&](int l, int r, bool is_up) {\n                if (is_up) x = seg.range_prod(l,\
+    \ r).get_val(x); \n                else x = rseg.range_prod(l, r).get_val(x);\n\
+    \            }); \n            std::cout << x << \"\\n\";\n        }\n    }\n\
+    }\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - Tree/HeavyLightDecomposition.hpp
@@ -563,7 +539,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_set_path_composite.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.000001'
@@ -26,8 +26,8 @@ data:
     - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_B
   bundledCode: "#line 1 \"test/2_aoj/incircle_of_a_triangle.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=CGL_7_B\"\n#define\
-    \ ERROR 0.000001\n#line 2 \"assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line\
-    \ 4 \"test/2_aoj/incircle_of_a_triangle.test.cpp\"\n\n#line 2 \"Geometry/centers.hpp\"\
+    \ ERROR 0.000001\n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 4 \"test/2_aoj/incircle_of_a_triangle.test.cpp\"\n\n#line 2 \"Geometry/centers.hpp\"\
     \n\n#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing DefaultFloat\
     \ = std::conditional_t<std::is_floating_point_v<T>, T, double>;\n\ntemplate <typename\
     \ T>\nconstexpr T get_default_eps() {\n    if constexpr (std::is_same_v<T, float>)\n\
@@ -214,8 +214,8 @@ data:
   isVerificationFile: true
   path: test/2_aoj/incircle_of_a_triangle.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-19 13:11:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/2_aoj/incircle_of_a_triangle.test.cpp
 layout: document

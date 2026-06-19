@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':x:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -30,53 +30,25 @@ data:
     links:
     - https://judge.yosupo.jp/problem/lca
   bundledCode: "#line 1 \"test/1_library_checker/tree/lca.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"default_code.hpp\"\n\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef pair<int,\
-    \ int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n#define\
-    \ SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class A,\
-    \ class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os <<\
-    \ \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
-    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
-    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
-    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
-    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
-    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
-    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
-    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
-    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
-    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
-    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
-    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
-    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
-    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
-    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
-    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
-    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
-    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
-    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
-    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
-    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
-    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
-    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 3 \"test/1_library_checker/tree/lca.test.cpp\"\n\n#line\
-    \ 2 \"Tree/TreeTools.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
-    \n\ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
-    class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
-    \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
-    \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
-    \    struct Empty {};\n    struct edge_v {\n        int from, to;\n        [[no_unique_address]]\
-    \ std::conditional_t<hasEdgeWeight, Edge, Empty> weight;\n        edge_v() {}\n\
-    \        edge_v(int u, int v) : from(u), to(v) {}\n        template <typename\
-    \ W>\n        edge_v(int u, int v, const W &w) requires(hasEdgeWeight) : from(u),\
-    \ to(v), weight(w) {}\n        template <typename OtherEdge>\n        edge_v(const\
-    \ OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight;\
-    \ }) \n            : from(other.from), to(other.to), weight(other.weight) {}\n\
-    \        template <typename OtherEdge>\n        edge_v(const OtherEdge &other)\
-    \ requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) \n        \
-    \    : from(other.from), to(other.to) {} \n        edge_v reversed() const {\n\
-    \            edge_v res(*this);\n            std::swap(res.from, res.to);\n  \
-    \          return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
+    \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"assumption.hpp\"\n\n#include\
+    \ <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/tree/lca.test.cpp\"\
+    \n\n#line 2 \"Tree/TreeTools.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\n\n#line 2 \"\
+    Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge = void, typename\
+    \ Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool hasEdgeWeight\
+    \ = !std::is_same_v<Edge, void>;\n    static constexpr bool hasVertexWeight =\
+    \ !std::is_same_v<Vertex, void>;\n    using edge_value_type = Edge;\n    using\
+    \ vertex_value_type = Vertex;\n    struct Empty {};\n    struct edge_v {\n   \
+    \     int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
+    \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
+    \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
+    \ <typename OtherEdge>\n        edge_v(const OtherEdge &other) requires(hasEdgeWeight\
+    \ && requires(OtherEdge o) { o.weight; }) \n            : from(other.from), to(other.to),\
+    \ weight(other.weight) {}\n        template <typename OtherEdge>\n        edge_v(const\
+    \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
+    \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
+    \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
     \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
     \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
     \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
@@ -240,14 +212,15 @@ data:
     \        }\n    }\n    void build_patable(int root = -1) {\n        if (this->current_root\
     \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
     \ == -1) root = 0;\n            this->traverse(root);\n        }\n        const\
-    \ int L = std::__lg(this->n()); \n        vector<vector<int>>(L + 1, vector<int>(this->n())).swap(pa_table);\n\
-    \        pa_table[0] = this->parents();\n        if constexpr (hasAddition) {\n\
-    \            vector<vector<WeightType>>(L + 1, vector<WeightType>(this->n())).swap(data);\n\
-    \            for (int i = 0; i < this->n(); ++i) {\n                if constexpr\
-    \ (this->hasEdgeWeight && this->hasVertexWeight) {\n                    data[0][i]\
-    \ = this->weight[i];\n                    if (i != root) data[0][i] = data[0][i]\
-    \ + this->parent_edge(i).weight;\n                }\n                else if constexpr\
-    \ (this->hasEdgeWeight) {\n                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
+    \ int L = std::__lg(this->n()); \n        std::vector<std::vector<int>>(L + 1,\
+    \ std::vector<int>(this->n())).swap(pa_table);\n        pa_table[0] = this->parents();\n\
+    \        if constexpr (hasAddition) {\n            std::vector<std::vector<WeightType>>(L\
+    \ + 1, std::vector<WeightType>(this->n())).swap(data);\n            for (int i\
+    \ = 0; i < this->n(); ++i) {\n                if constexpr (this->hasEdgeWeight\
+    \ && this->hasVertexWeight) {\n                    data[0][i] = this->weight[i];\n\
+    \                    if (i != root) data[0][i] = data[0][i] + this->parent_edge(i).weight;\n\
+    \                }\n                else if constexpr (this->hasEdgeWeight) {\n\
+    \                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
     \ \n                }\n                else if constexpr (this->hasVertexWeight)\
     \ {\n                    data[0][i] = this->weight[i];\n                }\n  \
     \          }\n        }\n        for (int i = 1; i <= L; ++i)\n            for\
@@ -256,16 +229,16 @@ data:
     \                data[i][j] = data[i - 1][j] + data[i - 1][pa_table[i - 1][j]];\n\
     \            }\n    }\n    int lca(int u, int v) {\n        if (this->ancestor(u,\
     \ v)) return u;\n        if (this->ancestor(v, u)) return v;\n        int L =\
-    \ __lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if (!this->ancestor(pa_table[i][u],\
-    \ v))\n                u = pa_table[i][u];\n        return pa_table[0][u];\n \
-    \   }\n    // be aware of difference in reverse direction edges, this function\
-    \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
-    \ u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n   \
-    \     int L = __lg(this->n());\n        WeightType res = WeightType();\n     \
-    \   if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n \
-    \               if (!this->ancestor(pa_table[i][u], v)) {\n                  \
-    \  res = res + data[i][u];\n                    u = pa_table[i][u];\n        \
-    \        }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
+    \ std::__lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if\
+    \ (!this->ancestor(pa_table[i][u], v))\n                u = pa_table[i][u];\n\
+    \        return pa_table[0][u];\n    }\n    // be aware of difference in reverse\
+    \ direction edges, this function only support this when v is an ancestor of u\n\
+    \    WeightType path_weight(int u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n\
+    \        int L = __lg(this->n());\n        WeightType res = WeightType();\n  \
+    \      if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n\
+    \                if (!this->ancestor(pa_table[i][u], v)) {\n                 \
+    \   res = res + data[i][u];\n                    u = pa_table[i][u];\n       \
+    \         }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
     \        }\n        if constexpr (hasVertexWeight) res = res + this->weight[u];\n\
     \        if (!this->ancestor(v, u)) {\n            for (int i = L; i >= 0; --i)\n\
     \                if (!this->ancestor(pa_table[i][v], u)) {\n                 \
@@ -287,20 +260,21 @@ data:
     \ }\n        if (d <= distance(u, _lca, _lca))\n            return step(u, _lca,\
     \ d, _lca);\n        d -= distance(u, _lca, _lca);\n        return step(v, _lca,\
     \ distance(v, _lca, _lca) - d, _lca);\n    }\n};\n#line 5 \"test/1_library_checker/tree/lca.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
-    \  cin >> n >> q;\n    TreeTools<> tree(n);\n    for (int i = 1; i < n; ++i) {\n\
-    \        int p;\n        cin >> p;\n        tree.add_edge(p, i);\n    }\n    tree.build_patable(0);\n\
-    \    while (q--) {\n        int u, v;\n        cin >> u >> v;\n        cout <<\
-    \ tree.lca(u, v) << \"\\n\";\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"default_code.hpp\"\
-    \n\n#include \"Tree/TreeTools.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    TreeTools<> tree(n);\n \
-    \   for (int i = 1; i < n; ++i) {\n        int p;\n        cin >> p;\n       \
-    \ tree.add_edge(p, i);\n    }\n    tree.build_patable(0);\n    while (q--) {\n\
-    \        int u, v;\n        cin >> u >> v;\n        cout << tree.lca(u, v) <<\
-    \ \"\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    TreeTools<> tree(n);\n    for (int i = 1;\
+    \ i < n; ++i) {\n        int p;\n        std::cin >> p;\n        tree.add_edge(p,\
+    \ i);\n    }\n    tree.build_patable(0);\n    while (q--) {\n        int u, v;\n\
+    \        std::cin >> u >> v;\n        std::cout << tree.lca(u, v) << \"\\n\";\n\
+    \    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"assumption.hpp\"\
+    \n\n#include \"Tree/TreeTools.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    TreeTools<> tree(n);\n\
+    \    for (int i = 1; i < n; ++i) {\n        int p;\n        std::cin >> p;\n \
+    \       tree.add_edge(p, i);\n    }\n    tree.build_patable(0);\n    while (q--)\
+    \ {\n        int u, v;\n        std::cin >> u >> v;\n        std::cout << tree.lca(u,\
+    \ v) << \"\\n\";\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Tree/TreeTools.hpp
   - Tree/Tree.hpp
   - Graph/base.hpp
@@ -309,7 +283,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/lca.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/lca.test.cpp

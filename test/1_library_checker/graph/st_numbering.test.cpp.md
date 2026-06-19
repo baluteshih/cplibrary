@@ -25,7 +25,7 @@ data:
     - https://judge.yosupo.jp/problem/st_numbering
   bundledCode: "#line 1 \"test/1_library_checker/graph/st_numbering.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/st_numbering\"\n#line 2 \"assumption.hpp\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
+    \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/st_numbering.test.cpp\"\
     \n\n#line 2 \"Graph/BCC.hpp\"\n\r\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
     \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
     \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
@@ -185,7 +185,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/st_numbering.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/st_numbering.test.cpp

@@ -4,13 +4,13 @@ data:
   - icon: ':x:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
@@ -22,15 +22,15 @@ data:
   - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':x:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -43,36 +43,8 @@ data:
     - https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree
   bundledCode: "#line 1 \"test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp\"\
     \n\n#line 2 \"Tree/CentroidDS/DistanceSolver.hpp\"\n\n#line 2 \"Tree/CentroidTree.hpp\"\
     \n\n#line 2 \"Tree/Tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
     \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
@@ -336,40 +308,41 @@ data:
     \ i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n                k -=\
     \ bit[res += i];\n        }\n        return res;\n    }\n    T total() {\n   \
     \     return total_;\n    }\n};\n#line 6 \"test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
-    \  cin >> n >> q;\n    vector<int> arr(n);\n    for (int &i : arr)\n        cin\
-    \ >> i;\n    DistanceSolver<BIT<ll>> tree(n);\n    for (int i = 1; i < n; ++i)\
-    \ {\n        int u, v;\n        cin >> u >> v;\n        tree.add_edge(u, v);\n\
-    \    }\n    tree.build();\n    auto range_add = [&](auto &ds, int l, int r, int\
-    \ x) {\n        l = max(l, 0), r = min(r, ds.n);\n        if (l >= r) return;\n\
-    \        ds.modify(l, x);\n        ds.modify(r, -x);\n    };\n    while (q--)\
-    \ {\n        int op, p;\n        cin >> op >> p;\n        if (op == 0) {\n   \
-    \         int l, r, x;\n            cin >> l >> r >> x;\n            tree.climb(p,\
-    \ [&](auto &ds, int d, [[maybe_unused]] bool prev) {\n                range_add(ds,\
-    \ l - d, r - d, x);\n            });\n        }\n        else {\n            ll\
-    \ ans = arr[p];\n            tree.climb(p, [&](auto &ds, int d, bool prev) {\n\
-    \                ll res = ds.prefix(d);\n                if (prev) ans -= res;\n\
-    \                else ans += res;\n            });\n            cout << ans <<\
-    \ \"\\n\";\n        }\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    std::vector<int> arr(n);\n    for (int &i\
+    \ : arr)\n        std::cin >> i;\n    DistanceSolver<BIT<long long>> tree(n);\n\
+    \    for (int i = 1; i < n; ++i) {\n        int u, v;\n        std::cin >> u >>\
+    \ v;\n        tree.add_edge(u, v);\n    }\n    tree.build();\n    auto range_add\
+    \ = [&](auto &ds, int l, int r, int x) {\n        l = std::max(l, 0), r = std::min(r,\
+    \ ds.n);\n        if (l >= r) return;\n        ds.modify(l, x);\n        ds.modify(r,\
+    \ -x);\n    };\n    while (q--) {\n        int op, p;\n        std::cin >> op\
+    \ >> p;\n        if (op == 0) {\n            int l, r, x;\n            std::cin\
+    \ >> l >> r >> x;\n            tree.climb(p, [&](auto &ds, int d, [[maybe_unused]]\
+    \ bool prev) {\n                range_add(ds, l - d, r - d, x);\n            });\n\
+    \        }\n        else {\n            long long ans = arr[p];\n            tree.climb(p,\
+    \ [&](auto &ds, int d, bool prev) {\n                long long res = ds.prefix(d);\n\
+    \                if (prev) ans -= res;\n                else ans += res;\n   \
+    \         });\n            std::cout << ans << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Tree/CentroidDS/DistanceSolver.hpp\"\
-    \n#include \"DataStructure/BIT.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    vector<int> arr(n);\n  \
-    \  for (int &i : arr)\n        cin >> i;\n    DistanceSolver<BIT<ll>> tree(n);\n\
-    \    for (int i = 1; i < n; ++i) {\n        int u, v;\n        cin >> u >> v;\n\
-    \        tree.add_edge(u, v);\n    }\n    tree.build();\n    auto range_add =\
-    \ [&](auto &ds, int l, int r, int x) {\n        l = max(l, 0), r = min(r, ds.n);\n\
-    \        if (l >= r) return;\n        ds.modify(l, x);\n        ds.modify(r, -x);\n\
-    \    };\n    while (q--) {\n        int op, p;\n        cin >> op >> p;\n    \
-    \    if (op == 0) {\n            int l, r, x;\n            cin >> l >> r >> x;\n\
-    \            tree.climb(p, [&](auto &ds, int d, [[maybe_unused]] bool prev) {\n\
-    \                range_add(ds, l - d, r - d, x);\n            });\n        }\n\
-    \        else {\n            ll ans = arr[p];\n            tree.climb(p, [&](auto\
-    \ &ds, int d, bool prev) {\n                ll res = ds.prefix(d);\n         \
-    \       if (prev) ans -= res;\n                else ans += res;\n            });\n\
-    \            cout << ans << \"\\n\";\n        }\n    }\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Tree/CentroidDS/DistanceSolver.hpp\"\
+    \n#include \"DataStructure/BIT.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    std::vector<int>\
+    \ arr(n);\n    for (int &i : arr)\n        std::cin >> i;\n    DistanceSolver<BIT<long\
+    \ long>> tree(n);\n    for (int i = 1; i < n; ++i) {\n        int u, v;\n    \
+    \    std::cin >> u >> v;\n        tree.add_edge(u, v);\n    }\n    tree.build();\n\
+    \    auto range_add = [&](auto &ds, int l, int r, int x) {\n        l = std::max(l,\
+    \ 0), r = std::min(r, ds.n);\n        if (l >= r) return;\n        ds.modify(l,\
+    \ x);\n        ds.modify(r, -x);\n    };\n    while (q--) {\n        int op, p;\n\
+    \        std::cin >> op >> p;\n        if (op == 0) {\n            int l, r, x;\n\
+    \            std::cin >> l >> r >> x;\n            tree.climb(p, [&](auto &ds,\
+    \ int d, [[maybe_unused]] bool prev) {\n                range_add(ds, l - d, r\
+    \ - d, x);\n            });\n        }\n        else {\n            long long\
+    \ ans = arr[p];\n            tree.climb(p, [&](auto &ds, int d, bool prev) {\n\
+    \                long long res = ds.prefix(d);\n                if (prev) ans\
+    \ -= res;\n                else ans += res;\n            });\n            std::cout\
+    \ << ans << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/CentroidTree.hpp
   - Tree/Tree.hpp
@@ -382,7 +355,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp

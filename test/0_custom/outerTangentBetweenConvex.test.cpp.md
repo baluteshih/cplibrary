@@ -34,7 +34,7 @@ data:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#line 2 \"assumption.hpp\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\
+    \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/0_custom/outerTangentBetweenConvex.test.cpp\"\
     \n\n#line 2 \"Geometry/outerTangentBetweenConvex.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
     \n    \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
     \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
@@ -409,7 +409,7 @@ data:
   isVerificationFile: true
   path: test/0_custom/outerTangentBetweenConvex.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/0_custom/outerTangentBetweenConvex.test.cpp

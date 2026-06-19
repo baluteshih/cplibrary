@@ -31,7 +31,7 @@ data:
     - https://judge.yosupo.jp/problem/min_cost_b_flow
   bundledCode: "#line 1 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#line 2 \"\
-    assumption.hpp\"\n\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\
+    assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\
     \n\n#line 2 \"Flow/bounded_cost_circulation.hpp\"\n\n#line 2 \"Flow/min_cost_circulation.hpp\"\
     \n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge\
     \ = void, typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr\
@@ -261,7 +261,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/min_cost_b_flow.test.cpp

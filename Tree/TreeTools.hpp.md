@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
@@ -206,14 +206,15 @@ data:
     \        }\n    }\n    void build_patable(int root = -1) {\n        if (this->current_root\
     \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
     \ == -1) root = 0;\n            this->traverse(root);\n        }\n        const\
-    \ int L = std::__lg(this->n()); \n        vector<vector<int>>(L + 1, vector<int>(this->n())).swap(pa_table);\n\
-    \        pa_table[0] = this->parents();\n        if constexpr (hasAddition) {\n\
-    \            vector<vector<WeightType>>(L + 1, vector<WeightType>(this->n())).swap(data);\n\
-    \            for (int i = 0; i < this->n(); ++i) {\n                if constexpr\
-    \ (this->hasEdgeWeight && this->hasVertexWeight) {\n                    data[0][i]\
-    \ = this->weight[i];\n                    if (i != root) data[0][i] = data[0][i]\
-    \ + this->parent_edge(i).weight;\n                }\n                else if constexpr\
-    \ (this->hasEdgeWeight) {\n                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
+    \ int L = std::__lg(this->n()); \n        std::vector<std::vector<int>>(L + 1,\
+    \ std::vector<int>(this->n())).swap(pa_table);\n        pa_table[0] = this->parents();\n\
+    \        if constexpr (hasAddition) {\n            std::vector<std::vector<WeightType>>(L\
+    \ + 1, std::vector<WeightType>(this->n())).swap(data);\n            for (int i\
+    \ = 0; i < this->n(); ++i) {\n                if constexpr (this->hasEdgeWeight\
+    \ && this->hasVertexWeight) {\n                    data[0][i] = this->weight[i];\n\
+    \                    if (i != root) data[0][i] = data[0][i] + this->parent_edge(i).weight;\n\
+    \                }\n                else if constexpr (this->hasEdgeWeight) {\n\
+    \                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
     \ \n                }\n                else if constexpr (this->hasVertexWeight)\
     \ {\n                    data[0][i] = this->weight[i];\n                }\n  \
     \          }\n        }\n        for (int i = 1; i <= L; ++i)\n            for\
@@ -222,16 +223,16 @@ data:
     \                data[i][j] = data[i - 1][j] + data[i - 1][pa_table[i - 1][j]];\n\
     \            }\n    }\n    int lca(int u, int v) {\n        if (this->ancestor(u,\
     \ v)) return u;\n        if (this->ancestor(v, u)) return v;\n        int L =\
-    \ __lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if (!this->ancestor(pa_table[i][u],\
-    \ v))\n                u = pa_table[i][u];\n        return pa_table[0][u];\n \
-    \   }\n    // be aware of difference in reverse direction edges, this function\
-    \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
-    \ u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n   \
-    \     int L = __lg(this->n());\n        WeightType res = WeightType();\n     \
-    \   if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n \
-    \               if (!this->ancestor(pa_table[i][u], v)) {\n                  \
-    \  res = res + data[i][u];\n                    u = pa_table[i][u];\n        \
-    \        }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
+    \ std::__lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if\
+    \ (!this->ancestor(pa_table[i][u], v))\n                u = pa_table[i][u];\n\
+    \        return pa_table[0][u];\n    }\n    // be aware of difference in reverse\
+    \ direction edges, this function only support this when v is an ancestor of u\n\
+    \    WeightType path_weight(int u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n\
+    \        int L = __lg(this->n());\n        WeightType res = WeightType();\n  \
+    \      if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n\
+    \                if (!this->ancestor(pa_table[i][u], v)) {\n                 \
+    \   res = res + data[i][u];\n                    u = pa_table[i][u];\n       \
+    \         }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
     \        }\n        if constexpr (hasVertexWeight) res = res + this->weight[u];\n\
     \        if (!this->ancestor(v, u)) {\n            for (int i = L; i >= 0; --i)\n\
     \                if (!this->ancestor(pa_table[i][v], u)) {\n                 \
@@ -272,14 +273,15 @@ data:
     \        }\n    }\n    void build_patable(int root = -1) {\n        if (this->current_root\
     \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
     \ == -1) root = 0;\n            this->traverse(root);\n        }\n        const\
-    \ int L = std::__lg(this->n()); \n        vector<vector<int>>(L + 1, vector<int>(this->n())).swap(pa_table);\n\
-    \        pa_table[0] = this->parents();\n        if constexpr (hasAddition) {\n\
-    \            vector<vector<WeightType>>(L + 1, vector<WeightType>(this->n())).swap(data);\n\
-    \            for (int i = 0; i < this->n(); ++i) {\n                if constexpr\
-    \ (this->hasEdgeWeight && this->hasVertexWeight) {\n                    data[0][i]\
-    \ = this->weight[i];\n                    if (i != root) data[0][i] = data[0][i]\
-    \ + this->parent_edge(i).weight;\n                }\n                else if constexpr\
-    \ (this->hasEdgeWeight) {\n                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
+    \ int L = std::__lg(this->n()); \n        std::vector<std::vector<int>>(L + 1,\
+    \ std::vector<int>(this->n())).swap(pa_table);\n        pa_table[0] = this->parents();\n\
+    \        if constexpr (hasAddition) {\n            std::vector<std::vector<WeightType>>(L\
+    \ + 1, std::vector<WeightType>(this->n())).swap(data);\n            for (int i\
+    \ = 0; i < this->n(); ++i) {\n                if constexpr (this->hasEdgeWeight\
+    \ && this->hasVertexWeight) {\n                    data[0][i] = this->weight[i];\n\
+    \                    if (i != root) data[0][i] = data[0][i] + this->parent_edge(i).weight;\n\
+    \                }\n                else if constexpr (this->hasEdgeWeight) {\n\
+    \                    if (i != root) data[0][i] = this->parent_edge(i).weight;\
     \ \n                }\n                else if constexpr (this->hasVertexWeight)\
     \ {\n                    data[0][i] = this->weight[i];\n                }\n  \
     \          }\n        }\n        for (int i = 1; i <= L; ++i)\n            for\
@@ -288,16 +290,16 @@ data:
     \                data[i][j] = data[i - 1][j] + data[i - 1][pa_table[i - 1][j]];\n\
     \            }\n    }\n    int lca(int u, int v) {\n        if (this->ancestor(u,\
     \ v)) return u;\n        if (this->ancestor(v, u)) return v;\n        int L =\
-    \ __lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if (!this->ancestor(pa_table[i][u],\
-    \ v))\n                u = pa_table[i][u];\n        return pa_table[0][u];\n \
-    \   }\n    // be aware of difference in reverse direction edges, this function\
-    \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
-    \ u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n   \
-    \     int L = __lg(this->n());\n        WeightType res = WeightType();\n     \
-    \   if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n \
-    \               if (!this->ancestor(pa_table[i][u], v)) {\n                  \
-    \  res = res + data[i][u];\n                    u = pa_table[i][u];\n        \
-    \        }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
+    \ std::__lg(this->n());\n        for (int i = L; i >= 0; --i)\n            if\
+    \ (!this->ancestor(pa_table[i][u], v))\n                u = pa_table[i][u];\n\
+    \        return pa_table[0][u];\n    }\n    // be aware of difference in reverse\
+    \ direction edges, this function only support this when v is an ancestor of u\n\
+    \    WeightType path_weight(int u, int v) requires (hasAddition) {\n        assert(!pa_table.empty());\n\
+    \        int L = __lg(this->n());\n        WeightType res = WeightType();\n  \
+    \      if (!this->ancestor(u, v)) {\n            for (int i = L; i >= 0; --i)\n\
+    \                if (!this->ancestor(pa_table[i][u], v)) {\n                 \
+    \   res = res + data[i][u];\n                    u = pa_table[i][u];\n       \
+    \         }\n            res = res + data[0][u];\n            u = pa_table[0][u];\n\
     \        }\n        if constexpr (hasVertexWeight) res = res + this->weight[u];\n\
     \        if (!this->ancestor(v, u)) {\n            for (int i = L; i >= 0; --i)\n\
     \                if (!this->ancestor(pa_table[i][v], u)) {\n                 \
@@ -327,7 +329,7 @@ data:
   isVerificationFile: false
   path: Tree/TreeTools.hpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/lca.test.cpp
