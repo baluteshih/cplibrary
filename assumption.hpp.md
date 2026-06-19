@@ -244,6 +244,42 @@ data:
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
+    title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
+    title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
+    title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
+    title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
+    title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
+    title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
+    title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
+    title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+    title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+    title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
+    title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -459,6 +495,7 @@ data:
   - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
+  - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/zalgorithm.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp
@@ -488,6 +525,17 @@ data:
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
+  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
+  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
+  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
+  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
+  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
+  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp

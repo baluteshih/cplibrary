@@ -187,7 +187,7 @@ data:
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
+    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return std::reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
@@ -238,36 +238,39 @@ data:
     \ (int i = m - 1; i > 0; --i) \n            up[i] = up[i * 2] * up[i * 2 + 1];\n\
     \        return up;\n    }\n    std::vector<T> Eval(const std::vector<T> &x) const\
     \ { // 1e5/696ms\n        auto up = _tree1(x); return _eval(x, up);\n    }\n \
-    \   std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0,\
-    \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
-    \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
-    \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
-    \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
-    \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
-    #line 2 \"Numeric/Combination.hpp\"\n\n#line 4 \"Numeric/Combination.hpp\"\n\n\
-    template<class T>\nrequires std::derived_from<T, internal::modint_base>\nclass\
-    \ Combination {\n    int N;\n    void init() {\n        for (int i = 1; i <= N;\
-    \ ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
-    \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
-    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
-    \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
-    \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
-    \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
-    \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
-    \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
-    \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
-    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
-    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
-    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
-    \ / i); \n    }\n    return res;\n}\n}\n#line 5 \"Numbers/bell_number.hpp\"\n\n\
-    template <typename T>\nstd::vector<T> bell_number(int n) {\n    Poly<T> f(n +\
-    \ 1);\n    Combination<T> comb(n + 1);\n    for (int i = 1; i <= n; ++i) f[i]\
-    \ = comb.ifac[i];\n    auto res = f.Exp();\n    for (int i = 0; i <= n; ++i) res[i]\
-    \ *= comb.fac[i];\n    return std::vector<T>(res.begin(), res.end());\n}\n"
+    \   T eval(T x) const {\n        T base = 1, res = 0;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            res += base * (*this)[i];\n            base *=\
+    \ x;\n        }\n        return res;\n    }\n    std::pair<Poly, Poly> DivMod(const\
+    \ Poly &rhs) const { // rhs.back() != 0, 5e5/330ms\n        if (n() < rhs.n())\
+    \ return {{0}, *this};\n        const int m = n() - rhs.n() + 1;\n        Poly\
+    \ X(rhs); X.irev().isz(m);\n        Poly Y(*this); Y.irev().isz(m);\n        Poly\
+    \ Q = (Y * X.Inv()).isz(m).irev();\n        X = rhs * Q, Y = *this;\n        return\
+    \ {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};\n    }\n    // should be include\
+    \ additionally\n    Poly Sqrt() const;\n    bool has_sqrt() const;\n    Poly&\
+    \ shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n#line 2 \"Numeric/Combination.hpp\"\
+    \n\n#line 4 \"Numeric/Combination.hpp\"\n\ntemplate<class T>\nrequires std::derived_from<T,\
+    \ internal::modint_base>\nclass Combination {\n    int N;\n    void init() {\n\
+    \        for (int i = 1; i <= N; ++i)\n            fac[i] = fac[i - 1] * i;\n\
+    \        ifac.back() = fac.back().inv();\n        for (int i = N - 1; i >= 0;\
+    \ --i)\n            ifac[i] = ifac[i + 1] * (i + 1);\n    }\npublic:\n    std::vector<T>\
+    \ fac, ifac;\n    Combination(int n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n\
+    \        init();\n    }\n    Combination(int n, T base): N(n), fac(N + 1, base.raw(1)),\
+    \ ifac(N + 1, base.raw(1)) {\n        init();\n    }\n    T C(int n, int m) {\n\
+    \        if (n < m) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n\
+    \    }\n    T P(int n, int m) {\n        if (n < m) return 0;\n        return\
+    \ fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n        return C(n +\
+    \ m - 1, m);\n    }\n};\nnamespace CombFunc {\ntemplate<class T>\nstd::vector<T>\
+    \ power(T base, int n) {\n    std::vector<T> res(n + 1, 1);\n    for (int i =\
+    \ 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n    return res;\n}\ntemplate<class\
+    \ T>\nstd::vector<T> ipower(T base, int n) {\n    return power(base.inv(), n);\n\
+    }\ntemplate<class T>\nstd::vector<T> linear_inverse(int n) {\n    std::vector<T>\
+    \ res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i = 2; i <= n; ++i) {\n\
+    \        res[i] = res[MOD % i] * (MOD - MOD / i); \n    }\n    return res;\n}\n\
+    }\n#line 5 \"Numbers/bell_number.hpp\"\n\ntemplate <typename T>\nstd::vector<T>\
+    \ bell_number(int n) {\n    Poly<T> f(n + 1);\n    Combination<T> comb(n + 1);\n\
+    \    for (int i = 1; i <= n; ++i) f[i] = comb.ifac[i];\n    auto res = f.Exp();\n\
+    \    for (int i = 0; i <= n; ++i) res[i] *= comb.fac[i];\n    return std::vector<T>(res.begin(),\
+    \ res.end());\n}\n"
   code: "#pragma once\n\n#include \"Polynomial/Polynomial.hpp\"\n#include \"Numeric/Combination.hpp\"\
     \n\ntemplate <typename T>\nstd::vector<T> bell_number(int n) {\n    Poly<T> f(n\
     \ + 1);\n    Combination<T> comb(n + 1);\n    for (int i = 1; i <= n; ++i) f[i]\
@@ -283,7 +286,7 @@ data:
   isVerificationFile: false
   path: Numbers/bell_number.hpp
   requiredBy: []
-  timestamp: '2026-06-19 14:07:30+08:00'
+  timestamp: '2026-06-19 21:01:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp

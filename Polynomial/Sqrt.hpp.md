@@ -187,7 +187,7 @@ data:
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
+    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return std::reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
@@ -238,25 +238,27 @@ data:
     \ (int i = m - 1; i > 0; --i) \n            up[i] = up[i * 2] * up[i * 2 + 1];\n\
     \        return up;\n    }\n    std::vector<T> Eval(const std::vector<T> &x) const\
     \ { // 1e5/696ms\n        auto up = _tree1(x); return _eval(x, up);\n    }\n \
-    \   std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0,\
-    \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
-    \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
-    \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
-    \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
-    \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
-    #line 2 \"Numeric/quadratic_residue.hpp\"\n\nint jacobi(int a, int m) {\n    int\
-    \ s = 1;\n    for (; m > 1; ) {\n        a %= m;\n        if (a == 0) return 0;\n\
-    \        const int r = std::countr_zero(static_cast<unsigned int>(a));\n     \
-    \   if ((r & 1) && ((m + 2) & 4)) s = -s;\n        a >>= r;\n        if (a & m\
-    \ & 2) s = -s;\n        std::swap(a, m);\n    }\n    return s;\n}\n\n#line 18\
-    \ \"Numeric/quadratic_residue.hpp\"\n\ntemplate<class T>\nrequires std::derived_from<T,\
-    \ internal::modint_base>\nT quadratic_residue(T a, bool &succ) {\n    succ = true;\n\
-    \    if (T::mod() == 2) return a;\n    const int jc = jacobi(a.val(), T::mod());\n\
-    \    if (jc == 0) return 0;\n    if (jc == -1) return succ = false, 0;\n    T\
-    \ b, d;\n    std::mt19937 rng(880301);\n    for (; ; ) {\n        b = rng() %\
-    \ T::mod();\n        d = b * b - a;\n        if (jacobi(d.val(), T::mod()) ==\
-    \ -1) break;\n    }\n    T f0 = b, f1 = 1, g0 = 1, g1 = 0, tmp;\n    for (int\
+    \   T eval(T x) const {\n        T base = 1, res = 0;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            res += base * (*this)[i];\n            base *=\
+    \ x;\n        }\n        return res;\n    }\n    std::pair<Poly, Poly> DivMod(const\
+    \ Poly &rhs) const { // rhs.back() != 0, 5e5/330ms\n        if (n() < rhs.n())\
+    \ return {{0}, *this};\n        const int m = n() - rhs.n() + 1;\n        Poly\
+    \ X(rhs); X.irev().isz(m);\n        Poly Y(*this); Y.irev().isz(m);\n        Poly\
+    \ Q = (Y * X.Inv()).isz(m).irev();\n        X = rhs * Q, Y = *this;\n        return\
+    \ {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};\n    }\n    // should be include\
+    \ additionally\n    Poly Sqrt() const;\n    bool has_sqrt() const;\n    Poly&\
+    \ shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n#line 2 \"Numeric/quadratic_residue.hpp\"\
+    \n\nint jacobi(int a, int m) {\n    int s = 1;\n    for (; m > 1; ) {\n      \
+    \  a %= m;\n        if (a == 0) return 0;\n        const int r = std::countr_zero(static_cast<unsigned\
+    \ int>(a));\n        if ((r & 1) && ((m + 2) & 4)) s = -s;\n        a >>= r;\n\
+    \        if (a & m & 2) s = -s;\n        std::swap(a, m);\n    }\n    return s;\n\
+    }\n\n#line 18 \"Numeric/quadratic_residue.hpp\"\n\ntemplate<class T>\nrequires\
+    \ std::derived_from<T, internal::modint_base>\nT quadratic_residue(T a, bool &succ)\
+    \ {\n    succ = true;\n    if (T::mod() == 2) return a;\n    const int jc = jacobi(a.val(),\
+    \ T::mod());\n    if (jc == 0) return 0;\n    if (jc == -1) return succ = false,\
+    \ 0;\n    T b, d;\n    std::mt19937 rng(880301);\n    for (; ; ) {\n        b\
+    \ = rng() % T::mod();\n        d = b * b - a;\n        if (jacobi(d.val(), T::mod())\
+    \ == -1) break;\n    }\n    T f0 = b, f1 = 1, g0 = 1, g1 = 0, tmp;\n    for (int\
     \ e = (1LL + T::mod()) >> 1; e; e >>= 1) {\n        if (e & 1) {\n           \
     \ tmp = g0 * f0 + d * g1 * f1;\n            g1 = g0 * f1 + g1 * f0;\n        \
     \    g0 = tmp;\n        }\n        tmp = f0 * f0 + d * f1 * f1;\n        f1 =\
@@ -294,7 +296,7 @@ data:
   isVerificationFile: false
   path: Polynomial/Sqrt.hpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-06-19 21:01:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp

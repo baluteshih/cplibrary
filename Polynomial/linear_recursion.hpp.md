@@ -187,7 +187,7 @@ data:
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
+    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return std::reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
@@ -238,22 +238,25 @@ data:
     \ (int i = m - 1; i > 0; --i) \n            up[i] = up[i * 2] * up[i * 2 + 1];\n\
     \        return up;\n    }\n    std::vector<T> Eval(const std::vector<T> &x) const\
     \ { // 1e5/696ms\n        auto up = _tree1(x); return _eval(x, up);\n    }\n \
-    \   std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0,\
-    \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
-    \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
-    \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
-    \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
-    \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
-    #line 4 \"Polynomial/Bostan_Mori.hpp\"\n\ntemplate<class T>\nT Bostan_Mori(const\
-    \ Poly<T> &f, const Poly<T> &g, long long k) { // [f(x)/g(x)][x^k]\n    assert(f.size()\
-    \ + 1 <= g.size());\n    Poly<T> F(f);\n    Poly<T> G(g);\n    for (; k; k >>=\
-    \ 1) {\n        Poly<T> H = G;\n        int m = 1;\n        while (m < (int)G.size()\
-    \ * 2) m <<= 1;\n        for (int i = 1; i < (int)H.size(); i += 2) H[i] = -H[i];\n\
-    \        F.dft(m), G.dft(m), H.dft(m);\n        F.imul(H), G.imul(H);\n      \
-    \  F.idft(m), G.idft(m);\n        for (int i = 0; i * 2 + (k & 1) < (int)F.size();\
-    \ ++i) F[i] = F[i * 2 + (k & 1)];\n        for (int i = 0; i * 2 < (int)G.size();\
-    \ ++i) G[i] = G[i * 2];\n        F.isz(((int)F.size() + 1 - (k & 1)) / 2), G.isz(((int)G.size()\
+    \   T eval(T x) const {\n        T base = 1, res = 0;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            res += base * (*this)[i];\n            base *=\
+    \ x;\n        }\n        return res;\n    }\n    std::pair<Poly, Poly> DivMod(const\
+    \ Poly &rhs) const { // rhs.back() != 0, 5e5/330ms\n        if (n() < rhs.n())\
+    \ return {{0}, *this};\n        const int m = n() - rhs.n() + 1;\n        Poly\
+    \ X(rhs); X.irev().isz(m);\n        Poly Y(*this); Y.irev().isz(m);\n        Poly\
+    \ Q = (Y * X.Inv()).isz(m).irev();\n        X = rhs * Q, Y = *this;\n        return\
+    \ {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};\n    }\n    // should be include\
+    \ additionally\n    Poly Sqrt() const;\n    bool has_sqrt() const;\n    Poly&\
+    \ shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n#line 4 \"Polynomial/Bostan_Mori.hpp\"\
+    \n\ntemplate<class T>\nT Bostan_Mori(const Poly<T> &f, const Poly<T> &g, long\
+    \ long k) { // [f(x)/g(x)][x^k]\n    assert(f.size() + 1 <= g.size());\n    Poly<T>\
+    \ F(f);\n    Poly<T> G(g);\n    for (; k; k >>= 1) {\n        Poly<T> H = G;\n\
+    \        int m = 1;\n        while (m < (int)G.size() * 2) m <<= 1;\n        for\
+    \ (int i = 1; i < (int)H.size(); i += 2) H[i] = -H[i];\n        F.dft(m), G.dft(m),\
+    \ H.dft(m);\n        F.imul(H), G.imul(H);\n        F.idft(m), G.idft(m);\n  \
+    \      for (int i = 0; i * 2 + (k & 1) < (int)F.size(); ++i) F[i] = F[i * 2 +\
+    \ (k & 1)];\n        for (int i = 0; i * 2 < (int)G.size(); ++i) G[i] = G[i *\
+    \ 2];\n        F.isz(((int)F.size() + 1 - (k & 1)) / 2), G.isz(((int)G.size()\
     \ + 1) / 2);\n    }\n    return F[0] / G[0];\n}\n#line 4 \"Polynomial/linear_recursion.hpp\"\
     \n\ntemplate<class T>\nT linear_recursion(const std::vector<T> &a, const std::vector<T>\
     \ &coef, long long n) { // a_n = \\sum c_j a_(n-j-1), 1e5/1698ms\n    const int\
@@ -276,7 +279,7 @@ data:
   isVerificationFile: false
   path: Polynomial/linear_recursion.hpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-06-19 21:01:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp

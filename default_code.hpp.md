@@ -3,42 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-    title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-    title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-    title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-    title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-    title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-    title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
@@ -168,18 +132,6 @@ data:
   timestamp: '2026-02-27 19:30:58+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/4_codeforces/101673A.test.cpp
   - test/4_codeforces/101242J.test.cpp
   - test/4_codeforces/104114B.test.cpp

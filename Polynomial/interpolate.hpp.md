@@ -184,7 +184,7 @@ data:
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
+    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return std::reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
@@ -235,20 +235,23 @@ data:
     \ (int i = m - 1; i > 0; --i) \n            up[i] = up[i * 2] * up[i * 2 + 1];\n\
     \        return up;\n    }\n    std::vector<T> Eval(const std::vector<T> &x) const\
     \ { // 1e5/696ms\n        auto up = _tree1(x); return _eval(x, up);\n    }\n \
-    \   std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0,\
-    \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
-    \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
-    \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
-    \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
-    \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
-    #line 4 \"Polynomial/interpolate.hpp\"\n\ntemplate<class T>\nPoly<T> interpolate(const\
-    \ std::vector<T> &x, const std::vector<T> &y) { // 1e5/928ms\n    const int m\
-    \ = (int)x.size();\n    std::vector<Poly<T>> up = Poly<T>::_tree1(x), down(m *\
-    \ 2);\n    std::vector<T> z = up[1].Dx()._eval(x, up);\n    for (int i = 0; i\
-    \ < m; ++i) z[i] = y[i] / z[i];\n    for (int i = 0; i < m; ++i) down[m + i] =\
-    \ {z[i]};\n    for (int i = m - 1; i > 0; --i) down[i] = down[i * 2] * up[i *\
-    \ 2 + 1] + down[i * 2 + 1] * up[i * 2];\n    return down[1];\n}\n"
+    \   T eval(T x) const {\n        T base = 1, res = 0;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            res += base * (*this)[i];\n            base *=\
+    \ x;\n        }\n        return res;\n    }\n    std::pair<Poly, Poly> DivMod(const\
+    \ Poly &rhs) const { // rhs.back() != 0, 5e5/330ms\n        if (n() < rhs.n())\
+    \ return {{0}, *this};\n        const int m = n() - rhs.n() + 1;\n        Poly\
+    \ X(rhs); X.irev().isz(m);\n        Poly Y(*this); Y.irev().isz(m);\n        Poly\
+    \ Q = (Y * X.Inv()).isz(m).irev();\n        X = rhs * Q, Y = *this;\n        return\
+    \ {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};\n    }\n    // should be include\
+    \ additionally\n    Poly Sqrt() const;\n    bool has_sqrt() const;\n    Poly&\
+    \ shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n#line 4 \"Polynomial/interpolate.hpp\"\
+    \n\ntemplate<class T>\nPoly<T> interpolate(const std::vector<T> &x, const std::vector<T>\
+    \ &y) { // 1e5/928ms\n    const int m = (int)x.size();\n    std::vector<Poly<T>>\
+    \ up = Poly<T>::_tree1(x), down(m * 2);\n    std::vector<T> z = up[1].Dx()._eval(x,\
+    \ up);\n    for (int i = 0; i < m; ++i) z[i] = y[i] / z[i];\n    for (int i =\
+    \ 0; i < m; ++i) down[m + i] = {z[i]};\n    for (int i = m - 1; i > 0; --i) down[i]\
+    \ = down[i * 2] * up[i * 2 + 1] + down[i * 2 + 1] * up[i * 2];\n    return down[1];\n\
+    }\n"
   code: "#pragma once\n\n#include \"Polynomial/Polynomial.hpp\"\n\ntemplate<class\
     \ T>\nPoly<T> interpolate(const std::vector<T> &x, const std::vector<T> &y) {\
     \ // 1e5/928ms\n    const int m = (int)x.size();\n    std::vector<Poly<T>> up\
@@ -266,7 +269,7 @@ data:
   isVerificationFile: false
   path: Polynomial/interpolate.hpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-06-19 21:01:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp

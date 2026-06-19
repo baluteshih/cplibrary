@@ -16,9 +16,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+  - icon: ':heavy_check_mark:'
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,36 +31,8 @@ data:
     - https://judge.yosupo.jp/problem/product_of_polynomial_sequence
   bundledCode: "#line 1 \"test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/product_of_polynomial_sequence\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp\"\
     \n\n#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2 \"Polynomial/NTT.hpp\"\n\n\
     #line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
@@ -218,7 +190,7 @@ data:
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
-    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
+    \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return std::reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
@@ -269,36 +241,38 @@ data:
     \ (int i = m - 1; i > 0; --i) \n            up[i] = up[i * 2] * up[i * 2 + 1];\n\
     \        return up;\n    }\n    std::vector<T> Eval(const std::vector<T> &x) const\
     \ { // 1e5/696ms\n        auto up = _tree1(x); return _eval(x, up);\n    }\n \
-    \   std::pair<Poly, Poly> DivMod(const Poly &rhs) const { // rhs.back() != 0,\
-    \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
-    \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
-    \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
-    \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
-    \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
-    #line 5 \"test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin\
-    \ >> n;\n    vector<Poly_t> arr(n);\n    for (auto &poly : arr) {\n        int\
-    \ k;\n        cin >> k;\n        poly.resize(k + 1);\n        for (auto &i : poly)\n\
-    \            cin >> i;\n    }\n    arr.push_back(Poly_t(1, 1));\n    ++n;\n  \
-    \  auto dq = [&](auto _dq, int l, int r) -> Poly_t {\n        if (l == r) return\
-    \ arr[l];\n        int mid = (l + r) >> 1;\n        return _dq(_dq, l, mid) *\
-    \ _dq(_dq, mid + 1, r);\n    };\n\n    auto res = dq(dq, 0, n - 1);\n    for (int\
-    \ i = 0; i < SZ(res); ++i)\n        cout << res[i] << \" \\n\"[i + 1 == SZ(res)];\
-    \ \n}\n"
+    \   T eval(T x) const {\n        T base = 1, res = 0;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            res += base * (*this)[i];\n            base *=\
+    \ x;\n        }\n        return res;\n    }\n    std::pair<Poly, Poly> DivMod(const\
+    \ Poly &rhs) const { // rhs.back() != 0, 5e5/330ms\n        if (n() < rhs.n())\
+    \ return {{0}, *this};\n        const int m = n() - rhs.n() + 1;\n        Poly\
+    \ X(rhs); X.irev().isz(m);\n        Poly Y(*this); Y.irev().isz(m);\n        Poly\
+    \ Q = (Y * X.Inv()).isz(m).irev();\n        X = rhs * Q, Y = *this;\n        return\
+    \ {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};\n    }\n    // should be include\
+    \ additionally\n    Poly Sqrt() const;\n    bool has_sqrt() const;\n    Poly&\
+    \ shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n#line 5 \"test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp\"\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n;\n    std::cin >> n;\n    std::vector<Poly_t> arr(n);\n    for (auto &poly\
+    \ : arr) {\n        int k;\n        std::cin >> k;\n        poly.resize(k + 1);\n\
+    \        for (auto &i : poly)\n            std::cin >> i;\n    }\n    arr.push_back(Poly_t(1,\
+    \ 1));\n    ++n;\n    auto dq = [&](auto _dq, int l, int r) -> Poly_t {\n    \
+    \    if (l == r) return arr[l];\n        int mid = (l + r) >> 1;\n        return\
+    \ _dq(_dq, l, mid) * _dq(_dq, mid + 1, r);\n    };\n\n    auto res = dq(dq, 0,\
+    \ n - 1);\n    for (int i = 0; i < int(res.size()); ++i)\n        std::cout <<\
+    \ res[i] << \" \\n\"[i + 1 == int(res.size())]; \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/product_of_polynomial_sequence\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Polynomial/Polynomial.hpp\"\n\n\
-    int main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >>\
-    \ n;\n    vector<Poly_t> arr(n);\n    for (auto &poly : arr) {\n        int k;\n\
-    \        cin >> k;\n        poly.resize(k + 1);\n        for (auto &i : poly)\n\
-    \            cin >> i;\n    }\n    arr.push_back(Poly_t(1, 1));\n    ++n;\n  \
-    \  auto dq = [&](auto _dq, int l, int r) -> Poly_t {\n        if (l == r) return\
-    \ arr[l];\n        int mid = (l + r) >> 1;\n        return _dq(_dq, l, mid) *\
-    \ _dq(_dq, mid + 1, r);\n    };\n\n    auto res = dq(dq, 0, n - 1);\n    for (int\
-    \ i = 0; i < SZ(res); ++i)\n        cout << res[i] << \" \\n\"[i + 1 == SZ(res)];\
-    \ \n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Polynomial/Polynomial.hpp\"\n\nint\
+    \ main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n;\n \
+    \   std::cin >> n;\n    std::vector<Poly_t> arr(n);\n    for (auto &poly : arr)\
+    \ {\n        int k;\n        std::cin >> k;\n        poly.resize(k + 1);\n   \
+    \     for (auto &i : poly)\n            std::cin >> i;\n    }\n    arr.push_back(Poly_t(1,\
+    \ 1));\n    ++n;\n    auto dq = [&](auto _dq, int l, int r) -> Poly_t {\n    \
+    \    if (l == r) return arr[l];\n        int mid = (l + r) >> 1;\n        return\
+    \ _dq(_dq, l, mid) * _dq(_dq, mid + 1, r);\n    };\n\n    auto res = dq(dq, 0,\
+    \ n - 1);\n    for (int i = 0; i < int(res.size()); ++i)\n        std::cout <<\
+    \ res[i] << \" \\n\"[i + 1 == int(res.size())]; \n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Polynomial/Polynomial.hpp
   - Polynomial/NTT.hpp
   - Numeric/Modint.hpp
@@ -307,7 +281,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-06-19 21:01:17+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
