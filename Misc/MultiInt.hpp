@@ -42,7 +42,7 @@ struct MultiInt {
     std::strong_ordering operator<=>(const MultiInt& o) const requires requires { v <=> o.v; } {
         return v <=> o.v;
     }
-    friend ostream& operator<<(ostream& os, const MultiInt& obj) {
+    friend std::ostream& operator<<(std::ostream& os, const MultiInt& obj) {
         std::apply([&os](const auto&... args) {
             bool first = true;
             ((os << (first ? "" : " ") << args, first = false), ...);

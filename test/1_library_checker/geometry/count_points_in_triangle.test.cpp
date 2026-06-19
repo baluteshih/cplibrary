@@ -1,26 +1,26 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/count_points_in_triangle"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Geometry/PointInAngle.hpp"
 
-using Point = Pt<ll>;
+using Point = Pt<long long>;
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, m, q;
-    cin >> n;
-    vector<Point> arr(n);
+    std::cin >> n;
+    std::vector<Point> arr(n);
     for (auto &p : arr)
-        cin >> p;
-    cin >> m;
-    vector<Point> extra(m);
+        std::cin >> p;
+    std::cin >> m;
+    std::vector<Point> extra(m);
     for (auto &p : extra)
-        cin >> p;
-    PointInAngle<int, Point> ds(arr, vector<int>(n, 0), extra, vector<int>(m, 1));
-    cin >> q;
+        std::cin >> p;
+    PointInAngle<int, Point> ds(arr, std::vector<int>(n, 0), extra, std::vector<int>(m, 1));
+    std::cin >> q;
     while (q--) {
         int x, y, z;
-        cin >> x >> y >> z;
-        cout << ds.calc_tri(x, y, z) << "\n";
+        std::cin >> x >> y >> z;
+        std::cout << ds.calc_tri(x, y, z) << "\n";
     }
 }

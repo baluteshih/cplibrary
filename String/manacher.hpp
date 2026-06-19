@@ -1,6 +1,6 @@
 #pragma once
 
-std::vector<int> manacher(const string &tmp) {
+std::vector<int> manacher(const std::string &tmp) {
     std::string s = "%";
     int l = 0, r = 0;
     for (char c : tmp) s.push_back(c), s.push_back('%');

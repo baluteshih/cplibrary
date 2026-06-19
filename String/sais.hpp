@@ -23,7 +23,7 @@ struct Suffix {
     }
     Suffix(const auto &_s) : Suffix(_s, (int)_s.size()) {}
     static auto sais(const auto &s) {
-        const int n = SZ(s), z = std::ranges::max(s) + 1;
+        const int n = s.size(), z = std::ranges::max(s) + 1;
         if (n == 1) return std::vector{0};
         std::vector<int> c(z); for (int x : s) ++c[x];
         std::partial_sum(c.begin(), c.end(), c.begin());
@@ -49,7 +49,7 @@ struct Suffix {
         std::vector<int> ns(lms.size());
         for (int j = -1, nz = 0; int i : sa | is_lms) {
             if (j >= 0) {
-                int len = min({n - i, n - j, lms[q[i] + 1] - i});
+                int len = std::min({n - i, n - j, lms[q[i] + 1] - i});
                 ns[q[i]] = nz += std::lexicographical_compare(std::begin(s) + j, std::begin(s) + j + len, std::begin(s) + i, std::begin(s) + i + len);
             }
             j = i;

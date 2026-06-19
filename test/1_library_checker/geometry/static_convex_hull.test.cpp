@@ -1,26 +1,26 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_convex_hull"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Geometry/convex.hpp"
 
-using Point = Pt<ll>;
+using Point = Pt<long long>;
 
 void solve() {
     int n;
-    cin >> n;
-    vector<Point> dots(n);
+    std::cin >> n;
+    std::vector<Point> dots(n);
     for (auto &p : dots)
-        cin >> p;
+        std::cin >> p;
     auto hull = convexHull(dots);
-    cout << hull.size() << "\n";
+    std::cout << hull.size() << "\n";
     for (auto p : hull)
-        cout << p << "\n";
+        std::cout << p << "\n";
 }
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int t;
-    cin >> t;
+    std::cin >> t;
     while (t--) {
         solve();
     }

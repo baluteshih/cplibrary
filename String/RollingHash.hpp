@@ -75,7 +75,7 @@ struct RollingHash {
         if (l == 0) return prefix_sum[r - 1];
         return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);
     }
-    friend ostream& operator<<(ostream& os, const RollingHash& v) {
+    friend std::ostream& operator<<(std::ostream& os, const RollingHash& v) {
         os << v.sz << " | " << v.val; 
         return os;
     }

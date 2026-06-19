@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "String/sais.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
-    string s;
-    cin >> s;
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
+    std::string s;
+    std::cin >> s;
     auto suffix = Suffix(s);
-    for (int i = 0; i < SZ(s); ++i)
-        cout << suffix.sa[i] << " \n"[i + 1 == SZ(s)];
+    for (int i = 0; i < int(s.size()); ++i)
+        std::cout << suffix.sa[i] << " \n"[i + 1 == int(s.size())];
 }

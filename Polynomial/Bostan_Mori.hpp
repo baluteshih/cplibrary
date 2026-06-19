@@ -3,7 +3,7 @@
 #include "Polynomial/Polynomial.hpp"
 
 template<class T>
-T Bostan_Mori(const Poly<T> &f, const Poly<T> &g, ll k) { // [f(x)/g(x)][x^k]
+T Bostan_Mori(const Poly<T> &f, const Poly<T> &g, long long k) { // [f(x)/g(x)][x^k]
     assert(f.size() + 1 <= g.size());
     Poly<T> F(f);
     Poly<T> G(g);

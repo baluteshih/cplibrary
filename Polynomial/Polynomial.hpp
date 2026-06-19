@@ -13,7 +13,7 @@ class Poly : public std::vector<T> {
     }
 public:
     Poly(const Poly &p, int m) : std::vector<T>(m) {
-        std::copy_n(p.data(), min(p.n(), m), this->data());
+        std::copy_n(p.data(), std::min(p.n(), m), this->data());
     }
     Poly(const std::vector<T> &v) : std::vector<T>(move(v)) {}
     Poly& irev() { return reverse(this->data(), this->data() + n()), *this; }
@@ -75,7 +75,7 @@ public:
         Poly ret(n() - 1);
         for (int i = 0; i < ret.n(); ++i)
             ret[i] = (i + 1) * (*this)[i + 1];
-        return ret.isz(max(1, ret.n()));
+        return ret.isz(std::max(1, ret.n()));
     }
     Poly Sx() const {
         Poly ret(n() + 1);
@@ -93,10 +93,10 @@ public:
         return (X * (*this - Y)).isz(n());
     }
     // M := P(P - 1). If k >= M, k := k % M + M, 5e5/1195ms
-    Poly Pow(ll k) const {
+    Poly Pow(long long k) const {
         int nz = 0;
         while (nz < n() && (*this)[nz] == 0) ++nz;
-        if (nz * min(k, (ll)n()) >= n()) return Poly(n());
+        if (nz * std::min(k, (long long)n()) >= n()) return Poly(n());
         if (!k) return Poly(Poly {1}, n());
         Poly X(this->data() + nz, this->data() + nz + n() - nz * k);
         return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();
@@ -135,7 +135,7 @@ public:
         Poly Y(*this); Y.irev().isz(m);
         Poly Q = (Y * X.Inv()).isz(m).irev();
         X = rhs * Q, Y = *this;
-        return {Q, (Y - X).isz(max(1, rhs.n() - 1))};
+        return {Q, (Y - X).isz(std::max(1, rhs.n() - 1))};
     }
     // should be include additionally
     Poly Sqrt() const;

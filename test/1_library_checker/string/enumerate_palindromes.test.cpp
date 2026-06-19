@@ -1,16 +1,16 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
-#include "String/manacher.hpp"
+#include "string/manacher.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
-    string s;
-    cin >> s;
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
+    std::string s;
+    std::cin >> s;
     auto z = manacher(s);
-    for (int i = 0; i < SZ(s); ++i) {
-        cout << get_radius_odd(z, i) * 2 - 1;
-        if (i + 1 < SZ(s)) cout << " " << get_radius_even(z, i) * 2 << " ";
-        else cout << "\n";
+    for (int i = 0; i < int(s.size()); ++i) {
+        std::cout << get_radius_odd(z, i) * 2 - 1;
+        if (i + 1 < int(s.size())) std::cout << " " << get_radius_even(z, i) * 2 << " ";
+        else std::cout << "\n";
     }
 }

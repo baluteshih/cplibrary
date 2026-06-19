@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "String/z_algo.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
-    string s;
-    cin >> s;
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
+    std::string s;
+    std::cin >> s;
     auto z = make_z(s);
-    for (int i = 0; i < SZ(s); ++i)
-        cout << z[i] << " \n"[i + 1 == SZ(s)];
+    for (int i = 0; i < int(s.size()); ++i)
+        std::cout << z[i] << " \n"[i + 1 == int(s.size())];
 }
