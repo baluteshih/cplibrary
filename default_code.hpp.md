@@ -7,20 +7,8 @@ data:
     path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
-    title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
-    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
     title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/data_structure/ordered_set.test.cpp
-    title: test/1_library_checker/data_structure/ordered_set.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-    title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
@@ -94,9 +82,6 @@ data:
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,15 +90,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/geometry/furthest_pair.test.cpp
-    title: test/1_library_checker/geometry/furthest_pair.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-    title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/graph/shortest_path.test.cpp
-    title: test/1_library_checker/graph/shortest_path.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
@@ -324,7 +300,6 @@ data:
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-  - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/line_add_get_min.test.cpp
@@ -337,30 +312,23 @@ data:
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
-  - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
   - test/1_library_checker/data_structure/predecessor_problem.test.cpp
   - test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
-  - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
   - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-  - test/1_library_checker/graph/shortest_path.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp

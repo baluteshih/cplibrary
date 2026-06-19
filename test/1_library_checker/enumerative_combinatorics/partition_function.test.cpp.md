@@ -10,10 +10,10 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   - icon: ':heavy_check_mark:'
@@ -285,16 +285,16 @@ data:
     \ * (3 * x - 1) / 2;\n        if (d > n) continue;\n        f[d] += (x % 2 ==\
     \ 0 ? 1 : -1);\n    }\n    auto res = f.Inv();\n    return std::vector<T>(res.begin(),\
     \ res.end());\n}\n#line 6 \"test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp\"\
-    \n\nusing mint = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n;\n    cin >> n;\n    auto res = partition_number<mint>(n);\n\
-    \    for (int i = 0; i <= n; ++i)\n        cout << res[i] << \" \\n\"[i == n];\n\
-    }\n"
+    \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    auto res = partition_number<mint>(n);\n\
+    \    for (int i = 0; i <= n; ++i)\n        std::cout << res[i] << \" \\n\"[i ==\
+    \ n];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\n\
     #include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     Numbers/partition_number.hpp\"\n\nusing mint = modint998244353;\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n   \
-    \ auto res = partition_number<mint>(n);\n    for (int i = 0; i <= n; ++i)\n  \
-    \      cout << res[i] << \" \\n\"[i == n];\n}\n"
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n;\n    std::cin\
+    \ >> n;\n    auto res = partition_number<mint>(n);\n    for (int i = 0; i <= n;\
+    \ ++i)\n        std::cout << res[i] << \" \\n\"[i == n];\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/Modint.hpp
@@ -306,7 +306,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp

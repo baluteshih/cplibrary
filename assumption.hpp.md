@@ -40,11 +40,29 @@ data:
     path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+    title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/furthest_pair.test.cpp
+    title: test/1_library_checker/geometry/furthest_pair.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
     title: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
@@ -85,6 +103,12 @@ data:
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+    title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/shortest_path.test.cpp
+    title: test/1_library_checker/graph/shortest_path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
   - icon: ':heavy_check_mark:'
@@ -100,6 +124,9 @@ data:
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/string/enumerate_palindromes.test.cpp
+    title: test/1_library_checker/string/enumerate_palindromes.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
   - icon: ':heavy_check_mark:'
@@ -108,28 +135,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/suffixarray.test.cpp
     title: test/1_library_checker/string/suffixarray.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/zalgorithm.test.cpp
     title: test/1_library_checker/string/zalgorithm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/cartesian_tree.test.cpp
     title: test/1_library_checker/tree/cartesian_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - icon: ':x:'
@@ -268,17 +295,26 @@ data:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/zalgorithm.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp
+  - test/1_library_checker/string/enumerate_palindromes.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/graph/bipartitematching.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
+  - test/1_library_checker/graph/shortest_path.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/graph/biconnected_components.test.cpp
   - test/1_library_checker/graph/st_numbering.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp

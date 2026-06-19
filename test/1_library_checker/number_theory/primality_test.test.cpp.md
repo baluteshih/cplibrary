@@ -64,21 +64,23 @@ data:
     \ < 1122004669633ll) ? _base[1] :\n        (n < 3474749660383ll) ? _base[2] :\
     \ _base[3];\n    for (T b : base)\n        if (!_miller_rabin(b, n))\n       \
     \     return false;\n    return true;\n}\n#line 5 \"test/1_library_checker/number_theory/primality_test.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin\
-    \ >> q;\n    while (q--) {\n        ll n;\n        cin >> n;\n        if (miller_rabin(n))\
-    \ cout << \"Yes\\n\";\n        else cout << \"No\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ q;\n    std::cin >> q;\n    while (q--) {\n        long long n;\n        std::cin\
+    \ >> n;\n        if (miller_rabin(n)) std::cout << \"Yes\\n\";\n        else std::cout\
+    \ << \"No\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\n#include\
     \ \"default_code.hpp\"\n\n#include \"Numeric/miller_rabin.hpp\"\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin >> q;\n   \
-    \ while (q--) {\n        ll n;\n        cin >> n;\n        if (miller_rabin(n))\
-    \ cout << \"Yes\\n\";\n        else cout << \"No\\n\";\n    }\n}\n"
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int q;\n    std::cin\
+    \ >> q;\n    while (q--) {\n        long long n;\n        std::cin >> n;\n   \
+    \     if (miller_rabin(n)) std::cout << \"Yes\\n\";\n        else std::cout <<\
+    \ \"No\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/miller_rabin.hpp
   isVerificationFile: true
   path: test/1_library_checker/number_theory/primality_test.test.cpp
   requiredBy: []
-  timestamp: '2026-02-28 23:10:21+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/primality_test.test.cpp

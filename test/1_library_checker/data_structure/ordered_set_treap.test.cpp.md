@@ -11,8 +11,8 @@ data:
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,36 +25,7 @@ data:
     - https://judge.yosupo.jp/problem/ordered_set
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/ordered_set\"\n#line 2 \"\
-    default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef\
-    \ long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define\
-    \ X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(),\
-    \ v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream& os, const\
-    \ pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second << \")\"\
-    ;\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer = requires(T&\
-    \ a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\
+    assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\
     \n\n#line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
@@ -113,25 +84,25 @@ data:
     \ auto &v) requires (!hasKey || !hasValue) {\n            if constexpr (hasKey)\
     \ key = Key(v);\n            else org = val = Value(v);\n        }\n        node(const\
     \ auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v)\
-    \ {\n        }\n        friend ostream& operator<<(ostream& os, const node &v)\
-    \ {\n            if constexpr (hasKey && hasValue) os << \"{key = \" << v.key\
-    \ << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os\
-    \ << v.key;\n            else os << v.org;\n            return os;\n        }\n\
-    \        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \"\
-    ;\n            auto printnode = [&](std::string name, node* ptr) {\n         \
-    \       std::cerr << name << \": \";\n                if (ptr) std::cerr << *ptr;\n\
-    \                else std::cerr << \"null\";\n            };\n            printnode(\"\
-    l\", l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \"\
-    , \";\n            if constexpr (!persistent) printnode(\"f\", f);\n         \
-    \   cerr << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void split(node *source, node *&left, node\
-    \ *&right, const auto &condition) {\n        if (!source) return left = right\
-    \ = nullptr, void();\n        if constexpr (persistent) source = NodeAlloc::allocate(*source);\
-    \ \n        if constexpr (hasTag || Rev) source->down();\n        if (condition(source))\
-    \ {\n            left = source;\n            split(source->r, left->r, right,\
-    \ condition);\n            left->up();\n        }\n        else {\n          \
-    \  right = source;\n            split(source->l, left, right->l, condition);\n\
-    \            right->up();\n        }\n    }\n    static void split_value(node\
+    \ {\n        }\n        friend std::ostream& operator<<(std::ostream& os, const\
+    \ node &v) {\n            if constexpr (hasKey && hasValue) os << \"{key = \"\
+    \ << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey)\
+    \ os << v.key;\n            else os << v.org;\n            return os;\n      \
+    \  }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
+    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
+    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
+    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
+    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
+    \ r), std::cerr << \", \";\n            if constexpr (!persistent) printnode(\"\
+    f\", f);\n            std::cerr << \"\\e[0m\\n\";\n        }\n    };\n    using\
+    \ NodeAlloc = Allocator<node>;\n    node *root = nullptr;\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
+    \ return left = right = nullptr, void();\n        if constexpr (persistent) source\
+    \ = NodeAlloc::allocate(*source); \n        if constexpr (hasTag || Rev) source->down();\n\
+    \        if (condition(source)) {\n            left = source;\n            split(source->r,\
+    \ left->r, right, condition);\n            left->up();\n        }\n        else\
+    \ {\n            right = source;\n            split(source->l, left, right->l,\
+    \ condition);\n            right->up();\n        }\n    }\n    static void split_value(node\
     \ *source, node *&left, node *&right, const auto &left_product, const auto &condition)\
     \ requires (hasValue) {\n        if (!source) return left = right = nullptr, void();\n\
     \        if constexpr (persistent) source = NodeAlloc::allocate(*source); \n \
@@ -312,55 +283,57 @@ data:
     \ requires (hasSize) {\n        return Iterator(find_value([&k](const Value &v)\
     \ {\n            return v.size() <= k;\n        }), this);\n    }\n};\n#line 5\
     \ \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\n\nusing\
-    \ treap = Treap<int>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, q;\n    cin >> n >> q;\n    treap tree;\n\n    auto insert = [&](int\
-    \ x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty() &&\
-    \ tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n \
-    \       return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n \
-    \   \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
+    \ treap = Treap<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\n    auto insert =\
+    \ [&](int x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty()\
+    \ && tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n\
+    \        return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n\
+    \    \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
     \        if (tree.empty() || tree.begin()->key != x)\n            return tree.left_merge(lft),\
     \ false;\n        tree.split_size(1).destruct();\n        return tree.left_merge(lft),\
-    \ true;\n    };\n\n    while (n--) {\n        int x;\n        cin >> x;\n    \
-    \    insert(x);\n    }\n    while (q--) {\n        int op, x;\n        cin >>\
-    \ op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
-    \        else if (op == 2) {\n            if (tree.size() < x) cout << \"-1\\\
-    n\";\n            else cout << tree.kth(x - 1)->key << \"\\n\";\n        }\n \
-    \       else if (op == 3) {\n            cout << tree.prefix_product_key_leq(x)\
+    \ true;\n    };\n\n    while (n--) {\n        int x;\n        std::cin >> x;\n\
+    \        insert(x);\n    }\n    while (q--) {\n        int op, x;\n        std::cin\
+    \ >> op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
+    \        else if (op == 2) {\n            if (tree.size() < x) std::cout << \"\
+    -1\\n\";\n            else std::cout << tree.kth(x - 1)->key << \"\\n\";\n   \
+    \     }\n        else if (op == 3) {\n            std::cout << tree.prefix_product_key_leq(x)\
     \ << \"\\n\";\n        }\n        else if (op == 4) {\n            auto it = tree.upper_bound(x);\n\
-    \            if (it == tree.begin()) cout << \"-1\\n\";\n            else cout\
-    \ << prev(it)->key << \"\\n\";\n        }\n        else {\n            auto it\
-    \ = tree.lower_bound(x);\n            if (it == tree.end()) cout << \"-1\\n\"\
-    ;\n            else cout << it->key << \"\\n\";\n        }\n    }\n}\n"
+    \            if (it == tree.begin()) std::cout << \"-1\\n\";\n            else\
+    \ std::cout << std::prev(it)->key << \"\\n\";\n        }\n        else {\n   \
+    \         auto it = tree.lower_bound(x);\n            if (it == tree.end()) std::cout\
+    \ << \"-1\\n\";\n            else std::cout << it->key << \"\\n\";\n        }\n\
+    \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/ordered_set\"\n#include\
-    \ \"default_code.hpp\"\n\n#include \"DataStructure/Treap.hpp\"\n\nusing treap\
-    \ = Treap<int>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n  \
-    \  int n, q;\n    cin >> n >> q;\n    treap tree;\n\n    auto insert = [&](int\
-    \ x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty() &&\
-    \ tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n \
-    \       return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n \
-    \   \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
+    \ \"assumption.hpp\"\n\n#include \"DataStructure/Treap.hpp\"\n\nusing treap =\
+    \ Treap<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\n    auto insert =\
+    \ [&](int x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty()\
+    \ && tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n\
+    \        return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n\
+    \    \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
     \        if (tree.empty() || tree.begin()->key != x)\n            return tree.left_merge(lft),\
     \ false;\n        tree.split_size(1).destruct();\n        return tree.left_merge(lft),\
-    \ true;\n    };\n\n    while (n--) {\n        int x;\n        cin >> x;\n    \
-    \    insert(x);\n    }\n    while (q--) {\n        int op, x;\n        cin >>\
-    \ op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
-    \        else if (op == 2) {\n            if (tree.size() < x) cout << \"-1\\\
-    n\";\n            else cout << tree.kth(x - 1)->key << \"\\n\";\n        }\n \
-    \       else if (op == 3) {\n            cout << tree.prefix_product_key_leq(x)\
+    \ true;\n    };\n\n    while (n--) {\n        int x;\n        std::cin >> x;\n\
+    \        insert(x);\n    }\n    while (q--) {\n        int op, x;\n        std::cin\
+    \ >> op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
+    \        else if (op == 2) {\n            if (tree.size() < x) std::cout << \"\
+    -1\\n\";\n            else std::cout << tree.kth(x - 1)->key << \"\\n\";\n   \
+    \     }\n        else if (op == 3) {\n            std::cout << tree.prefix_product_key_leq(x)\
     \ << \"\\n\";\n        }\n        else if (op == 4) {\n            auto it = tree.upper_bound(x);\n\
-    \            if (it == tree.begin()) cout << \"-1\\n\";\n            else cout\
-    \ << prev(it)->key << \"\\n\";\n        }\n        else {\n            auto it\
-    \ = tree.lower_bound(x);\n            if (it == tree.end()) cout << \"-1\\n\"\
-    ;\n            else cout << it->key << \"\\n\";\n        }\n    }\n}\n"
+    \            if (it == tree.begin()) std::cout << \"-1\\n\";\n            else\
+    \ std::cout << std::prev(it)->key << \"\\n\";\n        }\n        else {\n   \
+    \         auto it = tree.lower_bound(x);\n            if (it == tree.end()) std::cout\
+    \ << \"-1\\n\";\n            else std::cout << it->key << \"\\n\";\n        }\n\
+    \    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - DataStructure/Treap.hpp
   - DataStructure/DefaultAllocator.hpp
   - Algebra/size_value.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 14:18:54+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/ordered_set_treap.test.cpp

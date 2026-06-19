@@ -119,37 +119,37 @@ data:
     \ {\n    int N;\n    void init() {\n        for (int i = 1; i <= N; ++i)\n   \
     \         fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
     \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    vector<T> fac, ifac;\n    Combination(int n):\
-    \ N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
+    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
+    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
     \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
     \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
     \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
     \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
     \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nvector<T> power(T base, int n) {\n    vector<T>\
+    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
     \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nvector<T> ipower(T base, int\
-    \ n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nvector<T> linear_inverse(int\
-    \ n) {\n    vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i\
-    \ = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n   \
-    \ }\n    return res;\n}\n}\n#line 2 \"Numeric/DynamicModint.hpp\"\n\n// Reference:\
-    \ Atcoder Library https://github.com/atcoder/ac-library\n#line 2 \"Numeric/barrett.hpp\"\
-    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
-    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nstruct barrett {\n    unsigned int\
-    \ _m;\n    unsigned long long im;\n    explicit barrett(unsigned int m) : _m(m),\
-    \ im((unsigned long long)(-1) / m + 1) {}\n    unsigned int umod() const { return\
-    \ _m; }\n    unsigned int modulo(unsigned long long z) const {\n        if (_m\
-    \ == 1) return 0;\n#ifdef _MSC_VER\n        unsigned long long x;\n        _umul128(z,\
-    \ im, &x);\n#else\n        unsigned long long x = (unsigned long long)(((unsigned\
-    \ __int128)(z)*im) >> 64);\n#endif\n        unsigned long long y = x * _m;\n \
-    \       return (z - y + (z < y ? _m : 0));\n    }\n    unsigned int mul(unsigned\
-    \ int a, unsigned int b) const {\n        return modulo((unsigned long long)a\
-    \ * b);\n    }\n    unsigned long long floor(unsigned long long z) const {\n \
-    \       if (_m == 1) return z;\n        unsigned long long x = (unsigned long\
-    \ long)(((unsigned __int128)(z)*im) >> 64);\n        unsigned long long y = x\
-    \ * _m;\n        return (z < y ? x - 1 : x);\n    }\n    std::pair<unsigned long\
-    \ long, unsigned int> divmod(unsigned long long z) const {\n        if (_m ==\
-    \ 1) return {z, 0};\n        unsigned long long x = (unsigned long long)(((unsigned\
+    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
+    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
+    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
+    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
+    \ / i); \n    }\n    return res;\n}\n}\n#line 2 \"Numeric/DynamicModint.hpp\"\n\
+    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line 2\
+    \ \"Numeric/barrett.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nstruct barrett {\n    unsigned\
+    \ int _m;\n    unsigned long long im;\n    explicit barrett(unsigned int m) :\
+    \ _m(m), im((unsigned long long)(-1) / m + 1) {}\n    unsigned int umod() const\
+    \ { return _m; }\n    unsigned int modulo(unsigned long long z) const {\n    \
+    \    if (_m == 1) return 0;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x = (unsigned\
+    \ long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n        unsigned long\
+    \ long y = x * _m;\n        return (z - y + (z < y ? _m : 0));\n    }\n    unsigned\
+    \ int mul(unsigned int a, unsigned int b) const {\n        return modulo((unsigned\
+    \ long long)a * b);\n    }\n    unsigned long long floor(unsigned long long z)\
+    \ const {\n        if (_m == 1) return z;\n        unsigned long long x = (unsigned\
+    \ long long)(((unsigned __int128)(z)*im) >> 64);\n        unsigned long long y\
+    \ = x * _m;\n        return (z < y ? x - 1 : x);\n    }\n    std::pair<unsigned\
+    \ long long, unsigned int> divmod(unsigned long long z) const {\n        if (_m\
+    \ == 1) return {z, 0};\n        unsigned long long x = (unsigned long long)(((unsigned\
     \ __int128)(z)*im) >> 64);\n        unsigned long long y = x * _m;\n        if\
     \ (z < y) return {x - 1, z - y + _m};\n        return {x, z - y};\n    }\n};\n\
     #line 6 \"Numeric/DynamicModint.hpp\"\n\ntemplate <int id> struct dynamic_modint\
@@ -198,17 +198,18 @@ data:
     \ { return bt.umod(); }\n};\ntemplate <int id> barrett dynamic_modint<id>::bt(998244353);\n\
     \nusing modint = dynamic_modint<-1>;\n\n/*\nmodint::set_mod(p);\n*/\n#line 6 \"\
     test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int t, m;\n  \
-    \  cin >> t >> m;\n    modint v;\n    v.set_mod(m);\n    Combination<modint> comb(min(10000000,\
-    \ m - 1), v);\n    while (t--) {\n        int n, k;\n        cin >> n >> k;\n\
-    \        cout << comb.C(n, k) << \"\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ t, m;\n    std::cin >> t >> m;\n    modint v;\n    v.set_mod(m);\n    Combination<modint>\
+    \ comb(min(10000000, m - 1), v);\n    while (t--) {\n        int n, k;\n     \
+    \   std::cin >> n >> k;\n        std::cout << comb.C(n, k) << \"\\n\";\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
     \n#include \"default_code.hpp\"\n\n#include \"Numeric/Combination.hpp\"\n#include\
-    \ \"Numeric/DynamicModint.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int t, m;\n    cin >> t >> m;\n    modint v;\n    v.set_mod(m);\n\
-    \    Combination<modint> comb(min(10000000, m - 1), v);\n    while (t--) {\n \
-    \       int n, k;\n        cin >> n >> k;\n        cout << comb.C(n, k) << \"\\\
-    n\";\n    }\n}\n"
+    \ \"Numeric/DynamicModint.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int t, m;\n    std::cin >> t >> m;\n    modint v;\n  \
+    \  v.set_mod(m);\n    Combination<modint> comb(min(10000000, m - 1), v);\n   \
+    \ while (t--) {\n        int n, k;\n        std::cin >> n >> k;\n        std::cout\
+    \ << comb.C(n, k) << \"\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/Combination.hpp
@@ -218,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

@@ -243,14 +243,16 @@ data:
     \ 0;\n        for (int s = 0; s < int(crt_coef.size()); ++s)\n            ans\
     \ = bt.modulo(ans + (unsigned long long)(BPP[s].C(n, k)) * crt_coef[s]);\n   \
     \     return ans;\n    }\n};\n#line 5 \"test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int t, m;\n  \
-    \  cin >> t >> m;\n    Binomial binom(m);\n    while (t--) {\n        ll n, k;\n\
-    \        cin >> n >> k;\n        cout << binom.C(n, k) << \"\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ t, m;\n    std::cin >> t >> m;\n    Binomial binom(m);\n    while (t--) {\n\
+    \        ll n, k;\n        std::cin >> n >> k;\n        std::cout << binom.C(n,\
+    \ k) << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
     #include \"default_code.hpp\"\n\n#include \"Numeric/Binomial.hpp\"\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int t, m;\n    cin >> t >>\
-    \ m;\n    Binomial binom(m);\n    while (t--) {\n        ll n, k;\n        cin\
-    \ >> n >> k;\n        cout << binom.C(n, k) << \"\\n\";\n    }\n}\n"
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t, m;\n    std::cin\
+    \ >> t >> m;\n    Binomial binom(m);\n    while (t--) {\n        ll n, k;\n  \
+    \      std::cin >> n >> k;\n        std::cout << binom.C(n, k) << \"\\n\";\n \
+    \   }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/Binomial.hpp
@@ -264,7 +266,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp

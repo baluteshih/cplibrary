@@ -17,8 +17,8 @@ data:
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -31,36 +31,8 @@ data:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -222,25 +194,25 @@ data:
     \ auto &v) requires (!hasKey || !hasValue) {\n            if constexpr (hasKey)\
     \ key = Key(v);\n            else org = val = Value(v);\n        }\n        node(const\
     \ auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v)\
-    \ {\n        }\n        friend ostream& operator<<(ostream& os, const node &v)\
-    \ {\n            if constexpr (hasKey && hasValue) os << \"{key = \" << v.key\
-    \ << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os\
-    \ << v.key;\n            else os << v.org;\n            return os;\n        }\n\
-    \        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \"\
-    ;\n            auto printnode = [&](std::string name, node* ptr) {\n         \
-    \       std::cerr << name << \": \";\n                if (ptr) std::cerr << *ptr;\n\
-    \                else std::cerr << \"null\";\n            };\n            printnode(\"\
-    l\", l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \"\
-    , \";\n            if constexpr (!persistent) printnode(\"f\", f);\n         \
-    \   cerr << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void split(node *source, node *&left, node\
-    \ *&right, const auto &condition) {\n        if (!source) return left = right\
-    \ = nullptr, void();\n        if constexpr (persistent) source = NodeAlloc::allocate(*source);\
-    \ \n        if constexpr (hasTag || Rev) source->down();\n        if (condition(source))\
-    \ {\n            left = source;\n            split(source->r, left->r, right,\
-    \ condition);\n            left->up();\n        }\n        else {\n          \
-    \  right = source;\n            split(source->l, left, right->l, condition);\n\
-    \            right->up();\n        }\n    }\n    static void split_value(node\
+    \ {\n        }\n        friend std::ostream& operator<<(std::ostream& os, const\
+    \ node &v) {\n            if constexpr (hasKey && hasValue) os << \"{key = \"\
+    \ << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey)\
+    \ os << v.key;\n            else os << v.org;\n            return os;\n      \
+    \  }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
+    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
+    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
+    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
+    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
+    \ r), std::cerr << \", \";\n            if constexpr (!persistent) printnode(\"\
+    f\", f);\n            std::cerr << \"\\e[0m\\n\";\n        }\n    };\n    using\
+    \ NodeAlloc = Allocator<node>;\n    node *root = nullptr;\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
+    \ return left = right = nullptr, void();\n        if constexpr (persistent) source\
+    \ = NodeAlloc::allocate(*source); \n        if constexpr (hasTag || Rev) source->down();\n\
+    \        if (condition(source)) {\n            left = source;\n            split(source->r,\
+    \ left->r, right, condition);\n            left->up();\n        }\n        else\
+    \ {\n            right = source;\n            split(source->l, left, right->l,\
+    \ condition);\n            right->up();\n        }\n    }\n    static void split_value(node\
     \ *source, node *&left, node *&right, const auto &left_product, const auto &condition)\
     \ requires (hasValue) {\n        if (!source) return left = right = nullptr, void();\n\
     \        if constexpr (persistent) source = NodeAlloc::allocate(*source); \n \
@@ -429,26 +401,26 @@ data:
     \ + rhs.val, sz + rhs.sz);\n    }\n    Value operator+(const Tag &tag) const {\n\
     \        return Value(tag.a * val + tag.b * sz, sz);\n    }\n    int size() const\
     \ {\n        return sz; \n    }\n    static Value get(int l, int r) {\n      \
-    \  return Value(0, r - l);\n    }\n    friend ostream& operator<<(ostream& os,\
-    \ const Value &v) {\n        os << v.val;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, Value &v) {\n        is >> v.val;\n       \
-    \ v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void, Value,\
-    \ Tag, true>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int\
-    \ n, q;\n    cin >> n >> q;\n    treap tree;\n    for (int i = 0; i < n; ++i)\
-    \ {\n        Value v;\n        cin >> v;\n        tree.push_back(v);\n    }\n\
-    \    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 0) {\n\
-    \            int i;\n            Value v;\n            cin >> i >> v;\n      \
-    \      auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
-    \        }\n        else if (t == 1) {\n            int i;\n            cin >>\
-    \ i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else if\
-    \ (t == 2) {\n            int l, r;\n            cin >> l >> r;\n            tree.range_reverse(l,\
-    \ r);\n        }\n        else if (t == 3) {\n            int l, r;\n        \
-    \    Tag tag;\n            cin >> l >> r >> tag.a >> tag.b;\n            tree.range_transform(l,\
-    \ r, tag);\n        }\n        else {\n            int l, r;\n            cin\
-    \ >> l >> r;\n            cout << tree.range_prod(l, r) << \"\\n\";\n        }\n\
-    \    }\n}\n"
+    \  return Value(0, r - l);\n    }\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const Value &v) {\n        os << v.val;\n        return os;\n    }\n   \
+    \ friend std::istream& operator>>(std::istream& is, Value &v) {\n        is >>\
+    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void,\
+    \ Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n    for (int i = 0;\
+    \ i < n; ++i) {\n        Value v;\n        std::cin >> v;\n        tree.push_back(v);\n\
+    \    }\n    while (q--) {\n        int t;\n        std::cin >> t;\n        if\
+    \ (t == 0) {\n            int i;\n            Value v;\n            std::cin >>\
+    \ i >> v;\n            auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
+    \        }\n        else if (t == 1) {\n            int i;\n            std::cin\
+    \ >> i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else\
+    \ if (t == 2) {\n            int l, r;\n            std::cin >> l >> r;\n    \
+    \        tree.range_reverse(l, r);\n        }\n        else if (t == 3) {\n  \
+    \          int l, r;\n            Tag tag;\n            std::cin >> l >> r >>\
+    \ tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n        }\n \
+    \       else {\n            int l, r;\n            std::cin >> l >> r;\n     \
+    \       std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     DataStructure/Treap.hpp\"\n\nusing mint = modint998244353;\n\nstruct Tag {\n \
     \   mint a, b;\n    Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag operator+(const\
     \ Tag &rhs) {\n        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\n\
@@ -457,26 +429,26 @@ data:
     \ Value(val + rhs.val, sz + rhs.sz);\n    }\n    Value operator+(const Tag &tag)\
     \ const {\n        return Value(tag.a * val + tag.b * sz, sz);\n    }\n    int\
     \ size() const {\n        return sz; \n    }\n    static Value get(int l, int\
-    \ r) {\n        return Value(0, r - l);\n    }\n    friend ostream& operator<<(ostream&\
+    \ r) {\n        return Value(0, r - l);\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const Value &v) {\n        os << v.val;\n        return os;\n    }\n   \
-    \ friend istream& operator>>(istream& is, Value &v) {\n        is >> v.val;\n\
-    \        v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void,\
-    \ Value, Tag, true>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, q;\n    cin >> n >> q;\n    treap tree;\n    for (int i = 0; i < n;\
-    \ ++i) {\n        Value v;\n        cin >> v;\n        tree.push_back(v);\n  \
-    \  }\n    while (q--) {\n        int t;\n        cin >> t;\n        if (t == 0)\
-    \ {\n            int i;\n            Value v;\n            cin >> i >> v;\n  \
-    \          auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
-    \        }\n        else if (t == 1) {\n            int i;\n            cin >>\
-    \ i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else if\
-    \ (t == 2) {\n            int l, r;\n            cin >> l >> r;\n            tree.range_reverse(l,\
-    \ r);\n        }\n        else if (t == 3) {\n            int l, r;\n        \
-    \    Tag tag;\n            cin >> l >> r >> tag.a >> tag.b;\n            tree.range_transform(l,\
-    \ r, tag);\n        }\n        else {\n            int l, r;\n            cin\
-    \ >> l >> r;\n            cout << tree.range_prod(l, r) << \"\\n\";\n        }\n\
-    \    }\n}\n"
+    \ friend std::istream& operator>>(std::istream& is, Value &v) {\n        is >>\
+    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void,\
+    \ Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n    for (int i = 0;\
+    \ i < n; ++i) {\n        Value v;\n        std::cin >> v;\n        tree.push_back(v);\n\
+    \    }\n    while (q--) {\n        int t;\n        std::cin >> t;\n        if\
+    \ (t == 0) {\n            int i;\n            Value v;\n            std::cin >>\
+    \ i >> v;\n            auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
+    \        }\n        else if (t == 1) {\n            int i;\n            std::cin\
+    \ >> i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else\
+    \ if (t == 2) {\n            int l, r;\n            std::cin >> l >> r;\n    \
+    \        tree.range_reverse(l, r);\n        }\n        else if (t == 3) {\n  \
+    \          int l, r;\n            Tag tag;\n            std::cin >> l >> r >>\
+    \ tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n        }\n \
+    \       else {\n            int l, r;\n            std::cin >> l >> r;\n     \
+    \       std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - DataStructure/Treap.hpp
@@ -485,7 +457,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 14:18:54+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

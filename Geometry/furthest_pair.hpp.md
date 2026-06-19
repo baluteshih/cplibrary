@@ -309,25 +309,27 @@ data:
     \ */\n    return res;\n} // convex cut: (r, l]\n#line 5 \"Geometry/furthest_pair.hpp\"\
     \n\ntemplate<typename Point>\nstd::pair<int, int> furthest_pair(const std::vector<Point>\
     \ &dots) {\n    int n = dots.size();\n    assert(n >= 2);\n    auto convex = convexHull(dots);\n\
-    \    if (SZ(convex) == 1) return std::make_pair(0, 1);\n    auto res = rotating_calipers(SZ(convex),\
-    \ [&](int o, int a, int b) {\n        return Point::cmp(cross(convex[o], convex[(o\
-    \ + 1) % SZ(convex)], convex[a]), cross(convex[o], convex[(o + 1) % SZ(convex)],\
-    \ convex[b])) > 0; \n    });\n    std::pair<int, int> ans = std::make_pair(0,\
-    \ res[0]);\n    for (int i = 1; i < SZ(convex); ++i)\n        if (dist2(convex[ans.first],\
-    \ convex[ans.second]) < dist2(convex[i], convex[res[i]]))\n            ans = std::make_pair(i,\
-    \ res[i]);\n    return std::make_pair(ranges::find(dots, convex[ans.first]) -\
-    \ dots.begin(), ranges::find(dots, convex[ans.second]) - dots.begin());\n}\n"
+    \    if (int(convex.size()) == 1) return std::make_pair(0, 1);\n    auto res =\
+    \ rotating_calipers(int(convex.size()), [&](int o, int a, int b) {\n        return\
+    \ Point::cmp(cross(convex[o], convex[(o + 1) % int(convex.size())], convex[a]),\
+    \ cross(convex[o], convex[(o + 1) % int(convex.size())], convex[b])) > 0; \n \
+    \   });\n    std::pair<int, int> ans = std::make_pair(0, res[0]);\n    for (int\
+    \ i = 1; i < int(convex.size()); ++i)\n        if (dist2(convex[ans.first], convex[ans.second])\
+    \ < dist2(convex[i], convex[res[i]]))\n            ans = std::make_pair(i, res[i]);\n\
+    \    return std::make_pair(std::ranges::find(dots, convex[ans.first]) - dots.begin(),\
+    \ std::ranges::find(dots, convex[ans.second]) - dots.begin());\n}\n"
   code: "#pragma once\n\n#include \"Geometry/convex.hpp\"\n#include \"Misc/cyc_bitonic_search.hpp\"\
     \n\ntemplate<typename Point>\nstd::pair<int, int> furthest_pair(const std::vector<Point>\
     \ &dots) {\n    int n = dots.size();\n    assert(n >= 2);\n    auto convex = convexHull(dots);\n\
-    \    if (SZ(convex) == 1) return std::make_pair(0, 1);\n    auto res = rotating_calipers(SZ(convex),\
-    \ [&](int o, int a, int b) {\n        return Point::cmp(cross(convex[o], convex[(o\
-    \ + 1) % SZ(convex)], convex[a]), cross(convex[o], convex[(o + 1) % SZ(convex)],\
-    \ convex[b])) > 0; \n    });\n    std::pair<int, int> ans = std::make_pair(0,\
-    \ res[0]);\n    for (int i = 1; i < SZ(convex); ++i)\n        if (dist2(convex[ans.first],\
-    \ convex[ans.second]) < dist2(convex[i], convex[res[i]]))\n            ans = std::make_pair(i,\
-    \ res[i]);\n    return std::make_pair(ranges::find(dots, convex[ans.first]) -\
-    \ dots.begin(), ranges::find(dots, convex[ans.second]) - dots.begin());\n}\n"
+    \    if (int(convex.size()) == 1) return std::make_pair(0, 1);\n    auto res =\
+    \ rotating_calipers(int(convex.size()), [&](int o, int a, int b) {\n        return\
+    \ Point::cmp(cross(convex[o], convex[(o + 1) % int(convex.size())], convex[a]),\
+    \ cross(convex[o], convex[(o + 1) % int(convex.size())], convex[b])) > 0; \n \
+    \   });\n    std::pair<int, int> ans = std::make_pair(0, res[0]);\n    for (int\
+    \ i = 1; i < int(convex.size()); ++i)\n        if (dist2(convex[ans.first], convex[ans.second])\
+    \ < dist2(convex[i], convex[res[i]]))\n            ans = std::make_pair(i, res[i]);\n\
+    \    return std::make_pair(std::ranges::find(dots, convex[ans.first]) - dots.begin(),\
+    \ std::ranges::find(dots, convex[ans.second]) - dots.begin());\n}\n"
   dependsOn:
   - Geometry/convex.hpp
   - Geometry/base.hpp
@@ -337,7 +339,7 @@ data:
   isVerificationFile: false
   path: Geometry/furthest_pair.hpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/furthest_pair.test.cpp

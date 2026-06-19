@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
     - icon: ':question:'
@@ -29,7 +29,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/bitwise_transform.hpp
       title: Convolution/bitwise_transform.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
     - icon: ':question:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Discretization.hpp
       title: Discretization
     - icon: ':heavy_check_mark:'
@@ -282,7 +282,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/barrett.hpp
       title: Numeric/barrett.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':heavy_check_mark:'
@@ -291,7 +291,7 @@ data:
     - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -320,7 +320,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
     - icon: ':heavy_check_mark:'
@@ -346,7 +346,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/SMAWK.hpp
       title: Sequence/SMAWK.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
   - name: String
@@ -357,13 +357,13 @@ data:
     - icon: ':warning:'
       path: String/kmp.hpp
       title: String/kmp.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: String/manacher.hpp
       title: String/manacher.hpp
     - icon: ':heavy_check_mark:'
       path: String/sais.hpp
       title: String/sais.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: String/z_algo.hpp
       title: String/z_algo.hpp
   - name: Tree/CentroidDS
@@ -382,13 +382,13 @@ data:
     - icon: ':question:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/TreeTools.hpp
       title: Tree/TreeTools.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Tree/centroid_divide_and_conquer.hpp
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
@@ -718,7 +718,7 @@ data:
       title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - name: test/1_library_checker/string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/string/enumerate_palindromes.test.cpp
       title: test/1_library_checker/string/enumerate_palindromes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -730,30 +730,30 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/string/suffixarray.test.cpp
       title: test/1_library_checker/string/suffixarray.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/string/zalgorithm.test.cpp
       title: test/1_library_checker/string/zalgorithm.test.cpp
   - name: test/1_library_checker/tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
       title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/jump_on_tree.test.cpp
       title: test/1_library_checker/tree/jump_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/lca.test.cpp
       title: test/1_library_checker/tree/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
       title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_diameter.test.cpp
       title: test/1_library_checker/tree/tree_diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
       title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     - icon: ':x:'

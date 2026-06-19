@@ -11,8 +11,8 @@ data:
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,39 +25,11 @@ data:
     - https://judge.yosupo.jp/problem/minimum_spanning_tree
   bundledCode: "#line 1 \"test/1_library_checker/graph/minimum_spanning_tree.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\n\
-    #line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/graph/minimum_spanning_tree.test.cpp\"\n\n\
-    #line 2 \"Graph/minimum_spanning_tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\n\
-    template<bool directed = true, typename Edge = void, typename Vertex = void>\n\
-    class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
+    #line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"test/1_library_checker/graph/minimum_spanning_tree.test.cpp\"\n\n#line 2\
+    \ \"Graph/minimum_spanning_tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
+    \ directed = true, typename Edge = void, typename Vertex = void>\nclass Graph\
+    \ {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
     \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
     \    struct Empty {};\n    struct edge_v {\n        int from, to;\n        [[no_unique_address]]\
@@ -190,23 +162,23 @@ data:
     \    std::cout << ans << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n     \
     \   std::cout << res[i] << \" \\n\"[i + 2 == n]; \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/minimum_spanning_tree\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Graph/minimum_spanning_tree.hpp\"\
-    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
-    \ n, m;\n    std::cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for\
-    \ (int i = 0; i < m; ++i) {\n        int a, b, c;\n        std::cin >> a >> b\
-    \ >> c;\n        graph.add_edge(a, b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n\
+    \n#include \"assumption.hpp\"\n\n#include \"Graph/minimum_spanning_tree.hpp\"\n\
+    \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n,\
+    \ m;\n    std::cin >> n >> m;\n    UndirectedGraph<int> graph(n);\n    for (int\
+    \ i = 0; i < m; ++i) {\n        int a, b, c;\n        std::cin >> a >> b >> c;\n\
+    \        graph.add_edge(a, b, c);\n    }\n    auto res = minimum_spanning_tree(graph);\n\
     \    long long ans = 0;\n    for (int i : res)\n        ans += graph.edge(i).weight;\n\
     \    std::cout << ans << \"\\n\";\n    for (int i = 0; i + 1 < n; ++i)\n     \
     \   std::cout << res[i] << \" \\n\"[i + 2 == n]; \n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Graph/minimum_spanning_tree.hpp
   - Graph/base.hpp
   - DataStructure/DisjointSet.hpp
   isVerificationFile: true
   path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/minimum_spanning_tree.test.cpp

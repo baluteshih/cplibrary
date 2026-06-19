@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/string/enumerate_palindromes.test.cpp
+    title: test/1_library_checker/string/enumerate_palindromes.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"String/manacher.hpp\"\n\nstd::vector<int> manacher(const\
@@ -35,8 +38,9 @@ data:
   path: String/manacher.hpp
   requiredBy: []
   timestamp: '2026-06-19 13:39:32+08:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/string/enumerate_palindromes.test.cpp
 documentation_of: String/manacher.hpp
 layout: document
 redirect_from:

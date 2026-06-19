@@ -244,19 +244,20 @@ data:
     \ { return bt.umod(); }\n};\ntemplate <int id> barrett dynamic_modint<id>::bt(998244353);\n\
     \nusing modint = dynamic_modint<-1>;\n\n/*\nmodint::set_mod(p);\n*/\n#line 6 \"\
     test/1_library_checker/number_theory/sqrt_mod.test.cpp\"\n\nint main() {\n   \
-    \ ios::sync_with_stdio(0), cin.tie(0);\n    int t;\n    cin >> t;\n    while (t--)\
-    \ {\n        int y, p;\n        cin >> y >> p;\n        dynamic_modint<-1> v;\n\
-    \        v.set_mod(p);\n        v = v.raw(y);\n        bool succ;\n        auto\
-    \ res = quadratic_residue(v, succ);\n        if (!succ) cout << \"-1\\n\";\n \
-    \       else cout << res << \"\\n\";\n    }\n}\n"
+    \ std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t;\n    std::cin >>\
+    \ t;\n    while (t--) {\n        int y, p;\n        std::cin >> y >> p;\n    \
+    \    dynamic_modint<-1> v;\n        v.set_mod(p);\n        v = v.raw(y);\n   \
+    \     bool succ;\n        auto res = quadratic_residue(v, succ);\n        if (!succ)\
+    \ std::cout << \"-1\\n\";\n        else std::cout << res << \"\\n\";\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n#include \"\
     default_code.hpp\"\n\n#include \"Numeric/quadratic_residue.hpp\"\n#include \"\
-    Numeric/DynamicModint.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int t;\n    cin >> t;\n    while (t--) {\n        int y, p;\n        cin\
-    \ >> y >> p;\n        dynamic_modint<-1> v;\n        v.set_mod(p);\n        v\
-    \ = v.raw(y);\n        bool succ;\n        auto res = quadratic_residue(v, succ);\n\
-    \        if (!succ) cout << \"-1\\n\";\n        else cout << res << \"\\n\";\n\
-    \    }\n}\n"
+    Numeric/DynamicModint.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int t;\n    std::cin >> t;\n    while (t--) {\n      \
+    \  int y, p;\n        std::cin >> y >> p;\n        dynamic_modint<-1> v;\n   \
+    \     v.set_mod(p);\n        v = v.raw(y);\n        bool succ;\n        auto res\
+    \ = quadratic_residue(v, succ);\n        if (!succ) std::cout << \"-1\\n\";\n\
+    \        else std::cout << res << \"\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/quadratic_residue.hpp
@@ -267,7 +268,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/sqrt_mod.test.cpp

@@ -64,30 +64,31 @@ data:
     \        while ((y = x) != this->begin() && (--x)->p >= y->p) isect(x, this->erase(y));\n\
     \    }\n    T query(T x) {\n        auto l = *this->lower_bound(x);\n        return\
     \ l.a * x + l.b;\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/line_add_get_min.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
-    \  cin >> n >> q;\n    DynamicHull<ll> hull;\n    for (int i = 0; i < n; ++i)\
-    \ {\n        ll a, b;\n        cin >> a >> b;\n        hull.addline(-a, -b);\n\
-    \    }\n    while (q--) {\n        int type;\n        cin >> type;\n        if\
-    \ (type == 0) {\n            ll a, b;\n            cin >> a >> b;\n          \
-    \  hull.addline(-a, -b);\n        }\n        else {\n            ll p;\n     \
-    \       cin >> p;\n            cout << -hull.query(p) << \"\\n\";\n        }\n\
-    \    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    DynamicHull<long long> hull;\n    for (int\
+    \ i = 0; i < n; ++i) {\n        long long a, b;\n        std::cin >> a >> b;\n\
+    \        hull.addline(-a, -b);\n    }\n    while (q--) {\n        int type;\n\
+    \        std::cin >> type;\n        if (type == 0) {\n            long long a,\
+    \ b;\n            std::cin >> a >> b;\n            hull.addline(-a, -b);\n   \
+    \     }\n        else {\n            long long p;\n            std::cin >> p;\n\
+    \            std::cout << -hull.query(p) << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include\
     \ \"default_code.hpp\"\n\n#include \"Misc/DynamicHull.hpp\"\n\nint main() {\n\
-    \    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n\
-    \    DynamicHull<ll> hull;\n    for (int i = 0; i < n; ++i) {\n        ll a, b;\n\
-    \        cin >> a >> b;\n        hull.addline(-a, -b);\n    }\n    while (q--)\
-    \ {\n        int type;\n        cin >> type;\n        if (type == 0) {\n     \
-    \       ll a, b;\n            cin >> a >> b;\n            hull.addline(-a, -b);\n\
-    \        }\n        else {\n            ll p;\n            cin >> p;\n       \
-    \     cout << -hull.query(p) << \"\\n\";\n        }\n    }\n}\n"
+    \    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    DynamicHull<long long> hull;\n    for (int i = 0; i < n; ++i)\
+    \ {\n        long long a, b;\n        std::cin >> a >> b;\n        hull.addline(-a,\
+    \ -b);\n    }\n    while (q--) {\n        int type;\n        std::cin >> type;\n\
+    \        if (type == 0) {\n            long long a, b;\n            std::cin >>\
+    \ a >> b;\n            hull.addline(-a, -b);\n        }\n        else {\n    \
+    \        long long p;\n            std::cin >> p;\n            std::cout << -hull.query(p)\
+    \ << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Misc/DynamicHull.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 13:57:29+08:00'
+  timestamp: '2026-06-19 14:18:54+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/line_add_get_min.test.cpp

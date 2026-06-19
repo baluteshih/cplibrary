@@ -93,25 +93,25 @@ data:
     \ auto &v) requires (!hasKey || !hasValue) {\n            if constexpr (hasKey)\
     \ key = Key(v);\n            else org = val = Value(v);\n        }\n        node(const\
     \ auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v)\
-    \ {\n        }\n        friend ostream& operator<<(ostream& os, const node &v)\
-    \ {\n            if constexpr (hasKey && hasValue) os << \"{key = \" << v.key\
-    \ << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os\
-    \ << v.key;\n            else os << v.org;\n            return os;\n        }\n\
-    \        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \"\
-    ;\n            auto printnode = [&](std::string name, node* ptr) {\n         \
-    \       std::cerr << name << \": \";\n                if (ptr) std::cerr << *ptr;\n\
-    \                else std::cerr << \"null\";\n            };\n            printnode(\"\
-    l\", l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \"\
-    , \";\n            if constexpr (!persistent) printnode(\"f\", f);\n         \
-    \   cerr << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void split(node *source, node *&left, node\
-    \ *&right, const auto &condition) {\n        if (!source) return left = right\
-    \ = nullptr, void();\n        if constexpr (persistent) source = NodeAlloc::allocate(*source);\
-    \ \n        if constexpr (hasTag || Rev) source->down();\n        if (condition(source))\
-    \ {\n            left = source;\n            split(source->r, left->r, right,\
-    \ condition);\n            left->up();\n        }\n        else {\n          \
-    \  right = source;\n            split(source->l, left, right->l, condition);\n\
-    \            right->up();\n        }\n    }\n    static void split_value(node\
+    \ {\n        }\n        friend std::ostream& operator<<(std::ostream& os, const\
+    \ node &v) {\n            if constexpr (hasKey && hasValue) os << \"{key = \"\
+    \ << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey)\
+    \ os << v.key;\n            else os << v.org;\n            return os;\n      \
+    \  }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
+    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
+    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
+    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
+    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
+    \ r), std::cerr << \", \";\n            if constexpr (!persistent) printnode(\"\
+    f\", f);\n            std::cerr << \"\\e[0m\\n\";\n        }\n    };\n    using\
+    \ NodeAlloc = Allocator<node>;\n    node *root = nullptr;\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
+    \ return left = right = nullptr, void();\n        if constexpr (persistent) source\
+    \ = NodeAlloc::allocate(*source); \n        if constexpr (hasTag || Rev) source->down();\n\
+    \        if (condition(source)) {\n            left = source;\n            split(source->r,\
+    \ left->r, right, condition);\n            left->up();\n        }\n        else\
+    \ {\n            right = source;\n            split(source->l, left, right->l,\
+    \ condition);\n            right->up();\n        }\n    }\n    static void split_value(node\
     \ *source, node *&left, node *&right, const auto &left_product, const auto &condition)\
     \ requires (hasValue) {\n        if (!source) return left = right = nullptr, void();\n\
     \        if constexpr (persistent) source = NodeAlloc::allocate(*source); \n \
@@ -342,25 +342,25 @@ data:
     \ auto &v) requires (!hasKey || !hasValue) {\n            if constexpr (hasKey)\
     \ key = Key(v);\n            else org = val = Value(v);\n        }\n        node(const\
     \ auto &k, const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v)\
-    \ {\n        }\n        friend ostream& operator<<(ostream& os, const node &v)\
-    \ {\n            if constexpr (hasKey && hasValue) os << \"{key = \" << v.key\
-    \ << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os\
-    \ << v.key;\n            else os << v.org;\n            return os;\n        }\n\
-    \        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \"\
-    ;\n            auto printnode = [&](std::string name, node* ptr) {\n         \
-    \       std::cerr << name << \": \";\n                if (ptr) std::cerr << *ptr;\n\
-    \                else std::cerr << \"null\";\n            };\n            printnode(\"\
-    l\", l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \"\
-    , \";\n            if constexpr (!persistent) printnode(\"f\", f);\n         \
-    \   cerr << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void split(node *source, node *&left, node\
-    \ *&right, const auto &condition) {\n        if (!source) return left = right\
-    \ = nullptr, void();\n        if constexpr (persistent) source = NodeAlloc::allocate(*source);\
-    \ \n        if constexpr (hasTag || Rev) source->down();\n        if (condition(source))\
-    \ {\n            left = source;\n            split(source->r, left->r, right,\
-    \ condition);\n            left->up();\n        }\n        else {\n          \
-    \  right = source;\n            split(source->l, left, right->l, condition);\n\
-    \            right->up();\n        }\n    }\n    static void split_value(node\
+    \ {\n        }\n        friend std::ostream& operator<<(std::ostream& os, const\
+    \ node &v) {\n            if constexpr (hasKey && hasValue) os << \"{key = \"\
+    \ << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr (hasKey)\
+    \ os << v.key;\n            else os << v.org;\n            return os;\n      \
+    \  }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
+    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
+    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
+    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
+    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
+    \ r), std::cerr << \", \";\n            if constexpr (!persistent) printnode(\"\
+    f\", f);\n            std::cerr << \"\\e[0m\\n\";\n        }\n    };\n    using\
+    \ NodeAlloc = Allocator<node>;\n    node *root = nullptr;\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
+    \ return left = right = nullptr, void();\n        if constexpr (persistent) source\
+    \ = NodeAlloc::allocate(*source); \n        if constexpr (hasTag || Rev) source->down();\n\
+    \        if (condition(source)) {\n            left = source;\n            split(source->r,\
+    \ left->r, right, condition);\n            left->up();\n        }\n        else\
+    \ {\n            right = source;\n            split(source->l, left, right->l,\
+    \ condition);\n            right->up();\n        }\n    }\n    static void split_value(node\
     \ *source, node *&left, node *&right, const auto &left_product, const auto &condition)\
     \ requires (hasValue) {\n        if (!source) return left = right = nullptr, void();\n\
     \        if constexpr (persistent) source = NodeAlloc::allocate(*source); \n \
@@ -546,7 +546,7 @@ data:
   isVerificationFile: false
   path: DataStructure/Treap.hpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 14:18:54+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp

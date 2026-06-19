@@ -103,14 +103,14 @@ data:
     \ == 4, std::mt19937, std::mt19937_64> rng(880301);\n    while (1) {\n       \
     \ T x = rng() % (p - 1) + 1;\n        if (check(x)) return x;\n    }\n    return\
     \ -1;\n}\n#line 5 \"test/1_library_checker/number_theory/primitive_root.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin\
-    \ >> q;\n    while (q--) {\n        ll p;\n        cin >> p;\n        cout <<\
-    \ primitive_root(p) << \"\\n\";\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ q;\n    std::cin >> q;\n    while (q--) {\n        long long p;\n        std::cin\
+    \ >> p;\n        std::cout << primitive_root(p) << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primitive_root\"\n#include\
     \ \"default_code.hpp\"\n\n#include \"Numeric/primitive_root.hpp\"\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin >> q;\n   \
-    \ while (q--) {\n        ll p;\n        cin >> p;\n        cout << primitive_root(p)\
-    \ << \"\\n\";\n    }\n}\n"
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int q;\n    std::cin\
+    \ >> q;\n    while (q--) {\n        long long p;\n        std::cin >> p;\n   \
+    \     std::cout << primitive_root(p) << \"\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/primitive_root.hpp
@@ -120,7 +120,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/number_theory/primitive_root.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 10:37:09+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/primitive_root.test.cpp

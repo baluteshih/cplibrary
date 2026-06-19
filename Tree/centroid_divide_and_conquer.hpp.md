@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
   - icon: ':question:'
@@ -24,7 +24,7 @@ data:
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'
@@ -35,7 +35,7 @@ data:
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -309,7 +309,7 @@ data:
   - Tree/CentroidTree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

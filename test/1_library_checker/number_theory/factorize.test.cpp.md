@@ -82,16 +82,18 @@ data:
     \ }\n        T d = std::__gcd(p, cur);\n        self(self, cur / d);\n       \
     \ self(self, d);\n    };\n    factorize(factorize, n);\n    return res;\n}\n#line\
     \ 5 \"test/1_library_checker/number_theory/factorize.test.cpp\"\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin >> q;\n   \
-    \ while (q--) {\n        ll x;\n        cin >> x;\n        vector<ll> ans = pollard_rho(x);\n\
-    \        ranges::sort(ans);\n        cout << SZ(ans);\n        for (ll i : ans)\n\
-    \            cout << \" \" << i;\n        cout << \"\\n\";\n    }\n}\n"
+    \ {\n    ios::sync_with_stdio(0), std::cin.tie(0);\n    int q;\n    std::cin >>\
+    \ q;\n    while (q--) {\n        long long x;\n        std::cin >> x;\n      \
+    \  std::vector<long long> ans = pollard_rho(x);\n        std::ranges::sort(ans);\n\
+    \        std::cout << SZ(ans);\n        for (long long i : ans)\n            std::cout\
+    \ << \" \" << i;\n        std::cout << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include \"\
     default_code.hpp\"\n\n#include \"Numeric/pollard_rho.hpp\"\n\nint main() {\n \
-    \   ios::sync_with_stdio(0), cin.tie(0);\n    int q;\n    cin >> q;\n    while\
-    \ (q--) {\n        ll x;\n        cin >> x;\n        vector<ll> ans = pollard_rho(x);\n\
-    \        ranges::sort(ans);\n        cout << SZ(ans);\n        for (ll i : ans)\n\
-    \            cout << \" \" << i;\n        cout << \"\\n\";\n    }\n}\n"
+    \   ios::sync_with_stdio(0), std::cin.tie(0);\n    int q;\n    std::cin >> q;\n\
+    \    while (q--) {\n        long long x;\n        std::cin >> x;\n        std::vector<long\
+    \ long> ans = pollard_rho(x);\n        std::ranges::sort(ans);\n        std::cout\
+    \ << SZ(ans);\n        for (long long i : ans)\n            std::cout << \" \"\
+    \ << i;\n        std::cout << \"\\n\";\n    }\n}\n"
   dependsOn:
   - default_code.hpp
   - Numeric/pollard_rho.hpp
@@ -99,7 +101,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/number_theory/factorize.test.cpp
   requiredBy: []
-  timestamp: '2026-02-28 23:10:21+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/factorize.test.cpp

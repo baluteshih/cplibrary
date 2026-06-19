@@ -93,39 +93,39 @@ data:
     \ {\n    int N;\n    void init() {\n        for (int i = 1; i <= N; ++i)\n   \
     \         fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
     \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    vector<T> fac, ifac;\n    Combination(int n):\
-    \ N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
+    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
+    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
     \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
     \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
     \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
     \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
     \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nvector<T> power(T base, int n) {\n    vector<T>\
+    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
     \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nvector<T> ipower(T base, int\
-    \ n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nvector<T> linear_inverse(int\
-    \ n) {\n    vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i\
-    \ = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n   \
-    \ }\n    return res;\n}\n}\n"
+    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
+    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
+    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
+    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
+    \ / i); \n    }\n    return res;\n}\n}\n"
   code: "#pragma once\n\n#include \"Numeric/internal_math.hpp\"\n\ntemplate<class\
     \ T>\nrequires std::derived_from<T, internal::modint_base>\nclass Combination\
     \ {\n    int N;\n    void init() {\n        for (int i = 1; i <= N; ++i)\n   \
     \         fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
     \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    vector<T> fac, ifac;\n    Combination(int n):\
-    \ N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
+    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
+    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
     \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
     \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
     \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
     \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
     \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nvector<T> power(T base, int n) {\n    vector<T>\
+    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
     \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nvector<T> ipower(T base, int\
-    \ n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nvector<T> linear_inverse(int\
-    \ n) {\n    vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i\
-    \ = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n   \
-    \ }\n    return res;\n}\n}\n"
+    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
+    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
+    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
+    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
+    \ / i); \n    }\n    return res;\n}\n}\n"
   dependsOn:
   - Numeric/internal_math.hpp
   isVerificationFile: false
@@ -134,7 +134,7 @@ data:
   - Numbers/bell_number.hpp
   - Polynomial/lagrange_interpolate_iota.hpp
   - Polynomial/shift.hpp
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-19 14:07:30+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
