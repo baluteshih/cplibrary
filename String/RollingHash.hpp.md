@@ -37,8 +37,8 @@ data:
     \ MultiInt& o) const { auto res = *this; return res /= o; }\n    bool operator==(const\
     \ MultiInt& o) const requires requires { v == o.v; } {\n        return v == o.v;\n\
     \    }\n    std::strong_ordering operator<=>(const MultiInt& o) const requires\
-    \ requires { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
+    \ requires { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
     \ auto&... args) {\n            bool first = true;\n            ((os << (first\
     \ ? \"\" : \" \") << args, first = false), ...);\n        }, obj.v);\n       \
     \ return os;\n    }\n};\n#line 4 \"String/RollingHash.hpp\"\n\ntemplate <int base,\
@@ -76,8 +76,8 @@ data:
     \ rangeHash(const std::vector<RollingHash> &prefix_sum, int l, int r) {\n    \
     \    if (l > r) return RollingHash();\n        if (l == 0) return prefix_sum[r\
     \ - 1];\n        return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);\n    }\n\
-    \    friend ostream& operator<<(ostream& os, const RollingHash& v) {\n       \
-    \ os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n"
+    \    friend std::ostream& operator<<(std::ostream& os, const RollingHash& v) {\n\
+    \        os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Misc/MultiInt.hpp\"\n\ntemplate <int base, typename...\
     \ Ints>\nstruct RollingHash {\n    using Val = MultiInt<Ints...>;\n    int sz\
     \ = 0;\n    Val val;\n    inline static std::vector<Val> p_pow, p_ipow;\n    static\
@@ -113,14 +113,14 @@ data:
     \ rangeHash(const std::vector<RollingHash> &prefix_sum, int l, int r) {\n    \
     \    if (l > r) return RollingHash();\n        if (l == 0) return prefix_sum[r\
     \ - 1];\n        return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);\n    }\n\
-    \    friend ostream& operator<<(ostream& os, const RollingHash& v) {\n       \
-    \ os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n"
+    \    friend std::ostream& operator<<(std::ostream& os, const RollingHash& v) {\n\
+    \        os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n"
   dependsOn:
   - Misc/MultiInt.hpp
   isVerificationFile: false
   path: String/RollingHash.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/string/longest_common_substring.test.cpp

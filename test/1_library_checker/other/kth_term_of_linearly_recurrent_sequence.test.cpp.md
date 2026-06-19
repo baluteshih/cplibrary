@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
   - icon: ':question:'
@@ -19,17 +19,17 @@ data:
   - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
@@ -37,36 +37,8 @@ data:
     - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
   bundledCode: "#line 1 \"test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
     \n\n#line 2 \"Polynomial/linear_recursion.hpp\"\n\n#line 2 \"Polynomial/Bostan_Mori.hpp\"\
     \n   \n#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2 \"Polynomial/NTT.hpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
@@ -224,7 +196,7 @@ data:
     \ n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
-    \  std::copy_n(p.data(), min(p.n(), m), this->data());\n    }\n    Poly(const\
+    \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
     \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
@@ -249,19 +221,19 @@ data:
     \        for (int i = 0; i < m; ++i)\n            Xi[i] *= (2 - Xi[i] * Y[i]);\n\
     \        return Xi.idft(m).isz(n());\n    }\n    Poly Dx() const {\n        Poly\
     \ ret(n() - 1);\n        for (int i = 0; i < ret.n(); ++i)\n            ret[i]\
-    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(max(1, ret.n()));\n    }\n\
-    \    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i = 0; i\
-    \ < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n       \
-    \ return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n  \
-    \      return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
+    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(std::max(1, ret.n()));\n\
+    \    }\n    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i\
+    \ = 0; i < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n\
+    \        return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n\
+    \        return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
     \ (*this)[0] == 0, 5e5/886ms\n        if (n() == 1) return {1};\n        Poly\
     \ X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n        Poly Y = X.Ln(); Y[0]\
     \ = -1;\n        return (X * (*this - Y)).isz(n());\n    }\n    // M := P(P -\
-    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(ll k) const {\n    \
-    \    int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n       \
-    \ if (nz * min(k, (ll)n()) >= n()) return Poly(n());\n        if (!k) return Poly(Poly\
-    \ {1}, n());\n        Poly X(this->data() + nz, this->data() + nz + n() - nz *\
-    \ k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
+    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(long long k) const {\n\
+    \        int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n   \
+    \     if (nz * std::min(k, (long long)n()) >= n()) return Poly(n());\n       \
+    \ if (!k) return Poly(Poly {1}, n());\n        Poly X(this->data() + nz, this->data()\
+    \ + nz + n() - nz * k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
     \    }\n    Poly _tmul(int nn, const Poly &rhs) const {\n        Poly Y = ((*this)\
     \ * rhs).isz(n() + nn - 1);\n        return Poly(Y.data() + n() - 1, Y.data()\
     \ + Y.n());\n    }\n    std::vector<T> _eval(const std::vector<T> &x, const std::vector<Poly>\
@@ -280,11 +252,11 @@ data:
     \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
     \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
     \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(max(1, rhs.n()\
+    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
     \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
     \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
     #line 4 \"Polynomial/Bostan_Mori.hpp\"\n\ntemplate<class T>\nT Bostan_Mori(const\
-    \ Poly<T> &f, const Poly<T> &g, ll k) { // [f(x)/g(x)][x^k]\n    assert(f.size()\
+    \ Poly<T> &f, const Poly<T> &g, long long k) { // [f(x)/g(x)][x^k]\n    assert(f.size()\
     \ + 1 <= g.size());\n    Poly<T> F(f);\n    Poly<T> G(g);\n    for (; k; k >>=\
     \ 1) {\n        Poly<T> H = G;\n        int m = 1;\n        while (m < (int)G.size()\
     \ * 2) m <<= 1;\n        for (int i = 1; i < (int)H.size(); i += 2) H[i] = -H[i];\n\
@@ -298,18 +270,20 @@ data:
     \ k = (int)a.size();\n    assert((int)coef.size() == k);\n    Poly<T> f(a), g(coef);\n\
     \    g = g * T(-1);\n    g.insert(g.begin(), 1);\n    f = (f * g).isz(k);\n  \
     \  return Bostan_Mori(f, g, n);\n}\n#line 5 \"test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \n\nusing mint = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n;\n    ll m;\n    cin >> n >> m;\n    vector<mint> a(n),\
-    \ coef(n);\n    for (auto &i : a)\n        cin >> i;\n    for (auto &i : coef)\n\
-    \        cin >> i;\n    cout << linear_recursion(a, coef, m) << \"\\n\";\n}\n\n"
+    \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n;\n    long long m;\n    std::cin >> n >> m;\n  \
+    \  std::vector<mint> a(n), coef(n);\n    for (auto &i : a)\n        std::cin >>\
+    \ i;\n    for (auto &i : coef)\n        std::cin >> i;\n    std::cout << linear_recursion(a,\
+    \ coef, m) << \"\\n\";\n}\n\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Polynomial/linear_recursion.hpp\"\
-    \n\nusing mint = modint998244353;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n;\n    ll m;\n    cin >> n >> m;\n    vector<mint> a(n),\
-    \ coef(n);\n    for (auto &i : a)\n        cin >> i;\n    for (auto &i : coef)\n\
-    \        cin >> i;\n    cout << linear_recursion(a, coef, m) << \"\\n\";\n}\n\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Polynomial/linear_recursion.hpp\"\n\
+    \nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n;\n    long long m;\n    std::cin >> n >> m;\n  \
+    \  std::vector<mint> a(n), coef(n);\n    for (auto &i : a)\n        std::cin >>\
+    \ i;\n    for (auto &i : coef)\n        std::cin >> i;\n    std::cout << linear_recursion(a,\
+    \ coef, m) << \"\\n\";\n}\n\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Polynomial/linear_recursion.hpp
   - Polynomial/Bostan_Mori.hpp
   - Polynomial/Polynomial.hpp
@@ -320,8 +294,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 13:39:32+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
 layout: document

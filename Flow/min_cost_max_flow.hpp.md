@@ -5,14 +5,14 @@ data:
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/min_cost_circulation.hpp
     title: Flow/min_cost_circulation.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/7_loj/min_cost_max_flow.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/min_cost_max_flow.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -190,7 +190,7 @@ data:
   - Flow/min_cost_circulation.hpp
   - Flow/bounded_cost_circulation.hpp
   timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/7_loj/min_cost_max_flow.test.cpp

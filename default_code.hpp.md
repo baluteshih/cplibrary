@@ -4,12 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/biginteger/addition.test.cpp
-    title: test/1_library_checker/biginteger/addition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/biginteger/multiplication.test.cpp
-    title: test/1_library_checker/biginteger/multiplication.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
     title: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -139,45 +133,33 @@ data:
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/geometry/closest_pair.test.cpp
-    title: test/1_library_checker/geometry/closest_pair.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-    title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
-    title: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/geometry/static_convex_hull.test.cpp
-    title: test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - icon: ':x:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/shortest_path.test.cpp
     title: test/1_library_checker/graph/shortest_path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -189,25 +171,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/primitive_root.test.cpp
     title: test/1_library_checker/number_theory/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/other/two_sat.test.cpp
-    title: test/1_library_checker/other/two_sat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
   - icon: ':x:'
@@ -237,21 +213,6 @@ data:
   - icon: ':x:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/string/enumerate_palindromes.test.cpp
-    title: test/1_library_checker/string/enumerate_palindromes.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/string/longest_common_substring.test.cpp
-    title: test/1_library_checker/string/longest_common_substring.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/string/number_of_substrings.test.cpp
-    title: test/1_library_checker/string/number_of_substrings.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/string/suffixarray.test.cpp
-    title: test/1_library_checker/string/suffixarray.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/string/zalgorithm.test.cpp
-    title: test/1_library_checker/string/zalgorithm.test.cpp
   - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
@@ -399,15 +360,7 @@ data:
   - test/1_library_checker/convolution/lcm_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
-  - test/1_library_checker/other/two_sat.test.cpp
-  - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/1_library_checker/geometry/closest_pair.test.cpp
-  - test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
-  - test/1_library_checker/biginteger/addition.test.cpp
-  - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/line_add_get_min.test.cpp
@@ -438,11 +391,6 @@ data:
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
   - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - test/1_library_checker/string/suffixarray.test.cpp
-  - test/1_library_checker/string/zalgorithm.test.cpp
-  - test/1_library_checker/string/number_of_substrings.test.cpp
-  - test/1_library_checker/string/enumerate_palindromes.test.cpp
-  - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

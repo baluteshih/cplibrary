@@ -5,22 +5,22 @@ data:
   - icon: ':x:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
   - icon: ':x:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/min_cost_circulation.hpp
     title: Flow/min_cost_circulation.hpp
   - icon: ':warning:'
     path: Flow/min_cost_circulation_old.hpp
     title: Flow/min_cost_circulation_old.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
   - icon: ':heavy_check_mark:'
@@ -29,19 +29,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/BipartiteMatching.hpp
     title: Graph/BipartiteMatching.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/Dijkstra.hpp
     title: Graph/Dijkstra.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/ECC.hpp
     title: Graph/ECC.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/Matching.hpp
     title: Graph/Matching.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
   - icon: ':heavy_check_mark:'
@@ -56,10 +56,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
   - icon: ':x:'
@@ -111,25 +111,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/shortest_path.test.cpp
     title: test/1_library_checker/graph/shortest_path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/two_edge_connected_components.test.cpp
     title: test/1_library_checker/graph/two_edge_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
   - icon: ':x:'

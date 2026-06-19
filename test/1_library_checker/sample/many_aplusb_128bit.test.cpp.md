@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
   - icon: ':question:'

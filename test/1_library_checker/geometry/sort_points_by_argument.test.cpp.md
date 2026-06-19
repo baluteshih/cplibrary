@@ -5,8 +5,8 @@ data:
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,64 +19,36 @@ data:
     - https://judge.yosupo.jp/problem/sort_points_by_argument
   bundledCode: "#line 1 \"test/1_library_checker/geometry/sort_points_by_argument.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\n\
-    #line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/geometry/sort_points_by_argument.test.cpp\"\
-    \n\n#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing DefaultFloat\
-    \ = std::conditional_t<std::is_floating_point_v<T>, T, double>;\n\ntemplate <typename\
-    \ T>\nconstexpr T get_default_eps() {\n    if constexpr (std::is_same_v<T, float>)\n\
-    \        return T(1e-6);\n    else if constexpr (std::is_same_v<T, double>)\n\
-    \        return T(1e-9);\n    else if constexpr (std::is_same_v<T, long double>)\n\
-    \        return T(1e-12);\n    else\n        return T(0); \n}\n\ntemplate <typename\
-    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    static int sign(T x)\
-    \ {\n        if constexpr (std::is_floating_point_v<T>) {\n            return\
-    \ (x > eps) - (x < -eps); \n        }\n        else {\n            return (x >\
-    \ 0) - (x < 0);\n        }\n    }\n    static int cmp(T a, T b) {\n        return\
-    \ sign(a - b);\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
-    \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
-    \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
-    \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
-    \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
-    \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
-    \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
-    \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
-    \ == b); }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const\
-    \ Pt &a) {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt&\
-    \ operator-=(const Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n\
-    \    }\n    Pt& operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n\
-    \    }\n    Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n\
-    \    }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b;\
-    \ }\n    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n\
-    \    friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend\
-    \ Pt operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    #line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"test/1_library_checker/geometry/sort_points_by_argument.test.cpp\"\n\n#line\
+    \ 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
+    \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
+    \ constexpr (std::is_same_v<T, float>)\n        return T(1e-6);\n    else if constexpr\
+    \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
+    \ (std::is_same_v<T, long double>)\n        return T(1e-12);\n    else\n     \
+    \   return T(0); \n}\n\ntemplate <typename T, T eps = get_default_eps<T>()>\n\
+    struct Geometry {\n    static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>)\
+    \ {\n            return (x > eps) - (x < -eps); \n        }\n        else {\n\
+    \            return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T\
+    \ a, T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T\
+    \ eps = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps>\
+    \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
+    \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
+    \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
+    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
+    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
+    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
+    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
+    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
+    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
+    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
+    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
+    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
+    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
+    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
+    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
+    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
     \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
     \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
@@ -125,39 +97,41 @@ data:
     \ Pt &p, int strict) {\n        if (side(o, a, b) >= 0) return _betweenAngle(o,\
     \ a, b, p, strict);\n        return !_betweenAngle(o, b, a, p, !strict);\n   \
     \ }\n};\n#line 5 \"test/1_library_checker/geometry/sort_points_by_argument.test.cpp\"\
-    \n\nusing Point = Pt<ll>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n;\n    cin >> n;\n    vector<Point> dots(n);\n    for (auto &p : dots)\n\
-    \        cin >> p;\n    int zero_count = 0;\n    {\n        vector<Point> swp;\n\
-    \        for (auto &p : dots)\n            if (p != Point()) swp.push_back(p);\n\
-    \            else ++zero_count;\n        dots.swap(swp);\n    }\n    ranges::sort(dots,\
-    \ [](const auto &a, const auto &b) {\n        return polar(a, b);   \n    });\n\
-    \    ranges::rotate(dots, ranges::min_element(dots, [](const auto &a, const auto\
-    \ &b) {\n        if (sameDirection(Point(-1, 0), a)) return false;\n        if\
-    \ (sameDirection(Point(-1, 0), b)) return true;\n        return polar(a, b, Point(-1,\
-    \ 0)); \n    }));\n    dots.insert(ranges::min_element(dots, [](const auto &a,\
-    \ const auto &b) {\n        return polar(a, b, Point(1, 0)); \n    }), zero_count,\
-    \ Point());\n    for (auto &p : dots)\n        cout << p << \"\\n\";\n}\n"
+    \n\nusing Point = Pt<long long>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    std::vector<Point> dots(n);\n\
+    \    for (auto &p : dots)\n        std::cin >> p;\n    int zero_count = 0;\n \
+    \   {\n        std::vector<Point> swp;\n        for (auto &p : dots)\n       \
+    \     if (p != Point()) swp.push_back(p);\n            else ++zero_count;\n  \
+    \      dots.swap(swp);\n    }\n    std::ranges::sort(dots, [](const auto &a, const\
+    \ auto &b) {\n        return polar(a, b);   \n    });\n    std::ranges::rotate(dots,\
+    \ std::ranges::min_element(dots, [](const auto &a, const auto &b) {\n        if\
+    \ (sameDirection(Point(-1, 0), a)) return false;\n        if (sameDirection(Point(-1,\
+    \ 0), b)) return true;\n        return polar(a, b, Point(-1, 0)); \n    }));\n\
+    \    dots.insert(std::ranges::min_element(dots, [](const auto &a, const auto &b)\
+    \ {\n        return polar(a, b, Point(1, 0)); \n    }), zero_count, Point());\n\
+    \    for (auto &p : dots)\n        std::cout << p << \"\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Geometry/base.hpp\"\n\nusing Point\
-    \ = Pt<ll>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int\
-    \ n;\n    cin >> n;\n    vector<Point> dots(n);\n    for (auto &p : dots)\n  \
-    \      cin >> p;\n    int zero_count = 0;\n    {\n        vector<Point> swp;\n\
-    \        for (auto &p : dots)\n            if (p != Point()) swp.push_back(p);\n\
-    \            else ++zero_count;\n        dots.swap(swp);\n    }\n    ranges::sort(dots,\
-    \ [](const auto &a, const auto &b) {\n        return polar(a, b);   \n    });\n\
-    \    ranges::rotate(dots, ranges::min_element(dots, [](const auto &a, const auto\
-    \ &b) {\n        if (sameDirection(Point(-1, 0), a)) return false;\n        if\
-    \ (sameDirection(Point(-1, 0), b)) return true;\n        return polar(a, b, Point(-1,\
-    \ 0)); \n    }));\n    dots.insert(ranges::min_element(dots, [](const auto &a,\
-    \ const auto &b) {\n        return polar(a, b, Point(1, 0)); \n    }), zero_count,\
-    \ Point());\n    for (auto &p : dots)\n        cout << p << \"\\n\";\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Geometry/base.hpp\"\n\nusing Point\
+    \ = Pt<long long>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n;\n    std::cin >> n;\n    std::vector<Point> dots(n);\n    for (auto\
+    \ &p : dots)\n        std::cin >> p;\n    int zero_count = 0;\n    {\n       \
+    \ std::vector<Point> swp;\n        for (auto &p : dots)\n            if (p !=\
+    \ Point()) swp.push_back(p);\n            else ++zero_count;\n        dots.swap(swp);\n\
+    \    }\n    std::ranges::sort(dots, [](const auto &a, const auto &b) {\n     \
+    \   return polar(a, b);   \n    });\n    std::ranges::rotate(dots, std::ranges::min_element(dots,\
+    \ [](const auto &a, const auto &b) {\n        if (sameDirection(Point(-1, 0),\
+    \ a)) return false;\n        if (sameDirection(Point(-1, 0), b)) return true;\n\
+    \        return polar(a, b, Point(-1, 0)); \n    }));\n    dots.insert(std::ranges::min_element(dots,\
+    \ [](const auto &a, const auto &b) {\n        return polar(a, b, Point(1, 0));\
+    \ \n    }), zero_count, Point());\n    for (auto &p : dots)\n        std::cout\
+    \ << p << \"\\n\";\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Geometry/base.hpp
   isVerificationFile: true
   path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
+  timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/sort_points_by_argument.test.cpp

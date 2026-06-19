@@ -11,8 +11,8 @@ data:
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,38 +25,10 @@ data:
     - https://judge.yosupo.jp/problem/count_points_in_triangle
   bundledCode: "#line 1 \"test/1_library_checker/geometry/count_points_in_triangle.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/count_points_in_triangle\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/geometry/count_points_in_triangle.test.cpp\"\
-    \n\n#line 2 \"Geometry/PointInAngle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n \
-    \   \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/geometry/count_points_in_triangle.test.cpp\"\n\
+    \n#line 2 \"Geometry/PointInAngle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n   \
+    \ \ntemplate <typename T>\nusing DefaultFloat = std::conditional_t<std::is_floating_point_v<T>,\
     \ T, double>;\n\ntemplate <typename T>\nconstexpr T get_default_eps() {\n    if\
     \ constexpr (std::is_same_v<T, float>)\n        return T(1e-6);\n    else if constexpr\
     \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
@@ -190,31 +162,33 @@ data:
     \ T();\n        if (tmp < 0) return cnt[x][z] - cnt[x][y] - cnt[y][z] - cnt2[x][y]\
     \ - cnt2[y][z] - cnt3[y];\n        return cnt[x][y] + cnt[y][z] - cnt[x][z] -\
     \ cnt2[x][z];\n    }\n};\n#line 5 \"test/1_library_checker/geometry/count_points_in_triangle.test.cpp\"\
-    \n\nusing Point = Pt<ll>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, m, q;\n    cin >> n;\n    vector<Point> arr(n);\n    for (auto &p\
-    \ : arr)\n        cin >> p;\n    cin >> m;\n    vector<Point> extra(m);\n    for\
-    \ (auto &p : extra)\n        cin >> p;\n    PointInAngle<int, Point> ds(arr, vector<int>(n,\
-    \ 0), extra, vector<int>(m, 1));\n    cin >> q;\n    while (q--) {\n        int\
-    \ x, y, z;\n        cin >> x >> y >> z;\n        cout << ds.calc_tri(x, y, z)\
-    \ << \"\\n\";\n    }\n}\n"
+    \n\nusing Point = Pt<long long>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, m, q;\n    std::cin >> n;\n    std::vector<Point>\
+    \ arr(n);\n    for (auto &p : arr)\n        std::cin >> p;\n    std::cin >> m;\n\
+    \    std::vector<Point> extra(m);\n    for (auto &p : extra)\n        std::cin\
+    \ >> p;\n    PointInAngle<int, Point> ds(arr, std::vector<int>(n, 0), extra, std::vector<int>(m,\
+    \ 1));\n    std::cin >> q;\n    while (q--) {\n        int x, y, z;\n        std::cin\
+    \ >> x >> y >> z;\n        std::cout << ds.calc_tri(x, y, z) << \"\\n\";\n   \
+    \ }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/count_points_in_triangle\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Geometry/PointInAngle.hpp\"\n\n\
-    using Point = Pt<ll>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n\
-    \    int n, m, q;\n    cin >> n;\n    vector<Point> arr(n);\n    for (auto &p\
-    \ : arr)\n        cin >> p;\n    cin >> m;\n    vector<Point> extra(m);\n    for\
-    \ (auto &p : extra)\n        cin >> p;\n    PointInAngle<int, Point> ds(arr, vector<int>(n,\
-    \ 0), extra, vector<int>(m, 1));\n    cin >> q;\n    while (q--) {\n        int\
-    \ x, y, z;\n        cin >> x >> y >> z;\n        cout << ds.calc_tri(x, y, z)\
-    \ << \"\\n\";\n    }\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"Geometry/PointInAngle.hpp\"\n\nusing\
+    \ Point = Pt<long long>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, m, q;\n    std::cin >> n;\n    std::vector<Point> arr(n);\n    for\
+    \ (auto &p : arr)\n        std::cin >> p;\n    std::cin >> m;\n    std::vector<Point>\
+    \ extra(m);\n    for (auto &p : extra)\n        std::cin >> p;\n    PointInAngle<int,\
+    \ Point> ds(arr, std::vector<int>(n, 0), extra, std::vector<int>(m, 1));\n   \
+    \ std::cin >> q;\n    while (q--) {\n        int x, y, z;\n        std::cin >>\
+    \ x >> y >> z;\n        std::cout << ds.calc_tri(x, y, z) << \"\\n\";\n    }\n\
+    }\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Geometry/PointInAngle.hpp
   - Geometry/base.hpp
   - DataStructure/BIT.hpp
   isVerificationFile: true
   path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
+  timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/count_points_in_triangle.test.cpp

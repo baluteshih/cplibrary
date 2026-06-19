@@ -37,11 +37,11 @@ data:
     \ { auto res = *this; return res /= o; }\n    bool operator==(const MultiInt&\
     \ o) const requires requires { v == o.v; } {\n        return v == o.v;\n    }\n\
     \    std::strong_ordering operator<=>(const MultiInt& o) const requires requires\
-    \ { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const MultiInt& obj) {\n        std::apply([&os](const auto&... args) {\n\
-    \            bool first = true;\n            ((os << (first ? \"\" : \" \") <<\
-    \ args, first = false), ...);\n        }, obj.v);\n        return os;\n    }\n\
-    };\n"
+    \ { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
+    \ auto&... args) {\n            bool first = true;\n            ((os << (first\
+    \ ? \"\" : \" \") << args, first = false), ...);\n        }, obj.v);\n       \
+    \ return os;\n    }\n};\n"
   code: "#pragma once\n\ntemplate <typename... Ints>\nstruct MultiInt {\n    std::tuple<Ints...>\
     \ v;\n    MultiInt() = default;\n    template <typename T> requires std::is_integral_v<T>\n\
     \    MultiInt(T x) : v{ Ints(x)... } {}\n    MultiInt(Ints... args) : v{args...}\
@@ -64,8 +64,8 @@ data:
     \ MultiInt& o) const { auto res = *this; return res /= o; }\n    bool operator==(const\
     \ MultiInt& o) const requires requires { v == o.v; } {\n        return v == o.v;\n\
     \    }\n    std::strong_ordering operator<=>(const MultiInt& o) const requires\
-    \ requires { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
+    \ requires { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
     \ auto&... args) {\n            bool first = true;\n            ((os << (first\
     \ ? \"\" : \" \") << args, first = false), ...);\n        }, obj.v);\n       \
     \ return os;\n    }\n};\n"
@@ -74,7 +74,7 @@ data:
   path: Misc/MultiInt.hpp
   requiredBy:
   - String/RollingHash.hpp
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/string/longest_common_substring.test.cpp

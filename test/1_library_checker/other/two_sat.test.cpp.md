@@ -1,60 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
     links:
     - https://judge.yosupo.jp/problem/two_sat
   bundledCode: "#line 1 \"test/1_library_checker/other/two_sat.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#line 2 \"default_code.hpp\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long long ll;\ntypedef\
-    \ pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X first\n#define Y second\n\
-    #define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(), v.end()\ntemplate<class\
-    \ A, class B>\nostream& operator<<(ostream& os, const pair<A, B> &a) {\n    os\
-    \ << \"(\" << a.first << \", \" << a.second << \")\";\n    return os;\n}\ntemplate\
-    \ <typename T>\nconcept PrintableContainer = requires(T& a) {\n    a.begin();\n\
-    \    a.end();\n} && !std::same_as<std::remove_cvref_t<T>, std::string> &&\n  \
-    \   !std::same_as<std::remove_cvref_t<T>, std::string_view> &&\n     !std::is_convertible_v<T,\
-    \ const char*>;\ntemplate <PrintableContainer T>\nstd::ostream& operator<<(std::ostream&\
-    \ os, const T& a) {\n    os << \"[ \";\n    bool first = true;\n    for (const\
-    \ auto& item : a) {\n        if (!first) os << \", \";\n        os << item;\n\
-    \        first = false;\n    }\n    return os << \" ]\";\n}\n#ifdef bbq\n#include\
-    \ <experimental/iterator>\n#define safe cerr<<__PRETTY_FUNCTION__<<\" line \"\
-    <<__LINE__<<\" safe\\n\"\n#define sepline sepline_() \n#define debug(a...) debug_(#a,\
-    \ a)\n#define orange(a...) orange_(#a, a)\nvoid debug_(auto s, auto ...a) {\n\
-    \    cerr << \"\\e[1;32m(\" << s << \") = (\";\n    int f = 0;\n    (..., (cerr\
-    \ << (f++ ? \", \" : \"\") << a));\n    cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto\
-    \ s, auto L, auto R) {\n    cerr << \"\\e[1;33m[ \" << s << \" ] = [ \";\n   \
-    \ using namespace experimental;\n    copy(L, R, make_ostream_joiner(cerr, \",\
-    \ \"));\n    cerr << \" ]\\e[0m\\n\";\n}\nvoid sepline_(int length = 50) {\n \
-    \   cerr << \"\\e[1;35m\";\n    cerr << string(length, '=');\n    cerr << \"\\\
-    e[0m\\n\";\n}\n#else\n#define safe ((void)0)\n#define sepline safe\n#define debug(...)\
-    \ safe\n#define orange(...) safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n\
-    \    x = max(x, val);\n}\n\nvoid chmin(auto &x, auto val) {\n    x = min(x, val);\n\
-    }\n\nvector<int> count_array(const auto &container, int sz = -1) {\n    if (sz\
-    \ == -1) sz = *ranges::max_element(container) + 1;\n    vector<int> res(sz);\n\
-    \    for (auto x : container) ++res[x];\n    return res;\n}\n\ntemplate<class\
-    \ T>\nvoid discretization(vector<T> &vals) {\n    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(),\
-    \ vals.end());\n}\n#line 3 \"test/1_library_checker/other/two_sat.test.cpp\"\n\
-    \n#line 2 \"Misc/2sat.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#line 2 \"assumption.hpp\"\
+    \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/other/two_sat.test.cpp\"\
+    \n\n#line 2 \"Misc/2sat.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
     \n\ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
     class Graph {\npublic:\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
@@ -158,36 +130,38 @@ data:
     \ + n]) return false;\n            istrue[i] = scc.bln[i] < scc.bln[i + n];\n\
     \            istrue[i + n] = !istrue[i];\n        }\n        return true;\n  \
     \  }\n};\n#line 5 \"test/1_library_checker/other/two_sat.test.cpp\"\n\nint main()\
-    \ {\n    ios::sync_with_stdio(0), cin.tie(0);\n    string p, cnt;\n    int n,\
-    \ m;\n    cin >> p >> cnt >> n >> m;\n    SAT sat(n);\n    while (m--) {\n   \
-    \     int a, b, z;\n        cin >> a >> b >> z;\n        if (a < 0) a = sat.rv(-a\
-    \ - 1);\n        else --a;\n        if (b < 0) b = sat.rv(-b - 1);\n        else\
-    \ --b;\n        sat.add_clause(a, b);\n    }\n    if (!sat.solve())\n        cout\
-    \ << \"s UNSATISFIABLE\\n\";\n    else {\n        cout << \"s SATISFIABLE\\nv\
-    \ \";\n        for (int i = 0; i < n; ++i)\n            if (sat.istrue[i])\n \
-    \               cout << i + 1 << \" \";\n            else\n                cout\
-    \ << -(i + 1) << \" \";\n        cout << \"0\\n\";\n    }\n}\n"
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    std::string p, cnt;\n\
+    \    int n, m;\n    std::cin >> p >> cnt >> n >> m;\n    SAT sat(n);\n    while\
+    \ (m--) {\n        int a, b, z;\n        std::cin >> a >> b >> z;\n        if\
+    \ (a < 0) a = sat.rv(-a - 1);\n        else --a;\n        if (b < 0) b = sat.rv(-b\
+    \ - 1);\n        else --b;\n        sat.add_clause(a, b);\n    }\n    if (!sat.solve())\n\
+    \        std::cout << \"s UNSATISFIABLE\\n\";\n    else {\n        std::cout <<\
+    \ \"s SATISFIABLE\\nv \";\n        for (int i = 0; i < n; ++i)\n            if\
+    \ (sat.istrue[i])\n                std::cout << i + 1 << \" \";\n            else\n\
+    \                std::cout << -(i + 1) << \" \";\n        std::cout << \"0\\n\"\
+    ;\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#include \"\
-    default_code.hpp\"\n\n#include \"Misc/2sat.hpp\"\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    string p, cnt;\n    int n, m;\n    cin >> p >> cnt >> n >>\
-    \ m;\n    SAT sat(n);\n    while (m--) {\n        int a, b, z;\n        cin >>\
-    \ a >> b >> z;\n        if (a < 0) a = sat.rv(-a - 1);\n        else --a;\n  \
-    \      if (b < 0) b = sat.rv(-b - 1);\n        else --b;\n        sat.add_clause(a,\
-    \ b);\n    }\n    if (!sat.solve())\n        cout << \"s UNSATISFIABLE\\n\";\n\
-    \    else {\n        cout << \"s SATISFIABLE\\nv \";\n        for (int i = 0;\
-    \ i < n; ++i)\n            if (sat.istrue[i])\n                cout << i + 1 <<\
-    \ \" \";\n            else\n                cout << -(i + 1) << \" \";\n     \
-    \   cout << \"0\\n\";\n    }\n}\n"
+    assumption.hpp\"\n\n#include \"Misc/2sat.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    std::string p, cnt;\n    int n, m;\n    std::cin >> p\
+    \ >> cnt >> n >> m;\n    SAT sat(n);\n    while (m--) {\n        int a, b, z;\n\
+    \        std::cin >> a >> b >> z;\n        if (a < 0) a = sat.rv(-a - 1);\n  \
+    \      else --a;\n        if (b < 0) b = sat.rv(-b - 1);\n        else --b;\n\
+    \        sat.add_clause(a, b);\n    }\n    if (!sat.solve())\n        std::cout\
+    \ << \"s UNSATISFIABLE\\n\";\n    else {\n        std::cout << \"s SATISFIABLE\\\
+    nv \";\n        for (int i = 0; i < n; ++i)\n            if (sat.istrue[i])\n\
+    \                std::cout << i + 1 << \" \";\n            else\n            \
+    \    std::cout << -(i + 1) << \" \";\n        std::cout << \"0\\n\";\n    }\n\
+    }\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Misc/2sat.hpp
   - Graph/SCC.hpp
   - Graph/base.hpp
   isVerificationFile: true
   path: test/1_library_checker/other/two_sat.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 13:39:32+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/other/two_sat.test.cpp
 layout: document

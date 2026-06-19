@@ -17,16 +17,16 @@ data:
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/Bostan_Mori.hpp\"\n   \n#line 2 \"Polynomial/Polynomial.hpp\"\
@@ -186,7 +186,7 @@ data:
     \ n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
-    \  std::copy_n(p.data(), min(p.n(), m), this->data());\n    }\n    Poly(const\
+    \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
     \ std::vector<T> &v) : std::vector<T>(move(v)) {}\n    Poly& irev() { return reverse(this->data(),\
     \ this->data() + n()), *this; }\n    Poly& isz(int m) { return this->resize(m),\
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
@@ -211,19 +211,19 @@ data:
     \        for (int i = 0; i < m; ++i)\n            Xi[i] *= (2 - Xi[i] * Y[i]);\n\
     \        return Xi.idft(m).isz(n());\n    }\n    Poly Dx() const {\n        Poly\
     \ ret(n() - 1);\n        for (int i = 0; i < ret.n(); ++i)\n            ret[i]\
-    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(max(1, ret.n()));\n    }\n\
-    \    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i = 0; i\
-    \ < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n       \
-    \ return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n  \
-    \      return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
+    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(std::max(1, ret.n()));\n\
+    \    }\n    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i\
+    \ = 0; i < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n\
+    \        return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n\
+    \        return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
     \ (*this)[0] == 0, 5e5/886ms\n        if (n() == 1) return {1};\n        Poly\
     \ X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n        Poly Y = X.Ln(); Y[0]\
     \ = -1;\n        return (X * (*this - Y)).isz(n());\n    }\n    // M := P(P -\
-    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(ll k) const {\n    \
-    \    int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n       \
-    \ if (nz * min(k, (ll)n()) >= n()) return Poly(n());\n        if (!k) return Poly(Poly\
-    \ {1}, n());\n        Poly X(this->data() + nz, this->data() + nz + n() - nz *\
-    \ k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
+    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(long long k) const {\n\
+    \        int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n   \
+    \     if (nz * std::min(k, (long long)n()) >= n()) return Poly(n());\n       \
+    \ if (!k) return Poly(Poly {1}, n());\n        Poly X(this->data() + nz, this->data()\
+    \ + nz + n() - nz * k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
     \    }\n    Poly _tmul(int nn, const Poly &rhs) const {\n        Poly Y = ((*this)\
     \ * rhs).isz(n() + nn - 1);\n        return Poly(Y.data() + n() - 1, Y.data()\
     \ + Y.n());\n    }\n    std::vector<T> _eval(const std::vector<T> &x, const std::vector<Poly>\
@@ -242,11 +242,11 @@ data:
     \ 5e5/330ms\n        if (n() < rhs.n()) return {{0}, *this};\n        const int\
     \ m = n() - rhs.n() + 1;\n        Poly X(rhs); X.irev().isz(m);\n        Poly\
     \ Y(*this); Y.irev().isz(m);\n        Poly Q = (Y * X.Inv()).isz(m).irev();\n\
-    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(max(1, rhs.n()\
+    \        X = rhs * Q, Y = *this;\n        return {Q, (Y - X).isz(std::max(1, rhs.n()\
     \ - 1))};\n    }\n    // should be include additionally\n    Poly Sqrt() const;\n\
     \    bool has_sqrt() const;\n    Poly& shift(T c);\n};\nusing Poly_t = Poly<modint998244353>;\n\
     #line 4 \"Polynomial/Bostan_Mori.hpp\"\n\ntemplate<class T>\nT Bostan_Mori(const\
-    \ Poly<T> &f, const Poly<T> &g, ll k) { // [f(x)/g(x)][x^k]\n    assert(f.size()\
+    \ Poly<T> &f, const Poly<T> &g, long long k) { // [f(x)/g(x)][x^k]\n    assert(f.size()\
     \ + 1 <= g.size());\n    Poly<T> F(f);\n    Poly<T> G(g);\n    for (; k; k >>=\
     \ 1) {\n        Poly<T> H = G;\n        int m = 1;\n        while (m < (int)G.size()\
     \ * 2) m <<= 1;\n        for (int i = 1; i < (int)H.size(); i += 2) H[i] = -H[i];\n\
@@ -256,7 +256,7 @@ data:
     \ ++i) G[i] = G[i * 2];\n        F.isz(((int)F.size() + 1 - (k & 1)) / 2), G.isz(((int)G.size()\
     \ + 1) / 2);\n    }\n    return F[0] / G[0];\n}\n"
   code: "#pragma once\n   \n#include \"Polynomial/Polynomial.hpp\"\n\ntemplate<class\
-    \ T>\nT Bostan_Mori(const Poly<T> &f, const Poly<T> &g, ll k) { // [f(x)/g(x)][x^k]\n\
+    \ T>\nT Bostan_Mori(const Poly<T> &f, const Poly<T> &g, long long k) { // [f(x)/g(x)][x^k]\n\
     \    assert(f.size() + 1 <= g.size());\n    Poly<T> F(f);\n    Poly<T> G(g);\n\
     \    for (; k; k >>= 1) {\n        Poly<T> H = G;\n        int m = 1;\n      \
     \  while (m < (int)G.size() * 2) m <<= 1;\n        for (int i = 1; i < (int)H.size();\
@@ -276,8 +276,8 @@ data:
   path: Polynomial/Bostan_Mori.hpp
   requiredBy:
   - Polynomial/linear_recursion.hpp
-  timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-19 13:39:32+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: Polynomial/Bostan_Mori.hpp

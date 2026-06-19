@@ -7,6 +7,24 @@ data:
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/biginteger/addition.test.cpp
+    title: test/1_library_checker/biginteger/addition.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/biginteger/multiplication.test.cpp
+    title: test/1_library_checker/biginteger/multiplication.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/closest_pair.test.cpp
+    title: test/1_library_checker/geometry/closest_pair.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+    title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+    title: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/static_convex_hull.test.cpp
+    title: test/1_library_checker/geometry/static_convex_hull.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/biconnected_components.test.cpp
     title: test/1_library_checker/graph/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,18 +54,36 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/two_edge_connected_components.test.cpp
     title: test/1_library_checker/graph/two_edge_connected_components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/two_sat.test.cpp
+    title: test/1_library_checker/other/two_sat.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/string/longest_common_substring.test.cpp
+    title: test/1_library_checker/string/longest_common_substring.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/string/number_of_substrings.test.cpp
+    title: test/1_library_checker/string/number_of_substrings.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/string/suffixarray.test.cpp
+    title: test/1_library_checker/string/suffixarray.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/string/zalgorithm.test.cpp
+    title: test/1_library_checker/string/zalgorithm.test.cpp
   - icon: ':x:'
     path: test/1_library_checker/tree/cartesian_tree.test.cpp
     title: test/1_library_checker/tree/cartesian_tree.test.cpp
@@ -178,6 +214,8 @@ data:
   timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
@@ -190,6 +228,16 @@ data:
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
+  - test/1_library_checker/geometry/closest_pair.test.cpp
+  - test/1_library_checker/geometry/static_convex_hull.test.cpp
+  - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/biginteger/addition.test.cpp
+  - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/string/suffixarray.test.cpp
+  - test/1_library_checker/string/zalgorithm.test.cpp
+  - test/1_library_checker/string/number_of_substrings.test.cpp
+  - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/graph/bipartitematching.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp

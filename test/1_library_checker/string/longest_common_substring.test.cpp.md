@@ -14,8 +14,8 @@ data:
     path: String/RollingHash.hpp
     title: String/RollingHash.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -28,37 +28,9 @@ data:
     - https://judge.yosupo.jp/problem/longest_common_substring
   bundledCode: "#line 1 \"test/1_library_checker/string/longest_common_substring.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/string/longest_common_substring.test.cpp\"\
-    \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/string/longest_common_substring.test.cpp\"\n\n\
+    #line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
     \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
@@ -184,15 +156,15 @@ data:
     \ { auto res = *this; return res /= o; }\n    bool operator==(const MultiInt&\
     \ o) const requires requires { v == o.v; } {\n        return v == o.v;\n    }\n\
     \    std::strong_ordering operator<=>(const MultiInt& o) const requires requires\
-    \ { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const MultiInt& obj) {\n        std::apply([&os](const auto&... args) {\n\
-    \            bool first = true;\n            ((os << (first ? \"\" : \" \") <<\
-    \ args, first = false), ...);\n        }, obj.v);\n        return os;\n    }\n\
-    };\n#line 4 \"String/RollingHash.hpp\"\n\ntemplate <int base, typename... Ints>\n\
-    struct RollingHash {\n    using Val = MultiInt<Ints...>;\n    int sz = 0;\n  \
-    \  Val val;\n    inline static std::vector<Val> p_pow, p_ipow;\n    static void\
-    \ initialize() {\n        p_pow = std::vector<Val>{Val(1), Val(base)};\n     \
-    \   p_ipow = std::vector<Val>{Val(1), Val(1) / Val(base)};\n    }\n    static\
+    \ { v <=> o.v; } {\n        return v <=> o.v;\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const MultiInt& obj) {\n        std::apply([&os](const\
+    \ auto&... args) {\n            bool first = true;\n            ((os << (first\
+    \ ? \"\" : \" \") << args, first = false), ...);\n        }, obj.v);\n       \
+    \ return os;\n    }\n};\n#line 4 \"String/RollingHash.hpp\"\n\ntemplate <int base,\
+    \ typename... Ints>\nstruct RollingHash {\n    using Val = MultiInt<Ints...>;\n\
+    \    int sz = 0;\n    Val val;\n    inline static std::vector<Val> p_pow, p_ipow;\n\
+    \    static void initialize() {\n        p_pow = std::vector<Val>{Val(1), Val(base)};\n\
+    \        p_ipow = std::vector<Val>{Val(1), Val(1) / Val(base)};\n    }\n    static\
     \ void extend(int sz) {\n        if (p_pow.empty()) initialize();\n        int\
     \ cur = p_pow.size();\n        if (sz <= cur) return;\n        p_pow.resize(sz),\
     \ p_ipow.resize(sz);\n        if (cur < sz) {\n            for (int i = cur; i\
@@ -223,47 +195,47 @@ data:
     \ rangeHash(const std::vector<RollingHash> &prefix_sum, int l, int r) {\n    \
     \    if (l > r) return RollingHash();\n        if (l == 0) return prefix_sum[r\
     \ - 1];\n        return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);\n    }\n\
-    \    friend ostream& operator<<(ostream& os, const RollingHash& v) {\n       \
-    \ os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n#line 6 \"\
-    test/1_library_checker/string/longest_common_substring.test.cpp\"\n\nusing mint1\
-    \ = modint998244353;\nusing mint2 = modint1000000007;\nusing Hash = RollingHash<307,\
-    \ mint1, mint2>;\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n \
-    \   string s, t;\n    cin >> s >> t;\n    auto prefix1 = Hash::prefixHash(s);\n\
+    \    friend std::ostream& operator<<(std::ostream& os, const RollingHash& v) {\n\
+    \        os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n#line\
+    \ 6 \"test/1_library_checker/string/longest_common_substring.test.cpp\"\n\nusing\
+    \ mint1 = modint998244353;\nusing mint2 = modint1000000007;\nusing Hash = RollingHash<307,\
+    \ mint1, mint2>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    std::string s, t;\n    std::cin >> s >> t;\n    auto prefix1 = Hash::prefixHash(s);\n\
     \    auto prefix2 = Hash::prefixHash(t);\n    int anslen = 0, a = 0, b = 0;\n\n\
-    \    auto check = [&](int len) {\n        vector<pair<Hash, int>> val;\n     \
-    \   val.reserve(s.size() - len + 1);\n        for (int i = 0; i <= int(s.size())\
+    \    auto check = [&](int len) {\n        std::vector<std::pair<Hash, int>> val;\n\
+    \        val.reserve(s.size() - len + 1);\n        for (int i = 0; i <= int(s.size())\
     \ - len; ++i)\n            val.emplace_back(Hash::rangeHash(prefix1, i, i + len),\
-    \ i);\n        ranges::sort(val);\n        for (int i = 0; i <= int(t.size())\
+    \ i);\n        std::ranges::sort(val);\n        for (int i = 0; i <= int(t.size())\
     \ - len; ++i) {\n            auto v = Hash::rangeHash(prefix2, i, i + len);\n\
-    \            auto it = ranges::lower_bound(val, make_pair(v, 0));\n          \
-    \  if (it != val.end() && it->first == v) {\n                anslen = len;\n \
-    \               a = it->second;\n                b = i;\n                return\
-    \ true;\n            }\n        }\n        return false;\n    };\n\n    int l\
-    \ = 0, r = min(s.size(), t.size()) + 1;\n    while (r - l > 1) {\n        int\
-    \ mid = (l + r) >> 1;\n        if (check(mid)) l = mid;\n        else r = mid;\n\
-    \    }\n    cout << a << \" \" << a + anslen << \" \" << b << \" \" << b + anslen\
-    \ << \"\\n\";\n}\n"
+    \            auto it = std::ranges::lower_bound(val, std::make_pair(v, 0));\n\
+    \            if (it != val.end() && it->first == v) {\n                anslen\
+    \ = len;\n                a = it->second;\n                b = i;\n          \
+    \      return true;\n            }\n        }\n        return false;\n    };\n\
+    \n    int l = 0, r = std::min(s.size(), t.size()) + 1;\n    while (r - l > 1)\
+    \ {\n        int mid = (l + r) >> 1;\n        if (check(mid)) l = mid;\n     \
+    \   else r = mid;\n    }\n    std::cout << a << \" \" << a + anslen << \" \" <<\
+    \ b << \" \" << b + anslen << \"\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     String/RollingHash.hpp\"\n\nusing mint1 = modint998244353;\nusing mint2 = modint1000000007;\n\
-    using Hash = RollingHash<307, mint1, mint2>;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    string s, t;\n    cin >> s >> t;\n    auto prefix1 = Hash::prefixHash(s);\n\
-    \    auto prefix2 = Hash::prefixHash(t);\n    int anslen = 0, a = 0, b = 0;\n\n\
-    \    auto check = [&](int len) {\n        vector<pair<Hash, int>> val;\n     \
-    \   val.reserve(s.size() - len + 1);\n        for (int i = 0; i <= int(s.size())\
-    \ - len; ++i)\n            val.emplace_back(Hash::rangeHash(prefix1, i, i + len),\
-    \ i);\n        ranges::sort(val);\n        for (int i = 0; i <= int(t.size())\
-    \ - len; ++i) {\n            auto v = Hash::rangeHash(prefix2, i, i + len);\n\
-    \            auto it = ranges::lower_bound(val, make_pair(v, 0));\n          \
-    \  if (it != val.end() && it->first == v) {\n                anslen = len;\n \
-    \               a = it->second;\n                b = i;\n                return\
-    \ true;\n            }\n        }\n        return false;\n    };\n\n    int l\
-    \ = 0, r = min(s.size(), t.size()) + 1;\n    while (r - l > 1) {\n        int\
-    \ mid = (l + r) >> 1;\n        if (check(mid)) l = mid;\n        else r = mid;\n\
-    \    }\n    cout << a << \" \" << a + anslen << \" \" << b << \" \" << b + anslen\
-    \ << \"\\n\";\n}\n"
+    using Hash = RollingHash<307, mint1, mint2>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    std::string s, t;\n    std::cin >> s >> t;\n    auto prefix1\
+    \ = Hash::prefixHash(s);\n    auto prefix2 = Hash::prefixHash(t);\n    int anslen\
+    \ = 0, a = 0, b = 0;\n\n    auto check = [&](int len) {\n        std::vector<std::pair<Hash,\
+    \ int>> val;\n        val.reserve(s.size() - len + 1);\n        for (int i = 0;\
+    \ i <= int(s.size()) - len; ++i)\n            val.emplace_back(Hash::rangeHash(prefix1,\
+    \ i, i + len), i);\n        std::ranges::sort(val);\n        for (int i = 0; i\
+    \ <= int(t.size()) - len; ++i) {\n            auto v = Hash::rangeHash(prefix2,\
+    \ i, i + len);\n            auto it = std::ranges::lower_bound(val, std::make_pair(v,\
+    \ 0));\n            if (it != val.end() && it->first == v) {\n               \
+    \ anslen = len;\n                a = it->second;\n                b = i;\n   \
+    \             return true;\n            }\n        }\n        return false;\n\
+    \    };\n\n    int l = 0, r = std::min(s.size(), t.size()) + 1;\n    while (r\
+    \ - l > 1) {\n        int mid = (l + r) >> 1;\n        if (check(mid)) l = mid;\n\
+    \        else r = mid;\n    }\n    std::cout << a << \" \" << a + anslen << \"\
+    \ \" << b << \" \" << b + anslen << \"\\n\";\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - String/RollingHash.hpp
@@ -271,7 +243,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/string/longest_common_substring.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/string/longest_common_substring.test.cpp

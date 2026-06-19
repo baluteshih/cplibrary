@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/string/number_of_substrings.test.cpp
     title: test/1_library_checker/string/number_of_substrings.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/string/suffixarray.test.cpp
     title: test/1_library_checker/string/suffixarray.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"String/sais.hpp\"\n\n/*\n0-base\nThe input string should\
@@ -26,8 +26,8 @@ data:
     \ (int j = sa[ra[i] - 1]; std::max(i, j) + h < n && s[i + h] == s[j + h];) ++h;\n\
     \            hi[ra[i]] = h ? h-- : 0;\n        }\n    }\n    Suffix(const auto\
     \ &_s) : Suffix(_s, (int)_s.size()) {}\n    static auto sais(const auto &s) {\n\
-    \        const int n = SZ(s), z = std::ranges::max(s) + 1;\n        if (n == 1)\
-    \ return std::vector{0};\n        std::vector<int> c(z); for (int x : s) ++c[x];\n\
+    \        const int n = s.size(), z = std::ranges::max(s) + 1;\n        if (n ==\
+    \ 1) return std::vector{0};\n        std::vector<int> c(z); for (int x : s) ++c[x];\n\
     \        std::partial_sum(c.begin(), c.end(), c.begin());\n        std::vector<int>\
     \ sa(n);\n        auto I = std::views::iota(0, n);\n        std::vector<bool>\
     \ t(n, true);\n        for (int i = n - 2; i >= 0; --i)\n            t[i] = (s[i]\
@@ -40,7 +40,7 @@ data:
     \        for (auto x = c; int i : I | is_lms)\n            q[i] = lms.size(),\
     \ lms.push_back(sa[--x[s[i]]] = i);\n        induce();\n        std::vector<int>\
     \ ns(lms.size());\n        for (int j = -1, nz = 0; int i : sa | is_lms) {\n \
-    \           if (j >= 0) {\n                int len = min({n - i, n - j, lms[q[i]\
+    \           if (j >= 0) {\n                int len = std::min({n - i, n - j, lms[q[i]\
     \ + 1] - i});\n                ns[q[i]] = nz += std::lexicographical_compare(std::begin(s)\
     \ + j, std::begin(s) + j + len, std::begin(s) + i, std::begin(s) + i + len);\n\
     \            }\n            j = i;\n        }\n        std::ranges::fill(sa, 0);\n\
@@ -58,9 +58,9 @@ data:
     \ (!ra[i]) { h = 0; continue; }\n            for (int j = sa[ra[i] - 1]; std::max(i,\
     \ j) + h < n && s[i + h] == s[j + h];) ++h;\n            hi[ra[i]] = h ? h-- :\
     \ 0;\n        }\n    }\n    Suffix(const auto &_s) : Suffix(_s, (int)_s.size())\
-    \ {}\n    static auto sais(const auto &s) {\n        const int n = SZ(s), z =\
-    \ std::ranges::max(s) + 1;\n        if (n == 1) return std::vector{0};\n     \
-    \   std::vector<int> c(z); for (int x : s) ++c[x];\n        std::partial_sum(c.begin(),\
+    \ {}\n    static auto sais(const auto &s) {\n        const int n = s.size(), z\
+    \ = std::ranges::max(s) + 1;\n        if (n == 1) return std::vector{0};\n   \
+    \     std::vector<int> c(z); for (int x : s) ++c[x];\n        std::partial_sum(c.begin(),\
     \ c.end(), c.begin());\n        std::vector<int> sa(n);\n        auto I = std::views::iota(0,\
     \ n);\n        std::vector<bool> t(n, true);\n        for (int i = n - 2; i >=\
     \ 0; --i)\n            t[i] = (s[i] == s[i + 1] ? t[i + 1] : s[i] < s[i + 1]);\n\
@@ -72,7 +72,7 @@ data:
     \ lms, q(n);\n        lms.reserve(n);\n        for (auto x = c; int i : I | is_lms)\n\
     \            q[i] = lms.size(), lms.push_back(sa[--x[s[i]]] = i);\n        induce();\n\
     \        std::vector<int> ns(lms.size());\n        for (int j = -1, nz = 0; int\
-    \ i : sa | is_lms) {\n            if (j >= 0) {\n                int len = min({n\
+    \ i : sa | is_lms) {\n            if (j >= 0) {\n                int len = std::min({n\
     \ - i, n - j, lms[q[i] + 1] - i});\n                ns[q[i]] = nz += std::lexicographical_compare(std::begin(s)\
     \ + j, std::begin(s) + j + len, std::begin(s) + i, std::begin(s) + i + len);\n\
     \            }\n            j = i;\n        }\n        std::ranges::fill(sa, 0);\n\
@@ -83,8 +83,8 @@ data:
   isVerificationFile: false
   path: String/sais.hpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-19 13:39:32+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp
