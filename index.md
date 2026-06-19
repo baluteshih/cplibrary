@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':warning:'
@@ -55,7 +55,7 @@ data:
       title: Convolution/xor_convolution.hpp
   - name: DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/BIT.hpp
       title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
@@ -85,7 +85,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: Potential Disjoint Set
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
@@ -137,10 +137,10 @@ data:
     - icon: ':question:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Geometry/centers.hpp
       title: Geometry/centers.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Geometry/circle.hpp
       title: Geometry/circle.hpp
     - icon: ':x:'
@@ -199,7 +199,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
     - icon: ':question:'
@@ -368,18 +368,18 @@ data:
       title: String/z_algo.hpp
   - name: Tree/CentroidDS
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidDS/DistanceSolver.hpp
       title: Tree/CentroidDS/DistanceSolver.hpp
   - name: Tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidTree.hpp
       title: Tree/CentroidTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
     - icon: ':heavy_check_mark:'
@@ -388,7 +388,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/centroid_divide_and_conquer.hpp
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
@@ -756,45 +756,45 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
       title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - name: test/2_aoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/area.test.cpp
       title: test/2_aoj/area.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
       title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
       title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/common_tangent.test.cpp
       title: test/2_aoj/common_tangent.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/convex_cut.test.cpp
       title: test/2_aoj/convex_cut.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/counter-clockwise.test.cpp
       title: test/2_aoj/counter-clockwise.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/cross_point.test.cpp
       title: test/2_aoj/cross_point.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
       title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     - icon: ':x:'

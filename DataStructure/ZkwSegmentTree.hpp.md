@@ -21,7 +21,7 @@ data:
     \ Value = int, typename Tag = void, bool pushdown = true>\nclass ZkwSegmentTree\
     \ {\n    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static_assert(pushdown\
     \ || hasTag, \"Lazy tag must exist when pushdown is false\");\n    int n;\n  \
-    \  vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
+    \  std::vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
     \ std::vector<Tag>, Empty> lazy;\n    Value get_val(int rt) {\n        if constexpr\
     \ (pushdown) return seg[rt];\n        else return seg[rt] + lazy[rt];\n    }\n\
     \    void give_tag(int rt, auto tag) requires (hasTag) {\n        if constexpr\
@@ -45,8 +45,8 @@ data:
     \ lazy[rt];\n        else std::cerr << seg[rt];\n        std::cerr << \"\\n\"\
     ;\n    }\n    static int ceilpow2(int sz) {\n        int m = 1;\n        while\
     \ (m < sz) m <<= 1;\n        return m;\n    }\npublic:\n    ZkwSegmentTree(const\
-    \ vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { \n        if constexpr\
-    \ (hasTag) lazy.resize(n << 1); \n        for (int i = 0; i < int(data.size());\
+    \ std::vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { \n      \
+    \  if constexpr (hasTag) lazy.resize(n << 1); \n        for (int i = 0; i < int(data.size());\
     \ ++i) seg[i + n] = data[i];\n        for (int i = n - 1; i > 0; --i) up(i);\n\
     \    }\n    ZkwSegmentTree(int size): ZkwSegmentTree(vector<Value>(size)) {}\n\
     \    Value get(int x) {\n        assert(0 <= x && x < n);\n        if constexpr\
@@ -82,13 +82,13 @@ data:
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) {\n            for\
     \ (l += n, r += n; l < r; l >>= 1, r >>= 1) {\n                if (l & 1) printnode(l++);\n\
     \                if (r & 1) printnode(--r);\n            }\n        }\n      \
-    \  cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr <<\
-    \ \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n      \
-    \      printnode(i);\n        cerr << \"\\e[0m\\n\";\n    }\n};\n"
+    \  std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
+    \ << \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n   \
+    \         printnode(i);\n        std::cerr << \"\\e[0m\\n\";\n    }\n};\n"
   code: "#pragma once\n\ntemplate<typename Value = int, typename Tag = void, bool\
     \ pushdown = true>\nclass ZkwSegmentTree {\n    static constexpr bool hasTag =\
     \ !std::is_same_v<Tag, void>;\n    static_assert(pushdown || hasTag, \"Lazy tag\
-    \ must exist when pushdown is false\");\n    int n;\n    vector<Value> seg;\n\
+    \ must exist when pushdown is false\");\n    int n;\n    std::vector<Value> seg;\n\
     \    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>,\
     \ Empty> lazy;\n    Value get_val(int rt) {\n        if constexpr (pushdown) return\
     \ seg[rt];\n        else return seg[rt] + lazy[rt];\n    }\n    void give_tag(int\
@@ -112,7 +112,7 @@ data:
     \ << \"val = \" << seg[rt] << \", tag = \" << lazy[rt];\n        else std::cerr\
     \ << seg[rt];\n        std::cerr << \"\\n\";\n    }\n    static int ceilpow2(int\
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
-    \    }\npublic:\n    ZkwSegmentTree(const vector<Value> &data): n(ceilpow2(data.size())),\
+    \    }\npublic:\n    ZkwSegmentTree(const std::vector<Value> &data): n(ceilpow2(data.size())),\
     \ seg(n << 1) { \n        if constexpr (hasTag) lazy.resize(n << 1); \n      \
     \  for (int i = 0; i < int(data.size()); ++i) seg[i + n] = data[i];\n        for\
     \ (int i = n - 1; i > 0; --i) up(i);\n    }\n    ZkwSegmentTree(int size): ZkwSegmentTree(vector<Value>(size))\
@@ -149,14 +149,14 @@ data:
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) {\n            for\
     \ (l += n, r += n; l < r; l >>= 1, r >>= 1) {\n                if (l & 1) printnode(l++);\n\
     \                if (r & 1) printnode(--r);\n            }\n        }\n      \
-    \  cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr <<\
-    \ \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n      \
-    \      printnode(i);\n        cerr << \"\\e[0m\\n\";\n    }\n};\n"
+    \  std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
+    \ << \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n   \
+    \         printnode(i);\n        std::cerr << \"\\e[0m\\n\";\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/ZkwSegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-05-04 20:54:41+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp

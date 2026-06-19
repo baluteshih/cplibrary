@@ -13,9 +13,9 @@ data:
     links: []
   bundledCode: "#line 2 \"DataStructure/CatTree.hpp\"\n\ntemplate<typename Value =\
     \ int>\nclass CatTree {\n    int n;\n    std::vector<int> mid;\n    std::vector<std::vector<Value>>\
-    \ lft, rgt;\n    void initialize(int l, int r, int rt, const vector<Value> &data)\
-    \ {\n        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n    \
-    \        return;\n        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt]\
+    \ lft, rgt;\n    void initialize(int l, int r, int rt, const std::vector<Value>\
+    \ &data) {\n        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n\
+    \            return;\n        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt]\
     \ - l);\n        rgt[rt].resize(r - mid[rt]);\n        for (int i = mid[rt] -\
     \ 1; i >= l; --i) {\n            lft[rt][mid[rt] - i - 1] = i < std::ssize(data)\
     \ ? data[i] : Value();\n            if (mid[rt] - i - 1 > 0)\n               \
@@ -36,11 +36,11 @@ data:
     \ - l - 1] + rgt[lca][r - mid[lca]];\n    }\n};\n"
   code: "#pragma once\n\ntemplate<typename Value = int>\nclass CatTree {\n    int\
     \ n;\n    std::vector<int> mid;\n    std::vector<std::vector<Value>> lft, rgt;\n\
-    \    void initialize(int l, int r, int rt, const vector<Value> &data) {\n    \
-    \    if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n            return;\n\
-    \        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt] -\
-    \ l);\n        rgt[rt].resize(r - mid[rt]);\n        for (int i = mid[rt] - 1;\
-    \ i >= l; --i) {\n            lft[rt][mid[rt] - i - 1] = i < std::ssize(data)\
+    \    void initialize(int l, int r, int rt, const std::vector<Value> &data) {\n\
+    \        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n        \
+    \    return;\n        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt]\
+    \ - l);\n        rgt[rt].resize(r - mid[rt]);\n        for (int i = mid[rt] -\
+    \ 1; i >= l; --i) {\n            lft[rt][mid[rt] - i - 1] = i < std::ssize(data)\
     \ ? data[i] : Value();\n            if (mid[rt] - i - 1 > 0)\n               \
     \ lft[rt][mid[rt] - i - 1] = lft[rt][mid[rt] - i - 1] + lft[rt][mid[rt] - i -\
     \ 2];\n        }\n        for (int i = mid[rt]; i < r; ++i) {\n            rgt[rt][i\
@@ -61,7 +61,7 @@ data:
   isVerificationFile: false
   path: DataStructure/CatTree.hpp
   requiredBy: []
-  timestamp: '2026-03-18 20:28:14+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp

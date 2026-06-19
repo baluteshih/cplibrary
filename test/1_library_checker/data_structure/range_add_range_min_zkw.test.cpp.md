@@ -5,8 +5,8 @@ data:
     path: DataStructure/ZkwSegmentTree.hpp
     title: Zkw Segment Tree
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,41 +19,13 @@ data:
     - https://judge.yosupo.jp/problem/range_add_range_min
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_add_range_min\"\n#line\
-    \ 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef\
-    \ long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define\
-    \ X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(),\
-    \ v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream& os, const\
-    \ pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second << \")\"\
-    ;\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer = requires(T&\
-    \ a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp\"\
+    \ 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp\"\
     \n\n#line 2 \"DataStructure/ZkwSegmentTree.hpp\"\n\ntemplate<typename Value =\
     \ int, typename Tag = void, bool pushdown = true>\nclass ZkwSegmentTree {\n  \
     \  static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static_assert(pushdown\
     \ || hasTag, \"Lazy tag must exist when pushdown is false\");\n    int n;\n  \
-    \  vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
+    \  std::vector<Value> seg;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasTag,\
     \ std::vector<Tag>, Empty> lazy;\n    Value get_val(int rt) {\n        if constexpr\
     \ (pushdown) return seg[rt];\n        else return seg[rt] + lazy[rt];\n    }\n\
     \    void give_tag(int rt, auto tag) requires (hasTag) {\n        if constexpr\
@@ -77,8 +49,8 @@ data:
     \ lazy[rt];\n        else std::cerr << seg[rt];\n        std::cerr << \"\\n\"\
     ;\n    }\n    static int ceilpow2(int sz) {\n        int m = 1;\n        while\
     \ (m < sz) m <<= 1;\n        return m;\n    }\npublic:\n    ZkwSegmentTree(const\
-    \ vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { \n        if constexpr\
-    \ (hasTag) lazy.resize(n << 1); \n        for (int i = 0; i < int(data.size());\
+    \ std::vector<Value> &data): n(ceilpow2(data.size())), seg(n << 1) { \n      \
+    \  if constexpr (hasTag) lazy.resize(n << 1); \n        for (int i = 0; i < int(data.size());\
     \ ++i) seg[i + n] = data[i];\n        for (int i = n - 1; i > 0; --i) up(i);\n\
     \    }\n    ZkwSegmentTree(int size): ZkwSegmentTree(vector<Value>(size)) {}\n\
     \    Value get(int x) {\n        assert(0 <= x && x < n);\n        if constexpr\
@@ -114,50 +86,55 @@ data:
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) {\n            for\
     \ (l += n, r += n; l < r; l >>= 1, r >>= 1) {\n                if (l & 1) printnode(l++);\n\
     \                if (r & 1) printnode(--r);\n            }\n        }\n      \
-    \  cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr <<\
-    \ \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n      \
-    \      printnode(i);\n        cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp\"\
-    \n\nstruct Tag {\n    ll a;\n    Tag(ll _a = 0): a(_a) {}\n    Tag operator+(const\
-    \ Tag &rhs) {\n        return Tag(a + rhs.a);\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const Tag &v) {\n        os << v.a;\n        return os;\n    }\n};\n\nstruct\
-    \ Value {\n    ll val;\n    Value(ll _val = 1e18): val(_val) {}\n    Value operator+(const\
-    \ Value &rhs) {\n        return Value(min(val, rhs.val));\n    }\n    Value operator+(const\
+    \  std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr\
+    \ << \"\\e[1;33mInfo all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n   \
+    \         printnode(i);\n        std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line\
+    \ 5 \"test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp\"\
+    \n\nstruct Tag {\n    long long a;\n    Tag(long long _a = 0): a(_a) {}\n    Tag\
+    \ operator+(const Tag &rhs) {\n        return Tag(a + rhs.a);\n    }\n    friend\
+    \ std::ostream& operator<<(std::ostream& os, const Tag &v) {\n        os << v.a;\n\
+    \        return os;\n    }\n};\n\nstruct Value {\n    long long val;\n    Value(long\
+    \ long _val = 1e18): val(_val) {}\n    Value operator+(const Value &rhs) {\n \
+    \       return Value(std::min(val, rhs.val));\n    }\n    Value operator+(const\
     \ Tag &tag) {\n        return Value(val + tag.a);\n    }\n    Value operator-(const\
-    \ Tag &tag) {\n        return Value(val - tag.a);\n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const Value &v) {\n        os << v.val;\n        return\
-    \ os;\n    }\n    friend istream& operator>>(istream& is, Value &v) {\n      \
-    \  is >> v.val;\n        return is;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    vector<Value> arr(n);\n\
-    \    for (auto &v : arr)\n        cin >> v;\n    ZkwSegmentTree<Value, Tag> seg(arr);\n\
-    \    while (q--) {\n        int type, l, r;\n        cin >> type >> l >> r;\n\
-    \        if (type == 0) {\n            int x;\n            cin >> x;\n       \
-    \     seg.range_transform(l, r, Tag(x));\n        }\n        else {\n        \
-    \    cout << seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \ Tag &tag) {\n        return Value(val - tag.a);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.val;\n     \
+    \   return os;\n    }\n    friend std::istream& operator>>(std::istream& is, Value\
+    \ &v) {\n        is >> v.val;\n        return is;\n    }\n};\n\nint main() {\n\
+    \    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<Value> arr(n);\n    for (auto &v : arr)\n      \
+    \  std::cin >> v;\n    ZkwSegmentTree<Value, Tag> seg(arr);\n    while (q--) {\n\
+    \        int type, l, r;\n        std::cin >> type >> l >> r;\n        if (type\
+    \ == 0) {\n            int x;\n            std::cin >> x;\n            seg.range_transform(l,\
+    \ r, Tag(x));\n        }\n        else {\n            std::cout << seg.range_prod(l,\
+    \ r) << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_add_range_min\"\n\
-    #include \"default_code.hpp\"\n\n#include \"DataStructure/ZkwSegmentTree.hpp\"\
-    \n\nstruct Tag {\n    ll a;\n    Tag(ll _a = 0): a(_a) {}\n    Tag operator+(const\
-    \ Tag &rhs) {\n        return Tag(a + rhs.a);\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const Tag &v) {\n        os << v.a;\n        return os;\n    }\n};\n\nstruct\
-    \ Value {\n    ll val;\n    Value(ll _val = 1e18): val(_val) {}\n    Value operator+(const\
-    \ Value &rhs) {\n        return Value(min(val, rhs.val));\n    }\n    Value operator+(const\
+    #include \"assumption.hpp\"\n\n#include \"DataStructure/ZkwSegmentTree.hpp\"\n\
+    \nstruct Tag {\n    long long a;\n    Tag(long long _a = 0): a(_a) {}\n    Tag\
+    \ operator+(const Tag &rhs) {\n        return Tag(a + rhs.a);\n    }\n    friend\
+    \ std::ostream& operator<<(std::ostream& os, const Tag &v) {\n        os << v.a;\n\
+    \        return os;\n    }\n};\n\nstruct Value {\n    long long val;\n    Value(long\
+    \ long _val = 1e18): val(_val) {}\n    Value operator+(const Value &rhs) {\n \
+    \       return Value(std::min(val, rhs.val));\n    }\n    Value operator+(const\
     \ Tag &tag) {\n        return Value(val + tag.a);\n    }\n    Value operator-(const\
-    \ Tag &tag) {\n        return Value(val - tag.a);\n    }\n    friend ostream&\
-    \ operator<<(ostream& os, const Value &v) {\n        os << v.val;\n        return\
-    \ os;\n    }\n    friend istream& operator>>(istream& is, Value &v) {\n      \
-    \  is >> v.val;\n        return is;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    vector<Value> arr(n);\n\
-    \    for (auto &v : arr)\n        cin >> v;\n    ZkwSegmentTree<Value, Tag> seg(arr);\n\
-    \    while (q--) {\n        int type, l, r;\n        cin >> type >> l >> r;\n\
-    \        if (type == 0) {\n            int x;\n            cin >> x;\n       \
-    \     seg.range_transform(l, r, Tag(x));\n        }\n        else {\n        \
-    \    cout << seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \ Tag &tag) {\n        return Value(val - tag.a);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.val;\n     \
+    \   return os;\n    }\n    friend std::istream& operator>>(std::istream& is, Value\
+    \ &v) {\n        is >> v.val;\n        return is;\n    }\n};\n\nint main() {\n\
+    \    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<Value> arr(n);\n    for (auto &v : arr)\n      \
+    \  std::cin >> v;\n    ZkwSegmentTree<Value, Tag> seg(arr);\n    while (q--) {\n\
+    \        int type, l, r;\n        std::cin >> type >> l >> r;\n        if (type\
+    \ == 0) {\n            int x;\n            std::cin >> x;\n            seg.range_transform(l,\
+    \ r, Tag(x));\n        }\n        else {\n            std::cout << seg.range_prod(l,\
+    \ r) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - DataStructure/ZkwSegmentTree.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   requiredBy: []
-  timestamp: '2026-05-04 20:54:41+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp

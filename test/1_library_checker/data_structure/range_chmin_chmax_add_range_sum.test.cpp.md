@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,36 +19,8 @@ data:
     - https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp\"\
     \n\n#line 2 \"DataStructure/SegmentTree.hpp\"\n\ntemplate<typename Value = int,\
     \ typename Tag = void, bool pushdown = true>\nclass SegmentTree {\n    static\
     \ constexpr bool hasTag = !std::is_same_v<Tag, void>;\n    static_assert(pushdown\
@@ -174,79 +146,84 @@ data:
     \ 1);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n   \
     \     std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n  \
     \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp\"\
-    \n\nconst ll INF = 1e18;\n\nstruct Tag {\n    ll lazymax, lazymin, lazyadd;\n\
-    \    Tag(ll _mx = -INF, ll _mn = INF, ll _add = 0): lazymax(_mx), lazymin(_mn),\
-    \ lazyadd(_add) {}\n    Tag operator+(const Tag &rhs) const {\n        Tag res(*this);\n\
-    \        res.lazyadd += rhs.lazyadd;\n        if (res.lazymax != -INF) res.lazymax\
-    \ += rhs.lazyadd;\n        if (res.lazymin != INF) res.lazymin += rhs.lazyadd;\n\
-    \        if (rhs.lazymin != INF) { \n            chmin(res.lazymin, rhs.lazymin);\n\
-    \            chmin(res.lazymax, rhs.lazymin);\n        }\n        if (rhs.lazymax\
-    \ != -INF) chmax(res.lazymax, rhs.lazymax);\n        return res;\n    }\n};\n\n\
-    struct Value {\n    ll sum;\n    ll mx, mxcnt, smx;\n    ll mi, micnt, smi;\n\
-    \    int sz;\n    Value(ll _v = 0, int _sz = 0): sum(_v), mx(_v), mxcnt(1), smx(-INF),\
-    \ mi(_v), micnt(1), smi(INF), sz(_sz) {}\n    Value operator+(const Value &rhs)\
-    \ const {\n        Value res;\n        res.sum = sum + rhs.sum;\n        res.mx\
-    \ = max(mx, rhs.mx);\n        res.mi = min(mi, rhs.mi);\n        if (mx == rhs.mx)\
-    \ {\n            res.mxcnt = mxcnt + rhs.mxcnt;\n            res.smx = max(smx,\
-    \ rhs.smx);\n        }\n        else if (mx > rhs.mx) {\n            res.mxcnt\
-    \ = mxcnt;\n            res.smx = max(smx, rhs.mx);\n        }\n        else {\n\
-    \            res.mxcnt = rhs.mxcnt;\n            res.smx = max(mx, rhs.smx);\n\
-    \        }\n        if (mi == rhs.mi) {\n            res.micnt = micnt + rhs.micnt;\n\
-    \            res.smi = min(smi, rhs.smi);\n        }\n        else if (mi < rhs.mi)\
-    \ {\n            res.micnt = micnt;\n            res.smi = min(smi, rhs.mi);\n\
-    \        }\n        else {\n            res.micnt = rhs.micnt;\n            res.smi\
-    \ = min(mi, rhs.smi);\n        }\n        res.sz = sz + rhs.sz;\n        return\
-    \ res;\n    }\n    Value operator+(const Tag &tag) const {\n        Value res(*this);\n\
-    \        res.mx += tag.lazyadd;\n        if (res.smx != -INF) res.smx += tag.lazyadd;\n\
-    \        res.mi += tag.lazyadd;\n        if (res.smi != INF) res.smi += tag.lazyadd;\n\
-    \        res.sum += tag.lazyadd * sz;\n        if (tag.lazymin < res.mx) {\n \
-    \           assert(tag.lazymin > res.smx);\n            res.sum += res.mxcnt *\
-    \ (tag.lazymin - res.mx);\n            if (res.mx == res.smi) res.smi = tag.lazymin;\n\
-    \            if (res.mx == res.mi) res.mi = tag.lazymin;\n            res.mx =\
-    \ tag.lazymin;\n        }\n        if (tag.lazymax > res.mi) {   \n          \
-    \  assert(tag.lazymax < res.smi);\n            res.sum += res.micnt * (tag.lazymax\
-    \ - res.mi);\n            if (res.mi == res.smx) res.smx = tag.lazymax;\n    \
-    \        if (res.mi == res.mx) res.mx = tag.lazymax;\n            res.mi = tag.lazymax;\n\
-    \        }\n        return res;\n    }\n    friend ostream& operator<<(ostream&\
-    \ os, const Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\
-    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n    cin\
-    \ >> n >> m;\n    vector<Value> val(n);\n    for (int i = 0; i < n; ++i) {\n \
-    \       ll x;\n        cin >> x;\n        val[i] = Value(x, 1);\n    }\n    SegmentTree<Value,\
-    \ Tag> seg(val);\n    while (m--) {\n        int k, x, y;\n        ll t;\n   \
-    \     cin >> k >> x >> y;\n        if (k == 0)\n            cin >> t, seg.range_transform_beats(x,\
+    \n\nconst long long INF = 1e18;\n\nstruct Tag {\n    long long lazymax, lazymin,\
+    \ lazyadd;\n    Tag(long long _mx = -INF, long long _mn = INF, long long _add\
+    \ = 0): lazymax(_mx), lazymin(_mn), lazyadd(_add) {}\n    Tag operator+(const\
+    \ Tag &rhs) const {\n        Tag res(*this);\n        res.lazyadd += rhs.lazyadd;\n\
+    \        if (res.lazymax != -INF) res.lazymax += rhs.lazyadd;\n        if (res.lazymin\
+    \ != INF) res.lazymin += rhs.lazyadd;\n        if (rhs.lazymin != INF) { \n  \
+    \          res.lazymin = std::min(res.lazymin, rhs.lazymin);\n            res.lazymax\
+    \ = std::min(res.lazymax, rhs.lazymin);\n        }\n        if (rhs.lazymax !=\
+    \ -INF) res.lazymax = std::max(res.lazymax, rhs.lazymax);\n        return res;\n\
+    \    }\n};\n\nstruct Value {\n    long long sum;\n    long long mx, mxcnt, smx;\n\
+    \    long long mi, micnt, smi;\n    int sz;\n    Value(long long _v = 0, int _sz\
+    \ = 0): sum(_v), mx(_v), mxcnt(1), smx(-INF), mi(_v), micnt(1), smi(INF), sz(_sz)\
+    \ {}\n    Value operator+(const Value &rhs) const {\n        Value res;\n    \
+    \    res.sum = sum + rhs.sum;\n        res.mx = std::max(mx, rhs.mx);\n      \
+    \  res.mi = std::min(mi, rhs.mi);\n        if (mx == rhs.mx) {\n            res.mxcnt\
+    \ = mxcnt + rhs.mxcnt;\n            res.smx = std::max(smx, rhs.smx);\n      \
+    \  }\n        else if (mx > rhs.mx) {\n            res.mxcnt = mxcnt;\n      \
+    \      res.smx = std::max(smx, rhs.mx);\n        }\n        else {\n         \
+    \   res.mxcnt = rhs.mxcnt;\n            res.smx = std::max(mx, rhs.smx);\n   \
+    \     }\n        if (mi == rhs.mi) {\n            res.micnt = micnt + rhs.micnt;\n\
+    \            res.smi = std::min(smi, rhs.smi);\n        }\n        else if (mi\
+    \ < rhs.mi) {\n            res.micnt = micnt;\n            res.smi = std::min(smi,\
+    \ rhs.mi);\n        }\n        else {\n            res.micnt = rhs.micnt;\n  \
+    \          res.smi = std::min(mi, rhs.smi);\n        }\n        res.sz = sz +\
+    \ rhs.sz;\n        return res;\n    }\n    Value operator+(const Tag &tag) const\
+    \ {\n        Value res(*this);\n        res.mx += tag.lazyadd;\n        if (res.smx\
+    \ != -INF) res.smx += tag.lazyadd;\n        res.mi += tag.lazyadd;\n        if\
+    \ (res.smi != INF) res.smi += tag.lazyadd;\n        res.sum += tag.lazyadd * sz;\n\
+    \        if (tag.lazymin < res.mx) {\n            assert(tag.lazymin > res.smx);\n\
+    \            res.sum += res.mxcnt * (tag.lazymin - res.mx);\n            if (res.mx\
+    \ == res.smi) res.smi = tag.lazymin;\n            if (res.mx == res.mi) res.mi\
+    \ = tag.lazymin;\n            res.mx = tag.lazymin;\n        }\n        if (tag.lazymax\
+    \ > res.mi) {   \n            assert(tag.lazymax < res.smi);\n            res.sum\
+    \ += res.micnt * (tag.lazymax - res.mi);\n            if (res.mi == res.smx) res.smx\
+    \ = tag.lazymax;\n            if (res.mi == res.mx) res.mx = tag.lazymax;\n  \
+    \          res.mi = tag.lazymax;\n        }\n        return res;\n    }\n    friend\
+    \ std::ostream& operator<<(std::ostream& os, const Value &v) {\n        os <<\
+    \ v.sum;\n        return os;\n    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    std::vector<Value>\
+    \ val(n);\n    for (int i = 0; i < n; ++i) {\n        long long x;\n        std::cin\
+    \ >> x;\n        val[i] = Value(x, 1);\n    }\n    SegmentTree<Value, Tag> seg(val);\n\
+    \    while (m--) {\n        int k, x, y;\n        long long t;\n        std::cin\
+    \ >> k >> x >> y;\n        if (k == 0)\n            std::cin >> t, seg.range_transform_beats(x,\
     \ y, Tag(-INF, t, 0), [&](const Value &v) {\n                return t > v.smx;\
-    \ \n            });\n        else if (k == 1)\n            cin >> t, seg.range_transform_beats(x,\
+    \ \n            });\n        else if (k == 1)\n            std::cin >> t, seg.range_transform_beats(x,\
     \ y, Tag(t, INF, 0), [&](const Value &v) {\n                return t < v.smi;\n\
-    \            });\n        else if (k == 2)\n            cin >> t, seg.range_transform(x,\
-    \ y, Tag(-INF, INF, t));\n        else\n            cout << seg.range_prod(x,\
+    \            });\n        else if (k == 2)\n            std::cin >> t, seg.range_transform(x,\
+    \ y, Tag(-INF, INF, t));\n        else\n            std::cout << seg.range_prod(x,\
     \ y) << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
-    \n#include \"default_code.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n\
-    \nconst ll INF = 1e18;\n\nstruct Tag {\n    ll lazymax, lazymin, lazyadd;\n  \
-    \  Tag(ll _mx = -INF, ll _mn = INF, ll _add = 0): lazymax(_mx), lazymin(_mn),\
-    \ lazyadd(_add) {}\n    Tag operator+(const Tag &rhs) const {\n        Tag res(*this);\n\
-    \        res.lazyadd += rhs.lazyadd;\n        if (res.lazymax != -INF) res.lazymax\
-    \ += rhs.lazyadd;\n        if (res.lazymin != INF) res.lazymin += rhs.lazyadd;\n\
-    \        if (rhs.lazymin != INF) { \n            chmin(res.lazymin, rhs.lazymin);\n\
-    \            chmin(res.lazymax, rhs.lazymin);\n        }\n        if (rhs.lazymax\
-    \ != -INF) chmax(res.lazymax, rhs.lazymax);\n        return res;\n    }\n};\n\n\
-    struct Value {\n    ll sum;\n    ll mx, mxcnt, smx;\n    ll mi, micnt, smi;\n\
-    \    int sz;\n    Value(ll _v = 0, int _sz = 0): sum(_v), mx(_v), mxcnt(1), smx(-INF),\
+    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n\n\
+    const long long INF = 1e18;\n\nstruct Tag {\n    long long lazymax, lazymin, lazyadd;\n\
+    \    Tag(long long _mx = -INF, long long _mn = INF, long long _add = 0): lazymax(_mx),\
+    \ lazymin(_mn), lazyadd(_add) {}\n    Tag operator+(const Tag &rhs) const {\n\
+    \        Tag res(*this);\n        res.lazyadd += rhs.lazyadd;\n        if (res.lazymax\
+    \ != -INF) res.lazymax += rhs.lazyadd;\n        if (res.lazymin != INF) res.lazymin\
+    \ += rhs.lazyadd;\n        if (rhs.lazymin != INF) { \n            res.lazymin\
+    \ = std::min(res.lazymin, rhs.lazymin);\n            res.lazymax = std::min(res.lazymax,\
+    \ rhs.lazymin);\n        }\n        if (rhs.lazymax != -INF) res.lazymax = std::max(res.lazymax,\
+    \ rhs.lazymax);\n        return res;\n    }\n};\n\nstruct Value {\n    long long\
+    \ sum;\n    long long mx, mxcnt, smx;\n    long long mi, micnt, smi;\n    int\
+    \ sz;\n    Value(long long _v = 0, int _sz = 0): sum(_v), mx(_v), mxcnt(1), smx(-INF),\
     \ mi(_v), micnt(1), smi(INF), sz(_sz) {}\n    Value operator+(const Value &rhs)\
     \ const {\n        Value res;\n        res.sum = sum + rhs.sum;\n        res.mx\
-    \ = max(mx, rhs.mx);\n        res.mi = min(mi, rhs.mi);\n        if (mx == rhs.mx)\
-    \ {\n            res.mxcnt = mxcnt + rhs.mxcnt;\n            res.smx = max(smx,\
-    \ rhs.smx);\n        }\n        else if (mx > rhs.mx) {\n            res.mxcnt\
-    \ = mxcnt;\n            res.smx = max(smx, rhs.mx);\n        }\n        else {\n\
-    \            res.mxcnt = rhs.mxcnt;\n            res.smx = max(mx, rhs.smx);\n\
-    \        }\n        if (mi == rhs.mi) {\n            res.micnt = micnt + rhs.micnt;\n\
-    \            res.smi = min(smi, rhs.smi);\n        }\n        else if (mi < rhs.mi)\
-    \ {\n            res.micnt = micnt;\n            res.smi = min(smi, rhs.mi);\n\
-    \        }\n        else {\n            res.micnt = rhs.micnt;\n            res.smi\
-    \ = min(mi, rhs.smi);\n        }\n        res.sz = sz + rhs.sz;\n        return\
-    \ res;\n    }\n    Value operator+(const Tag &tag) const {\n        Value res(*this);\n\
-    \        res.mx += tag.lazyadd;\n        if (res.smx != -INF) res.smx += tag.lazyadd;\n\
-    \        res.mi += tag.lazyadd;\n        if (res.smi != INF) res.smi += tag.lazyadd;\n\
+    \ = std::max(mx, rhs.mx);\n        res.mi = std::min(mi, rhs.mi);\n        if\
+    \ (mx == rhs.mx) {\n            res.mxcnt = mxcnt + rhs.mxcnt;\n            res.smx\
+    \ = std::max(smx, rhs.smx);\n        }\n        else if (mx > rhs.mx) {\n    \
+    \        res.mxcnt = mxcnt;\n            res.smx = std::max(smx, rhs.mx);\n  \
+    \      }\n        else {\n            res.mxcnt = rhs.mxcnt;\n            res.smx\
+    \ = std::max(mx, rhs.smx);\n        }\n        if (mi == rhs.mi) {\n         \
+    \   res.micnt = micnt + rhs.micnt;\n            res.smi = std::min(smi, rhs.smi);\n\
+    \        }\n        else if (mi < rhs.mi) {\n            res.micnt = micnt;\n\
+    \            res.smi = std::min(smi, rhs.mi);\n        }\n        else {\n   \
+    \         res.micnt = rhs.micnt;\n            res.smi = std::min(mi, rhs.smi);\n\
+    \        }\n        res.sz = sz + rhs.sz;\n        return res;\n    }\n    Value\
+    \ operator+(const Tag &tag) const {\n        Value res(*this);\n        res.mx\
+    \ += tag.lazyadd;\n        if (res.smx != -INF) res.smx += tag.lazyadd;\n    \
+    \    res.mi += tag.lazyadd;\n        if (res.smi != INF) res.smi += tag.lazyadd;\n\
     \        res.sum += tag.lazyadd * sz;\n        if (tag.lazymin < res.mx) {\n \
     \           assert(tag.lazymin > res.smx);\n            res.sum += res.mxcnt *\
     \ (tag.lazymin - res.mx);\n            if (res.mx == res.smi) res.smi = tag.lazymin;\n\
@@ -255,26 +232,27 @@ data:
     \  assert(tag.lazymax < res.smi);\n            res.sum += res.micnt * (tag.lazymax\
     \ - res.mi);\n            if (res.mi == res.smx) res.smx = tag.lazymax;\n    \
     \        if (res.mi == res.mx) res.mx = tag.lazymax;\n            res.mi = tag.lazymax;\n\
-    \        }\n        return res;\n    }\n    friend ostream& operator<<(ostream&\
+    \        }\n        return res;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\
-    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n    cin\
-    \ >> n >> m;\n    vector<Value> val(n);\n    for (int i = 0; i < n; ++i) {\n \
-    \       ll x;\n        cin >> x;\n        val[i] = Value(x, 1);\n    }\n    SegmentTree<Value,\
-    \ Tag> seg(val);\n    while (m--) {\n        int k, x, y;\n        ll t;\n   \
-    \     cin >> k >> x >> y;\n        if (k == 0)\n            cin >> t, seg.range_transform_beats(x,\
+    \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n,\
+    \ m;\n    std::cin >> n >> m;\n    std::vector<Value> val(n);\n    for (int i\
+    \ = 0; i < n; ++i) {\n        long long x;\n        std::cin >> x;\n        val[i]\
+    \ = Value(x, 1);\n    }\n    SegmentTree<Value, Tag> seg(val);\n    while (m--)\
+    \ {\n        int k, x, y;\n        long long t;\n        std::cin >> k >> x >>\
+    \ y;\n        if (k == 0)\n            std::cin >> t, seg.range_transform_beats(x,\
     \ y, Tag(-INF, t, 0), [&](const Value &v) {\n                return t > v.smx;\
-    \ \n            });\n        else if (k == 1)\n            cin >> t, seg.range_transform_beats(x,\
+    \ \n            });\n        else if (k == 1)\n            std::cin >> t, seg.range_transform_beats(x,\
     \ y, Tag(t, INF, 0), [&](const Value &v) {\n                return t < v.smi;\n\
-    \            });\n        else if (k == 2)\n            cin >> t, seg.range_transform(x,\
-    \ y, Tag(-INF, INF, t));\n        else\n            cout << seg.range_prod(x,\
+    \            });\n        else if (k == 2)\n            std::cin >> t, seg.range_transform(x,\
+    \ y, Tag(-INF, INF, t));\n        else\n            std::cout << seg.range_prod(x,\
     \ y) << \"\\n\";\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - DataStructure/SegmentTree.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp

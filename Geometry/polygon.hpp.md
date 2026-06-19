@@ -8,7 +8,7 @@ data:
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':x:'
@@ -36,19 +36,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/static_convex_hull.test.cpp
     title: test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/area.test.cpp
     title: test/2_aoj/area.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
     title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/common_tangent.test.cpp
     title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   - icon: ':x:'

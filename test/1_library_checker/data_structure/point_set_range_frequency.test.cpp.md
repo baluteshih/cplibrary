@@ -8,8 +8,8 @@ data:
     path: DataStructure/PointerSegmentTree.hpp
     title: Pointer Segment Tree
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -22,36 +22,8 @@ data:
     - https://judge.yosupo.jp/problem/point_set_range_frequency
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/point_set_range_frequency.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_frequency\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/point_set_range_frequency.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/data_structure/point_set_range_frequency.test.cpp\"\
     \n\n#line 2 \"DataStructure/PointerSegmentTree.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
@@ -87,8 +59,8 @@ data:
     \        l->give_tag(lazy);\n            r->give_tag(lazy);\n            lazy\
     \ = Tag();\n        }\n        node() = default;\n        node(const auto &v)\
     \ : val(v) {}\n    };\n    node *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n\
-    \    void initialize(int l, int r, node *&p, const vector<Value> &data) {\n  \
-    \      if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
+    \    void initialize(int l, int r, node *&p, const std::vector<Value> &data) {\n\
+    \        if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
     \ void();\n        p = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n\
     \        initialize(l, mid, p->l, data);\n        initialize(mid, r, p->r, data);\n\
     \        p->up();\n    }\n    static void check_node(node *&p, int l, int r) requires\
@@ -193,7 +165,7 @@ data:
     \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
     \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
     \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
-    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const std::vector<Value> &data):\
     \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
     \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
     \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
@@ -228,43 +200,45 @@ data:
     \ n, root, other.root);\n    }\n    void printinfo(int l, int r) {\n        assert(0\
     \ <= l && r <= n);\n        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo\
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l,\
-    \ r, 0, n, root);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
+    \ r, 0, n, root);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
     \ {\n        std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, root);\n\
-    \        cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/point_set_range_frequency.test.cpp\"\
+    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/point_set_range_frequency.test.cpp\"\
     \n\nusing segtree = PointerSegmentTree<int, void, true, DefaultAllocator, true>;\n\
-    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n    cin\
-    \ >> n >> q;\n    vector<int> arr(n);\n    for (auto &v : arr)\n        cin >>\
-    \ v;\n    map<int, segtree> mp;\n    \n    auto get_seg = [&](int x) -> segtree&\
-    \ {\n        if (mp.find(x) != mp.end()) return mp[x];\n        mp[x] = segtree(n);\n\
-    \        return mp[x];\n    };\n\n    for (int i = 0; i < n; ++i)\n        get_seg(arr[i]).modify(i,\
-    \ 1);\n    for (int i = 1; i <= q; ++i) {\n        int type;\n        cin >> type;\n\
-    \        if (type == 0) {\n            int k, x;\n            cin >> k >> x;\n\
+    \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n,\
+    \ q;\n    std::cin >> n >> q;\n    std::vector<int> arr(n);\n    for (auto &v\
+    \ : arr)\n        std::cin >> v;\n    std::map<int, segtree> mp;\n    \n    auto\
+    \ get_seg = [&](int x) -> segtree& {\n        if (mp.find(x) != mp.end()) return\
+    \ mp[x];\n        mp[x] = segtree(n);\n        return mp[x];\n    };\n\n    for\
+    \ (int i = 0; i < n; ++i)\n        get_seg(arr[i]).modify(i, 1);\n    for (int\
+    \ i = 1; i <= q; ++i) {\n        int type;\n        std::cin >> type;\n      \
+    \  if (type == 0) {\n            int k, x;\n            std::cin >> k >> x;\n\
     \            get_seg(arr[k]).modify(k, 0);\n            arr[k] = x;\n        \
     \    get_seg(arr[k]).modify(k, 1);\n        }\n        else {\n            int\
-    \ l, r, x;\n            cin >> l >> r >> x;\n            cout << get_seg(x).range_prod(l,\
+    \ l, r, x;\n            std::cin >> l >> r >> x;\n            std::cout << get_seg(x).range_prod(l,\
     \ r) << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_frequency\"\
-    \n#include \"default_code.hpp\"\n\n#include \"DataStructure/PointerSegmentTree.hpp\"\
+    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/PointerSegmentTree.hpp\"\
     \n\nusing segtree = PointerSegmentTree<int, void, true, DefaultAllocator, true>;\n\
-    \nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n    cin\
-    \ >> n >> q;\n    vector<int> arr(n);\n    for (auto &v : arr)\n        cin >>\
-    \ v;\n    map<int, segtree> mp;\n    \n    auto get_seg = [&](int x) -> segtree&\
-    \ {\n        if (mp.find(x) != mp.end()) return mp[x];\n        mp[x] = segtree(n);\n\
-    \        return mp[x];\n    };\n\n    for (int i = 0; i < n; ++i)\n        get_seg(arr[i]).modify(i,\
-    \ 1);\n    for (int i = 1; i <= q; ++i) {\n        int type;\n        cin >> type;\n\
-    \        if (type == 0) {\n            int k, x;\n            cin >> k >> x;\n\
+    \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n,\
+    \ q;\n    std::cin >> n >> q;\n    std::vector<int> arr(n);\n    for (auto &v\
+    \ : arr)\n        std::cin >> v;\n    std::map<int, segtree> mp;\n    \n    auto\
+    \ get_seg = [&](int x) -> segtree& {\n        if (mp.find(x) != mp.end()) return\
+    \ mp[x];\n        mp[x] = segtree(n);\n        return mp[x];\n    };\n\n    for\
+    \ (int i = 0; i < n; ++i)\n        get_seg(arr[i]).modify(i, 1);\n    for (int\
+    \ i = 1; i <= q; ++i) {\n        int type;\n        std::cin >> type;\n      \
+    \  if (type == 0) {\n            int k, x;\n            std::cin >> k >> x;\n\
     \            get_seg(arr[k]).modify(k, 0);\n            arr[k] = x;\n        \
     \    get_seg(arr[k]).modify(k, 1);\n        }\n        else {\n            int\
-    \ l, r, x;\n            cin >> l >> r >> x;\n            cout << get_seg(x).range_prod(l,\
+    \ l, r, x;\n            std::cin >> l >> r >> x;\n            std::cout << get_seg(x).range_prod(l,\
     \ r) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/DefaultAllocator.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   requiredBy: []
-  timestamp: '2026-05-23 01:18:48+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp

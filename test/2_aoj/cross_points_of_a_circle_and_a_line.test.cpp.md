@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.000001'
@@ -349,7 +349,7 @@ data:
   path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   requiredBy: []
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
 layout: document

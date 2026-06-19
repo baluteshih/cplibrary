@@ -11,8 +11,8 @@ data:
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -25,36 +25,8 @@ data:
     - https://judge.yosupo.jp/problem/queue_operate_all_composite
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -172,35 +144,36 @@ data:
     \n\nusing mint = modint998244353;\n\nstruct Value {\n    mint a, b;\n    Value(mint\
     \ _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Value operator+(const Value &rhs)\
     \ {\n        return Value(a * rhs.a, rhs.a * b + rhs.b);\n    }\n    mint get_val(mint\
-    \ x) {\n        return a * x + b;\n    }\n};\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int q;\n    cin >> q;\n    SwagQueue<Value> que;\n    while\
-    \ (q--) {\n        int type;\n        cin >> type;\n        if (type == 0) {\n\
-    \            mint a, b;\n            cin >> a >> b;\n            que.push(Value(a,\
-    \ b));\n        }\n        else if (type == 1) {\n            que.pop();\n   \
-    \     }\n        else {\n            mint x;\n            cin >> x;\n        \
-    \    cout << que.prod().get_val(x) << \"\\n\";\n        }\n    }\n}\n"
+    \ x) {\n        return a * x + b;\n    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int q;\n    std::cin >> q;\n    SwagQueue<Value> que;\n\
+    \    while (q--) {\n        int type;\n        std::cin >> type;\n        if (type\
+    \ == 0) {\n            mint a, b;\n            std::cin >> a >> b;\n         \
+    \   que.push(Value(a, b));\n        }\n        else if (type == 1) {\n       \
+    \     que.pop();\n        }\n        else {\n            mint x;\n           \
+    \ std::cin >> x;\n            std::cout << que.prod().get_val(x) << \"\\n\";\n\
+    \        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     DataStructure/SwagQueue.hpp\"\n\nusing mint = modint998244353;\n\nstruct Value\
     \ {\n    mint a, b;\n    Value(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n  \
     \  Value operator+(const Value &rhs) {\n        return Value(a * rhs.a, rhs.a\
     \ * b + rhs.b);\n    }\n    mint get_val(mint x) {\n        return a * x + b;\n\
-    \    }\n};\n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int\
-    \ q;\n    cin >> q;\n    SwagQueue<Value> que;\n    while (q--) {\n        int\
-    \ type;\n        cin >> type;\n        if (type == 0) {\n            mint a, b;\n\
-    \            cin >> a >> b;\n            que.push(Value(a, b));\n        }\n \
-    \       else if (type == 1) {\n            que.pop();\n        }\n        else\
-    \ {\n            mint x;\n            cin >> x;\n            cout << que.prod().get_val(x)\
-    \ << \"\\n\";\n        }\n    }\n}\n"
+    \    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int q;\n    std::cin >> q;\n    SwagQueue<Value> que;\n    while (q--) {\n\
+    \        int type;\n        std::cin >> type;\n        if (type == 0) {\n    \
+    \        mint a, b;\n            std::cin >> a >> b;\n            que.push(Value(a,\
+    \ b));\n        }\n        else if (type == 1) {\n            que.pop();\n   \
+    \     }\n        else {\n            mint x;\n            std::cin >> x;\n   \
+    \         std::cout << que.prod().get_val(x) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - DataStructure/SwagQueue.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp

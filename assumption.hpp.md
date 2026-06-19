@@ -52,6 +52,78 @@ data:
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_add_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+    title: test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/predecessor_problem.test.cpp
+    title: test/1_library_checker/data_structure/predecessor_problem.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
+    title: test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_point_get.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+    title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/unionfind.test.cpp
+    title: test/1_library_checker/data_structure/unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+    title: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+    title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,43 +231,43 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/area.test.cpp
     title: test/2_aoj/area.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
     title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
     title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/common_tangent.test.cpp
     title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/counter-clockwise.test.cpp
     title: test/2_aoj/counter-clockwise.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_point.test.cpp
     title: test/2_aoj/cross_point.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   - icon: ':x:'
@@ -298,10 +370,34 @@ data:
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/data_structure/static_rmq.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+  - test/1_library_checker/data_structure/unionfind.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
+  - test/1_library_checker/data_structure/predecessor_problem.test.cpp
+  - test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_add_range_sum.test.cpp
   - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/zalgorithm.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp

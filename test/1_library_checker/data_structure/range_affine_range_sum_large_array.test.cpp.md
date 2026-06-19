@@ -14,8 +14,8 @@ data:
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
-    path: default_code.hpp
-    title: default_code.hpp
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -28,36 +28,8 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum_large_array
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum_large_array\"\
-    \n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    typedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n\
-    #define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v)\
-    \ v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
-    \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
-    \ << \")\";\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer\
-    \ = requires(T& a) {\n    a.begin();\n    a.end();\n} && !std::same_as<std::remove_cvref_t<T>,\
-    \ std::string> &&\n     !std::same_as<std::remove_cvref_t<T>, std::string_view>\
-    \ &&\n     !std::is_convertible_v<T, const char*>;\ntemplate <PrintableContainer\
-    \ T>\nstd::ostream& operator<<(std::ostream& os, const T& a) {\n    os << \"[\
-    \ \";\n    bool first = true;\n    for (const auto& item : a) {\n        if (!first)\
-    \ os << \", \";\n        os << item;\n        first = false;\n    }\n    return\
-    \ os << \" ]\";\n}\n#ifdef bbq\n#include <experimental/iterator>\n#define safe\
-    \ cerr<<__PRETTY_FUNCTION__<<\" line \"<<__LINE__<<\" safe\\n\"\n#define sepline\
-    \ sepline_() \n#define debug(a...) debug_(#a, a)\n#define orange(a...) orange_(#a,\
-    \ a)\nvoid debug_(auto s, auto ...a) {\n    cerr << \"\\e[1;32m(\" << s << \"\
-    ) = (\";\n    int f = 0;\n    (..., (cerr << (f++ ? \", \" : \"\") << a));\n \
-    \   cerr << \")\\e[0m\\n\";\n}\nvoid orange_(auto s, auto L, auto R) {\n    cerr\
-    \ << \"\\e[1;33m[ \" << s << \" ] = [ \";\n    using namespace experimental;\n\
-    \    copy(L, R, make_ostream_joiner(cerr, \", \"));\n    cerr << \" ]\\e[0m\\\
-    n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
-    \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
-    \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
-    \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 3 \"test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -196,8 +168,8 @@ data:
     \        l->give_tag(lazy);\n            r->give_tag(lazy);\n            lazy\
     \ = Tag();\n        }\n        node() = default;\n        node(const auto &v)\
     \ : val(v) {}\n    };\n    node *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n\
-    \    void initialize(int l, int r, node *&p, const vector<Value> &data) {\n  \
-    \      if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
+    \    void initialize(int l, int r, node *&p, const std::vector<Value> &data) {\n\
+    \        if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
     \ void();\n        p = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n\
     \        initialize(l, mid, p->l, data);\n        initialize(mid, r, p->r, data);\n\
     \        p->up();\n    }\n    static void check_node(node *&p, int l, int r) requires\
@@ -302,7 +274,7 @@ data:
     \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
     \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
     \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
-    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const std::vector<Value> &data):\
     \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
     \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
     \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
@@ -337,9 +309,9 @@ data:
     \ n, root, other.root);\n    }\n    void printinfo(int l, int r) {\n        assert(0\
     \ <= l && r <= n);\n        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo\
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l,\
-    \ r, 0, n, root);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
+    \ r, 0, n, root);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
     \ {\n        std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, root);\n\
-    \        cerr << \"\\e[0m\\n\";\n    }\n};\n#line 6 \"test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp\"\
+    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 6 \"test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nstruct Tag {\n    mint a, b;\n    Tag(mint\
     \ _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag operator+(const Tag &rhs) {\n\
     \        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\nstruct Value\
@@ -347,17 +319,18 @@ data:
     \ {}\n    Value operator+(const Value &rhs) {\n        return Value(mul + rhs.mul,\
     \ add + rhs.add);\n    }\n    Value operator+(const Tag &tag) {\n        return\
     \ Value(tag.a * mul + tag.b * add, add);\n    }\n    static Value get(int l, int\
-    \ r) {\n        return Value(0, r - l);\n    }\n    friend ostream& operator<<(ostream&\
+    \ r) {\n        return Value(0, r - l);\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const Value &v) {\n        os << v.mul;\n        return os;\n    }\n};\n\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, q;\n  \
-    \  cin >> n >> q;\n    PointerSegmentTree<Value, Tag, true, DefaultAllocator,\
-    \ true> seg(n);\n    while (q--) {\n        int t;\n        cin >> t;\n      \
-    \  if (t == 0) {\n            int l, r;\n            Tag tag;\n            cin\
-    \ >> l >> r >> tag.a >> tag.b;\n            seg.range_transform(l, r, tag);\n\
-    \        }\n        else {\n            int l, r;\n            cin >> l >> r;\n\
-    \            cout << seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    PointerSegmentTree<Value, Tag, true, DefaultAllocator,\
+    \ true> seg(n);\n    while (q--) {\n        int t;\n        std::cin >> t;\n \
+    \       if (t == 0) {\n            int l, r;\n            Tag tag;\n         \
+    \   std::cin >> l >> r >> tag.a >> tag.b;\n            seg.range_transform(l,\
+    \ r, tag);\n        }\n        else {\n            int l, r;\n            std::cin\
+    \ >> l >> r;\n            std::cout << seg.range_prod(l, r) << \"\\n\";\n    \
+    \    }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum_large_array\"\
-    \n#include \"default_code.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     DataStructure/PointerSegmentTree.hpp\"\n\nusing mint = modint998244353;\n\nstruct\
     \ Tag {\n    mint a, b;\n    Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n\
     \    Tag operator+(const Tag &rhs) {\n        return Tag(a * rhs.a, rhs.a * b\
@@ -366,17 +339,17 @@ data:
     \ {\n        return Value(mul + rhs.mul, add + rhs.add);\n    }\n    Value operator+(const\
     \ Tag &tag) {\n        return Value(tag.a * mul + tag.b * add, add);\n    }\n\
     \    static Value get(int l, int r) {\n        return Value(0, r - l);\n    }\n\
-    \    friend ostream& operator<<(ostream& os, const Value &v) {\n        os <<\
-    \ v.mul;\n        return os;\n    }\n};\n\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n, q;\n    cin >> n >> q;\n    PointerSegmentTree<Value,\
+    \    friend std::ostream& operator<<(std::ostream& os, const Value &v) {\n   \
+    \     os << v.mul;\n        return os;\n    }\n};\n\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    PointerSegmentTree<Value,\
     \ Tag, true, DefaultAllocator, true> seg(n);\n    while (q--) {\n        int t;\n\
-    \        cin >> t;\n        if (t == 0) {\n            int l, r;\n           \
-    \ Tag tag;\n            cin >> l >> r >> tag.a >> tag.b;\n            seg.range_transform(l,\
-    \ r, tag);\n        }\n        else {\n            int l, r;\n            cin\
-    \ >> l >> r;\n            cout << seg.range_prod(l, r) << \"\\n\";\n        }\n\
-    \    }\n}\n"
+    \        std::cin >> t;\n        if (t == 0) {\n            int l, r;\n      \
+    \      Tag tag;\n            std::cin >> l >> r >> tag.a >> tag.b;\n         \
+    \   seg.range_transform(l, r, tag);\n        }\n        else {\n            int\
+    \ l, r;\n            std::cin >> l >> r;\n            std::cout << seg.range_prod(l,\
+    \ r) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
-  - default_code.hpp
+  - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   - DataStructure/PointerSegmentTree.hpp
@@ -384,7 +357,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   requiredBy: []
-  timestamp: '2026-06-18 22:20:51+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp

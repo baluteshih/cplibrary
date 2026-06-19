@@ -64,8 +64,8 @@ data:
     \        l->give_tag(lazy);\n            r->give_tag(lazy);\n            lazy\
     \ = Tag();\n        }\n        node() = default;\n        node(const auto &v)\
     \ : val(v) {}\n    };\n    node *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n\
-    \    void initialize(int l, int r, node *&p, const vector<Value> &data) {\n  \
-    \      if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
+    \    void initialize(int l, int r, node *&p, const std::vector<Value> &data) {\n\
+    \        if (r - l == 1) \n            return p = NodeAlloc::allocate(data[l]),\
     \ void();\n        p = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n\
     \        initialize(l, mid, p->l, data);\n        initialize(mid, r, p->r, data);\n\
     \        p->up();\n    }\n    static void check_node(node *&p, int l, int r) requires\
@@ -170,7 +170,7 @@ data:
     \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
     \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
     \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
-    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const std::vector<Value> &data):\
     \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
     \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
     \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
@@ -205,9 +205,9 @@ data:
     \ n, root, other.root);\n    }\n    void printinfo(int l, int r) {\n        assert(0\
     \ <= l && r <= n);\n        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo\
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l,\
-    \ r, 0, n, root);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
+    \ r, 0, n, root);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
     \ {\n        std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, root);\n\
-    \        cerr << \"\\e[0m\\n\";\n    }\n};\n"
+    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n"
   code: "#pragma once\n\n#include \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
     \ Value = int, typename Tag = void, bool pushdown = true, template<typename> class\
     \ Allocator = DefaultAllocator, bool dynamic = false, bool persistent = false>\n\
@@ -240,24 +240,24 @@ data:
     \            r->give_tag(lazy);\n            lazy = Tag();\n        }\n      \
     \  node() = default;\n        node(const auto &v) : val(v) {}\n    };\n    node\
     \ *root = nullptr;\n    using NodeAlloc = Allocator<node>;\n    void initialize(int\
-    \ l, int r, node *&p, const vector<Value> &data) {\n        if (r - l == 1) \n\
-    \            return p = NodeAlloc::allocate(data[l]), void();\n        p = NodeAlloc::allocate();\n\
-    \        int mid = (l + r) >> 1;\n        initialize(l, mid, p->l, data);\n  \
-    \      initialize(mid, r, p->r, data);\n        p->up();\n    }\n    static void\
-    \ check_node(node *&p, int l, int r) requires (dynamic || persistent) {\n    \
-    \    bool allocated = false; \n        if constexpr (dynamic) if (!p) {\n    \
-    \        allocated = true;\n            if constexpr (hasGet) p = NodeAlloc::allocate(Value::get(l,\
-    \ r));\n            else p = NodeAlloc::allocate();\n        }\n        if constexpr\
-    \ (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n    }\n    Value\
-    \ range_prod(int L, int R, int l, int r, node *p) {\n        if constexpr (dynamic)\
-    \ {\n            if (!p) {\n                if constexpr (hasGet) return Value::get(std::max(L,\
-    \ l), std::min(R, r));\n                return Value();\n            }\n     \
-    \   }\n        if (L <= l && R >= r)\n            return p->get_val();\n     \
-    \   if constexpr (hasTag && pushdown) p->down(l, r);\n        int mid = (l + r)\
-    \ >> 1;\n        if constexpr (pushdown) {\n            if (R <= mid) return range_prod(L,\
-    \ R, l, mid, p->l);\n            if (L >= mid) return range_prod(L, R, mid, r,\
-    \ p->r);\n            return range_prod(L, R, l, mid, p->l) + range_prod(L, R,\
-    \ mid, r, p->r); \n        }\n        else {\n            if (R <= mid) return\
+    \ l, int r, node *&p, const std::vector<Value> &data) {\n        if (r - l ==\
+    \ 1) \n            return p = NodeAlloc::allocate(data[l]), void();\n        p\
+    \ = NodeAlloc::allocate();\n        int mid = (l + r) >> 1;\n        initialize(l,\
+    \ mid, p->l, data);\n        initialize(mid, r, p->r, data);\n        p->up();\n\
+    \    }\n    static void check_node(node *&p, int l, int r) requires (dynamic ||\
+    \ persistent) {\n        bool allocated = false; \n        if constexpr (dynamic)\
+    \ if (!p) {\n            allocated = true;\n            if constexpr (hasGet)\
+    \ p = NodeAlloc::allocate(Value::get(l, r));\n            else p = NodeAlloc::allocate();\n\
+    \        }\n        if constexpr (persistent) if (!allocated) p = NodeAlloc::allocate(*p);\n\
+    \    }\n    Value range_prod(int L, int R, int l, int r, node *p) {\n        if\
+    \ constexpr (dynamic) {\n            if (!p) {\n                if constexpr (hasGet)\
+    \ return Value::get(std::max(L, l), std::min(R, r));\n                return Value();\n\
+    \            }\n        }\n        if (L <= l && R >= r)\n            return p->get_val();\n\
+    \        if constexpr (hasTag && pushdown) p->down(l, r);\n        int mid = (l\
+    \ + r) >> 1;\n        if constexpr (pushdown) {\n            if (R <= mid) return\
+    \ range_prod(L, R, l, mid, p->l);\n            if (L >= mid) return range_prod(L,\
+    \ R, mid, r, p->r);\n            return range_prod(L, R, l, mid, p->l) + range_prod(L,\
+    \ R, mid, r, p->r); \n        }\n        else {\n            if (R <= mid) return\
     \ range_prod(L, R, l, mid, p->l) + p->lazy;\n            if (L >= mid) return\
     \ range_prod(L, R, mid, r, p->r) + p->lazy;\n            return range_prod(L,\
     \ R, l, mid, p->l) + range_prod(L, R, mid, r, p->r) + p->lazy;\n        }\n  \
@@ -346,7 +346,7 @@ data:
     \   if (R > mid) printinfo(L, R, mid, r, p->r);\n    }\n    void printall(int\
     \ l, int r, node *p) {\n        printnode(l, r, p);\n        if (r - l == 1) return;\n\
     \        int mid = (l + r) >> 1;\n        printall(l, mid, p->l);\n        printall(mid,\
-    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const vector<Value> &data):\
+    \ r, p->r);\n    }\npublic:\n    PointerSegmentTree(const std::vector<Value> &data):\
     \ n(data.size()), root(nullptr) { \n        initialize(0, n, root, data);\n  \
     \  }\n    PointerSegmentTree(int size) requires (!dynamic) : PointerSegmentTree(vector<Value>(size))\
     \ {}\n    PointerSegmentTree(int size = 0) requires (dynamic || persistent) :\
@@ -381,15 +381,15 @@ data:
     \ n, root, other.root);\n    }\n    void printinfo(int l, int r) {\n        assert(0\
     \ <= l && r <= n);\n        assert(l <= r);\n        std::cerr << \"\\e[1;33mInfo\
     \ [\" << l << \", \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l,\
-    \ r, 0, n, root);\n        cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
+    \ r, 0, n, root);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall()\
     \ {\n        std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, root);\n\
-    \        cerr << \"\\e[0m\\n\";\n    }\n};\n"
+    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n"
   dependsOn:
   - DataStructure/DefaultAllocator.hpp
   isVerificationFile: false
   path: DataStructure/PointerSegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-05-23 01:18:48+08:00'
+  timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
