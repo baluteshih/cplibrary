@@ -1,6 +1,6 @@
 #define PROBLEM "https://www.luogu.com.cn/problem/P3835"
 #define IGNORE
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "DataStructure/Treap.hpp"
 
