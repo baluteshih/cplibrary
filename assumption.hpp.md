@@ -232,6 +232,9 @@ data:
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
+    title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/factorize.test.cpp
     title: test/1_library_checker/number_theory/factorize.test.cpp
   - icon: ':heavy_check_mark:'
@@ -243,6 +246,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
+    title: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -585,7 +591,9 @@ data:
   - test/1_library_checker/graph/dominatortree.test.cpp
   - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - test/1_library_checker/number_theory/enumerate_quotients.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp
+  - test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp

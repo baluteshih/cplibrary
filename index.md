@@ -289,6 +289,12 @@ data:
       path: Numeric/factor_transform.hpp
       title: Numeric/factor_transform.hpp
     - icon: ':heavy_check_mark:'
+      path: Numeric/floor_enumerate.hpp
+      title: Numeric/floor_enumerate.hpp
+    - icon: ':heavy_check_mark:'
+      path: Numeric/floor_sum.hpp
+      title: Numeric/floor_sum.hpp
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -658,6 +664,9 @@ data:
   - name: test/1_library_checker/number_theory
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
+      title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/factorize.test.cpp
       title: test/1_library_checker/number_theory/factorize.test.cpp
     - icon: ':heavy_check_mark:'
@@ -669,6 +678,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
       title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
+      title: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
   - name: test/1_library_checker/other
     pages:
     - icon: ':heavy_check_mark:'

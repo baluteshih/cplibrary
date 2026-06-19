@@ -35,9 +35,11 @@ data:
     n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
     \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
     \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
+    \ safe\n#endif\nvoid chmax(auto &x, auto val) { x = max(x, val); }\nvoid chmin(auto\
+    \ &x, auto val) { x = min(x, val); }\nauto floor_div(auto a, auto b) { return\
+    \ a / b - (a % b && (a < 0) ^ (b < 0)); }\nauto ceil_div(auto a, auto b) { return\
+    \ a / b + (a % b && (a < 0) ^ (b > 0)); }\nvector<int> count_array(const auto\
+    \ &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
     \ return res;\n}\n"
   code: "#pragma once\n\n#include \"assumption.hpp\"\nusing namespace std;\ntypedef\
@@ -63,9 +65,11 @@ data:
     n\";\n}\nvoid sepline_(int length = 50) {\n    cerr << \"\\e[1;35m\";\n    cerr\
     \ << string(length, '=');\n    cerr << \"\\e[0m\\n\";\n}\n#else\n#define safe\
     \ ((void)0)\n#define sepline safe\n#define debug(...) safe\n#define orange(...)\
-    \ safe\n#endif\n\nvoid chmax(auto &x, auto val) {\n    x = max(x, val);\n}\n\n\
-    void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
-    \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
+    \ safe\n#endif\nvoid chmax(auto &x, auto val) { x = max(x, val); }\nvoid chmin(auto\
+    \ &x, auto val) { x = min(x, val); }\nauto floor_div(auto a, auto b) { return\
+    \ a / b - (a % b && (a < 0) ^ (b < 0)); }\nauto ceil_div(auto a, auto b) { return\
+    \ a / b + (a % b && (a < 0) ^ (b > 0)); }\nvector<int> count_array(const auto\
+    \ &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
     \ return res;\n}\n"
   dependsOn:
@@ -73,7 +77,7 @@ data:
   isVerificationFile: false
   path: default_code.hpp
   requiredBy: []
-  timestamp: '2026-06-19 23:20:06+08:00'
+  timestamp: '2026-06-20 01:45:49+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: default_code.hpp
