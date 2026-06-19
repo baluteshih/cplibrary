@@ -14,7 +14,7 @@ class Combination {
             ifac[i] = ifac[i + 1] * (i + 1);
     }
 public:
-    vector<T> fac, ifac;
+    std::vector<T> fac, ifac;
     Combination(int n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {
         init();
     }
@@ -35,19 +35,19 @@ public:
 };
 namespace CombFunc {
 template<class T>
-vector<T> power(T base, int n) {
-    vector<T> res(n + 1, 1);
+std::vector<T> power(T base, int n) {
+    std::vector<T> res(n + 1, 1);
     for (int i = 1; i <= n; ++i)
         res[i] = res[i - 1] * base;
     return res;
 }
 template<class T>
-vector<T> ipower(T base, int n) {
+std::vector<T> ipower(T base, int n) {
     return power(base.inv(), n);
 }
 template<class T>
-vector<T> linear_inverse(int n) {
-    vector<T> res(n + 1, 1);
+std::vector<T> linear_inverse(int n) {
+    std::vector<T> res(n + 1, 1);
     int MOD = T().mod();
     for (int i = 2; i <= n; ++i) {
         res[i] = res[MOD % i] * (MOD - MOD / i); 

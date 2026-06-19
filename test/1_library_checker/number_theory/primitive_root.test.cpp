@@ -4,12 +4,12 @@
 #include "Numeric/primitive_root.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int q;
-    cin >> q;
+    std::cin >> q;
     while (q--) {
-        ll p;
-        cin >> p;
-        cout << primitive_root(p) << "\n";
+        long long p;
+        std::cin >> p;
+        std::cout << primitive_root(p) << "\n";
     }
 }

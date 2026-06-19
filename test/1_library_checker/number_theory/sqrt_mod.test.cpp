@@ -5,18 +5,18 @@
 #include "Numeric/DynamicModint.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    std::ios::sync_with_stdio(0), std::cin.tie(0);
     int t;
-    cin >> t;
+    std::cin >> t;
     while (t--) {
         int y, p;
-        cin >> y >> p;
+        std::cin >> y >> p;
         dynamic_modint<-1> v;
         v.set_mod(p);
         v = v.raw(y);
         bool succ;
         auto res = quadratic_residue(v, succ);
-        if (!succ) cout << "-1\n";
-        else cout << res << "\n";
+        if (!succ) std::cout << "-1\n";
+        else std::cout << res << "\n";
     }
 }

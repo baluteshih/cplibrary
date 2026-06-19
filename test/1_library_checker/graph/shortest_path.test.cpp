@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Graph/Dijkstra.hpp"
 

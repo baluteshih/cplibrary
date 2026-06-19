@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/minimum_spanning_tree"
-#include "default_code.hpp"
+#include "assumption.hpp"
 
 #include "Graph/minimum_spanning_tree.hpp"
 

@@ -4,17 +4,17 @@
 #include "Numeric/pollard_rho.hpp"
 
 int main() {
-    ios::sync_with_stdio(0), cin.tie(0);
+    ios::sync_with_stdio(0), std::cin.tie(0);
     int q;
-    cin >> q;
+    std::cin >> q;
     while (q--) {
-        ll x;
-        cin >> x;
-        vector<ll> ans = pollard_rho(x);
-        ranges::sort(ans);
-        cout << SZ(ans);
-        for (ll i : ans)
-            cout << " " << i;
-        cout << "\n";
+        long long x;
+        std::cin >> x;
+        std::vector<long long> ans = pollard_rho(x);
+        std::ranges::sort(ans);
+        std::cout << SZ(ans);
+        for (long long i : ans)
+            std::cout << " " << i;
+        std::cout << "\n";
     }
 }
