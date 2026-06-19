@@ -35,10 +35,10 @@ public:
             this->traverse(root);
         }
         const int L = std::__lg(this->n()); 
-        vector<vector<int>>(L + 1, vector<int>(this->n())).swap(pa_table);
+        std::vector<std::vector<int>>(L + 1, std::vector<int>(this->n())).swap(pa_table);
         pa_table[0] = this->parents();
         if constexpr (hasAddition) {
-            vector<vector<WeightType>>(L + 1, vector<WeightType>(this->n())).swap(data);
+            std::vector<std::vector<WeightType>>(L + 1, std::vector<WeightType>(this->n())).swap(data);
             for (int i = 0; i < this->n(); ++i) {
                 if constexpr (this->hasEdgeWeight && this->hasVertexWeight) {
                     data[0][i] = this->weight[i];
@@ -62,7 +62,7 @@ public:
     int lca(int u, int v) {
         if (this->ancestor(u, v)) return u;
         if (this->ancestor(v, u)) return v;
-        int L = __lg(this->n());
+        int L = std::__lg(this->n());
         for (int i = L; i >= 0; --i)
             if (!this->ancestor(pa_table[i][u], v))
                 u = pa_table[i][u];

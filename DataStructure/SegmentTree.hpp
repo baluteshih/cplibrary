@@ -5,7 +5,7 @@ class SegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
     static_assert(pushdown || hasTag, "Lazy tag must exist when pushdown is false");
     int n;
-    vector<Value> seg;
+    std::vector<Value> seg;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>, Empty> lazy;
     Value get_val(int rt) {
@@ -24,7 +24,7 @@ class SegmentTree {
         give_tag(rt << 1 | 1, lazy[rt]);
         lazy[rt] = Tag();
     }
-    void initialize(int l, int r, int rt, const vector<Value> &data) {
+    void initialize(int l, int r, int rt, const std::vector<Value> &data) {
         if (r - l == 1) 
             return seg[rt] = data[l], void();
         int mid = (l + r) >> 1;
@@ -169,8 +169,8 @@ class SegmentTree {
         printall(l, mid, rt << 1);
         printall(mid, r, rt << 1 | 1);
     }
-    public:
-    SegmentTree(const vector<Value> &data): n(data.size()), seg(n << 2) { 
+public:
+    SegmentTree(const std::vector<Value> &data): n(data.size()), seg(n << 2) { 
         if constexpr (hasTag) lazy.resize(n << 2); 
         initialize(0, n, 1, data);
     }
@@ -226,11 +226,11 @@ class SegmentTree {
         std::cerr << "\e[1;33mInfo [" << l << ", " << r << "):\n";
         if (l < r) 
             printinfo(l, r, 0, n, 1);
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
     void printall() {
         std::cerr << "\e[1;33mInfo all:\n";
         printall(0, n, 1);
-        cerr << "\e[0m\n";
+        std::cerr << "\e[0m\n";
     }
 };

@@ -9,12 +9,12 @@ class Discretization {
         return _vals;
     }
 public:
-    int idx(int x) {
-        auto it = ranges::lower_bound(vals, x);
+    int idx(T x) {
+        auto it = std::ranges::lower_bound(vals, x);
         if (it == vals.end() || *it != x) return -1;
         return it - vals.begin();
     }
-    int safe_idx(int x) {
+    int safe_idx(T x) {
         int res = idx(x);
         assert(res != -1);
         return res;
@@ -34,5 +34,8 @@ public:
     }
     const T& operator[](size_t index) const {
         return vals[index];
-    } 
+    }
+    int size() {
+        return vals.size();
+    }
 };

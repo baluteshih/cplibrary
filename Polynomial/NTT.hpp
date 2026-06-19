@@ -9,7 +9,7 @@ class NTT {
     inline static int max_size = 1;
     inline static std::vector<T> w{1, T(1)};
     inline static const T root = internal::primitive_root_constexpr(T::mod());
-    static void set_upper_bound(int n) {
+    static void ensure_upper_bound(int n) {
         if (max_size < n) {
             while (max_size <= n) max_size <<= 1;
             w.resize(max_size);
@@ -32,13 +32,13 @@ public:
         }
         return limit;
     }();
-    static void ntt(vector<T> &a, bool inv = false) { //0 <= a[i] < P
+    static void ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P
         int n = a.size();
         assert((n & (n - 1)) == 0);
-        if ((int)maxsize() < n) set_upper_bound(n);
+        ensure_upper_bound(n);
         for (int i = 0, j = 1; j < n - 1; ++j) {
             for (int k = n >> 1; (i ^= k) < k; k >>= 1);
-            if (j < i) swap(a[i], a[j]);
+            if (j < i) std::swap(a[i], a[j]);
         }
         for (int s = 1; s < n; s <<= 1) {
             for (int i = 0; i < n; i += s * 2) {
@@ -51,14 +51,14 @@ public:
         }
         if (!inv) return;
         T iv = T(n).inv(); 
-        reverse(a.begin() + 1, a.begin() + n);
+        std::reverse(a.begin() + 1, a.begin() + n);
         for (int i = 0; i < n; ++i) a[i] *= iv;
     }
     static size_t maxsize() {
         return max_size;
     }
-    static vector<T> convolution(vector<T> a, vector<T> b) {
-        if (a.empty() || b.empty()) return vector<T>();
+    static std::vector<T> convolution(std::vector<T> a, std::vector<T> b) {
+        if (a.empty() || b.empty()) return std::vector<T>();
         int n = 1, sz = int(a.size()) + int(b.size()) - 1;
         while (n < sz) n <<= 1;
         assert(n <= ntt_max_limit && "the result length exceeds the limit of the prime can support");
