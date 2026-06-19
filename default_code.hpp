@@ -61,15 +61,10 @@ void sepline_(int length = 50) {
 #define debug(...) safe
 #define orange(...) safe
 #endif
-
-void chmax(auto &x, auto val) {
-    x = max(x, val);
-}
-
-void chmin(auto &x, auto val) {
-    x = min(x, val);
-}
-
+void chmax(auto &x, auto val) { x = max(x, val); }
+void chmin(auto &x, auto val) { x = min(x, val); }
+auto floor_div(auto a, auto b) { return a / b - (a % b && (a < 0) ^ (b < 0)); }
+auto ceil_div(auto a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }
 vector<int> count_array(const auto &container, int sz = -1) {
     if (sz == -1) sz = *ranges::max_element(container) + 1;
     vector<int> res(sz);
