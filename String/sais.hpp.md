@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/number_of_substrings.test.cpp
     title: test/1_library_checker/string/number_of_substrings.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/suffixarray.test.cpp
     title: test/1_library_checker/string/suffixarray.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"String/sais.hpp\"\n\n/*\n0-base\nThe input string should\
@@ -84,7 +84,7 @@ data:
   path: String/sais.hpp
   requiredBy: []
   timestamp: '2026-06-19 13:39:32+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp

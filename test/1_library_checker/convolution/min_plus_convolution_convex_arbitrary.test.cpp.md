@@ -60,25 +60,25 @@ data:
     \ = j;\n        self(self, l, mid - 1, jl, from), self(self, mid + 1, r, from,\
     \ jr);\n    };\n    return dc(dc, 0, n - 1 + m - 1, 0, m - 1), c;\n}\n#line 5\
     \ \"test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    vector<int> a(n), b(m);\n    for (int &i : a)\n       \
-    \ cin >> i;\n    for (int &i : b)\n        cin >> i;\n    auto c = min_plus_convolution(a,\
-    \ b);\n    for (int i = 0; i < SZ(c); ++i)\n        cout << c[i] << \" \\n\"[i\
-    \ + 1 == SZ(c)];\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m;\n    std::cin >> n >> m;\n    std::vector<int> a(n), b(m);\n    for (int\
+    \ &i : a)\n        std::cin >> i;\n    for (int &i : b)\n        std::cin >> i;\n\
+    \    auto c = min_plus_convolution(a, b);\n    for (int i = 0; i < int(c.size());\
+    \ ++i)\n        std::cout << c[i] << \" \\n\"[i + 1 == int(c.size())];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
     \n#include \"default_code.hpp\"\n\n#include \"Convolution/min_plus_convolution.hpp\"\
-    \n\nint main() {\n    ios::sync_with_stdio(0), cin.tie(0);\n    int n, m;\n  \
-    \  cin >> n >> m;\n    vector<int> a(n), b(m);\n    for (int &i : a)\n       \
-    \ cin >> i;\n    for (int &i : b)\n        cin >> i;\n    auto c = min_plus_convolution(a,\
-    \ b);\n    for (int i = 0; i < SZ(c); ++i)\n        cout << c[i] << \" \\n\"[i\
-    \ + 1 == SZ(c)];\n}\n"
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, m;\n    std::cin >> n >> m;\n    std::vector<int> a(n), b(m);\n    for (int\
+    \ &i : a)\n        std::cin >> i;\n    for (int &i : b)\n        std::cin >> i;\n\
+    \    auto c = min_plus_convolution(a, b);\n    for (int i = 0; i < int(c.size());\
+    \ ++i)\n        std::cout << c[i] << \" \\n\"[i + 1 == int(c.size())];\n}\n"
   dependsOn:
   - default_code.hpp
   - Convolution/min_plus_convolution.hpp
   isVerificationFile: true
   path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
   requiredBy: []
-  timestamp: '2026-05-06 17:59:51+08:00'
+  timestamp: '2026-06-19 14:01:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp

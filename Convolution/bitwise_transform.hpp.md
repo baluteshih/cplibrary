@@ -8,7 +8,7 @@ data:
   - icon: ':warning:'
     path: Convolution/or_convolution.hpp
     title: Convolution/or_convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Convolution/subset_convolution.hpp
     title: Convolution/subset_convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
     title: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Convolution/bitwise_transform.hpp\"\n\nnamespace bitwise_transform\
@@ -91,7 +91,7 @@ data:
   - Convolution/and_convolution.hpp
   - Convolution/subset_convolution.hpp
   timestamp: '2026-06-14 15:20:09+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp

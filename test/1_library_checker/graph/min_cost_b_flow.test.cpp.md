@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
   - icon: ':question:'

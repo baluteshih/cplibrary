@@ -13,6 +13,33 @@ data:
     path: test/1_library_checker/biginteger/multiplication.test.cpp
     title: test/1_library_checker/biginteger/multiplication.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+    title: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+    title: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/convolution.test.cpp
+    title: test/1_library_checker/convolution/convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+    title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/convolution_online.test.cpp
+    title: test/1_library_checker/convolution/convolution_online.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/gcd_convolution.test.cpp
+    title: test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/lcm_convolution.test.cpp
+    title: test/1_library_checker/convolution/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+    title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+    title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,13 +99,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/number_of_substrings.test.cpp
     title: test/1_library_checker/string/number_of_substrings.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/suffixarray.test.cpp
     title: test/1_library_checker/string/suffixarray.test.cpp
   - icon: ':x:'
@@ -214,6 +241,15 @@ data:
   timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
+  - test/1_library_checker/convolution/convolution.test.cpp
+  - test/1_library_checker/convolution/convolution_online.test.cpp
+  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
+  - test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
+  - test/1_library_checker/convolution/gcd_convolution.test.cpp
+  - test/1_library_checker/convolution/lcm_convolution.test.cpp
+  - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
+  - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp

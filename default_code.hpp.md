@@ -4,35 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
-    title: test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
-    title: test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/convolution.test.cpp
-    title: test/1_library_checker/convolution/convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
-    title: test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/convolution_online.test.cpp
-    title: test/1_library_checker/convolution/convolution_online.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/gcd_convolution.test.cpp
-    title: test/1_library_checker/convolution/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/lcm_convolution.test.cpp
-    title: test/1_library_checker/convolution/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
-    title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
-    title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
@@ -186,31 +159,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
     title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
     title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
     title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
     title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - icon: ':x:'
@@ -350,16 +323,7 @@ data:
   - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
-  - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-  - test/1_library_checker/convolution/convolution_online.test.cpp
-  - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
-  - test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
-  - test/1_library_checker/convolution/gcd_convolution.test.cpp
-  - test/1_library_checker/convolution/lcm_convolution.test.cpp
-  - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
-  - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
