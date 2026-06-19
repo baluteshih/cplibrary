@@ -8,17 +8,17 @@ data:
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
     title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/incircle_of_a_triangle.test.cpp
     title: test/2_aoj/incircle_of_a_triangle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
   - icon: ':x:'

@@ -136,11 +136,11 @@ data:
     \ {\n        return lhs._v == rhs._v;\n    }\n    friend bool operator!=(const\
     \ mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n    }\n   \
     \ friend std::strong_ordering operator<=>(const mint& lhs, const mint& rhs) {\n\
-    \        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static barrett bt;\n    static unsigned int umod()\
     \ { return bt.umod(); }\n};\ntemplate <int id> barrett dynamic_modint<id>::bt(998244353);\n\
     \nusing modint = dynamic_modint<-1>;\n\n/*\nmodint::set_mod(p);\n*/\n"
@@ -182,11 +182,11 @@ data:
     \ {\n        return lhs._v == rhs._v;\n    }\n    friend bool operator!=(const\
     \ mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n    }\n   \
     \ friend std::strong_ordering operator<=>(const mint& lhs, const mint& rhs) {\n\
-    \        return lhs._v <=> rhs._v;\n    }\n    friend ostream& operator<<(ostream&\
+    \        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ istream& operator>>(istream& is, mint& v) {\n        long long x;\n        is\
-    \ >> x;\n        x %= (long long)(umod());\n        if (x < 0) x += umod();\n\
-    \        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
+    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
+    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
+    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
     \    unsigned int _v;\n    static barrett bt;\n    static unsigned int umod()\
     \ { return bt.umod(); }\n};\ntemplate <int id> barrett dynamic_modint<id>::bt(998244353);\n\
     \nusing modint = dynamic_modint<-1>;\n\n/*\nmodint::set_mod(p);\n*/\n"
@@ -196,7 +196,7 @@ data:
   isVerificationFile: false
   path: Numeric/DynamicModint.hpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-19 20:51:50+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp

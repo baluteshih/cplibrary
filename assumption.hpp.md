@@ -37,6 +37,9 @@ data:
     path: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
+    title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
     title: test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,6 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
+    title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
@@ -127,6 +133,15 @@ data:
     path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
   - icon: ':heavy_check_mark:'
@@ -190,11 +205,47 @@ data:
     path: test/1_library_checker/graph/two_edge_connected_components.test.cpp
     title: test/1_library_checker/graph/two_edge_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
+    title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
+    title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+    title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
+    title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+    title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
+    title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+    title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/factorize.test.cpp
+    title: test/1_library_checker/number_theory/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/primality_test.test.cpp
+    title: test/1_library_checker/number_theory/primality_test.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/primitive_root.test.cpp
+    title: test/1_library_checker/number_theory/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
+    title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
+    title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/enumerate_palindromes.test.cpp
     title: test/1_library_checker/string/enumerate_palindromes.test.cpp
@@ -270,51 +321,51 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_circles.test.cpp
     title: test/2_aoj/cross_points_of_circles.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/distance.test.cpp
     title: test/2_aoj/distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/incircle_of_a_triangle.test.cpp
     title: test/2_aoj/incircle_of_a_triangle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/intersection.test.cpp
     title: test/2_aoj/intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/parallel-orthogonal.test.cpp
     title: test/2_aoj/parallel-orthogonal.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/polygon-point_containment.test.cpp
     title: test/2_aoj/polygon-point_containment.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/projection.test.cpp
     title: test/2_aoj/projection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/reflection.test.cpp
     title: test/2_aoj/reflection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/tangent_to_a_circle.test.cpp
     title: test/2_aoj/tangent_to_a_circle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "assumption.hpp"
@@ -338,10 +389,19 @@ data:
   path: assumption.hpp
   requiredBy: []
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/set_power_series/subset_convolution.test.cpp
+  - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
+  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_det.test.cpp
+  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_product.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_concave_arbitrary.test.cpp
   - test/1_library_checker/convolution/convolution.test.cpp
+  - test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
   - test/1_library_checker/convolution/convolution_mod_1000000007.test.cpp
   - test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp
@@ -372,6 +432,7 @@ data:
   - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+  - test/1_library_checker/data_structure/line_add_get_min.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
@@ -404,6 +465,9 @@ data:
   - test/1_library_checker/string/enumerate_palindromes.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   - test/1_library_checker/graph/bipartitematching.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
@@ -420,6 +484,10 @@ data:
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
   - test/1_library_checker/graph/two_edge_connected_components.test.cpp
   - test/1_library_checker/graph/dominatortree.test.cpp
+  - test/1_library_checker/number_theory/primitive_root.test.cpp
+  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - test/1_library_checker/number_theory/primality_test.test.cpp
+  - test/1_library_checker/number_theory/factorize.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp

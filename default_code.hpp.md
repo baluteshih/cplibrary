@@ -4,54 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-    title: test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
-    title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-    title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
-    title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-    title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-    title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-    title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-    title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-    title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/number_theory/factorize.test.cpp
-    title: test/1_library_checker/number_theory/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/number_theory/primality_test.test.cpp
-    title: test/1_library_checker/number_theory/primality_test.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/number_theory/primitive_root.test.cpp
-    title: test/1_library_checker/number_theory/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-    title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,9 +39,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
     title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
-    title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - icon: ':x:'
     path: test/3_qoj/17153.test.cpp
     title: test/3_qoj/17153.test.cpp
@@ -219,24 +168,7 @@ data:
   timestamp: '2026-02-27 19:30:58+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/1_library_checker/set_power_series/subset_convolution.test.cpp
-  - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp
-  - test/1_library_checker/data_structure/line_add_get_min.test.cpp
   - test/1_library_checker/sample/many_aplusb_128bit.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-  - test/1_library_checker/number_theory/primitive_root.test.cpp
-  - test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - test/1_library_checker/number_theory/primality_test.test.cpp
-  - test/1_library_checker/number_theory/factorize.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp

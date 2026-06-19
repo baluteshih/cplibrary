@@ -164,7 +164,7 @@ data:
     - icon: ':question:'
       path: Geometry/line.hpp
       title: Geometry/line.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: Geometry/minimum_enclosing_circle.hpp
       title: Geometry/minimum_enclosing_circle.hpp
     - icon: ':heavy_check_mark:'
@@ -393,7 +393,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':question:'
@@ -797,46 +797,46 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
       title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/cross_points_of_circles.test.cpp
       title: test/2_aoj/cross_points_of_circles.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/distance.test.cpp
       title: test/2_aoj/distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/incircle_of_a_triangle.test.cpp
       title: test/2_aoj/incircle_of_a_triangle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/intersection.test.cpp
       title: test/2_aoj/intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
       title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/minimum_cost_flow.test.cpp
       title: test/2_aoj/minimum_cost_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
       title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/minimum_enclosing_circle.test.cpp
       title: test/2_aoj/minimum_enclosing_circle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/parallel-orthogonal.test.cpp
       title: test/2_aoj/parallel-orthogonal.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/polygon-point_containment.test.cpp
       title: test/2_aoj/polygon-point_containment.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/projection.test.cpp
       title: test/2_aoj/projection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/reflection.test.cpp
       title: test/2_aoj/reflection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/tangent_to_a_circle.test.cpp
       title: test/2_aoj/tangent_to_a_circle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/type_of_circle.test.cpp
       title: test/2_aoj/type_of_circle.test.cpp
   - name: test/3_qoj

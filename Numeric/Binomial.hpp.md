@@ -154,9 +154,9 @@ data:
     \ -1;\n}\n#line 2 \"Numeric/mod_inv.hpp\"\n\ntemplate<typename T>\nT mod_inv(T\
     \ val, T mod) {\n    if (mod == 0) return 0;\n    mod = std::abs(mod);\n    val\
     \ %= mod;\n    if (val < 0) val += mod;\n    T a = val, b = mod, u = 1, v = 0,\
-    \ t;\n    while (b > 0) {\n        t = a / b;\n        swap(a -= t * b, b), swap(u\
-    \ -= t * v, v);\n    }\n    if (u < 0) u += mod;\n    return u;\n}\n#line 8 \"\
-    Numeric/Binomial.hpp\"\n\n// source: https://maspypy.github.io/library/mod/binomial.hpp\n\
+    \ t;\n    while (b > 0) {\n        t = a / b;\n        std::swap(a -= t * b, b),\
+    \ std::swap(u -= t * v, v);\n    }\n    if (u < 0) u += mod;\n    return u;\n\
+    }\n#line 8 \"Numeric/Binomial.hpp\"\n\n// source: https://maspypy.github.io/library/mod/binomial.hpp\n\
     struct BinomialPrimePower {\n    int p, e, pp, root, ord;\n    std::vector<int>\
     \ exp, log_fact, power;\n    barrett bt_p, bt_pp;\n    BinomialPrimePower(int\
     \ _p, int _e) : p(_p), e(_e), power(e + 1, 1), bt_p(1), bt_pp(1) {\n        for\
@@ -269,7 +269,7 @@ data:
   isVerificationFile: false
   path: Numeric/Binomial.hpp
   requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  timestamp: '2026-06-19 20:51:50+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp

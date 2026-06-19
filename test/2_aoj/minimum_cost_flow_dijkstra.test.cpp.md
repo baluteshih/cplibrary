@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
@@ -161,7 +161,7 @@ data:
   path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   requiredBy: []
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
 layout: document

@@ -165,10 +165,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - icon: ':x:'
