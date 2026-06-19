@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/half_plane_intersection.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -169,18 +169,18 @@ data:
     \ Geometry<MulT, eps>::cmp(MulT(a02Y) * MulT(a12X), MulT(a02X) * MulT(a12Y)) >=\
     \ int(strict);\n}\n\ntemplate<typename Line, typename MulT = typename Line::value_type,\
     \ MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val :\
-    \ get_default_eps<MulT>()>\nstd::vector<Line> half_plane_intersection(vector<Line>\
-    \ arr) {\n    std::sort(ALL(arr), [&](const Line &a, const Line &b) -> int {\n\
-    \        if (!sameDirection(a, b))\n            return polar(direction(a), direction(b));\n\
-    \        return side(a[0], a[1], b[1]) < 0;\n    });\n    std::deque<Line> dq(1,\
-    \ arr[0]);\n    auto pop_back = [&](int t, const Line &p) {\n        while (SZ(dq)\
-    \ >= t && !line_contain<Line, MulT, eps>(p, dq[SZ(dq) - 2], dq.back()))\n    \
-    \        dq.pop_back();\n    };\n    auto pop_front = [&](int t, const Line &p)\
-    \ {\n        while (SZ(dq) >= t && !line_contain<Line, MulT, eps>(p, dq[0], dq[1]))\n\
-    \            dq.pop_front();\n    };\n    for (auto p : arr)\n        if (!sameDirection(dq.back(),\
-    \ p))\n            pop_back(2, p), pop_front(2, p), dq.push_back(p);\n    pop_back(3,\
-    \ dq[0]), pop_front(3, dq.back());\n    return std::vector<Line>(dq.begin(), dq.end());\n\
-    }\n"
+    \ get_default_eps<MulT>()>\nstd::vector<Line> half_plane_intersection(std::vector<Line>\
+    \ arr) {\n    std::ranges::sort(arr, [&](const Line &a, const Line &b) -> int\
+    \ {\n        if (!sameDirection(a, b))\n            return polar(direction(a),\
+    \ direction(b));\n        return side(a[0], a[1], b[1]) < 0;\n    });\n    std::deque<Line>\
+    \ dq(1, arr[0]);\n    auto pop_back = [&](int t, const Line &p) {\n        while\
+    \ (int(dq.size()) >= t && !line_contain<Line, MulT, eps>(p, dq[int(dq.size())\
+    \ - 2], dq.back()))\n            dq.pop_back();\n    };\n    auto pop_front =\
+    \ [&](int t, const Line &p) {\n        while (int(dq.size()) >= t && !line_contain<Line,\
+    \ MulT, eps>(p, dq[0], dq[1]))\n            dq.pop_front();\n    };\n    for (auto\
+    \ p : arr)\n        if (!sameDirection(dq.back(), p))\n            pop_back(2,\
+    \ p), pop_front(2, p), dq.push_back(p);\n    pop_back(3, dq[0]), pop_front(3,\
+    \ dq.back());\n    return std::vector<Line>(dq.begin(), dq.end());\n}\n"
   code: "#pragma once\n\n#include \"Geometry/base.hpp\"\n#include \"Geometry/line.hpp\"\
     \n\n// Check inter(l1, l2) in l0\ntemplate<typename Line, typename MulT = typename\
     \ Line::value_type, MulT eps = std::is_same_v<typename Line::value_type, MulT>\
@@ -193,26 +193,26 @@ data:
     \ Geometry<MulT, eps>::cmp(MulT(a02Y) * MulT(a12X), MulT(a02X) * MulT(a12Y)) >=\
     \ int(strict);\n}\n\ntemplate<typename Line, typename MulT = typename Line::value_type,\
     \ MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val :\
-    \ get_default_eps<MulT>()>\nstd::vector<Line> half_plane_intersection(vector<Line>\
-    \ arr) {\n    std::sort(ALL(arr), [&](const Line &a, const Line &b) -> int {\n\
-    \        if (!sameDirection(a, b))\n            return polar(direction(a), direction(b));\n\
-    \        return side(a[0], a[1], b[1]) < 0;\n    });\n    std::deque<Line> dq(1,\
-    \ arr[0]);\n    auto pop_back = [&](int t, const Line &p) {\n        while (SZ(dq)\
-    \ >= t && !line_contain<Line, MulT, eps>(p, dq[SZ(dq) - 2], dq.back()))\n    \
-    \        dq.pop_back();\n    };\n    auto pop_front = [&](int t, const Line &p)\
-    \ {\n        while (SZ(dq) >= t && !line_contain<Line, MulT, eps>(p, dq[0], dq[1]))\n\
-    \            dq.pop_front();\n    };\n    for (auto p : arr)\n        if (!sameDirection(dq.back(),\
-    \ p))\n            pop_back(2, p), pop_front(2, p), dq.push_back(p);\n    pop_back(3,\
-    \ dq[0]), pop_front(3, dq.back());\n    return std::vector<Line>(dq.begin(), dq.end());\n\
-    }\n"
+    \ get_default_eps<MulT>()>\nstd::vector<Line> half_plane_intersection(std::vector<Line>\
+    \ arr) {\n    std::ranges::sort(arr, [&](const Line &a, const Line &b) -> int\
+    \ {\n        if (!sameDirection(a, b))\n            return polar(direction(a),\
+    \ direction(b));\n        return side(a[0], a[1], b[1]) < 0;\n    });\n    std::deque<Line>\
+    \ dq(1, arr[0]);\n    auto pop_back = [&](int t, const Line &p) {\n        while\
+    \ (int(dq.size()) >= t && !line_contain<Line, MulT, eps>(p, dq[int(dq.size())\
+    \ - 2], dq.back()))\n            dq.pop_back();\n    };\n    auto pop_front =\
+    \ [&](int t, const Line &p) {\n        while (int(dq.size()) >= t && !line_contain<Line,\
+    \ MulT, eps>(p, dq[0], dq[1]))\n            dq.pop_front();\n    };\n    for (auto\
+    \ p : arr)\n        if (!sameDirection(dq.back(), p))\n            pop_back(2,\
+    \ p), pop_front(2, p), dq.push_back(p);\n    pop_back(3, dq[0]), pop_front(3,\
+    \ dq.back());\n    return std::vector<Line>(dq.begin(), dq.end());\n}\n"
   dependsOn:
   - Geometry/base.hpp
   - Geometry/line.hpp
   isVerificationFile: false
   path: Geometry/half_plane_intersection.hpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/3_qoj/2162.test.cpp
 documentation_of: Geometry/half_plane_intersection.hpp

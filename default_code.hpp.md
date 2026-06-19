@@ -1,71 +1,21 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/3_qoj/17153.test.cpp
-    title: test/3_qoj/17153.test.cpp
-  - icon: ':x:'
-    path: test/3_qoj/2162.test.cpp
-    title: test/3_qoj/2162.test.cpp
-  - icon: ':x:'
-    path: test/3_qoj/6445.test.cpp
-    title: test/3_qoj/6445.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101242J.test.cpp
-    title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101673A.test.cpp
-    title: test/4_codeforces/101673A.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/104114B.test.cpp
-    title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/106033E.test.cpp
-    title: test/4_codeforces/106033E.test.cpp
-  - icon: ':x:'
-    path: test/5_NCOJ/123.test.cpp
-    title: test/5_NCOJ/123.test.cpp
-  - icon: ':x:'
-    path: test/5_NCOJ/929.test.cpp
-    title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
-    path: test/6_TIOJ/1503.test.cpp
-    title: test/6_TIOJ/1503.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/7_loj/2302.test.cpp
-    title: test/7_loj/2302.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/bounded_flow.test.cpp
-    title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/max_bounded_flow.test.cpp
-    title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/maxflow.test.cpp
-    title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/min_bounded_flow.test.cpp
-    title: test/7_loj/min_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/min_cost_max_flow.test.cpp
-    title: test/7_loj/min_cost_max_flow.test.cpp
-  - icon: ':x:'
-    path: test/8_luogu/P3835.test.cpp
-    title: test/8_luogu/P3835.test.cpp
-  - icon: ':x:'
     path: test/8_luogu/P3835_pool.test.cpp
     title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':x:'
-    path: test/8_luogu/P5055.test.cpp
-    title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing namespace\
+  bundledCode: "#line 2 \"default_code.hpp\"\n\n#line 2 \"assumption.hpp\"\n\n#include\
+    \ <cassert>\n#include <bits/stdc++.h>\n#line 4 \"default_code.hpp\"\nusing namespace\
     \ std;\ntypedef long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll>\
     \ pll;\n#define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define\
     \ ALL(v) v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
@@ -92,12 +42,10 @@ data:
     void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
     \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n"
-  code: "#pragma once\n\n#include <bits/stdc++.h>\nusing namespace std;\ntypedef long\
-    \ long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define X\
-    \ first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(),\
+    \ return res;\n}\n"
+  code: "#pragma once\n\n#include \"assumption.hpp\"\nusing namespace std;\ntypedef\
+    \ long long ll;\ntypedef pair<int, int> pii;\ntypedef pair<ll, ll> pll;\n#define\
+    \ X first\n#define Y second\n#define SZ(a) ((int)a.size())\n#define ALL(v) v.begin(),\
     \ v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream& os, const\
     \ pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second << \")\"\
     ;\n    return os;\n}\ntemplate <typename T>\nconcept PrintableContainer = requires(T&\
@@ -122,35 +70,16 @@ data:
     void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
     \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n"
-  dependsOn: []
+    \ return res;\n}\n"
+  dependsOn:
+  - assumption.hpp
   isVerificationFile: false
   path: default_code.hpp
   requiredBy: []
-  timestamp: '2026-02-27 19:30:58+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/4_codeforces/101673A.test.cpp
-  - test/4_codeforces/101242J.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/106033E.test.cpp
-  - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/min_cost_max_flow.test.cpp
-  - test/7_loj/maxflow.test.cpp
-  - test/7_loj/2302.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
-  - test/7_loj/max_bounded_flow.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
-  - test/8_luogu/P3835.test.cpp
-  - test/8_luogu/P5055.test.cpp
-  - test/3_qoj/2162.test.cpp
-  - test/3_qoj/6445.test.cpp
-  - test/3_qoj/17153.test.cpp
-  - test/5_NCOJ/123.test.cpp
-  - test/5_NCOJ/929.test.cpp
-  - test/6_TIOJ/1503.test.cpp
 documentation_of: default_code.hpp
 layout: document
 redirect_from:

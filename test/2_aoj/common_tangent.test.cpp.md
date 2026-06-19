@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   - icon: ':heavy_check_mark:'

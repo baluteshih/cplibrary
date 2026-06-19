@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: default_code.hpp
+    title: default_code.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
@@ -399,6 +402,60 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/3_qoj/17153.test.cpp
+    title: test/3_qoj/17153.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/3_qoj/2162.test.cpp
+    title: test/3_qoj/2162.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/3_qoj/6445.test.cpp
+    title: test/3_qoj/6445.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/4_codeforces/101242J.test.cpp
+    title: test/4_codeforces/101242J.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/4_codeforces/101673A.test.cpp
+    title: test/4_codeforces/101673A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/4_codeforces/104114B.test.cpp
+    title: test/4_codeforces/104114B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/4_codeforces/106033E.test.cpp
+    title: test/4_codeforces/106033E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/5_NCOJ/123.test.cpp
+    title: test/5_NCOJ/123.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/5_NCOJ/929.test.cpp
+    title: test/5_NCOJ/929.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/6_TIOJ/1503.test.cpp
+    title: test/6_TIOJ/1503.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/7_loj/2302.test.cpp
+    title: test/7_loj/2302.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/7_loj/bounded_flow.test.cpp
+    title: test/7_loj/bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/7_loj/max_bounded_flow.test.cpp
+    title: test/7_loj/max_bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/7_loj/maxflow.test.cpp
+    title: test/7_loj/maxflow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/7_loj/min_bounded_flow.test.cpp
+    title: test/7_loj/min_bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/8_luogu/P3835.test.cpp
+    title: test/8_luogu/P3835.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/8_luogu/P3835_pool.test.cpp
+    title: test/8_luogu/P3835_pool.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/8_luogu/P5055.test.cpp
+    title: test/8_luogu/P5055.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -423,7 +480,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: assumption.hpp
-  requiredBy: []
+  requiredBy:
+  - default_code.hpp
   timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -536,7 +594,24 @@ data:
   - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/4_codeforces/101673A.test.cpp
+  - test/4_codeforces/101242J.test.cpp
+  - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/106033E.test.cpp
+  - test/7_loj/bounded_flow.test.cpp
+  - test/7_loj/maxflow.test.cpp
+  - test/7_loj/2302.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
+  - test/7_loj/max_bounded_flow.test.cpp
+  - test/8_luogu/P3835_pool.test.cpp
+  - test/8_luogu/P3835.test.cpp
+  - test/8_luogu/P5055.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
+  - test/3_qoj/2162.test.cpp
+  - test/3_qoj/6445.test.cpp
+  - test/3_qoj/17153.test.cpp
+  - test/5_NCOJ/123.test.cpp
+  - test/5_NCOJ/929.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
@@ -559,6 +634,7 @@ data:
   - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/projection.test.cpp
   - test/2_aoj/common_tangent.test.cpp
+  - test/6_TIOJ/1503.test.cpp
 documentation_of: assumption.hpp
 layout: document
 redirect_from:

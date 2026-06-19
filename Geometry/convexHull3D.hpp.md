@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/convexHull3D.hpp\"\n\n#line 2 \"Geometry/Point3D.hpp\"\
@@ -98,24 +98,24 @@ data:
     \ T;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n\
     \    static constexpr T eps_val = eps;\n    T x = 0, y = 0, z = 0;\n    Pt3()\
     \ : x(0), y(0), z(0) {}\n    Pt3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt3 &p) { return is >> p.x >> p.y\
-    \ >> p.z; }\n    friend ostream& operator<<(ostream &os, const Pt3 &p) { return\
-    \ os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend bool operator==(const Pt3\
-    \ &a, const Pt3 &b) {\n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0\
-    \ && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const Pt3 &a, const\
-    \ Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x, -y, -z);\
-    \ }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y, z += a.z;\n\
-    \        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n        x\
-    \ -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3& operator*=(T\
-    \ d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n    }\n    Pt3&\
-    \ operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return *this;\n\
-    \    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return Pt3(a) +=\
-    \ b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return Pt3(a) -=\
-    \ b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a) *= d; }\n\
-    \    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n    friend\
-    \ bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x, b.x);\n\
-    \        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n    \
-    \    return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
+    \    friend std::istream& operator>>(std::istream &is, Pt3 &p) { return is >>\
+    \ p.x >> p.y >> p.z; }\n    friend std::ostream& operator<<(std::ostream &os,\
+    \ const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend\
+    \ bool operator==(const Pt3 &a, const Pt3 &b) {\n        return cmp(a.x, b.x)\
+    \ == 0 && cmp(a.y, b.y) == 0 && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const\
+    \ Pt3 &a, const Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x,\
+    \ -y, -z); }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y,\
+    \ z += a.z;\n        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n\
+    \        x -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3&\
+    \ operator*=(T d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n\
+    \    }\n    Pt3& operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return\
+    \ *this;\n    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return\
+    \ Pt3(a) += b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return\
+    \ Pt3(a) -= b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a)\
+    \ *= d; }\n    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n\
+    \    friend bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x,\
+    \ b.x);\n        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n\
+    \        return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
     \ operator>(const Pt3 &a, const Pt3 &b) { return b < a; }\n    friend bool operator<=(const\
     \ Pt3 &a, const Pt3 &b) { return !(b < a); }\n    friend bool operator>=(const\
     \ Pt3 &a, const Pt3 &b) { return !(a < b); }\n    template <typename U, U _eps,\
@@ -173,16 +173,16 @@ data:
     \ the faces with input point indexes\n    std::vector<Face> res;\n    std::vector<Point>\
     \ P;\n    convexHull3D(const std::vector<Point> &_P) : res(), P(_P) {\n      \
     \  int n = P.size();\n        if (n <= 2) return; // be careful about edge case\n\
-    \        // ensure first 4 points are not coplanar\n        swap(P[1], *std::ranges::find_if(P,\
-    \ [&](auto p) { return sign(square(P[0] - p)) != 0; }));\n        swap(P[2], *std::ranges::find_if(P,\
-    \ [&](auto p) { return sign(square(cross(p, P[0], P[1]))) != 0; }));\n       \
-    \ swap(P[3], *std::ranges::find_if(P, [&](auto p) { return sign(volume(P[0], P[1],\
-    \ P[2], p)) != 0; }));\n        std::vector<std::vector<int>> flag(n, std::vector<int>(n));\n\
-    \        res.emplace_back(0, 1, 2);\n        res.emplace_back(2, 1, 0);\n    \
-    \    for (int i = 3; i < n; ++i) {\n            std::vector<Face> next;\n    \
-    \        for (auto f : res) {\n                int d = sign(volume(P[f.a], P[f.b],\
-    \ P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n          \
-    \      int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
+    \        // ensure first 4 points are not coplanar\n        std::swap(P[1], *std::ranges::find_if(P,\
+    \ [&](auto p) { return sign(square(P[0] - p)) != 0; }));\n        std::swap(P[2],\
+    \ *std::ranges::find_if(P, [&](auto p) { return sign(square(cross(p, P[0], P[1])))\
+    \ != 0; }));\n        std::swap(P[3], *std::ranges::find_if(P, [&](auto p) { return\
+    \ sign(volume(P[0], P[1], P[2], p)) != 0; }));\n        std::vector<std::vector<int>>\
+    \ flag(n, std::vector<int>(n));\n        res.emplace_back(0, 1, 2);\n        res.emplace_back(2,\
+    \ 1, 0);\n        for (int i = 3; i < n; ++i) {\n            std::vector<Face>\
+    \ next;\n            for (auto f : res) {\n                int d = sign(volume(P[f.a],\
+    \ P[f.b], P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n  \
+    \              int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
     \ = flag[f.c][f.a] = ff;\n            }\n            for (auto f : res) {\n  \
     \              auto F = [&](int x, int y) {\n                    if (flag[x][y]\
     \ > 0 && flag[y][x] <= 0)\n                        next.emplace_back(x, y, i);\n\
@@ -218,16 +218,16 @@ data:
     \    std::vector<Face> res;\n    std::vector<Point> P;\n    convexHull3D(const\
     \ std::vector<Point> &_P) : res(), P(_P) {\n        int n = P.size();\n      \
     \  if (n <= 2) return; // be careful about edge case\n        // ensure first\
-    \ 4 points are not coplanar\n        swap(P[1], *std::ranges::find_if(P, [&](auto\
-    \ p) { return sign(square(P[0] - p)) != 0; }));\n        swap(P[2], *std::ranges::find_if(P,\
-    \ [&](auto p) { return sign(square(cross(p, P[0], P[1]))) != 0; }));\n       \
-    \ swap(P[3], *std::ranges::find_if(P, [&](auto p) { return sign(volume(P[0], P[1],\
-    \ P[2], p)) != 0; }));\n        std::vector<std::vector<int>> flag(n, std::vector<int>(n));\n\
-    \        res.emplace_back(0, 1, 2);\n        res.emplace_back(2, 1, 0);\n    \
-    \    for (int i = 3; i < n; ++i) {\n            std::vector<Face> next;\n    \
-    \        for (auto f : res) {\n                int d = sign(volume(P[f.a], P[f.b],\
-    \ P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n          \
-    \      int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
+    \ 4 points are not coplanar\n        std::swap(P[1], *std::ranges::find_if(P,\
+    \ [&](auto p) { return sign(square(P[0] - p)) != 0; }));\n        std::swap(P[2],\
+    \ *std::ranges::find_if(P, [&](auto p) { return sign(square(cross(p, P[0], P[1])))\
+    \ != 0; }));\n        std::swap(P[3], *std::ranges::find_if(P, [&](auto p) { return\
+    \ sign(volume(P[0], P[1], P[2], p)) != 0; }));\n        std::vector<std::vector<int>>\
+    \ flag(n, std::vector<int>(n));\n        res.emplace_back(0, 1, 2);\n        res.emplace_back(2,\
+    \ 1, 0);\n        for (int i = 3; i < n; ++i) {\n            std::vector<Face>\
+    \ next;\n            for (auto f : res) {\n                int d = sign(volume(P[f.a],\
+    \ P[f.b], P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n  \
+    \              int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
     \ = flag[f.c][f.a] = ff;\n            }\n            for (auto f : res) {\n  \
     \              auto F = [&](int x, int y) {\n                    if (flag[x][y]\
     \ > 0 && flag[y][x] <= 0)\n                        next.emplace_back(x, y, i);\n\
@@ -259,8 +259,8 @@ data:
   isVerificationFile: false
   path: Geometry/convexHull3D.hpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/3_qoj/6445.test.cpp
 documentation_of: Geometry/convexHull3D.hpp

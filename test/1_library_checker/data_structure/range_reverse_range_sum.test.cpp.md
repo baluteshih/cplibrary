@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':heavy_check_mark:'

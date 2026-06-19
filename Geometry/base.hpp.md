@@ -2,49 +2,49 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/closest_pair.hpp
     title: Geometry/closest_pair.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/rotating_sweepline.hpp
     title: Geometry/rotating_sweepline.hpp
   _extendedVerifiedWith:
@@ -126,33 +126,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/2162.test.cpp
     title: test/3_qoj/2162.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing\
@@ -327,7 +327,7 @@ data:
   - Geometry/convexHull3D.hpp
   - Geometry/half_plane_intersection.hpp
   timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/closest_pair.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp

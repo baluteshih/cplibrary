@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/rotating_sweepline.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -109,26 +109,26 @@ data:
     \    for (int i = 0; i < n; ++i)\n        for (int j = 0; j < n; ++j)\n      \
     \      if (i != j)\n                e.push_back({pts[j] - pts[i], i, j});\n  \
     \  std::ranges::sort(e.begin(), e.end(), [&](const Event &a, const Event &b) {\n\
-    \        return polar(a.dir, b.dir, init);\n    });\n    vector<int> ord(n), pos(n);\n\
-    \    std::iota(ord.begin(), ord.end(), 0);\n    std::ranges::sort(ord, [&](int\
-    \ a, int b) {\n        auto va = cross(init, pts[a]);\n        auto vb = cross(init,\
-    \ pts[b]);\n        if (va != vb) return va < vb;\n        return dot(init, pts[a])\
-    \ < dot(init, pts[b]);\n    });\n    for (int i = 0; i < n; i++) pos[ord[i]] =\
-    \ i;\n    init_order(ord);\n    for (int i = 0, j = 0; i < int(e.size()); i =\
-    \ j) {\n        std::vector<std::pair<int, int>> tmp;\n        for (; j < int(e.size())\
-    \ && !polar(e[i].dir, e[j].dir, init); ++j)\n            tmp.emplace_back(e[j].u,\
-    \ e[j].v);\n        ranges::sort(tmp, [&](const std::pair<int, int> &x, const\
-    \ std::pair<int, int> &y) {\n            return std::make_pair(pos[x.first], pos[x.second])\
-    \ < std::make_pair(pos[y.first], pos[y.second]);\n        });\n        for (int\
-    \ k = 0; k < int(tmp.size()); ) {\n            int l = pos[tmp[k].first], r =\
-    \ pos[tmp[k].second];\n            for (int tk = k; tk < int(tmp.size()) && pos[tmp[tk].first]\
-    \ <= r; ++tk)\n                r = std::max(r, pos[tmp[tk].second]);\n       \
-    \     if constexpr (reverse_convention) update_ans(ord, l, r);\n            for\
-    \ (; k < int(tmp.size()) && pos[tmp[k].first] <= r; ++k) {\n                auto\
-    \ [x, y] = tmp[k]; \n                if constexpr (!reverse_convention) update_ans(ord,\
-    \ pos[x]);\n                std::tie(ord[pos[x]], ord[pos[y]], pos[x], pos[y])\
-    \ = std::make_tuple(ord[pos[y]], ord[pos[x]], pos[y], pos[x]);\n            }\n\
-    \        }\n    }\n}\n"
+    \        return polar(a.dir, b.dir, init);\n    });\n    std::vector<int> ord(n),\
+    \ pos(n);\n    std::iota(ord.begin(), ord.end(), 0);\n    std::ranges::sort(ord,\
+    \ [&](int a, int b) {\n        auto va = cross(init, pts[a]);\n        auto vb\
+    \ = cross(init, pts[b]);\n        if (va != vb) return va < vb;\n        return\
+    \ dot(init, pts[a]) < dot(init, pts[b]);\n    });\n    for (int i = 0; i < n;\
+    \ i++) pos[ord[i]] = i;\n    init_order(ord);\n    for (int i = 0, j = 0; i <\
+    \ int(e.size()); i = j) {\n        std::vector<std::pair<int, int>> tmp;\n   \
+    \     for (; j < int(e.size()) && !polar(e[i].dir, e[j].dir, init); ++j)\n   \
+    \         tmp.emplace_back(e[j].u, e[j].v);\n        std::ranges::sort(tmp, [&](const\
+    \ std::pair<int, int> &x, const std::pair<int, int> &y) {\n            return\
+    \ std::make_pair(pos[x.first], pos[x.second]) < std::make_pair(pos[y.first], pos[y.second]);\n\
+    \        });\n        for (int k = 0; k < int(tmp.size()); ) {\n            int\
+    \ l = pos[tmp[k].first], r = pos[tmp[k].second];\n            for (int tk = k;\
+    \ tk < int(tmp.size()) && pos[tmp[tk].first] <= r; ++tk)\n                r =\
+    \ std::max(r, pos[tmp[tk].second]);\n            if constexpr (reverse_convention)\
+    \ update_ans(ord, l, r);\n            for (; k < int(tmp.size()) && pos[tmp[k].first]\
+    \ <= r; ++k) {\n                auto [x, y] = tmp[k]; \n                if constexpr\
+    \ (!reverse_convention) update_ans(ord, pos[x]);\n                std::tie(ord[pos[x]],\
+    \ ord[pos[y]], pos[x], pos[y]) = std::make_tuple(ord[pos[y]], ord[pos[x]], pos[y],\
+    \ pos[x]);\n            }\n        }\n    }\n}\n"
   code: "#pragma once\n\n#include \"Geometry/base.hpp\"\n\n/*\ninit_order(const std::vector<int>\
     \ &ord)\n\nif reverse_convention is true:\nupdate_ans(const std::vector<int> &ord,\
     \ int l, int r): \n    calculate ans related to line(pts[ord[l]], pts[ord[l+1]],\
@@ -145,33 +145,33 @@ data:
     \    for (int i = 0; i < n; ++i)\n        for (int j = 0; j < n; ++j)\n      \
     \      if (i != j)\n                e.push_back({pts[j] - pts[i], i, j});\n  \
     \  std::ranges::sort(e.begin(), e.end(), [&](const Event &a, const Event &b) {\n\
-    \        return polar(a.dir, b.dir, init);\n    });\n    vector<int> ord(n), pos(n);\n\
-    \    std::iota(ord.begin(), ord.end(), 0);\n    std::ranges::sort(ord, [&](int\
-    \ a, int b) {\n        auto va = cross(init, pts[a]);\n        auto vb = cross(init,\
-    \ pts[b]);\n        if (va != vb) return va < vb;\n        return dot(init, pts[a])\
-    \ < dot(init, pts[b]);\n    });\n    for (int i = 0; i < n; i++) pos[ord[i]] =\
-    \ i;\n    init_order(ord);\n    for (int i = 0, j = 0; i < int(e.size()); i =\
-    \ j) {\n        std::vector<std::pair<int, int>> tmp;\n        for (; j < int(e.size())\
-    \ && !polar(e[i].dir, e[j].dir, init); ++j)\n            tmp.emplace_back(e[j].u,\
-    \ e[j].v);\n        ranges::sort(tmp, [&](const std::pair<int, int> &x, const\
-    \ std::pair<int, int> &y) {\n            return std::make_pair(pos[x.first], pos[x.second])\
-    \ < std::make_pair(pos[y.first], pos[y.second]);\n        });\n        for (int\
-    \ k = 0; k < int(tmp.size()); ) {\n            int l = pos[tmp[k].first], r =\
-    \ pos[tmp[k].second];\n            for (int tk = k; tk < int(tmp.size()) && pos[tmp[tk].first]\
-    \ <= r; ++tk)\n                r = std::max(r, pos[tmp[tk].second]);\n       \
-    \     if constexpr (reverse_convention) update_ans(ord, l, r);\n            for\
-    \ (; k < int(tmp.size()) && pos[tmp[k].first] <= r; ++k) {\n                auto\
-    \ [x, y] = tmp[k]; \n                if constexpr (!reverse_convention) update_ans(ord,\
-    \ pos[x]);\n                std::tie(ord[pos[x]], ord[pos[y]], pos[x], pos[y])\
-    \ = std::make_tuple(ord[pos[y]], ord[pos[x]], pos[y], pos[x]);\n            }\n\
-    \        }\n    }\n}\n"
+    \        return polar(a.dir, b.dir, init);\n    });\n    std::vector<int> ord(n),\
+    \ pos(n);\n    std::iota(ord.begin(), ord.end(), 0);\n    std::ranges::sort(ord,\
+    \ [&](int a, int b) {\n        auto va = cross(init, pts[a]);\n        auto vb\
+    \ = cross(init, pts[b]);\n        if (va != vb) return va < vb;\n        return\
+    \ dot(init, pts[a]) < dot(init, pts[b]);\n    });\n    for (int i = 0; i < n;\
+    \ i++) pos[ord[i]] = i;\n    init_order(ord);\n    for (int i = 0, j = 0; i <\
+    \ int(e.size()); i = j) {\n        std::vector<std::pair<int, int>> tmp;\n   \
+    \     for (; j < int(e.size()) && !polar(e[i].dir, e[j].dir, init); ++j)\n   \
+    \         tmp.emplace_back(e[j].u, e[j].v);\n        std::ranges::sort(tmp, [&](const\
+    \ std::pair<int, int> &x, const std::pair<int, int> &y) {\n            return\
+    \ std::make_pair(pos[x.first], pos[x.second]) < std::make_pair(pos[y.first], pos[y.second]);\n\
+    \        });\n        for (int k = 0; k < int(tmp.size()); ) {\n            int\
+    \ l = pos[tmp[k].first], r = pos[tmp[k].second];\n            for (int tk = k;\
+    \ tk < int(tmp.size()) && pos[tmp[tk].first] <= r; ++tk)\n                r =\
+    \ std::max(r, pos[tmp[tk].second]);\n            if constexpr (reverse_convention)\
+    \ update_ans(ord, l, r);\n            for (; k < int(tmp.size()) && pos[tmp[k].first]\
+    \ <= r; ++k) {\n                auto [x, y] = tmp[k]; \n                if constexpr\
+    \ (!reverse_convention) update_ans(ord, pos[x]);\n                std::tie(ord[pos[x]],\
+    \ ord[pos[y]], pos[x], pos[y]) = std::make_tuple(ord[pos[y]], ord[pos[x]], pos[y],\
+    \ pos[x]);\n            }\n        }\n    }\n}\n"
   dependsOn:
   - Geometry/base.hpp
   isVerificationFile: false
   path: Geometry/rotating_sweepline.hpp
   requiredBy: []
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp

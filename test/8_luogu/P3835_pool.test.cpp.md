@@ -1,26 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/PoolAllocator.hpp
     title: Pool Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: assumption.hpp
+    title: assumption.hpp
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     IGNORE: ''
@@ -28,8 +31,9 @@ data:
     links:
     - https://www.luogu.com.cn/problem/P3835
   bundledCode: "#line 1 \"test/8_luogu/P3835_pool.test.cpp\"\n#define PROBLEM \"https://www.luogu.com.cn/problem/P3835\"\
-    \n#define IGNORE\n#line 2 \"default_code.hpp\"\n\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\ntypedef long long ll;\ntypedef pair<int, int> pii;\ntypedef\
+    \n#define IGNORE\n#line 2 \"default_code.hpp\"\n\n#line 2 \"assumption.hpp\"\n\
+    \n#include <cassert>\n#include <bits/stdc++.h>\n#line 4 \"default_code.hpp\"\n\
+    using namespace std;\ntypedef long long ll;\ntypedef pair<int, int> pii;\ntypedef\
     \ pair<ll, ll> pll;\n#define X first\n#define Y second\n#define SZ(a) ((int)a.size())\n\
     #define ALL(v) v.begin(), v.end()\ntemplate<class A, class B>\nostream& operator<<(ostream&\
     \ os, const pair<A, B> &a) {\n    os << \"(\" << a.first << \", \" << a.second\
@@ -55,9 +59,7 @@ data:
     void chmin(auto &x, auto val) {\n    x = min(x, val);\n}\n\nvector<int> count_array(const\
     \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
-    \ return res;\n}\n\ntemplate<class T>\nvoid discretization(vector<T> &vals) {\n\
-    \    ranges::sort(vals);\n    vals.erase(ranges::unique(vals).begin(), vals.end());\n\
-    }\n#line 4 \"test/8_luogu/P3835_pool.test.cpp\"\n\n#line 2 \"DataStructure/Treap.hpp\"\
+    \ return res;\n}\n#line 4 \"test/8_luogu/P3835_pool.test.cpp\"\n\n#line 2 \"DataStructure/Treap.hpp\"\
     \n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename T>\nstruct\
     \ DefaultAllocator {\n    template<typename... Args>\n    static T* allocate(Args&&...\
     \ args) { \n        return new T(std::forward<Args>(args)...);\n    }\n    static\
@@ -324,46 +326,49 @@ data:
     };\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T, _POOL_SIZE>::pool[_POOL_SIZE];\n\
     \ntemplate<typename T, int _POOL_SIZE>\nint PoolAllocator<T, _POOL_SIZE>::ptr\
     \ = 0;\n#line 9 \"test/8_luogu/P3835_pool.test.cpp\"\n\nusing treap = Treap<int,\
-    \ size_v, void, false, PoolAllocator, true>;\n\nint main() {\n    ios::sync_with_stdio(0),\
-    \ cin.tie(0);\n    int n;\n    cin >> n;\n    vector<treap> tree(n + 1);\n   \
-    \ for (int i = 1; i <= n; ++i) {\n        int v, op, x;\n        cin >> v >> op\
-    \ >> x;\n        tree[i] = tree[v];\n        if (op == 1) {\n            auto\
-    \ lft = tree[i].split_key_lt(x);\n            tree[i].left_merge(treap(x, 1)).left_merge(lft);\n\
-    \        }\n        else if (op == 2) {\n            auto lft = tree[i].split_key_lt(x);\n\
-    \            if (!tree[i].empty()) {\n                auto it = tree[i].begin();\n\
-    \                if (it->key == x) tree[i].split_size(1);\n            }\n   \
-    \         tree[i].left_merge(lft);\n        }\n        else if (op == 3) {\n \
-    \           cout << tree[i].prefix_product_key_lt(x).size() + 1 << \"\\n\"; \n\
-    \        }\n        else if (op == 4) {\n            cout << tree[i].kth(x - 1)->key\
-    \ << \"\\n\";\n        }\n        else if (op == 5) {\n            auto lft =\
-    \ tree[i].split_key_lt(x);\n            if (!lft.empty()) cout << lft.rbegin()->key\
-    \ << \"\\n\";\n            else cout << -2147483647 << \"\\n\";\n            tree[i].left_merge(lft);\n\
-    \        }\n        else {\n            auto it = tree[i].upper_bound(x);\n  \
-    \          if (it != tree[i].end()) cout << it->key << \"\\n\";\n            else\
-    \ cout << 2147483647 << \"\\n\";\n        }\n    }\n}\n"
-  code: "#define PROBLEM \"https://www.luogu.com.cn/problem/P3835\"\n#define IGNORE\n\
-    #include \"default_code.hpp\"\n\n#include \"DataStructure/Treap.hpp\"\n\n#define\
-    \ POOL_SIZE 30000000\n#include \"DataStructure/PoolAllocator.hpp\"\n\nusing treap\
-    \ = Treap<int, size_v, void, false, PoolAllocator, true>;\n\nint main() {\n  \
-    \  ios::sync_with_stdio(0), cin.tie(0);\n    int n;\n    cin >> n;\n    vector<treap>\
-    \ tree(n + 1);\n    for (int i = 1; i <= n; ++i) {\n        int v, op, x;\n  \
-    \      cin >> v >> op >> x;\n        tree[i] = tree[v];\n        if (op == 1)\
-    \ {\n            auto lft = tree[i].split_key_lt(x);\n            tree[i].left_merge(treap(x,\
+    \ size_v, void, false, PoolAllocator, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    std::vector<treap> tree(n\
+    \ + 1);\n    for (int i = 1; i <= n; ++i) {\n        int v, op, x;\n        std::cin\
+    \ >> v >> op >> x;\n        tree[i] = tree[v];\n        if (op == 1) {\n     \
+    \       auto lft = tree[i].split_key_lt(x);\n            tree[i].left_merge(treap(x,\
     \ 1)).left_merge(lft);\n        }\n        else if (op == 2) {\n            auto\
     \ lft = tree[i].split_key_lt(x);\n            if (!tree[i].empty()) {\n      \
     \          auto it = tree[i].begin();\n                if (it->key == x) tree[i].split_size(1);\n\
     \            }\n            tree[i].left_merge(lft);\n        }\n        else\
-    \ if (op == 3) {\n            cout << tree[i].prefix_product_key_lt(x).size()\
-    \ + 1 << \"\\n\"; \n        }\n        else if (op == 4) {\n            cout <<\
-    \ tree[i].kth(x - 1)->key << \"\\n\";\n        }\n        else if (op == 5) {\n\
-    \            auto lft = tree[i].split_key_lt(x);\n            if (!lft.empty())\
-    \ cout << lft.rbegin()->key << \"\\n\";\n            else cout << -2147483647\
+    \ if (op == 3) {\n            std::cout << tree[i].prefix_product_key_lt(x).size()\
+    \ + 1 << \"\\n\"; \n        }\n        else if (op == 4) {\n            std::cout\
+    \ << tree[i].kth(x - 1)->key << \"\\n\";\n        }\n        else if (op == 5)\
+    \ {\n            auto lft = tree[i].split_key_lt(x);\n            if (!lft.empty())\
+    \ std::cout << lft.rbegin()->key << \"\\n\";\n            else std::cout << -2147483647\
     \ << \"\\n\";\n            tree[i].left_merge(lft);\n        }\n        else {\n\
     \            auto it = tree[i].upper_bound(x);\n            if (it != tree[i].end())\
-    \ cout << it->key << \"\\n\";\n            else cout << 2147483647 << \"\\n\"\
-    ;\n        }\n    }\n}\n"
+    \ std::cout << it->key << \"\\n\";\n            else std::cout << 2147483647 <<\
+    \ \"\\n\";\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"https://www.luogu.com.cn/problem/P3835\"\n#define IGNORE\n\
+    #include \"default_code.hpp\"\n\n#include \"DataStructure/Treap.hpp\"\n\n#define\
+    \ POOL_SIZE 30000000\n#include \"DataStructure/PoolAllocator.hpp\"\n\nusing treap\
+    \ = Treap<int, size_v, void, false, PoolAllocator, true>;\n\nint main() {\n  \
+    \  std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n;\n    std::cin >>\
+    \ n;\n    std::vector<treap> tree(n + 1);\n    for (int i = 1; i <= n; ++i) {\n\
+    \        int v, op, x;\n        std::cin >> v >> op >> x;\n        tree[i] = tree[v];\n\
+    \        if (op == 1) {\n            auto lft = tree[i].split_key_lt(x);\n   \
+    \         tree[i].left_merge(treap(x, 1)).left_merge(lft);\n        }\n      \
+    \  else if (op == 2) {\n            auto lft = tree[i].split_key_lt(x);\n    \
+    \        if (!tree[i].empty()) {\n                auto it = tree[i].begin();\n\
+    \                if (it->key == x) tree[i].split_size(1);\n            }\n   \
+    \         tree[i].left_merge(lft);\n        }\n        else if (op == 3) {\n \
+    \           std::cout << tree[i].prefix_product_key_lt(x).size() + 1 << \"\\n\"\
+    ; \n        }\n        else if (op == 4) {\n            std::cout << tree[i].kth(x\
+    \ - 1)->key << \"\\n\";\n        }\n        else if (op == 5) {\n            auto\
+    \ lft = tree[i].split_key_lt(x);\n            if (!lft.empty()) std::cout << lft.rbegin()->key\
+    \ << \"\\n\";\n            else std::cout << -2147483647 << \"\\n\";\n       \
+    \     tree[i].left_merge(lft);\n        }\n        else {\n            auto it\
+    \ = tree[i].upper_bound(x);\n            if (it != tree[i].end()) std::cout <<\
+    \ it->key << \"\\n\";\n            else std::cout << 2147483647 << \"\\n\";\n\
+    \        }\n    }\n}\n"
   dependsOn:
   - default_code.hpp
+  - assumption.hpp
   - DataStructure/Treap.hpp
   - DataStructure/DefaultAllocator.hpp
   - Algebra/size_value.hpp
@@ -371,8 +376,8 @@ data:
   isVerificationFile: true
   path: test/8_luogu/P3835_pool.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 14:18:54+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/8_luogu/P3835_pool.test.cpp
 layout: document

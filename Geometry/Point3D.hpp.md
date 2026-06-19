@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_qoj/6445.test.cpp
     title: test/3_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/Point3D.hpp\"\n    \n#line 2 \"Geometry/base.hpp\"\
@@ -98,24 +98,24 @@ data:
     \ T;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n\
     \    static constexpr T eps_val = eps;\n    T x = 0, y = 0, z = 0;\n    Pt3()\
     \ : x(0), y(0), z(0) {}\n    Pt3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}\n\
-    \    friend istream& operator>>(istream &is, Pt3 &p) { return is >> p.x >> p.y\
-    \ >> p.z; }\n    friend ostream& operator<<(ostream &os, const Pt3 &p) { return\
-    \ os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend bool operator==(const Pt3\
-    \ &a, const Pt3 &b) {\n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0\
-    \ && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const Pt3 &a, const\
-    \ Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x, -y, -z);\
-    \ }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y, z += a.z;\n\
-    \        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n        x\
-    \ -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3& operator*=(T\
-    \ d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n    }\n    Pt3&\
-    \ operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return *this;\n\
-    \    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return Pt3(a) +=\
-    \ b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return Pt3(a) -=\
-    \ b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a) *= d; }\n\
-    \    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n    friend\
-    \ bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x, b.x);\n\
-    \        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n    \
-    \    return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
+    \    friend std::istream& operator>>(std::istream &is, Pt3 &p) { return is >>\
+    \ p.x >> p.y >> p.z; }\n    friend std::ostream& operator<<(std::ostream &os,\
+    \ const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend\
+    \ bool operator==(const Pt3 &a, const Pt3 &b) {\n        return cmp(a.x, b.x)\
+    \ == 0 && cmp(a.y, b.y) == 0 && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const\
+    \ Pt3 &a, const Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x,\
+    \ -y, -z); }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y,\
+    \ z += a.z;\n        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n\
+    \        x -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3&\
+    \ operator*=(T d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n\
+    \    }\n    Pt3& operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return\
+    \ *this;\n    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return\
+    \ Pt3(a) += b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return\
+    \ Pt3(a) -= b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a)\
+    \ *= d; }\n    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n\
+    \    friend bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x,\
+    \ b.x);\n        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n\
+    \        return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
     \ operator>(const Pt3 &a, const Pt3 &b) { return b < a; }\n    friend bool operator<=(const\
     \ Pt3 &a, const Pt3 &b) { return !(b < a); }\n    friend bool operator>=(const\
     \ Pt3 &a, const Pt3 &b) { return !(a < b); }\n    template <typename U, U _eps,\
@@ -169,8 +169,8 @@ data:
     \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
     \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
     \ 0, y = 0, z = 0;\n    Pt3() : x(0), y(0), z(0) {}\n    Pt3(T x_, T y_, T z_)\
-    \ : x(x_), y(y_), z(z_) {}\n    friend istream& operator>>(istream &is, Pt3 &p)\
-    \ { return is >> p.x >> p.y >> p.z; }\n    friend ostream& operator<<(ostream\
+    \ : x(x_), y(y_), z(z_) {}\n    friend std::istream& operator>>(std::istream &is,\
+    \ Pt3 &p) { return is >> p.x >> p.y >> p.z; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend\
     \ bool operator==(const Pt3 &a, const Pt3 &b) {\n        return cmp(a.x, b.x)\
     \ == 0 && cmp(a.y, b.y) == 0 && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const\
@@ -241,8 +241,8 @@ data:
   path: Geometry/Point3D.hpp
   requiredBy:
   - Geometry/convexHull3D.hpp
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-19 23:20:06+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/3_qoj/6445.test.cpp
 documentation_of: Geometry/Point3D.hpp
