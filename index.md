@@ -70,9 +70,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
+    - icon: ':warning:'
+      path: DataStructure/LazyDeleteHeap.hpp
+      title: Lazy Delete Heap
     - icon: ':heavy_check_mark:'
       path: DataStructure/LeftistTree.hpp
       title: Leftist Tree
+    - icon: ':warning:'
+      path: DataStructure/MinMaxHeap.hpp
+      title: MinMax Heap
     - icon: ':heavy_check_mark:'
       path: DataStructure/OrderedSet.hpp
       title: Ordered Set
