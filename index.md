@@ -70,13 +70,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/LazyDeleteHeap.hpp
       title: Lazy Delete Heap
     - icon: ':heavy_check_mark:'
       path: DataStructure/LeftistTree.hpp
       title: Leftist Tree
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/MinMaxHeap.hpp
       title: MinMax Heap
     - icon: ':heavy_check_mark:'
@@ -476,6 +476,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
       title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+      title: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
       title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

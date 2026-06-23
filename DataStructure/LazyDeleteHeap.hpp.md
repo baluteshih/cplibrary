@@ -2,13 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/MinMaxHeap.hpp
     title: MinMax Heap
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+    title: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/LazyDeleteHeap.hpp\"\n\ntemplate <typename\
@@ -45,8 +48,9 @@ data:
   requiredBy:
   - DataStructure/MinMaxHeap.hpp
   timestamp: '2026-06-23 22:48:02+08:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
 documentation_of: DataStructure/LazyDeleteHeap.hpp
 layout: document
 title: Lazy Delete Heap

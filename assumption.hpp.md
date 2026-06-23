@@ -49,6 +49,9 @@ data:
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+    title: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -541,6 +544,7 @@ data:
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min.test.cpp
+  - test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
