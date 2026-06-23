@@ -13,6 +13,7 @@
 "test/1_library_checker/convolution/min_plus_convolution_convex_arbitrary.test.cpp": "2026-06-19 20:51:50 +0800",
 "test/1_library_checker/convolution/min_plus_convolution_convex_convex.test.cpp": "2026-06-19 14:01:32 +0800",
 "test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp": "2026-06-19 14:18:54 +0800",
+"test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp": "2026-06-23 22:52:51 +0800",
 "test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp": "2026-06-19 14:18:54 +0800",
 "test/1_library_checker/data_structure/line_add_get_min.test.cpp": "2026-06-19 20:51:50 +0800",
 "test/1_library_checker/data_structure/ordered_set.test.cpp": "2026-06-19 14:18:54 +0800",
