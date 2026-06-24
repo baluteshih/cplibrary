@@ -172,6 +172,12 @@ data:
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/cycle_detection_directed.test.cpp
     title: test/1_library_checker/graph/cycle_detection_directed.test.cpp
   - icon: ':heavy_check_mark:'
@@ -315,37 +321,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/cartesian_tree.test.cpp
     title: test/1_library_checker/tree/cartesian_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -387,10 +393,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -432,7 +438,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
   - icon: ':heavy_check_mark:'
@@ -447,16 +453,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/maxflow.test.cpp
     title: test/7_loj/maxflow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -468,9 +474,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "assumption.hpp"
@@ -495,7 +501,7 @@ data:
   requiredBy:
   - default_code.hpp
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -588,11 +594,13 @@ data:
   - test/1_library_checker/graph/st_numbering.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/general_matching.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/cycle_detection_directed.test.cpp
   - test/1_library_checker/graph/strongly_connected_components.test.cpp
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
   - test/1_library_checker/graph/two_edge_connected_components.test.cpp
   - test/1_library_checker/graph/dominatortree.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/number_theory/enumerate_quotients.test.cpp

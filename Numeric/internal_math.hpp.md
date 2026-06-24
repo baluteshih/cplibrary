@@ -5,12 +5,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: Convolution/OnlineConvolution.hpp
     title: Convolution/OnlineConvolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/convolution.hpp
     title: Convolution/convolution.hpp
   - icon: ':heavy_check_mark:'
     path: Convolution/xor_convolution.hpp
     title: Convolution/xor_convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: Graph/count_spanning_tree.hpp
+    title: Graph/count_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
@@ -32,10 +35,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
   - icon: ':heavy_check_mark:'
@@ -44,7 +47,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   - icon: ':heavy_check_mark:'
@@ -145,6 +148,12 @@ data:
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/enumerate_triangles.test.cpp
     title: test/1_library_checker/graph/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
@@ -216,21 +225,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -353,6 +362,7 @@ data:
   requiredBy:
   - Numbers/partition_number.hpp
   - Numbers/bell_number.hpp
+  - Graph/count_spanning_tree.hpp
   - Misc/bigint.hpp
   - Numeric/Modint.hpp
   - Numeric/Combination.hpp
@@ -373,7 +383,7 @@ data:
   - Polynomial/shift.hpp
   - Matrix/Matrix.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -415,7 +425,9 @@ data:
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp

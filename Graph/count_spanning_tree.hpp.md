@@ -1,6 +1,9 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: Graph/base.hpp
+    title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
@@ -8,38 +11,110 @@ data:
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
   - icon: ':question:'
-    path: Numeric/Modint.hpp
-    title: Numeric/Modint.hpp
-  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
-    path: assumption.hpp
-    title: assumption.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
-    links:
-    - https://judge.yosupo.jp/problem/system_of_linear_equations
-  bundledCode: "#line 1 \"test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
-    #line 3 \"test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp\"\
-    \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
-    \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
-    \ x += m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x,\
-    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
-    \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
-    \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
-    \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int\
-    \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
+    links: []
+  bundledCode: "#line 2 \"Graph/count_spanning_tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
+    \n\ntemplate<bool directed = true, typename Edge = void, typename Vertex = void>\n\
+    class Graph {\npublic:\n    static constexpr bool is_directed = directed;\n  \
+    \  static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
+    \ constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
+    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
+    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
+    \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
+    \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
+    \ <typename OtherEdge>\n        edge_v(const OtherEdge &other) requires(hasEdgeWeight\
+    \ && requires(OtherEdge o) { o.weight; }) \n            : from(other.from), to(other.to),\
+    \ weight(other.weight) {}\n        template <typename OtherEdge>\n        edge_v(const\
+    \ OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight;\
+    \ }) \n            : from(other.from), to(other.to) {} \n        edge_v reversed()\
+    \ const {\n            edge_v res(*this);\n            std::swap(res.from, res.to);\n\
+    \            return res;\n        }\n        friend std::ostream& operator<<(std::ostream&\
+    \ os, const edge_v &v) {\n            os << \"(\" << v.from << \"->\" << v.to;\n\
+    \            if constexpr (hasEdgeWeight) os << \", \" << v.weight;\n        \
+    \    os << \")\";\n            return os;\n        }\n    };\n    std::vector<std::vector<std::pair<int,\
+    \ int>>> G;\n    std::vector<edge_v> edges;\n    [[no_unique_address]] std::conditional_t<hasVertexWeight,\
+    \ std::vector<Vertex>, Empty> weight;\n    Graph(int _n) : G(_n) {\n        if\
+    \ constexpr (hasVertexWeight) weight.resize(_n);\n    }\n    int n() const { return\
+    \ G.size(); }\n    int m() const { return edges.size(); }\n    int opposite(int\
+    \ u, int eid) const { return edges[eid].from ^ edges[eid].to ^ u; }\n    auto&\
+    \ edge(int idx) {\n        return edges[idx]; \n    }\n    auto &vertex(int idx)\
+    \ requires (hasVertexWeight) {\n        return weight[idx];\n    }\n    const\
+    \ auto& edge(int idx) const {\n        return edges[idx]; \n    }\n    const auto\
+    \ &vertex(int idx) const requires (hasVertexWeight) {\n        return weight[idx];\n\
+    \    }\n    auto &vertex_weight() requires (hasVertexWeight) {\n        return\
+    \ weight;\n    }\n    const auto &vertex_weight() const requires (hasVertexWeight)\
+    \ {\n        return weight;\n    }\n    void set_vertex_weight(const auto &vec)\
+    \ {\n        for (int i = 0; i < n(); ++i)\n            weight[i] = vec[i];\n\
+    \    }\n    void add_edge(int u, int v, const auto &w) requires (hasEdgeWeight)\
+    \ {\n        G[u].emplace_back(v, edges.size());\n        if constexpr (!directed)\
+    \ G[v].emplace_back(u, edges.size());\n        edges.emplace_back(u, v, w);\n\
+    \    }\n    void add_edge(int u, int v) requires (!hasEdgeWeight) {\n        G[u].emplace_back(v,\
+    \ edges.size());\n        if constexpr (!directed) G[v].emplace_back(u, edges.size());\n\
+    \        edges.emplace_back(u, v);\n    }\n    void add_edge(const edge_v &e)\
+    \ {\n        G[e.from].emplace_back(e.to, edges.size());\n        if constexpr\
+    \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
+    \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
+    \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
+    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
+    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
+    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
+    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
+    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
+    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
+    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
+    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
+    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
+    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
+    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
+    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
+    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
+    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
+    \              return 1;\n                }\n                int rt = self(self,\
+    \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
+    \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
+    \                    }\n                    if (cyc_end == u) rt = 2;\n      \
+    \              return rt;\n                }\n            }\n            vis[u]\
+    \ = 2;\n            return 0;\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i)\n            if (!vis[i] && dfs(dfs, i, -1))\n                break;\n\
+    \        std::ranges::reverse(res_v);\n        std::ranges::reverse(res_e);\n\
+    \        return std::make_pair(res_v, res_e);\n    }\n    Graph<true, Edge, Vertex>\
+    \ oriented(const std::vector<int> &rk) const requires (!directed) {\n        Graph<true,\
+    \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
+    \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
+    \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
+    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
+    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
+    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
+    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
+    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
+    #line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\n// Reference:\
+    \ Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef _MSC_VER\n#include\
+    \ <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long long safe_mod(long\
+    \ long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n    return x;\n\
+    }\nconstexpr long long pow_mod_constexpr(long long x, long long n, int m) {\n\
+    \    if (m == 1) return 0;\n    unsigned int _m = (unsigned int)(m);\n    unsigned\
+    \ long long r = 1;\n    unsigned long long y = safe_mod(x, m);\n    while (n)\
+    \ {\n        if (n & 1) r = (r * y) % _m;\n        y = (y * y) % _m;\n       \
+    \ n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int n)\
+    \ {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
     \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
     \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
     \ (long long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
@@ -86,56 +161,8 @@ data:
     \    struct modint_base {};\n    struct static_modint_base : modint_base {};\n\
     \    template <class T> using is_modint = std::is_base_of<modint_base, T>;\n \
     \   template <class T> using is_modint_t = std::enable_if_t<is_modint<T>::value>;\n\
-    }  // namespace internal\n#line 5 \"Numeric/Modint.hpp\"\n\ntemplate <int m, std::enable_if_t<(1\
-    \ <= m)>* = nullptr>\nstruct static_modint : internal::static_modint_base {\n\
-    \    using mint = static_modint;\n\n  public:\n    static constexpr int mod()\
-    \ { return m; }\n    static mint raw(int v) {\n        mint x;\n        x._v =\
-    \ v;\n        return x;\n    }\n\n    static_modint() : _v(0) {}\n    template\
-    \ <class T, internal::is_signed_int_t<T>* = nullptr>\n    static_modint(T v) {\n\
-    \        long long x = (long long)(v % (long long)(umod()));\n        if (x <\
-    \ 0) x += umod();\n        _v = (unsigned int)(x);\n    }\n    template <class\
-    \ T, internal::is_unsigned_int_t<T>* = nullptr>\n    static_modint(T v) {\n  \
-    \      _v = (unsigned int)(v % umod());\n    }\n\n    unsigned int val() const\
-    \ { return _v; }\n\n    mint& operator++() {\n        _v++;\n        if (_v ==\
-    \ umod()) _v = 0;\n        return *this;\n    }\n    mint& operator--() {\n  \
-    \      if (_v == 0) _v = umod();\n        _v--;\n        return *this;\n    }\n\
-    \    mint operator++(int) {\n        mint result = *this;\n        ++*this;\n\
-    \        return result;\n    }\n    mint operator--(int) {\n        mint result\
-    \ = *this;\n        --*this;\n        return result;\n    }\n\n    mint& operator+=(const\
-    \ mint& rhs) {\n        _v += rhs._v;\n        if (_v >= umod()) _v -= umod();\n\
-    \        return *this;\n    }\n    mint& operator-=(const mint& rhs) {\n     \
-    \   _v -= rhs._v;\n        if (_v >= umod()) _v += umod();\n        return *this;\n\
-    \    }\n    mint& operator*=(const mint& rhs) {\n        unsigned long long z\
-    \ = _v;\n        z *= rhs._v;\n        _v = (unsigned int)(z % umod());\n    \
-    \    return *this;\n    }\n    mint& operator/=(const mint& rhs) { return *this\
-    \ = *this * rhs.inv(); }\n\n    mint operator+() const { return *this; }\n   \
-    \ mint operator-() const { return mint() - *this; }\n\n    mint pow(long long\
-    \ n) const {\n        assert(0 <= n);\n        mint x = *this, r = 1;\n      \
-    \  while (n) {\n            if (n & 1) r *= x;\n            x *= x;\n        \
-    \    n >>= 1;\n        }\n        return r;\n    }\n    mint inv() const {\n \
-    \       if (prime) {\n            assert(_v);\n            return pow(umod() -\
-    \ 2);\n        } else {\n            auto eg = internal::inv_gcd(_v, m);\n   \
-    \         assert(eg.first == 1);\n            return eg.second;\n        }\n \
-    \   }\n\n    friend mint operator+(const mint& lhs, const mint& rhs) {\n     \
-    \   return mint(lhs) += rhs;\n    }\n    friend mint operator-(const mint& lhs,\
-    \ const mint& rhs) {\n        return mint(lhs) -= rhs;\n    }\n    friend mint\
-    \ operator*(const mint& lhs, const mint& rhs) {\n        return mint(lhs) *= rhs;\n\
-    \    }\n    friend mint operator/(const mint& lhs, const mint& rhs) {\n      \
-    \  return mint(lhs) /= rhs;\n    }\n    friend bool operator==(const mint& lhs,\
-    \ const mint& rhs) {\n        return lhs._v == rhs._v;\n    }\n    friend bool\
-    \ operator!=(const mint& lhs, const mint& rhs) {\n        return lhs._v != rhs._v;\n\
-    \    }\n    friend std::strong_ordering operator<=>(const mint& lhs, const mint&\
-    \ rhs) {\n        return lhs._v <=> rhs._v;\n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const mint& v) {\n        os << v._v;\n        return os;\n    }\n    friend\
-    \ std::istream& operator>>(std::istream& is, mint& v) {\n        long long x;\n\
-    \        is >> x;\n        x %= (long long)(umod());\n        if (x < 0) x +=\
-    \ umod();\n        v._v = (unsigned int)(x);\n        return is;\n    }\n\n  private:\n\
-    \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
-    \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
-    \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
-    #line 5 \"test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp\"\
-    \n\n#line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
-    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
+    }  // namespace internal\n#line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename T,\
+    \ class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
     \ Allocator> {\n    int n() const { return (int)this->size(); }\npublic:\n   \
     \ Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector operator*(const\
     \ T &v) const {\n        Vector res(*this);\n        for (int i = 0; i < n();\
@@ -260,45 +287,38 @@ data:
     \ sols.rows(sols.n() - dimt, sols.n());\n        if (lower.columns(m(), lower.m())\
     \ != identity(dimt) * T(-1))\n            return std::nullopt;\n        return\
     \ std::make_pair(lower.columns(0, m()), upper.columns(0, m()));\n    }\n};\n#line\
-    \ 7 \"test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp\"\
-    \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    Matrix<mint> A(n,\
-    \ m);\n    for (auto &row : A)\n        for (auto &v : row)\n            std::cin\
-    \ >> v;\n    Vector<mint> b(n);\n    for (auto &x : b)\n        std::cin >> x;\n\
-    \    auto x = A.solve(b);\n    if (!x) std::cout << \"-1\\n\";\n    else {\n \
-    \       auto [sol, basis] = *x;\n        std::cout << basis.n() << \"\\n\";\n\
-    \        for (int i = 0; i < sol.m(); ++i)\n            std::cout << sol[0][i]\
-    \ << \" \\n\"[i + 1 == sol.m()];\n        for (int i = 0; i < basis.n(); ++i)\n\
-    \            for (int j = 0; j < basis.m(); ++j)\n                std::cout <<\
-    \ basis[i][j] << \" \\n\"[j + 1 == basis.m()];\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n\n#include \"\
-    Matrix/Matrix.hpp\"\n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    Matrix<mint> A(n,\
-    \ m);\n    for (auto &row : A)\n        for (auto &v : row)\n            std::cin\
-    \ >> v;\n    Vector<mint> b(n);\n    for (auto &x : b)\n        std::cin >> x;\n\
-    \    auto x = A.solve(b);\n    if (!x) std::cout << \"-1\\n\";\n    else {\n \
-    \       auto [sol, basis] = *x;\n        std::cout << basis.n() << \"\\n\";\n\
-    \        for (int i = 0; i < sol.m(); ++i)\n            std::cout << sol[0][i]\
-    \ << \" \\n\"[i + 1 == sol.m()];\n        for (int i = 0; i < basis.n(); ++i)\n\
-    \            for (int j = 0; j < basis.m(); ++j)\n                std::cout <<\
-    \ basis[i][j] << \" \\n\"[j + 1 == basis.m()];\n    }\n}\n"
+    \ 5 \"Graph/count_spanning_tree.hpp\"\n\ntemplate<typename T, typename graph>\n\
+    T count_spanning_tree(const graph &G, int root = 0) {\n    Matrix<T> mat(G.n());\n\
+    \    assert(root >= 0 && root < G.n());\n    for (auto e : G.edges) {\n      \
+    \  if (e.to == e.from) continue;\n        mat[e.to][e.to] += T(1);\n        mat[e.from][e.to]\
+    \ -= T(1);\n        if constexpr (!graph::is_directed) {\n            mat[e.from][e.from]\
+    \ += T(1);\n            mat[e.to][e.from] -= T(1);\n        }\n    }\n    return\
+    \ mat.minor(root, root).det();\n}\n"
+  code: "#pragma once\n\n#include \"Graph/base.hpp\"\n#include \"Matrix/Matrix.hpp\"\
+    \n\ntemplate<typename T, typename graph>\nT count_spanning_tree(const graph &G,\
+    \ int root = 0) {\n    Matrix<T> mat(G.n());\n    assert(root >= 0 && root < G.n());\n\
+    \    for (auto e : G.edges) {\n        if (e.to == e.from) continue;\n       \
+    \ mat[e.to][e.to] += T(1);\n        mat[e.from][e.to] -= T(1);\n        if constexpr\
+    \ (!graph::is_directed) {\n            mat[e.from][e.from] += T(1);\n        \
+    \    mat[e.to][e.from] -= T(1);\n        }\n    }\n    return mat.minor(root,\
+    \ root).det();\n}\n"
   dependsOn:
-  - assumption.hpp
-  - Numeric/Modint.hpp
-  - Numeric/internal_math.hpp
+  - Graph/base.hpp
   - Matrix/Matrix.hpp
+  - Numeric/internal_math.hpp
   - Matrix/Vector.hpp
-  isVerificationFile: true
-  path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  isVerificationFile: false
+  path: Graph/count_spanning_tree.hpp
   requiredBy: []
   timestamp: '2026-06-24 18:12:55+08:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+documentation_of: Graph/count_spanning_tree.hpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-- /verify/test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp.html
-title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+- /library/Graph/count_spanning_tree.hpp
+- /library/Graph/count_spanning_tree.hpp.html
+title: Graph/count_spanning_tree.hpp
 ---

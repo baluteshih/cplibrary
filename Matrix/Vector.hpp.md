@@ -3,12 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Graph/count_spanning_tree.hpp
+    title: Graph/count_spanning_tree.hpp
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
@@ -88,6 +97,7 @@ data:
   isVerificationFile: false
   path: Matrix/Vector.hpp
   requiredBy:
+  - Graph/count_spanning_tree.hpp
   - Matrix/Matrix.hpp
   timestamp: '2026-02-27 19:30:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -100,6 +110,8 @@ data:
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Matrix/Vector.hpp
 layout: document
 redirect_from:

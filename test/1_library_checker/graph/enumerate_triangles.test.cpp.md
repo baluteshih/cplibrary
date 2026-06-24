@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -32,10 +32,11 @@ data:
     \ 3 \"test/1_library_checker/graph/enumerate_triangles.test.cpp\"\n\n#line 2 \"\
     Graph/enumerate_c3.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
     \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
-    \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
-    \ constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
-    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
-    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \    static constexpr bool is_directed = directed;\n    static constexpr bool\
+    \ hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool hasVertexWeight\
+    \ = !std::is_same_v<Vertex, void>;\n    using edge_value_type = Edge;\n    using\
+    \ vertex_value_type = Vertex;\n    struct Empty {};\n    struct edge_v {\n   \
+    \     int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
     \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
     \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
     \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
@@ -247,7 +248,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
+  timestamp: '2026-06-24 18:12:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/enumerate_triangles.test.cpp

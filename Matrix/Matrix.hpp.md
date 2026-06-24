@@ -4,14 +4,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Graph/count_spanning_tree.hpp
+    title: Graph/count_spanning_tree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
@@ -148,32 +157,36 @@ data:
     \ l, int r) const {\n        if (m() == 0) return Matrix(0, 0);\n        assert(l\
     \ <= r);\n        assert(r <= m());\n        Matrix res(n(), r - l);\n       \
     \ for (int i = 0; i < n(); ++i)\n            std::copy((*this)[i].begin() + l,\
-    \ (*this)[i].begin() + r, res[i].begin());\n        return res;\n    }\n    static\
-    \ Matrix identity(int n, T one = T(1)) {\n        Matrix res(n, n);\n        for\
-    \ (int i = 0; i < n; ++i)\n            res[i][i] = one;\n        return res;\n\
-    \    }\n    Matrix pow(long long k) const {\n        Matrix res(identity(n()));\n\
-    \        Matrix base(*this);\n        for (; k; k >>= 1, base = base * base)\n\
-    \            if (k & 1)\n                res = res * base;\n        return res;\n\
-    \    }\n    Vector<T> apply(const Vector<T> &x) {\n        return (*this * Matrix(x).transpose()).transpose()[0];\n\
-    \    }\n    template<gauss_mode mode = half>\n    void eliminate(int i) {\n  \
-    \      int pivot = (*this)[i].find_pivot();\n        if (pivot < m()) {\n    \
-    \        T pinv = 0;\n            if constexpr (mode != euclidean) pinv = T(1)\
-    \ / (*this)[i][pivot];\n            for (int j = (mode != full) * i; j < n();\
-    \ ++j)\n                if (j != i) {\n                    if constexpr (mode\
-    \ != euclidean) (*this)[j] += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);\n\
-    \                    else {\n                        int parity = 1;\n       \
-    \                 while ((*this)[j][pivot] != T(0)) {\n                      \
-    \      T q;\n                            if constexpr (std::derived_from<T, internal::modint_base>)\
-    \ q = T((*this)[i][pivot].val() / (*this)[j][pivot].val());\n                \
-    \            else q = (*this)[i][pivot] / (*this)[j][pivot];\n               \
-    \             (*this)[i] += (*this)[j] * q * T(-1);\n                        \
-    \    std::swap((*this)[i], (*this)[j]);\n                            parity *=\
-    \ -1;\n                        }\n                        (*this)[j] *= T(parity);\n\
-    \                    }\n                }\n        }\n    }\n    template<gauss_mode\
-    \ mode = half>\n    Matrix& gauss() {\n        for (int i = 0; i < n(); ++i) {\n\
-    \            if constexpr (mode == euclidean) {\n                if ((*this)[i][i]\
-    \ == T(0)) {\n                    for (int j = i + 1; j < n(); ++j) {\n      \
-    \                  if ((*this)[j][i] != T(0)) {\n                            std::swap((*this)[i],\
+    \ (*this)[i].begin() + r, res[i].begin());\n        return res;\n    }\n    Matrix\
+    \ minor(int _i, int _j) const {\n        Matrix res(n() - 1, m() - 1);\n     \
+    \   for (int i = 0; i + 1 < n(); ++i)\n            for (int j = 0; j + 1 < m();\
+    \ ++j)\n                res[i][j] = (*this)[i + (i >= _i)][j + (j >= _j)];\n \
+    \       return res;\n    }\n    static Matrix identity(int n, T one = T(1)) {\n\
+    \        Matrix res(n, n);\n        for (int i = 0; i < n; ++i)\n            res[i][i]\
+    \ = one;\n        return res;\n    }\n    Matrix pow(long long k) const {\n  \
+    \      Matrix res(identity(n()));\n        Matrix base(*this);\n        for (;\
+    \ k; k >>= 1, base = base * base)\n            if (k & 1)\n                res\
+    \ = res * base;\n        return res;\n    }\n    Vector<T> apply(const Vector<T>\
+    \ &x) {\n        return (*this * Matrix(x).transpose()).transpose()[0];\n    }\n\
+    \    template<gauss_mode mode = half>\n    void eliminate(int i) {\n        int\
+    \ pivot = (*this)[i].find_pivot();\n        if (pivot < m()) {\n            T\
+    \ pinv = 0;\n            if constexpr (mode != euclidean) pinv = T(1) / (*this)[i][pivot];\n\
+    \            for (int j = (mode != full) * i; j < n(); ++j)\n                if\
+    \ (j != i) {\n                    if constexpr (mode != euclidean) (*this)[j]\
+    \ += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);\n                    else\
+    \ {\n                        int parity = 1;\n                        while ((*this)[j][pivot]\
+    \ != T(0)) {\n                            T q;\n                            if\
+    \ constexpr (std::derived_from<T, internal::modint_base>) q = T((*this)[i][pivot].val()\
+    \ / (*this)[j][pivot].val());\n                            else q = (*this)[i][pivot]\
+    \ / (*this)[j][pivot];\n                            (*this)[i] += (*this)[j] *\
+    \ q * T(-1);\n                            std::swap((*this)[i], (*this)[j]);\n\
+    \                            parity *= -1;\n                        }\n      \
+    \                  (*this)[j] *= T(parity);\n                    }\n         \
+    \       }\n        }\n    }\n    template<gauss_mode mode = half>\n    Matrix&\
+    \ gauss() {\n        for (int i = 0; i < n(); ++i) {\n            if constexpr\
+    \ (mode == euclidean) {\n                if ((*this)[i][i] == T(0)) {\n      \
+    \              for (int j = i + 1; j < n(); ++j) {\n                        if\
+    \ ((*this)[j][i] != T(0)) {\n                            std::swap((*this)[i],\
     \ (*this)[j]);\n                            (*this)[j] *= T(-1);\n           \
     \                 break;\n                        }\n                    }\n \
     \               }\n                if ((*this)[i][i] == T(0)) continue;\n    \
@@ -247,32 +260,35 @@ data:
     \ (m() == 0) return Matrix(0, 0);\n        assert(l <= r);\n        assert(r <=\
     \ m());\n        Matrix res(n(), r - l);\n        for (int i = 0; i < n(); ++i)\n\
     \            std::copy((*this)[i].begin() + l, (*this)[i].begin() + r, res[i].begin());\n\
-    \        return res;\n    }\n    static Matrix identity(int n, T one = T(1)) {\n\
-    \        Matrix res(n, n);\n        for (int i = 0; i < n; ++i)\n            res[i][i]\
-    \ = one;\n        return res;\n    }\n    Matrix pow(long long k) const {\n  \
-    \      Matrix res(identity(n()));\n        Matrix base(*this);\n        for (;\
-    \ k; k >>= 1, base = base * base)\n            if (k & 1)\n                res\
-    \ = res * base;\n        return res;\n    }\n    Vector<T> apply(const Vector<T>\
-    \ &x) {\n        return (*this * Matrix(x).transpose()).transpose()[0];\n    }\n\
-    \    template<gauss_mode mode = half>\n    void eliminate(int i) {\n        int\
-    \ pivot = (*this)[i].find_pivot();\n        if (pivot < m()) {\n            T\
-    \ pinv = 0;\n            if constexpr (mode != euclidean) pinv = T(1) / (*this)[i][pivot];\n\
-    \            for (int j = (mode != full) * i; j < n(); ++j)\n                if\
-    \ (j != i) {\n                    if constexpr (mode != euclidean) (*this)[j]\
-    \ += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);\n                    else\
-    \ {\n                        int parity = 1;\n                        while ((*this)[j][pivot]\
-    \ != T(0)) {\n                            T q;\n                            if\
-    \ constexpr (std::derived_from<T, internal::modint_base>) q = T((*this)[i][pivot].val()\
-    \ / (*this)[j][pivot].val());\n                            else q = (*this)[i][pivot]\
-    \ / (*this)[j][pivot];\n                            (*this)[i] += (*this)[j] *\
-    \ q * T(-1);\n                            std::swap((*this)[i], (*this)[j]);\n\
-    \                            parity *= -1;\n                        }\n      \
-    \                  (*this)[j] *= T(parity);\n                    }\n         \
-    \       }\n        }\n    }\n    template<gauss_mode mode = half>\n    Matrix&\
-    \ gauss() {\n        for (int i = 0; i < n(); ++i) {\n            if constexpr\
-    \ (mode == euclidean) {\n                if ((*this)[i][i] == T(0)) {\n      \
-    \              for (int j = i + 1; j < n(); ++j) {\n                        if\
-    \ ((*this)[j][i] != T(0)) {\n                            std::swap((*this)[i],\
+    \        return res;\n    }\n    Matrix minor(int _i, int _j) const {\n      \
+    \  Matrix res(n() - 1, m() - 1);\n        for (int i = 0; i + 1 < n(); ++i)\n\
+    \            for (int j = 0; j + 1 < m(); ++j)\n                res[i][j] = (*this)[i\
+    \ + (i >= _i)][j + (j >= _j)];\n        return res;\n    }\n    static Matrix\
+    \ identity(int n, T one = T(1)) {\n        Matrix res(n, n);\n        for (int\
+    \ i = 0; i < n; ++i)\n            res[i][i] = one;\n        return res;\n    }\n\
+    \    Matrix pow(long long k) const {\n        Matrix res(identity(n()));\n   \
+    \     Matrix base(*this);\n        for (; k; k >>= 1, base = base * base)\n  \
+    \          if (k & 1)\n                res = res * base;\n        return res;\n\
+    \    }\n    Vector<T> apply(const Vector<T> &x) {\n        return (*this * Matrix(x).transpose()).transpose()[0];\n\
+    \    }\n    template<gauss_mode mode = half>\n    void eliminate(int i) {\n  \
+    \      int pivot = (*this)[i].find_pivot();\n        if (pivot < m()) {\n    \
+    \        T pinv = 0;\n            if constexpr (mode != euclidean) pinv = T(1)\
+    \ / (*this)[i][pivot];\n            for (int j = (mode != full) * i; j < n();\
+    \ ++j)\n                if (j != i) {\n                    if constexpr (mode\
+    \ != euclidean) (*this)[j] += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);\n\
+    \                    else {\n                        int parity = 1;\n       \
+    \                 while ((*this)[j][pivot] != T(0)) {\n                      \
+    \      T q;\n                            if constexpr (std::derived_from<T, internal::modint_base>)\
+    \ q = T((*this)[i][pivot].val() / (*this)[j][pivot].val());\n                \
+    \            else q = (*this)[i][pivot] / (*this)[j][pivot];\n               \
+    \             (*this)[i] += (*this)[j] * q * T(-1);\n                        \
+    \    std::swap((*this)[i], (*this)[j]);\n                            parity *=\
+    \ -1;\n                        }\n                        (*this)[j] *= T(parity);\n\
+    \                    }\n                }\n        }\n    }\n    template<gauss_mode\
+    \ mode = half>\n    Matrix& gauss() {\n        for (int i = 0; i < n(); ++i) {\n\
+    \            if constexpr (mode == euclidean) {\n                if ((*this)[i][i]\
+    \ == T(0)) {\n                    for (int j = i + 1; j < n(); ++j) {\n      \
+    \                  if ((*this)[j][i] != T(0)) {\n                            std::swap((*this)[i],\
     \ (*this)[j]);\n                            (*this)[j] *= T(-1);\n           \
     \                 break;\n                        }\n                    }\n \
     \               }\n                if ((*this)[i][i] == T(0)) continue;\n    \
@@ -320,8 +336,9 @@ data:
   - Matrix/Vector.hpp
   isVerificationFile: false
   path: Matrix/Matrix.hpp
-  requiredBy: []
-  timestamp: '2026-05-29 21:39:52+08:00'
+  requiredBy:
+  - Graph/count_spanning_tree.hpp
+  timestamp: '2026-06-24 18:12:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -332,6 +349,8 @@ data:
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Matrix/Matrix.hpp
 layout: document
 redirect_from:

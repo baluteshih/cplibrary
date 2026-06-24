@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   _extendedRequiredBy: []

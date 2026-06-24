@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: DataStructure/DisjointSet.hpp
-    title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
-    path: Graph/SCC.hpp
-    title: Graph/SCC.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
-    path: Graph/incremental_scc.hpp
-    title: Graph/incremental_scc.hpp
+    path: Graph/count_spanning_tree.hpp
+    title: Graph/count_spanning_tree.hpp
+  - icon: ':heavy_check_mark:'
+    path: Matrix/Matrix.hpp
+    title: Matrix/Matrix.hpp
+  - icon: ':heavy_check_mark:'
+    path: Matrix/Vector.hpp
+    title: Matrix/Vector.hpp
   - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
@@ -29,12 +29,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/incremental_scc
+    PROBLEM: https://judge.yosupo.jp/problem/counting_spanning_tree_undirected
     links:
-    - https://judge.yosupo.jp/problem/incremental_scc
-  bundledCode: "#line 1 \"test/1_library_checker/graph/incremental_scc.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/incremental_scc\"\n#line 2 \"\
-    assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/graph/incremental_scc.test.cpp\"\
+    - https://judge.yosupo.jp/problem/counting_spanning_tree_undirected
+  bundledCode: "#line 1 \"test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/counting_spanning_tree_undirected\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -138,9 +139,8 @@ data:
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
-    #line 2 \"Graph/incremental_scc.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\n\n#line 2\
-    \ \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge = void, typename\
-    \ Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool is_directed\
+    #line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed = true, typename Edge = void,\
+    \ typename Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool is_directed\
     \ = directed;\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
     \ void>;\n    static constexpr bool hasVertexWeight = !std::is_same_v<Vertex,\
     \ void>;\n    using edge_value_type = Edge;\n    using vertex_value_type = Vertex;\n\
@@ -218,130 +218,169 @@ data:
     \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
     \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
     \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void, typename Vertex =\
-    \ void>\nstruct SCC : public Graph<true, Edge, Vertex>  { // 0-base\n    using\
-    \ super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n    std::vector<int>\
-    \ low, dfn, bln, instack, stk;\n    void dfs(int u) {\n        low[u] = dfn[u]\
-    \ = ++dft;\n        instack[u] = 1, stk.push_back(u);\n        for (auto [v, eid]\
-    \ : this->G[u])\n            if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u],\
-    \ low[v]);\n            else if (instack[v] && dfn[v] < dfn[u])\n            \
-    \    low[u] = std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n   \
-    \         for (; stk.back() != u; stk.pop_back())\n                bln[stk.back()]\
-    \ = nscc, instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++,\
-    \ stk.pop_back();\n        }\n    }\n    SCC(int n): super(n), dft(), nscc(),\
-    \ low(n), dfn(n), bln(n), instack(n) {}\n    void solve() {\n        for (int\
-    \ i = 0; i < this->n(); ++i)\n            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>>\
-    \ components() {\n        std::vector<std::vector<int>> res(nscc);\n        for\
-    \ (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n   \
-    \     std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n#line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are\
-    \ the inserted order\n// return an array t of length m\n// t[i] := the time when\
-    \ edge i belongs to an scc, t[i] = m if never\ntemplate <typename GraphType>\n\
-    std::vector<int> incremental_scc(const GraphType &G) {\n    int n = G.n(), m =\
-    \ G.m();\n    std::vector<int> res(m, m);\n\n    std::vector<int> idx(n, -1);\n\
-    \    auto dc = [&](auto &self, std::vector<std::array<int, 3>> &event, int l,\
-    \ int r) -> void {\n        if (r - l == 1 || event.empty()) return;\n       \
-    \ int mid = (l + r) >> 1;\n        int cnt = 0;\n        for (auto& [i, a, b]\
-    \ : event) {\n            if (idx[a] == -1) idx[a] = cnt++;\n            if (idx[b]\
-    \ == -1) idx[b] = cnt++;\n        }\n        SCC scc(cnt);\n        for (auto&\
-    \ [i, a, b] : event)\n            if (i <= mid)\n                scc.add_edge(idx[a],\
-    \ idx[b]);\n        scc.solve();\n        std::vector<std::array<int, 3>> lft,\
-    \ rgt;\n        for (auto [i, a, b] : event) {\n            a = idx[a], b = idx[b];\n\
-    \            if (i <= mid && scc.bln[a] == scc.bln[b]) {\n                   \
-    \ res[i] = std::min(res[i], mid);\n                    lft.push_back({i, a, b});\n\
-    \            }\n            else rgt.push_back({i, scc.bln[a], scc.bln[b]});\n\
-    \        }\n        for (auto &[i, a, b] : event) idx[a] = idx[b] = -1;\n    \
-    \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
-    \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
-    \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
-    \    return res;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename\
-    \ T = void, bool undo_tag = false>\nclass DisjointSet {\nprotected:\n    static\
-    \ constexpr bool hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int>\
-    \ boss, sz;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasT,\
-    \ std::vector<T>, Empty> data;\n    [[no_unique_address]] std::conditional_t<undo_tag,\
-    \ std::vector<std::pair<int*, int>>, Empty> cache;\n    [[no_unique_address]]\
-    \ std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*, T>>, Empty> data_cache;\n\
-    public:\n    DisjointSet(int n_): n(n_), boss(n), sz(n, 1) {\n        std::iota(boss.begin(),\
-    \ boss.end(), 0);\n        if constexpr (hasT) data.resize(n);\n    }\n    DisjointSet(const\
-    \ std::vector<T> &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1),\
-    \ data(data_) {\n        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual\
-    \ int leader(int u) {\n        if (boss[u] == u) return u;\n        if constexpr\
-    \ (undo_tag) return leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n\
-    \    }\n    int size(int u) {\n        return sz[leader(u)];\n    }\n    bool\
-    \ same(int u, int v) {\n        return leader(u) == leader(v);\n    }\n    bool\
-    \ merge(int u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n\
-    \        if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
-    \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
-    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
-    \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
-    \        }\n        boss[v] = u;\n        sz[u] += sz[v];\n        if constexpr\
-    \ (hasT) {\n            data[u] = data[u] + data[v]; \n        }\n        return\
-    \ true;\n    }\n    size_t version() requires (undo_tag && !hasT) {\n        return\
-    \ cache.size();\n    }\n    std::pair<size_t, size_t> version() requires (undo_tag\
-    \ && hasT) {\n        return std::make_pair(cache.size(), data_cache.size());\n\
-    \    }\n    void undo(auto req_version) requires (undo_tag) {\n        while (version()\
-    \ != req_version) {\n            if constexpr (!hasT) {\n                *cache.back().first\
-    \ = cache.back().second;\n                cache.pop_back();\n            }\n \
-    \           else {\n                if (cache.size() > req_version.first) {\n\
-    \                    *cache.back().first = cache.back().second;\n            \
-    \        cache.pop_back();\n                }\n                else {\n      \
-    \              *data_cache.back().first = data_cache.back().second;\n        \
-    \            data_cache.pop_back();\n                }\n            }\n      \
-    \  }\n    }\n    auto& getdata(int u) requires (hasT) {\n        return data[leader(u)];\n\
-    \    }\n    void data_transform(int u, auto func) requires (hasT) {\n        auto\
-    \ &cur = getdata(u);\n        if constexpr (undo_tag)\n            data_cache.emplace_back(&cur,\
-    \ cur);\n        func(cur);\n    }\n    std::vector<std::vector<int>> groups()\
-    \ {\n        std::vector<std::vector<int>> result(n);\n        for (int i = 0;\
-    \ i < n; ++i)\n            result[leader(i)].push_back(i);\n        result.erase(remove_if(result.begin(),\
-    \ result.end(), [](auto &g) { return g.empty(); }), result.end());\n        return\
-    \ result;\n    }\n};\n#line 7 \"test/1_library_checker/graph/incremental_scc.test.cpp\"\
+    #line 2 \"Graph/count_spanning_tree.hpp\"\n\n#line 2 \"Matrix/Matrix.hpp\"\n\n\
+    #line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename T, class Allocator = std::allocator<T>>\
+    \ \nclass Vector : public std::vector<T, Allocator> {\n    int n() const { return\
+    \ (int)this->size(); }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n)\
+    \ {}\n    Vector operator*(const T &v) const {\n        Vector res(*this);\n \
+    \       for (int i = 0; i < n(); ++i)\n            res[i] = res[i] * v;\n    \
+    \    return res;\n    }\n    Vector& operator*=(const T &v) {\n        for (int\
+    \ i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] * v;\n        return\
+    \ *this;\n    }\n    Vector operator/(const T &v) const {\n        Vector res(*this);\n\
+    \        for (int i = 0; i < n(); ++i)\n            res[i] = res[i] / v;\n   \
+    \     return res;\n    }\n    Vector& operator/=(const T &v) {\n        for (int\
+    \ i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] / v;\n        return\
+    \ *this;\n    }\n    Vector operator+(const Vector &rhs) const {\n        assert(n()\
+    \ == rhs.n());\n        Vector res(n());\n        for (int i = 0; i < n(); ++i)\n\
+    \            res[i] = (*this)[i] + rhs[i];\n        return res;\n    }\n    Vector&\
+    \ operator+=(const Vector &rhs) {\n        assert(n() == rhs.n());\n        for\
+    \ (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] + rhs[i];\n \
+    \       return *this;\n    }\n    T operator*(const Vector &rhs) const {\n   \
+    \     assert(n() == rhs.n());\n        T res = T();\n        for (int i = 0; i\
+    \ < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n        return res;\n\
+    \    }\n    Vector operator|(Vector const& rhs) const {\n        Vector res(n()\
+    \ + rhs.n());\n        std::copy(this->begin(), this->end(), res.begin()); \n\
+    \        std::copy(rhs.begin(), rhs.end(), res.begin() + n());\n        return\
+    \ res;\n    }\n    int find_pivot() {\n        int pivot = 0;\n        while (pivot\
+    \ < n() && (*this)[pivot] == T(0)) ++pivot;\n        return pivot;\n    }\n};\n\
+    #line 5 \"Matrix/Matrix.hpp\"\n\ntemplate<class T>\nclass Matrix : public std::vector<Vector<T>>\
+    \ {\npublic:\n    enum gauss_mode {half, full, euclidean};\n    int n() const\
+    \ { return (int)this->size(); }\n    int m() const { return n() ? (int)(*this)[0].size()\
+    \ : 0; }\n    Matrix(int _n, int _m): std::vector<Vector<T>>(_n, Vector<T>(_m))\
+    \ {}\n    Matrix(int _n): Matrix(_n, _n) {}\n    Matrix(const Vector<T> &vec):\
+    \ Matrix(1, (int)vec.size()) {\n        (*this)[0] = vec;\n    }\n    Matrix transpose()\
+    \ const {\n        Matrix res(m(), n());\n        for (int i = 0; i < m(); ++i)\n\
+    \            for (int j = 0; j < n(); ++j)\n                res[i][j] = (*this)[j][i];\n\
+    \        return res;\n    }\n    Matrix operator*(const Matrix &rhs) const {\n\
+    \        assert(m() == rhs.n());\n        Matrix res(n(), rhs.m());\n        auto\
+    \ _rhs = rhs.transpose();\n        for (int i = 0; i < res.n(); ++i)\n       \
+    \     for (int j = 0; j < res.m(); ++j)\n                res[i][j] = (*this)[i]\
+    \ * _rhs[j];\n        return res;\n    }\n    Matrix operator*(const T &v) const\
+    \ {\n        Matrix res(*this);\n        for (int i = 0; i < res.n(); ++i)\n \
+    \           for (int j = 0; j < res.m(); ++j)\n                res[i][j] = res[i][j]\
+    \ * v;\n        return res;\n    }\n    Matrix operator/(const Matrix &rhs) const\
+    \ {\n        assert(m() == rhs.n());\n        return *this * rhs.inv();\n    }\n\
+    \    Matrix operator+(const Matrix &rhs) const {\n        assert(n() == rhs.n());\n\
+    \        assert(m() == rhs.m());\n        Matrix res(n(), m());\n        for (int\
+    \ i = 0; i < res.n(); ++i)\n            res[i] = (*this)[i] + rhs[i];\n      \
+    \  return res;\n    }\n    Matrix operator|(Matrix const& rhs) const {\n     \
+    \   assert(n() == rhs.n());\n        Matrix res(n(), m() + rhs.m());\n       \
+    \ for (int i = 0; i < n(); ++i)\n            res[i] = (*this)[i] | rhs[i];\n \
+    \       return res;\n    }\n    Matrix rows(int l, int r) const {\n        assert(l\
+    \ <= r);\n        assert(r <= n());\n        Matrix res(r - l, m());\n       \
+    \ for (int i = 0; i < r - l; ++i)\n            res[i] = (*this)[l + i];\n    \
+    \    return res;\n    }\n    Matrix columns(int l, int r) const {\n        if\
+    \ (m() == 0) return Matrix(0, 0);\n        assert(l <= r);\n        assert(r <=\
+    \ m());\n        Matrix res(n(), r - l);\n        for (int i = 0; i < n(); ++i)\n\
+    \            std::copy((*this)[i].begin() + l, (*this)[i].begin() + r, res[i].begin());\n\
+    \        return res;\n    }\n    Matrix minor(int _i, int _j) const {\n      \
+    \  Matrix res(n() - 1, m() - 1);\n        for (int i = 0; i + 1 < n(); ++i)\n\
+    \            for (int j = 0; j + 1 < m(); ++j)\n                res[i][j] = (*this)[i\
+    \ + (i >= _i)][j + (j >= _j)];\n        return res;\n    }\n    static Matrix\
+    \ identity(int n, T one = T(1)) {\n        Matrix res(n, n);\n        for (int\
+    \ i = 0; i < n; ++i)\n            res[i][i] = one;\n        return res;\n    }\n\
+    \    Matrix pow(long long k) const {\n        Matrix res(identity(n()));\n   \
+    \     Matrix base(*this);\n        for (; k; k >>= 1, base = base * base)\n  \
+    \          if (k & 1)\n                res = res * base;\n        return res;\n\
+    \    }\n    Vector<T> apply(const Vector<T> &x) {\n        return (*this * Matrix(x).transpose()).transpose()[0];\n\
+    \    }\n    template<gauss_mode mode = half>\n    void eliminate(int i) {\n  \
+    \      int pivot = (*this)[i].find_pivot();\n        if (pivot < m()) {\n    \
+    \        T pinv = 0;\n            if constexpr (mode != euclidean) pinv = T(1)\
+    \ / (*this)[i][pivot];\n            for (int j = (mode != full) * i; j < n();\
+    \ ++j)\n                if (j != i) {\n                    if constexpr (mode\
+    \ != euclidean) (*this)[j] += (*this)[i] * (*this)[j][pivot] * pinv * T(-1);\n\
+    \                    else {\n                        int parity = 1;\n       \
+    \                 while ((*this)[j][pivot] != T(0)) {\n                      \
+    \      T q;\n                            if constexpr (std::derived_from<T, internal::modint_base>)\
+    \ q = T((*this)[i][pivot].val() / (*this)[j][pivot].val());\n                \
+    \            else q = (*this)[i][pivot] / (*this)[j][pivot];\n               \
+    \             (*this)[i] += (*this)[j] * q * T(-1);\n                        \
+    \    std::swap((*this)[i], (*this)[j]);\n                            parity *=\
+    \ -1;\n                        }\n                        (*this)[j] *= T(parity);\n\
+    \                    }\n                }\n        }\n    }\n    template<gauss_mode\
+    \ mode = half>\n    Matrix& gauss() {\n        for (int i = 0; i < n(); ++i) {\n\
+    \            if constexpr (mode == euclidean) {\n                if ((*this)[i][i]\
+    \ == T(0)) {\n                    for (int j = i + 1; j < n(); ++j) {\n      \
+    \                  if ((*this)[j][i] != T(0)) {\n                            std::swap((*this)[i],\
+    \ (*this)[j]);\n                            (*this)[j] *= T(-1);\n           \
+    \                 break;\n                        }\n                    }\n \
+    \               }\n                if ((*this)[i][i] == T(0)) continue;\n    \
+    \        }\n            eliminate<mode>(i);\n        }\n        return *this;\n\
+    \    }\n    std::pair<std::vector<int>, std::vector<int>> sort_classify(int lim)\
+    \ {\n        int rk = 0;\n        std::vector<int> pivots, free;\n        for\
+    \ (int j = 0; j < lim; ++j) {\n            if (rk < n() && (*this)[rk][j] == T(0))\
+    \ {\n                for (int i = rk + 1; i < n(); ++i) {\n                  \
+    \  if ((*this)[i][j] != T(0)) {\n                        std::swap((*this)[i],\
+    \ (*this)[rk]);\n                        (*this)[rk] *= T(-1);\n             \
+    \       }\n                }\n            }\n            if (rk < n() && (*this)[rk][j]\
+    \ != T(0)) {\n                pivots.push_back(j);\n                rk++;\n  \
+    \          } \n            else {\n                free.push_back(j);\n      \
+    \      }\n        }\n        return std::make_pair(pivots, free);\n    }\n   \
+    \ template<gauss_mode mode = half>\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ echelonize(int lim) {\n        return gauss<mode>().sort_classify(lim);\n  \
+    \  }\n    template<gauss_mode mode = half>\n    std::pair<std::vector<int>, std::vector<int>>\
+    \ echelonize() {\n        return echelonize<mode>(m());\n    }\n    int rank()\
+    \ const {\n        if (n() > m()) return transpose().rank();\n        return Matrix(*this).echelonize().first.size();\n\
+    \    }\n    template<gauss_mode mode = half>\n    T det() const {\n        assert(n()\
+    \ == m());\n        Matrix cur = *this;\n        cur.echelonize<mode>();\n   \
+    \     T res = T(1);\n        for (int i = 0; i < n(); ++i)\n            res =\
+    \ res * cur[i][i];\n        return res;\n    }\n    std::pair<T, Matrix> inv()\
+    \ const {\n        assert(n() == m());\n        Matrix cur = *this | identity(n());\n\
+    \        if ((int)cur.echelonize<full>(n()).first.size() < n())\n            return\
+    \ std::make_pair(0, Matrix(0, 0));\n        T det = 1;\n        for (int i = 0;\
+    \ i < n(); ++i) {\n            det = det * cur[i][i];\n            cur[i] = cur[i]\
+    \ / cur[i][i];\n        }\n        return std::make_pair(det, cur.columns(n(),\
+    \ n() + n()));\n    }\n    Matrix kernel() const {\n        Matrix A(*this);\n\
+    \        auto [pivots, free] = A.echelonize<full>();\n        Matrix sols((int)free.size(),\
+    \ m());\n        for (int j = 0; j < (int)pivots.size(); ++j) {\n            T\
+    \ scale = T(1) / A[j][pivots[j]];\n            for (int i = 0; i < (int)free.size();\
+    \ ++i)\n                sols[i][pivots[j]] = A[j][free[i]] * scale;\n        }\n\
+    \        for (int i = 0; i < (int)free.size(); ++i)\n            sols[i][free[i]]\
+    \ = T(-1);\n        return sols;\n    }\n    // return (x, basis)\n    // (*this)\
+    \ * (x^T + basis^T) = t^T\n    std::optional<std::pair<Matrix, Matrix>> solve(const\
+    \ Matrix &t) const {\n        int dimt = t.n();\n        Matrix sols = (*this\
+    \ | t.transpose()).kernel();\n        if (sols.n() < dimt) return std::nullopt;\n\
+    \        Matrix upper = sols.rows(0, sols.n() - dimt);\n        Matrix lower =\
+    \ sols.rows(sols.n() - dimt, sols.n());\n        if (lower.columns(m(), lower.m())\
+    \ != identity(dimt) * T(-1))\n            return std::nullopt;\n        return\
+    \ std::make_pair(lower.columns(0, m()), upper.columns(0, m()));\n    }\n};\n#line\
+    \ 5 \"Graph/count_spanning_tree.hpp\"\n\ntemplate<typename T, typename graph>\n\
+    T count_spanning_tree(const graph &G, int root = 0) {\n    Matrix<T> mat(G.n());\n\
+    \    assert(root >= 0 && root < G.n());\n    for (auto e : G.edges) {\n      \
+    \  if (e.to == e.from) continue;\n        mat[e.to][e.to] += T(1);\n        mat[e.from][e.to]\
+    \ -= T(1);\n        if constexpr (!graph::is_directed) {\n            mat[e.from][e.from]\
+    \ += T(1);\n            mat[e.to][e.from] -= T(1);\n        }\n    }\n    return\
+    \ mat.minor(root, root).det();\n}\n#line 7 \"test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    std::vector<mint>\
-    \ arr(n);\n    for (auto &i : arr)\n        std::cin >> i;\n    Graph G(n);\n\
-    \    for (int i = 0; i < m; ++i) {\n        int u, v;\n        std::cin >> u >>\
-    \ v;\n        G.add_edge(u, v);\n    }\n    auto res = incremental_scc(G);\n \
-    \   DisjointSet<mint> djs(arr);\n    std::vector<int> idx(m);\n    std::iota(idx.begin(),\
-    \ idx.end(), 0);\n    std::ranges::sort(idx, [&](int a, int b) {\n        return\
-    \ res[a] < res[b]; \n    });\n    std::vector<mint> ans(m);\n    for (int i :\
-    \ idx) {\n        if (res[i] == m) break;\n        mint lft = djs.getdata(G.edge(i).from);\n\
-    \        mint rgt = djs.getdata(G.edge(i).to);\n        if (djs.merge(G.edge(i).from,\
-    \ G.edge(i).to))\n            ans[res[i]] += lft * rgt;\n    }\n    std::partial_sum(ans.begin(),\
-    \ ans.end(), ans.begin());\n    for (auto &i : ans)\n        std::cout << i <<\
-    \ \"\\n\";\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/incremental_scc\"\n#include\
-    \ \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"Graph/incremental_scc.hpp\"\
-    \n#include \"DataStructure/DisjointSet.hpp\"\n\nusing mint = modint998244353;\n\
+    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    UndirectedGraph<>\
+    \ G(n);\n    while (m--) {\n        int u, v;\n        std::cin >> u >> v;\n \
+    \       G.add_edge(u, v);\n    }\n    std::cout << count_spanning_tree<mint>(G)\
+    \ << \"\\n\";\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_spanning_tree_undirected\"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    Graph/base.hpp\"\n#include \"Graph/count_spanning_tree.hpp\"\n\nusing mint = modint998244353;\n\
     \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n,\
-    \ m;\n    std::cin >> n >> m;\n    std::vector<mint> arr(n);\n    for (auto &i\
-    \ : arr)\n        std::cin >> i;\n    Graph G(n);\n    for (int i = 0; i < m;\
-    \ ++i) {\n        int u, v;\n        std::cin >> u >> v;\n        G.add_edge(u,\
-    \ v);\n    }\n    auto res = incremental_scc(G);\n    DisjointSet<mint> djs(arr);\n\
-    \    std::vector<int> idx(m);\n    std::iota(idx.begin(), idx.end(), 0);\n   \
-    \ std::ranges::sort(idx, [&](int a, int b) {\n        return res[a] < res[b];\
-    \ \n    });\n    std::vector<mint> ans(m);\n    for (int i : idx) {\n        if\
-    \ (res[i] == m) break;\n        mint lft = djs.getdata(G.edge(i).from);\n    \
-    \    mint rgt = djs.getdata(G.edge(i).to);\n        if (djs.merge(G.edge(i).from,\
-    \ G.edge(i).to))\n            ans[res[i]] += lft * rgt;\n    }\n    std::partial_sum(ans.begin(),\
-    \ ans.end(), ans.begin());\n    for (auto &i : ans)\n        std::cout << i <<\
-    \ \"\\n\";\n}\n"
+    \ m;\n    std::cin >> n >> m;\n    UndirectedGraph<> G(n);\n    while (m--) {\n\
+    \        int u, v;\n        std::cin >> u >> v;\n        G.add_edge(u, v);\n \
+    \   }\n    std::cout << count_spanning_tree<mint>(G) << \"\\n\";\n}\n"
   dependsOn:
   - assumption.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
-  - Graph/incremental_scc.hpp
-  - Graph/SCC.hpp
   - Graph/base.hpp
-  - DataStructure/DisjointSet.hpp
+  - Graph/count_spanning_tree.hpp
+  - Matrix/Matrix.hpp
+  - Matrix/Vector.hpp
   isVerificationFile: true
-  path: test/1_library_checker/graph/incremental_scc.test.cpp
+  path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   requiredBy: []
   timestamp: '2026-06-24 18:12:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp
+documentation_of: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/graph/incremental_scc.test.cpp
-- /verify/test/1_library_checker/graph/incremental_scc.test.cpp.html
-title: test/1_library_checker/graph/incremental_scc.test.cpp
+- /verify/test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+- /verify/test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp.html
+title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 ---

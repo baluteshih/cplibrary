@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree
@@ -48,10 +48,11 @@ data:
     \n\n#line 2 \"Tree/CentroidDS/DistanceSolver.hpp\"\n\n#line 2 \"Tree/CentroidTree.hpp\"\
     \n\n#line 2 \"Tree/Tree.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool directed\
     \ = true, typename Edge = void, typename Vertex = void>\nclass Graph {\npublic:\n\
-    \    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static\
-    \ constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;\n    using edge_value_type\
-    \ = Edge;\n    using vertex_value_type = Vertex;\n    struct Empty {};\n    struct\
-    \ edge_v {\n        int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
+    \    static constexpr bool is_directed = directed;\n    static constexpr bool\
+    \ hasEdgeWeight = !std::is_same_v<Edge, void>;\n    static constexpr bool hasVertexWeight\
+    \ = !std::is_same_v<Vertex, void>;\n    using edge_value_type = Edge;\n    using\
+    \ vertex_value_type = Vertex;\n    struct Empty {};\n    struct edge_v {\n   \
+    \     int from, to;\n        [[no_unique_address]] std::conditional_t<hasEdgeWeight,\
     \ Edge, Empty> weight;\n        edge_v() {}\n        edge_v(int u, int v) : from(u),\
     \ to(v) {}\n        template <typename W>\n        edge_v(int u, int v, const\
     \ W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}\n        template\
@@ -355,8 +356,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-24 18:12:55+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
 layout: document

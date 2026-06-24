@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':warning:'
@@ -29,7 +29,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/bitwise_transform.hpp
       title: Convolution/bitwise_transform.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -55,7 +55,7 @@ data:
       title: Convolution/xor_convolution.hpp
   - name: DataStructure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/BIT.hpp
       title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/Discretization.hpp
       title: Discretization
     - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: Potential Disjoint Set
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
@@ -114,13 +114,13 @@ data:
       title: Zkw Segment Tree
   - name: Flow
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
     - icon: ':heavy_check_mark:'
@@ -129,7 +129,7 @@ data:
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -205,15 +205,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
       path: Graph/bipolar_orientation.hpp
       title: Graph/bipolar_orientation.hpp
+    - icon: ':heavy_check_mark:'
+      path: Graph/count_spanning_tree.hpp
+      title: Graph/count_spanning_tree.hpp
     - icon: ':heavy_check_mark:'
       path: Graph/dominator_tree.hpp
       title: Graph/dominator_tree.hpp
@@ -282,13 +285,13 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
       path: Numeric/barrett.hpp
       title: Numeric/barrett.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':heavy_check_mark:'
@@ -300,10 +303,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -332,7 +335,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
     - icon: ':heavy_check_mark:'
@@ -383,32 +386,32 @@ data:
       title: String/z_algo.hpp
   - name: Tree/CentroidDS
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/CentroidDS/DistanceSolver.hpp
       title: Tree/CentroidDS/DistanceSolver.hpp
   - name: Tree
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/CentroidTree.hpp
       title: Tree/CentroidTree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/TreeTools.hpp
       title: Tree/TreeTools.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Tree/centroid_divide_and_conquer.hpp
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -606,6 +609,12 @@ data:
       path: test/1_library_checker/graph/bipartitematching.test.cpp
       title: test/1_library_checker/graph/bipartitematching.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+      title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+      title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/cycle_detection_directed.test.cpp
       title: test/1_library_checker/graph/cycle_detection_directed.test.cpp
     - icon: ':heavy_check_mark:'
@@ -765,37 +774,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
       title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/jump_on_tree.test.cpp
       title: test/1_library_checker/tree/jump_on_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/lca.test.cpp
       title: test/1_library_checker/tree/lca.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
       title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/tree_diameter.test.cpp
       title: test/1_library_checker/tree/tree_diameter.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
       title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - name: test/2_aoj
@@ -839,10 +848,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
       title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/minimum_cost_flow.test.cpp
       title: test/2_aoj/minimum_cost_flow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
       title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
@@ -888,7 +897,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/4_codeforces/104114B.test.cpp
       title: test/4_codeforces/104114B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/4_codeforces/106033E.test.cpp
       title: test/4_codeforces/106033E.test.cpp
   - name: test/5_NCOJ
@@ -909,16 +918,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/7_loj/2302.test.cpp
       title: test/7_loj/2302.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/7_loj/bounded_flow.test.cpp
       title: test/7_loj/bounded_flow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/7_loj/max_bounded_flow.test.cpp
       title: test/7_loj/max_bounded_flow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/7_loj/maxflow.test.cpp
       title: test/7_loj/maxflow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/7_loj/min_bounded_flow.test.cpp
       title: test/7_loj/min_bounded_flow.test.cpp
   - name: test/8_luogu
