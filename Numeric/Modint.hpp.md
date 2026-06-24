@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
@@ -18,18 +18,33 @@ data:
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
   - icon: ':heavy_check_mark:'
+    path: Numbers/bernoulli_number.hpp
+    title: Numbers/bernoulli_number.hpp
+  - icon: ':heavy_check_mark:'
     path: Numbers/partition_number.hpp
     title: Numbers/partition_number.hpp
+  - icon: ':x:'
+    path: Numbers/stirling_first_kind.hpp
+    title: Numbers/stirling_first_kind.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_first_kind_row.hpp
+    title: Numbers/stirling_first_kind_row.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_second_kind.hpp
+    title: Numbers/stirling_second_kind.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_second_kind_row.hpp
+    title: Numbers/stirling_second_kind_row.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/quadratic_residue.hpp
     title: Numeric/quadratic_residue.hpp
   - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':heavy_check_mark:'
@@ -44,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -120,6 +135,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
@@ -150,6 +177,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
+    title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
@@ -207,9 +237,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -371,6 +401,11 @@ data:
   requiredBy:
   - Numbers/partition_number.hpp
   - Numbers/bell_number.hpp
+  - Numbers/stirling_second_kind_row.hpp
+  - Numbers/stirling_second_kind.hpp
+  - Numbers/stirling_first_kind.hpp
+  - Numbers/stirling_first_kind_row.hpp
+  - Numbers/bernoulli_number.hpp
   - Misc/bigint.hpp
   - Numeric/quadratic_residue.hpp
   - Convolution/OnlineConvolution.hpp
@@ -384,7 +419,7 @@ data:
   - Polynomial/Sqrt.hpp
   - Polynomial/shift.hpp
   timestamp: '2026-06-18 22:20:51+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -420,13 +455,18 @@ data:
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
+  - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp

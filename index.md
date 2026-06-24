@@ -114,13 +114,13 @@ data:
       title: Zkw Segment Tree
   - name: Flow
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
     - icon: ':heavy_check_mark:'
@@ -208,7 +208,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -269,14 +269,29 @@ data:
       path: Numbers/bell_number.hpp
       title: Numbers/bell_number.hpp
     - icon: ':heavy_check_mark:'
+      path: Numbers/bernoulli_number.hpp
+      title: Numbers/bernoulli_number.hpp
+    - icon: ':heavy_check_mark:'
       path: Numbers/partition_number.hpp
       title: Numbers/partition_number.hpp
+    - icon: ':x:'
+      path: Numbers/stirling_first_kind.hpp
+      title: Numbers/stirling_first_kind.hpp
+    - icon: ':heavy_check_mark:'
+      path: Numbers/stirling_first_kind_row.hpp
+      title: Numbers/stirling_first_kind_row.hpp
+    - icon: ':heavy_check_mark:'
+      path: Numbers/stirling_second_kind.hpp
+      title: Numbers/stirling_second_kind.hpp
+    - icon: ':heavy_check_mark:'
+      path: Numbers/stirling_second_kind_row.hpp
+      title: Numbers/stirling_second_kind_row.hpp
   - name: Numeric
     pages:
     - icon: ':heavy_check_mark:'
       path: Numeric/Binomial.hpp
       title: Numeric/Binomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Combination.hpp
       title: Numeric/Combination.hpp
     - icon: ':heavy_check_mark:'
@@ -285,7 +300,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -303,10 +318,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -335,10 +350,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/Polynomial.hpp
       title: Polynomial/Polynomial.hpp
     - icon: ':heavy_check_mark:'
@@ -353,7 +368,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/linear_recursion.hpp
       title: Polynomial/linear_recursion.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Polynomial/shift.hpp
       title: Polynomial/shift.hpp
   - name: Sequence
@@ -583,6 +598,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+    - icon: ':x:'
+      path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - name: test/1_library_checker/geometry
     pages:
     - icon: ':heavy_check_mark:'
@@ -681,6 +708,9 @@ data:
       title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - name: test/1_library_checker/number_theory
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
+      title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
       title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
@@ -918,16 +948,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/7_loj/2302.test.cpp
       title: test/7_loj/2302.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/bounded_flow.test.cpp
       title: test/7_loj/bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/max_bounded_flow.test.cpp
       title: test/7_loj/max_bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/maxflow.test.cpp
       title: test/7_loj/maxflow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/min_bounded_flow.test.cpp
       title: test/7_loj/min_bounded_flow.test.cpp
   - name: test/8_luogu

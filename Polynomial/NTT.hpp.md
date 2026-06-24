@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
   _extendedRequiredBy:
@@ -24,12 +24,27 @@ data:
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
   - icon: ':heavy_check_mark:'
+    path: Numbers/bernoulli_number.hpp
+    title: Numbers/bernoulli_number.hpp
+  - icon: ':heavy_check_mark:'
     path: Numbers/partition_number.hpp
     title: Numbers/partition_number.hpp
+  - icon: ':x:'
+    path: Numbers/stirling_first_kind.hpp
+    title: Numbers/stirling_first_kind.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_first_kind_row.hpp
+    title: Numbers/stirling_first_kind_row.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_second_kind.hpp
+    title: Numbers/stirling_second_kind.hpp
+  - icon: ':heavy_check_mark:'
+    path: Numbers/stirling_second_kind_row.hpp
+    title: Numbers/stirling_second_kind_row.hpp
   - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':heavy_check_mark:'
@@ -44,7 +59,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -69,6 +84,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
+    title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -108,9 +138,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\
@@ -306,6 +336,11 @@ data:
   requiredBy:
   - Numbers/partition_number.hpp
   - Numbers/bell_number.hpp
+  - Numbers/stirling_second_kind_row.hpp
+  - Numbers/stirling_second_kind.hpp
+  - Numbers/stirling_first_kind.hpp
+  - Numbers/stirling_first_kind_row.hpp
+  - Numbers/bernoulli_number.hpp
   - Misc/bigint.hpp
   - Convolution/OnlineConvolution.hpp
   - Convolution/convolution.hpp
@@ -317,7 +352,7 @@ data:
   - Polynomial/Sqrt.hpp
   - Polynomial/shift.hpp
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
@@ -326,8 +361,13 @@ data:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+  - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/polynomial_interpolation.test.cpp

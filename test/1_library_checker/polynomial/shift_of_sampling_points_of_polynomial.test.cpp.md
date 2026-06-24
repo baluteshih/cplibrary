@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':heavy_check_mark:'
@@ -202,43 +202,52 @@ data:
     \ *this; }\n    Poly& imul(const Poly &rhs) {\n        for (int i = 0; i < n();\
     \ ++i)\n            (*this)[i] *= rhs[i];\n        return *this;\n    }\n    Poly&\
     \ strip() {\n        while (!this->empty() && this->back() == 0)\n           \
-    \ this->pop_back();\n        return *this;\n    }\n    Poly operator+(const Poly\
-    \ &rhs) const { // n() == rhs.n()\n        Poly res(*this);\n        for (int\
-    \ i = 0; i < n(); ++i)\n            res[i] += rhs[i];\n        return res;\n \
-    \   }\n    Poly operator-(const Poly &rhs) const { // n() == rhs.n()\n       \
-    \ Poly res(*this);\n        for (int i = 0; i < n(); ++i)\n            res[i]\
-    \ -= rhs[i];\n        return res;\n    }\n    Poly operator*(const T &rhs) const\
-    \ {\n        Poly res(*this);\n        for (int i = 0; i < n(); ++i)\n       \
-    \     res[i] *= rhs;\n        return res;\n    }\n    Poly operator*(const Poly\
-    \ &rhs) const { // 5e5/185ms\n        return NTT<T>::convolution(*this, rhs);\n\
-    \    }\n    Poly &dft(int len) {\n        assert((len & (len - 1)) == 0);\n  \
-    \      isz(len);\n        NTT<T>::ntt(*this);\n        return *this;\n    }\n\
-    \    Poly &idft(int len) {\n        assert((len & (len - 1)) == 0);\n        isz(len);\n\
-    \        NTT<T>::ntt(*this, true);\n        return *this;\n    }\n    Poly Inv()\
-    \ const { // (*this)[0] != 0, 5e5/212ms\n        if (n() == 1) return {(*this)[0].inv()};\n\
-    \        int m = ceilpow2(n() * 2);\n        Poly Xi = Poly(*this, (n() + 1) /\
-    \ 2).Inv().isz(m);\n        Poly Y(*this, m);\n        Xi.dft(m), Y.dft(m);\n\
-    \        for (int i = 0; i < m; ++i)\n            Xi[i] *= (2 - Xi[i] * Y[i]);\n\
-    \        return Xi.idft(m).isz(n());\n    }\n    Poly Dx() const {\n        Poly\
-    \ ret(n() - 1);\n        for (int i = 0; i < ret.n(); ++i)\n            ret[i]\
-    \ = (i + 1) * (*this)[i + 1];\n        return ret.isz(std::max(1, ret.n()));\n\
-    \    }\n    Poly Sx() const {\n        Poly ret(n() + 1);\n        for (int i\
-    \ = 0; i < n(); ++i)\n            ret[i + 1] = T(i + 1).inv() * (*this)[i];\n\
-    \        return ret;\n    }\n    Poly Ln() const { // (*this)[0] == 1, 5e5/406ms\n\
-    \        return (Dx() * Inv()).Sx().isz(n());\n    }\n    Poly Exp() const { //\
-    \ (*this)[0] == 0, 5e5/886ms\n        if (n() == 1) return {1};\n        Poly\
-    \ X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n        Poly Y = X.Ln(); Y[0]\
-    \ = -1;\n        return (X * (*this - Y)).isz(n());\n    }\n    // M := P(P -\
-    \ 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly Pow(long long k) const {\n\
-    \        int nz = 0;\n        while (nz < n() && (*this)[nz] == 0) ++nz;\n   \
-    \     if (nz * std::min(k, (long long)n()) >= n()) return Poly(n());\n       \
-    \ if (!k) return Poly(Poly {1}, n());\n        Poly X(this->data() + nz, this->data()\
-    \ + nz + n() - nz * k);\n        return ((X.Ln() * T(k)).Exp() * X[0].pow(k)).irev().isz(n()).irev();\n\
-    \    }\n    Poly _tmul(int nn, const Poly &rhs) const {\n        Poly Y = ((*this)\
-    \ * rhs).isz(n() + nn - 1);\n        return Poly(Y.data() + n() - 1, Y.data()\
-    \ + Y.n());\n    }\n    std::vector<T> _eval(const std::vector<T> &x, const std::vector<Poly>\
-    \ &up) const {\n        const int m = (int)x.size();\n        if (!m) return {};\n\
-    \        std::vector<Poly> down(m * 2);\n        down[1] = Poly(up[1]).irev().isz(n()).Inv().irev()._tmul(m,\
+    \ this->pop_back();\n        return *this;\n    }\n    Poly& operator+=(const\
+    \ Poly &rhs) { // n() == rhs.n()\n        for (int i = 0; i < n(); ++i)\n    \
+    \        (*this)[i] += rhs[i];\n        return *this;\n    }\n    Poly& operator-=(const\
+    \ Poly &rhs) { // n() == rhs.n()\n        for (int i = 0; i < n(); ++i)\n    \
+    \        (*this)[i] -= rhs[i];\n        return *this;\n    }\n    Poly& operator*=(const\
+    \ T &rhs) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i] *=\
+    \ rhs;\n        return *this;\n    }\n    Poly operator*=(const Poly &rhs) { //\
+    \ 5e5/185ms\n        *this = NTT<T>::convolution(*this, rhs);\n        return\
+    \ *this;\n    }\n    Poly& operator<<=(const int sz) {\n        this->insert(this->begin(),\
+    \ sz, T(0));\n        return *this;\n    }\n    Poly& operator>>=(const int sz)\
+    \ {\n        if (n() <= sz) this->clear();\n        else this->erase(this->begin(),\
+    \ this->begin() + sz);\n        return *this;\n    }\n    friend Poly operator+(const\
+    \ Poly &a, const Poly &b) { return Poly(a) += b; }\n    friend Poly operator-(const\
+    \ Poly &a, const Poly &b) { return Poly(a) -= b; }\n    friend Poly operator*(const\
+    \ Poly &a, const T &b) { return Poly(a) *= b; }\n    friend Poly operator*(const\
+    \ Poly &a, const Poly &b) { return Poly(a) *= b; }\n    friend Poly operator<<(const\
+    \ Poly &a, const int sz) { return Poly(a) <<= sz; }\n    friend Poly operator>>(const\
+    \ Poly &a, const int sz) { return Poly(a) >>= sz; }\n    Poly &dft(int len) {\n\
+    \        assert((len & (len - 1)) == 0);\n        isz(len);\n        NTT<T>::ntt(*this);\n\
+    \        return *this;\n    }\n    Poly &idft(int len) {\n        assert((len\
+    \ & (len - 1)) == 0);\n        isz(len);\n        NTT<T>::ntt(*this, true);\n\
+    \        return *this;\n    }\n    Poly Inv() const { // (*this)[0] != 0, 5e5/212ms\n\
+    \        if (n() == 1) return {(*this)[0].inv()};\n        int m = ceilpow2(n()\
+    \ * 2);\n        Poly Xi = Poly(*this, (n() + 1) / 2).Inv().isz(m);\n        Poly\
+    \ Y(*this, m);\n        Xi.dft(m), Y.dft(m);\n        for (int i = 0; i < m; ++i)\n\
+    \            Xi[i] *= (2 - Xi[i] * Y[i]);\n        return Xi.idft(m).isz(n());\n\
+    \    }\n    Poly Dx() const {\n        Poly ret(n() - 1);\n        for (int i\
+    \ = 0; i < ret.n(); ++i)\n            ret[i] = (i + 1) * (*this)[i + 1];\n   \
+    \     return ret.isz(std::max(1, ret.n()));\n    }\n    Poly Sx() const {\n  \
+    \      Poly ret(n() + 1);\n        for (int i = 0; i < n(); ++i)\n           \
+    \ ret[i + 1] = T(i + 1).inv() * (*this)[i];\n        return ret;\n    }\n    Poly\
+    \ Ln() const { // (*this)[0] == 1, 5e5/406ms\n        return (Dx() * Inv()).Sx().isz(n());\n\
+    \    }\n    Poly Exp() const { // (*this)[0] == 0, 5e5/886ms\n        if (n()\
+    \ == 1) return {1};\n        Poly X = Poly(*this, (n() + 1) / 2).Exp().isz(n());\n\
+    \        Poly Y = X.Ln(); Y[0] = -1;\n        return (X * (*this - Y)).isz(n());\n\
+    \    }\n    // M := P(P - 1). If k >= M, k := k % M + M, 5e5/1195ms\n    Poly\
+    \ Pow(long long k) const {\n        int nz = 0;\n        while (nz < n() && (*this)[nz]\
+    \ == 0) ++nz;\n        if (nz * std::min(k, (long long)n()) >= n()) return Poly(n());\n\
+    \        if (!k) return Poly(Poly {1}, n());\n        Poly X(this->data() + nz,\
+    \ this->data() + nz + n() - nz * k);\n        return ((X.Ln() * T(k)).Exp() *\
+    \ X[0].pow(k)).irev().isz(n()).irev();\n    }\n    Poly _tmul(int nn, const Poly\
+    \ &rhs) const {\n        Poly Y = ((*this) * rhs).isz(n() + nn - 1);\n       \
+    \ return Poly(Y.data() + n() - 1, Y.data() + Y.n());\n    }\n    std::vector<T>\
+    \ _eval(const std::vector<T> &x, const std::vector<Poly> &up) const {\n      \
+    \  const int m = (int)x.size();\n        if (!m) return {};\n        std::vector<Poly>\
+    \ down(m * 2);\n        down[1] = Poly(up[1]).irev().isz(n()).Inv().irev()._tmul(m,\
     \ *this);\n        for (int i = 2; i < m * 2; ++i)\n            down[i] = up[i\
     \ ^ 1]._tmul(up[i].n() - 1, down[i / 2]);\n        std::vector<T> y(m);\n    \
     \    for (int i = 0; i < m; ++i) y[i] = down[m + i][0];\n        return y;\n \
@@ -317,7 +326,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 21:01:17+08:00'
+  timestamp: '2026-06-24 22:42:07+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp

@@ -150,6 +150,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
@@ -240,6 +252,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
+    title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
     title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
@@ -453,16 +468,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/maxflow.test.cpp
     title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -579,9 +594,13 @@ data:
   - test/1_library_checker/string/number_of_substrings.test.cpp
   - test/1_library_checker/string/enumerate_palindromes.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   - test/1_library_checker/graph/bipartitematching.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -606,6 +625,7 @@ data:
   - test/1_library_checker/number_theory/enumerate_quotients.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp
   - test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
+  - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
