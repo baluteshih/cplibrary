@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
   - icon: ':x:'
