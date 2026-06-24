@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numbers/stirling_first_kind.hpp
     title: Numbers/stirling_first_kind.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/shift.hpp\"\n\n#line 2 \"Polynomial/Polynomial.hpp\"\
@@ -305,9 +305,9 @@ data:
   requiredBy:
   - Numbers/stirling_first_kind.hpp
   timestamp: '2026-06-24 22:42:07+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
 documentation_of: Polynomial/shift.hpp
 layout: document

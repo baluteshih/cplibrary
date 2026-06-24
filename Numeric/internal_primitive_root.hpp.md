@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/partition_number.hpp
     title: Numbers/partition_number.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numbers/stirling_first_kind.hpp
     title: Numbers/stirling_first_kind.hpp
   - icon: ':heavy_check_mark:'
@@ -38,10 +38,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':heavy_check_mark:'
@@ -56,7 +56,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -81,9 +81,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
@@ -135,9 +135,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -253,7 +253,7 @@ data:
   - Polynomial/Sqrt.hpp
   - Polynomial/shift.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/convolution_online.test.cpp
@@ -263,10 +263,10 @@ data:
   - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp

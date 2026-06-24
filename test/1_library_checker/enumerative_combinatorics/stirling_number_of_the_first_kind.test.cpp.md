@@ -1,47 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numbers/stirling_first_kind.hpp
     title: Numbers/stirling_first_kind.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/stirling_first_kind
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
     links:
-    - https://judge.yosupo.jp/problem/stirling_first_kind
-  bundledCode: "#line 1 \"test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_first_kind\"\n#line\
-    \ 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp\"\
+    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+  bundledCode: "#line 1 \"test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -298,17 +298,17 @@ data:
     \ f({0, 1});\n    for (int i = lg - 2; i >= 0; --i) {\n        int _n = n >> i;\n\
     \        f *= Poly<T>(f).shift(T(_n >> 1));\n        if (_n & 1) f = (f << 1)\
     \ + (f * T(_n - 1)).isz(f.size() + 1);\n    }\n    for (int i = (n & 1) ^ 1; i\
-    \ <= n; i += 2) f[i] *= T(-1);\n    return f;\n}\n#line 6 \"test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp\"\
+    \ <= n; i += 2) f[i] *= T(-1);\n    return f;\n}\n#line 6 \"test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    auto res = stirling_first_kind<mint>(n);\n\
     \    for (int i = 0; i <= n; ++i)\n        std::cout << res[i] << \" \\n\"[i ==\
     \ n];\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_first_kind\"\n\
-    #include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"Numbers/stirling_first_kind.hpp\"\
-    \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n;\n    std::cin >> n;\n    auto res = stirling_first_kind<mint>(n);\n\
-    \    for (int i = 0; i <= n; ++i)\n        std::cout << res[i] << \" \\n\"[i ==\
-    \ n];\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
+    Numbers/stirling_first_kind.hpp\"\n\nusing mint = modint998244353;\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n;\n    std::cin\
+    \ >> n;\n    auto res = stirling_first_kind<mint>(n);\n    for (int i = 0; i <=\
+    \ n; ++i)\n        std::cout << res[i] << \" \\n\"[i == n];\n}\n"
   dependsOn:
   - assumption.hpp
   - Numeric/Modint.hpp
@@ -320,15 +320,15 @@ data:
   - Polynomial/shift.hpp
   - Numeric/Combination.hpp
   isVerificationFile: true
-  path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   requiredBy: []
-  timestamp: '2026-06-24 22:42:07+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-24 23:16:17+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+documentation_of: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
-- /verify/test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp.html
-title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+- /verify/test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+- /verify/test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp.html
+title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
 ---

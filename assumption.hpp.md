@@ -150,9 +150,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-  - icon: ':x:'
-    path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
-    title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
@@ -489,9 +489,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "assumption.hpp"
@@ -516,7 +516,7 @@ data:
   requiredBy:
   - default_code.hpp
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -595,10 +595,10 @@ data:
   - test/1_library_checker/string/enumerate_palindromes.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp

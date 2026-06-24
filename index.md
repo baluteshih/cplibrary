@@ -274,7 +274,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numbers/partition_number.hpp
       title: Numbers/partition_number.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Numbers/stirling_first_kind.hpp
       title: Numbers/stirling_first_kind.hpp
     - icon: ':heavy_check_mark:'
@@ -291,7 +291,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/Binomial.hpp
       title: Numeric/Binomial.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Combination.hpp
       title: Numeric/Combination.hpp
     - icon: ':heavy_check_mark:'
@@ -300,7 +300,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -318,10 +318,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -350,10 +350,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Polynomial/Polynomial.hpp
       title: Polynomial/Polynomial.hpp
     - icon: ':heavy_check_mark:'
@@ -368,7 +368,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/linear_recursion.hpp
       title: Polynomial/linear_recursion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Polynomial/shift.hpp
       title: Polynomial/shift.hpp
   - name: Sequence
@@ -426,7 +426,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -598,9 +598,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
-    - icon: ':x:'
-      path: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
-      title: test/1_library_checker/enumerative_combinatorics/stirling_first_kind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
