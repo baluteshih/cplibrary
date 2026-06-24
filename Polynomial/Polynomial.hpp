@@ -28,27 +28,40 @@ public:
             this->pop_back();
         return *this;
     }
-    Poly operator+(const Poly &rhs) const { // n() == rhs.n()
-        Poly res(*this);
+    Poly& operator+=(const Poly &rhs) { // n() == rhs.n()
         for (int i = 0; i < n(); ++i)
-            res[i] += rhs[i];
-        return res;
+            (*this)[i] += rhs[i];
+        return *this;
     }
-    Poly operator-(const Poly &rhs) const { // n() == rhs.n()
-        Poly res(*this);
+    Poly& operator-=(const Poly &rhs) { // n() == rhs.n()
         for (int i = 0; i < n(); ++i)
-            res[i] -= rhs[i];
-        return res;
+            (*this)[i] -= rhs[i];
+        return *this;
     }
-    Poly operator*(const T &rhs) const {
-        Poly res(*this);
+    Poly& operator*=(const T &rhs) {
         for (int i = 0; i < n(); ++i)
-            res[i] *= rhs;
-        return res;
+            (*this)[i] *= rhs;
+        return *this;
     }
-    Poly operator*(const Poly &rhs) const { // 5e5/185ms
-        return NTT<T>::convolution(*this, rhs);
+    Poly operator*=(const Poly &rhs) { // 5e5/185ms
+        *this = NTT<T>::convolution(*this, rhs);
+        return *this;
     }
+    Poly& operator<<=(const int sz) {
+        this->insert(this->begin(), sz, T(0));
+        return *this;
+    }
+    Poly& operator>>=(const int sz) {
+        if (n() <= sz) this->clear();
+        else this->erase(this->begin(), this->begin() + sz);
+        return *this;
+    }
+    friend Poly operator+(const Poly &a, const Poly &b) { return Poly(a) += b; }
+    friend Poly operator-(const Poly &a, const Poly &b) { return Poly(a) -= b; }
+    friend Poly operator*(const Poly &a, const T &b) { return Poly(a) *= b; }
+    friend Poly operator*(const Poly &a, const Poly &b) { return Poly(a) *= b; }
+    friend Poly operator<<(const Poly &a, const int sz) { return Poly(a) <<= sz; }
+    friend Poly operator>>(const Poly &a, const int sz) { return Poly(a) >>= sz; }
     Poly &dft(int len) {
         assert((len & (len - 1)) == 0);
         isz(len);
