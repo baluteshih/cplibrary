@@ -73,6 +73,13 @@ public:
             std::copy((*this)[i].begin() + l, (*this)[i].begin() + r, res[i].begin());
         return res;
     }
+    Matrix minor(int _i, int _j) const {
+        Matrix res(n() - 1, m() - 1);
+        for (int i = 0; i + 1 < n(); ++i)
+            for (int j = 0; j + 1 < m(); ++j)
+                res[i][j] = (*this)[i + (i >= _i)][j + (j >= _j)];
+        return res;
+    }
     static Matrix identity(int n, T one = T(1)) {
         Matrix res(n, n);
         for (int i = 0; i < n; ++i)

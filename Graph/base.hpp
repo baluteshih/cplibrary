@@ -3,6 +3,7 @@
 template<bool directed = true, typename Edge = void, typename Vertex = void>
 class Graph {
 public:
+    static constexpr bool is_directed = directed;
     static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;
     static constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;
     using edge_value_type = Edge;
