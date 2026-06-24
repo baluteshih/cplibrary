@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/stirling_first_kind"
+#define PROBLEM "https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind"
 #include "assumption.hpp"
 
 #include "Numeric/Modint.hpp"
