@@ -112,6 +112,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/ZkwSegmentTree.hpp
       title: Zkw Segment Tree
+  - name: Enumerate
+    pages:
+    - icon: ':warning:'
+      path: Enumerate/subset_enumerate.hpp
+      title: Enumerate/subset_enumerate.hpp
   - name: Flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -379,9 +384,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
+    - icon: ':warning:'
+      path: Sequence/count_subset_sum.hpp
+      title: Sequence/count_subset_sum.hpp
+    - icon: ':warning:'
+      path: Sequence/maximum_non_adjacent_elements.hpp
+      title: Sequence/maximum_non_adjacent_elements.hpp
     - icon: ':heavy_check_mark:'
       path: Sequence/mo_solver.hpp
       title: Sequence/mo_solver.hpp
+    - icon: ':warning:'
+      path: Sequence/same_position.hpp
+      title: Sequence/same_position.hpp
   - name: String
     pages:
     - icon: ':heavy_check_mark:'
