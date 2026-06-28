@@ -22,6 +22,9 @@ data:
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+    title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -134,6 +137,7 @@ data:
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp

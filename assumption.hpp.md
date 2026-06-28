@@ -184,6 +184,9 @@ data:
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+    title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - icon: ':heavy_check_mark:'
@@ -606,6 +609,7 @@ data:
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/1_library_checker/graph/shortest_path.test.cpp
+  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp

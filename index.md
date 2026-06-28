@@ -220,6 +220,9 @@ data:
       path: Graph/bipolar_orientation.hpp
       title: Graph/bipolar_orientation.hpp
     - icon: ':heavy_check_mark:'
+      path: Graph/complement_bfs.hpp
+      title: Graph/complement_bfs.hpp
+    - icon: ':heavy_check_mark:'
       path: Graph/count_spanning_tree.hpp
       title: Graph/count_spanning_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -649,6 +652,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/bipartitematching.test.cpp
       title: test/1_library_checker/graph/bipartitematching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+      title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
       title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp

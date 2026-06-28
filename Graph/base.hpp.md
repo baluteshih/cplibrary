@@ -45,6 +45,9 @@ data:
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
   - icon: ':heavy_check_mark:'
+    path: Graph/complement_bfs.hpp
+    title: Graph/complement_bfs.hpp
+  - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -93,6 +96,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+    title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
@@ -365,6 +371,7 @@ data:
   - Graph/BipartiteMatching.hpp
   - Graph/minimum_arborescence.hpp
   - Graph/enumerate_c3.hpp
+  - Graph/complement_bfs.hpp
   - Graph/dominator_tree.hpp
   - Graph/BCC.hpp
   - Graph/SCC.hpp
@@ -408,6 +415,7 @@ data:
   - test/1_library_checker/graph/bipartitematching.test.cpp
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/1_library_checker/graph/shortest_path.test.cpp
+  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
