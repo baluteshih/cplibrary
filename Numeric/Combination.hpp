@@ -10,6 +10,12 @@ public:
     inline static std::vector<T> fac = {T(1)};
     inline static std::vector<T> ifac = {T(1)};
     Combination(int n) { ensure_upper_bound(n); }
+    Combination(int n, T v) { 
+        N = 1;
+        std::vector<T>(n, v.raw(1)).swap(fac);
+        std::vector<T>(n, v.raw(1)).swap(ifac);
+        ensure_upper_bound(n);
+    }
     T C(int n, int m) {
         if (n < m || m < 0) return 0;
         return fac[n] * ifac[m] * ifac[n - m];

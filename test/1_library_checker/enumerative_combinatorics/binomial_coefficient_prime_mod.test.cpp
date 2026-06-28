@@ -10,7 +10,7 @@ int main() {
     std::cin >> t >> m;
     modint v;
     v.set_mod(m);
-    Combination<modint> comb(std::min(10000000, m - 1), v);
+    Combination<modint> comb(std::min(10000000, m), v);
     while (t--) {
         int n, k;
         std::cin >> n >> k;
