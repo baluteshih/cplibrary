@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/barrett.hpp
     title: Numeric/barrett.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
@@ -90,43 +90,45 @@ data:
     \ T>\nrequires std::derived_from<T, internal::modint_base>\nclass Combination\
     \ {\n    inline static int N = 1;\npublic:\n    inline static std::vector<T> fac\
     \ = {T(1)};\n    inline static std::vector<T> ifac = {T(1)};\n    Combination(int\
-    \ n) { ensure_upper_bound(n); }\n    T C(int n, int m) {\n        if (n < m ||\
-    \ m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n    }\n  \
-    \  T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return ifac[n]\
-    \ * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n < m) return\
-    \ 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n \
-    \       return C(n + m - 1, m);\n    }\n    // a - b <= k and all non-empty proper\
-    \ prefix have a - b < k\n    T extend_catalan(int a, int b, int k) {\n       \
-    \ if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return\
-    \ C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n\
-    \        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n       \
-    \ for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
-    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
-    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
-    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
-    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
-    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
-    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
-    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
-    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
-    \   }\n    return res;\n}\n}\n#line 2 \"Numeric/DynamicModint.hpp\"\n\n// Reference:\
-    \ Atcoder Library https://github.com/atcoder/ac-library\n#line 2 \"Numeric/barrett.hpp\"\
-    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
-    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nstruct barrett {\n    unsigned int\
-    \ _m;\n    unsigned long long im;\n    explicit barrett(unsigned int m) : _m(m),\
-    \ im((unsigned long long)(-1) / m + 1) {}\n    unsigned int umod() const { return\
-    \ _m; }\n    unsigned int modulo(unsigned long long z) const {\n        if (_m\
-    \ == 1) return 0;\n#ifdef _MSC_VER\n        unsigned long long x;\n        _umul128(z,\
-    \ im, &x);\n#else\n        unsigned long long x = (unsigned long long)(((unsigned\
-    \ __int128)(z)*im) >> 64);\n#endif\n        unsigned long long y = x * _m;\n \
-    \       return (z - y + (z < y ? _m : 0));\n    }\n    unsigned int mul(unsigned\
-    \ int a, unsigned int b) const {\n        return modulo((unsigned long long)a\
-    \ * b);\n    }\n    unsigned long long floor(unsigned long long z) const {\n \
-    \       if (_m == 1) return z;\n        unsigned long long x = (unsigned long\
-    \ long)(((unsigned __int128)(z)*im) >> 64);\n        unsigned long long y = x\
-    \ * _m;\n        return (z < y ? x - 1 : x);\n    }\n    std::pair<unsigned long\
-    \ long, unsigned int> divmod(unsigned long long z) const {\n        if (_m ==\
-    \ 1) return {z, 0};\n        unsigned long long x = (unsigned long long)(((unsigned\
+    \ n) { ensure_upper_bound(n); }\n    Combination(int n, T v) { \n        N = 1;\n\
+    \        std::vector<T>(n, v.raw(1)).swap(fac);\n        std::vector<T>(n, v.raw(1)).swap(ifac);\n\
+    \        ensure_upper_bound(n);\n    }\n    T C(int n, int m) {\n        if (n\
+    \ < m || m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n  \
+    \  }\n    T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return\
+    \ ifac[n] * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n\
+    \ < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n,\
+    \ int m) {\n        return C(n + m - 1, m);\n    }\n    // a - b <= k and all\
+    \ non-empty proper prefix have a - b < k\n    T extend_catalan(int a, int b, int\
+    \ k) {\n        if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b +\
+    \ k);\n        return C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int\
+    \ n) {\n        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n\
+    \        for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n \
+    \       ifac.back() = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n\
+    \            ifac[i] = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace\
+    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
+    \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
+    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
+    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
+    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
+    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
+    \ / i); \n    }\n    return res;\n}\n}\n#line 2 \"Numeric/DynamicModint.hpp\"\n\
+    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line 2\
+    \ \"Numeric/barrett.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nstruct barrett {\n    unsigned\
+    \ int _m;\n    unsigned long long im;\n    explicit barrett(unsigned int m) :\
+    \ _m(m), im((unsigned long long)(-1) / m + 1) {}\n    unsigned int umod() const\
+    \ { return _m; }\n    unsigned int modulo(unsigned long long z) const {\n    \
+    \    if (_m == 1) return 0;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x = (unsigned\
+    \ long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n        unsigned long\
+    \ long y = x * _m;\n        return (z - y + (z < y ? _m : 0));\n    }\n    unsigned\
+    \ int mul(unsigned int a, unsigned int b) const {\n        return modulo((unsigned\
+    \ long long)a * b);\n    }\n    unsigned long long floor(unsigned long long z)\
+    \ const {\n        if (_m == 1) return z;\n        unsigned long long x = (unsigned\
+    \ long long)(((unsigned __int128)(z)*im) >> 64);\n        unsigned long long y\
+    \ = x * _m;\n        return (z < y ? x - 1 : x);\n    }\n    std::pair<unsigned\
+    \ long long, unsigned int> divmod(unsigned long long z) const {\n        if (_m\
+    \ == 1) return {z, 0};\n        unsigned long long x = (unsigned long long)(((unsigned\
     \ __int128)(z)*im) >> 64);\n        unsigned long long y = x * _m;\n        if\
     \ (z < y) return {x - 1, z - y + _m};\n        return {x, z - y};\n    }\n};\n\
     #line 6 \"Numeric/DynamicModint.hpp\"\n\ntemplate <int id> struct dynamic_modint\
@@ -177,15 +179,15 @@ data:
     test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ t, m;\n    std::cin >> t >> m;\n    modint v;\n    v.set_mod(m);\n    Combination<modint>\
-    \ comb(std::min(10000000, m - 1), v);\n    while (t--) {\n        int n, k;\n\
-    \        std::cin >> n >> k;\n        std::cout << comb.C(n, k) << \"\\n\";\n\
-    \    }\n}\n"
+    \ comb(std::min(10000000, m), v);\n    while (t--) {\n        int n, k;\n    \
+    \    std::cin >> n >> k;\n        std::cout << comb.C(n, k) << \"\\n\";\n    }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
     \n#include \"assumption.hpp\"\n\n#include \"Numeric/Combination.hpp\"\n#include\
     \ \"Numeric/DynamicModint.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int t, m;\n    std::cin >> t >> m;\n    modint v;\n  \
-    \  v.set_mod(m);\n    Combination<modint> comb(std::min(10000000, m - 1), v);\n\
-    \    while (t--) {\n        int n, k;\n        std::cin >> n >> k;\n        std::cout\
+    \  v.set_mod(m);\n    Combination<modint> comb(std::min(10000000, m), v);\n  \
+    \  while (t--) {\n        int n, k;\n        std::cin >> n >> k;\n        std::cout\
     \ << comb.C(n, k) << \"\\n\";\n    }\n}\n"
   dependsOn:
   - assumption.hpp
@@ -196,8 +198,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   requiredBy: []
-  timestamp: '2026-06-29 01:08:03+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-29 01:18:59+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
 layout: document

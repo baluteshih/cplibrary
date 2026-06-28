@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: String/manacher.hpp
     title: String/manacher.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

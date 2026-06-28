@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/stirling_first_kind_row.hpp
     title: Numbers/stirling_first_kind_row.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -146,77 +146,79 @@ data:
     \n\n#line 4 \"Numeric/Combination.hpp\"\n\ntemplate<class T>\nrequires std::derived_from<T,\
     \ internal::modint_base>\nclass Combination {\n    inline static int N = 1;\n\
     public:\n    inline static std::vector<T> fac = {T(1)};\n    inline static std::vector<T>\
-    \ ifac = {T(1)};\n    Combination(int n) { ensure_upper_bound(n); }\n    T C(int\
-    \ n, int m) {\n        if (n < m || m < 0) return 0;\n        return fac[n] *\
-    \ ifac[m] * ifac[n - m];\n    }\n    T invC(int n, int m) {\n        assert(n\
-    \ >= m && m >= 0);\n        return ifac[n] * fac[m] * fac[n - m];\n    }\n   \
-    \ T P(int n, int m) {\n        if (n < m) return 0;\n        return fac[n] * ifac[n\
-    \ - m];\n    }\n    T H(int n, int m) {\n        return C(n + m - 1, m);\n   \
-    \ }\n    // a - b <= k and all non-empty proper prefix have a - b < k\n    T extend_catalan(int\
-    \ a, int b, int k) {\n        if (a - b == k) return C(a + b - 1, a - 1) - C(a\
-    \ + b - 1, b + k);\n        return C(a + b, a) - C(a + b, b + k); \n    }\n  \
-    \  void ensure_upper_bound(int n) {\n        if (N >= n) return;\n        fac.resize(n),\
-    \ ifac.resize(n);\n        for (int i = N; i < n; ++i)\n            fac[i] = fac[i\
-    \ - 1] * i;\n        ifac.back() = fac.back().inv();\n        for (int i = n -\
-    \ 2; i >= N; --i)\n            ifac[i] = ifac[i + 1] * (i + 1);\n        N = n;\n\
-    \    }\n};\nnamespace CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base,\
-    \ int n) {\n    std::vector<T> res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n\
-    \        res[i] = res[i - 1] * base;\n    return res;\n}\ntemplate<class T>\n\
-    std::vector<T> ipower(T base, int n) {\n    return power(base.inv(), n);\n}\n\
-    template<class T>\nstd::vector<T> linear_inverse(int n) {\n    std::vector<T>\
-    \ res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i = 2; i <= n; ++i) {\n\
-    \        res[i] = res[MOD % i] * (MOD - MOD / i); \n    }\n    return res;\n}\n\
-    }\n#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2 \"Polynomial/NTT.hpp\"\n\n\
-    #line 2 \"Numeric/internal_primitive_root.hpp\"\n\n#line 4 \"Numeric/internal_primitive_root.hpp\"\
-    \n\n// reference: Atcoder Library https://github.com/atcoder/ac-library\n\nnamespace\
-    \ internal { \n// Compile time primitive root\n// @param m must be prime\n// @return\
-    \ primitive root (and minimum in now)\nconstexpr int primitive_root_constexpr(int\
-    \ m) {\n    if (m == 2) return 1;\n    if (m == 167772161) return 3;\n    if (m\
-    \ == 469762049) return 3;\n    if (m == 754974721) return 11;\n    if (m == 998244353)\
-    \ return 3;\n    int divs[20] = {};\n    divs[0] = 2;\n    int cnt = 1;\n    int\
-    \ x = (m - 1) / 2;\n    while (x % 2 == 0) x /= 2;\n    for (int i = 3; (long\
-    \ long)(i)*i <= x; i += 2) {\n        if (x % i == 0) {\n            divs[cnt++]\
-    \ = i;\n            while (x % i == 0) {\n                x /= i;\n          \
-    \  }\n        }\n    }\n    if (x > 1) {\n        divs[cnt++] = x;\n    }\n  \
-    \  for (int g = 2;; g++) {\n        bool ok = true;\n        for (int i = 0; i\
-    \ < cnt; i++) {\n            if (pow_mod_constexpr(g, (m - 1) / divs[i], m) ==\
-    \ 1) {\n                ok = false;\n                break;\n            }\n \
-    \       }\n        if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int\
-    \ primitive_root = primitive_root_constexpr(m);\n}  // namespace internal\n#line\
-    \ 5 \"Polynomial/NTT.hpp\"\n\ntemplate<typename T>\nrequires std::derived_from<T,\
-    \ internal::modint_base>\nclass NTT {\n    inline static int max_size = 1;\n \
-    \   inline static std::vector<T> w{1, T(1)};\n    inline static const T root =\
-    \ internal::primitive_root_constexpr(T::mod());\n    static void ensure_upper_bound(int\
-    \ n) {\n        if (max_size < n) {\n            while (max_size <= n) max_size\
-    \ <<= 1;\n            w.resize(max_size);\n            std::ranges::fill(w, 1);\n\
-    \            T dw = root.pow((T::mod() - 1) / max_size);\n            for (int\
-    \ s = max_size / 2; s; s >>= 1, dw *= dw) {\n                w[s] = 1;\n     \
-    \           for (int j = 1; j < s; ++j) \n                    w[s + j] = w[s +\
-    \ j - 1] * dw;\n            }\n        }\n    }\npublic:\n    static constexpr\
-    \ int ntt_max_limit = []() {\n        unsigned int m = T::mod() - 1;\n       \
-    \ int limit = 1;\n        while ((m & 1) == 0) {\n            limit <<= 1;\n \
-    \           m >>= 1;\n        }\n        return limit;\n    }();\n    static void\
-    \ ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        int n =\
-    \ a.size();\n        assert((n & (n - 1)) == 0);\n        ensure_upper_bound(n);\n\
-    \        for (int i = 0, j = 1; j < n - 1; ++j) {\n            for (int k = n\
-    \ >> 1; (i ^= k) < k; k >>= 1);\n            if (j < i) std::swap(a[i], a[j]);\n\
-    \        }\n        for (int s = 1; s < n; s <<= 1) {\n            for (int i\
-    \ = 0; i < n; i += s * 2) {\n                for (int j = 0; j < s; ++j) {\n \
-    \                   T tmp = a[i + s + j] * w[s + j];\n                    a[i\
-    \ + s + j] = a[i + j] - tmp;\n                    a[i + j] += tmp;\n         \
-    \       }\n            }\n        }\n        if (!inv) return;\n        T iv =\
-    \ T(n).inv(); \n        std::reverse(a.begin() + 1, a.begin() + n);\n        for\
-    \ (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n    static size_t maxsize() {\n\
-    \        return max_size;\n    }\n    static std::vector<T> convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n        if (a.empty() || b.empty()) return std::vector<T>();\n\
-    \        int n = 1, sz = int(a.size()) + int(b.size()) - 1;\n        while (n\
-    \ < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"the result length exceeds\
-    \ the limit of the prime can support\");\n        a.resize(n), b.resize(n);\n\
-    \        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i]\
-    \ = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n        return\
-    \ a;\n    }\n};\n#line 4 \"Polynomial/Polynomial.hpp\"\n\ntemplate<class T>\n\
-    class Poly : public std::vector<T> {\n    using std::vector<T>::vector;\n    int\
-    \ n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
+    \ ifac = {T(1)};\n    Combination(int n) { ensure_upper_bound(n); }\n    Combination(int\
+    \ n, T v) { \n        N = 1;\n        std::vector<T>(n, v.raw(1)).swap(fac);\n\
+    \        std::vector<T>(n, v.raw(1)).swap(ifac);\n        ensure_upper_bound(n);\n\
+    \    }\n    T C(int n, int m) {\n        if (n < m || m < 0) return 0;\n     \
+    \   return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T invC(int n, int m) {\n\
+    \        assert(n >= m && m >= 0);\n        return ifac[n] * fac[m] * fac[n -\
+    \ m];\n    }\n    T P(int n, int m) {\n        if (n < m) return 0;\n        return\
+    \ fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n        return C(n +\
+    \ m - 1, m);\n    }\n    // a - b <= k and all non-empty proper prefix have a\
+    \ - b < k\n    T extend_catalan(int a, int b, int k) {\n        if (a - b == k)\
+    \ return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return C(a + b, a)\
+    \ - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n        if\
+    \ (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n        for (int i\
+    \ = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
+    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
+    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
+    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
+    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
+    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
+    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
+    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
+    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
+    \   }\n    return res;\n}\n}\n#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2\
+    \ \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/internal_primitive_root.hpp\"\n\n\
+    #line 4 \"Numeric/internal_primitive_root.hpp\"\n\n// reference: Atcoder Library\
+    \ https://github.com/atcoder/ac-library\n\nnamespace internal { \n// Compile time\
+    \ primitive root\n// @param m must be prime\n// @return primitive root (and minimum\
+    \ in now)\nconstexpr int primitive_root_constexpr(int m) {\n    if (m == 2) return\
+    \ 1;\n    if (m == 167772161) return 3;\n    if (m == 469762049) return 3;\n \
+    \   if (m == 754974721) return 11;\n    if (m == 998244353) return 3;\n    int\
+    \ divs[20] = {};\n    divs[0] = 2;\n    int cnt = 1;\n    int x = (m - 1) / 2;\n\
+    \    while (x % 2 == 0) x /= 2;\n    for (int i = 3; (long long)(i)*i <= x; i\
+    \ += 2) {\n        if (x % i == 0) {\n            divs[cnt++] = i;\n         \
+    \   while (x % i == 0) {\n                x /= i;\n            }\n        }\n\
+    \    }\n    if (x > 1) {\n        divs[cnt++] = x;\n    }\n    for (int g = 2;;\
+    \ g++) {\n        bool ok = true;\n        for (int i = 0; i < cnt; i++) {\n \
+    \           if (pow_mod_constexpr(g, (m - 1) / divs[i], m) == 1) {\n         \
+    \       ok = false;\n                break;\n            }\n        }\n      \
+    \  if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
+    \ = primitive_root_constexpr(m);\n}  // namespace internal\n#line 5 \"Polynomial/NTT.hpp\"\
+    \n\ntemplate<typename T>\nrequires std::derived_from<T, internal::modint_base>\n\
+    class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
+    \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
+    \    static void ensure_upper_bound(int n) {\n        if (max_size < n) {\n  \
+    \          while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
+    \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
+    \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
+    \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
+    \                    w[s + j] = w[s + j - 1] * dw;\n            }\n        }\n\
+    \    }\npublic:\n    static constexpr int ntt_max_limit = []() {\n        unsigned\
+    \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
+    \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
+    \ limit;\n    }();\n    static void ntt(std::vector<T> &a, bool inv = false) {\
+    \ //0 <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) ==\
+    \ 0);\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j < n -\
+    \ 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n      \
+    \      if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s = 1; s\
+    \ < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n        \
+    \        for (int j = 0; j < s; ++j) {\n                    T tmp = a[i + s +\
+    \ j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n       \
+    \             a[i + j] += tmp;\n                }\n            }\n        }\n\
+    \        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
+    \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
+    \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
+    \ b.empty()) return std::vector<T>();\n        int n = 1, sz = int(a.size()) +\
+    \ int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit\
+    \ && \"the result length exceeds the limit of the prime can support\");\n    \
+    \    a.resize(n), b.resize(n);\n        ntt(a), ntt(b);\n        for (int i =\
+    \ 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n        ntt(a, true);\n   \
+    \     a.resize(sz);\n        return a;\n    }\n};\n#line 4 \"Polynomial/Polynomial.hpp\"\
+    \n\ntemplate<class T>\nclass Poly : public std::vector<T> {\n    using std::vector<T>::vector;\n\
+    \    int n() const { return (int)this->size(); } // n() >= 1\n    static int ceilpow2(int\
     \ sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n        return m;\n\
     \    }\npublic:\n    Poly(const Poly &p, int m) : std::vector<T>(m) {\n      \
     \  std::copy_n(p.data(), std::min(p.n(), m), this->data());\n    }\n    Poly(const\
@@ -319,7 +321,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
   requiredBy: []
-  timestamp: '2026-06-29 01:08:03+08:00'
+  timestamp: '2026-06-29 01:18:59+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp

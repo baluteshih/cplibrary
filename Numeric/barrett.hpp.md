@@ -5,14 +5,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Binomial.hpp
     title: Numeric/Binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -70,7 +70,7 @@ data:
   - Numeric/DynamicModint.hpp
   - Numeric/Binomial.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

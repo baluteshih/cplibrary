@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -270,28 +270,31 @@ data:
     \n\n#line 4 \"Numeric/Combination.hpp\"\n\ntemplate<class T>\nrequires std::derived_from<T,\
     \ internal::modint_base>\nclass Combination {\n    inline static int N = 1;\n\
     public:\n    inline static std::vector<T> fac = {T(1)};\n    inline static std::vector<T>\
-    \ ifac = {T(1)};\n    Combination(int n) { ensure_upper_bound(n); }\n    T C(int\
-    \ n, int m) {\n        if (n < m || m < 0) return 0;\n        return fac[n] *\
-    \ ifac[m] * ifac[n - m];\n    }\n    T invC(int n, int m) {\n        assert(n\
-    \ >= m && m >= 0);\n        return ifac[n] * fac[m] * fac[n - m];\n    }\n   \
-    \ T P(int n, int m) {\n        if (n < m) return 0;\n        return fac[n] * ifac[n\
-    \ - m];\n    }\n    T H(int n, int m) {\n        return C(n + m - 1, m);\n   \
-    \ }\n    // a - b <= k and all non-empty proper prefix have a - b < k\n    T extend_catalan(int\
-    \ a, int b, int k) {\n        if (a - b == k) return C(a + b - 1, a - 1) - C(a\
-    \ + b - 1, b + k);\n        return C(a + b, a) - C(a + b, b + k); \n    }\n  \
-    \  void ensure_upper_bound(int n) {\n        if (N >= n) return;\n        fac.resize(n),\
-    \ ifac.resize(n);\n        for (int i = N; i < n; ++i)\n            fac[i] = fac[i\
-    \ - 1] * i;\n        ifac.back() = fac.back().inv();\n        for (int i = n -\
-    \ 2; i >= N; --i)\n            ifac[i] = ifac[i + 1] * (i + 1);\n        N = n;\n\
-    \    }\n};\nnamespace CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base,\
-    \ int n) {\n    std::vector<T> res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n\
-    \        res[i] = res[i - 1] * base;\n    return res;\n}\ntemplate<class T>\n\
-    std::vector<T> ipower(T base, int n) {\n    return power(base.inv(), n);\n}\n\
-    template<class T>\nstd::vector<T> linear_inverse(int n) {\n    std::vector<T>\
-    \ res(n + 1, 1);\n    int MOD = T().mod();\n    for (int i = 2; i <= n; ++i) {\n\
-    \        res[i] = res[MOD % i] * (MOD - MOD / i); \n    }\n    return res;\n}\n\
-    }\n#line 5 \"Polynomial/lagrange_interpolate_iota.hpp\"\n\n// given f(0),...,f(n-1),\
-    \ return f(c + i) for all 0 <= i < m, 5e5/408ms\n// source: https://maspypy.github.io/library/poly/lagrange_interpolate_iota.hpp\n\
+    \ ifac = {T(1)};\n    Combination(int n) { ensure_upper_bound(n); }\n    Combination(int\
+    \ n, T v) { \n        N = 1;\n        std::vector<T>(n, v.raw(1)).swap(fac);\n\
+    \        std::vector<T>(n, v.raw(1)).swap(ifac);\n        ensure_upper_bound(n);\n\
+    \    }\n    T C(int n, int m) {\n        if (n < m || m < 0) return 0;\n     \
+    \   return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T invC(int n, int m) {\n\
+    \        assert(n >= m && m >= 0);\n        return ifac[n] * fac[m] * fac[n -\
+    \ m];\n    }\n    T P(int n, int m) {\n        if (n < m) return 0;\n        return\
+    \ fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n        return C(n +\
+    \ m - 1, m);\n    }\n    // a - b <= k and all non-empty proper prefix have a\
+    \ - b < k\n    T extend_catalan(int a, int b, int k) {\n        if (a - b == k)\
+    \ return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return C(a + b, a)\
+    \ - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n        if\
+    \ (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n        for (int i\
+    \ = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
+    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
+    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
+    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
+    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
+    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
+    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
+    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
+    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
+    \   }\n    return res;\n}\n}\n#line 5 \"Polynomial/lagrange_interpolate_iota.hpp\"\
+    \n\n// given f(0),...,f(n-1), return f(c + i) for all 0 <= i < m, 5e5/408ms\n\
+    // source: https://maspypy.github.io/library/poly/lagrange_interpolate_iota.hpp\n\
     template<class T>\nstd::vector<T> lagrange_interpolate_iota(const std::vector<T>\
     \ &f, T c, int m) {\n    const int k = f.size();\n    Poly<T> a(f);\n    Combination<T>\
     \ comb(k);\n    for (int i = 0; i < k; ++i) {\n        a[i] *= comb.ifac[i] *\
@@ -331,7 +334,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2026-06-29 01:08:03+08:00'
+  timestamp: '2026-06-29 01:18:59+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp

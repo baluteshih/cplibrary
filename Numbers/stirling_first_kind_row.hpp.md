@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
@@ -89,28 +89,30 @@ data:
     \ T>\nrequires std::derived_from<T, internal::modint_base>\nclass Combination\
     \ {\n    inline static int N = 1;\npublic:\n    inline static std::vector<T> fac\
     \ = {T(1)};\n    inline static std::vector<T> ifac = {T(1)};\n    Combination(int\
-    \ n) { ensure_upper_bound(n); }\n    T C(int n, int m) {\n        if (n < m ||\
-    \ m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n    }\n  \
-    \  T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return ifac[n]\
-    \ * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n < m) return\
-    \ 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n \
-    \       return C(n + m - 1, m);\n    }\n    // a - b <= k and all non-empty proper\
-    \ prefix have a - b < k\n    T extend_catalan(int a, int b, int k) {\n       \
-    \ if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return\
-    \ C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n\
-    \        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n       \
-    \ for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
-    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
-    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
-    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
-    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
-    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
-    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
-    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
-    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
-    \   }\n    return res;\n}\n}\n#line 2 \"Polynomial/Polynomial.hpp\"\n\n#line 2\
-    \ \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder\
-    \ Library https://github.com/atcoder/ac-library\n#line 5 \"Numeric/Modint.hpp\"\
+    \ n) { ensure_upper_bound(n); }\n    Combination(int n, T v) { \n        N = 1;\n\
+    \        std::vector<T>(n, v.raw(1)).swap(fac);\n        std::vector<T>(n, v.raw(1)).swap(ifac);\n\
+    \        ensure_upper_bound(n);\n    }\n    T C(int n, int m) {\n        if (n\
+    \ < m || m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n  \
+    \  }\n    T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return\
+    \ ifac[n] * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n\
+    \ < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n,\
+    \ int m) {\n        return C(n + m - 1, m);\n    }\n    // a - b <= k and all\
+    \ non-empty proper prefix have a - b < k\n    T extend_catalan(int a, int b, int\
+    \ k) {\n        if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b +\
+    \ k);\n        return C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int\
+    \ n) {\n        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n\
+    \        for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n \
+    \       ifac.back() = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n\
+    \            ifac[i] = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace\
+    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
+    \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
+    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
+    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
+    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
+    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
+    \ / i); \n    }\n    return res;\n}\n}\n#line 2 \"Polynomial/Polynomial.hpp\"\n\
+    \n#line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference:\
+    \ Atcoder Library https://github.com/atcoder/ac-library\n#line 5 \"Numeric/Modint.hpp\"\
     \n\ntemplate <int m, std::enable_if_t<(1 <= m)>* = nullptr>\nstruct static_modint\
     \ : internal::static_modint_base {\n    using mint = static_modint;\n\n  public:\n\
     \    static constexpr int mod() { return m; }\n    static mint raw(int v) {\n\
@@ -303,7 +305,7 @@ data:
   isVerificationFile: false
   path: Numbers/stirling_first_kind_row.hpp
   requiredBy: []
-  timestamp: '2026-06-29 01:08:03+08:00'
+  timestamp: '2026-06-29 01:18:59+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
