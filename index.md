@@ -299,10 +299,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/Binomial.hpp
       title: Numeric/Binomial.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Combination.hpp
       title: Numeric/Combination.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/DynamicModint.hpp
       title: Numeric/DynamicModint.hpp
     - icon: ':warning:'
@@ -311,7 +311,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/barrett.hpp
       title: Numeric/barrett.hpp
     - icon: ':heavy_check_mark:'
@@ -326,7 +326,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -443,7 +443,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -609,7 +609,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
     - icon: ':heavy_check_mark:'

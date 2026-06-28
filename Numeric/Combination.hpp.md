@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -57,9 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Numeric/Combination.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\
@@ -120,42 +120,52 @@ data:
     \   template <class T> using is_modint_t = std::enable_if_t<is_modint<T>::value>;\n\
     }  // namespace internal\n#line 4 \"Numeric/Combination.hpp\"\n\ntemplate<class\
     \ T>\nrequires std::derived_from<T, internal::modint_base>\nclass Combination\
-    \ {\n    int N;\n    void init() {\n        for (int i = 1; i <= N; ++i)\n   \
-    \         fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
-    \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
-    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
-    \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
-    \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
-    \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
-    \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
-    \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
-    \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
-    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
-    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
-    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
-    \ / i); \n    }\n    return res;\n}\n}\n"
+    \ {\n    inline static int N = 1;\npublic:\n    inline static std::vector<T> fac\
+    \ = {T(1)};\n    inline static std::vector<T> ifac = {T(1)};\n    Combination(int\
+    \ n) { ensure_upper_bound(n); }\n    T C(int n, int m) {\n        if (n < m ||\
+    \ m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n    }\n  \
+    \  T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return ifac[n]\
+    \ * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n < m) return\
+    \ 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n \
+    \       return C(n + m - 1, m);\n    }\n    // a - b <= k and all non-empty proper\
+    \ prefix have a - b < k\n    T extend_catalan(int a, int b, int k) {\n       \
+    \ if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return\
+    \ C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n\
+    \        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n       \
+    \ for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
+    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
+    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
+    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
+    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
+    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
+    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
+    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
+    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
+    \   }\n    return res;\n}\n}\n"
   code: "#pragma once\n\n#include \"Numeric/internal_math.hpp\"\n\ntemplate<class\
     \ T>\nrequires std::derived_from<T, internal::modint_base>\nclass Combination\
-    \ {\n    int N;\n    void init() {\n        for (int i = 1; i <= N; ++i)\n   \
-    \         fac[i] = fac[i - 1] * i;\n        ifac.back() = fac.back().inv();\n\
-    \        for (int i = N - 1; i >= 0; --i)\n            ifac[i] = ifac[i + 1] *\
-    \ (i + 1);\n    }\npublic:\n    std::vector<T> fac, ifac;\n    Combination(int\
-    \ n): N(n), fac(N + 1, 1), ifac(N + 1, 1) {\n        init();\n    }\n    Combination(int\
-    \ n, T base): N(n), fac(N + 1, base.raw(1)), ifac(N + 1, base.raw(1)) {\n    \
-    \    init();\n    }\n    T C(int n, int m) {\n        if (n < m) return 0;\n \
-    \       return fac[n] * ifac[m] * ifac[n - m];\n    }\n    T P(int n, int m) {\n\
-    \        if (n < m) return 0;\n        return fac[n] * ifac[n - m];\n    }\n \
-    \   T H(int n, int m) {\n        return C(n + m - 1, m);\n    }\n};\nnamespace\
-    \ CombFunc {\ntemplate<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T>\
-    \ res(n + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1]\
-    \ * base;\n    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base,\
-    \ int n) {\n    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T>\
-    \ linear_inverse(int n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n\
-    \    for (int i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD\
-    \ / i); \n    }\n    return res;\n}\n}\n"
+    \ {\n    inline static int N = 1;\npublic:\n    inline static std::vector<T> fac\
+    \ = {T(1)};\n    inline static std::vector<T> ifac = {T(1)};\n    Combination(int\
+    \ n) { ensure_upper_bound(n); }\n    T C(int n, int m) {\n        if (n < m ||\
+    \ m < 0) return 0;\n        return fac[n] * ifac[m] * ifac[n - m];\n    }\n  \
+    \  T invC(int n, int m) {\n        assert(n >= m && m >= 0);\n        return ifac[n]\
+    \ * fac[m] * fac[n - m];\n    }\n    T P(int n, int m) {\n        if (n < m) return\
+    \ 0;\n        return fac[n] * ifac[n - m];\n    }\n    T H(int n, int m) {\n \
+    \       return C(n + m - 1, m);\n    }\n    // a - b <= k and all non-empty proper\
+    \ prefix have a - b < k\n    T extend_catalan(int a, int b, int k) {\n       \
+    \ if (a - b == k) return C(a + b - 1, a - 1) - C(a + b - 1, b + k);\n        return\
+    \ C(a + b, a) - C(a + b, b + k); \n    }\n    void ensure_upper_bound(int n) {\n\
+    \        if (N >= n) return;\n        fac.resize(n), ifac.resize(n);\n       \
+    \ for (int i = N; i < n; ++i)\n            fac[i] = fac[i - 1] * i;\n        ifac.back()\
+    \ = fac.back().inv();\n        for (int i = n - 2; i >= N; --i)\n            ifac[i]\
+    \ = ifac[i + 1] * (i + 1);\n        N = n;\n    }\n};\nnamespace CombFunc {\n\
+    template<class T>\nstd::vector<T> power(T base, int n) {\n    std::vector<T> res(n\
+    \ + 1, 1);\n    for (int i = 1; i <= n; ++i)\n        res[i] = res[i - 1] * base;\n\
+    \    return res;\n}\ntemplate<class T>\nstd::vector<T> ipower(T base, int n) {\n\
+    \    return power(base.inv(), n);\n}\ntemplate<class T>\nstd::vector<T> linear_inverse(int\
+    \ n) {\n    std::vector<T> res(n + 1, 1);\n    int MOD = T().mod();\n    for (int\
+    \ i = 2; i <= n; ++i) {\n        res[i] = res[MOD % i] * (MOD - MOD / i); \n \
+    \   }\n    return res;\n}\n}\n"
   dependsOn:
   - Numeric/internal_math.hpp
   isVerificationFile: false
@@ -169,8 +179,8 @@ data:
   - Numbers/bernoulli_number.hpp
   - Polynomial/lagrange_interpolate_iota.hpp
   - Polynomial/shift.hpp
-  timestamp: '2026-06-19 14:07:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-29 01:08:03+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp

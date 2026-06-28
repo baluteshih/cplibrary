@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/mo_solver.hpp
     title: Sequence/mo_solver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

@@ -44,10 +44,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Binomial.hpp
     title: Numeric/Binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
   - icon: ':heavy_check_mark:'
@@ -156,7 +156,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -267,9 +267,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -418,7 +418,7 @@ data:
   - Polynomial/shift.hpp
   - Matrix/Matrix.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp

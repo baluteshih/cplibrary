@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/factor_transform.hpp
     title: Numeric/factor_transform.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/prime_work.hpp
     title: Numeric/prime_work.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
