@@ -58,6 +58,7 @@
 "test/1_library_checker/geometry/static_convex_hull.test.cpp": "2026-06-19 13:39:32 +0800",
 "test/1_library_checker/graph/biconnected_components.test.cpp": "2026-06-24 18:12:55 +0800",
 "test/1_library_checker/graph/bipartitematching.test.cpp": "2026-06-24 18:12:55 +0800",
+"test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp": "2026-06-28 13:32:45 +0800",
 "test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp": "2026-06-24 18:12:55 +0800",
 "test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp": "2026-06-24 18:12:55 +0800",
 "test/1_library_checker/graph/cycle_detection_directed.test.cpp": "2026-06-24 18:12:55 +0800",
