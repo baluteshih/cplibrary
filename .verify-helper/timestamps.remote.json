@@ -84,6 +84,7 @@
 "test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp": "2026-06-24 18:12:55 +0800",
 "test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp": "2026-06-24 18:12:55 +0800",
 "test/1_library_checker/number_theory/bernoulli_number.test.cpp": "2026-06-29 01:18:59 +0800",
+"test/1_library_checker/number_theory/counting_primes.test.cpp": "2026-06-29 21:15:04 +0800",
 "test/1_library_checker/number_theory/enumerate_quotients.test.cpp": "2026-06-20 01:45:49 +0800",
 "test/1_library_checker/number_theory/factorize.test.cpp": "2026-06-19 20:51:50 +0800",
 "test/1_library_checker/number_theory/primality_test.test.cpp": "2026-06-19 20:51:50 +0800",
