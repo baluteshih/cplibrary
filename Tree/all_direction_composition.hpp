@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Tree/Tree.hpp"
+#include "Algebra/ValidOperation.hpp"
+#include "Graph/UnifiedWeight.hpp"
 
 template<typename Edge, typename Vertex>
-requires (ValidAddableState<Vertex, Vertex> && ValidAddableState<Vertex, Edge>)
+requires (!std::is_void_v<Edge> && !std::is_void_v<Vertex> && ValidAddableUnifiedWeight<Edge, Vertex>)
 std::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree) {
     std::vector<Vertex> dp(tree.n()), recv(tree.n());
     if (tree.current_root == -1) tree.traverse(); 

@@ -4,15 +4,7 @@ template<typename T, typename Fallback>
 using ReplaceVoid = std::conditional_t<std::same_as<T, void>, Fallback, T>;
 
 template <typename A, typename B>
-concept ValidAddableState =
-    requires(const ReplaceVoid<A, B>& a, 
-             const ReplaceVoid<B, A>& b) {
-        a + b;
-    };
+concept ValidAddableState = requires(A a, B b) { a + b; };
 
 template <typename A, typename B>
-concept ValidSubtractableState = 
-    requires(const ReplaceVoid<A, B>& a, 
-             const ReplaceVoid<B, A>& b) {
-        a - b;
-    };
+concept ValidSubtractableState = requires(A a, B b) { a - b; };

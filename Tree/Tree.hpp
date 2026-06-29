@@ -2,6 +2,7 @@
 
 #include "Graph/base.hpp"
 #include "Graph/UnifiedWeight.hpp"
+#include "Algebra/ValidOperation.hpp"
 
 template<typename Edge = void, typename Vertex = void>
 class Tree : public Graph<false, Edge, Vertex> {
@@ -100,7 +101,7 @@ public:
         });
         return res;
     }
-    auto weighted_distance(int root = -1) requires (ValidAddableState<Edge, Vertex>) {
+    auto weighted_distance(int root = -1) requires (ValidAddableUnifiedWeight<Edge, Vertex>) {
         if (current_root == -1 || (root != -1 && current_root != root)) {
             assert(root != -1);
             traverse(root);

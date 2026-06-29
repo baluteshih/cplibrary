@@ -9,3 +9,8 @@ struct UnifiedWeight {
 
 template <typename Edge, typename Vertex>
 using UnifiedWeight_t = typename UnifiedWeight<Edge, Vertex>::type;
+
+template <typename Edge, typename Vertex>
+concept ValidAddableUnifiedWeight = 
+    (std::is_void_v<Vertex> && ValidAddableState<Edge, Edge>) ||
+    (ValidAddableState<Vertex, Vertex> && (std::is_void_v<Edge> || ValidAddableState<Vertex, Edge>));

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tree/Tree.hpp"
+#include "Algebra/ValidOperation.hpp"
 
 template<typename Edge = void, typename Vertex = void>
 class TreeTools : public Tree<Edge, Vertex> {
