@@ -9,11 +9,6 @@ typedef pair<ll, ll> pll;
 #define Y second
 #define SZ(a) ((int)a.size())
 #define ALL(v) v.begin(), v.end()
-template<class A, class B>
-ostream& operator<<(ostream& os, const pair<A, B> &a) {
-    os << "(" << a.first << ", " << a.second << ")";
-    return os;
-}
 template <typename T>
 concept PrintableContainer = requires(T& a) {
     a.begin();
@@ -21,6 +16,15 @@ concept PrintableContainer = requires(T& a) {
 } && !std::same_as<std::remove_cvref_t<T>, std::string> &&
      !std::same_as<std::remove_cvref_t<T>, std::string_view> &&
      !std::is_convertible_v<T, const char*>;
+template<class A, class B>
+ostream& operator<<(ostream& os, const pair<A, B> &a);
+template <PrintableContainer T>
+std::ostream& operator<<(std::ostream& os, const T& a);
+template<class A, class B>
+ostream& operator<<(ostream& os, const pair<A, B> &a) {
+    os << "(" << a.first << ", " << a.second << ")";
+    return os;
+}
 template <PrintableContainer T>
 std::ostream& operator<<(std::ostream& os, const T& a) {
     os << "[ ";
