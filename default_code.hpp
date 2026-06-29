@@ -13,9 +13,7 @@ template <typename T>
 concept PrintableContainer = requires(T& a) {
     a.begin();
     a.end();
-} && !std::same_as<std::remove_cvref_t<T>, std::string> &&
-     !std::same_as<std::remove_cvref_t<T>, std::string_view> &&
-     !std::is_convertible_v<T, const char*>;
+} && !std::convertible_to<std::remove_cvref_t<T>, std::string_view>; 
 template<class A, class B>
 ostream& operator<<(ostream& os, const pair<A, B> &a);
 template <PrintableContainer T>
