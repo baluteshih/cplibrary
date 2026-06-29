@@ -74,20 +74,42 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate<typename T, typename\
-    \ Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T, void>, Fallback,\
-    \ T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState =\n    requires(const\
-    \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
-    \ a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept ValidSubtractableState\
-    \ = \n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
-    \ A>& b) {\n        a - b;\n    };\n"
-  code: "#pragma once\n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid\
-    \ = std::conditional_t<std::same_as<T, void>, Fallback, T>;\n\ntemplate <typename\
-    \ A, typename B>\nconcept ValidAddableState =\n    requires(const ReplaceVoid<A,\
-    \ B>& a, \n             const ReplaceVoid<B, A>& b) {\n        a + b;\n    };\n\
-    \ntemplate <typename A, typename B>\nconcept ValidSubtractableState = \n    requires(const\
-    \ ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B, A>& b) {\n       \
-    \ a - b;\n    };\n"
+  bundledCode: '#line 2 "Algebra/ValidOperation.hpp"
+
+
+    template<typename T, typename Fallback>
+
+    using ReplaceVoid = std::conditional_t<std::same_as<T, void>, Fallback, T>;
+
+
+    template <typename A, typename B>
+
+    concept ValidAddableState = requires(A a, B b) { a + b; };
+
+
+    template <typename A, typename B>
+
+    concept ValidSubtractableState = requires(A a, B b) { a - b; };
+
+    '
+  code: '#pragma once
+
+
+    template<typename T, typename Fallback>
+
+    using ReplaceVoid = std::conditional_t<std::same_as<T, void>, Fallback, T>;
+
+
+    template <typename A, typename B>
+
+    concept ValidAddableState = requires(A a, B b) { a + b; };
+
+
+    template <typename A, typename B>
+
+    concept ValidSubtractableState = requires(A a, B b) { a - b; };
+
+    '
   dependsOn: []
   isVerificationFile: false
   path: Algebra/ValidOperation.hpp
@@ -102,7 +124,7 @@ data:
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/TreeTools.hpp
   - DataStructure/LeftistTree.hpp
-  timestamp: '2026-05-19 13:54:46+08:00'
+  timestamp: '2026-06-29 20:34:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp

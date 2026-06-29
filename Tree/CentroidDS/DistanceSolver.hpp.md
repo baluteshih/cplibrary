@@ -118,14 +118,15 @@ data:
     #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
     \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ =\n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
-    \ A>& b) {\n        a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept\
-    \ ValidSubtractableState = \n    requires(const ReplaceVoid<A, B>& a, \n     \
-    \        const ReplaceVoid<B, A>& b) {\n        a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \ = requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ ValidSubtractableState = requires(A a, B b) { a - b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
     \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
     \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
-    \ UnifiedWeight<Edge, Vertex>::type;\n#line 5 \"Tree/Tree.hpp\"\n\ntemplate<typename\
+    \ UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\n\
+    concept ValidAddableUnifiedWeight = \n    (std::is_void_v<Vertex> && ValidAddableState<Edge,\
+    \ Edge>) ||\n    (ValidAddableState<Vertex, Vertex> && (std::is_void_v<Edge> ||\
+    \ ValidAddableState<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename\
     \ Edge = void, typename Vertex = void>\nclass Tree : public Graph<false, Edge,\
     \ Vertex> {\npublic:\n    using super = Graph<false, Edge, Vertex>;\n    using\
     \ super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using WeightType\
@@ -167,7 +168,7 @@ data:
     \ -1);\n            traverse(root);\n        }\n        std::vector<Edge> res(this->n());\n\
     \        predfs([&](int u) {\n            if (parent_eid(u) != -1)\n         \
     \       res[u] = res[parent(u)] + parent_edge(u).weight;\n        });\n      \
-    \  return res;\n    }\n    auto weighted_distance(int root = -1) requires (ValidAddableState<Edge,\
+    \  return res;\n    }\n    auto weighted_distance(int root = -1) requires (ValidAddableUnifiedWeight<Edge,\
     \ Vertex>) {\n        if (current_root == -1 || (root != -1 && current_root !=\
     \ root)) {\n            assert(root != -1);\n            traverse(root);\n   \
     \     }\n        std::vector<WeightType> res(this->n());\n        predfs([&](int\
@@ -315,7 +316,7 @@ data:
   isVerificationFile: false
   path: Tree/CentroidDS/DistanceSolver.hpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-29 20:34:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

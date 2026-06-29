@@ -71,18 +71,22 @@ data:
   bundledCode: "#line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
     \n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ =\n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
-    \ A>& b) {\n        a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept\
-    \ ValidSubtractableState = \n    requires(const ReplaceVoid<A, B>& a, \n     \
-    \        const ReplaceVoid<B, A>& b) {\n        a - b;\n    };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \ = requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ ValidSubtractableState = requires(A a, B b) { a - b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
     \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
     \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
-    \ UnifiedWeight<Edge, Vertex>::type;\n"
+    \ UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\n\
+    concept ValidAddableUnifiedWeight = \n    (std::is_void_v<Vertex> && ValidAddableState<Edge,\
+    \ Edge>) ||\n    (ValidAddableState<Vertex, Vertex> && (std::is_void_v<Edge> ||\
+    \ ValidAddableState<Vertex, Edge>));\n"
   code: "#pragma once\n\n#include \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename\
     \ Edge, typename Vertex>\nstruct UnifiedWeight {\n    using type = std::conditional_t<!std::is_same_v<Vertex,\
     \ void>, Vertex, Edge>;\n};\n\ntemplate <typename Edge, typename Vertex>\nusing\
-    \ UnifiedWeight_t = typename UnifiedWeight<Edge, Vertex>::type;\n"
+    \ UnifiedWeight_t = typename UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename\
+    \ Edge, typename Vertex>\nconcept ValidAddableUnifiedWeight = \n    (std::is_void_v<Vertex>\
+    \ && ValidAddableState<Edge, Edge>) ||\n    (ValidAddableState<Vertex, Vertex>\
+    \ && (std::is_void_v<Edge> || ValidAddableState<Vertex, Edge>));\n"
   dependsOn:
   - Algebra/ValidOperation.hpp
   isVerificationFile: false
@@ -95,7 +99,7 @@ data:
   - Tree/HeavyLightDecomposition.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/TreeTools.hpp
-  timestamp: '2026-05-19 13:54:46+08:00'
+  timestamp: '2026-06-29 20:34:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp

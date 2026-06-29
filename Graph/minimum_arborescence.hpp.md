@@ -159,10 +159,8 @@ data:
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
     \n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ =\n    requires(const ReplaceVoid<A, B>& a, \n             const ReplaceVoid<B,\
-    \ A>& b) {\n        a + b;\n    };\n\ntemplate <typename A, typename B>\nconcept\
-    \ ValidSubtractableState = \n    requires(const ReplaceVoid<A, B>& a, \n     \
-    \        const ReplaceVoid<B, A>& b) {\n        a - b;\n    };\n#line 6 \"DataStructure/LeftistTree.hpp\"\
+    \ = requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ ValidSubtractableState = requires(A a, B b) { a - b; };\n#line 6 \"DataStructure/LeftistTree.hpp\"\
     \n\ntemplate<typename Key = int,\n         typename Tag = void,\n         typename\
     \ Info = void,\n         template<typename> class Allocator = DefaultAllocator,\n\
     \         bool persistent = false\n>\nclass LeftistTree { \n    static constexpr\
@@ -270,7 +268,7 @@ data:
   isVerificationFile: false
   path: Graph/minimum_arborescence.hpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-29 20:34:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp

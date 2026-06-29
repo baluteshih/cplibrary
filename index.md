@@ -115,6 +115,9 @@ data:
   - name: Enumerate
     pages:
     - icon: ':warning:'
+      path: Enumerate/bfs_enumerate.hpp
+      title: Enumerate/bfs_enumerate.hpp
+    - icon: ':warning:'
       path: Enumerate/subset_enumerate.hpp
       title: Enumerate/subset_enumerate.hpp
   - name: Flow
