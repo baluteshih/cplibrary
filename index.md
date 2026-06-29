@@ -3,6 +3,9 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
+    - icon: ':warning:'
+      path: Algebra/IterableOf.hpp
+      title: Algebra/IterableOf.hpp
     - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
