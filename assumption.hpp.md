@@ -262,6 +262,9 @@ data:
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/number_theory/counting_primes.test.cpp
+    title: test/1_library_checker/number_theory/counting_primes.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
     title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
   - icon: ':heavy_check_mark:'
@@ -633,6 +636,7 @@ data:
   - test/1_library_checker/number_theory/enumerate_quotients.test.cpp
   - test/1_library_checker/number_theory/primality_test.test.cpp
   - test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
+  - test/1_library_checker/number_theory/counting_primes.test.cpp
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/number_theory/factorize.test.cpp
   - test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp

@@ -348,6 +348,9 @@ data:
       path: Numeric/mod_pow.hpp
       title: Numeric/mod_pow.hpp
     - icon: ':heavy_check_mark:'
+      path: Numeric/pi_count.hpp
+      title: Numeric/pi_count.hpp
+    - icon: ':heavy_check_mark:'
       path: Numeric/pollard_rho.hpp
       title: Numeric/pollard_rho.hpp
     - icon: ':heavy_check_mark:'
@@ -743,6 +746,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
       title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/number_theory/counting_primes.test.cpp
+      title: test/1_library_checker/number_theory/counting_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
       title: test/1_library_checker/number_theory/enumerate_quotients.test.cpp
