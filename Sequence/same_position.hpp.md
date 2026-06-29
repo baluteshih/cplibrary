@@ -5,10 +5,13 @@ data:
     path: Algebra/IterableOf.hpp
     title: Algebra/IterableOf.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Sequence/same_position.hpp\"\n\n#line 2 \"Algebra/IterableOf.hpp\"\
@@ -40,8 +43,9 @@ data:
   path: Sequence/same_position.hpp
   requiredBy: []
   timestamp: '2026-06-29 21:10:18+08:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
 documentation_of: Sequence/same_position.hpp
 layout: document
 redirect_from:

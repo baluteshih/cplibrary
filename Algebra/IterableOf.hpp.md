@@ -5,13 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/occur_position.hpp
     title: Sequence/occur_position.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: Sequence/same_position.hpp
     title: Sequence/same_position.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
     title: test/1_library_checker/data_structure/static_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -45,6 +48,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_range_frequency.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
 documentation_of: Algebra/IterableOf.hpp
 layout: document
 redirect_from:

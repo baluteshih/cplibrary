@@ -133,6 +133,9 @@ data:
     path: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+    title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -456,6 +459,7 @@ data:
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
   - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
   - test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp

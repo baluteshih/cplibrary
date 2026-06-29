@@ -408,7 +408,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/occur_position.hpp
       title: Sequence/occur_position.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Sequence/same_position.hpp
       title: Sequence/same_position.hpp
   - name: String
@@ -627,6 +627,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+      title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
       title: test/1_library_checker/enumerative_combinatorics/partition_function.test.cpp
