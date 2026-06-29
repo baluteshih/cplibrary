@@ -35,6 +35,7 @@
 "test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp": "2026-06-19 18:28:09 +0800",
 "test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp": "2026-06-19 18:28:09 +0800",
 "test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp": "2026-06-19 18:28:09 +0800",
+"test/1_library_checker/data_structure/static_range_frequency.test.cpp": "2026-06-29 21:10:18 +0800",
 "test/1_library_checker/data_structure/static_range_mode_query.test.cpp": "2026-06-20 01:10:00 +0800",
 "test/1_library_checker/data_structure/static_rmq.test.cpp": "2026-06-19 18:28:09 +0800",
 "test/1_library_checker/data_structure/static_rmq_cattree.test.cpp": "2026-06-19 18:28:09 +0800",
