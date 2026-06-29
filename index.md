@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: Algebra
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/IterableOf.hpp
       title: Algebra/IterableOf.hpp
     - icon: ':heavy_check_mark:'
@@ -402,6 +402,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/mo_solver.hpp
       title: Sequence/mo_solver.hpp
+    - icon: ':heavy_check_mark:'
+      path: Sequence/occur_position.hpp
+      title: Sequence/occur_position.hpp
     - icon: ':warning:'
       path: Sequence/same_position.hpp
       title: Sequence/same_position.hpp
@@ -583,6 +586,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
+      title: test/1_library_checker/data_structure/static_range_frequency.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
       title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp

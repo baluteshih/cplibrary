@@ -115,6 +115,9 @@ data:
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
+    title: test/1_library_checker/data_structure/static_range_frequency.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - icon: ':heavy_check_mark:'
@@ -572,6 +575,7 @@ data:
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/data_structure/static_range_frequency.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
