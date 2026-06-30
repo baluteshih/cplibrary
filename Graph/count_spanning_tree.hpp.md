@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'

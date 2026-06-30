@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Discretization.hpp
     title: Discretization
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Sequence/mo_solver.hpp
     title: Sequence/mo_solver.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_mode_query
@@ -56,20 +56,23 @@ data:
     \         if constexpr (useRemoveRight) remove_right(--cur_r);\n            else\
     \ remove_left(--cur_r);\n        query(i);\n    }\n}\n#line 2 \"DataStructure/Discretization.hpp\"\
     \n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T> vals;\n \
-    \   static std::vector<T> sort_and_unique(std::vector<T> _vals) {\n        std::ranges::sort(_vals);\n\
-    \        _vals.erase(std::ranges::unique(_vals).begin(), _vals.end());\n     \
-    \   return _vals;\n    }\npublic:\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(vals,\
-    \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
-    \ - vals.begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
-    \        assert(res != -1);\n        return res;\n    }\n    Discretization(const\
-    \ std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
-    \ x) {\n        return std::ranges::lower_bound(vals, x) - vals.begin();\n   \
-    \ }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals, x)\
-    \ - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
+    \   static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {\n\
+    \        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
+    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
+    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
+    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
+    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
+    \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
+    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
+    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
+    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
+    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
+    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
     \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
     \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
     \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n#line 6 \"test/1_library_checker/data_structure/static_range_mode_query.test.cpp\"\
+    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n\
+    #line 6 \"test/1_library_checker/data_structure/static_range_mode_query.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, q;\n    std::cin >> n >> q;\n    std::vector<int> arr(n);\n    for (auto\
     \ &i : arr)\n        std::cin >> i;\n    std::vector<std::pair<int, int>> querys(q);\n\
@@ -116,8 +119,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-30 17:54:41+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
 layout: document

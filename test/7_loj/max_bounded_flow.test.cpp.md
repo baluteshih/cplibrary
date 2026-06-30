@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

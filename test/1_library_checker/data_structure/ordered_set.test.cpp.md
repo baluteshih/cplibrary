@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
     title: Ordered Set
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -34,21 +34,24 @@ data:
     assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/data_structure/ordered_set.test.cpp\"\
     \n\n#line 2 \"DataStructure/OrderedSet.hpp\"\n\n#line 2 \"DataStructure/Discretization.hpp\"\
     \n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T> vals;\n \
-    \   static std::vector<T> sort_and_unique(std::vector<T> _vals) {\n        std::ranges::sort(_vals);\n\
-    \        _vals.erase(std::ranges::unique(_vals).begin(), _vals.end());\n     \
-    \   return _vals;\n    }\npublic:\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(vals,\
-    \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
-    \ - vals.begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
-    \        assert(res != -1);\n        return res;\n    }\n    Discretization(const\
-    \ std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
-    \ x) {\n        return std::ranges::lower_bound(vals, x) - vals.begin();\n   \
-    \ }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals, x)\
-    \ - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
+    \   static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {\n\
+    \        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
+    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
+    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
+    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
+    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
+    \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
+    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
+    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
+    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
+    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
+    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
     \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
     \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
     \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n#line 2 \"DataStructure/BIT.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
-    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n\
+    #line 2 \"DataStructure/BIT.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n\
+    #line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
     concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
     \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
@@ -135,7 +138,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/ordered_set.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
+  timestamp: '2026-06-30 17:54:41+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/ordered_set.test.cpp

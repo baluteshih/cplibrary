@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Sequence/mo_solver.hpp\"\n\n#line 2 \"Algebra/NullFunc.hpp\"\
@@ -74,7 +74,7 @@ data:
   path: Sequence/mo_solver.hpp
   requiredBy: []
   timestamp: '2026-06-20 01:10:00+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
 documentation_of: Sequence/mo_solver.hpp
