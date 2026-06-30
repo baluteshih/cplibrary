@@ -11,7 +11,7 @@ public:
     BipartiteGraph(int _l, int _r) : super(_l), rsize(_r) {} 
     int l() const { return this->G.size(); }
     int r() const { return rsize; }
-    std::vector<int> out_degree() override {
+    std::vector<int> out_degree() const override {
         std::vector<int> res(rsize);
         for (auto &e : this->edges)
             ++res[e.from];
