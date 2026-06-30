@@ -1,6 +1,12 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/CatTree.hpp
     title: Cat Tree
@@ -20,7 +26,16 @@ data:
   bundledCode: "#line 1 \"test/1_library_checker/data_structure/static_rmq_cattree.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#line 2 \"assumption.hpp\"\
     \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/data_structure/static_rmq_cattree.test.cpp\"\
-    \n\n#line 2 \"DataStructure/CatTree.hpp\"\n\ntemplate<typename Value = int>\n\
+    \n\n#line 2 \"DataStructure/CatTree.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
+    DataStructure/CatTree.hpp\"\n\ntemplate<typename Value = int>\nrequires isMonoid<Value>\n\
     class CatTree {\n    int n;\n    std::vector<int> mid;\n    std::vector<std::vector<Value>>\
     \ lft, rgt;\n    void initialize(int l, int r, int rt, const std::vector<Value>\
     \ &data) {\n        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n\
@@ -33,16 +48,15 @@ data:
     \ - mid[rt]] = i < std::ssize(data) ? data[i] : Value();\n            if (i -\
     \ mid[rt] > 0)\n                rgt[rt][i - mid[rt]] = rgt[rt][i - mid[rt] - 1]\
     \ + rgt[rt][i - mid[rt]];\n        }\n        initialize(l, mid[rt], rt << 1,\
-    \ data);\n        initialize(mid[rt], r, rt << 1 | 1, data);\n    }\n    static\
-    \ int ceilpow2(int sz) {\n        int m = 1;\n        while (m < sz) m <<= 1;\n\
-    \        return m;\n    }\npublic:\n    CatTree(const std::vector<Value> &data):\
-    \ n(ceilpow2(data.size())), mid(n), lft(n << 1), rgt(n) { \n        initialize(0,\
-    \ n, 1, data);\n    }\n    CatTree(int size): CatTree(std::vector<Value>(size))\
-    \ {}\n    Value range_prod(int l, int r) {\n        assert(0 <= l && r <= n);\n\
-    \        assert(l <= r);\n        if (l == r) return Value();\n        --r;\n\
-    \        l += n, r += n;\n        if (l == r) return lft[l][0];\n        int lca\
-    \ = l >> (std::__lg(l ^ r) + 1);\n        l -= n, r -= n;\n        return lft[lca][mid[lca]\
-    \ - l - 1] + rgt[lca][r - mid[lca]];\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/static_rmq_cattree.test.cpp\"\
+    \ data);\n        initialize(mid[rt], r, rt << 1 | 1, data);\n    }\npublic:\n\
+    \    CatTree(const std::ranges::range auto &data): n(std::bit_ceil(static_cast<std::size_t>(std::ranges::distance(data)))),\
+    \ mid(n), lft(n << 1), rgt(n) { \n        initialize(0, n, 1, data);\n    }\n\
+    \    CatTree(int size): CatTree(std::vector<Value>(size)) {}\n    Value range_prod(int\
+    \ l, int r) {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n  \
+    \      if (l == r) return Value();\n        --r;\n        l += n, r += n;\n  \
+    \      if (l == r) return lft[l][0];\n        int lca = l >> (std::__lg(l ^ r)\
+    \ + 1);\n        l -= n, r -= n;\n        return lft[lca][mid[lca] - l - 1] +\
+    \ rgt[lca][r - mid[lca]];\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/static_rmq_cattree.test.cpp\"\
     \n\nstruct Value {\n    int val;\n    Value(int _v = 2e9): val(_v) {}\n    Value\
     \ operator+(const Value &a) const {\n        return Value(std::min(val, a.val));\n\
     \    }\n    friend std::ostream& operator<<(std::ostream& os, const Value &v)\
@@ -68,10 +82,12 @@ data:
   dependsOn:
   - assumption.hpp
   - DataStructure/CatTree.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 18:28:09+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp

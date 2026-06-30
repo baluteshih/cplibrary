@@ -59,8 +59,8 @@ data:
     \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Field/concept.hpp\"\
     \n\ntemplate<typename T>\nconcept isField = Addable<T, T> && Multiplicable<T,\
     \ T> && std::default_initializable<T>;\n#line 4 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
-    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
-    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ T, class Allocator = std::allocator<T>>\nrequires isField<T>\nclass Vector :\
+    \ public std::vector<T, Allocator> {\n    int n() const { return (int)this->size();\
     \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
     \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
     \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
@@ -83,8 +83,8 @@ data:
     \ pivot = 0;\n        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n\
     \        return pivot;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Algebra/Field/concept.hpp\"\n\ntemplate<typename\
-    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
-    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ T, class Allocator = std::allocator<T>>\nrequires isField<T>\nclass Vector :\
+    \ public std::vector<T, Allocator> {\n    int n() const { return (int)this->size();\
     \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
     \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
     \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
@@ -114,7 +114,7 @@ data:
   requiredBy:
   - Graph/count_spanning_tree.hpp
   - Matrix/Matrix.hpp
-  timestamp: '2026-06-30 17:03:55+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp

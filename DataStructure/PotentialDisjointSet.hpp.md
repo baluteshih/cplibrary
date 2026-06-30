@@ -1,6 +1,12 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
@@ -18,17 +24,26 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/PotentialDisjointSet.hpp\"\n\n#line 2 \"DataStructure/DisjointSet.hpp\"\
+    \n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/DisjointSet.hpp\"\
     \n\ntemplate<typename T = void, bool undo_tag = false>\nclass DisjointSet {\n\
-    protected:\n    static constexpr bool hasT = !std::is_same_v<T, void>;\n    int\
+    protected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n    int\
     \ n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
     \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
     \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
     \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
     \ T>>, Empty> data_cache;\npublic:\n    DisjointSet(int n_): n(n_), boss(n), sz(n,\
     \ 1) {\n        std::iota(boss.begin(), boss.end(), 0);\n        if constexpr\
-    \ (hasT) data.resize(n);\n    }\n    DisjointSet(const std::vector<T> &data_)\
-    \ requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {\n      \
-    \  std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual int leader(int\
+    \ (hasT) data.resize(n);\n    }\n    DisjointSet(const std::ranges::range auto\
+    \ &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {\n\
+    \        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual int leader(int\
     \ u) {\n        if (boss[u] == u) return u;\n        if constexpr (undo_tag) return\
     \ leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n    }\n  \
     \  int size(int u) {\n        return sz[leader(u)];\n    }\n    bool same(int\
@@ -98,10 +113,12 @@ data:
     \  }\n};\n"
   dependsOn:
   - DataStructure/DisjointSet.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: false
   path: DataStructure/PotentialDisjointSet.hpp
   requiredBy: []
-  timestamp: '2026-05-04 14:30:17+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp

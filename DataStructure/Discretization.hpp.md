@@ -9,15 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Discretization.hpp\"\n\ntemplate<typename\
@@ -28,7 +28,7 @@ data:
     \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
     \ - vals.begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
     \        assert(res != -1);\n        return res;\n    }\n    Discretization(const\
-    \ std::vector<T> &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
+    \ std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
     \ x) {\n        return std::ranges::lower_bound(vals, x) - vals.begin();\n   \
     \ }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals, x)\
     \ - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
@@ -43,7 +43,7 @@ data:
     \       auto it = std::ranges::lower_bound(vals, x);\n        if (it == vals.end()\
     \ || *it != x) return -1;\n        return it - vals.begin();\n    }\n    int safe_idx(T\
     \ x) {\n        int res = idx(x);\n        assert(res != -1);\n        return\
-    \ res;\n    }\n    Discretization(const std::vector<T> &_vals): vals(sort_and_unique(_vals))\
+    \ res;\n    }\n    Discretization(const std::ranges::range auto &_vals): vals(sort_and_unique(_vals))\
     \ {}\n    int left_close(T x) {\n        return std::ranges::lower_bound(vals,\
     \ x) - vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
     \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
@@ -56,8 +56,8 @@ data:
   path: DataStructure/Discretization.hpp
   requiredBy:
   - DataStructure/OrderedSet.hpp
-  timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-30 17:38:58+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
@@ -84,12 +84,12 @@ class Discretization;
 ## Constructor
 
 ```cpp
-Discretization(const std::vector<T> &_vals);
+Discretization(const std::ranges::range auto &_vals);
 ```
 
 * $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
 
-Constructs a discretization object from an array of values. It sorts the array and removes duplicate elements.
+Constructs a discretization object from a range of values. It sorts the range and removes duplicate elements.
 
 ---
 

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -199,17 +202,20 @@ data:
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 2 \"DataStructure/Doubling.hpp\"\
-    \n\n#line 4 \"DataStructure/Doubling.hpp\"\n\ntemplate<class Value, bool ImplicitJump\
-    \ = false>\nclass Doubling {\n    struct Empty {};\n    static constexpr bool\
-    \ hasValue = Addable<Value, Value>;\n    static_assert(hasValue || !ImplicitJump);\n\
-    \    inline int get_nxt(int j, int i) const {\n        if constexpr (ImplicitJump)\
-    \ return std::min(n - 1, i + (1 << j));\n        else return nxt[j][i];\n    }\n\
-    \    void build() {\n        for (int j = 1; j < max_log; ++j)\n            for\
-    \ (int i = 0; i < n; ++i) {\n                if constexpr (!ImplicitJump) nxt[j][i]\
-    \ = nxt[j - 1][nxt[j - 1][i]];\n                if constexpr (hasValue) val[j][i]\
-    \ = val[j - 1][i] + val[j - 1][get_nxt(j - 1, i)]; \n            }\n    }\npublic:\n\
-    \    int n, max_log;\n    [[no_unique_address]] std::conditional_t<ImplicitJump,\
-    \ Empty, std::vector<std::vector<int>>> nxt;\n    [[no_unique_address]] std::conditional_t<hasValue,\
+    \n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
+    DataStructure/Doubling.hpp\"\n\ntemplate<class Value, bool ImplicitJump = false>\n\
+    class Doubling {\n    struct Empty {};\n    static constexpr bool hasValue = isMonoid<Value>;\n\
+    \    static_assert(hasValue || !ImplicitJump);\n    inline int get_nxt(int j,\
+    \ int i) const {\n        if constexpr (ImplicitJump) return std::min(n - 1, i\
+    \ + (1 << j));\n        else return nxt[j][i];\n    }\n    void build() {\n  \
+    \      for (int j = 1; j < max_log; ++j)\n            for (int i = 0; i < n; ++i)\
+    \ {\n                if constexpr (!ImplicitJump) nxt[j][i] = nxt[j - 1][nxt[j\
+    \ - 1][i]];\n                if constexpr (hasValue) val[j][i] = val[j - 1][i]\
+    \ + val[j - 1][get_nxt(j - 1, i)]; \n            }\n    }\npublic:\n    int n,\
+    \ max_log;\n    [[no_unique_address]] std::conditional_t<ImplicitJump, Empty,\
+    \ std::vector<std::vector<int>>> nxt;\n    [[no_unique_address]] std::conditional_t<hasValue,\
     \ std::vector<std::vector<Value>>, Empty> val; \n    Doubling() : n(0), max_log(0)\
     \ {}\n    Doubling(int _n, const std::ranges::range auto &init_nxt) requires (!hasValue\
     \ && !ImplicitJump) : n(_n), max_log(std::bit_width(static_cast<unsigned int>(n))\
@@ -313,10 +319,11 @@ data:
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
   - DataStructure/Doubling.hpp
+  - Algebra/Monoid/concept.hpp
   isVerificationFile: true
   path: test/1_library_checker/tree/jump_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:16:44+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/jump_on_tree.test.cpp

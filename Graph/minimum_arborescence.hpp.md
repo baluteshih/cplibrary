@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -108,23 +111,32 @@ data:
     \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
     \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
     \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool\
-    \ undo_tag = false>\nclass DisjointSet {\nprotected:\n    static constexpr bool\
-    \ hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int> boss, sz;\n\
-    \    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasT, std::vector<T>,\
-    \ Empty> data;\n    [[no_unique_address]] std::conditional_t<undo_tag, std::vector<std::pair<int*,\
-    \ int>>, Empty> cache;\n    [[no_unique_address]] std::conditional_t<undo_tag\
-    \ && hasT, std::vector<std::pair<T*, T>>, Empty> data_cache;\npublic:\n    DisjointSet(int\
-    \ n_): n(n_), boss(n), sz(n, 1) {\n        std::iota(boss.begin(), boss.end(),\
-    \ 0);\n        if constexpr (hasT) data.resize(n);\n    }\n    DisjointSet(const\
-    \ std::vector<T> &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1),\
-    \ data(data_) {\n        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual\
-    \ int leader(int u) {\n        if (boss[u] == u) return u;\n        if constexpr\
-    \ (undo_tag) return leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n\
-    \    }\n    int size(int u) {\n        return sz[leader(u)];\n    }\n    bool\
-    \ same(int u, int v) {\n        return leader(u) == leader(v);\n    }\n    bool\
-    \ merge(int u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n\
-    \        if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
+    #line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
+    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
+    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
+    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
+    \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
+    \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
+    \ T>>, Empty> data_cache;\npublic:\n    DisjointSet(int n_): n(n_), boss(n), sz(n,\
+    \ 1) {\n        std::iota(boss.begin(), boss.end(), 0);\n        if constexpr\
+    \ (hasT) data.resize(n);\n    }\n    DisjointSet(const std::ranges::range auto\
+    \ &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {\n\
+    \        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual int leader(int\
+    \ u) {\n        if (boss[u] == u) return u;\n        if constexpr (undo_tag) return\
+    \ leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n    }\n  \
+    \  int size(int u) {\n        return sz[leader(u)];\n    }\n    bool same(int\
+    \ u, int v) {\n        return leader(u) == leader(v);\n    }\n    bool merge(int\
+    \ u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n   \
+    \     if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
     \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
     \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
     \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
@@ -156,23 +168,17 @@ data:
     \ {\n        os << v.sz;\n        return os;\n    }\n};\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
-    \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
-    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
-    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
-    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 6 \"DataStructure/LeftistTree.hpp\"\n\ntemplate<typename\
-    \ Key = int,\n         typename Tag = void,\n         typename Info = void,\n\
-    \         template<typename> class Allocator = DefaultAllocator,\n         bool\
-    \ persistent = false\n>\nclass LeftistTree { \n    static constexpr bool hasTag\
-    \ = !std::is_same_v<Tag, void>;\n    static constexpr bool hasInfo = !std::is_same_v<Info,\
-    \ void>;\n    struct Empty {};\n    template <bool Condition, typename T>\n  \
-    \  static auto get_default() {\n        if constexpr (Condition) return T();\n\
-    \        else return Empty{};\n    }\n    static_assert(!hasTag || Addable<Key,\
-    \ Tag>);\n    struct node {\n        node *l = nullptr, *r = nullptr;\n      \
-    \  Key key;\n        [[no_unique_address]] std::conditional_t<hasTag, Tag, Empty>\
-    \ lazy = get_default<hasTag, Tag>();\n        [[no_unique_address]] std::conditional_t<hasInfo,\
+    \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 6 \"DataStructure/LeftistTree.hpp\"\
+    \n\ntemplate<typename Key = int,\n         typename Tag = void,\n         typename\
+    \ Info = void,\n         template<typename> class Allocator = DefaultAllocator,\n\
+    \         bool persistent = false\n>\nclass LeftistTree { \n    static constexpr\
+    \ bool hasTag = !std::is_same_v<Tag, void>;\n    static constexpr bool hasInfo\
+    \ = !std::is_same_v<Info, void>;\n    struct Empty {};\n    template <bool Condition,\
+    \ typename T>\n    static auto get_default() {\n        if constexpr (Condition)\
+    \ return T();\n        else return Empty{};\n    }\n    static_assert(!hasTag\
+    \ || Addable<Key, Tag>);\n    struct node {\n        node *l = nullptr, *r = nullptr;\n\
+    \        Key key;\n        [[no_unique_address]] std::conditional_t<hasTag, Tag,\
+    \ Empty> lazy = get_default<hasTag, Tag>();\n        [[no_unique_address]] std::conditional_t<hasInfo,\
     \ Info, Empty> info = get_default<hasInfo, Info>();\n        int rank = 0;\n \
     \       void up() {\n            if (get_rank(r) > get_rank(l)) std::swap(r, l);\n\
     \            rank = get_rank(r) + 1;\n        }\n        void give_tag(const auto\
@@ -263,14 +269,15 @@ data:
   dependsOn:
   - Graph/base.hpp
   - DataStructure/DisjointSet.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/ValidOperation.hpp
   - DataStructure/LeftistTree.hpp
   - Algebra/size_value.hpp
   - DataStructure/DefaultAllocator.hpp
-  - Algebra/ValidOperation.hpp
   isVerificationFile: false
   path: Graph/minimum_arborescence.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:03:55+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp

@@ -10,16 +10,16 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
@@ -307,21 +307,21 @@ data:
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 6 \"Tree/all_direction_composition.hpp\"\
     \n\ntemplate<typename Edge, typename Vertex>\nrequires (!std::is_void_v<Edge>\
-    \ && !std::is_void_v<Vertex> && Addable<Edge, Vertex>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge,\
-    \ Vertex> &tree) {\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n  \
-    \  if (tree.current_root == -1) tree.traverse(); \n    tree.postdfs([&](int u)\
-    \ {\n        for (auto [v, eid] : tree[u])\n            if (v != tree.parent(u))\
-    \ {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n                dp[u]\
-    \ = dp[u] + dp[v];\n            }\n        dp[u] = dp[u] + tree.vertex(u);\n \
-    \   });\n    if constexpr (ValidSubtractableState<Vertex, Vertex>) {\n       \
-    \ tree.predfs([&](int u) {\n            if (tree.parent(u) != u) {\n         \
-    \       recv[u] = recv[tree.parent(u)] - dp[u];\n                recv[u] = recv[u]\
-    \ + tree.parent_edge(u).weight;\n            }\n            for (auto [v, eid]\
-    \ : tree[u])\n                if (v != tree.parent(u))\n                    recv[u]\
-    \ = recv[u] + dp[v];\n            recv[u] = recv[u] + tree.vertex(u); \n     \
-    \   });\n    }\n    else {\n        tree.predfs([&](int u) {\n            if (tree.parent(u)\
-    \ != u)\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n   \
-    \         recv[u] = recv[u] + tree.vertex(u); \n            for (auto [v, eid]\
+    \ && !std::is_void_v<Vertex> && AddableUnifiedWeight<Edge, Vertex>)\nstd::vector<Vertex>\
+    \ all_direction_composition(Tree<Edge, Vertex> &tree) {\n    std::vector<Vertex>\
+    \ dp(tree.n()), recv(tree.n());\n    if (tree.current_root == -1) tree.traverse();\
+    \ \n    tree.postdfs([&](int u) {\n        for (auto [v, eid] : tree[u])\n   \
+    \         if (v != tree.parent(u)) {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n\
+    \                dp[u] = dp[u] + dp[v];\n            }\n        dp[u] = dp[u]\
+    \ + tree.vertex(u);\n    });\n    if constexpr (Subtractable<Vertex, Vertex>)\
+    \ {\n        tree.predfs([&](int u) {\n            if (tree.parent(u) != u) {\n\
+    \                recv[u] = recv[tree.parent(u)] - dp[u];\n                recv[u]\
+    \ = recv[u] + tree.parent_edge(u).weight;\n            }\n            for (auto\
+    \ [v, eid] : tree[u])\n                if (v != tree.parent(u))\n            \
+    \        recv[u] = recv[u] + dp[v];\n            recv[u] = recv[u] + tree.vertex(u);\
+    \ \n        });\n    }\n    else {\n        tree.predfs([&](int u) {\n       \
+    \     if (tree.parent(u) != u)\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
+    \            recv[u] = recv[u] + tree.vertex(u); \n            for (auto [v, eid]\
     \ : tree[u])\n                if (v != tree.parent(u)) {\n                   \
     \ recv[v] = recv[u];\n                    recv[u] = recv[u] + dp[v];\n       \
     \         }\n            Vertex sum = Vertex(); \n            for (auto [v, eid]\
@@ -380,8 +380,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:16:44+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-30 17:38:58+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 layout: document

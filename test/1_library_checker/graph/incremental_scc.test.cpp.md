@@ -1,6 +1,12 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
@@ -13,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -254,23 +260,32 @@ data:
     \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
     \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
     \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
-    \    return res;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename\
-    \ T = void, bool undo_tag = false>\nclass DisjointSet {\nprotected:\n    static\
-    \ constexpr bool hasT = !std::is_same_v<T, void>;\n    int n;\n    std::vector<int>\
-    \ boss, sz;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasT,\
-    \ std::vector<T>, Empty> data;\n    [[no_unique_address]] std::conditional_t<undo_tag,\
-    \ std::vector<std::pair<int*, int>>, Empty> cache;\n    [[no_unique_address]]\
-    \ std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*, T>>, Empty> data_cache;\n\
-    public:\n    DisjointSet(int n_): n(n_), boss(n), sz(n, 1) {\n        std::iota(boss.begin(),\
-    \ boss.end(), 0);\n        if constexpr (hasT) data.resize(n);\n    }\n    DisjointSet(const\
-    \ std::vector<T> &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1),\
-    \ data(data_) {\n        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual\
-    \ int leader(int u) {\n        if (boss[u] == u) return u;\n        if constexpr\
-    \ (undo_tag) return leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n\
-    \    }\n    int size(int u) {\n        return sz[leader(u)];\n    }\n    bool\
-    \ same(int u, int v) {\n        return leader(u) == leader(v);\n    }\n    bool\
-    \ merge(int u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n\
-    \        if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
+    \    return res;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
+    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
+    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
+    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
+    \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
+    \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
+    \ T>>, Empty> data_cache;\npublic:\n    DisjointSet(int n_): n(n_), boss(n), sz(n,\
+    \ 1) {\n        std::iota(boss.begin(), boss.end(), 0);\n        if constexpr\
+    \ (hasT) data.resize(n);\n    }\n    DisjointSet(const std::ranges::range auto\
+    \ &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {\n\
+    \        std::iota(boss.begin(), boss.end(), 0);\n    }\n    virtual int leader(int\
+    \ u) {\n        if (boss[u] == u) return u;\n        if constexpr (undo_tag) return\
+    \ leader(boss[u]);\n        else return boss[u] = leader(boss[u]);\n    }\n  \
+    \  int size(int u) {\n        return sz[leader(u)];\n    }\n    bool same(int\
+    \ u, int v) {\n        return leader(u) == leader(v);\n    }\n    bool merge(int\
+    \ u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n   \
+    \     if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
     \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
     \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
     \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
@@ -332,10 +347,12 @@ data:
   - Graph/SCC.hpp
   - Graph/base.hpp
   - DataStructure/DisjointSet.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: true
   path: test/1_library_checker/graph/incremental_scc.test.cpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp

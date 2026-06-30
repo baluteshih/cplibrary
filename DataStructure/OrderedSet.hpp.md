@@ -1,10 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   _extendedRequiredBy: []
@@ -25,17 +31,26 @@ data:
     \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
     \ - vals.begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
     \        assert(res != -1);\n        return res;\n    }\n    Discretization(const\
-    \ std::vector<T> &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
+    \ std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
     \ x) {\n        return std::ranges::lower_bound(vals, x) - vals.begin();\n   \
     \ }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals, x)\
     \ - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
     \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
     \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
     \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n#line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT\
-    \ { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T> bit;\n \
-    \   BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n \
-    \   BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(),\
+    \    }\n};\n#line 2 \"DataStructure/BIT.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"\
+    DataStructure/BIT.hpp\"\n\ntemplate<class T>\nrequires isCommutativeMonoid<T>\n\
+    class BIT { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T>\
+    \ bit;\n    BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
+    \ auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(),\
     \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
     \         bit[x] = arr[x - 1];\n            int y = x - (x & -x);\n          \
     \  for (int i = x - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] +\
@@ -43,37 +58,17 @@ data:
     \ + v;\n        for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] +\
     \ v;\n    }\n    T prefix(int x) {\n        T res = T();\n        for (++x; x;\
     \ x -= x & -x)\n            res = res + bit[x];\n        return res;\n    }\n\
-    \    T suffix(int x) requires requires(T x, T y) { x - y; } {\n        return\
-    \ total_ - prefix(x - 1);\n    }\n    T range(int l, int r) requires requires(T\
-    \ x, T y) { x - y; } { // [l, r)\n        if (l >= r) return T();\n        T res\
-    \ = prefix(r - 1) - prefix(l - 1);\n        return res;\n    }\n    int kth(int\
-    \ k) { // 0-base query\n        assert((n & (n - 1)) == 0);\n        ++k;\n  \
-    \      int res = 0;\n        for (int i = n >> 1; i >= 1; i >>= 1) {\n       \
-    \     if (bit[res + i] < k)\n                k -= bit[res += i];\n        }\n\
-    \        return res;\n    }\n    T total() {\n        return total_;\n    }\n\
-    };\n#line 5 \"DataStructure/OrderedSet.hpp\"\n\ntemplate<class T>\nclass OrderedSet\
-    \ : public Discretization<T> {\n    std::vector<bool> vis;\n    BIT<int> bit;\n\
-    public:\n    OrderedSet(const std::vector<T> &_vals): Discretization<T>(_vals),\
-    \ vis(_vals.size()), bit(std::bit_ceil(_vals.size())) {}\n    bool insert(T x)\
-    \ {\n        x = this->safe_idx(x);\n        if (vis[x]) return false;\n     \
-    \   vis[x] = true;\n        bit.modify(x, 1);\n        return true;\n    }\n \
-    \   bool erase(T x) {\n        x = this->safe_idx(x);\n        if (!vis[x]) return\
-    \ false;\n        vis[x] = false;\n        bit.modify(x, -1);\n        return\
-    \ true;\n    }\n    bool exists(T x) {\n        x = this->idx(x);\n        if\
-    \ (x == -1) return false;\n        return vis[x]; \n    }\n    int size() {\n\
-    \        return bit.total();\n    }\n    int lt_count(T x) {\n        return bit.prefix(this->right_open(x)\
-    \ - 1);\n    }\n    int leq_count(T x) {\n        return bit.prefix(this->right_close(x));\n\
-    \    }\n    int order(T x) {\n        return leq_count(x);\n    }\n    int kth(int\
-    \ k) { // 0-base query, return 0-base index\n        if (size() <= k) return -1;\n\
-    \        int res = bit.kth(k);\n        return res;\n    }\n    int leq(T x) {\
-    \ // return 0-base index\n        int res = leq_count(x);\n        return res\
-    \ == 0 ? -1 : kth(res - 1);\n    }\n    int geq(T x) { // return 0-base index\n\
-    \        int res = lt_count(x);\n        return res == size() ? -1 : kth(res);\n\
-    \    }\n};\n"
-  code: "#pragma once\n\n#include \"DataStructure/Discretization.hpp\"\n#include \"\
-    DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass OrderedSet : public Discretization<T>\
-    \ {\n    std::vector<bool> vis;\n    BIT<int> bit;\npublic:\n    OrderedSet(const\
-    \ std::vector<T> &_vals): Discretization<T>(_vals), vis(_vals.size()), bit(std::bit_ceil(_vals.size()))\
+    \    T suffix(int x) requires Subtractable<T, T> {\n        return total_ - prefix(x\
+    \ - 1);\n    }\n    T range(int l, int r) requires Subtractable<T, T> { // [l,\
+    \ r)\n        if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l\
+    \ - 1);\n        return res;\n    }\n    int kth(int k) { // 0-base query\n  \
+    \      assert((n & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n     \
+    \   for (int i = n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n\
+    \                k -= bit[res += i];\n        }\n        return res;\n    }\n\
+    \    T total() {\n        return total_;\n    }\n};\n#line 5 \"DataStructure/OrderedSet.hpp\"\
+    \n\ntemplate<class T>\nclass OrderedSet : public Discretization<T> {\n    std::vector<bool>\
+    \ vis;\n    BIT<int> bit;\npublic:\n    OrderedSet(const std::ranges::range auto\
+    \ &_vals): Discretization<T>(_vals), vis(std::ranges::distance(_vals)), bit(std::bit_ceil(vis.size()))\
     \ {}\n    bool insert(T x) {\n        x = this->safe_idx(x);\n        if (vis[x])\
     \ return false;\n        vis[x] = true;\n        bit.modify(x, 1);\n        return\
     \ true;\n    }\n    bool erase(T x) {\n        x = this->safe_idx(x);\n      \
@@ -89,13 +84,34 @@ data:
     \   int res = leq_count(x);\n        return res == 0 ? -1 : kth(res - 1);\n  \
     \  }\n    int geq(T x) { // return 0-base index\n        int res = lt_count(x);\n\
     \        return res == size() ? -1 : kth(res);\n    }\n};\n"
+  code: "#pragma once\n\n#include \"DataStructure/Discretization.hpp\"\n#include \"\
+    DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass OrderedSet : public Discretization<T>\
+    \ {\n    std::vector<bool> vis;\n    BIT<int> bit;\npublic:\n    OrderedSet(const\
+    \ std::ranges::range auto &_vals): Discretization<T>(_vals), vis(std::ranges::distance(_vals)),\
+    \ bit(std::bit_ceil(vis.size())) {}\n    bool insert(T x) {\n        x = this->safe_idx(x);\n\
+    \        if (vis[x]) return false;\n        vis[x] = true;\n        bit.modify(x,\
+    \ 1);\n        return true;\n    }\n    bool erase(T x) {\n        x = this->safe_idx(x);\n\
+    \        if (!vis[x]) return false;\n        vis[x] = false;\n        bit.modify(x,\
+    \ -1);\n        return true;\n    }\n    bool exists(T x) {\n        x = this->idx(x);\n\
+    \        if (x == -1) return false;\n        return vis[x]; \n    }\n    int size()\
+    \ {\n        return bit.total();\n    }\n    int lt_count(T x) {\n        return\
+    \ bit.prefix(this->right_open(x) - 1);\n    }\n    int leq_count(T x) {\n    \
+    \    return bit.prefix(this->right_close(x));\n    }\n    int order(T x) {\n \
+    \       return leq_count(x);\n    }\n    int kth(int k) { // 0-base query, return\
+    \ 0-base index\n        if (size() <= k) return -1;\n        int res = bit.kth(k);\n\
+    \        return res;\n    }\n    int leq(T x) { // return 0-base index\n     \
+    \   int res = leq_count(x);\n        return res == 0 ? -1 : kth(res - 1);\n  \
+    \  }\n    int geq(T x) { // return 0-base index\n        int res = lt_count(x);\n\
+    \        return res == size() ? -1 : kth(res);\n    }\n};\n"
   dependsOn:
   - DataStructure/Discretization.hpp
   - DataStructure/BIT.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: false
   path: DataStructure/OrderedSet.hpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
@@ -124,12 +140,12 @@ class OrderedSet : public Discretization<T>;
 ## Constructor
 
 ```cpp
-OrderedSet(const std::vector<T> &_vals);
+OrderedSet(const std::ranges::range auto &_vals);
 ```
 
 * $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
 
-Constructs an empty ordered set using the given array `_vals` as the universe of possible elements to be inserted later.
+Constructs an empty ordered set using the given range `_vals` as the universe of possible elements to be inserted later.
 
 ---
 

@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: Algebra/Monoid/concept.hpp
+    title: Algebra/Monoid/concept.hpp
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
   - icon: ':question:'
@@ -13,7 +16,7 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
   - icon: ':question:'
@@ -240,25 +243,29 @@ data:
     \    }\n    // func(int l, int r), intervals are [l, r), intervals could be empty\n\
     \    template <bool is_edge, class F>\n    void work_subtree(int u, F func) const\
     \ {\n        func(this->dfs_in[u] + is_edge, this->dfs_out[u] + 1);\n    }\n};\n\
-    #line 2 \"DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass BIT { // 0-base\n\
+    #line 2 \"DataStructure/BIT.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n\
+    #line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename T>\nconcept isMonoid\
+    \ = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename T>\n\
+    concept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"DataStructure/BIT.hpp\"\n\
+    \ntemplate<class T>\nrequires isCommutativeMonoid<T>\nclass BIT { // 0-base\n\
     public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n) :\
-    \ n(_n), total_(), bit(n + 1) {}\n    template<typename U>\n    BIT(const std::vector<U>\
-    \ &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())),\
-    \ bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x] = arr[x\
-    \ - 1];\n            int y = x - (x & -x);\n            for (int i = x - 1; i\
-    \ > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n        }\n  \
-    \  }\n    void modify(int x, T v) {\n        total_ = total_ + v;\n        for\
-    \ (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n    T prefix(int\
-    \ x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n            res\
-    \ = res + bit[x];\n        return res;\n    }\n    T suffix(int x) requires requires(T\
-    \ x, T y) { x - y; } {\n        return total_ - prefix(x - 1);\n    }\n    T range(int\
-    \ l, int r) requires requires(T x, T y) { x - y; } { // [l, r)\n        if (l\
-    \ >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n        return\
-    \ res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n & (n -\
-    \ 1)) == 0);\n        ++k;\n        int res = 0;\n        for (int i = n >> 1;\
-    \ i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n                k -=\
-    \ bit[res += i];\n        }\n        return res;\n    }\n    T total() {\n   \
-    \     return total_;\n    }\n};\n#line 6 \"test/1_library_checker/tree/vertex_add_path_sum.test.cpp\"\
+    \ n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range auto &arr)\
+    \ : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(), arr.end(),\
+    \ T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x]\
+    \ = arr[x - 1];\n            int y = x - (x & -x);\n            for (int i = x\
+    \ - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n      \
+    \  }\n    }\n    void modify(int x, T v) {\n        total_ = total_ + v;\n   \
+    \     for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n\
+    \    T prefix(int x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n\
+    \            res = res + bit[x];\n        return res;\n    }\n    T suffix(int\
+    \ x) requires Subtractable<T, T> {\n        return total_ - prefix(x - 1);\n \
+    \   }\n    T range(int l, int r) requires Subtractable<T, T> { // [l, r)\n   \
+    \     if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n\
+    \        return res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n\
+    \ & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n        for (int i =\
+    \ n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n            \
+    \    k -= bit[res += i];\n        }\n        return res;\n    }\n    T total()\
+    \ {\n        return total_;\n    }\n};\n#line 6 \"test/1_library_checker/tree/vertex_add_path_sum.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, q;\n    std::cin >> n >> q;\n    HeavyLightDecomposition<> hld(n);\n    std::vector<int>\
     \ arr(n);\n    for (int &i : arr)\n        std::cin >> i;\n    for (int i = 1;\
@@ -296,10 +303,11 @@ data:
   - Graph/UnifiedWeight.hpp
   - Algebra/ValidOperation.hpp
   - DataStructure/BIT.hpp
+  - Algebra/Monoid/concept.hpp
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:16:44+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_add_path_sum.test.cpp

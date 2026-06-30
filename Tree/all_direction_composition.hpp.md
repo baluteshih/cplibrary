@@ -15,12 +15,12 @@ data:
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/all_direction_composition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -188,21 +188,21 @@ data:
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 6 \"Tree/all_direction_composition.hpp\"\
     \n\ntemplate<typename Edge, typename Vertex>\nrequires (!std::is_void_v<Edge>\
-    \ && !std::is_void_v<Vertex> && Addable<Edge, Vertex>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge,\
-    \ Vertex> &tree) {\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n  \
-    \  if (tree.current_root == -1) tree.traverse(); \n    tree.postdfs([&](int u)\
-    \ {\n        for (auto [v, eid] : tree[u])\n            if (v != tree.parent(u))\
-    \ {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n                dp[u]\
-    \ = dp[u] + dp[v];\n            }\n        dp[u] = dp[u] + tree.vertex(u);\n \
-    \   });\n    if constexpr (ValidSubtractableState<Vertex, Vertex>) {\n       \
-    \ tree.predfs([&](int u) {\n            if (tree.parent(u) != u) {\n         \
-    \       recv[u] = recv[tree.parent(u)] - dp[u];\n                recv[u] = recv[u]\
-    \ + tree.parent_edge(u).weight;\n            }\n            for (auto [v, eid]\
-    \ : tree[u])\n                if (v != tree.parent(u))\n                    recv[u]\
-    \ = recv[u] + dp[v];\n            recv[u] = recv[u] + tree.vertex(u); \n     \
-    \   });\n    }\n    else {\n        tree.predfs([&](int u) {\n            if (tree.parent(u)\
-    \ != u)\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n   \
-    \         recv[u] = recv[u] + tree.vertex(u); \n            for (auto [v, eid]\
+    \ && !std::is_void_v<Vertex> && AddableUnifiedWeight<Edge, Vertex>)\nstd::vector<Vertex>\
+    \ all_direction_composition(Tree<Edge, Vertex> &tree) {\n    std::vector<Vertex>\
+    \ dp(tree.n()), recv(tree.n());\n    if (tree.current_root == -1) tree.traverse();\
+    \ \n    tree.postdfs([&](int u) {\n        for (auto [v, eid] : tree[u])\n   \
+    \         if (v != tree.parent(u)) {\n                dp[v] = dp[v] + tree.edge(eid).weight;\n\
+    \                dp[u] = dp[u] + dp[v];\n            }\n        dp[u] = dp[u]\
+    \ + tree.vertex(u);\n    });\n    if constexpr (Subtractable<Vertex, Vertex>)\
+    \ {\n        tree.predfs([&](int u) {\n            if (tree.parent(u) != u) {\n\
+    \                recv[u] = recv[tree.parent(u)] - dp[u];\n                recv[u]\
+    \ = recv[u] + tree.parent_edge(u).weight;\n            }\n            for (auto\
+    \ [v, eid] : tree[u])\n                if (v != tree.parent(u))\n            \
+    \        recv[u] = recv[u] + dp[v];\n            recv[u] = recv[u] + tree.vertex(u);\
+    \ \n        });\n    }\n    else {\n        tree.predfs([&](int u) {\n       \
+    \     if (tree.parent(u) != u)\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
+    \            recv[u] = recv[u] + tree.vertex(u); \n            for (auto [v, eid]\
     \ : tree[u])\n                if (v != tree.parent(u)) {\n                   \
     \ recv[v] = recv[u];\n                    recv[u] = recv[u] + dp[v];\n       \
     \         }\n            Vertex sum = Vertex(); \n            for (auto [v, eid]\
@@ -211,15 +211,15 @@ data:
     \ + sum;\n                }\n        });\n    }\n    return recv;\n}\n"
   code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n#include \"Algebra/ValidOperation.hpp\"\
     \n#include \"Graph/UnifiedWeight.hpp\"\n\ntemplate<typename Edge, typename Vertex>\n\
-    requires (!std::is_void_v<Edge> && !std::is_void_v<Vertex> && Addable<Edge, Vertex>)\n\
-    std::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree) {\n  \
-    \  std::vector<Vertex> dp(tree.n()), recv(tree.n());\n    if (tree.current_root\
+    requires (!std::is_void_v<Edge> && !std::is_void_v<Vertex> && AddableUnifiedWeight<Edge,\
+    \ Vertex>)\nstd::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree)\
+    \ {\n    std::vector<Vertex> dp(tree.n()), recv(tree.n());\n    if (tree.current_root\
     \ == -1) tree.traverse(); \n    tree.postdfs([&](int u) {\n        for (auto [v,\
     \ eid] : tree[u])\n            if (v != tree.parent(u)) {\n                dp[v]\
     \ = dp[v] + tree.edge(eid).weight;\n                dp[u] = dp[u] + dp[v];\n \
     \           }\n        dp[u] = dp[u] + tree.vertex(u);\n    });\n    if constexpr\
-    \ (ValidSubtractableState<Vertex, Vertex>) {\n        tree.predfs([&](int u) {\n\
-    \            if (tree.parent(u) != u) {\n                recv[u] = recv[tree.parent(u)]\
+    \ (Subtractable<Vertex, Vertex>) {\n        tree.predfs([&](int u) {\n       \
+    \     if (tree.parent(u) != u) {\n                recv[u] = recv[tree.parent(u)]\
     \ - dp[u];\n                recv[u] = recv[u] + tree.parent_edge(u).weight;\n\
     \            }\n            for (auto [v, eid] : tree[u])\n                if\
     \ (v != tree.parent(u))\n                    recv[u] = recv[u] + dp[v];\n    \
@@ -241,8 +241,8 @@ data:
   isVerificationFile: false
   path: Tree/all_direction_composition.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:16:44+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-30 17:38:58+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: Tree/all_direction_composition.hpp

@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -234,8 +234,8 @@ data:
     \ && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Field/concept.hpp\"\n\n\
     template<typename T>\nconcept isField = Addable<T, T> && Multiplicable<T, T> &&\
     \ std::default_initializable<T>;\n#line 4 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
-    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
-    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ T, class Allocator = std::allocator<T>>\nrequires isField<T>\nclass Vector :\
+    \ public std::vector<T, Allocator> {\n    int n() const { return (int)this->size();\
     \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
     \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
     \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
@@ -396,7 +396,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:03:55+08:00'
+  timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/mo_solver.hpp
     title: Sequence/mo_solver.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_mode_query
@@ -62,7 +62,7 @@ data:
     \ x);\n        if (it == vals.end() || *it != x) return -1;\n        return it\
     \ - vals.begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
     \        assert(res != -1);\n        return res;\n    }\n    Discretization(const\
-    \ std::vector<T> &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
+    \ std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}\n    int left_close(T\
     \ x) {\n        return std::ranges::lower_bound(vals, x) - vals.begin();\n   \
     \ }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals, x)\
     \ - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
@@ -116,8 +116,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   requiredBy: []
-  timestamp: '2026-06-20 01:10:00+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-30 17:38:58+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
 layout: document
