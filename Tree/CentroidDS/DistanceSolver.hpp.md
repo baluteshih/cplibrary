@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/CentroidDS/DistanceSolver.hpp\"\n\n#line 2 \"Tree/CentroidTree.hpp\"\
@@ -124,7 +124,7 @@ data:
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
     \ type = std::conditional_t<std::is_void_v<Vertex>, Edge, Vertex>;\n};\n\ntemplate\
     \ <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename UnifiedWeight<Edge,\
-    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept ValidAddableUnifiedWeight\
+    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept AddableUnifiedWeight\
     \ = \n    (std::is_void_v<Vertex> && Addable<Edge, Edge>) ||\n    (Addable<Vertex,\
     \ Vertex> && (std::is_void_v<Edge> || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\
     \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
@@ -317,8 +317,8 @@ data:
   isVerificationFile: false
   path: Tree/CentroidDS/DistanceSolver.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:03:55+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-30 17:16:44+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp

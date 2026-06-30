@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Doubling.hpp
     title: Doubling
   _extendedRequiredBy: []

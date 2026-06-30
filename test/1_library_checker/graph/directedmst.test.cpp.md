@@ -4,28 +4,28 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'
@@ -33,9 +33,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
@@ -257,17 +257,17 @@ data:
     struct UnifiedWeight {\n    using type = std::conditional_t<std::is_void_v<Vertex>,\
     \ Edge, Vertex>;\n};\n\ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t\
     \ = typename UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename\
-    \ Vertex>\nconcept ValidAddableUnifiedWeight = \n    (std::is_void_v<Vertex> &&\
-    \ Addable<Edge, Edge>) ||\n    (Addable<Vertex, Vertex> && (std::is_void_v<Edge>\
-    \ || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass Tree : public Graph<false, Edge,\
-    \ Vertex> {\npublic:\n    using super = Graph<false, Edge, Vertex>;\n    using\
-    \ super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using WeightType\
-    \ = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n    std::vector<int>\
-    \ pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n    Tree(int\
-    \ n): super(n), current_root(-1) {}\n    Tree(const super &graph, const std::vector<int>\
-    \ &edge_index): super(graph.n()), current_root(-1) {\n        assert(int(edge_index.size())\
-    \ + 1 == this->n());\n        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
+    \ Vertex>\nconcept AddableUnifiedWeight = \n    (std::is_void_v<Vertex> && Addable<Edge,\
+    \ Edge>) ||\n    (Addable<Vertex, Vertex> && (std::is_void_v<Edge> || Addable<Vertex,\
+    \ Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename Edge = void, typename\
+    \ Vertex = void>\nclass Tree : public Graph<false, Edge, Vertex> {\npublic:\n\
+    \    using super = Graph<false, Edge, Vertex>;\n    using super::hasEdgeWeight;\n\
+    \    using super::hasVertexWeight;\n    using WeightType = UnifiedWeight_t<Edge,\
+    \ Vertex>;\n    int current_root;\n    std::vector<int> pa, dfs_in, dfs_out;\n\
+    \    std::vector<int> preorder, postorder;\n    Tree(int n): super(n), current_root(-1)\
+    \ {}\n    Tree(const super &graph, const std::vector<int> &edge_index): super(graph.n()),\
+    \ current_root(-1) {\n        assert(int(edge_index.size()) + 1 == this->n());\n\
+    \        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
     \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
     \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
     \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
@@ -365,8 +365,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:03:55+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-06-30 17:16:44+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/directedmst.test.cpp
 layout: document

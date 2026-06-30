@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':x:'
@@ -231,7 +231,7 @@ data:
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
     \ type = std::conditional_t<std::is_void_v<Vertex>, Edge, Vertex>;\n};\n\ntemplate\
     \ <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename UnifiedWeight<Edge,\
-    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept ValidAddableUnifiedWeight\
+    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept AddableUnifiedWeight\
     \ = \n    (std::is_void_v<Vertex> && Addable<Edge, Edge>) ||\n    (Addable<Vertex,\
     \ Vertex> && (std::is_void_v<Edge> || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\
     \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
@@ -380,7 +380,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:03:55+08:00'
+  timestamp: '2026-06-30 17:16:44+08:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
