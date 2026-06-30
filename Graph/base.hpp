@@ -85,16 +85,20 @@ public:
         if constexpr (!directed) G[edges.back().to].pop_back();
         edges.pop_back();
     }
-    std::vector<int> in_degree() {
+    std::vector<int> in_degree() const {
         std::vector<int> res(n());
-        for (auto &e : edges)
+        for (auto &e : edges) {
+            if constexpr (!is_directed) ++res[e.from];
             ++res[e.to];
+        }
         return res;
     }
-    virtual std::vector<int> out_degree() {
+    virtual std::vector<int> out_degree() const {
         std::vector<int> res(n());
-        for (auto &e : edges)
+        for (auto &e : edges) {
+            if constexpr (!is_directed) ++res[e.to];
             ++res[e.from];
+        }
         return res;
     }
     std::vector<std::pair<int, int>>& operator[](int idx) {
@@ -153,8 +157,8 @@ public:
                 res.add_edge(e.reversed());
         return res;
     }
-    Graph induced(const std::vector<int> &subset) {
-        std::vector<int> idx(n, -1);
+    Graph induced(const std::vector<int> &subset) const {
+        std::vector<int> idx(n(), -1);
         for (int cnt = 0; int i : subset) idx[i] = cnt++;
         Graph res(subset.size());
         for (auto e : edges) {
