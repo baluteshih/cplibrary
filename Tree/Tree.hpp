@@ -101,7 +101,7 @@ public:
         });
         return res;
     }
-    auto weighted_distance(int root = -1) requires (ValidAddableUnifiedWeight<Edge, Vertex>) {
+    auto weighted_distance(int root = -1) requires (AddableUnifiedWeight<Edge, Vertex>) {
         if (current_root == -1 || (root != -1 && current_root != root)) {
             assert(root != -1);
             traverse(root);

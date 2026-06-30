@@ -5,7 +5,7 @@
 template<class Value, bool ImplicitJump = false>
 class Doubling {
     struct Empty {};
-    static constexpr bool hasValue = ValidAddableState<Value, Value>;
+    static constexpr bool hasValue = Addable<Value, Value>;
     static_assert(hasValue || !ImplicitJump);
     inline int get_nxt(int j, int i) const {
         if constexpr (ImplicitJump) return std::min(n - 1, i + (1 << j));

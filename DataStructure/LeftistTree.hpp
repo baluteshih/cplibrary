@@ -19,7 +19,7 @@ class LeftistTree {
         if constexpr (Condition) return T();
         else return Empty{};
     }
-    static_assert(!hasTag || ValidAddableState<Key, Tag>);
+    static_assert(!hasTag || Addable<Key, Tag>);
     struct node {
         node *l = nullptr, *r = nullptr;
         Key key;

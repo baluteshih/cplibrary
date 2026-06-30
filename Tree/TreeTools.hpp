@@ -13,9 +13,9 @@ public:
     using super::hasVertexWeight;
     using typename super::WeightType;
     static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;
-    static constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && ValidAddableState<WeightType, WeightType>) || 
-                                        ((hasEdgeWeight && hasVertexWeight) && ValidAddableState<Vertex, Edge>); 
-    static constexpr bool hasSubtract = ValidSubtractableState<WeightType, WeightType>; 
+    static constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && Addable<WeightType, WeightType>) || 
+                                        ((hasEdgeWeight && hasVertexWeight) && Addable<Vertex, Edge>); 
+    static constexpr bool hasSubtract = Subtractable<WeightType, WeightType>; 
     std::vector<int> dep;
     Doubling<std::conditional_t<hasAddition, WeightType, void>, false> pa_table;
     struct Empty {};

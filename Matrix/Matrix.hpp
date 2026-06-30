@@ -21,41 +21,49 @@ public:
                 res[i][j] = (*this)[j][i];
         return res;
     }
-    Matrix operator*(const Matrix &rhs) const {
+    Matrix& operator*=(const Matrix &rhs) {
         assert(m() == rhs.n());
-        Matrix res(n(), rhs.m());
         auto _rhs = rhs.transpose();
-        for (int i = 0; i < res.n(); ++i)
-            for (int j = 0; j < res.m(); ++j)
-                res[i][j] = (*this)[i] * _rhs[j];
-        return res;
+        for (int i = 0; i < n(); ++i) {
+            auto cur = (*this)[i];
+            (*this)[i].resize(rhs.m());
+            for (int j = 0; j < rhs.m(); ++j)
+                (*this)[i][j] = cur * _rhs[j];
+        }
+        return *this;
     }
-    Matrix operator*(const T &v) const {
-        Matrix res(*this);
-        for (int i = 0; i < res.n(); ++i)
-            for (int j = 0; j < res.m(); ++j)
-                res[i][j] = res[i][j] * v;
-        return res;
+    Matrix& operator*=(const T &v) {
+        for (int i = 0; i < n(); ++i)
+            (*this)[i] *= v;
+        return *this;
     }
-    Matrix operator/(const Matrix &rhs) const {
-        assert(m() == rhs.n());
-        return *this * rhs.inv();
-    }
-    Matrix operator+(const Matrix &rhs) const {
+    Matrix& operator+=(const Matrix &rhs) {
         assert(n() == rhs.n());
         assert(m() == rhs.m());
-        Matrix res(n(), m());
-        for (int i = 0; i < res.n(); ++i)
-            res[i] = (*this)[i] + rhs[i];
-        return res;
-    }
-    Matrix operator|(Matrix const& rhs) const {
-        assert(n() == rhs.n());
-        Matrix res(n(), m() + rhs.m());
         for (int i = 0; i < n(); ++i)
-            res[i] = (*this)[i] | rhs[i];
-        return res;
+            (*this)[i] += rhs[i];
+        return *this;
     }
+    Matrix& operator-=(const Matrix &rhs) {
+        assert(n() == rhs.n());
+        assert(m() == rhs.m());
+        for (int i = 0; i < n(); ++i)
+            (*this)[i] += rhs[i];
+        return *this;
+    }
+    Matrix& operator|=(Matrix const& rhs) {
+        assert(n() == rhs.n());
+        for (int i = 0; i < n(); ++i)
+            (*this)[i] |= rhs[i];
+        return *this;
+    }
+    Matrix& operator/=(const T &v) const { return *this *= v.inv(); }
+    Matrix operator*(const Matrix &rhs) const { return Matrix(*this) *= rhs; }
+    Matrix operator*(const T &v) const { return Matrix(*this) *= v; }
+    Matrix operator/(const T &v) const { return Matrix(*this) /= v; }
+    Matrix operator+(const Matrix &rhs) const { return Matrix(*this) += rhs; }
+    Matrix operator-(const Matrix &rhs) const { return Matrix(*this) -= rhs; }
+    Matrix operator|(const Matrix &rhs) const { return Matrix(*this) |= rhs; }
     Matrix rows(int l, int r) const {
         assert(l <= r);
         assert(r <= n());
