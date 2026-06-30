@@ -122,7 +122,7 @@ public:
             traverse(root);
         }
         std::vector<int> res(this->n(), 1);
-        predfs([&](int u) {
+        postdfs([&](int u) {
             for (auto [v, eid] : this->G[u])
                 if (eid != parent_eid(u))
                     res[u] += res[v];
