@@ -20,12 +20,12 @@ class Discretization;
 ## Constructor
 
 ```cpp
-Discretization(const std::vector<T> &_vals);
+Discretization(const std::ranges::range auto &_vals);
 ```
 
 * $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
 
-Constructs a discretization object from an array of values. It sorts the array and removes duplicate elements.
+Constructs a discretization object from a range of values. It sorts the range and removes duplicate elements.
 
 ---
 

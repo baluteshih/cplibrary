@@ -1,14 +1,17 @@
 #pragma once
 
+#include "Algebra/Monoid/concept.hpp"
+#include "Algebra/ValidOperation.hpp"
+
 template<class T>
+requires isCommutativeMonoid<T>
 class BIT { // 0-base
 public:
     int n;
     T total_;
     std::vector<T> bit;
     BIT(int _n) : n(_n), total_(), bit(n + 1) {}
-    template<typename U>
-    BIT(const std::vector<U> &arr) : n(arr.size()), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {
+    BIT(const std::ranges::range auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {
         for (int x = 1; x <= n; ++x) {
             bit[x] = arr[x - 1];
             int y = x - (x & -x);
@@ -27,10 +30,10 @@ public:
             res = res + bit[x];
         return res;
     }
-    T suffix(int x) requires requires(T x, T y) { x - y; } {
+    T suffix(int x) requires Subtractable<T, T> {
         return total_ - prefix(x - 1);
     }
-    T range(int l, int r) requires requires(T x, T y) { x - y; } { // [l, r)
+    T range(int l, int r) requires Subtractable<T, T> { // [l, r)
         if (l >= r) return T();
         T res = prefix(r - 1) - prefix(l - 1);
         return res;

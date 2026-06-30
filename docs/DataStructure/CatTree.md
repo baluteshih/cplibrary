@@ -30,15 +30,15 @@ Constructs a Cat Tree of given size, initialized with `Value()`.
 
 ---
 
-## Constructor (Array)
+## Constructor (Range)
 
 ```cpp
-CatTree(const std::vector<Value> &data);
+CatTree(const std::ranges::range auto &data);
 ```
 
 * $O(N \log N)$ time
 
-Constructs a Cat Tree from an existing array.
+Constructs a Cat Tree from an existing range.
 
 ---
 

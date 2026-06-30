@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Algebra/Monoid/concept.hpp"
+
 template<typename T = void, bool undo_tag = false>
 class DisjointSet {
 protected:
-    static constexpr bool hasT = !std::is_same_v<T, void>;
+    static constexpr bool hasT = isCommutativeMonoid<T>;
     int n;
     std::vector<int> boss, sz;
     struct Empty {};
@@ -15,7 +17,7 @@ public:
         std::iota(boss.begin(), boss.end(), 0);
         if constexpr (hasT) data.resize(n);
     }
-    DisjointSet(const std::vector<T> &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {
+    DisjointSet(const std::ranges::range auto &data_) requires (hasT) : n(data_.size()), boss(n), sz(n, 1), data(data_) {
         std::iota(boss.begin(), boss.end(), 0);
     }
     virtual int leader(int u) {

@@ -33,16 +33,15 @@ Constructs an empty BIT of size `n` initialized with the default value of type `
 
 ---
 
-## Constructor (Array)
+## Constructor (Range)
 
 ```cpp
-template<typename U>
-BIT(const std::vector<U> &arr);
+BIT(const std::ranges::range auto &arr);
 ```
 
 * $O(N)$ time
 
-Constructs a BIT from an existing array using an optimized linear-time build algorithm.
+Constructs a BIT from an existing range using an optimized linear-time build algorithm.
 
 ---
 

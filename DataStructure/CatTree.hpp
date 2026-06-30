@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Algebra/Monoid/concept.hpp"
+
 template<typename Value = int>
+requires isMonoid<Value>
 class CatTree {
     int n;
     std::vector<int> mid;
@@ -26,13 +29,8 @@ class CatTree {
         initialize(l, mid[rt], rt << 1, data);
         initialize(mid[rt], r, rt << 1 | 1, data);
     }
-    static int ceilpow2(int sz) {
-        int m = 1;
-        while (m < sz) m <<= 1;
-        return m;
-    }
 public:
-    CatTree(const std::vector<Value> &data): n(ceilpow2(data.size())), mid(n), lft(n << 1), rgt(n) { 
+    CatTree(const std::ranges::range auto &data): n(std::bit_ceil(static_cast<std::size_t>(std::ranges::distance(data)))), mid(n), lft(n << 1), rgt(n) { 
         initialize(0, n, 1, data);
     }
     CatTree(int size): CatTree(std::vector<Value>(size)) {}

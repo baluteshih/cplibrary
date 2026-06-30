@@ -19,7 +19,7 @@ public:
         assert(res != -1);
         return res;
     }
-    Discretization(const std::vector<T> &_vals): vals(sort_and_unique(_vals)) {}
+    Discretization(const std::ranges::range auto &_vals): vals(sort_and_unique(_vals)) {}
     int left_close(T x) {
         return std::ranges::lower_bound(vals, x) - vals.begin();
     }

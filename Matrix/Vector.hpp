@@ -2,9 +2,9 @@
 
 #include "Algebra/Field/concept.hpp"
 
-template<typename T, class Allocator = std::allocator<T>> 
+template<typename T, class Allocator = std::allocator<T>>
+requires isField<T>
 class Vector : public std::vector<T, Allocator> {
-    static_assert(isField<T>);
     int n() const { return (int)this->size(); }
 public:
     Vector(int _n): std::vector<T, Allocator>(_n) {}

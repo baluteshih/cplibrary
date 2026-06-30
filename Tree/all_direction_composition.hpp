@@ -5,7 +5,7 @@
 #include "Graph/UnifiedWeight.hpp"
 
 template<typename Edge, typename Vertex>
-requires (!std::is_void_v<Edge> && !std::is_void_v<Vertex> && Addable<Edge, Vertex>)
+requires (!std::is_void_v<Edge> && !std::is_void_v<Vertex> && AddableUnifiedWeight<Edge, Vertex>)
 std::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree) {
     std::vector<Vertex> dp(tree.n()), recv(tree.n());
     if (tree.current_root == -1) tree.traverse(); 
@@ -17,7 +17,7 @@ std::vector<Vertex> all_direction_composition(Tree<Edge, Vertex> &tree) {
             }
         dp[u] = dp[u] + tree.vertex(u);
     });
-    if constexpr (ValidSubtractableState<Vertex, Vertex>) {
+    if constexpr (Subtractable<Vertex, Vertex>) {
         tree.predfs([&](int u) {
             if (tree.parent(u) != u) {
                 recv[u] = recv[tree.parent(u)] - dp[u];

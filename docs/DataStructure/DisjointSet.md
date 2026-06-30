@@ -30,16 +30,16 @@ Constructs a DSU with `n` elements, each in its own component.
 
 ---
 
-## Constructor (Array)
+## Constructor (Range)
 
 ```cpp
-DisjointSet(const std::vector<T> &data);
+DisjointSet(const std::ranges::range auto &data);
 ```
 
 * Requires `T` not to be `void`.
 * $O(N)$ time
 
-Constructs a DSU from an initial data array.
+Constructs a DSU from an initial data range.
 
 ---
 

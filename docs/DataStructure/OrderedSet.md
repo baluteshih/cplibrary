@@ -23,12 +23,12 @@ class OrderedSet : public Discretization<T>;
 ## Constructor
 
 ```cpp
-OrderedSet(const std::vector<T> &_vals);
+OrderedSet(const std::ranges::range auto &_vals);
 ```
 
 * $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
 
-Constructs an empty ordered set using the given array `_vals` as the universe of possible elements to be inserted later.
+Constructs an empty ordered set using the given range `_vals` as the universe of possible elements to be inserted later.
 
 ---
 
