@@ -6,7 +6,7 @@
 struct Value {
     int val;
     Value(int _v = 2'000'000'000): val(_v) {}
-    Value operator+(const Value &rhs) {
+    Value operator+(const Value &rhs) const {
         return Value(std::min(val, rhs.val));
     }
     friend std::ostream& operator<<(std::ostream& os, const Value &v) {
@@ -26,7 +26,7 @@ int main() {
     std::vector<Value> arr(n);
     for (auto &i : arr)
         std::cin >> i;
-    SparseTable table(arr);
+    SparseTable<Value> table(arr);
     while (q--) {
         int l, r;
         std::cin >> l >> r;

@@ -1,7 +1,7 @@
 struct Tag {
     int a;
     Tag(int _a = 0): a(_a) {}
-    Tag operator+(const Tag &rhs) {
+    Tag operator+(const Tag &rhs) const {
         return Tag(a + rhs.a);
     }
 };
@@ -9,10 +9,10 @@ struct Tag {
 struct Value {
     int val;
     Value(int _val = 0): val(_val) {}
-    Value operator+(const Value &rhs) {
+    Value operator+(const Value &rhs) const {
         return Value(min(val, rhs.val));
     }
-    Value operator+(const Tag &tag) {
+    Value operator+(const Tag &tag) const {
         return Value(val + tag.a);
     }
     friend ostream& operator<<(ostream& os, const Value &v) {

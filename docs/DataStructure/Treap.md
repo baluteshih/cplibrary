@@ -19,7 +19,8 @@ template<
 class Treap;
 ```
 
-* `Key`: The type of search keys. Use `void` for sequence-only usage.
+* `Key`: The type of search keys.
+    * Use `void` for sequence-only usage.
 * `Value`: The type of elements or range aggregates. Defaults to `size_v`.
     * Must support associative `operator+` for merging (commutative or non-commutative).
     * Must have a default constructor `Value()` acting as the identity element.
