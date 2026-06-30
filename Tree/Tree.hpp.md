@@ -153,8 +153,9 @@ data:
     #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
     \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
     \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ = requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ ValidSubtractableState = requires(A a, B b) { a - b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \ = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\
+    \ntemplate <typename A, typename B>\nconcept ValidSubtractableState = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
     \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
     \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
@@ -319,7 +320,7 @@ data:
   - Tree/HeavyLightDecomposition.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/TreeTools.hpp
-  timestamp: '2026-06-29 20:34:17+08:00'
+  timestamp: '2026-06-30 16:12:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp

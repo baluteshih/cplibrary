@@ -9,21 +9,21 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"template/monoid.cpp\"\nstruct Value {\n    int val;\n  \
-    \  Value(int _v = 0): val(_v) {}\n    Value operator+(const Value &rhs) {\n  \
-    \      return Value(min(val, rhs.val));\n    }\n    friend ostream& operator<<(ostream&\
+    \  Value(int _v = 0): val(_v) {}\n    Value operator+(const Value &rhs) const\
+    \ {\n        return Value(min(val, rhs.val));\n    }\n    friend ostream& operator<<(ostream&\
     \ os, const Value &v) {\n        os << v.val;\n        return os;\n    }\n   \
     \ friend istream& operator>>(istream& is, Value &v) {\n        is >> v.val;\n\
     \        return is;\n    }\n};\n"
   code: "struct Value {\n    int val;\n    Value(int _v = 0): val(_v) {}\n    Value\
-    \ operator+(const Value &rhs) {\n        return Value(min(val, rhs.val));\n  \
-    \  }\n    friend ostream& operator<<(ostream& os, const Value &v) {\n        os\
-    \ << v.val;\n        return os;\n    }\n    friend istream& operator>>(istream&\
+    \ operator+(const Value &rhs) const {\n        return Value(min(val, rhs.val));\n\
+    \    }\n    friend ostream& operator<<(ostream& os, const Value &v) {\n      \
+    \  os << v.val;\n        return os;\n    }\n    friend istream& operator>>(istream&\
     \ is, Value &v) {\n        is >> v.val;\n        return is;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: template/monoid.cpp
   requiredBy: []
-  timestamp: '2026-05-04 02:28:30+08:00'
+  timestamp: '2026-06-30 16:12:09+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: template/monoid.cpp

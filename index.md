@@ -74,6 +74,9 @@ data:
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
     - icon: ':heavy_check_mark:'
+      path: DataStructure/Doubling.hpp
+      title: Doubling
+    - icon: ':heavy_check_mark:'
       path: DataStructure/LazyDeleteHeap.hpp
       title: Lazy Delete Heap
     - icon: ':heavy_check_mark:'

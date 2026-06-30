@@ -3,8 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: DataStructure/Doubling.hpp
+    title: Doubling
+  - icon: ':heavy_check_mark:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
+  - icon: ':heavy_check_mark:'
+    path: DataStructure/SparseTable.hpp
+    title: Sparse Table
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
@@ -33,6 +39,9 @@ data:
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
@@ -84,12 +93,14 @@ data:
 
     template <typename A, typename B>
 
-    concept ValidAddableState = requires(A a, B b) { a + b; };
+    concept ValidAddableState = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a + b; };
 
 
     template <typename A, typename B>
 
-    concept ValidSubtractableState = requires(A a, B b) { a - b; };
+    concept ValidSubtractableState = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a - b; };
 
     '
   code: '#pragma once
@@ -102,12 +113,14 @@ data:
 
     template <typename A, typename B>
 
-    concept ValidAddableState = requires(A a, B b) { a + b; };
+    concept ValidAddableState = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a + b; };
 
 
     template <typename A, typename B>
 
-    concept ValidSubtractableState = requires(A a, B b) { a - b; };
+    concept ValidSubtractableState = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a - b; };
 
     '
   dependsOn: []
@@ -123,8 +136,10 @@ data:
   - Tree/HeavyLightDecomposition.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/TreeTools.hpp
+  - DataStructure/Doubling.hpp
   - DataStructure/LeftistTree.hpp
-  timestamp: '2026-06-29 20:34:17+08:00'
+  - DataStructure/SparseTable.hpp
+  timestamp: '2026-06-30 16:12:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
@@ -138,6 +153,7 @@ data:
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
 documentation_of: Algebra/ValidOperation.hpp
 layout: document
