@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/BCC.hpp
     title: Graph/BCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/minimum_arborescence.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -157,27 +157,28 @@ data:
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
     \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
-    \n\ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
-    \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\
-    \ntemplate <typename A, typename B>\nconcept ValidSubtractableState = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n#line 6 \"DataStructure/LeftistTree.hpp\"\
-    \n\ntemplate<typename Key = int,\n         typename Tag = void,\n         typename\
-    \ Info = void,\n         template<typename> class Allocator = DefaultAllocator,\n\
-    \         bool persistent = false\n>\nclass LeftistTree { \n    static constexpr\
-    \ bool hasTag = !std::is_same_v<Tag, void>;\n    static constexpr bool hasInfo\
-    \ = !std::is_same_v<Info, void>;\n    struct Empty {};\n    template <bool Condition,\
-    \ typename T>\n    static auto get_default() {\n        if constexpr (Condition)\
-    \ return T();\n        else return Empty{};\n    }\n    static_assert(!hasTag\
-    \ || ValidAddableState<Key, Tag>);\n    struct node {\n        node *l = nullptr,\
-    \ *r = nullptr;\n        Key key;\n        [[no_unique_address]] std::conditional_t<hasTag,\
-    \ Tag, Empty> lazy = get_default<hasTag, Tag>();\n        [[no_unique_address]]\
-    \ std::conditional_t<hasInfo, Info, Empty> info = get_default<hasInfo, Info>();\n\
-    \        int rank = 0;\n        void up() {\n            if (get_rank(r) > get_rank(l))\
-    \ std::swap(r, l);\n            rank = get_rank(r) + 1;\n        }\n        void\
-    \ give_tag(const auto &tag) requires (hasTag) {\n            key = key + tag;\n\
-    \            lazy = lazy + tag;\n        }\n        void down() requires (hasTag)\
-    \ {\n            bool need_tag = false;\n            if constexpr (std::equality_comparable<Tag>)\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 6 \"DataStructure/LeftistTree.hpp\"\n\ntemplate<typename\
+    \ Key = int,\n         typename Tag = void,\n         typename Info = void,\n\
+    \         template<typename> class Allocator = DefaultAllocator,\n         bool\
+    \ persistent = false\n>\nclass LeftistTree { \n    static constexpr bool hasTag\
+    \ = !std::is_same_v<Tag, void>;\n    static constexpr bool hasInfo = !std::is_same_v<Info,\
+    \ void>;\n    struct Empty {};\n    template <bool Condition, typename T>\n  \
+    \  static auto get_default() {\n        if constexpr (Condition) return T();\n\
+    \        else return Empty{};\n    }\n    static_assert(!hasTag || Addable<Key,\
+    \ Tag>);\n    struct node {\n        node *l = nullptr, *r = nullptr;\n      \
+    \  Key key;\n        [[no_unique_address]] std::conditional_t<hasTag, Tag, Empty>\
+    \ lazy = get_default<hasTag, Tag>();\n        [[no_unique_address]] std::conditional_t<hasInfo,\
+    \ Info, Empty> info = get_default<hasInfo, Info>();\n        int rank = 0;\n \
+    \       void up() {\n            if (get_rank(r) > get_rank(l)) std::swap(r, l);\n\
+    \            rank = get_rank(r) + 1;\n        }\n        void give_tag(const auto\
+    \ &tag) requires (hasTag) {\n            key = key + tag;\n            lazy =\
+    \ lazy + tag;\n        }\n        void down() requires (hasTag) {\n          \
+    \  bool need_tag = false;\n            if constexpr (std::equality_comparable<Tag>)\
     \ need_tag = (lazy != Tag());\n            else need_tag = true;\n           \
     \ if (!need_tag) return;\n            if (l) {\n                if constexpr (persistent)\
     \ l = NodeAlloc::allocate(*l);\n                l->give_tag(lazy);\n         \
@@ -269,8 +270,8 @@ data:
   isVerificationFile: false
   path: Graph/minimum_arborescence.hpp
   requiredBy: []
-  timestamp: '2026-06-30 16:12:09+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-30 17:03:55+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp
 documentation_of: Graph/minimum_arborescence.hpp

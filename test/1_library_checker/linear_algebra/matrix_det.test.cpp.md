@@ -2,18 +2,24 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/Field/concept.hpp
+    title: Algebra/Field/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -133,54 +139,67 @@ data:
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
     #line 5 \"test/1_library_checker/linear_algebra/matrix_det.test.cpp\"\n\n#line\
-    \ 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
+    \ 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Matrix/Vector.hpp\"\n\n#line 2 \"Algebra/Field/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Field/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isField = Addable<T, T> && Multiplicable<T,\
+    \ T> && std::default_initializable<T>;\n#line 4 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
     \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
-    \ Allocator> {\n    int n() const { return (int)this->size(); }\npublic:\n   \
-    \ Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector operator*(const\
-    \ T &v) const {\n        Vector res(*this);\n        for (int i = 0; i < n();\
-    \ ++i)\n            res[i] = res[i] * v;\n        return res;\n    }\n    Vector&\
+    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
     \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
-    \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector operator/(const\
-    \ T &v) const {\n        Vector res(*this);\n        for (int i = 0; i < n();\
-    \ ++i)\n            res[i] = res[i] / v;\n        return res;\n    }\n    Vector&\
-    \ operator/=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
-    \  (*this)[i] = (*this)[i] / v;\n        return *this;\n    }\n    Vector operator+(const\
-    \ Vector &rhs) const {\n        assert(n() == rhs.n());\n        Vector res(n());\n\
-    \        for (int i = 0; i < n(); ++i)\n            res[i] = (*this)[i] + rhs[i];\n\
-    \        return res;\n    }\n    Vector& operator+=(const Vector &rhs) {\n   \
-    \     assert(n() == rhs.n());\n        for (int i = 0; i < n(); ++i)\n       \
-    \     (*this)[i] = (*this)[i] + rhs[i];\n        return *this;\n    }\n    T operator*(const\
-    \ Vector &rhs) const {\n        assert(n() == rhs.n());\n        T res = T();\n\
-    \        for (int i = 0; i < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n\
-    \        return res;\n    }\n    Vector operator|(Vector const& rhs) const {\n\
-    \        Vector res(n() + rhs.n());\n        std::copy(this->begin(), this->end(),\
-    \ res.begin()); \n        std::copy(rhs.begin(), rhs.end(), res.begin() + n());\n\
-    \        return res;\n    }\n    int find_pivot() {\n        int pivot = 0;\n\
-    \        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n        return\
-    \ pivot;\n    }\n};\n#line 5 \"Matrix/Matrix.hpp\"\n\ntemplate<class T>\nclass\
-    \ Matrix : public std::vector<Vector<T>> {\npublic:\n    enum gauss_mode {half,\
-    \ full, euclidean};\n    int n() const { return (int)this->size(); }\n    int\
-    \ m() const { return n() ? (int)(*this)[0].size() : 0; }\n    Matrix(int _n, int\
-    \ _m): std::vector<Vector<T>>(_n, Vector<T>(_m)) {}\n    Matrix(int _n): Matrix(_n,\
-    \ _n) {}\n    Matrix(const Vector<T> &vec): Matrix(1, (int)vec.size()) {\n   \
-    \     (*this)[0] = vec;\n    }\n    Matrix transpose() const {\n        Matrix\
-    \ res(m(), n());\n        for (int i = 0; i < m(); ++i)\n            for (int\
-    \ j = 0; j < n(); ++j)\n                res[i][j] = (*this)[j][i];\n        return\
-    \ res;\n    }\n    Matrix operator*(const Matrix &rhs) const {\n        assert(m()\
-    \ == rhs.n());\n        Matrix res(n(), rhs.m());\n        auto _rhs = rhs.transpose();\n\
-    \        for (int i = 0; i < res.n(); ++i)\n            for (int j = 0; j < res.m();\
-    \ ++j)\n                res[i][j] = (*this)[i] * _rhs[j];\n        return res;\n\
-    \    }\n    Matrix operator*(const T &v) const {\n        Matrix res(*this);\n\
-    \        for (int i = 0; i < res.n(); ++i)\n            for (int j = 0; j < res.m();\
-    \ ++j)\n                res[i][j] = res[i][j] * v;\n        return res;\n    }\n\
-    \    Matrix operator/(const Matrix &rhs) const {\n        assert(m() == rhs.n());\n\
-    \        return *this * rhs.inv();\n    }\n    Matrix operator+(const Matrix &rhs)\
-    \ const {\n        assert(n() == rhs.n());\n        assert(m() == rhs.m());\n\
-    \        Matrix res(n(), m());\n        for (int i = 0; i < res.n(); ++i)\n  \
-    \          res[i] = (*this)[i] + rhs[i];\n        return res;\n    }\n    Matrix\
-    \ operator|(Matrix const& rhs) const {\n        assert(n() == rhs.n());\n    \
-    \    Matrix res(n(), m() + rhs.m());\n        for (int i = 0; i < n(); ++i)\n\
-    \            res[i] = (*this)[i] | rhs[i];\n        return res;\n    }\n    Matrix\
+    \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
+    \ T &v) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i]\
+    \ / v;\n        return *this;\n    }\n    Vector& operator+=(const Vector &rhs)\
+    \ {\n        assert(n() == rhs.n());\n        for (int i = 0; i < n(); ++i)\n\
+    \            (*this)[i] = (*this)[i] + rhs[i];\n        return *this;\n    }\n\
+    \    Vector& operator-=(const Vector &rhs) {\n        assert(n() == rhs.n());\n\
+    \        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] -\
+    \ rhs[i];\n        return *this;\n    }\n    T operator*(const Vector &rhs) const\
+    \ {\n        assert(n() == rhs.n());\n        T res = T();\n        for (int i\
+    \ = 0; i < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n        return\
+    \ res;\n    }\n    Vector& operator|=(Vector const& rhs) {\n        this->insert(this->end(),\
+    \ rhs.begin(), rhs.end());\n        return *this;\n    }\n    Vector operator*(const\
+    \ T &v) const { return Vector(*this) *= v; }\n    Vector operator/(const T &v)\
+    \ const { return Vector(*this) /= v; }\n    Vector operator+(const Vector &rhs)\
+    \ const { return Vector(*this) += rhs; }\n    Vector operator-(const Vector &rhs)\
+    \ const { return Vector(*this) -= rhs; }\n    Vector operator|(Vector const& rhs)\
+    \ const { return Vector(*this) |= rhs; }\n    int find_pivot() {\n        int\
+    \ pivot = 0;\n        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n\
+    \        return pivot;\n    }\n};\n#line 5 \"Matrix/Matrix.hpp\"\n\ntemplate<class\
+    \ T>\nclass Matrix : public std::vector<Vector<T>> {\npublic:\n    enum gauss_mode\
+    \ {half, full, euclidean};\n    int n() const { return (int)this->size(); }\n\
+    \    int m() const { return n() ? (int)(*this)[0].size() : 0; }\n    Matrix(int\
+    \ _n, int _m): std::vector<Vector<T>>(_n, Vector<T>(_m)) {}\n    Matrix(int _n):\
+    \ Matrix(_n, _n) {}\n    Matrix(const Vector<T> &vec): Matrix(1, (int)vec.size())\
+    \ {\n        (*this)[0] = vec;\n    }\n    Matrix transpose() const {\n      \
+    \  Matrix res(m(), n());\n        for (int i = 0; i < m(); ++i)\n            for\
+    \ (int j = 0; j < n(); ++j)\n                res[i][j] = (*this)[j][i];\n    \
+    \    return res;\n    }\n    Matrix& operator*=(const Matrix &rhs) {\n       \
+    \ assert(m() == rhs.n());\n        auto _rhs = rhs.transpose();\n        for (int\
+    \ i = 0; i < n(); ++i) {\n            auto cur = (*this)[i];\n            (*this)[i].resize(rhs.m());\n\
+    \            for (int j = 0; j < rhs.m(); ++j)\n                (*this)[i][j]\
+    \ = cur * _rhs[j];\n        }\n        return *this;\n    }\n    Matrix& operator*=(const\
+    \ T &v) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i] *= v;\n\
+    \        return *this;\n    }\n    Matrix& operator+=(const Matrix &rhs) {\n \
+    \       assert(n() == rhs.n());\n        assert(m() == rhs.m());\n        for\
+    \ (int i = 0; i < n(); ++i)\n            (*this)[i] += rhs[i];\n        return\
+    \ *this;\n    }\n    Matrix& operator-=(const Matrix &rhs) {\n        assert(n()\
+    \ == rhs.n());\n        assert(m() == rhs.m());\n        for (int i = 0; i < n();\
+    \ ++i)\n            (*this)[i] += rhs[i];\n        return *this;\n    }\n    Matrix&\
+    \ operator|=(Matrix const& rhs) {\n        assert(n() == rhs.n());\n        for\
+    \ (int i = 0; i < n(); ++i)\n            (*this)[i] |= rhs[i];\n        return\
+    \ *this;\n    }\n    Matrix& operator/=(const T &v) const { return *this *= v.inv();\
+    \ }\n    Matrix operator*(const Matrix &rhs) const { return Matrix(*this) *= rhs;\
+    \ }\n    Matrix operator*(const T &v) const { return Matrix(*this) *= v; }\n \
+    \   Matrix operator/(const T &v) const { return Matrix(*this) /= v; }\n    Matrix\
+    \ operator+(const Matrix &rhs) const { return Matrix(*this) += rhs; }\n    Matrix\
+    \ operator-(const Matrix &rhs) const { return Matrix(*this) -= rhs; }\n    Matrix\
+    \ operator|(const Matrix &rhs) const { return Matrix(*this) |= rhs; }\n    Matrix\
     \ rows(int l, int r) const {\n        assert(l <= r);\n        assert(r <= n());\n\
     \        Matrix res(r - l, m());\n        for (int i = 0; i < r - l; ++i)\n  \
     \          res[i] = (*this)[l + i];\n        return res;\n    }\n    Matrix columns(int\
@@ -276,10 +295,12 @@ data:
   - Numeric/internal_math.hpp
   - Matrix/Matrix.hpp
   - Matrix/Vector.hpp
+  - Algebra/Field/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: true
   path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-30 17:03:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/linear_algebra/matrix_det.test.cpp

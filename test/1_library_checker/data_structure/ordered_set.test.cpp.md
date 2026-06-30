@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
     title: Ordered Set
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

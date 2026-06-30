@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Doubling.hpp
     title: Doubling
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -27,29 +27,29 @@ data:
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#line 2 \"assumption.hpp\"\
     \n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp\"\
     \n\n#line 2 \"DataStructure/SparseTable.hpp\"\n\n#line 2 \"DataStructure/Doubling.hpp\"\
-    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate<typename T, typename Fallback>\n\
-    using ReplaceVoid = std::conditional_t<std::same_as<T, void>, Fallback, T>;\n\n\
-    template <typename A, typename B>\nconcept ValidAddableState = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename\
-    \ A, typename B>\nconcept ValidSubtractableState = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a - b; };\n#line 4 \"DataStructure/Doubling.hpp\"\n\n\
-    template<class Value, bool ImplicitJump = false>\nclass Doubling {\n    struct\
-    \ Empty {};\n    static constexpr bool hasValue = ValidAddableState<Value, Value>;\n\
-    \    static_assert(hasValue || !ImplicitJump);\n    inline int get_nxt(int j,\
-    \ int i) const {\n        if constexpr (ImplicitJump) return std::min(n - 1, i\
-    \ + (1 << j));\n        else return nxt[j][i];\n    }\n    void build() {\n  \
-    \      for (int j = 1; j < max_log; ++j)\n            for (int i = 0; i < n; ++i)\
-    \ {\n                if constexpr (!ImplicitJump) nxt[j][i] = nxt[j - 1][nxt[j\
-    \ - 1][i]];\n                if constexpr (hasValue) val[j][i] = val[j - 1][i]\
-    \ + val[j - 1][get_nxt(j - 1, i)]; \n            }\n    }\npublic:\n    int n,\
-    \ max_log;\n    [[no_unique_address]] std::conditional_t<ImplicitJump, Empty,\
-    \ std::vector<std::vector<int>>> nxt;\n    [[no_unique_address]] std::conditional_t<hasValue,\
-    \ std::vector<std::vector<Value>>, Empty> val; \n    Doubling() : n(0), max_log(0)\
-    \ {}\n    Doubling(int _n, const std::ranges::range auto &init_nxt) requires (!hasValue\
-    \ && !ImplicitJump) : n(_n), max_log(std::bit_width(static_cast<unsigned int>(n))\
-    \ + 1) { \n        nxt.assign(max_log, std::vector<int>(n)); \n        std::ranges::copy(init_nxt,\
-    \ nxt[0].begin());\n        build(); \n    }\n    Doubling(int _n, const std::ranges::range\
-    \ auto &init_val) requires (hasValue && ImplicitJump) : n(_n), max_log(std::bit_width(static_cast<unsigned\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"DataStructure/Doubling.hpp\"\
+    \n\ntemplate<class Value, bool ImplicitJump = false>\nclass Doubling {\n    struct\
+    \ Empty {};\n    static constexpr bool hasValue = Addable<Value, Value>;\n   \
+    \ static_assert(hasValue || !ImplicitJump);\n    inline int get_nxt(int j, int\
+    \ i) const {\n        if constexpr (ImplicitJump) return std::min(n - 1, i + (1\
+    \ << j));\n        else return nxt[j][i];\n    }\n    void build() {\n       \
+    \ for (int j = 1; j < max_log; ++j)\n            for (int i = 0; i < n; ++i) {\n\
+    \                if constexpr (!ImplicitJump) nxt[j][i] = nxt[j - 1][nxt[j - 1][i]];\n\
+    \                if constexpr (hasValue) val[j][i] = val[j - 1][i] + val[j - 1][get_nxt(j\
+    \ - 1, i)]; \n            }\n    }\npublic:\n    int n, max_log;\n    [[no_unique_address]]\
+    \ std::conditional_t<ImplicitJump, Empty, std::vector<std::vector<int>>> nxt;\n\
+    \    [[no_unique_address]] std::conditional_t<hasValue, std::vector<std::vector<Value>>,\
+    \ Empty> val; \n    Doubling() : n(0), max_log(0) {}\n    Doubling(int _n, const\
+    \ std::ranges::range auto &init_nxt) requires (!hasValue && !ImplicitJump) : n(_n),\
+    \ max_log(std::bit_width(static_cast<unsigned int>(n)) + 1) { \n        nxt.assign(max_log,\
+    \ std::vector<int>(n)); \n        std::ranges::copy(init_nxt, nxt[0].begin());\n\
+    \        build(); \n    }\n    Doubling(int _n, const std::ranges::range auto\
+    \ &init_val) requires (hasValue && ImplicitJump) : n(_n), max_log(std::bit_width(static_cast<unsigned\
     \ int>(n)) + 1) { \n        val.assign(max_log, std::vector<Value>(n)); \n   \
     \     std::ranges::copy(init_val, val[0].begin());\n        build(); \n    }\n\
     \    Doubling(int _n, const std::ranges::range auto &init_nxt, const std::ranges::range\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 16:12:09+08:00'
+  timestamp: '2026-06-30 17:03:55+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp

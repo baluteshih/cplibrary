@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: Algebra/Field/concept.hpp
+    title: Algebra/Field/concept.hpp
+  - icon: ':question:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
@@ -44,62 +50,71 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"Matrix/Vector.hpp\"\n\ntemplate<typename T, class Allocator\
-    \ = std::allocator<T>> \nclass Vector : public std::vector<T, Allocator> {\n \
-    \   int n() const { return (int)this->size(); }\npublic:\n    Vector(int _n):\
-    \ std::vector<T, Allocator>(_n) {}\n    Vector operator*(const T &v) const {\n\
-    \        Vector res(*this);\n        for (int i = 0; i < n(); ++i)\n         \
-    \   res[i] = res[i] * v;\n        return res;\n    }\n    Vector& operator*=(const\
+  bundledCode: "#line 2 \"Matrix/Vector.hpp\"\n\n#line 2 \"Algebra/Field/concept.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Field/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isField = Addable<T, T> && Multiplicable<T,\
+    \ T> && std::default_initializable<T>;\n#line 4 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
+    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
+    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
+    \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
+    \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
     \ T &v) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i]\
-    \ * v;\n        return *this;\n    }\n    Vector operator/(const T &v) const {\n\
-    \        Vector res(*this);\n        for (int i = 0; i < n(); ++i)\n         \
-    \   res[i] = res[i] / v;\n        return res;\n    }\n    Vector& operator/=(const\
+    \ / v;\n        return *this;\n    }\n    Vector& operator+=(const Vector &rhs)\
+    \ {\n        assert(n() == rhs.n());\n        for (int i = 0; i < n(); ++i)\n\
+    \            (*this)[i] = (*this)[i] + rhs[i];\n        return *this;\n    }\n\
+    \    Vector& operator-=(const Vector &rhs) {\n        assert(n() == rhs.n());\n\
+    \        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] -\
+    \ rhs[i];\n        return *this;\n    }\n    T operator*(const Vector &rhs) const\
+    \ {\n        assert(n() == rhs.n());\n        T res = T();\n        for (int i\
+    \ = 0; i < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n        return\
+    \ res;\n    }\n    Vector& operator|=(Vector const& rhs) {\n        this->insert(this->end(),\
+    \ rhs.begin(), rhs.end());\n        return *this;\n    }\n    Vector operator*(const\
+    \ T &v) const { return Vector(*this) *= v; }\n    Vector operator/(const T &v)\
+    \ const { return Vector(*this) /= v; }\n    Vector operator+(const Vector &rhs)\
+    \ const { return Vector(*this) += rhs; }\n    Vector operator-(const Vector &rhs)\
+    \ const { return Vector(*this) -= rhs; }\n    Vector operator|(Vector const& rhs)\
+    \ const { return Vector(*this) |= rhs; }\n    int find_pivot() {\n        int\
+    \ pivot = 0;\n        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n\
+    \        return pivot;\n    }\n};\n"
+  code: "#pragma once\n\n#include \"Algebra/Field/concept.hpp\"\n\ntemplate<typename\
+    \ T, class Allocator = std::allocator<T>> \nclass Vector : public std::vector<T,\
+    \ Allocator> {\n    static_assert(isField<T>);\n    int n() const { return (int)this->size();\
+    \ }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n) {}\n    Vector&\
+    \ operator*=(const T &v) {\n        for (int i = 0; i < n(); ++i)\n          \
+    \  (*this)[i] = (*this)[i] * v;\n        return *this;\n    }\n    Vector& operator/=(const\
     \ T &v) {\n        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i]\
-    \ / v;\n        return *this;\n    }\n    Vector operator+(const Vector &rhs)\
-    \ const {\n        assert(n() == rhs.n());\n        Vector res(n());\n       \
-    \ for (int i = 0; i < n(); ++i)\n            res[i] = (*this)[i] + rhs[i];\n \
-    \       return res;\n    }\n    Vector& operator+=(const Vector &rhs) {\n    \
-    \    assert(n() == rhs.n());\n        for (int i = 0; i < n(); ++i)\n        \
-    \    (*this)[i] = (*this)[i] + rhs[i];\n        return *this;\n    }\n    T operator*(const\
-    \ Vector &rhs) const {\n        assert(n() == rhs.n());\n        T res = T();\n\
-    \        for (int i = 0; i < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n\
-    \        return res;\n    }\n    Vector operator|(Vector const& rhs) const {\n\
-    \        Vector res(n() + rhs.n());\n        std::copy(this->begin(), this->end(),\
-    \ res.begin()); \n        std::copy(rhs.begin(), rhs.end(), res.begin() + n());\n\
-    \        return res;\n    }\n    int find_pivot() {\n        int pivot = 0;\n\
-    \        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n        return\
-    \ pivot;\n    }\n};\n"
-  code: "#pragma once\n\ntemplate<typename T, class Allocator = std::allocator<T>>\
-    \ \nclass Vector : public std::vector<T, Allocator> {\n    int n() const { return\
-    \ (int)this->size(); }\npublic:\n    Vector(int _n): std::vector<T, Allocator>(_n)\
-    \ {}\n    Vector operator*(const T &v) const {\n        Vector res(*this);\n \
-    \       for (int i = 0; i < n(); ++i)\n            res[i] = res[i] * v;\n    \
-    \    return res;\n    }\n    Vector& operator*=(const T &v) {\n        for (int\
-    \ i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] * v;\n        return\
-    \ *this;\n    }\n    Vector operator/(const T &v) const {\n        Vector res(*this);\n\
-    \        for (int i = 0; i < n(); ++i)\n            res[i] = res[i] / v;\n   \
-    \     return res;\n    }\n    Vector& operator/=(const T &v) {\n        for (int\
-    \ i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] / v;\n        return\
-    \ *this;\n    }\n    Vector operator+(const Vector &rhs) const {\n        assert(n()\
-    \ == rhs.n());\n        Vector res(n());\n        for (int i = 0; i < n(); ++i)\n\
-    \            res[i] = (*this)[i] + rhs[i];\n        return res;\n    }\n    Vector&\
-    \ operator+=(const Vector &rhs) {\n        assert(n() == rhs.n());\n        for\
-    \ (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] + rhs[i];\n \
-    \       return *this;\n    }\n    T operator*(const Vector &rhs) const {\n   \
-    \     assert(n() == rhs.n());\n        T res = T();\n        for (int i = 0; i\
-    \ < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n        return res;\n\
-    \    }\n    Vector operator|(Vector const& rhs) const {\n        Vector res(n()\
-    \ + rhs.n());\n        std::copy(this->begin(), this->end(), res.begin()); \n\
-    \        std::copy(rhs.begin(), rhs.end(), res.begin() + n());\n        return\
-    \ res;\n    }\n    int find_pivot() {\n        int pivot = 0;\n        while (pivot\
-    \ < n() && (*this)[pivot] == T(0)) ++pivot;\n        return pivot;\n    }\n};\n"
-  dependsOn: []
+    \ / v;\n        return *this;\n    }\n    Vector& operator+=(const Vector &rhs)\
+    \ {\n        assert(n() == rhs.n());\n        for (int i = 0; i < n(); ++i)\n\
+    \            (*this)[i] = (*this)[i] + rhs[i];\n        return *this;\n    }\n\
+    \    Vector& operator-=(const Vector &rhs) {\n        assert(n() == rhs.n());\n\
+    \        for (int i = 0; i < n(); ++i)\n            (*this)[i] = (*this)[i] -\
+    \ rhs[i];\n        return *this;\n    }\n    T operator*(const Vector &rhs) const\
+    \ {\n        assert(n() == rhs.n());\n        T res = T();\n        for (int i\
+    \ = 0; i < n(); ++i)\n            res = res + (*this)[i] * rhs[i];\n        return\
+    \ res;\n    }\n    Vector& operator|=(Vector const& rhs) {\n        this->insert(this->end(),\
+    \ rhs.begin(), rhs.end());\n        return *this;\n    }\n    Vector operator*(const\
+    \ T &v) const { return Vector(*this) *= v; }\n    Vector operator/(const T &v)\
+    \ const { return Vector(*this) /= v; }\n    Vector operator+(const Vector &rhs)\
+    \ const { return Vector(*this) += rhs; }\n    Vector operator-(const Vector &rhs)\
+    \ const { return Vector(*this) -= rhs; }\n    Vector operator|(Vector const& rhs)\
+    \ const { return Vector(*this) |= rhs; }\n    int find_pivot() {\n        int\
+    \ pivot = 0;\n        while (pivot < n() && (*this)[pivot] == T(0)) ++pivot;\n\
+    \        return pivot;\n    }\n};\n"
+  dependsOn:
+  - Algebra/Field/concept.hpp
+  - Algebra/ValidOperation.hpp
   isVerificationFile: false
   path: Matrix/Vector.hpp
   requiredBy:
   - Graph/count_spanning_tree.hpp
   - Matrix/Matrix.hpp
-  timestamp: '2026-02-27 19:30:58+08:00'
+  timestamp: '2026-06-30 17:03:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp

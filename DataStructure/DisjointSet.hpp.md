@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PotentialDisjointSet.hpp
     title: Potential Disjoint Set
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
   - icon: ':heavy_check_mark:'
@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,9 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T =\
@@ -131,7 +131,7 @@ data:
   - Graph/minimum_spanning_tree.hpp
   - DataStructure/PotentialDisjointSet.hpp
   timestamp: '2026-05-04 02:28:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp

@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

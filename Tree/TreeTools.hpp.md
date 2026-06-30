@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Doubling.hpp
     title: Doubling
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/TreeTools.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\n\n#line\
@@ -110,46 +110,46 @@ data:
     \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
     \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
     #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
-    \ntemplate<typename T, typename Fallback>\nusing ReplaceVoid = std::conditional_t<std::same_as<T,\
-    \ void>, Fallback, T>;\n\ntemplate <typename A, typename B>\nconcept ValidAddableState\
-    \ = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\
-    \ntemplate <typename A, typename B>\nconcept ValidSubtractableState = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
+    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
     \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
-    \ type = std::conditional_t<!std::is_same_v<Vertex, void>, Vertex, Edge>;\n};\n\
-    \ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename\
-    \ UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\n\
-    concept ValidAddableUnifiedWeight = \n    (std::is_void_v<Vertex> && ValidAddableState<Edge,\
-    \ Edge>) ||\n    (ValidAddableState<Vertex, Vertex> && (std::is_void_v<Edge> ||\
-    \ ValidAddableState<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass Tree : public Graph<false, Edge,\
-    \ Vertex> {\npublic:\n    using super = Graph<false, Edge, Vertex>;\n    using\
-    \ super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using WeightType\
-    \ = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n    std::vector<int>\
-    \ pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n    Tree(int\
-    \ n): super(n), current_root(-1) {}\n    Tree(const super &graph, const std::vector<int>\
-    \ &edge_index): super(graph.n()), current_root(-1) {\n        assert(int(edge_index.size())\
-    \ + 1 == this->n());\n        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
-    \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
-    \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
-    \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
-    \ preorder.reserve(this->n());\n        postorder.clear(), postorder.reserve(this->n());\n\
-    \        int dft = -1;\n        auto dfs = [&](auto& self, int u, int f) -> void\
-    \ {\n            pa[u] = f;\n            dfs_in[u] = ++dft;\n            preorder.push_back(u);\n\
-    \            for (auto [v, eid] : this->G[u])\n                if (eid != f)\n\
-    \                    self(self, v, eid);\n            dfs_out[u] = dft;\n    \
-    \        postorder.push_back(u);\n        };\n        dfs(dfs, root, -1);\n  \
-    \  }\n    bool ancestor(int u, int v) const {\n        return dfs_in[u] <= dfs_in[v]\
-    \ && dfs_out[v] <= dfs_out[u];\n    }\n    void run_order(const std::vector<int>\
-    \ &order, const auto &func) {\n        for (int i : order)\n            func(i);\n\
-    \    }\n    void predfs(const auto &func) {\n        run_order(preorder, func);\n\
-    \    }\n    void postdfs(const auto &func) {\n        run_order(postorder, func);\n\
-    \    }\n    int parent(int u) const {\n        if (pa[u] == -1) return u;\n  \
-    \      return this->opposite(u, pa[u]);\n    }\n    int parent_eid(int u) const\
-    \ {\n        return pa[u];\n    }\n    super::edge_v& parent_edge(int u) {\n \
-    \       assert(pa[u] != -1);\n        return this->edge(pa[u]);\n    }\n    super::edge_v\
-    \ parent_edge(int u) const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n\
-    \    }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
+    \ type = std::conditional_t<std::is_void_v<Vertex>, Edge, Vertex>;\n};\n\ntemplate\
+    \ <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename UnifiedWeight<Edge,\
+    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept ValidAddableUnifiedWeight\
+    \ = \n    (std::is_void_v<Vertex> && Addable<Edge, Edge>) ||\n    (Addable<Vertex,\
+    \ Vertex> && (std::is_void_v<Edge> || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
+    \ Graph<false, Edge, Vertex> {\npublic:\n    using super = Graph<false, Edge,\
+    \ Vertex>;\n    using super::hasEdgeWeight;\n    using super::hasVertexWeight;\n\
+    \    using WeightType = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n\
+    \    std::vector<int> pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n\
+    \    Tree(int n): super(n), current_root(-1) {}\n    Tree(const super &graph,\
+    \ const std::vector<int> &edge_index): super(graph.n()), current_root(-1) {\n\
+    \        assert(int(edge_index.size()) + 1 == this->n());\n        for (int eid\
+    \ : edge_index)\n            this->add_edge(graph.edge(eid));\n    }\n    void\
+    \ traverse(int root = 0) {\n        current_root = root;\n        std::vector<int>(this->n()).swap(pa);\n\
+    \        std::vector<int>(this->n()).swap(dfs_in);\n        std::vector<int>(this->n()).swap(dfs_out);\n\
+    \        preorder.clear(), preorder.reserve(this->n());\n        postorder.clear(),\
+    \ postorder.reserve(this->n());\n        int dft = -1;\n        auto dfs = [&](auto&\
+    \ self, int u, int f) -> void {\n            pa[u] = f;\n            dfs_in[u]\
+    \ = ++dft;\n            preorder.push_back(u);\n            for (auto [v, eid]\
+    \ : this->G[u])\n                if (eid != f)\n                    self(self,\
+    \ v, eid);\n            dfs_out[u] = dft;\n            postorder.push_back(u);\n\
+    \        };\n        dfs(dfs, root, -1);\n    }\n    bool ancestor(int u, int\
+    \ v) const {\n        return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];\n\
+    \    }\n    void run_order(const std::vector<int> &order, const auto &func) {\n\
+    \        for (int i : order)\n            func(i);\n    }\n    void predfs(const\
+    \ auto &func) {\n        run_order(preorder, func);\n    }\n    void postdfs(const\
+    \ auto &func) {\n        run_order(postorder, func);\n    }\n    int parent(int\
+    \ u) const {\n        if (pa[u] == -1) return u;\n        return this->opposite(u,\
+    \ pa[u]);\n    }\n    int parent_eid(int u) const {\n        return pa[u];\n \
+    \   }\n    super::edge_v& parent_edge(int u) {\n        assert(pa[u] != -1);\n\
+    \        return this->edge(pa[u]);\n    }\n    super::edge_v parent_edge(int u)\
+    \ const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n \
+    \   }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
     \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
     \ -1);\n            traverse(root);\n        }\n        std::vector<int> res(this->n());\n\
     \        for (int i = 0; i < this->n(); ++i)\n            res[i] = parent(i);\n\
@@ -163,7 +163,7 @@ data:
     \ -1);\n            traverse(root);\n        }\n        std::vector<Edge> res(this->n());\n\
     \        predfs([&](int u) {\n            if (parent_eid(u) != -1)\n         \
     \       res[u] = res[parent(u)] + parent_edge(u).weight;\n        });\n      \
-    \  return res;\n    }\n    auto weighted_distance(int root = -1) requires (ValidAddableUnifiedWeight<Edge,\
+    \  return res;\n    }\n    auto weighted_distance(int root = -1) requires (AddableUnifiedWeight<Edge,\
     \ Vertex>) {\n        if (current_root == -1 || (root != -1 && current_root !=\
     \ root)) {\n            assert(root != -1);\n            traverse(root);\n   \
     \     }\n        std::vector<WeightType> res(this->n());\n        predfs([&](int\
@@ -195,7 +195,7 @@ data:
     \        });\n        return res;\n    }\n};\n#line 2 \"DataStructure/Doubling.hpp\"\
     \n\n#line 4 \"DataStructure/Doubling.hpp\"\n\ntemplate<class Value, bool ImplicitJump\
     \ = false>\nclass Doubling {\n    struct Empty {};\n    static constexpr bool\
-    \ hasValue = ValidAddableState<Value, Value>;\n    static_assert(hasValue || !ImplicitJump);\n\
+    \ hasValue = Addable<Value, Value>;\n    static_assert(hasValue || !ImplicitJump);\n\
     \    inline int get_nxt(int j, int i) const {\n        if constexpr (ImplicitJump)\
     \ return std::min(n - 1, i + (1 << j));\n        else return nxt[j][i];\n    }\n\
     \    void build() {\n        for (int j = 1; j < max_log; ++j)\n            for\
@@ -233,66 +233,9 @@ data:
     \    using super::hasEdgeWeight;\n    using super::hasVertexWeight;\n    using\
     \ typename super::WeightType;\n    static constexpr bool hasWeight = !std::is_same_v<WeightType,\
     \ void>;\n    static constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight)\
-    \ && ValidAddableState<WeightType, WeightType>) || \n                        \
-    \                ((hasEdgeWeight && hasVertexWeight) && ValidAddableState<Vertex,\
-    \ Edge>); \n    static constexpr bool hasSubtract = ValidSubtractableState<WeightType,\
-    \ WeightType>; \n    std::vector<int> dep;\n    Doubling<std::conditional_t<hasAddition,\
-    \ WeightType, void>, false> pa_table;\n    struct Empty {};\n    [[no_unique_address]]\
-    \ std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>, Empty> data;\n\
-    \    [[no_unique_address]] std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>,\
-    \ Empty> rootpath;\n    void build_rootpath(int root = -1) {\n        if (this->current_root\
-    \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
-    \ == -1) root = 0;\n            this->traverse(root);\n        }\n        this->depth().swap(dep);\n\
-    \        if constexpr (hasAddition) {\n            this->weighted_distance().swap(rootpath);\n\
-    \        }\n    }\n    void build_patable(int root = -1) {\n        if (this->current_root\
-    \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
-    \ == -1) root = 0;\n            this->traverse(root);\n        }\n        if constexpr\
-    \ (hasAddition) pa_table = decltype(pa_table)(this->n(), this->parents(), std::views::iota(0,\
-    \ this->n()) | std::views::transform([&](int i) {\n            WeightType res\
-    \ = WeightType();\n            if constexpr (this->hasEdgeWeight && this->hasVertexWeight)\
-    \ {\n                res = this->weight[i];\n                if (i != root) res\
-    \ = res + this->parent_edge(i).weight;\n            }\n            else if constexpr\
-    \ (this->hasEdgeWeight) {\n                if (i != root) res = this->parent_edge(i).weight;\
-    \ \n            }\n            else if constexpr (this->hasVertexWeight) {\n \
-    \               res = this->weight[i];\n            }\n            return res;\n\
-    \        }));\n        else pa_table = decltype(pa_table)(this->n(), this->parents());\
-    \ \n    }\n    int lca(int u, int v) {\n        if (this->ancestor(u, v)) return\
-    \ u;\n        if (this->ancestor(v, u)) return v;\n        u = pa_table.maximal_prefix(u,\
-    \ [&](int x) { return !this->ancestor(x, v); });\n        return pa_table.nxt[0][u];\n\
-    \    }\n    // be aware of difference in reverse direction edges, this function\
-    \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
-    \ u, int v) requires (hasAddition) {\n        assert(pa_table.n > 0);\n      \
-    \  int L = __lg(this->n());\n        WeightType res = WeightType();\n        if\
-    \ (!this->ancestor(u, v)) {\n            std::tie(res, u) = pa_table.maximal_prefix_prod(u,\
-    \ [&](int x) { return !this->ancestor(x, v); });\n            res = res + pa_table.val[0][u];\n\
-    \            u = pa_table.nxt[0][u];\n        }\n        if constexpr (hasVertexWeight)\
-    \ res = res + this->weight[u];\n        if (!this->ancestor(v, u)) {\n       \
-    \     auto [oppo, _v] = pa_table.maximal_prefix_prod(v, [&](int x) { return !this->ancestor(x,\
-    \ u); });\n            res = res + oppo + pa_table.val[0][_v];\n        }\n  \
-    \      return res;\n    }\n    int distance(int u, int v, int _lca = -1) {\n \
-    \       if (dep.empty()) build_rootpath();\n        if (_lca == -1) _lca = lca(u,\
-    \ v);\n        return dep[u] + dep[v] - dep[_lca] * 2;\n    }\n    auto weighted_distance(int\
-    \ u, int v, int _lca = -1) requires (hasAddition && hasSubtract) {\n        if\
-    \ (dep.empty()) build_rootpath();\n        if (_lca == -1) _lca = lca(u, v);\n\
-    \        WeightType res = rootpath[u] + rootpath[v] - rootpath[_lca] - rootpath[_lca];\n\
-    \        if constexpr (hasVertexWeight) res = res + this->weight[_lca];\n    \
-    \    return res;\n    }\n    int step(int u, int v, int d, int _lca = -1) {\n\
-    \        if (_lca == -1) _lca = lca(u, v);\n        if (d > distance(u, v, _lca))\n\
-    \            return -1;\n        if (this->ancestor(u, v)) { \n            std::swap(u,\
-    \ v);\n            d = distance(u, v, _lca) - d;\n        }\n        if (this->ancestor(v,\
-    \ u)) return pa_table.step(u, d);\n        if (d <= distance(u, _lca, _lca))\n\
-    \            return step(u, _lca, d, _lca);\n        d -= distance(u, _lca, _lca);\n\
-    \        return step(v, _lca, distance(v, _lca, _lca) - d, _lca);\n    }\n};\n"
-  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n#include \"DataStructure/Doubling.hpp\"\
-    \n#include \"Algebra/ValidOperation.hpp\"\n\ntemplate<typename Edge = void, typename\
-    \ Vertex = void>\nclass TreeTools : public Tree<Edge, Vertex> {\npublic:\n   \
-    \ using super = Tree<Edge, Vertex>;\n    using super::Tree;\n    using super::hasEdgeWeight;\n\
-    \    using super::hasVertexWeight;\n    using typename super::WeightType;\n  \
-    \  static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;\n    static\
-    \ constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && ValidAddableState<WeightType,\
-    \ WeightType>) || \n                                        ((hasEdgeWeight &&\
-    \ hasVertexWeight) && ValidAddableState<Vertex, Edge>); \n    static constexpr\
-    \ bool hasSubtract = ValidSubtractableState<WeightType, WeightType>; \n    std::vector<int>\
+    \ && Addable<WeightType, WeightType>) || \n                                  \
+    \      ((hasEdgeWeight && hasVertexWeight) && Addable<Vertex, Edge>); \n    static\
+    \ constexpr bool hasSubtract = Subtractable<WeightType, WeightType>; \n    std::vector<int>\
     \ dep;\n    Doubling<std::conditional_t<hasAddition, WeightType, void>, false>\
     \ pa_table;\n    struct Empty {};\n    [[no_unique_address]] std::conditional_t<hasWeight,\
     \ std::vector<std::vector<WeightType>>, Empty> data;\n    [[no_unique_address]]\
@@ -319,10 +262,66 @@ data:
     \    }\n    // be aware of difference in reverse direction edges, this function\
     \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
     \ u, int v) requires (hasAddition) {\n        assert(pa_table.n > 0);\n      \
-    \  int L = __lg(this->n());\n        WeightType res = WeightType();\n        if\
-    \ (!this->ancestor(u, v)) {\n            std::tie(res, u) = pa_table.maximal_prefix_prod(u,\
-    \ [&](int x) { return !this->ancestor(x, v); });\n            res = res + pa_table.val[0][u];\n\
-    \            u = pa_table.nxt[0][u];\n        }\n        if constexpr (hasVertexWeight)\
+    \  WeightType res = WeightType();\n        if (!this->ancestor(u, v)) {\n    \
+    \        std::tie(res, u) = pa_table.maximal_prefix_prod(u, [&](int x) { return\
+    \ !this->ancestor(x, v); });\n            res = res + pa_table.val[0][u];\n  \
+    \          u = pa_table.nxt[0][u];\n        }\n        if constexpr (hasVertexWeight)\
+    \ res = res + this->weight[u];\n        if (!this->ancestor(v, u)) {\n       \
+    \     auto [oppo, _v] = pa_table.maximal_prefix_prod(v, [&](int x) { return !this->ancestor(x,\
+    \ u); });\n            res = res + oppo + pa_table.val[0][_v];\n        }\n  \
+    \      return res;\n    }\n    int distance(int u, int v, int _lca = -1) {\n \
+    \       if (dep.empty()) build_rootpath();\n        if (_lca == -1) _lca = lca(u,\
+    \ v);\n        return dep[u] + dep[v] - dep[_lca] * 2;\n    }\n    auto weighted_distance(int\
+    \ u, int v, int _lca = -1) requires (hasAddition && hasSubtract) {\n        if\
+    \ (dep.empty()) build_rootpath();\n        if (_lca == -1) _lca = lca(u, v);\n\
+    \        WeightType res = rootpath[u] + rootpath[v] - rootpath[_lca] - rootpath[_lca];\n\
+    \        if constexpr (hasVertexWeight) res = res + this->weight[_lca];\n    \
+    \    return res;\n    }\n    int step(int u, int v, int d, int _lca = -1) {\n\
+    \        if (_lca == -1) _lca = lca(u, v);\n        if (d > distance(u, v, _lca))\n\
+    \            return -1;\n        if (this->ancestor(u, v)) { \n            std::swap(u,\
+    \ v);\n            d = distance(u, v, _lca) - d;\n        }\n        if (this->ancestor(v,\
+    \ u)) return pa_table.step(u, d);\n        if (d <= distance(u, _lca, _lca))\n\
+    \            return step(u, _lca, d, _lca);\n        d -= distance(u, _lca, _lca);\n\
+    \        return step(v, _lca, distance(v, _lca, _lca) - d, _lca);\n    }\n};\n"
+  code: "#pragma once\n\n#include \"Tree/Tree.hpp\"\n#include \"DataStructure/Doubling.hpp\"\
+    \n#include \"Algebra/ValidOperation.hpp\"\n\ntemplate<typename Edge = void, typename\
+    \ Vertex = void>\nclass TreeTools : public Tree<Edge, Vertex> {\npublic:\n   \
+    \ using super = Tree<Edge, Vertex>;\n    using super::Tree;\n    using super::hasEdgeWeight;\n\
+    \    using super::hasVertexWeight;\n    using typename super::WeightType;\n  \
+    \  static constexpr bool hasWeight = !std::is_same_v<WeightType, void>;\n    static\
+    \ constexpr bool hasAddition = ((!hasEdgeWeight || !hasVertexWeight) && Addable<WeightType,\
+    \ WeightType>) || \n                                        ((hasEdgeWeight &&\
+    \ hasVertexWeight) && Addable<Vertex, Edge>); \n    static constexpr bool hasSubtract\
+    \ = Subtractable<WeightType, WeightType>; \n    std::vector<int> dep;\n    Doubling<std::conditional_t<hasAddition,\
+    \ WeightType, void>, false> pa_table;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>, Empty> data;\n\
+    \    [[no_unique_address]] std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>,\
+    \ Empty> rootpath;\n    void build_rootpath(int root = -1) {\n        if (this->current_root\
+    \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
+    \ == -1) root = 0;\n            this->traverse(root);\n        }\n        this->depth().swap(dep);\n\
+    \        if constexpr (hasAddition) {\n            this->weighted_distance().swap(rootpath);\n\
+    \        }\n    }\n    void build_patable(int root = -1) {\n        if (this->current_root\
+    \ == -1 || (root != -1 && this->current_root != root)) {\n            if (root\
+    \ == -1) root = 0;\n            this->traverse(root);\n        }\n        if constexpr\
+    \ (hasAddition) pa_table = decltype(pa_table)(this->n(), this->parents(), std::views::iota(0,\
+    \ this->n()) | std::views::transform([&](int i) {\n            WeightType res\
+    \ = WeightType();\n            if constexpr (this->hasEdgeWeight && this->hasVertexWeight)\
+    \ {\n                res = this->weight[i];\n                if (i != root) res\
+    \ = res + this->parent_edge(i).weight;\n            }\n            else if constexpr\
+    \ (this->hasEdgeWeight) {\n                if (i != root) res = this->parent_edge(i).weight;\
+    \ \n            }\n            else if constexpr (this->hasVertexWeight) {\n \
+    \               res = this->weight[i];\n            }\n            return res;\n\
+    \        }));\n        else pa_table = decltype(pa_table)(this->n(), this->parents());\
+    \ \n    }\n    int lca(int u, int v) {\n        if (this->ancestor(u, v)) return\
+    \ u;\n        if (this->ancestor(v, u)) return v;\n        u = pa_table.maximal_prefix(u,\
+    \ [&](int x) { return !this->ancestor(x, v); });\n        return pa_table.nxt[0][u];\n\
+    \    }\n    // be aware of difference in reverse direction edges, this function\
+    \ only support this when v is an ancestor of u\n    WeightType path_weight(int\
+    \ u, int v) requires (hasAddition) {\n        assert(pa_table.n > 0);\n      \
+    \  WeightType res = WeightType();\n        if (!this->ancestor(u, v)) {\n    \
+    \        std::tie(res, u) = pa_table.maximal_prefix_prod(u, [&](int x) { return\
+    \ !this->ancestor(x, v); });\n            res = res + pa_table.val[0][u];\n  \
+    \          u = pa_table.nxt[0][u];\n        }\n        if constexpr (hasVertexWeight)\
     \ res = res + this->weight[u];\n        if (!this->ancestor(v, u)) {\n       \
     \     auto [oppo, _v] = pa_table.maximal_prefix_prod(v, [&](int x) { return !this->ancestor(x,\
     \ u); });\n            res = res + oppo + pa_table.val[0][_v];\n        }\n  \
@@ -349,8 +348,8 @@ data:
   isVerificationFile: false
   path: Tree/TreeTools.hpp
   requiredBy: []
-  timestamp: '2026-06-30 16:12:09+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-30 17:03:55+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
