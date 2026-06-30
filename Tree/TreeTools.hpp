@@ -61,7 +61,6 @@ public:
     // be aware of difference in reverse direction edges, this function only support this when v is an ancestor of u
     WeightType path_weight(int u, int v) requires (hasAddition) {
         assert(pa_table.n > 0);
-        int L = __lg(this->n());
         WeightType res = WeightType();
         if (!this->ancestor(u, v)) {
             std::tie(res, u) = pa_table.maximal_prefix_prod(u, [&](int x) { return !this->ancestor(x, v); });
