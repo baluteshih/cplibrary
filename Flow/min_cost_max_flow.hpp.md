@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/min_cost_max_flow.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -188,7 +188,7 @@ data:
   - Flow/min_cost_circulation.hpp
   - Flow/bounded_cost_circulation.hpp
   timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B
@@ -163,7 +163,7 @@ data:
   path: test/2_aoj/minimum_cost_flow.test.cpp
   requiredBy: []
   timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/minimum_cost_flow.test.cpp
 layout: document

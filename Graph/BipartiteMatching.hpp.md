@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/BipartiteGraph.hpp
     title: Graph/BipartiteGraph.hpp
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/BipartiteMatching.hpp\"\n\n#line 2 \"Graph/BipartiteGraph.hpp\"\
@@ -103,7 +103,7 @@ data:
     \ Edge, Vertex> {\n    using super = Graph<true, Edge, Vertex>;\nprotected:\n\
     \    int rsize;\npublic:\n    BipartiteGraph(int _l, int _r) : super(_l), rsize(_r)\
     \ {} \n    int l() const { return this->G.size(); }\n    int r() const { return\
-    \ rsize; }\n    std::vector<int> out_degree() override {\n        std::vector<int>\
+    \ rsize; }\n    std::vector<int> out_degree() const override {\n        std::vector<int>\
     \ res(rsize);\n        for (auto &e : this->edges)\n            ++res[e.from];\n\
     \        return res;\n    }\n    BipartiteGraph reversed() {\n        Graph res(rsize,\
     \ this->n());\n        for (auto &e : this->edges) {\n            if constexpr\
@@ -179,8 +179,8 @@ data:
   isVerificationFile: false
   path: Graph/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-06-30 21:38:18+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/bipartitematching.test.cpp
 documentation_of: Graph/BipartiteMatching.hpp

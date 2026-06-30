@@ -17,10 +17,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/IterableOf.hpp
       title: Algebra/IterableOf.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
     - icon: ':heavy_check_mark:'
@@ -28,7 +28,7 @@ data:
       title: Algebra/size_value.hpp
   - name: Algebra/Monoid
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/concept.hpp
       title: Algebra/Monoid/concept.hpp
   - name: Convolution
@@ -68,7 +68,7 @@ data:
       title: Convolution/xor_convolution.hpp
   - name: DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/BIT.hpp
       title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
@@ -107,7 +107,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: Potential Disjoint Set
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
@@ -153,7 +153,7 @@ data:
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -211,10 +211,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/BCC.hpp
       title: Graph/BCC.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/BipartiteGraph.hpp
       title: Graph/BipartiteGraph.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Graph/BipartiteMatching.hpp
       title: Graph/BipartiteMatching.hpp
     - icon: ':heavy_check_mark:'
@@ -229,7 +229,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
     - icon: ':question:'
@@ -333,7 +333,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -351,7 +351,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -449,18 +449,18 @@ data:
       title: String/z_algo.hpp
   - name: Tree/CentroidDS
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidDS/DistanceSolver.hpp
       title: Tree/CentroidDS/DistanceSolver.hpp
   - name: Tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidTree.hpp
       title: Tree/CentroidTree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
     - icon: ':heavy_check_mark:'
@@ -469,7 +469,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/centroid_divide_and_conquer.hpp
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
@@ -686,7 +686,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/biconnected_components.test.cpp
       title: test/1_library_checker/graph/biconnected_components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/bipartitematching.test.cpp
       title: test/1_library_checker/graph/bipartitematching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -894,16 +894,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - name: test/2_aoj
@@ -947,10 +947,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
       title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/minimum_cost_flow.test.cpp
       title: test/2_aoj/minimum_cost_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
       title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
