@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -16,11 +16,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Graph/count_eulerian_circuits.hpp
+    title: Graph/count_eulerian_circuits.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+    title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
@@ -75,23 +81,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -104,23 +111,23 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\n// Reference:\
-    \ Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef _MSC_VER\n#include\
-    \ <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long long safe_mod(long\
-    \ long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n    return x;\n\
-    }\nconstexpr long long pow_mod_constexpr(long long x, long long n, int m) {\n\
-    \    if (m == 1) return 0;\n    unsigned int _m = (unsigned int)(m);\n    unsigned\
-    \ long long r = 1;\n    unsigned long long y = safe_mod(x, m);\n    while (n)\
-    \ {\n        if (n & 1) r = (r * y) % _m;\n        y = (y * y) % _m;\n       \
-    \ n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int n)\
-    \ {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\
+    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
+    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long\
+    \ long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x +=\
+    \ m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x, long\
+    \ long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
+    \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
+    \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int\
+    \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
     \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
     \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
     \ (long long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
@@ -330,10 +337,12 @@ data:
   - Algebra/ValidOperation.hpp
   isVerificationFile: false
   path: Graph/count_spanning_tree.hpp
-  requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
+  requiredBy:
+  - Graph/count_eulerian_circuits.hpp
+  timestamp: '2026-06-30 20:37:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Graph/count_spanning_tree.hpp

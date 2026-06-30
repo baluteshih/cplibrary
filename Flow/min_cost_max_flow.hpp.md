@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/min_cost_max_flow.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -69,23 +69,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -98,20 +99,20 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename T, typename C = T>\n\
-    struct CostFlowWeight {\n    T cap;\n    C cost;\n    T flow;\n    CostFlowWeight()\
-    \ : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T c, C w, T f = 0) : cap(c),\
-    \ cost(w), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
-    \ CostFlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \"\
-    , \" << v.flow << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T,\
-    \ typename C = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T,\
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename\
+    \ T, typename C = T>\nstruct CostFlowWeight {\n    T cap;\n    C cost;\n    T\
+    \ flow;\n    CostFlowWeight() : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T\
+    \ c, C w, T f = 0) : cap(c), cost(w), flow(f) {}\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const CostFlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.cost\
+    \ << \", \" << v.flow << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename\
+    \ T, typename C = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T,\
     \ C>, void> { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T,\
     \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
     \ up;\n    template<bool bellmanford = true>\n    bool shortest_path(int s, int\
@@ -186,8 +187,8 @@ data:
   requiredBy:
   - Flow/min_cost_circulation.hpp
   - Flow/bounded_cost_circulation.hpp
-  timestamp: '2026-06-24 18:12:55+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-30 20:37:16+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     IGNORE: ''
@@ -67,23 +67,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -96,35 +97,35 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Flow/Dinic.hpp\"\n\ntemplate<typename T>\nstruct FlowWeight {\n    T\
-    \ cap, flow;\n    FlowWeight() : cap(0), flow(0) {}\n    FlowWeight(T c, T f =\
-    \ 0) : cap(c), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os,\
-    \ const FlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.flow <<\
-    \ \"]\";\n        return os;\n    }\n};\n\ntemplate<class T>\nclass Dinic : public\
-    \ Graph<true, FlowWeight<T>, void> { // 0-base\npublic:\n    using super = Graph<true,\
-    \ FlowWeight<T>, void>;\n    std::vector<int> dis, cur;\n    T dfs(int u, T push_cap,\
-    \ int t) {\n        if (u == t || push_cap == 0) return push_cap;\n        for\
-    \ (int &i = cur[u]; i < std::ssize(this->G[u]); ++i) {\n            auto [v, eid]\
-    \ = this->G[u][i];\n            auto &w = this->edges[eid].weight;\n         \
-    \   if (dis[v] == dis[u] + 1 && w.cap > w.flow) {\n                T df = dfs(v,\
-    \ std::min(w.cap - w.flow, push_cap), t);\n                if (df > T(0)) {\n\
-    \                    w.flow += df;\n                    this->edges[eid ^ 1].weight.flow\
-    \ -= df;\n                    return df;\n                }\n            }\n \
-    \       }\n        dis[u] = -1;\n        return 0;\n    }\n    bool bfs(int s,\
-    \ int t) {\n        std::ranges::fill(dis, -1);\n        std::queue<int> q;\n\
-    \        q.push(s);\n        dis[s] = 0;\n        while (!q.empty()) {\n     \
-    \       int u = q.front();\n            q.pop();\n            for (auto [v, eid]\
-    \ : this->G[u]) {\n                auto &w = this->edges[eid].weight;\n      \
-    \          if (dis[v] == -1 && w.cap > w.flow) {\n                    dis[v] =\
-    \ dis[u] + 1;\n                    q.push(v);\n                }\n           \
-    \ }\n        }\n        return dis[t] != -1;\n    }\n    Dinic(int _n) : super(_n),\
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 4 \"Flow/Dinic.hpp\"\n\ntemplate<typename T>\nstruct\
+    \ FlowWeight {\n    T cap, flow;\n    FlowWeight() : cap(0), flow(0) {}\n    FlowWeight(T\
+    \ c, T f = 0) : cap(c), flow(f) {}\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const FlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.flow\
+    \ << \"]\";\n        return os;\n    }\n};\n\ntemplate<class T>\nclass Dinic :\
+    \ public Graph<true, FlowWeight<T>, void> { // 0-base\npublic:\n    using super\
+    \ = Graph<true, FlowWeight<T>, void>;\n    std::vector<int> dis, cur;\n    T dfs(int\
+    \ u, T push_cap, int t) {\n        if (u == t || push_cap == 0) return push_cap;\n\
+    \        for (int &i = cur[u]; i < std::ssize(this->G[u]); ++i) {\n          \
+    \  auto [v, eid] = this->G[u][i];\n            auto &w = this->edges[eid].weight;\n\
+    \            if (dis[v] == dis[u] + 1 && w.cap > w.flow) {\n                T\
+    \ df = dfs(v, std::min(w.cap - w.flow, push_cap), t);\n                if (df\
+    \ > T(0)) {\n                    w.flow += df;\n                    this->edges[eid\
+    \ ^ 1].weight.flow -= df;\n                    return df;\n                }\n\
+    \            }\n        }\n        dis[u] = -1;\n        return 0;\n    }\n  \
+    \  bool bfs(int s, int t) {\n        std::ranges::fill(dis, -1);\n        std::queue<int>\
+    \ q;\n        q.push(s);\n        dis[s] = 0;\n        while (!q.empty()) {\n\
+    \            int u = q.front();\n            q.pop();\n            for (auto [v,\
+    \ eid] : this->G[u]) {\n                auto &w = this->edges[eid].weight;\n \
+    \               if (dis[v] == -1 && w.cap > w.flow) {\n                    dis[v]\
+    \ = dis[u] + 1;\n                    q.push(v);\n                }\n         \
+    \   }\n        }\n        return dis[t] != -1;\n    }\n    Dinic(int _n) : super(_n),\
     \ dis(_n), cur(_n) {}\n    void add_edge(int u, int v, T cap) {\n        super::add_edge(u,\
     \ v, FlowWeight<T>(cap, 0));\n        super::add_edge(v, u, FlowWeight<T>(0, 0));\n\
     \    }\n    T maxflow(int s, int t) {\n        T flow = 0, df;\n        while\
@@ -172,8 +173,8 @@ data:
   isVerificationFile: true
   path: test/7_loj/maxflow.test.cpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-06-30 20:37:16+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/7_loj/maxflow.test.cpp
 layout: document

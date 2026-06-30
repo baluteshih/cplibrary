@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/centroid_divide_and_conquer.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -82,23 +82,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -111,54 +112,54 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
-    \ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
-    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
-    \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
-    \ type = std::conditional_t<std::is_void_v<Vertex>, Edge, Vertex>;\n};\n\ntemplate\
-    \ <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename UnifiedWeight<Edge,\
-    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept AddableUnifiedWeight\
-    \ = \n    (std::is_void_v<Vertex> && Addable<Edge, Edge>) ||\n    (Addable<Vertex,\
-    \ Vertex> && (std::is_void_v<Edge> || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\
-    \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
-    \ Graph<false, Edge, Vertex> {\npublic:\n    using super = Graph<false, Edge,\
-    \ Vertex>;\n    using super::hasEdgeWeight;\n    using super::hasVertexWeight;\n\
-    \    using WeightType = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n\
-    \    std::vector<int> pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n\
-    \    Tree(int n): super(n), current_root(-1) {}\n    Tree(const super &graph,\
-    \ const std::vector<int> &edge_index): super(graph.n()), current_root(-1) {\n\
-    \        assert(int(edge_index.size()) + 1 == this->n());\n        for (int eid\
-    \ : edge_index)\n            this->add_edge(graph.edge(eid));\n    }\n    void\
-    \ traverse(int root = 0) {\n        current_root = root;\n        std::vector<int>(this->n()).swap(pa);\n\
-    \        std::vector<int>(this->n()).swap(dfs_in);\n        std::vector<int>(this->n()).swap(dfs_out);\n\
-    \        preorder.clear(), preorder.reserve(this->n());\n        postorder.clear(),\
-    \ postorder.reserve(this->n());\n        int dft = -1;\n        auto dfs = [&](auto&\
-    \ self, int u, int f) -> void {\n            pa[u] = f;\n            dfs_in[u]\
-    \ = ++dft;\n            preorder.push_back(u);\n            for (auto [v, eid]\
-    \ : this->G[u])\n                if (eid != f)\n                    self(self,\
-    \ v, eid);\n            dfs_out[u] = dft;\n            postorder.push_back(u);\n\
-    \        };\n        dfs(dfs, root, -1);\n    }\n    bool ancestor(int u, int\
-    \ v) const {\n        return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];\n\
-    \    }\n    void run_order(const std::vector<int> &order, const auto &func) {\n\
-    \        for (int i : order)\n            func(i);\n    }\n    void predfs(const\
-    \ auto &func) {\n        run_order(preorder, func);\n    }\n    void postdfs(const\
-    \ auto &func) {\n        run_order(postorder, func);\n    }\n    int parent(int\
-    \ u) const {\n        if (pa[u] == -1) return u;\n        return this->opposite(u,\
-    \ pa[u]);\n    }\n    int parent_eid(int u) const {\n        return pa[u];\n \
-    \   }\n    super::edge_v& parent_edge(int u) {\n        assert(pa[u] != -1);\n\
-    \        return this->edge(pa[u]);\n    }\n    super::edge_v parent_edge(int u)\
-    \ const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n \
-    \   }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\n\ntemplate <typename Edge,\
+    \ typename Vertex>\nstruct UnifiedWeight {\n    using type = std::conditional_t<std::is_void_v<Vertex>,\
+    \ Edge, Vertex>;\n};\n\ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t\
+    \ = typename UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename\
+    \ Vertex>\nconcept AddableUnifiedWeight = \n    (std::is_void_v<Vertex> && Addable<Edge,\
+    \ Edge>) ||\n    (Addable<Vertex, Vertex> && (std::is_void_v<Edge> || Addable<Vertex,\
+    \ Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename Edge = void, typename\
+    \ Vertex = void>\nclass Tree : public Graph<false, Edge, Vertex> {\npublic:\n\
+    \    using super = Graph<false, Edge, Vertex>;\n    using super::hasEdgeWeight;\n\
+    \    using super::hasVertexWeight;\n    using WeightType = UnifiedWeight_t<Edge,\
+    \ Vertex>;\n    int current_root;\n    std::vector<int> pa, dfs_in, dfs_out;\n\
+    \    std::vector<int> preorder, postorder;\n    Tree(int n): super(n), current_root(-1)\
+    \ {}\n    Tree(const super &graph, const std::vector<int> &edge_index): super(graph.n()),\
+    \ current_root(-1) {\n        assert(int(edge_index.size()) + 1 == this->n());\n\
+    \        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
+    \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
+    \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
+    \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
+    \ preorder.reserve(this->n());\n        postorder.clear(), postorder.reserve(this->n());\n\
+    \        int dft = -1;\n        auto dfs = [&](auto& self, int u, int f) -> void\
+    \ {\n            pa[u] = f;\n            dfs_in[u] = ++dft;\n            preorder.push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (eid != f)\n\
+    \                    self(self, v, eid);\n            dfs_out[u] = dft;\n    \
+    \        postorder.push_back(u);\n        };\n        dfs(dfs, root, -1);\n  \
+    \  }\n    bool ancestor(int u, int v) const {\n        return dfs_in[u] <= dfs_in[v]\
+    \ && dfs_out[v] <= dfs_out[u];\n    }\n    void run_order(const std::vector<int>\
+    \ &order, const auto &func) {\n        for (int i : order)\n            func(i);\n\
+    \    }\n    void predfs(const auto &func) {\n        run_order(preorder, func);\n\
+    \    }\n    void postdfs(const auto &func) {\n        run_order(postorder, func);\n\
+    \    }\n    int parent(int u) const {\n        if (pa[u] == -1) return u;\n  \
+    \      return this->opposite(u, pa[u]);\n    }\n    int parent_eid(int u) const\
+    \ {\n        return pa[u];\n    }\n    super::edge_v& parent_edge(int u) {\n \
+    \       assert(pa[u] != -1);\n        return this->edge(pa[u]);\n    }\n    super::edge_v\
+    \ parent_edge(int u) const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n\
+    \    }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
     \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
     \ -1);\n            traverse(root);\n        }\n        std::vector<int> res(this->n());\n\
     \        for (int i = 0; i < this->n(); ++i)\n            res[i] = parent(i);\n\
@@ -311,8 +312,8 @@ data:
   requiredBy:
   - Tree/CentroidTree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
-  timestamp: '2026-06-30 17:16:44+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-06-30 20:37:16+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

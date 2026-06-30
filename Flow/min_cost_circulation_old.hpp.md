@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -54,23 +54,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -83,38 +84,38 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Flow/min_cost_circulation_old.hpp\"\n\ntemplate<typename T, typename\
-    \ C = T>\nstruct CostCirculationFlowWeight {\n    T fcap;\n    C cost;\n    T\
-    \ cap, flow;\n    CostCirculationFlowWeight() : cap(0), fcap(0), cost(0), flow(0)\
-    \ {}\n    CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c), cost(w),\
-    \ cap(cc), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
-    \ CostCirculationFlowWeight &v) {\n        os << \"[\" << v.fcap << \", \" <<\
-    \ v.cost << \", \" << v.cap << \", \" << v.flow << \"]\";\n        return os;\n\
-    \    }\n};\n\n// O(VE * ElogC)\ntemplate<typename T, typename C = T>\nclass min_cost_circulation\
-    \ : public Graph<true, CostCirculationFlowWeight<T, C>, void> { // 0-base\npublic:\n\
-    \    using super = Graph<true, CostCirculationFlowWeight<T, C>, void>;\n    std::vector<int>\
-    \ past;\n    std::vector<C> dis, pot;\n    void BellmanFord(int s) {\n       \
-    \ std::vector<int> inq(this->n());\n        std::ranges::fill(dis, std::numeric_limits<C>::max());\n\
-    \        std::queue<int> q;\n        auto relax = [&](int u, C d, int eid) {\n\
-    \            if (dis[u] > d) {\n                dis[u] = d, past[u] = eid;\n \
-    \               if (!inq[u]) inq[u] = 1, q.push(u);\n            }\n        };\n\
-    \        relax(s, 0, -1);\n        while (!q.empty()) {\n            int u = q.front();\n\
-    \            q.pop(), inq[u] = 0;\n            for (auto [v, eid] : this->G[u])\
-    \ {\n                auto &w = this->edges[eid].weight;\n                if (w.cap\
-    \ > w.flow)\n                    relax(v, dis[u] + w.cost, eid);\n           \
-    \ }\n        }\n    }\n    void try_edge(int eid) {\n        auto &cur = this->edges[eid];\n\
-    \        auto &w = cur.weight;\n        if (w.cap > w.flow) return ++w.cap, void();\n\
-    \        BellmanFord(cur.to);\n        if (dis[cur.from] + w.cost < 0) {\n   \
-    \         ++w.flow, --this->edges[eid ^ 1].weight.flow;\n            for (int\
-    \ i = cur.from; past[i] != -1; i = this->edges[past[i]].from) {\n            \
-    \    ++this->edges[past[i]].weight.flow;\n                --this->edges[past[i]\
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 4 \"Flow/min_cost_circulation_old.hpp\"\n\ntemplate<typename\
+    \ T, typename C = T>\nstruct CostCirculationFlowWeight {\n    T fcap;\n    C cost;\n\
+    \    T cap, flow;\n    CostCirculationFlowWeight() : cap(0), fcap(0), cost(0),\
+    \ flow(0) {}\n    CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c),\
+    \ cost(w), cap(cc), flow(f) {}\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const CostCirculationFlowWeight &v) {\n        os << \"[\" << v.fcap <<\
+    \ \", \" << v.cost << \", \" << v.cap << \", \" << v.flow << \"]\";\n        return\
+    \ os;\n    }\n};\n\n// O(VE * ElogC)\ntemplate<typename T, typename C = T>\nclass\
+    \ min_cost_circulation : public Graph<true, CostCirculationFlowWeight<T, C>, void>\
+    \ { // 0-base\npublic:\n    using super = Graph<true, CostCirculationFlowWeight<T,\
+    \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    void\
+    \ BellmanFord(int s) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
+    \ std::numeric_limits<C>::max());\n        std::queue<int> q;\n        auto relax\
+    \ = [&](int u, C d, int eid) {\n            if (dis[u] > d) {\n              \
+    \  dis[u] = d, past[u] = eid;\n                if (!inq[u]) inq[u] = 1, q.push(u);\n\
+    \            }\n        };\n        relax(s, 0, -1);\n        while (!q.empty())\
+    \ {\n            int u = q.front();\n            q.pop(), inq[u] = 0;\n      \
+    \      for (auto [v, eid] : this->G[u]) {\n                auto &w = this->edges[eid].weight;\n\
+    \                if (w.cap > w.flow)\n                    relax(v, dis[u] + w.cost,\
+    \ eid);\n            }\n        }\n    }\n    void try_edge(int eid) {\n     \
+    \   auto &cur = this->edges[eid];\n        auto &w = cur.weight;\n        if (w.cap\
+    \ > w.flow) return ++w.cap, void();\n        BellmanFord(cur.to);\n        if\
+    \ (dis[cur.from] + w.cost < 0) {\n            ++w.flow, --this->edges[eid ^ 1].weight.flow;\n\
+    \            for (int i = cur.from; past[i] != -1; i = this->edges[past[i]].from)\
+    \ {\n                ++this->edges[past[i]].weight.flow;\n                --this->edges[past[i]\
     \ ^ 1].weight.flow;\n            }\n        }\n        ++w.cap;\n    }\n    min_cost_circulation(int\
     \ _n) : super(_n), past(_n), dis(_n), pot(_n) {} \n    void solve(int mxlg) {\n\
     \        for (int b = mxlg; b >= 0; --b) {\n            for (int i = 0; i < this->n();\
@@ -175,7 +176,7 @@ data:
   isVerificationFile: false
   path: Flow/min_cost_circulation_old.hpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-30 20:37:16+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Flow/min_cost_circulation_old.hpp

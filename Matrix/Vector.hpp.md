@@ -4,10 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Graph/count_eulerian_circuits.hpp
+    title: Graph/count_eulerian_circuits.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+    title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
@@ -112,6 +118,7 @@ data:
   isVerificationFile: false
   path: Matrix/Vector.hpp
   requiredBy:
+  - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
   - Matrix/Matrix.hpp
   timestamp: '2026-06-30 17:38:58+08:00'
@@ -125,6 +132,7 @@ data:
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Matrix/Vector.hpp

@@ -12,6 +12,9 @@ data:
     path: Convolution/xor_convolution.hpp
     title: Convolution/xor_convolution.hpp
   - icon: ':heavy_check_mark:'
+    path: Graph/count_eulerian_circuits.hpp
+    title: Graph/count_eulerian_circuits.hpp
+  - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -50,7 +53,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
   - icon: ':heavy_check_mark:'
@@ -178,6 +181,9 @@ data:
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+    title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - icon: ':heavy_check_mark:'
@@ -264,15 +270,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -400,6 +406,7 @@ data:
   - Numbers/stirling_first_kind.hpp
   - Numbers/stirling_first_kind_row.hpp
   - Numbers/bernoulli_number.hpp
+  - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
   - Misc/bigint.hpp
   - Numeric/Modint.hpp
@@ -421,7 +428,7 @@ data:
   - Polynomial/shift.hpp
   - Matrix/Matrix.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -468,6 +475,7 @@ data:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/enumerate_triangles.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp

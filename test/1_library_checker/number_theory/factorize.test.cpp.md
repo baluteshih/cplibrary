@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/pollard_rho.hpp
     title: Numeric/pollard_rho.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

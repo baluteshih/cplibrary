@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -60,23 +60,24 @@ data:
     \ (!directed) G[e.to].emplace_back(e.from, edges.size());\n        edges.emplace_back(e);\n\
     \    }\n    void pop_edge() {\n        G[edges.back().from].pop_back();\n    \
     \    if constexpr (!directed) G[edges.back().to].pop_back();\n        edges.pop_back();\n\
-    \    }\n    std::vector<int> in_degree() {\n        std::vector<int> res(n());\n\
-    \        for (auto &e : edges)\n            ++res[e.to];\n        return res;\n\
-    \    }\n    virtual std::vector<int> out_degree() {\n        std::vector<int>\
-    \ res(n());\n        for (auto &e : edges)\n            ++res[e.from];\n     \
-    \   return res;\n    }\n    std::vector<std::pair<int, int>>& operator[](int idx)\
-    \ {\n        return G[idx];\n    }\n    const std::vector<std::pair<int, int>>&\
-    \ operator[](int idx) const {\n        return G[idx];\n    }\n    Graph reversed()\
-    \ const {\n        Graph res(n());\n        for (auto &e : edges)\n          \
-    \  res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight) res.set_vertex_weight(weight);\n\
-    \        return res;\n    }\n    std::pair<std::vector<int>, std::vector<int>>\
-    \ cycle() {\n        std::vector<int> vis(this->n());\n        std::vector<int>\
-    \ res_v, res_e;\n        int cyc_end = -1;\n        auto dfs = [&](auto self,\
-    \ int u, int f) -> int {\n            vis[u] = 1;\n            for (auto [v, eid]\
-    \ : G[u]) {\n                if (eid == f || vis[v] == 2) continue;\n        \
-    \        if (vis[v] == 1) {\n                    res_v.push_back(u);\n       \
-    \             res_e.push_back(eid);\n                    cyc_end = v;\n      \
-    \              return 1;\n                }\n                int rt = self(self,\
+    \    }\n    std::vector<int> in_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.from];\n\
+    \            ++res[e.to];\n        }\n        return res;\n    }\n    virtual\
+    \ std::vector<int> out_degree() const {\n        std::vector<int> res(n());\n\
+    \        for (auto &e : edges) {\n            if constexpr (!is_directed) ++res[e.to];\n\
+    \            ++res[e.from];\n        }\n        return res;\n    }\n    std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) {\n        return G[idx];\n    }\n    const std::vector<std::pair<int,\
+    \ int>>& operator[](int idx) const {\n        return G[idx];\n    }\n    Graph\
+    \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
+    \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
+    \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
+    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
+    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
+    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
+    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
+    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
+    \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
     \                       res_e.push_back(eid);\n                        res_v.push_back(u);\n\
     \                    }\n                    if (cyc_end == u) rt = 2;\n      \
@@ -89,43 +90,43 @@ data:
     \ Edge, Vertex> res(this->n());\n        for (auto &e : edges)\n            if\
     \ (rk[e.from] < rk[e.to])\n                res.add_edge(e);\n            else\n\
     \                res.add_edge(e.reversed());\n        return res;\n    }\n   \
-    \ Graph induced(const std::vector<int> &subset) {\n        std::vector<int> idx(n,\
-    \ -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n        Graph\
-    \ res(subset.size());\n        for (auto e : edges) {\n            e.from = idx[e.from],\
-    \ e.to = idx[e.to];\n            if (e.to == -1 || e.from == -1) continue;\n \
-    \           res.add_edge(e);\n        }\n        return res;\n    }\n};\n\ntemplate<typename\
-    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
-    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n};\n\
-    #line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge = void, typename Vertex\
-    \ = void>\r\nstruct BCC : public Graph<false, Edge, Vertex> { // 0-base\r\n  \
-    \  using super = Graph<false, Edge, Vertex>;\r\n    int dft, nbcc;\r\n    std::vector<int>\
-    \ low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>> bcc;\r\n   \
-    \ void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n        for (;\
-    \ stk.back() != u; stk.pop_back())\r\n            bln[stk.back()] = nbcc, bcc[nbcc].push_back(stk.back());\r\
-    \n        stk.pop_back(), bln[u] = nbcc++;\r\n    }\r\n    void dfs(int u, int\
-    \ f) {\r\n        int child = 0;\r\n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\
-    \n        for (auto [v, eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n \
-    \               dfs(v, u), ++child;\r\n                low[u] = std::min(low[u],\
-    \ low[v]);\r\n                if (dfn[u] <= low[v]) {\r\n                    is_ap[u]\
-    \ = 1, bln[u] = nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\
-    \n                }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n \
-    \               low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child\
-    \ < 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n  \
-    \  }\r\n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n)\
-    \ {}\r\n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()),\
-    \ bln(G.n()), is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0;\
-    \ i < this->n(); ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n   \
-    \ /*\r\n    Return std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex\
-    \ index of the vertex u belongs to\r\n    */\r\n    std::pair<std::vector<int>,\
-    \ std::vector<std::vector<int>>> block_cut_tree() const {\r\n        int count\
-    \ = nbcc;\r\n        std::vector<int> cir, newbln(bln);\r\n        std::vector<std::vector<int>>\
-    \ nG;\r\n        cir.resize(count);\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (is_ap[i])\r\n                newbln[i] = count++;\r\n\
-    \        cir.resize(count, 1), nG.resize(count);\r\n        for (int i = 0; i\
-    \ < count && !cir[i]; ++i)\r\n            for (int j : bcc[i])\r\n           \
-    \     if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]), nG[newbln[j]].push_back(i);\r\
-    \n        return {newbln, nG};\r\n    } // up to 2 * n - 2 nodes!! bln[i] for\
-    \ id\r\n};\r\n"
+    \ Graph induced(const std::vector<int> &subset) const {\n        std::vector<int>\
+    \ idx(n(), -1);\n        for (int cnt = 0; int i : subset) idx[i] = cnt++;\n \
+    \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
+    \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
+    \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
+    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
+    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
+    \ Vertex>::Graph;\n};\n#line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge =\
+    \ void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge, Vertex>\
+    \ { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n    int dft,\
+    \ nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
+    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
+    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
+    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
+    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
+    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
+    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
+    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
+    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
+    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
+    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
+    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
+    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
+    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
+    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
+    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
+    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
+    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
+    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
+    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
+    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
+    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
+    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
+    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
+    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
+    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
+    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n"
   code: "#pragma once\r\n\r\n#include \"Graph/base.hpp\"\r\n\r\ntemplate<typename\
     \ Edge = void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge,\
     \ Vertex> { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n   \
@@ -161,7 +162,7 @@ data:
   isVerificationFile: false
   path: Graph/BCC.hpp
   requiredBy: []
-  timestamp: '2026-06-24 18:12:55+08:00'
+  timestamp: '2026-06-30 20:37:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/biconnected_components.test.cpp
