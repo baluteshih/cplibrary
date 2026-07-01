@@ -138,13 +138,13 @@ data:
       title: Enumerate/subset_enumerate.hpp
   - name: Flow
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
     - icon: ':heavy_check_mark:'
@@ -232,7 +232,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -474,7 +474,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -996,7 +996,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/4_codeforces/104114B.test.cpp
       title: test/4_codeforces/104114B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/4_codeforces/106033E.test.cpp
       title: test/4_codeforces/106033E.test.cpp
   - name: test/5_NCOJ
@@ -1017,16 +1017,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/7_loj/2302.test.cpp
       title: test/7_loj/2302.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/bounded_flow.test.cpp
       title: test/7_loj/bounded_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/max_bounded_flow.test.cpp
       title: test/7_loj/max_bounded_flow.test.cpp
-    - icon: ':x:'
-      path: test/7_loj/maxflow.test.cpp
-      title: test/7_loj/maxflow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/7_loj/min_bounded_flow.test.cpp
       title: test/7_loj/min_bounded_flow.test.cpp
   - name: test/8_luogu

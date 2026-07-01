@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     IGNORE: ''
@@ -197,7 +197,7 @@ data:
   path: test/7_loj/bounded_flow.test.cpp
   requiredBy: []
   timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/7_loj/bounded_flow.test.cpp
 layout: document

@@ -1,32 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/maxflow.test.cpp
-    title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/Dinic.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
@@ -218,11 +215,10 @@ data:
   requiredBy:
   - Flow/bounded_flow.hpp
   timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/4_codeforces/106033E.test.cpp
   - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/maxflow.test.cpp
   - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
 documentation_of: Flow/Dinic.hpp

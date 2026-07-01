@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -180,7 +180,7 @@ data:
     \ this->weight[u];\n        });\n        return res;\n    }\n    std::vector<int>\
     \ subtree_size(int root = -1) {\n        if (current_root == -1 || (root != -1\
     \ && current_root != root)) {\n            assert(root != -1);\n            traverse(root);\n\
-    \        }\n        std::vector<int> res(this->n(), 1);\n        predfs([&](int\
+    \        }\n        std::vector<int> res(this->n(), 1);\n        postdfs([&](int\
     \ u) {\n            for (auto [v, eid] : this->G[u])\n                if (eid\
     \ != parent_eid(u))\n                    res[u] += res[v];\n        });\n    \
     \    return res;\n    }\n    std::vector<int> path(int u, int v, int root = -1)\
@@ -318,7 +318,7 @@ data:
   isVerificationFile: false
   path: Tree/CentroidDS/DistanceSolver.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-06-30 23:51:20+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

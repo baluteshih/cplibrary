@@ -474,7 +474,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
   - icon: ':heavy_check_mark:'
@@ -489,16 +489,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/maxflow.test.cpp
-    title: test/7_loj/maxflow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -510,9 +507,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "assumption.hpp"
@@ -537,7 +534,7 @@ data:
   requiredBy:
   - default_code.hpp
   timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
@@ -671,7 +668,6 @@ data:
   - test/4_codeforces/104114B.test.cpp
   - test/4_codeforces/106033E.test.cpp
   - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/maxflow.test.cpp
   - test/7_loj/2302.test.cpp
   - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp

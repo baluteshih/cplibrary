@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -193,7 +193,7 @@ data:
     \ this->weight[u];\n        });\n        return res;\n    }\n    std::vector<int>\
     \ subtree_size(int root = -1) {\n        if (current_root == -1 || (root != -1\
     \ && current_root != root)) {\n            assert(root != -1);\n            traverse(root);\n\
-    \        }\n        std::vector<int> res(this->n(), 1);\n        predfs([&](int\
+    \        }\n        std::vector<int> res(this->n(), 1);\n        postdfs([&](int\
     \ u) {\n            for (auto [v, eid] : this->G[u])\n                if (eid\
     \ != parent_eid(u))\n                    res[u] += res[v];\n        });\n    \
     \    return res;\n    }\n    std::vector<int> path(int u, int v, int root = -1)\
@@ -367,7 +367,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-06-30 23:51:20+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
