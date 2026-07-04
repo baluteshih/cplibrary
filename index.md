@@ -87,6 +87,9 @@ data:
       path: DataStructure/Doubling.hpp
       title: Doubling
     - icon: ':heavy_check_mark:'
+      path: DataStructure/DynamicBitset.hpp
+      title: Dynamic Bitset
+    - icon: ':heavy_check_mark:'
       path: DataStructure/LazyDeleteHeap.hpp
       title: Lazy Delete Heap
     - icon: ':heavy_check_mark:'
@@ -270,6 +273,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Matrix/Matrix.hpp
       title: Matrix/Matrix.hpp
+    - icon: ':heavy_check_mark:'
+      path: Matrix/MatrixF2.hpp
+      title: Matrix/MatrixF2.hpp
     - icon: ':heavy_check_mark:'
       path: Matrix/Vector.hpp
       title: Matrix/Vector.hpp
@@ -480,6 +486,9 @@ data:
     - icon: ':warning:'
       path: default_code.hpp
       title: default_code.hpp
+    - icon: ':heavy_check_mark:'
+      path: pragma.hpp
+      title: pragma.hpp
   - name: template
     pages:
     - icon: ':warning:'
@@ -763,6 +772,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
       title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
+      title: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
       title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp

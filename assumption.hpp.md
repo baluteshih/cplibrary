@@ -262,6 +262,9 @@ data:
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
+    title: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - icon: ':heavy_check_mark:'
@@ -541,6 +544,7 @@ data:
   - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
   - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
