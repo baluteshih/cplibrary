@@ -84,6 +84,7 @@
 "test/1_library_checker/linear_algebra/matrix_det.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/linear_algebra/matrix_product.test.cpp": "2026-06-30 17:38:58 +0800",
+"test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp": "2026-07-04 18:47:24 +0800",
 "test/1_library_checker/linear_algebra/matrix_rank.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp": "2026-06-30 17:38:58 +0800",
