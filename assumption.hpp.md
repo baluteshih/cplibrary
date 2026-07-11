@@ -460,14 +460,11 @@ data:
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/17153.test.cpp
-    title: test/3_qoj/17153.test.cpp
+    path: test/3_yukicoder/1077.test.cpp
+    title: test/3_yukicoder/1077.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/2162.test.cpp
-    title: test/3_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/3_qoj/6445.test.cpp
-    title: test/3_qoj/6445.test.cpp
+    path: test/3_yukicoder/2114.test.cpp
+    title: test/3_yukicoder/2114.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
@@ -510,6 +507,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/17153.test.cpp
+    title: test/9_qoj/17153.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/2162.test.cpp
+    title: test/9_qoj/2162.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/6445.test.cpp
+    title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -667,6 +673,9 @@ data:
   - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/9_qoj/2162.test.cpp
+  - test/9_qoj/6445.test.cpp
+  - test/9_qoj/17153.test.cpp
   - test/4_codeforces/101673A.test.cpp
   - test/4_codeforces/101242J.test.cpp
   - test/4_codeforces/104114B.test.cpp
@@ -679,9 +688,6 @@ data:
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/3_qoj/2162.test.cpp
-  - test/3_qoj/6445.test.cpp
-  - test/3_qoj/17153.test.cpp
   - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
@@ -706,6 +712,8 @@ data:
   - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/projection.test.cpp
   - test/2_aoj/common_tangent.test.cpp
+  - test/3_yukicoder/2114.test.cpp
+  - test/3_yukicoder/1077.test.cpp
   - test/6_TIOJ/1503.test.cpp
 documentation_of: assumption.hpp
 layout: document

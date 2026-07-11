@@ -38,7 +38,10 @@ data:
     \ safe\n#define orange(...) safe\n#endif\nvoid chmax(auto &x, auto val) { x =\
     \ max(x, val); }\nvoid chmin(auto &x, auto val) { x = min(x, val); }\nauto floor_div(auto\
     \ a, auto b) { return a / b - (a % b && (a < 0) ^ (b < 0)); }\nauto ceil_div(auto\
-    \ a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }\nvector<int> count_array(const\
+    \ a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }\nstring bitstring(auto\
+    \ x, int width = -1) {\n    string res;\n    while (x) res.push_back((x & 1) +\
+    \ '0'), x >>= 1;\n    if (res.empty()) res = \"0\";\n    if (width != -1) res.resize(width,\
+    \ '0');\n    ranges::reverse(res);\n    return res;\n}\nvector<int> count_array(const\
     \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
     \ return res;\n}\n"
@@ -68,7 +71,10 @@ data:
     \ safe\n#define orange(...) safe\n#endif\nvoid chmax(auto &x, auto val) { x =\
     \ max(x, val); }\nvoid chmin(auto &x, auto val) { x = min(x, val); }\nauto floor_div(auto\
     \ a, auto b) { return a / b - (a % b && (a < 0) ^ (b < 0)); }\nauto ceil_div(auto\
-    \ a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }\nvector<int> count_array(const\
+    \ a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }\nstring bitstring(auto\
+    \ x, int width = -1) {\n    string res;\n    while (x) res.push_back((x & 1) +\
+    \ '0'), x >>= 1;\n    if (res.empty()) res = \"0\";\n    if (width != -1) res.resize(width,\
+    \ '0');\n    ranges::reverse(res);\n    return res;\n}\nvector<int> count_array(const\
     \ auto &container, int sz = -1) {\n    if (sz == -1) sz = *ranges::max_element(container)\
     \ + 1;\n    vector<int> res(sz);\n    for (auto x : container) ++res[x];\n   \
     \ return res;\n}\n"
@@ -77,7 +83,7 @@ data:
   isVerificationFile: false
   path: default_code.hpp
   requiredBy: []
-  timestamp: '2026-06-29 22:13:42+08:00'
+  timestamp: '2026-07-12 01:44:14+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: default_code.hpp

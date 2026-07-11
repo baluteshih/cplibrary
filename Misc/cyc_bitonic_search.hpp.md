@@ -25,14 +25,14 @@ data:
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/2162.test.cpp
-    title: test/3_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/2162.test.cpp
+    title: test/9_qoj/2162.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -80,10 +80,10 @@ data:
   verifiedWith:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
+  - test/9_qoj/2162.test.cpp
   - test/4_codeforces/101242J.test.cpp
   - test/4_codeforces/104114B.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/3_qoj/2162.test.cpp
   - test/2_aoj/convex_cut.test.cpp
 documentation_of: Misc/cyc_bitonic_search.hpp
 layout: document

@@ -10,8 +10,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/2162.test.cpp
-    title: test/3_qoj/2162.test.cpp
+    path: test/9_qoj/2162.test.cpp
+    title: test/9_qoj/2162.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -214,7 +214,7 @@ data:
   timestamp: '2026-06-19 23:20:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/3_qoj/2162.test.cpp
+  - test/9_qoj/2162.test.cpp
 documentation_of: Geometry/half_plane_intersection.hpp
 layout: document
 redirect_from:

@@ -131,6 +131,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/ZkwSegmentTree.hpp
       title: Zkw Segment Tree
+  - name: DataStructure/Convex
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/Convex/ConjugateSlopeTrick.hpp
+      title: Conjugate Slope Trick
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/Convex/DynamicHull.hpp
+      title: Dynamic Convex Hull
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/Convex/SlopeTrick.hpp
+      title: Slope Trick
   - name: Enumerate
     pages:
     - icon: ':warning:'
@@ -284,9 +295,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/2sat.hpp
       title: Misc/2sat.hpp
-    - icon: ':heavy_check_mark:'
-      path: Misc/DynamicHull.hpp
-      title: Misc/DynamicHull.hpp
     - icon: ':heavy_check_mark:'
       path: Misc/MultiInt.hpp
       title: Misc/MultiInt.hpp
@@ -986,17 +994,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/2_aoj/type_of_circle.test.cpp
       title: test/2_aoj/type_of_circle.test.cpp
-  - name: test/3_qoj
+  - name: test/3_yukicoder
     pages:
     - icon: ':heavy_check_mark:'
-      path: test/3_qoj/17153.test.cpp
-      title: test/3_qoj/17153.test.cpp
+      path: test/3_yukicoder/1077.test.cpp
+      title: test/3_yukicoder/1077.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/3_qoj/2162.test.cpp
-      title: test/3_qoj/2162.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/3_qoj/6445.test.cpp
-      title: test/3_qoj/6445.test.cpp
+      path: test/3_yukicoder/2114.test.cpp
+      title: test/3_yukicoder/2114.test.cpp
   - name: test/4_codeforces
     pages:
     - icon: ':heavy_check_mark:'
@@ -1049,6 +1054,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/8_luogu/P5055.test.cpp
       title: test/8_luogu/P5055.test.cpp
+  - name: test/9_qoj
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/9_qoj/17153.test.cpp
+      title: test/9_qoj/17153.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/9_qoj/2162.test.cpp
+      title: test/9_qoj/2162.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/9_qoj/6445.test.cpp
+      title: test/9_qoj/6445.test.cpp
 layout: toppage
 ---
 A personal library for competitive programming.

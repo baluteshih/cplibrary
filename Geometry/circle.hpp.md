@@ -43,11 +43,11 @@ data:
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/6445.test.cpp
-    title: test/3_qoj/6445.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/6445.test.cpp
+    title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -458,7 +458,7 @@ data:
   timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/3_qoj/6445.test.cpp
+  - test/9_qoj/6445.test.cpp
   - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/cross_points_of_circles.test.cpp

@@ -19,9 +19,6 @@ data:
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/3_qoj/17153.test.cpp
-    title: test/3_qoj/17153.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
   - icon: ':heavy_check_mark:'
@@ -30,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/17153.test.cpp
+    title: test/9_qoj/17153.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -552,10 +552,10 @@ data:
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/9_qoj/17153.test.cpp
   - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
-  - test/3_qoj/17153.test.cpp
 documentation_of: DataStructure/Treap.hpp
 layout: document
 title: Treap
