@@ -25,7 +25,7 @@ Constructs an empty `DynamicBitset` of size `n` with all bits initialized to `0`
 DynamicBitset(std::string_view s);
 ```
 
-* $O(|s|)$ time
+* $O(\lvert s\rvert)$ time
 
 Constructs a `DynamicBitset` from a binary string `s` (consisting of `'0'` and `'1'`). The least significant bit (index `0`) corresponds to the last character of the string `s` (i.e. `s.back()`).
 

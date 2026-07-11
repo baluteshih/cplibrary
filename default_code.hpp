@@ -67,6 +67,14 @@ void chmax(auto &x, auto val) { x = max(x, val); }
 void chmin(auto &x, auto val) { x = min(x, val); }
 auto floor_div(auto a, auto b) { return a / b - (a % b && (a < 0) ^ (b < 0)); }
 auto ceil_div(auto a, auto b) { return a / b + (a % b && (a < 0) ^ (b > 0)); }
+string bitstring(auto x, int width = -1) {
+    string res;
+    while (x) res.push_back((x & 1) + '0'), x >>= 1;
+    if (res.empty()) res = "0";
+    if (width != -1) res.resize(width, '0');
+    ranges::reverse(res);
+    return res;
+}
 vector<int> count_array(const auto &container, int sz = -1) {
     if (sz == -1) sz = *ranges::max_element(container) + 1;
     vector<int> res(sz);

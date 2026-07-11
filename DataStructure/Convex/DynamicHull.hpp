@@ -1,13 +1,12 @@
 #pragma once
 
-// only works for integer coordinates!! maintain max
 template<typename T>
 struct Line {
     mutable T a, b, p;
     bool operator<(const Line &rhs) const { return a < rhs.a; }
     bool operator<(T x) const { return p < x; }
 };
-template<typename T, T kInf = 1'000'000'000'000'000'000LL>
+template<typename T, T kInf = std::numeric_limits<T>::max() / 2>
 struct DynamicHull : std::multiset<Line<T>, std::less<>> {
     using iterator = std::multiset<Line<T>, std::less<>>::iterator; 
     T Div(T a, T b) { return a / b - ((a ^ b) < 0 && a % b); }

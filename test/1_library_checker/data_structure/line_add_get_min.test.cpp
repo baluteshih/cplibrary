@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/line_add_get_min"
 #include "assumption.hpp"
 
-#include "Misc/DynamicHull.hpp"
+#include "DataStructure/Convex/DynamicHull.hpp"
 
 int main() {
     std::ios::sync_with_stdio(0), std::cin.tie(0);
