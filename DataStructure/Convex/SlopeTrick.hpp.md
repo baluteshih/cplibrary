@@ -97,7 +97,7 @@ layout: document
 title: Slope Trick
 ---
 
-A data structure that maintains a continuous, convex, piecewise linear function $f(x)$ whose slopes are integers. It supports operations like adding absolute value functions $\lvert x-a\rvert$, adding $(x-a)_+$ or $(a-x)_+$, shifting the function, and finding the minimum value.
+A data structure that maintains a continuous, convex, piecewise linear function $f(x)$ whose slopes are integers. It supports operations like adding absolute value functions $\lvert x-a\rvert$, adding $\max(0, x-a)$ or $\max(0, a-x)$, shifting the function, and finding the minimum value.
 
 The function is represented as:
 
