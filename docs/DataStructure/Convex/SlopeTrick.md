@@ -6,7 +6,9 @@ documentation_of: ../../../DataStructure/Convex/SlopeTrick.hpp
 A data structure that maintains a continuous, convex, piecewise linear function $f(x)$ whose slopes are integers. It supports operations like adding absolute value functions $\lvert x-a\rvert$, adding $(x-a)_+$ or $(a-x)_+$, shifting the function, and finding the minimum value.
 
 The function is represented as:
+
 $$f(x) = f_{\text{min}} + \sum_{l \in L} (l - x)_+ + \sum_{r \in R} (x - r)_+$$
+
 where $L$ and $R$ are multisets of slope change points, implemented as a max-heap and a min-heap respectively.
 
 ## Template Parameters

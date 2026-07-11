@@ -4,6 +4,7 @@ documentation_of: ../../../DataStructure/Convex/DynamicHull.hpp
 ---
 
 A dynamic convex hull (often referred to as a line container or envelope) data structure. It maintains a set of linear functions $y = ax + b$ and supports adding new lines and querying the maximum value at a given $x$-coordinate:
+
 $$f(x) = \max_i (a_i x + b_i)$$
 
 *Note: This implementation only works for integer coordinates and coefficients.*

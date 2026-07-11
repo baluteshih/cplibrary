@@ -3,9 +3,11 @@ title: Conjugate Slope Trick
 documentation_of: ../../../DataStructure/Convex/ConjugateSlopeTrick.hpp
 ---
 
-Conjugate Slope Trick maintains a convex function $f(x)$ using its convex conjugate (Fenchel conjugate) $f^*(p) = \sup_x (px - f(x))$. The conjugate function $f^*(p)$ is internally maintained using a standard `SlopeTrick`. 
+Conjugate Slope Trick maintains a convex function $f(x)$ using its convex conjugate (Fenchel conjugate) $f^*(p) = \sup_x (px - f(x))$. 
 
-This enables efficient operations like min-convolution (which corresponds to addition in the conjugate domain) and additions of certain functions like $c(x-a)_+$ or $c\lvert x-a\rvert$ in $O(1)$ time.
+The conjugate function $f^*(p)$ is internally maintained using a standard `SlopeTrick`. 
+
+This enables efficient operations like min-convolution (which corresponds to addition in the conjugate domain) and additions of certain functions like $c(x-a)_+$ or $c\lvert x-a\rvert$ in $O(\lvert a \rvert \log n)$ time.
 
 ## Template Parameters
 
