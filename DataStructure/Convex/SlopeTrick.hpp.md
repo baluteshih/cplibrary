@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Convex/ConjugateSlopeTrick.hpp
     title: Conjugate Slope Trick
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/3_yukicoder/1077.test.cpp
     title: test/3_yukicoder/1077.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_yukicoder/2114.test.cpp
     title: test/3_yukicoder/2114.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - "https://maspypy.com/slope-trick-1-\u89E3\u8AAC\u7DE8"
@@ -89,7 +89,7 @@ data:
   requiredBy:
   - DataStructure/Convex/ConjugateSlopeTrick.hpp
   timestamp: '2026-07-12 18:12:29+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/3_yukicoder/2114.test.cpp
   - test/3_yukicoder/1077.test.cpp
@@ -248,7 +248,7 @@ SlopeTrick& shift(T a);
 
 * $O(1)$ time
 
-Translates the function horizontally: $f(x) \leftarrow f(x - a)$.
+Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by left).
 
 ---
 

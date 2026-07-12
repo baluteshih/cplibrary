@@ -133,13 +133,13 @@ data:
       title: Zkw Segment Tree
   - name: DataStructure/Convex
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Convex/ConjugateSlopeTrick.hpp
       title: Conjugate Slope Trick
     - icon: ':heavy_check_mark:'
       path: DataStructure/Convex/DynamicHull.hpp
       title: Dynamic Convex Hull
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Convex/SlopeTrick.hpp
       title: Slope Trick
   - name: Enumerate
@@ -488,7 +488,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -1008,7 +1008,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/3_yukicoder/1077.test.cpp
       title: test/3_yukicoder/1077.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/3_yukicoder/2114.test.cpp
       title: test/3_yukicoder/2114.test.cpp
   - name: test/4_codeforces

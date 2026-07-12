@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/occur_position.hpp
     title: Sequence/occur_position.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

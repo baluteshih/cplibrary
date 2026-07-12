@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Convex/SlopeTrick.hpp
     title: Slope Trick
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/3_yukicoder/2114.test.cpp
     title: test/3_yukicoder/2114.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - "https://maspypy.com/slope-trick-3-slope-trick-\u306E\u51F8\u5171\u5F79"
@@ -54,23 +54,23 @@ data:
     \ INF>;\npublic:\n    ConjugateSlopeTrick() : super() {}\n    using super::is_inf;\n\
     \    T f0() { return -super::top(); }\n    ConjugateSlopeTrick& add_const(T a)\
     \ { return super::add_const(-a), *this; }\n    ConjugateSlopeTrick& add_x_minus_a(T\
-    \ c, T a = 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r +=\
-    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(a);\n      \
-    \  return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
+    \ c, T a = 0) {\n        if (a) shift(a);\n        if (c > 0) super::add_r +=\
+    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(-a);\n     \
+    \   return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
     \ add_x_minus_a(c, a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T\
     \ a, T b = 0) { return super::shift(a).add_const(-b), *this; }\n    ConjugateSlopeTrick&\
-    \ shift(int a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick&\
-    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(a);\n\
+    \ shift(int a) { return super::add_linear(-a, 0), *this; }\n    ConjugateSlopeTrick&\
+    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(-a);\n\
     \        for (int i = 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return\
     \ *this;\n    }\n    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int\
     \ base = 0) {\n        add_const(g[0]);\n        for (int i = 1; i < int(g.size());\
-    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(-base);\n\
+    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(base);\n\
     \        return *this;\n    }\n    ConjugateSlopeTrick& clear_left() { return\
     \ super::suffix_min(), *this; }\n    ConjugateSlopeTrick& clear_right() { return\
     \ super::prefix_min(), *this; }\n    T min_val(T p = 0) {\n        return -super::eval(p);\n\
     \    }\n    T eval(T x = 0) {\n        if (x > 0 && x > static_cast<T>(super::size_r()))\
     \ return INF;\n        if (x < 0 && -x > static_cast<T>(super::size_l())) return\
-    \ INF;\n        if (x) shift(-x);\n        T res = f0();\n        if (x) shift(x);\n\
+    \ INF;\n        if (x) shift(x);\n        T res = f0();\n        if (x) shift(-x);\n\
     \        return res; \n    }\n};\n"
   code: "#pragma once\n\n#include \"DataStructure/Convex/SlopeTrick.hpp\"\n\n/*\n\
     reference: https://maspypy.com/slope-trick-3-slope-trick-\u306E\u51F8\u5171\u5F79\
@@ -79,31 +79,31 @@ data:
     \ INF>;\npublic:\n    ConjugateSlopeTrick() : super() {}\n    using super::is_inf;\n\
     \    T f0() { return -super::top(); }\n    ConjugateSlopeTrick& add_const(T a)\
     \ { return super::add_const(-a), *this; }\n    ConjugateSlopeTrick& add_x_minus_a(T\
-    \ c, T a = 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r +=\
-    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(a);\n      \
-    \  return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
+    \ c, T a = 0) {\n        if (a) shift(a);\n        if (c > 0) super::add_r +=\
+    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(-a);\n     \
+    \   return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
     \ add_x_minus_a(c, a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T\
     \ a, T b = 0) { return super::shift(a).add_const(-b), *this; }\n    ConjugateSlopeTrick&\
-    \ shift(int a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick&\
-    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(a);\n\
+    \ shift(int a) { return super::add_linear(-a, 0), *this; }\n    ConjugateSlopeTrick&\
+    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(-a);\n\
     \        for (int i = 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return\
     \ *this;\n    }\n    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int\
     \ base = 0) {\n        add_const(g[0]);\n        for (int i = 1; i < int(g.size());\
-    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(-base);\n\
+    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(base);\n\
     \        return *this;\n    }\n    ConjugateSlopeTrick& clear_left() { return\
     \ super::suffix_min(), *this; }\n    ConjugateSlopeTrick& clear_right() { return\
     \ super::prefix_min(), *this; }\n    T min_val(T p = 0) {\n        return -super::eval(p);\n\
     \    }\n    T eval(T x = 0) {\n        if (x > 0 && x > static_cast<T>(super::size_r()))\
     \ return INF;\n        if (x < 0 && -x > static_cast<T>(super::size_l())) return\
-    \ INF;\n        if (x) shift(-x);\n        T res = f0();\n        if (x) shift(x);\n\
+    \ INF;\n        if (x) shift(x);\n        T res = f0();\n        if (x) shift(-x);\n\
     \        return res; \n    }\n};\n"
   dependsOn:
   - DataStructure/Convex/SlopeTrick.hpp
   isVerificationFile: false
   path: DataStructure/Convex/ConjugateSlopeTrick.hpp
   requiredBy: []
-  timestamp: '2026-07-12 18:12:29+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-07-12 18:29:57+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/3_yukicoder/2114.test.cpp
 documentation_of: DataStructure/Convex/ConjugateSlopeTrick.hpp
@@ -223,7 +223,7 @@ ConjugateSlopeTrick& shift(int a);
 
 * $O(\lvert a\rvert \log N)$ time, where $N$ is the number of slope changes in the conjugate function.
 
-Translates the function horizontally: $f(x) \leftarrow f(x - a)$.
+Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by left).
 
 ---
 
