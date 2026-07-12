@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Convex/SlopeTrick.hpp
     title: Slope Trick
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/3_yukicoder/2114.test.cpp
     title: test/3_yukicoder/2114.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - "https://maspypy.com/slope-trick-3-slope-trick-\u306E\u51F8\u5171\u5F79"
@@ -20,29 +20,29 @@ data:
     \u8AAC\u7DE8\n*/\n\ntemplate<typename T, T INF = std::numeric_limits<T>::max()\
     \ / 2>\nclass SlopeTrick {\n    using min_heap = std::priority_queue<T, std::vector<T>,\
     \ std::greater<T>>;\n    using max_heap = std::priority_queue<T>;\n    max_heap\
-    \ pq_l;\n    min_heap pq_r;\n    T min_f;\n    T top_l() const { return pq_l.empty()\
-    \ ? -INF : pq_l.top() + add_l; }\n    T top_r() const { return pq_r.empty() ?\
-    \ INF : pq_r.top() + add_r; }\n    T pop_l() { T res = top_l(); if (!pq_l.empty())\
+    \ pq_l;\n    min_heap pq_r;\n    T min_f;\nprotected:\n    T top_l() const { return\
+    \ pq_l.empty() ? -INF : pq_l.top() + add_l; }\n    T top_r() const { return pq_r.empty()\
+    \ ? INF : pq_r.top() + add_r; }\n    T pop_l() { T res = top_l(); if (!pq_l.empty())\
     \ pq_l.pop(); return res; }\n    T pop_r() { T res = top_r(); if (!pq_r.empty())\
     \ pq_r.pop(); return res; }\n    void push_l(T a) { pq_l.push(a - add_l); }\n\
-    \    void push_r(T a) { pq_r.push(a - add_r); }\nprotected:\n    T add_l, add_r;\
-    \ \npublic:\n    SlopeTrick() : min_f(), add_l(), add_r() {}\n    bool is_inf(T\
-    \ v) { return v >= INF || v <= -INF; }\n    int size_l() { return pq_l.size();\
-    \ }\n    int size_r() { return pq_r.size(); }\n    int size() { return size_l()\
-    \ + size_r(); }\n    T top() { return min_f; }\n    std::pair<T, T> top_interval()\
-    \ { return {top_l(), top_r()}; }\n    SlopeTrick& add_const(T a) { return min_f\
-    \ += a, *this; }\n    SlopeTrick& add_x_minus_a(T a) {\n        min_f += std::max(T(0),\
-    \ top_l() - a);\n        push_l(a), push_r(pop_l());\n        return *this;\n\
-    \    }\n    SlopeTrick& add_a_minus_x(T a) {\n        min_f += std::max(T(0),\
-    \ a - top_r());\n        push_r(a), push_l(pop_r());\n        return *this;\n\
-    \    }\n    SlopeTrick& add_abs(T a) { return add_x_minus_a(a).add_a_minus_x(a);\
-    \ } \n    SlopeTrick& add_linear(int a, T b) {\n        for (min_f += b; a > 0;\
-    \ --a) {\n            T x = pop_l();\n            min_f += x, push_r(x);\n   \
-    \     }\n        for (; a < 0; ++a) {\n            T x = pop_r();\n          \
-    \  min_f -= x, push_l(x);\n        }\n        return *this;\n    }\n    SlopeTrick&\
-    \ shift(T a) { return add_l += a, add_r += a, *this; }\n    SlopeTrick& sliding_window_minimum(T\
-    \ a, T b) {\n        assert(a <= b);\n        add_l += a, add_r += b;\n      \
-    \  return *this;\n    }\n    SlopeTrick& prefix_min() { return min_heap().swap(pq_r),\
+    \    void push_r(T a) { pq_r.push(a - add_r); }\n    T add_l, add_r; \npublic:\n\
+    \    SlopeTrick() : min_f(), add_l(), add_r() {}\n    bool is_inf(T v) { return\
+    \ v >= INF || v <= -INF; }\n    int size_l() { return pq_l.size(); }\n    int\
+    \ size_r() { return pq_r.size(); }\n    int size() { return size_l() + size_r();\
+    \ }\n    T top() { return min_f; }\n    std::pair<T, T> top_interval() { return\
+    \ {top_l(), top_r()}; }\n    SlopeTrick& add_const(T a) { return min_f += a, *this;\
+    \ }\n    SlopeTrick& add_x_minus_a(T a) {\n        min_f += std::max(T(0), top_l()\
+    \ - a);\n        push_l(a), push_r(pop_l());\n        return *this;\n    }\n \
+    \   SlopeTrick& add_a_minus_x(T a) {\n        min_f += std::max(T(0), a - top_r());\n\
+    \        push_r(a), push_l(pop_r());\n        return *this;\n    }\n    SlopeTrick&\
+    \ add_abs(T a) { return add_x_minus_a(a).add_a_minus_x(a); } \n    SlopeTrick&\
+    \ add_linear(int a, T b) {\n        for (min_f += b; a > 0; --a) {\n         \
+    \   T x = pop_l();\n            min_f += x, push_r(x);\n        }\n        for\
+    \ (; a < 0; ++a) {\n            T x = pop_r();\n            min_f -= x, push_l(x);\n\
+    \        }\n        return *this;\n    }\n    SlopeTrick& shift(T a) { return\
+    \ add_l += a, add_r += a, *this; }\n    SlopeTrick& sliding_window_minimum(T a,\
+    \ T b) {\n        assert(a <= b);\n        add_l += a, add_r += b;\n        return\
+    \ *this;\n    }\n    SlopeTrick& prefix_min() { return min_heap().swap(pq_r),\
     \ *this; }\n    SlopeTrick& suffix_min() { return max_heap().swap(pq_l), *this;\
     \ }\n    T eval(T x) {\n        T res = min_f;\n        auto tl = pq_l; auto tr\
     \ = pq_r;\n        for (; !tl.empty(); tl.pop()) res += std::max(T(0), (tl.top()\
@@ -53,49 +53,57 @@ data:
     class ConjugateSlopeTrick : private SlopeTrick<T, INF> {\n    using super = SlopeTrick<T,\
     \ INF>;\npublic:\n    ConjugateSlopeTrick() : super() {}\n    using super::is_inf;\n\
     \    T f0() { return -super::top(); }\n    ConjugateSlopeTrick& add_const(T a)\
-    \ { super::add_const(a); }\n    ConjugateSlopeTrick& add_x_minus_a(T c, T a =\
-    \ 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r += c;\n   \
-    \     if (c < 0) super::add_l += c;\n        if (a) shift(a);\n        return\
-    \ *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return add_x_minus_a(c,\
-    \ a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T a, T b = 0)\
-    \ { return super::shift(a).add_const(b), *this; }\n    ConjugateSlopeTrick& shift(int\
-    \ a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick& sliding_window_minimum(T\
-    \ a, T b) {\n        assert(a <= b);\n        shift(a);\n        for (int i =\
-    \ 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return *this;\n    }\n\
-    \    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int base = 0) {\n\
-    \        for (int i = 1; i < int(g.size()); ++i) super::add_x_minus_a(g[i] - g[i\
-    \ - 1]);\n        if (base != 0) shift(-base);\n        return *this;\n    }\n\
-    \    ConjugateSlopeTrick& clear_left() { return super::suffix_min(), *this; }\n\
-    \    ConjugateSlopeTrick& clear_right() { return super::prefix_min(), *this; }\n\
-    \    T min_val(T p = 0) {\n        return -super::eval(p);\n    }\n};\n"
+    \ { return super::add_const(-a), *this; }\n    ConjugateSlopeTrick& add_x_minus_a(T\
+    \ c, T a = 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r +=\
+    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(a);\n      \
+    \  return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
+    \ add_x_minus_a(c, a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T\
+    \ a, T b = 0) { return super::shift(a).add_const(-b), *this; }\n    ConjugateSlopeTrick&\
+    \ shift(int a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick&\
+    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(a);\n\
+    \        for (int i = 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return\
+    \ *this;\n    }\n    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int\
+    \ base = 0) {\n        add_const(g[0]);\n        for (int i = 1; i < int(g.size());\
+    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(-base);\n\
+    \        return *this;\n    }\n    ConjugateSlopeTrick& clear_left() { return\
+    \ super::suffix_min(), *this; }\n    ConjugateSlopeTrick& clear_right() { return\
+    \ super::prefix_min(), *this; }\n    T min_val(T p = 0) {\n        return -super::eval(p);\n\
+    \    }\n    T eval(T x = 0) {\n        if (x > 0 && x > static_cast<T>(super::size_r()))\
+    \ return INF;\n        if (x < 0 && -x > static_cast<T>(super::size_l())) return\
+    \ INF;\n        if (x) shift(-x);\n        T res = f0();\n        if (x) shift(x);\n\
+    \        return res; \n    }\n};\n"
   code: "#pragma once\n\n#include \"DataStructure/Convex/SlopeTrick.hpp\"\n\n/*\n\
     reference: https://maspypy.com/slope-trick-3-slope-trick-\u306E\u51F8\u5171\u5F79\
     \ \n*/\n\ntemplate<typename T, T INF = std::numeric_limits<T>::max() / 2>\nclass\
     \ ConjugateSlopeTrick : private SlopeTrick<T, INF> {\n    using super = SlopeTrick<T,\
     \ INF>;\npublic:\n    ConjugateSlopeTrick() : super() {}\n    using super::is_inf;\n\
     \    T f0() { return -super::top(); }\n    ConjugateSlopeTrick& add_const(T a)\
-    \ { super::add_const(a); }\n    ConjugateSlopeTrick& add_x_minus_a(T c, T a =\
-    \ 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r += c;\n   \
-    \     if (c < 0) super::add_l += c;\n        if (a) shift(a);\n        return\
-    \ *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return add_x_minus_a(c,\
-    \ a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T a, T b = 0)\
-    \ { return super::shift(a).add_const(b), *this; }\n    ConjugateSlopeTrick& shift(int\
-    \ a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick& sliding_window_minimum(T\
-    \ a, T b) {\n        assert(a <= b);\n        shift(a);\n        for (int i =\
-    \ 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return *this;\n    }\n\
-    \    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int base = 0) {\n\
-    \        for (int i = 1; i < int(g.size()); ++i) super::add_x_minus_a(g[i] - g[i\
-    \ - 1]);\n        if (base != 0) shift(-base);\n        return *this;\n    }\n\
-    \    ConjugateSlopeTrick& clear_left() { return super::suffix_min(), *this; }\n\
-    \    ConjugateSlopeTrick& clear_right() { return super::prefix_min(), *this; }\n\
-    \    T min_val(T p = 0) {\n        return -super::eval(p);\n    }\n};\n"
+    \ { return super::add_const(-a), *this; }\n    ConjugateSlopeTrick& add_x_minus_a(T\
+    \ c, T a = 0) {\n        if (a) shift(-a);\n        if (c > 0) super::add_r +=\
+    \ c;\n        if (c < 0) super::add_l += c;\n        if (a) shift(a);\n      \
+    \  return *this;\n    }\n    ConjugateSlopeTrick& add_abs(T c, T a = 0) { return\
+    \ add_x_minus_a(c, a).add_x_minus_a(-c, a); }\n    ConjugateSlopeTrick& add_linear(T\
+    \ a, T b = 0) { return super::shift(a).add_const(-b), *this; }\n    ConjugateSlopeTrick&\
+    \ shift(int a) { return super::add_linear(a, 0), *this; }\n    ConjugateSlopeTrick&\
+    \ sliding_window_minimum(T a, T b) {\n        assert(a <= b);\n        shift(a);\n\
+    \        for (int i = 0; i < b - a; ++i) super::add_x_minus_a(0);\n        return\
+    \ *this;\n    }\n    ConjugateSlopeTrick& convolve(const std::vector<T>& g, int\
+    \ base = 0) {\n        add_const(g[0]);\n        for (int i = 1; i < int(g.size());\
+    \ ++i) super::add_a_minus_x(g[i - 1] - g[i]);\n        if (base != 0) shift(-base);\n\
+    \        return *this;\n    }\n    ConjugateSlopeTrick& clear_left() { return\
+    \ super::suffix_min(), *this; }\n    ConjugateSlopeTrick& clear_right() { return\
+    \ super::prefix_min(), *this; }\n    T min_val(T p = 0) {\n        return -super::eval(p);\n\
+    \    }\n    T eval(T x = 0) {\n        if (x > 0 && x > static_cast<T>(super::size_r()))\
+    \ return INF;\n        if (x < 0 && -x > static_cast<T>(super::size_l())) return\
+    \ INF;\n        if (x) shift(-x);\n        T res = f0();\n        if (x) shift(x);\n\
+    \        return res; \n    }\n};\n"
   dependsOn:
   - DataStructure/Convex/SlopeTrick.hpp
   isVerificationFile: false
   path: DataStructure/Convex/ConjugateSlopeTrick.hpp
   requiredBy: []
-  timestamp: '2026-07-12 01:44:14+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-07-12 18:12:29+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/3_yukicoder/2114.test.cpp
 documentation_of: DataStructure/Convex/ConjugateSlopeTrick.hpp
@@ -129,7 +137,9 @@ ConjugateSlopeTrick();
 
 * $O(1)$ time
 
-Constructs an empty `ConjugateSlopeTrick` object.
+Constructs an empty `ConjugateSlopeTrick` object representing the following function:
+
+$$f(x) = \begin{cases} 0 & x = 0 \\ \infty & x \neq 0 \end{cases}$$
 
 ---
 
@@ -175,7 +185,7 @@ Adds a constant $a$ to the function: $f(x) \leftarrow f(x) + a$.
 ConjugateSlopeTrick& add_x_minus_a(T c, T a = 0);
 ```
 
-* $O(\lvert a\rvert\log n)$ time
+* $O(\lvert a\rvert\log N)$ time
 
 Adds the function $c(x - a)_+ = \max(0, c(x - a))$ to the function.
 
@@ -187,7 +197,7 @@ Adds the function $c(x - a)_+ = \max(0, c(x - a))$ to the function.
 ConjugateSlopeTrick& add_abs(T c, T a = 0);
 ```
 
-* $O(\lvert a\rvert\log n)$ time
+* $O(\lvert a\rvert\log N)$ time
 
 Adds $c\lvert x - a\rvert$ to the function. Equivalent to `add_x_minus_a(c, a).add_x_minus_a(-c, a)`.
 
@@ -274,3 +284,15 @@ T min_val(T p = 0);
 * $O(N \log N)$ time
 
 Computes the minimum value of $f(x) - px$ over all $x$, which is $-f^*(p)$. Note that this operation evaluates the internal SlopeTrick at $p$.
+
+---
+
+## eval
+
+```cpp
+T eval(T x);
+```
+
+* $O(|x| \log N)$ time
+
+Computes the value $f(x)$ at a given point $x$.

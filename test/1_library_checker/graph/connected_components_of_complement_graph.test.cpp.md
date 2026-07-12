@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/complement_bfs.hpp
     title: Graph/complement_bfs.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/SMAWK.hpp
     title: Sequence/SMAWK.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
