@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/StackPoolAllocator.hpp\"\n\n#ifndef POOL_SIZE\n\
@@ -38,8 +41,9 @@ data:
   path: DataStructure/StackPoolAllocator.hpp
   requiredBy: []
   timestamp: '2026-05-05 22:01:14+08:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
 documentation_of: DataStructure/StackPoolAllocator.hpp
 layout: document
 title: Stack Pool Allocator

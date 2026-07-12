@@ -64,6 +64,15 @@ data:
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -502,9 +511,6 @@ data:
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/8_luogu/P3835_pool.test.cpp
-    title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
   - icon: ':heavy_check_mark:'
@@ -605,10 +611,13 @@ data:
   - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
   - test/1_library_checker/data_structure/predecessor_problem.test.cpp
   - test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
@@ -684,7 +693,6 @@ data:
   - test/7_loj/2302.test.cpp
   - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
-  - test/8_luogu/P3835_pool.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp

@@ -11,6 +11,9 @@ data:
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'
+    path: DataStructure/PoolAllocator.hpp
+    title: Pool Allocator
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':heavy_check_mark:'
@@ -23,16 +26,26 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/ordered_set
+    PROBLEM: http://judge.yosupo.jp/problem/persistent_queue
     links:
-    - https://judge.yosupo.jp/problem/ordered_set
-  bundledCode: "#line 1 \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/ordered_set\"\n#line 2 \"\
-    assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3 \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\
-    \n\n#line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
-    \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
-    \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
-    \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    - http://judge.yosupo.jp/problem/persistent_queue
+  bundledCode: "#line 1 \"test/1_library_checker/data_structure/persistent_queue_pool.test.cpp\"\
+    \n#define PROBLEM \"http://judge.yosupo.jp/problem/persistent_queue\"\n#line 2\
+    \ \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line 3\
+    \ \"test/1_library_checker/data_structure/persistent_queue_pool.test.cpp\"\n\n\
+    #line 2 \"DataStructure/PoolAllocator.hpp\"\n\n#ifndef POOL_SIZE\n    #define\
+    \ POOL_SIZE 10000000\n#endif\n\ntemplate<typename T, int _POOL_SIZE = POOL_SIZE>\n\
+    struct PoolAllocator {\n    static T pool[_POOL_SIZE];\n    static int ptr;\n\
+    \    template<typename... Args>\n    static T* allocate(Args&&... args) { \n \
+    \       T* p = &pool[ptr++];\n        return new (p) T(std::forward<Args>(args)...);\n\
+    \    }\n    static void deallocate([[maybe_unused]] T* p) {}\n    static void\
+    \ reset() { ptr = 0; }\n};\n\ntemplate<typename T, int _POOL_SIZE>\nT PoolAllocator<T,\
+    \ _POOL_SIZE>::pool[_POOL_SIZE];\n\ntemplate<typename T, int _POOL_SIZE>\nint\
+    \ PoolAllocator<T, _POOL_SIZE>::ptr = 0;\n#line 2 \"DataStructure/Treap.hpp\"\n\
+    \n#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename T>\nstruct\
+    \ DefaultAllocator {\n    template<typename... Args>\n    static T* allocate(Args&&...\
+    \ args) { \n        return new T(std::forward<Args>(args)...);\n    }\n    static\
+    \ void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
     \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
     \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
@@ -295,66 +308,43 @@ data:
     \ [left, right] = split_range(l, r);\n        if (!empty()) reverse();\n     \
     \   this->left_merge(left).right_merge(right);\n    }\n    Iterator kth(int k)\
     \ requires (hasSize) {\n        return Iterator(find_value([&k](const Value &v)\
-    \ {\n            return v.size() <= k;\n        }), this);\n    }\n};\n#line 5\
-    \ \"test/1_library_checker/data_structure/ordered_set_treap.test.cpp\"\n\nusing\
-    \ treap = Treap<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\n    auto insert =\
-    \ [&](int x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty()\
-    \ && tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n\
-    \        return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n\
-    \    \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
-    \        if (tree.empty() || tree.begin()->key != x)\n            return tree.left_merge(lft),\
-    \ false;\n        tree.split_size(1).destruct();\n        return tree.left_merge(lft),\
-    \ true;\n    };\n\n    while (n--) {\n        int x;\n        std::cin >> x;\n\
-    \        insert(x);\n    }\n    while (q--) {\n        int op, x;\n        std::cin\
-    \ >> op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
-    \        else if (op == 2) {\n            if (tree.size() < x) std::cout << \"\
-    -1\\n\";\n            else std::cout << tree.kth(x - 1)->key << \"\\n\";\n   \
-    \     }\n        else if (op == 3) {\n            std::cout << tree.prefix_product_key_leq(x)\
-    \ << \"\\n\";\n        }\n        else if (op == 4) {\n            auto it = tree.upper_bound(x);\n\
-    \            if (it == tree.begin()) std::cout << \"-1\\n\";\n            else\
-    \ std::cout << std::prev(it)->key << \"\\n\";\n        }\n        else {\n   \
-    \         auto it = tree.lower_bound(x);\n            if (it == tree.end()) std::cout\
-    \ << \"-1\\n\";\n            else std::cout << it->key << \"\\n\";\n        }\n\
-    \    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/ordered_set\"\n#include\
-    \ \"assumption.hpp\"\n\n#include \"DataStructure/Treap.hpp\"\n\nusing treap =\
-    \ Treap<int>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\n    auto insert =\
-    \ [&](int x) {\n        auto lft = tree.split_key_lt(x);\n        if (!tree.empty()\
-    \ && tree.begin()->key == x)\n            return tree.left_merge(lft), false;\n\
-    \        return tree.left_merge(treap(x, 1)).left_merge(lft), true;\n    };\n\
-    \    \n    auto erase = [&](int x) {\n        auto lft = tree.split_key_lt(x);\n\
-    \        if (tree.empty() || tree.begin()->key != x)\n            return tree.left_merge(lft),\
-    \ false;\n        tree.split_size(1).destruct();\n        return tree.left_merge(lft),\
-    \ true;\n    };\n\n    while (n--) {\n        int x;\n        std::cin >> x;\n\
-    \        insert(x);\n    }\n    while (q--) {\n        int op, x;\n        std::cin\
-    \ >> op >> x;\n        if (op == 0) insert(x);\n        else if (op == 1) erase(x);\n\
-    \        else if (op == 2) {\n            if (tree.size() < x) std::cout << \"\
-    -1\\n\";\n            else std::cout << tree.kth(x - 1)->key << \"\\n\";\n   \
-    \     }\n        else if (op == 3) {\n            std::cout << tree.prefix_product_key_leq(x)\
-    \ << \"\\n\";\n        }\n        else if (op == 4) {\n            auto it = tree.upper_bound(x);\n\
-    \            if (it == tree.begin()) std::cout << \"-1\\n\";\n            else\
-    \ std::cout << std::prev(it)->key << \"\\n\";\n        }\n        else {\n   \
-    \         auto it = tree.lower_bound(x);\n            if (it == tree.end()) std::cout\
-    \ << \"-1\\n\";\n            else std::cout << it->key << \"\\n\";\n        }\n\
-    \    }\n}\n"
+    \ {\n            return v.size() <= k;\n        }), this);\n    }\n};\n#line 6\
+    \ \"test/1_library_checker/data_structure/persistent_queue_pool.test.cpp\"\n\n\
+    using treap = Treap<int, size_v, void, false, PoolAllocator, true>;\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int q;\n    std::cin\
+    \ >> q;\n    std::vector<treap> roots(1, treap());\n    while (q--) {\n      \
+    \  int op, t;\n        std::cin >> op >> t;\n        roots.push_back(roots[++t]);\n\
+    \        if (op == 0) {\n            int x;\n            std::cin >> x;\n    \
+    \        roots.back().push_back(treap(x, 1));\n        }\n        else {\n   \
+    \         auto lft = roots.back().split_size(1);\n            std::cout << lft.get_key()\
+    \ << \"\\n\";\n        }\n    }\n}\n"
+  code: "#define PROBLEM \"http://judge.yosupo.jp/problem/persistent_queue\"\n#include\
+    \ \"assumption.hpp\"\n\n#include \"DataStructure/PoolAllocator.hpp\"\n#include\
+    \ \"DataStructure/Treap.hpp\"\n\nusing treap = Treap<int, size_v, void, false,\
+    \ PoolAllocator, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int q;\n    std::cin >> q;\n    std::vector<treap> roots(1, treap());\n \
+    \   while (q--) {\n        int op, t;\n        std::cin >> op >> t;\n        roots.push_back(roots[++t]);\n\
+    \        if (op == 0) {\n            int x;\n            std::cin >> x;\n    \
+    \        roots.back().push_back(treap(x, 1));\n        }\n        else {\n   \
+    \         auto lft = roots.back().split_size(1);\n            std::cout << lft.get_key()\
+    \ << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
   - assumption.hpp
+  - DataStructure/PoolAllocator.hpp
   - DataStructure/Treap.hpp
   - DataStructure/DefaultAllocator.hpp
   - Algebra/ValidOperation.hpp
   - Algebra/size_value.hpp
   isVerificationFile: true
-  path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  path: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   requiredBy: []
   timestamp: '2026-07-12 15:36:33+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+documentation_of: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
 layout: document
 redirect_from:
-- /verify/test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-- /verify/test/1_library_checker/data_structure/ordered_set_treap.test.cpp.html
-title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+- /verify/test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+- /verify/test/1_library_checker/data_structure/persistent_queue_pool.test.cpp.html
+title: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
 ---

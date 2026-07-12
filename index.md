@@ -116,7 +116,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: Sparse Table
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/StackPoolAllocator.hpp
       title: Stack Pool Allocator
     - icon: ':heavy_check_mark:'
@@ -574,6 +574,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
       title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/persistent_queue.test.cpp
+      title: test/1_library_checker/data_structure/persistent_queue.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+      title: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+      title: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
       title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
@@ -1048,9 +1057,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/8_luogu/P3835.test.cpp
       title: test/8_luogu/P3835.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/8_luogu/P3835_pool.test.cpp
-      title: test/8_luogu/P3835_pool.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/8_luogu/P5055.test.cpp
       title: test/8_luogu/P5055.test.cpp

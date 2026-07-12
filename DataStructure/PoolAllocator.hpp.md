@@ -4,11 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/8_luogu/P3835_pool.test.cpp
-    title: test/8_luogu/P3835_pool.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/8_luogu/P5055.test.cpp
-    title: test/8_luogu/P5055.test.cpp
+    path: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -39,8 +36,7 @@ data:
   timestamp: '2026-05-23 21:25:29+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/8_luogu/P3835_pool.test.cpp
-  - test/8_luogu/P5055.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
 documentation_of: DataStructure/PoolAllocator.hpp
 layout: document
 title: Pool Allocator

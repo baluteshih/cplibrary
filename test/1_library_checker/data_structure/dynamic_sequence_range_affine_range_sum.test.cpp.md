@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/ValidOperation.hpp
+    title: Algebra/ValidOperation.hpp
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
   - icon: ':heavy_check_mark:'
@@ -139,31 +142,40 @@ data:
     #line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
     \n\ntemplate<typename T>\nstruct DefaultAllocator {\n    template<typename...\
     \ Args>\n    static T* allocate(Args&&... args) { \n        return new T(std::forward<Args>(args)...);\n\
-    \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/size_value.hpp\"\
-    \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
-    \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
-    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
-    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
-    \   return os;\n    }\n};\n#line 5 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n\
-    \    #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n      \
-    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
-    \ = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
-    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
-    \ hasKey = !std::is_same_v<Key, void>;\n    static constexpr bool hasValue = !std::is_same_v<Value,\
-    \ void>;\n    static constexpr bool hasTag = !std::is_same_v<Tag, void>;\n   \
-    \ static constexpr bool usePri = !persistent;\n    static constexpr bool hasSize\
-    \ = requires(Value v) { v.size(); };\n    static constexpr bool hasValueReverse\
-    \ = requires(Value v) { v.reverse(); };\n    struct Empty {};\n    template <bool\
-    \ Condition, typename T>\n    static auto get_default() {\n        if constexpr\
-    \ (Condition) return T();\n        else return Empty{};\n    }\n    template <bool\
-    \ Condition>\n    static auto get_pri() {\n        if constexpr (Condition) return\
-    \ rng();\n        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
-    \    static_assert(!hasTag || hasValue);\n    static inline std::mt19937 rng{RNGSEED};\n\
-    \    struct node {\n        node *l = nullptr, *r = nullptr;\n        [[no_unique_address]]\
-    \ std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();\n\
-    \        [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey,\
-    \ Key>();\n        [[no_unique_address]] std::conditional_t<hasValue, Value, Empty>\
-    \ org = get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
+    \    }\n    static void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 2 \"Algebra/size_value.hpp\"\n\nstruct size_v {\n    int\
+    \ sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v operator+(const size_v\
+    \ &rhs) const {\n        return size_v(sz + rhs.sz);\n    }\n    int size() const\
+    \ {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const size_v &v) {\n        os << v.sz;\n        return os;\n    }\n};\n\
+    #line 6 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n    #define RNGSEED 880301\n\
+    #endif\n\ntemplate<typename Key = void, \n         typename Value = size_v,\n\
+    \         typename Tag = void, \n         bool Rev = false,\n         template<typename>\
+    \ class Allocator = DefaultAllocator,\n         bool persistent = false\n>\nclass\
+    \ Treap {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n    static\
+    \ constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr bool\
+    \ hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey = Addable<Key,\
+    \ Tag>;\n    static constexpr bool hasTagToValue = Addable<Value, Tag>;\n    static\
+    \ constexpr bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
+    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
+    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
+    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
+    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
+    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
+    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
+    \    static_assert(!hasValue || Addable<Value, Value>);\n    static_assert(!hasTag\
+    \ || Addable<Tag, Tag>);\n    static inline std::conditional_t<!persistent, std::mt19937,\
+    \ std::mt19937_64> rng{RNGSEED};\n    struct node {\n        node *l = nullptr,\
+    \ *r = nullptr;\n        [[no_unique_address]] std::conditional_t<!persistent,\
+    \ node*, Empty> f = get_default<!persistent, node*>();\n        [[no_unique_address]]\
+    \ std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();\n \
+    \       [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> org =\
+    \ get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
     \ Value, Empty> val = get_default<hasValue, Value>();\n        [[no_unique_address]]\
     \ std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();\n\
     \        [[no_unique_address]] std::conditional_t<Rev, int, Empty> rev = get_default<Rev,\
@@ -174,15 +186,17 @@ data:
     \    if constexpr (!persistent) {\n                f = nullptr;\n            \
     \    if (l) l->f = this;\n                if (r) r->f = this;\n            }\n\
     \        }\n        void give_tag(const auto &tag) requires (hasTag) {\n     \
-    \       org = org + tag; \n            val = val + tag;\n            lazy = lazy\
+    \       if constexpr (hasTagToValue) {\n                org = org + tag; \n  \
+    \              val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
+    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
     \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
     \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
     \                val.reverse();\n            }\n            std::swap(l, r);\n\
     \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
     \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
     \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
-    \ (std::equality_comparable<Tag>) need_tag = (lazy != Tag());\n              \
-    \  else need_tag = true;\n            }\n            if (!need_rev && !need_tag)\
+    \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
+    \   else need_tag = true;\n            }\n            if (!need_rev && !need_tag)\
     \ return;\n            if (l) {\n                if constexpr (persistent) l =\
     \ NodeAlloc::allocate(*l);\n                if constexpr (hasTag) if (need_tag)\
     \ l->give_tag(lazy);\n                if constexpr (Rev) if (need_rev) l->reverse();\n\
@@ -236,24 +250,24 @@ data:
     \    if (!left || !right) return left ? left : right;\n        bool useleft =\
     \ true;\n        if constexpr (usePri)\n            useleft = left->pri < right->pri;\n\
     \        else\n            useleft = rng() % (get_size(left) + get_size(right))\
-    \ < size_t(get_size(left));\n        if (useleft) {\n            if constexpr\
-    \ (persistent) left = NodeAlloc::allocate(*left); \n            if constexpr (hasTag\
-    \ || Rev) left->down();\n            left->r = merge(left->r, right);\n      \
-    \      left->up();\n            return left;\n        }\n        if constexpr\
-    \ (persistent) right = NodeAlloc::allocate(*right);\n        if constexpr (hasTag\
-    \ || Rev) right->down();\n        right->l = merge(left, right->l);\n        right->up();\n\
-    \        return right;\n    }\n    static Key get_key(node *a) requires (hasKey)\
-    \ {\n        return get_key(a, Key());\n    }\n    static Key get_key(node *a,\
-    \ auto Default) requires (hasKey) {\n        return a ? a->key : Default;\n  \
-    \  }\n    static Value get_org(node *a) requires (hasValue) {\n        return\
-    \ a ? a->org : Value();\n    }\n    static Value get_org(node *a, auto Default)\
-    \ requires (hasValue) {\n        return a ? a->org : Default;\n    }\n    static\
-    \ Value get_val(node *a) requires (hasValue) {\n        return a ? a->val : Value();\n\
-    \    }\n    static Value get_val(node *a, Value Default) requires (hasValue) {\n\
-    \        return a ? a->val : Default;\n    }\n    static int get_size(node *a)\
-    \ requires (hasSize) { \n        return a ? a->val.size() : 0;\n    }\n    static\
-    \ void free(node *&ptr) requires (!persistent) {\n        if (ptr == nullptr)\
-    \ return;\n        free(ptr->l);\n        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n\
+    \ < get_size(left);\n        if (useleft) {\n            if constexpr (persistent)\
+    \ left = NodeAlloc::allocate(*left); \n            if constexpr (hasTag || Rev)\
+    \ left->down();\n            left->r = merge(left->r, right);\n            left->up();\n\
+    \            return left;\n        }\n        if constexpr (persistent) right\
+    \ = NodeAlloc::allocate(*right);\n        if constexpr (hasTag || Rev) right->down();\n\
+    \        right->l = merge(left, right->l);\n        right->up();\n        return\
+    \ right;\n    }\n    static Key get_key(node *a) requires (hasKey) {\n       \
+    \ return get_key(a, Key());\n    }\n    static Key get_key(node *a, auto Default)\
+    \ requires (hasKey) {\n        return a ? a->key : Default;\n    }\n    static\
+    \ Value get_org(node *a) requires (hasValue) {\n        return a ? a->org : Value();\n\
+    \    }\n    static Value get_org(node *a, auto Default) requires (hasValue) {\n\
+    \        return a ? a->org : Default;\n    }\n    static Value get_val(node *a)\
+    \ requires (hasValue) {\n        return a ? a->val : Value();\n    }\n    static\
+    \ Value get_val(node *a, Value Default) requires (hasValue) {\n        return\
+    \ a ? a->val : Default;\n    }\n    static size_t get_size(node *a) requires (hasSize)\
+    \ { \n        return a ? a->val.size() : 0;\n    }\n    static void free(node\
+    \ *&ptr) requires (!persistent) {\n        if (ptr == nullptr) return;\n     \
+    \   free(ptr->l);\n        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n\
     \        ptr = nullptr;\n    }\n    static node* find_min(node *start) {\n   \
     \     if (!start) return nullptr;\n        node *res = start;\n        while (true)\
     \ {\n            if constexpr (hasTag || Rev) res->down();\n            if (res->l)\
@@ -453,11 +467,12 @@ data:
   - Numeric/internal_math.hpp
   - DataStructure/Treap.hpp
   - DataStructure/DefaultAllocator.hpp
+  - Algebra/ValidOperation.hpp
   - Algebra/size_value.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 14:18:54+08:00'
+  timestamp: '2026-07-12 15:36:33+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

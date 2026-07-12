@@ -33,6 +33,9 @@ data:
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
   - icon: ':heavy_check_mark:'
+    path: DataStructure/Treap.hpp
+    title: Treap
+  - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
   - icon: ':heavy_check_mark:'
@@ -79,8 +82,26 @@ data:
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+    title: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+    title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
@@ -177,6 +198,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/8_luogu/P3835.test.cpp
+    title: test/8_luogu/P3835.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/8_luogu/P5055.test.cpp
+    title: test/8_luogu/P5055.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/9_qoj/17153.test.cpp
+    title: test/9_qoj/17153.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -248,6 +278,7 @@ data:
   - DataStructure/SparseTable.hpp
   - DataStructure/CatTree.hpp
   - DataStructure/PotentialDisjointSet.hpp
+  - DataStructure/Treap.hpp
   - Geometry/PointInAngle.hpp
   - Algebra/Monoid/concept.hpp
   - Algebra/Field/concept.hpp
@@ -277,8 +308,14 @@ data:
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -289,6 +326,9 @@ data:
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - test/9_qoj/17153.test.cpp
+  - test/8_luogu/P3835.test.cpp
+  - test/8_luogu/P5055.test.cpp
 documentation_of: Algebra/ValidOperation.hpp
 layout: document
 redirect_from:
