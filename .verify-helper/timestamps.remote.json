@@ -154,6 +154,7 @@
 "test/2_aoj/tangent_to_a_circle.test.cpp": "2026-06-19 13:11:38 +0800",
 "test/2_aoj/type_of_circle.test.cpp": "2026-06-19 13:11:38 +0800",
 "test/3_yukicoder/1077.test.cpp": "2026-07-12 18:12:29 +0800",
+"test/3_yukicoder/2114.test.cpp": "2026-07-12 18:29:57 +0800",
 "test/4_codeforces/101242J.test.cpp": "2026-06-19 23:20:06 +0800",
 "test/4_codeforces/101673A.test.cpp": "2026-06-19 23:20:06 +0800",
 "test/4_codeforces/104114B.test.cpp": "2026-06-19 23:20:06 +0800",
