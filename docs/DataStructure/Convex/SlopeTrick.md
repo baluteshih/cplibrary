@@ -153,7 +153,7 @@ SlopeTrick& shift(T a);
 
 * $O(1)$ time
 
-Translates the function horizontally: $f(x) \leftarrow f(x - a)$.
+Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by left).
 
 ---
 

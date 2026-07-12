@@ -15,25 +15,25 @@ public:
     T f0() { return -super::top(); }
     ConjugateSlopeTrick& add_const(T a) { return super::add_const(-a), *this; }
     ConjugateSlopeTrick& add_x_minus_a(T c, T a = 0) {
-        if (a) shift(-a);
+        if (a) shift(a);
         if (c > 0) super::add_r += c;
         if (c < 0) super::add_l += c;
-        if (a) shift(a);
+        if (a) shift(-a);
         return *this;
     }
     ConjugateSlopeTrick& add_abs(T c, T a = 0) { return add_x_minus_a(c, a).add_x_minus_a(-c, a); }
     ConjugateSlopeTrick& add_linear(T a, T b = 0) { return super::shift(a).add_const(-b), *this; }
-    ConjugateSlopeTrick& shift(int a) { return super::add_linear(a, 0), *this; }
+    ConjugateSlopeTrick& shift(int a) { return super::add_linear(-a, 0), *this; }
     ConjugateSlopeTrick& sliding_window_minimum(T a, T b) {
         assert(a <= b);
-        shift(a);
+        shift(-a);
         for (int i = 0; i < b - a; ++i) super::add_x_minus_a(0);
         return *this;
     }
     ConjugateSlopeTrick& convolve(const std::vector<T>& g, int base = 0) {
         add_const(g[0]);
         for (int i = 1; i < int(g.size()); ++i) super::add_a_minus_x(g[i - 1] - g[i]);
-        if (base != 0) shift(-base);
+        if (base != 0) shift(base);
         return *this;
     }
     ConjugateSlopeTrick& clear_left() { return super::suffix_min(), *this; }
@@ -44,9 +44,9 @@ public:
     T eval(T x = 0) {
         if (x > 0 && x > static_cast<T>(super::size_r())) return INF;
         if (x < 0 && -x > static_cast<T>(super::size_l())) return INF;
-        if (x) shift(-x);
-        T res = f0();
         if (x) shift(x);
+        T res = f0();
+        if (x) shift(-x);
         return res; 
     }
 };
