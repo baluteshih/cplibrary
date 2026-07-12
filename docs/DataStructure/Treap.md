@@ -26,8 +26,11 @@ class Treap;
     * Must have a default constructor `Value()` acting as the identity element.
     * Requires a member function `size()` for size-based operations.
 * `Tag`: The type of lazy tags.
-    * Must support `operator+` for tag composition (`Tag + Tag`) and application to a value (`Value + Tag`).
+    * Must support `operator+` for tag composition (`Tag + Tag`).
     * Must have a default constructor `Tag()` acting as the identity tag.
+    * If `operator+` between `Value` and `Tag` is supported, the lazy tag will be applied to `Value`.
+    * If `operator+` between `Key` and `Tag` is supported, the lazy tag will be applied to `Key`.
+    * **WARNING**: It is recommended to use a custom struct to implement the `Tag` to prevent unexpected application. 
 * `Rev`: If `true`, supports range reversals (`range_reverse`).
     * If `Value` has a `reverse()` member function, it is called for the node value and composed value during propagation.
 * `Allocator`: The allocator used for node management.

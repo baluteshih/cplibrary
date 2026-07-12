@@ -11,13 +11,13 @@ class SlopeTrick {
     max_heap pq_l;
     min_heap pq_r;
     T min_f;
+protected:
     T top_l() const { return pq_l.empty() ? -INF : pq_l.top() + add_l; }
     T top_r() const { return pq_r.empty() ? INF : pq_r.top() + add_r; }
     T pop_l() { T res = top_l(); if (!pq_l.empty()) pq_l.pop(); return res; }
     T pop_r() { T res = top_r(); if (!pq_r.empty()) pq_r.pop(); return res; }
     void push_l(T a) { pq_l.push(a - add_l); }
     void push_r(T a) { pq_r.push(a - add_r); }
-protected:
     T add_l, add_r; 
 public:
     SlopeTrick() : min_f(), add_l(), add_r() {}

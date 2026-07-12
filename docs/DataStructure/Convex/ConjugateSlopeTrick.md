@@ -29,7 +29,9 @@ ConjugateSlopeTrick();
 
 * $O(1)$ time
 
-Constructs an empty `ConjugateSlopeTrick` object.
+Constructs an empty `ConjugateSlopeTrick` object representing the following function:
+
+$$f(x) = \begin{cases} 0 & x = 0 \\ \infty & x \neq 0 \end{cases}$$
 
 ---
 
@@ -75,7 +77,7 @@ Adds a constant $a$ to the function: $f(x) \leftarrow f(x) + a$.
 ConjugateSlopeTrick& add_x_minus_a(T c, T a = 0);
 ```
 
-* $O(\lvert a\rvert\log n)$ time
+* $O(\lvert a\rvert\log N)$ time
 
 Adds the function $c(x - a)_+ = \max(0, c(x - a))$ to the function.
 
@@ -87,7 +89,7 @@ Adds the function $c(x - a)_+ = \max(0, c(x - a))$ to the function.
 ConjugateSlopeTrick& add_abs(T c, T a = 0);
 ```
 
-* $O(\lvert a\rvert\log n)$ time
+* $O(\lvert a\rvert\log N)$ time
 
 Adds $c\lvert x - a\rvert$ to the function. Equivalent to `add_x_minus_a(c, a).add_x_minus_a(-c, a)`.
 
@@ -174,3 +176,15 @@ T min_val(T p = 0);
 * $O(N \log N)$ time
 
 Computes the minimum value of $f(x) - px$ over all $x$, which is $-f^*(p)$. Note that this operation evaluates the internal SlopeTrick at $p$.
+
+---
+
+## eval
+
+```cpp
+T eval(T x);
+```
+
+* $O(|x| \log N)$ time
+
+Computes the value $f(x)$ at a given point $x$.
