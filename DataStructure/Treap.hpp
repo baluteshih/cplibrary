@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataStructure/DefaultAllocator.hpp"
+#include "Algebra/ValidOperation.hpp"
 #include "Algebra/size_value.hpp"
 
 #ifndef RNGSEED
@@ -15,9 +16,11 @@ template<typename Key = void,
          bool persistent = false
 >
 class Treap {
-    static constexpr bool hasKey = !std::is_same_v<Key, void>;
-    static constexpr bool hasValue = !std::is_same_v<Value, void>;
-    static constexpr bool hasTag = !std::is_same_v<Tag, void>;
+    static constexpr bool hasKey = !std::is_void_v<Key>;
+    static constexpr bool hasValue = !std::is_void_v<Value>;
+    static constexpr bool hasTag = !std::is_void_v<Tag>;
+    static constexpr bool hasTagToKey = Addable<Key, Tag>;
+    static constexpr bool hasTagToValue = Addable<Value, Tag>;
     static constexpr bool usePri = !persistent;
     static constexpr bool hasSize = requires(Value v) { v.size(); };
     static constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };
@@ -33,8 +36,9 @@ class Treap {
         else return Empty{};
     }
     static_assert(hasKey || hasValue);
-    static_assert(!hasTag || hasValue);
-    static inline std::mt19937 rng{RNGSEED};
+    static_assert(!hasValue || Addable<Value, Value>);
+    static_assert(!hasTag || Addable<Tag, Tag>);
+    static inline std::conditional_t<!persistent, std::mt19937, std::mt19937_64> rng{RNGSEED};
     struct node {
         node *l = nullptr, *r = nullptr;
         [[no_unique_address]] std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();
@@ -57,8 +61,13 @@ class Treap {
             }
         }
         void give_tag(const auto &tag) requires (hasTag) {
-            org = org + tag; 
-            val = val + tag;
+            if constexpr (hasTagToValue) {
+                org = org + tag; 
+                val = val + tag;
+            }
+            if constexpr (hasTagToKey) {
+                key = key + tag;
+            }
             lazy = lazy + tag;
         }
         void reverse() requires (Rev) {
@@ -74,7 +83,7 @@ class Treap {
             if constexpr (Rev) need_rev = rev;
             bool need_tag = false;
             if constexpr (hasTag) { 
-                if constexpr (std::equality_comparable<Tag>) need_tag = (lazy != Tag());
+                if constexpr (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());
                 else need_tag = true;
             }
             if (!need_rev && !need_tag) return;
@@ -171,7 +180,7 @@ class Treap {
         if constexpr (usePri)
             useleft = left->pri < right->pri;
         else
-            useleft = rng() % (get_size(left) + get_size(right)) < size_t(get_size(left));
+            useleft = rng() % (get_size(left) + get_size(right)) < get_size(left);
         if (useleft) {
             if constexpr (persistent) left = NodeAlloc::allocate(*left); 
             if constexpr (hasTag || Rev) left->down();
@@ -203,7 +212,7 @@ class Treap {
     static Value get_val(node *a, Value Default) requires (hasValue) {
         return a ? a->val : Default;
     }
-    static int get_size(node *a) requires (hasSize) { 
+    static size_t get_size(node *a) requires (hasSize) { 
         return a ? a->val.size() : 0;
     }
     static void free(node *&ptr) requires (!persistent) {

@@ -4,9 +4,6 @@
 
 #include "DataStructure/Treap.hpp"
 
-#define POOL_SIZE 17000000
-#include "DataStructure/PoolAllocator.hpp"
-
 struct Value {
     long long sum;
     int sz;
@@ -23,7 +20,7 @@ struct Value {
     }
 };
 
-using treap = Treap<void, Value, void, true, PoolAllocator, true>;
+using treap = Treap<void, Value, void, true, DefaultAllocator, true>;
 
 int main() {
     std::ios::sync_with_stdio(0), std::cin.tie(0);
