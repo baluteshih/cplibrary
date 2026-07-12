@@ -185,6 +185,6 @@ Computes the minimum value of $f(x) - px$ over all $x$, which is $-f^*(p)$. Note
 T eval(T x);
 ```
 
-* $O(|x| \log N)$ time
+* $O(\lvert x\rvert \log N)$ time
 
 Computes the value $f(x)$ at a given point $x$.
