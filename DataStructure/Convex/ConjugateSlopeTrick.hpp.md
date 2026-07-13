@@ -223,7 +223,7 @@ ConjugateSlopeTrick& shift(int a);
 
 * $O(\lvert a\rvert \log N)$ time, where $N$ is the number of slope changes in the conjugate function.
 
-Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by left).
+Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by right).
 
 ---
 
@@ -293,6 +293,6 @@ Computes the minimum value of $f(x) - px$ over all $x$, which is $-f^*(p)$. Note
 T eval(T x);
 ```
 
-* $O(|x| \log N)$ time
+* $O(\lvert x\rvert \log N)$ time
 
 Computes the value $f(x)$ at a given point $x$.
