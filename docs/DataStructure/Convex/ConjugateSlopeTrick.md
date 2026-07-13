@@ -115,7 +115,7 @@ ConjugateSlopeTrick& shift(int a);
 
 * $O(\lvert a\rvert \log N)$ time, where $N$ is the number of slope changes in the conjugate function.
 
-Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by left).
+Translates the function horizontally: $f(x) \leftarrow f(x - a)$ (shifted by right).
 
 ---
 
