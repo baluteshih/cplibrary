@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -121,26 +121,25 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n#line 4 \"Misc/2sat.hpp\"\n\nstruct SAT { // 0-base\n    int n;\n  \
-    \  std::vector<bool> istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n), istrue(n\
-    \ + n), scc(n + n) {}\n    int rv(int a) {\n        return a >= n ? a - n : a\
-    \ + n;\n    }\n    void add_clause(int a, int b) {\n        scc.add_edge(rv(a),\
-    \ b), scc.add_edge(rv(b), a);\n    }\n    bool solve() {\n        scc.solve();\n\
-    \        for (int i = 0; i < n; ++i) {\n            if (scc.bln[i] == scc.bln[i\
-    \ + n]) return false;\n            istrue[i] = scc.bln[i] < scc.bln[i + n];\n\
-    \            istrue[i + n] = !istrue[i];\n        }\n        return true;\n  \
-    \  }\n};\n#line 5 \"test/1_library_checker/other/two_sat.test.cpp\"\n\nint main()\
-    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    std::string p, cnt;\n\
-    \    int n, m;\n    std::cin >> p >> cnt >> n >> m;\n    SAT sat(n);\n    while\
-    \ (m--) {\n        int a, b, z;\n        std::cin >> a >> b >> z;\n        if\
-    \ (a < 0) a = sat.rv(-a - 1);\n        else --a;\n        if (b < 0) b = sat.rv(-b\
-    \ - 1);\n        else --b;\n        sat.add_clause(a, b);\n    }\n    if (!sat.solve())\n\
-    \        std::cout << \"s UNSATISFIABLE\\n\";\n    else {\n        std::cout <<\
-    \ \"s SATISFIABLE\\nv \";\n        for (int i = 0; i < n; ++i)\n            if\
-    \ (sat.istrue[i])\n                std::cout << i + 1 << \" \";\n            else\n\
-    \                std::cout << -(i + 1) << \" \";\n        std::cout << \"0\\n\"\
-    ;\n    }\n}\n"
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
+    #line 4 \"Misc/2sat.hpp\"\n\nstruct SAT { // 0-base\n    int n;\n    std::vector<bool>\
+    \ istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n), istrue(n + n), scc(n + n) {}\n\
+    \    int rv(int a) {\n        return a >= n ? a - n : a + n;\n    }\n    void\
+    \ add_clause(int a, int b) {\n        scc.add_edge(rv(a), b), scc.add_edge(rv(b),\
+    \ a);\n    }\n    bool solve() {\n        scc.solve();\n        for (int i = 0;\
+    \ i < n; ++i) {\n            if (scc.bln[i] == scc.bln[i + n]) return false;\n\
+    \            istrue[i] = scc.bln[i] < scc.bln[i + n];\n            istrue[i +\
+    \ n] = !istrue[i];\n        }\n        return true;\n    }\n};\n#line 5 \"test/1_library_checker/other/two_sat.test.cpp\"\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    std::string\
+    \ p, cnt;\n    int n, m;\n    std::cin >> p >> cnt >> n >> m;\n    SAT sat(n);\n\
+    \    while (m--) {\n        int a, b, z;\n        std::cin >> a >> b >> z;\n \
+    \       if (a < 0) a = sat.rv(-a - 1);\n        else --a;\n        if (b < 0)\
+    \ b = sat.rv(-b - 1);\n        else --b;\n        sat.add_clause(a, b);\n    }\n\
+    \    if (!sat.solve())\n        std::cout << \"s UNSATISFIABLE\\n\";\n    else\
+    \ {\n        std::cout << \"s SATISFIABLE\\nv \";\n        for (int i = 0; i <\
+    \ n; ++i)\n            if (sat.istrue[i])\n                std::cout << i + 1\
+    \ << \" \";\n            else\n                std::cout << -(i + 1) << \" \"\
+    ;\n        std::cout << \"0\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n#include \"\
     assumption.hpp\"\n\n#include \"Misc/2sat.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    std::string p, cnt;\n    int n, m;\n    std::cin >> p\
@@ -161,7 +160,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/other/two_sat.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 13:11:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/other/two_sat.test.cpp

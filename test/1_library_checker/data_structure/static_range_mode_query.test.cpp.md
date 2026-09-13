@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/mo_solver.hpp
     title: Sequence/mo_solver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -55,62 +55,56 @@ data:
     \     while (cur_l < l) remove_left(cur_l++);\n        while (cur_r > r)\n   \
     \         if constexpr (useRemoveRight) remove_right(--cur_r);\n            else\
     \ remove_left(--cur_r);\n        query(i);\n    }\n}\n#line 2 \"DataStructure/Discretization.hpp\"\
-    \n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T> vals;\n \
-    \   static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {\n\
-    \        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
-    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
-    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
-    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
-    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
-    \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
-    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
-    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
-    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
-    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
-    \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n\
-    #line 6 \"test/1_library_checker/data_structure/static_range_mode_query.test.cpp\"\
+    \n\ntemplate<typename T>\nclass Discretization : public std::vector<T> {\npublic:\n\
+    \    using std::vector<T>::vector;\n    virtual void build() {\n        std::ranges::sort(*this);\n\
+    \        auto [first, last] = std::ranges::unique(*this);\n        this->erase(first,\
+    \ last);\n    }\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(*this,\
+    \ x);\n        if (it == this->end() || *it != x) return -1;\n        return it\
+    \ - this->begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
+    \        assert(res != -1);\n        return res;\n    }\n    int left_close(T\
+    \ x) {\n        return std::ranges::lower_bound(*this, x) - this->begin();\n \
+    \   }\n    int left_open(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n};\n#line 6 \"test/1_library_checker/data_structure/static_range_mode_query.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, q;\n    std::cin >> n >> q;\n    std::vector<int> arr(n);\n    for (auto\
     \ &i : arr)\n        std::cin >> i;\n    std::vector<std::pair<int, int>> querys(q);\n\
-    \    for (auto &[l, r] : querys)\n        std::cin >> l >> r;\n    Discretization\
-    \ val(arr);\n    for (auto &i : arr)\n        i = val.idx(i);\n    std::vector<int>\
-    \ cnt(val.size()), cnt2(n + 1), pl(val.size());\n    std::vector<std::vector<int>>\
-    \ pool(n + 1);\n    std::iota(pl.begin(), pl.end(), 0);\n    pool[0] = pl;\n \
-    \   std::vector<std::pair<int, int>> ans(q);\n\n    auto pop = [&](int x) {\n\
-    \        std::swap(pool[cnt[x]][pl[x]], pool[cnt[x]].back());\n        pl[pool[cnt[x]][pl[x]]]\
-    \ = pl[x];\n        pool[cnt[x]].pop_back();\n    };\n\n    auto push = [&](int\
-    \ x) {\n        pl[x] = pool[cnt[x]].size();\n        pool[cnt[x]].push_back(x);\n\
-    \    };\n\n    int mx = 0;\n    cnt2[0] = val.size();\n    mo_solver(querys, [&](int\
-    \ qid) {\n        ans[qid] = std::make_pair(val[pool[mx].back()], mx);\n    },\
-    \ [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt[arr[l]]\
-    \ == mx) ++mx;\n        ++cnt2[++cnt[arr[l]]], push(arr[l]);\n    }, [&](int l)\
-    \ {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt2[mx] == 0) --mx;\n\
-    \        ++cnt2[--cnt[arr[l]]], push(arr[l]);\n    });\n    for (auto [v, c] :\
-    \ ans)\n        std::cout << v << \" \" << c << \"\\n\";\n}\n"
+    \    for (auto &[l, r] : querys)\n        std::cin >> l >> r;\n    Discretization<int>\
+    \ val(arr.begin(), arr.end());\n    val.build();\n    for (auto &i : arr)\n  \
+    \      i = val.idx(i);\n    std::vector<int> cnt(val.size()), cnt2(n + 1), pl(val.size());\n\
+    \    std::vector<std::vector<int>> pool(n + 1);\n    std::iota(pl.begin(), pl.end(),\
+    \ 0);\n    pool[0] = pl;\n    std::vector<std::pair<int, int>> ans(q);\n\n   \
+    \ auto pop = [&](int x) {\n        std::swap(pool[cnt[x]][pl[x]], pool[cnt[x]].back());\n\
+    \        pl[pool[cnt[x]][pl[x]]] = pl[x];\n        pool[cnt[x]].pop_back();\n\
+    \    };\n\n    auto push = [&](int x) {\n        pl[x] = pool[cnt[x]].size();\n\
+    \        pool[cnt[x]].push_back(x);\n    };\n\n    int mx = 0;\n    cnt2[0] =\
+    \ val.size();\n    mo_solver(querys, [&](int qid) {\n        ans[qid] = std::make_pair(val[pool[mx].back()],\
+    \ mx);\n    }, [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n    \
+    \    if (cnt[arr[l]] == mx) ++mx;\n        ++cnt2[++cnt[arr[l]]], push(arr[l]);\n\
+    \    }, [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt2[mx]\
+    \ == 0) --mx;\n        ++cnt2[--cnt[arr[l]]], push(arr[l]);\n    });\n    for\
+    \ (auto [v, c] : ans)\n        std::cout << v << \" \" << c << \"\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_mode_query\"\
     \n#include \"assumption.hpp\"\n\n#include \"Sequence/mo_solver.hpp\"\n#include\
     \ \"DataStructure/Discretization.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    std::vector<int>\
     \ arr(n);\n    for (auto &i : arr)\n        std::cin >> i;\n    std::vector<std::pair<int,\
     \ int>> querys(q);\n    for (auto &[l, r] : querys)\n        std::cin >> l >>\
-    \ r;\n    Discretization val(arr);\n    for (auto &i : arr)\n        i = val.idx(i);\n\
-    \    std::vector<int> cnt(val.size()), cnt2(n + 1), pl(val.size());\n    std::vector<std::vector<int>>\
-    \ pool(n + 1);\n    std::iota(pl.begin(), pl.end(), 0);\n    pool[0] = pl;\n \
-    \   std::vector<std::pair<int, int>> ans(q);\n\n    auto pop = [&](int x) {\n\
-    \        std::swap(pool[cnt[x]][pl[x]], pool[cnt[x]].back());\n        pl[pool[cnt[x]][pl[x]]]\
-    \ = pl[x];\n        pool[cnt[x]].pop_back();\n    };\n\n    auto push = [&](int\
-    \ x) {\n        pl[x] = pool[cnt[x]].size();\n        pool[cnt[x]].push_back(x);\n\
-    \    };\n\n    int mx = 0;\n    cnt2[0] = val.size();\n    mo_solver(querys, [&](int\
-    \ qid) {\n        ans[qid] = std::make_pair(val[pool[mx].back()], mx);\n    },\
-    \ [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt[arr[l]]\
-    \ == mx) ++mx;\n        ++cnt2[++cnt[arr[l]]], push(arr[l]);\n    }, [&](int l)\
-    \ {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt2[mx] == 0) --mx;\n\
-    \        ++cnt2[--cnt[arr[l]]], push(arr[l]);\n    });\n    for (auto [v, c] :\
-    \ ans)\n        std::cout << v << \" \" << c << \"\\n\";\n}\n"
+    \ r;\n    Discretization<int> val(arr.begin(), arr.end());\n    val.build();\n\
+    \    for (auto &i : arr)\n        i = val.idx(i);\n    std::vector<int> cnt(val.size()),\
+    \ cnt2(n + 1), pl(val.size());\n    std::vector<std::vector<int>> pool(n + 1);\n\
+    \    std::iota(pl.begin(), pl.end(), 0);\n    pool[0] = pl;\n    std::vector<std::pair<int,\
+    \ int>> ans(q);\n\n    auto pop = [&](int x) {\n        std::swap(pool[cnt[x]][pl[x]],\
+    \ pool[cnt[x]].back());\n        pl[pool[cnt[x]][pl[x]]] = pl[x];\n        pool[cnt[x]].pop_back();\n\
+    \    };\n\n    auto push = [&](int x) {\n        pl[x] = pool[cnt[x]].size();\n\
+    \        pool[cnt[x]].push_back(x);\n    };\n\n    int mx = 0;\n    cnt2[0] =\
+    \ val.size();\n    mo_solver(querys, [&](int qid) {\n        ans[qid] = std::make_pair(val[pool[mx].back()],\
+    \ mx);\n    }, [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n    \
+    \    if (cnt[arr[l]] == mx) ++mx;\n        ++cnt2[++cnt[arr[l]]], push(arr[l]);\n\
+    \    }, [&](int l) {\n        --cnt2[cnt[arr[l]]], pop(arr[l]); \n        if (cnt2[mx]\
+    \ == 0) --mx;\n        ++cnt2[--cnt[arr[l]]], push(arr[l]);\n    });\n    for\
+    \ (auto [v, c] : ans)\n        std::cout << v << \" \" << c << \"\\n\";\n}\n"
   dependsOn:
   - assumption.hpp
   - Sequence/mo_solver.hpp
@@ -119,7 +113,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:54:41+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_range_mode_query.test.cpp

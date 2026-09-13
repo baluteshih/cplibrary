@@ -53,14 +53,14 @@ data:
   isVerificationFile: false
   path: Numeric/prime_work.hpp
   requiredBy:
-  - Numeric/factor_transform.hpp
-  - Convolution/lcm_convolution.hpp
   - Convolution/gcd_convolution.hpp
+  - Convolution/lcm_convolution.hpp
+  - Numeric/factor_transform.hpp
   timestamp: '2026-06-18 21:28:00+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/convolution/gcd_convolution.test.cpp
   - test/1_library_checker/convolution/lcm_convolution.test.cpp
+  - test/1_library_checker/convolution/gcd_convolution.test.cpp
 documentation_of: Numeric/prime_work.hpp
 layout: document
 redirect_from:

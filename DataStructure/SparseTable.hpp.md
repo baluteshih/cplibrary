@@ -66,15 +66,15 @@ data:
     \        return u;\n    }\n};\n#line 4 \"DataStructure/SparseTable.hpp\"\n\ntemplate<typename\
     \ Value = int>\nclass SparseTable {\n    int n;\n    Doubling<Value, true> table;\n\
     public:\n    SparseTable(const std::ranges::range auto &data) : n(data.size()),\
-    \ table(n, data) {} \n    Value range_prod(int l, int r) {\n        assert(0 <=\
-    \ l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
+    \ table(n, data) {} \n    Value range_prod(int l, int r) const {\n        assert(0\
+    \ <= l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
     \        int lg = std::__lg(r - l);\n        return table.val[lg][l] + table.val[lg][r\
     \ - (1 << lg)];\n    }\n};\n"
   code: "#pragma once\n\n#include \"DataStructure/Doubling.hpp\"\n\ntemplate<typename\
     \ Value = int>\nclass SparseTable {\n    int n;\n    Doubling<Value, true> table;\n\
     public:\n    SparseTable(const std::ranges::range auto &data) : n(data.size()),\
-    \ table(n, data) {} \n    Value range_prod(int l, int r) {\n        assert(0 <=\
-    \ l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
+    \ table(n, data) {} \n    Value range_prod(int l, int r) const {\n        assert(0\
+    \ <= l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
     \        int lg = std::__lg(r - l);\n        return table.val[lg][l] + table.val[lg][r\
     \ - (1 << lg)];\n    }\n};\n"
   dependsOn:
@@ -84,7 +84,7 @@ data:
   isVerificationFile: false
   path: DataStructure/SparseTable.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
+  timestamp: '2026-09-13 13:11:32+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp

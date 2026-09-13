@@ -91,8 +91,8 @@ data:
   timestamp: '2026-07-12 18:12:29+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/3_yukicoder/2114.test.cpp
   - test/3_yukicoder/1077.test.cpp
+  - test/3_yukicoder/2114.test.cpp
 documentation_of: DataStructure/Convex/SlopeTrick.hpp
 layout: document
 title: Slope Trick

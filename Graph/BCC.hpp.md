@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -165,8 +165,8 @@ data:
   timestamp: '2026-06-30 20:37:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/biconnected_components.test.cpp
   - test/1_library_checker/graph/st_numbering.test.cpp
+  - test/1_library_checker/graph/biconnected_components.test.cpp
 documentation_of: Graph/BCC.hpp
 layout: document
 redirect_from:

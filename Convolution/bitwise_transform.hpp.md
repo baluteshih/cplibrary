@@ -86,16 +86,16 @@ data:
   isVerificationFile: false
   path: Convolution/bitwise_transform.hpp
   requiredBy:
-  - Convolution/xor_convolution.hpp
-  - Convolution/or_convolution.hpp
   - Convolution/and_convolution.hpp
+  - Convolution/xor_convolution.hpp
   - Convolution/subset_convolution.hpp
+  - Convolution/or_convolution.hpp
   timestamp: '2026-06-14 15:20:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_xor_convolution.test.cpp
   - test/1_library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/1_library_checker/set_power_series/subset_convolution.test.cpp
 documentation_of: Convolution/bitwise_transform.hpp
 layout: document
 redirect_from:

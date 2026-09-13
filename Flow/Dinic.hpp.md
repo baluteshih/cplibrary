@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
@@ -219,8 +219,8 @@ data:
   verifiedWith:
   - test/4_codeforces/106033E.test.cpp
   - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
 documentation_of: Flow/Dinic.hpp
 layout: document
 redirect_from:

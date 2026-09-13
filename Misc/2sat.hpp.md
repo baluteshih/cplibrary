@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -113,16 +113,15 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n#line 4 \"Misc/2sat.hpp\"\n\nstruct SAT { // 0-base\n    int n;\n  \
-    \  std::vector<bool> istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n), istrue(n\
-    \ + n), scc(n + n) {}\n    int rv(int a) {\n        return a >= n ? a - n : a\
-    \ + n;\n    }\n    void add_clause(int a, int b) {\n        scc.add_edge(rv(a),\
-    \ b), scc.add_edge(rv(b), a);\n    }\n    bool solve() {\n        scc.solve();\n\
-    \        for (int i = 0; i < n; ++i) {\n            if (scc.bln[i] == scc.bln[i\
-    \ + n]) return false;\n            istrue[i] = scc.bln[i] < scc.bln[i + n];\n\
-    \            istrue[i + n] = !istrue[i];\n        }\n        return true;\n  \
-    \  }\n};\n"
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
+    #line 4 \"Misc/2sat.hpp\"\n\nstruct SAT { // 0-base\n    int n;\n    std::vector<bool>\
+    \ istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n), istrue(n + n), scc(n + n) {}\n\
+    \    int rv(int a) {\n        return a >= n ? a - n : a + n;\n    }\n    void\
+    \ add_clause(int a, int b) {\n        scc.add_edge(rv(a), b), scc.add_edge(rv(b),\
+    \ a);\n    }\n    bool solve() {\n        scc.solve();\n        for (int i = 0;\
+    \ i < n; ++i) {\n            if (scc.bln[i] == scc.bln[i + n]) return false;\n\
+    \            istrue[i] = scc.bln[i] < scc.bln[i + n];\n            istrue[i +\
+    \ n] = !istrue[i];\n        }\n        return true;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Graph/SCC.hpp\"\n\nstruct SAT { // 0-base\n  \
     \  int n;\n    std::vector<bool> istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n),\
     \ istrue(n + n), scc(n + n) {}\n    int rv(int a) {\n        return a >= n ? a\
@@ -138,7 +137,7 @@ data:
   isVerificationFile: false
   path: Misc/2sat.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 13:11:32+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp

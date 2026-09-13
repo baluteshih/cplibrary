@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -75,8 +75,8 @@ data:
     \        return u;\n    }\n};\n#line 4 \"DataStructure/SparseTable.hpp\"\n\ntemplate<typename\
     \ Value = int>\nclass SparseTable {\n    int n;\n    Doubling<Value, true> table;\n\
     public:\n    SparseTable(const std::ranges::range auto &data) : n(data.size()),\
-    \ table(n, data) {} \n    Value range_prod(int l, int r) {\n        assert(0 <=\
-    \ l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
+    \ table(n, data) {} \n    Value range_prod(int l, int r) const {\n        assert(0\
+    \ <= l && r <= n);\n        assert(l <= r);\n        if (l == r) return Value();\n\
     \        int lg = std::__lg(r - l);\n        return table.val[lg][l] + table.val[lg][r\
     \ - (1 << lg)];\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp\"\
     \n\nstruct Value {\n    int val;\n    Value(int _v = 2'000'000'000): val(_v) {}\n\
@@ -110,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
+  timestamp: '2026-09-13 13:11:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp

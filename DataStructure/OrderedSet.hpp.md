@@ -24,35 +24,29 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/OrderedSet.hpp\"\n\n#line 2 \"DataStructure/Discretization.hpp\"\
-    \n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T> vals;\n \
-    \   static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {\n\
-    \        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
-    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
-    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
-    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
-    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
-    \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
-    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
-    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
-    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
-    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
-    \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n\
-    #line 2 \"DataStructure/BIT.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n\
-    #line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
-    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
-    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
-    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \n\ntemplate<typename T>\nclass Discretization : public std::vector<T> {\npublic:\n\
+    \    using std::vector<T>::vector;\n    virtual void build() {\n        std::ranges::sort(*this);\n\
+    \        auto [first, last] = std::ranges::unique(*this);\n        this->erase(first,\
+    \ last);\n    }\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(*this,\
+    \ x);\n        if (it == this->end() || *it != x) return -1;\n        return it\
+    \ - this->begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
+    \        assert(res != -1);\n        return res;\n    }\n    int left_close(T\
+    \ x) {\n        return std::ranges::lower_bound(*this, x) - this->begin();\n \
+    \   }\n    int left_open(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n};\n#line 2 \"DataStructure/BIT.hpp\"\n\n#line 2\
+    \ \"Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\n\
+    template <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
+    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
     \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
     \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
     \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"\
     DataStructure/BIT.hpp\"\n\ntemplate<class T>\nrequires isCommutativeMonoid<T>\n\
     class BIT { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T>\
-    \ bit;\n    BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
+    \ bit;\n    BIT(int _n = 0) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
     \ auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(),\
     \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
     \         bit[x] = arr[x - 1];\n            int y = x - (x & -x);\n          \
@@ -70,9 +64,10 @@ data:
     \                k -= bit[res += i];\n        }\n        return res;\n    }\n\
     \    T total() {\n        return total_;\n    }\n};\n#line 5 \"DataStructure/OrderedSet.hpp\"\
     \n\ntemplate<class T>\nclass OrderedSet : public Discretization<T> {\n    std::vector<bool>\
-    \ vis;\n    BIT<int> bit;\npublic:\n    OrderedSet(const std::ranges::range auto\
-    \ &_vals): Discretization<T>(_vals), vis(std::ranges::distance(_vals)), bit(std::bit_ceil(vis.size()))\
-    \ {}\n    bool insert(T x) {\n        x = this->safe_idx(x);\n        if (vis[x])\
+    \ vis;\n    BIT<int> bit;\npublic:\n    using Discretization<T>::Discretization;\n\
+    \    void build() override {\n        Discretization<T>::build(); \n        vis.assign(Discretization<T>::size(),\
+    \ false);\n        bit = BIT<int>(std::bit_ceil(Discretization<T>::size()));\n\
+    \    }\n    bool insert(T x) {\n        x = this->safe_idx(x);\n        if (vis[x])\
     \ return false;\n        vis[x] = true;\n        bit.modify(x, 1);\n        return\
     \ true;\n    }\n    bool erase(T x) {\n        x = this->safe_idx(x);\n      \
     \  if (!vis[x]) return false;\n        vis[x] = false;\n        bit.modify(x,\
@@ -89,12 +84,13 @@ data:
     \        return res == size() ? -1 : kth(res);\n    }\n};\n"
   code: "#pragma once\n\n#include \"DataStructure/Discretization.hpp\"\n#include \"\
     DataStructure/BIT.hpp\"\n\ntemplate<class T>\nclass OrderedSet : public Discretization<T>\
-    \ {\n    std::vector<bool> vis;\n    BIT<int> bit;\npublic:\n    OrderedSet(const\
-    \ std::ranges::range auto &_vals): Discretization<T>(_vals), vis(std::ranges::distance(_vals)),\
-    \ bit(std::bit_ceil(vis.size())) {}\n    bool insert(T x) {\n        x = this->safe_idx(x);\n\
-    \        if (vis[x]) return false;\n        vis[x] = true;\n        bit.modify(x,\
-    \ 1);\n        return true;\n    }\n    bool erase(T x) {\n        x = this->safe_idx(x);\n\
-    \        if (!vis[x]) return false;\n        vis[x] = false;\n        bit.modify(x,\
+    \ {\n    std::vector<bool> vis;\n    BIT<int> bit;\npublic:\n    using Discretization<T>::Discretization;\n\
+    \    void build() override {\n        Discretization<T>::build(); \n        vis.assign(Discretization<T>::size(),\
+    \ false);\n        bit = BIT<int>(std::bit_ceil(Discretization<T>::size()));\n\
+    \    }\n    bool insert(T x) {\n        x = this->safe_idx(x);\n        if (vis[x])\
+    \ return false;\n        vis[x] = true;\n        bit.modify(x, 1);\n        return\
+    \ true;\n    }\n    bool erase(T x) {\n        x = this->safe_idx(x);\n      \
+    \  if (!vis[x]) return false;\n        vis[x] = false;\n        bit.modify(x,\
     \ -1);\n        return true;\n    }\n    bool exists(T x) {\n        x = this->idx(x);\n\
     \        if (x == -1) return false;\n        return vis[x]; \n    }\n    int size()\
     \ {\n        return bit.total();\n    }\n    int lt_count(T x) {\n        return\
@@ -114,7 +110,7 @@ data:
   isVerificationFile: false
   path: DataStructure/OrderedSet.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:54:41+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
@@ -140,15 +136,25 @@ class OrderedSet : public Discretization<T>;
 
 ---
 
-## Constructor
+## Constructors
 
 ```cpp
-OrderedSet(const std::ranges::range auto &_vals);
+using Discretization<T>::Discretization;
 ```
 
-* $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
+Constructors are inherited from `Discretization<T>`. Candidate values can be initialized using vector constructors or added via `push_back()` before calling `build()`.
 
-Constructs an empty ordered set using the given range `_vals` as the universe of possible elements to be inserted later.
+---
+
+## build
+
+```cpp
+void build() override;
+```
+
+* $O(N \log N)$ time, where $N$ is the number of candidate values.
+
+Sorts and removes duplicate candidate values by invoking `Discretization<T>::build()`, and initializes internal data structures (`vis` array and BIT). Must be called after populating candidate values and before performing set operations like `insert`, `erase`, or queries.
 
 ---
 
@@ -160,7 +166,7 @@ bool insert(T x);
 
 * $O(\log N)$ time
 
-Inserts the value `x` into the set. Returns `true` if `x` was successfully inserted, or `false` if `x` was already present. `x` must exist in the original array `_vals`.
+Inserts the value `x` into the set. Returns `true` if `x` was successfully inserted, or `false` if `x` was already present. `x` must exist in the discretized universe built via `build()`.
 
 ---
 
@@ -172,7 +178,7 @@ bool erase(T x);
 
 * $O(\log N)$ time
 
-Erases the value `x` from the set. Returns `true` if `x` was successfully erased, or `false` if `x` was not present. `x` must exist in the original array `_vals`.
+Erases the value `x` from the set. Returns `true` if `x` was successfully erased, or `false` if `x` was not present. `x` must exist in the discretized universe built via `build()`.
 
 ---
 

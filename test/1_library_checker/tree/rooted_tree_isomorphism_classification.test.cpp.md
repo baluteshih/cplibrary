@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -197,38 +197,34 @@ data:
     \            for (auto [v, eid] : this->G[u])\n                if (eid != parent_eid(u))\n\
     \                    res[u] += res[v];\n            res[u] = shift_hash_value(res[u]);\n\
     \        });\n        return res;\n    }\n};\n#line 2 \"DataStructure/Discretization.hpp\"\
-    \n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T> vals;\n \
-    \   static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {\n\
-    \        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
-    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
-    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
-    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
-    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
-    \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
-    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
-    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
-    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
-    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
-    \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n\
-    #line 6 \"test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp\"\
+    \n\ntemplate<typename T>\nclass Discretization : public std::vector<T> {\npublic:\n\
+    \    using std::vector<T>::vector;\n    virtual void build() {\n        std::ranges::sort(*this);\n\
+    \        auto [first, last] = std::ranges::unique(*this);\n        this->erase(first,\
+    \ last);\n    }\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(*this,\
+    \ x);\n        if (it == this->end() || *it != x) return -1;\n        return it\
+    \ - this->begin();\n    }\n    int safe_idx(T x) {\n        int res = idx(x);\n\
+    \        assert(res != -1);\n        return res;\n    }\n    int left_close(T\
+    \ x) {\n        return std::ranges::lower_bound(*this, x) - this->begin();\n \
+    \   }\n    int left_open(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n};\n#line 6 \"test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n;\n    std::cin >> n;\n    Tree tree(n);\n    for (int i = 1; i < n; ++i) {\n\
     \        int p;\n        std::cin >> p;\n        tree.add_edge(p, i);\n    }\n\
-    \    auto res = tree.hash_values();\n    Discretization val(res);\n    std::cout\
-    \ << val.size() << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout\
-    \ << val.idx(res[i]) << \" \\n\"[i + 1 == n];\n}\n"
+    \    auto res = tree.hash_values();\n    Discretization<decltype(res)::value_type>\
+    \ val(res.begin(), res.end());\n    val.build();\n    std::cout << val.size()\
+    \ << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout << val.idx(res[i])\
+    \ << \" \\n\"[i + 1 == n];\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification\"\
     \n#include \"assumption.hpp\"\n\n#include \"Tree/Tree.hpp\"\n#include \"DataStructure/Discretization.hpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n;\n    std::cin >> n;\n    Tree tree(n);\n    for (int i = 1; i < n; ++i) {\n\
     \        int p;\n        std::cin >> p;\n        tree.add_edge(p, i);\n    }\n\
-    \    auto res = tree.hash_values();\n    Discretization val(res);\n    std::cout\
-    \ << val.size() << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout\
-    \ << val.idx(res[i]) << \" \\n\"[i + 1 == n];\n}\n"
+    \    auto res = tree.hash_values();\n    Discretization<decltype(res)::value_type>\
+    \ val(res.begin(), res.end());\n    val.build();\n    std::cout << val.size()\
+    \ << \"\\n\";\n    for (int i = 0; i < n; ++i)\n        std::cout << val.idx(res[i])\
+    \ << \" \\n\"[i + 1 == n];\n}\n"
   dependsOn:
   - assumption.hpp
   - Tree/Tree.hpp
@@ -239,7 +235,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 23:51:20+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp

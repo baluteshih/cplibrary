@@ -21,50 +21,41 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Discretization.hpp\"\n\ntemplate<typename\
-    \ T>\nclass Discretization {\n    std::vector<T> vals;\n    static std::vector<T>\
-    \ sort_and_unique(std::ranges::range auto &&_vals) {\n        std::vector<T> res;\n\
-    \        std::ranges::copy(_vals, std::back_inserter(res));\n        std::ranges::sort(res);\n\
-    \        auto [first, last] = std::ranges::unique(res);\n        res.erase(first,\
-    \ last);\n        return res;\n    }\npublic:\n    int idx(T x) {\n        auto\
-    \ it = std::ranges::lower_bound(vals, x);\n        if (it == vals.end() || *it\
-    \ != x) return -1;\n        return it - vals.begin();\n    }\n    int safe_idx(T\
-    \ x) {\n        int res = idx(x);\n        assert(res != -1);\n        return\
-    \ res;\n    }\n    Discretization(std::ranges::range auto &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals)))\
-    \ {}\n    int left_close(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
-    \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n"
-  code: "#pragma once\n\ntemplate<typename T>\nclass Discretization {\n    std::vector<T>\
-    \ vals;\n    static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals)\
-    \ {\n        std::vector<T> res;\n        std::ranges::copy(_vals, std::back_inserter(res));\n\
-    \        std::ranges::sort(res);\n        auto [first, last] = std::ranges::unique(res);\n\
-    \        res.erase(first, last);\n        return res;\n    }\npublic:\n    int\
-    \ idx(T x) {\n        auto it = std::ranges::lower_bound(vals, x);\n        if\
-    \ (it == vals.end() || *it != x) return -1;\n        return it - vals.begin();\n\
+    \ T>\nclass Discretization : public std::vector<T> {\npublic:\n    using std::vector<T>::vector;\n\
+    \    virtual void build() {\n        std::ranges::sort(*this);\n        auto [first,\
+    \ last] = std::ranges::unique(*this);\n        this->erase(first, last);\n   \
+    \ }\n    int idx(T x) {\n        auto it = std::ranges::lower_bound(*this, x);\n\
+    \        if (it == this->end() || *it != x) return -1;\n        return it - this->begin();\n\
     \    }\n    int safe_idx(T x) {\n        int res = idx(x);\n        assert(res\
-    \ != -1);\n        return res;\n    }\n    Discretization(std::ranges::range auto\
-    \ &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}\n\
-    \    int left_close(T x) {\n        return std::ranges::lower_bound(vals, x) -\
-    \ vals.begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(vals,\
-    \ x) - vals.begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(vals,\
-    \ x) - vals.begin();\n    }\n    const T& operator[](size_t index) const {\n \
-    \       return vals[index];\n    }\n    int size() {\n        return vals.size();\n\
-    \    }\n};\n\ntemplate <std::ranges::range R>\nDiscretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;\n"
+    \ != -1);\n        return res;\n    }\n    int left_close(T x) {\n        return\
+    \ std::ranges::lower_bound(*this, x) - this->begin();\n    }\n    int left_open(T\
+    \ x) {\n        return std::ranges::upper_bound(*this, x) - this->begin() - 1;\n\
+    \    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n};\n"
+  code: "#pragma once\n\ntemplate<typename T>\nclass Discretization : public std::vector<T>\
+    \ {\npublic:\n    using std::vector<T>::vector;\n    virtual void build() {\n\
+    \        std::ranges::sort(*this);\n        auto [first, last] = std::ranges::unique(*this);\n\
+    \        this->erase(first, last);\n    }\n    int idx(T x) {\n        auto it\
+    \ = std::ranges::lower_bound(*this, x);\n        if (it == this->end() || *it\
+    \ != x) return -1;\n        return it - this->begin();\n    }\n    int safe_idx(T\
+    \ x) {\n        int res = idx(x);\n        assert(res != -1);\n        return\
+    \ res;\n    }\n    int left_close(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n    int left_open(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_close(T x) {\n        return std::ranges::upper_bound(*this,\
+    \ x) - this->begin() - 1;\n    }\n    int right_open(T x) {\n        return std::ranges::lower_bound(*this,\
+    \ x) - this->begin();\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/Discretization.hpp
   requiredBy:
   - DataStructure/OrderedSet.hpp
-  timestamp: '2026-06-30 17:54:41+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: DataStructure/Discretization.hpp
 layout: document
 title: Discretization
@@ -72,11 +63,15 @@ title: Discretization
 
 A utility class for coordinate compression (discretization), allowing efficient mapping from values to $0$-indexed ranks and queries for intervals.
 
+## Inheritance
+
+`Discretization<T>` inherits publicly from `std::vector<T>`.
+
 ## Template Parameters
 
 ```cpp
 template<typename T>
-class Discretization;
+class Discretization : public std::vector<T>;
 ```
 
 * `T`: The type of elements being discretized.
@@ -84,22 +79,32 @@ class Discretization;
 
 ---
 
-## Constructor
+## Constructors
 
 ```cpp
-Discretization(const std::ranges::range auto &_vals);
+using std::vector<T>::vector;
 ```
 
-* $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
+Constructors are inherited from `std::vector<T>`. Elements can be initialized using any `std::vector` constructor (e.g. range iterator constructor, default constructor, initializer list) or pushed directly into the container before calling `build()`.
 
-Constructs a discretization object from a range of values. It sorts the range and removes duplicate elements.
+---
+
+## build
+
+```cpp
+virtual void build();
+```
+
+* $O(N \log N)$ time, where $N$ is the number of elements in the container.
+
+Sorts the underlying elements (`std::ranges::sort`) and removes duplicates (`std::ranges::unique`). Must be called after populating elements and prior to performing any discretization queries.
 
 ---
 
 ## idx
 
 ```cpp
-int idx(int x);
+int idx(T x);
 ```
 
 * $O(\log N)$ time
@@ -111,7 +116,7 @@ Returns the discretized index (rank) of the value `x`. Returns `-1` if `x` does 
 ## safe_idx
 
 ```cpp
-int safe_idx(int x);
+int safe_idx(T x);
 ```
 
 * $O(\log N)$ time
@@ -128,7 +133,7 @@ int left_close(T x);
 
 * $O(\log N)$ time
 
-Returns the first index `i` such that `vals[i] >= x`. Corresponds to the starting index when dealing with a closed left interval `[x, ...)`.
+Returns the first index `i` such that `(*this)[i] >= x`. Corresponds to the starting index when dealing with a closed left interval `[x, ...)`.
 
 ---
 
@@ -140,7 +145,7 @@ int left_open(T x);
 
 * $O(\log N)$ time
 
-Returns the last index `i` such that `vals[i] <= x`. Corresponds to the starting index when dealing with a closed left interval `(x, ...)`.
+Returns the last index `i` such that `(*this)[i] <= x`. Corresponds to the starting index when dealing with an open left interval `(x, ...)`.
 
 ---
 
@@ -152,7 +157,7 @@ int right_close(T x);
 
 * $O(\log N)$ time
 
-Returns the last index `i` such that `vals[i] <= x`. Corresponds to the ending index when dealing with a closed right interval `(..., x]`.
+Returns the last index `i` such that `(*this)[i] <= x`. Corresponds to the ending index when dealing with a closed right interval `(..., x]`.
 
 ---
 
@@ -164,16 +169,11 @@ int right_open(T x);
 
 * $O(\log N)$ time
 
-Returns the first index `i` such that `vals[i] >= x`. Corresponds to the ending index when dealing with an open right interval `(..., x)`.
+Returns the first index `i` such that `(*this)[i] >= x`. Corresponds to the ending index when dealing with an open right interval `(..., x)`.
 
 ---
 
-## operator[]
+## Inherited std::vector Methods
 
-```cpp
-const T& operator[](size_t index) const;
-```
+Because `Discretization<T>` inherits from `std::vector<T>`, all standard `std::vector` member functions (e.g., `operator[]`, `size()`, `push_back()`, `empty()`, iterators) are directly accessible.
 
-* $O(1)$ time
-
-Returns the original value at the given discretized index.

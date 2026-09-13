@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -118,8 +118,8 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n#line 5 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
+    #line 5 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, m;\n    std::cin >> n >> m;\n    SCC scc(n);\n    while (m--) {\n       \
     \ int u, v;\n        std::cin >> u >> v;\n        scc.add_edge(u, v);\n    }\n\
@@ -142,8 +142,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-09-13 13:11:32+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/strongly_connected_components.test.cpp
 layout: document

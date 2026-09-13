@@ -392,12 +392,12 @@ data:
   timestamp: '2026-06-19 18:28:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
-  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
 documentation_of: DataStructure/PointerSegmentTree.hpp
 layout: document
 title: Pointer Segment Tree

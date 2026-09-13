@@ -453,21 +453,21 @@ data:
   isVerificationFile: false
   path: Geometry/circle.hpp
   requiredBy:
-  - Geometry/minimum_enclosing_circle.hpp
   - Geometry/circle_cover.hpp
+  - Geometry/minimum_enclosing_circle.hpp
   timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/9_qoj/6445.test.cpp
-  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - test/2_aoj/cross_points_of_circles.test.cpp
-  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
-  - test/2_aoj/common_tangent.test.cpp
   - test/6_TIOJ/1503.test.cpp
+  - test/2_aoj/cross_points_of_circles.test.cpp
+  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
+  - test/2_aoj/type_of_circle.test.cpp
+  - test/2_aoj/tangent_to_a_circle.test.cpp
+  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
+  - test/2_aoj/common_tangent.test.cpp
 documentation_of: Geometry/circle.hpp
 layout: document
 redirect_from:

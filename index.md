@@ -31,6 +31,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/concept.hpp
       title: Algebra/Monoid/concept.hpp
+    - icon: ':warning:'
+      path: Algebra/Monoid/history_min_with_add.hpp
+      title: Algebra/Monoid/history_min_with_add.hpp
+    - icon: ':warning:'
+      path: Algebra/Monoid/max_v.hpp
+      title: Algebra/Monoid/max_v.hpp
+    - icon: ':warning:'
+      path: Algebra/Monoid/min_v.hpp
+      title: Algebra/Monoid/min_v.hpp
   - name: Convolution
     pages:
     - icon: ':heavy_check_mark:'
@@ -240,13 +249,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/Matching.hpp
       title: Graph/Matching.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -488,7 +497,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':warning:'
@@ -769,7 +778,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/st_numbering.test.cpp
       title: test/1_library_checker/graph/st_numbering.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/graph/strongly_connected_components.test.cpp
       title: test/1_library_checker/graph/strongly_connected_components.test.cpp
     - icon: ':heavy_check_mark:'

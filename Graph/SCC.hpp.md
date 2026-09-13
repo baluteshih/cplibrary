@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
@@ -121,8 +121,7 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n"
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename Edge = void,\
     \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
     \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
@@ -138,17 +137,16 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n"
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n"
   dependsOn:
   - Graph/base.hpp
   isVerificationFile: false
   path: Graph/SCC.hpp
   requiredBy:
-  - Graph/incremental_scc.hpp
   - Misc/2sat.hpp
-  timestamp: '2026-06-30 20:37:16+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - Graph/incremental_scc.hpp
+  timestamp: '2026-09-13 13:11:32+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp

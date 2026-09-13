@@ -110,7 +110,7 @@ data:
     \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"\
     DataStructure/BIT.hpp\"\n\ntemplate<class T>\nrequires isCommutativeMonoid<T>\n\
     class BIT { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T>\
-    \ bit;\n    BIT(int _n) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
+    \ bit;\n    BIT(int _n = 0) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
     \ auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(),\
     \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
     \         bit[x] = arr[x - 1];\n            int y = x - (x & -x);\n          \
@@ -216,7 +216,7 @@ data:
   isVerificationFile: false
   path: Geometry/PointInAngle.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp

@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -240,28 +240,28 @@ data:
     \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
     \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        std::ranges::reverse(res);\n        return res;\n    }\n}; // scc_id(i):\
-    \ bln[i]\n#line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are\
-    \ the inserted order\n// return an array t of length m\n// t[i] := the time when\
-    \ edge i belongs to an scc, t[i] = m if never\ntemplate <typename GraphType>\n\
-    std::vector<int> incremental_scc(const GraphType &G) {\n    int n = G.n(), m =\
-    \ G.m();\n    std::vector<int> res(m, m);\n\n    std::vector<int> idx(n, -1);\n\
-    \    auto dc = [&](auto &self, std::vector<std::array<int, 3>> &event, int l,\
-    \ int r) -> void {\n        if (r - l == 1 || event.empty()) return;\n       \
-    \ int mid = (l + r) >> 1;\n        int cnt = 0;\n        for (auto& [i, a, b]\
-    \ : event) {\n            if (idx[a] == -1) idx[a] = cnt++;\n            if (idx[b]\
-    \ == -1) idx[b] = cnt++;\n        }\n        SCC scc(cnt);\n        for (auto&\
-    \ [i, a, b] : event)\n            if (i <= mid)\n                scc.add_edge(idx[a],\
-    \ idx[b]);\n        scc.solve();\n        std::vector<std::array<int, 3>> lft,\
-    \ rgt;\n        for (auto [i, a, b] : event) {\n            a = idx[a], b = idx[b];\n\
-    \            if (i <= mid && scc.bln[a] == scc.bln[b]) {\n                   \
-    \ res[i] = std::min(res[i], mid);\n                    lft.push_back({i, a, b});\n\
-    \            }\n            else rgt.push_back({i, scc.bln[a], scc.bln[b]});\n\
-    \        }\n        for (auto &[i, a, b] : event) idx[a] = idx[b] = -1;\n    \
-    \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
-    \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
-    \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
-    \    return res;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
+    #line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are the inserted\
+    \ order\n// return an array t of length m\n// t[i] := the time when edge i belongs\
+    \ to an scc, t[i] = m if never\ntemplate <typename GraphType>\nstd::vector<int>\
+    \ incremental_scc(const GraphType &G) {\n    int n = G.n(), m = G.m();\n    std::vector<int>\
+    \ res(m, m);\n\n    std::vector<int> idx(n, -1);\n    auto dc = [&](auto &self,\
+    \ std::vector<std::array<int, 3>> &event, int l, int r) -> void {\n        if\
+    \ (r - l == 1 || event.empty()) return;\n        int mid = (l + r) >> 1;\n   \
+    \     int cnt = 0;\n        for (auto& [i, a, b] : event) {\n            if (idx[a]\
+    \ == -1) idx[a] = cnt++;\n            if (idx[b] == -1) idx[b] = cnt++;\n    \
+    \    }\n        SCC scc(cnt);\n        for (auto& [i, a, b] : event)\n       \
+    \     if (i <= mid)\n                scc.add_edge(idx[a], idx[b]);\n        scc.solve();\n\
+    \        std::vector<std::array<int, 3>> lft, rgt;\n        for (auto [i, a, b]\
+    \ : event) {\n            a = idx[a], b = idx[b];\n            if (i <= mid &&\
+    \ scc.bln[a] == scc.bln[b]) {\n                    res[i] = std::min(res[i], mid);\n\
+    \                    lft.push_back({i, a, b});\n            }\n            else\
+    \ rgt.push_back({i, scc.bln[a], scc.bln[b]});\n        }\n        for (auto &[i,\
+    \ a, b] : event) idx[a] = idx[b] = -1;\n        self(self, lft, l, mid), self(self,\
+    \ rgt, mid, r);\n    };\n\n    std::vector<std::array<int, 3>> event;\n    for\
+    \ (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n        event.push_back({i,\
+    \ e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n    return res;\n}\n#line\
+    \ 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
     \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
     concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
@@ -353,7 +353,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/incremental_scc.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 13:11:32+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp

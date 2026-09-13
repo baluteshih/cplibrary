@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -310,14 +310,14 @@ data:
   isVerificationFile: false
   path: Tree/centroid_divide_and_conquer.hpp
   requiredBy:
-  - Tree/CentroidTree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/CentroidTree.hpp
   timestamp: '2026-06-30 23:51:20+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
 documentation_of: Tree/centroid_divide_and_conquer.hpp
 layout: document
 redirect_from:

@@ -79,29 +79,29 @@ data:
   isVerificationFile: false
   path: DataStructure/DefaultAllocator.hpp
   requiredBy:
-  - Graph/minimum_arborescence.hpp
-  - DataStructure/LeftistTree.hpp
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/Treap.hpp
+  - DataStructure/LeftistTree.hpp
+  - Graph/minimum_arborescence.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
-  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue.test.cpp
-  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+  - test/9_qoj/17153.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
+  - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
-  - test/9_qoj/17153.test.cpp
-  - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
+  - test/8_luogu/P3835.test.cpp
 documentation_of: DataStructure/DefaultAllocator.hpp
 layout: document
 title: Default Allocator

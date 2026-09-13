@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -342,9 +342,9 @@ data:
   timestamp: '2026-06-30 20:37:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Graph/count_spanning_tree.hpp
 layout: document
 redirect_from:

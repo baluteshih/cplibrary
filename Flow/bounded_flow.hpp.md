@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -196,8 +196,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
+  - test/7_loj/min_bounded_flow.test.cpp
 documentation_of: Flow/bounded_flow.hpp
 layout: document
 redirect_from:

@@ -118,23 +118,23 @@ data:
   isVerificationFile: false
   path: Matrix/Vector.hpp
   requiredBy:
+  - Matrix/Matrix.hpp
   - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
-  - Matrix/Matrix.hpp
   timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Matrix/Vector.hpp
 layout: document
 redirect_from:

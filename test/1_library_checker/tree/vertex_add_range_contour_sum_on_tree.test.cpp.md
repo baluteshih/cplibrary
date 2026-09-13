@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -301,8 +301,8 @@ data:
     \ = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename T>\n\
     concept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"DataStructure/BIT.hpp\"\n\
     \ntemplate<class T>\nrequires isCommutativeMonoid<T>\nclass BIT { // 0-base\n\
-    public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n) :\
-    \ n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range auto &arr)\
+    public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n =\
+    \ 0) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range auto &arr)\
     \ : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(), arr.end(),\
     \ T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x]\
     \ = arr[x - 1];\n            int y = x - (x & -x);\n            for (int i = x\
@@ -372,7 +372,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 23:51:20+08:00'
+  timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
