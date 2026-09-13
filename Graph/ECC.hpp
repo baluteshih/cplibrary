@@ -3,8 +3,8 @@
 #include "Graph/base.hpp"
 
 template<typename Edge = void, typename Vertex = void>
-struct ECC : public Graph<false, Edge, Vertex> { // 0-base
-    using super = Graph<false, Edge, Vertex>;
+struct ECC : public UndirectedGraph<Edge, Vertex> { // 0-base
+    using super = UndirectedGraph<Edge, Vertex>;
     int dft;
     std::vector<int> low, dfn, stk;
     void dfs(int u, int f) {

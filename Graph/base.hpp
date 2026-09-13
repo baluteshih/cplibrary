@@ -174,4 +174,24 @@ template<typename Edge = void, typename Vertex = void>
 class UndirectedGraph : public Graph<false, Edge, Vertex> {
 public:
     using Graph<false, Edge, Vertex>::Graph;
+    std::vector<std::vector<int>> components() {
+        std::vector<std::vector<int>> res;
+        std::vector<bool> vis(this->n());
+        auto dfs = [&](auto self, int u) -> void {
+            vis[u] = true;
+            res.back().push_back(u);
+            for (auto [v, eid] : this->G[u])
+                if (!vis[v])
+                    self(self, v);
+        };
+        for (int i = 0; i < this->n(); ++i) {
+            if (vis[i]) continue;
+            res.emplace_back();
+            dfs(dfs, i);
+        }
+        return res;
+    }
+    bool is_connected() {
+        return components().size() == 1;
+    }
 };

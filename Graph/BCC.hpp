@@ -3,8 +3,8 @@
 #include "Graph/base.hpp"
 
 template<typename Edge = void, typename Vertex = void>
-struct BCC : public Graph<false, Edge, Vertex> { // 0-base
-    using super = Graph<false, Edge, Vertex>;
+struct BCC : public UndirectedGraph<Edge, Vertex> { // 0-base
+    using super = UndirectedGraph<Edge, Vertex>;
     int dft, nbcc;
     std::vector<int> low, dfn, bln, stk, is_ap;
     std::vector<std::vector<int>> bcc;

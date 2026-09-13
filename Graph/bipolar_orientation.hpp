@@ -4,7 +4,7 @@
 
 // there exists bipolar orientation iff the graph is biconnected after adding the edge (s, t)
 template<typename Edge, typename Vertex>
-std::vector<int> bipolar_orientation(Graph<false, Edge, Vertex> &G, int s, int t) {
+std::vector<int> bipolar_orientation(UndirectedGraph<Edge, Vertex> &G, int s, int t) {
     assert(s != t);
     assert(G.m() > 0);
     int n = G.n();

@@ -5,8 +5,8 @@
 /*
 match[u] = -1 implies no match
 */
-struct Matching : public Graph<false, void, void> { // 0-base
-    using super = Graph<false, void, void>;
+struct Matching : public UndirectedGraph<void, void> { // 0-base
+    using super = UndirectedGraph<void, void>;
     std::queue<int> q;
     std::vector<int> fa, s, vis, pre, match;
     int Find(int u)
