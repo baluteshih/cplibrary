@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
@@ -118,12 +118,19 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\
-    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
-    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long\
-    \ long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x +=\
-    \ m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x, long\
-    \ long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"Matrix/Matrix.hpp\"\
+    \n\n#line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
+    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
+    \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
+    \ x += m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x,\
+    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
     \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
     \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
     \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int\
@@ -339,7 +346,7 @@ data:
   path: Graph/count_spanning_tree.hpp
   requiredBy:
   - Graph/count_eulerian_circuits.hpp
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp

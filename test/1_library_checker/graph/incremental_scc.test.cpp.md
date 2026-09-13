@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'
@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -225,43 +225,50 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
-    #line 4 \"Graph/incremental_scc.hpp\"\n\n// the order of the edges are the inserted\
-    \ order\n// return an array t of length m\n// t[i] := the time when edge i belongs\
-    \ to an scc, t[i] = m if never\ntemplate <typename GraphType>\nstd::vector<int>\
-    \ incremental_scc(const GraphType &G) {\n    int n = G.n(), m = G.m();\n    std::vector<int>\
-    \ res(m, m);\n\n    std::vector<int> idx(n, -1);\n    auto dc = [&](auto &self,\
-    \ std::vector<std::array<int, 3>> &event, int l, int r) -> void {\n        if\
-    \ (r - l == 1 || event.empty()) return;\n        int mid = (l + r) >> 1;\n   \
-    \     int cnt = 0;\n        for (auto& [i, a, b] : event) {\n            if (idx[a]\
-    \ == -1) idx[a] = cnt++;\n            if (idx[b] == -1) idx[b] = cnt++;\n    \
-    \    }\n        SCC scc(cnt);\n        for (auto& [i, a, b] : event)\n       \
-    \     if (i <= mid)\n                scc.add_edge(idx[a], idx[b]);\n        scc.solve();\n\
-    \        std::vector<std::array<int, 3>> lft, rgt;\n        for (auto [i, a, b]\
-    \ : event) {\n            a = idx[a], b = idx[b];\n            if (i <= mid &&\
-    \ scc.bln[a] == scc.bln[b]) {\n                    res[i] = std::min(res[i], mid);\n\
-    \                    lft.push_back({i, a, b});\n            }\n            else\
-    \ rgt.push_back({i, scc.bln[a], scc.bln[b]});\n        }\n        for (auto &[i,\
-    \ a, b] : event) idx[a] = idx[b] = -1;\n        self(self, lft, l, mid), self(self,\
-    \ rgt, mid, r);\n    };\n\n    std::vector<std::array<int, 3>> event;\n    for\
-    \ (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n        event.push_back({i,\
-    \ e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n    return res;\n}\n#line\
-    \ 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/SCC.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nstruct SCC : public\
+    \ Graph<true, Edge, Vertex>  { // 0-base\n    using super = Graph<true, Edge,\
+    \ Vertex>;\n    int dft, nscc;\n    std::vector<int> low, dfn, bln, instack, stk;\n\
+    \    void dfs(int u) {\n        low[u] = dfn[u] = ++dft;\n        instack[u] =\
+    \ 1, stk.push_back(u);\n        for (auto [v, eid] : this->G[u])\n           \
+    \ if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u], low[v]);\n \
+    \           else if (instack[v] && dfn[v] < dfn[u])\n                low[u] =\
+    \ std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n            for\
+    \ (; stk.back() != u; stk.pop_back())\n                bln[stk.back()] = nscc,\
+    \ instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n\
+    \        }\n    }\n    SCC(int n): super(n), dft(), nscc(), low(n), dfn(n), bln(n),\
+    \ instack(n) {}\n    void solve() {\n        for (int i = 0; i < this->n(); ++i)\n\
+    \            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>> components()\
+    \ {\n        std::vector<std::vector<int>> res(nscc);\n        for (int i = 0;\
+    \ i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n        return res;\n\
+    \    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n#line 4 \"Graph/incremental_scc.hpp\"\
+    \n\n// the order of the edges are the inserted order\n// return an array t of\
+    \ length m\n// t[i] := the time when edge i belongs to an scc, t[i] = m if never\n\
+    template <typename GraphType>\nstd::vector<int> incremental_scc(const GraphType\
+    \ &G) {\n    int n = G.n(), m = G.m();\n    std::vector<int> res(m, m);\n\n  \
+    \  std::vector<int> idx(n, -1);\n    auto dc = [&](auto &self, std::vector<std::array<int,\
+    \ 3>> &event, int l, int r) -> void {\n        if (r - l == 1 || event.empty())\
+    \ return;\n        int mid = (l + r) >> 1;\n        int cnt = 0;\n        for\
+    \ (auto& [i, a, b] : event) {\n            if (idx[a] == -1) idx[a] = cnt++;\n\
+    \            if (idx[b] == -1) idx[b] = cnt++;\n        }\n        SCC scc(cnt);\n\
+    \        for (auto& [i, a, b] : event)\n            if (i <= mid)\n          \
+    \      scc.add_edge(idx[a], idx[b]);\n        scc.solve();\n        std::vector<std::array<int,\
+    \ 3>> lft, rgt;\n        for (auto [i, a, b] : event) {\n            a = idx[a],\
+    \ b = idx[b];\n            if (i <= mid && scc.bln[a] == scc.bln[b]) {\n     \
+    \               res[i] = std::min(res[i], mid);\n                    lft.push_back({i,\
+    \ a, b});\n            }\n            else rgt.push_back({i, scc.bln[a], scc.bln[b]});\n\
+    \        }\n        for (auto &[i, a, b] : event) idx[a] = idx[b] = -1;\n    \
+    \    self(self, lft, l, mid), self(self, rgt, mid, r);\n    };\n\n    std::vector<std::array<int,\
+    \ 3>> event;\n    for (int i = 0; i < m; ++i) {\n        auto &e = G.edge(i);\n\
+    \        event.push_back({i, e.from, e.to});\n    }\n    dc(dc, event, 0, m);\n\
+    \    return res;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
     \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
     concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
@@ -353,7 +360,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/incremental_scc.test.cpp
   requiredBy: []
-  timestamp: '2026-09-13 13:11:32+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp

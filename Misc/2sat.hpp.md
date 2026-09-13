@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'
@@ -98,30 +98,38 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
-    #line 4 \"Misc/2sat.hpp\"\n\nstruct SAT { // 0-base\n    int n;\n    std::vector<bool>\
-    \ istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n), istrue(n + n), scc(n + n) {}\n\
-    \    int rv(int a) {\n        return a >= n ? a - n : a + n;\n    }\n    void\
-    \ add_clause(int a, int b) {\n        scc.add_edge(rv(a), b), scc.add_edge(rv(b),\
-    \ a);\n    }\n    bool solve() {\n        scc.solve();\n        for (int i = 0;\
-    \ i < n; ++i) {\n            if (scc.bln[i] == scc.bln[i + n]) return false;\n\
-    \            istrue[i] = scc.bln[i] < scc.bln[i + n];\n            istrue[i +\
-    \ n] = !istrue[i];\n        }\n        return true;\n    }\n};\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/SCC.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nstruct SCC : public\
+    \ Graph<true, Edge, Vertex>  { // 0-base\n    using super = Graph<true, Edge,\
+    \ Vertex>;\n    int dft, nscc;\n    std::vector<int> low, dfn, bln, instack, stk;\n\
+    \    void dfs(int u) {\n        low[u] = dfn[u] = ++dft;\n        instack[u] =\
+    \ 1, stk.push_back(u);\n        for (auto [v, eid] : this->G[u])\n           \
+    \ if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u], low[v]);\n \
+    \           else if (instack[v] && dfn[v] < dfn[u])\n                low[u] =\
+    \ std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n            for\
+    \ (; stk.back() != u; stk.pop_back())\n                bln[stk.back()] = nscc,\
+    \ instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n\
+    \        }\n    }\n    SCC(int n): super(n), dft(), nscc(), low(n), dfn(n), bln(n),\
+    \ instack(n) {}\n    void solve() {\n        for (int i = 0; i < this->n(); ++i)\n\
+    \            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>> components()\
+    \ {\n        std::vector<std::vector<int>> res(nscc);\n        for (int i = 0;\
+    \ i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n        return res;\n\
+    \    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n#line 4 \"Misc/2sat.hpp\"\
+    \n\nstruct SAT { // 0-base\n    int n;\n    std::vector<bool> istrue;\n    SCC<>\
+    \ scc;\n    SAT(int _n): n(_n), istrue(n + n), scc(n + n) {}\n    int rv(int a)\
+    \ {\n        return a >= n ? a - n : a + n;\n    }\n    void add_clause(int a,\
+    \ int b) {\n        scc.add_edge(rv(a), b), scc.add_edge(rv(b), a);\n    }\n \
+    \   bool solve() {\n        scc.solve();\n        for (int i = 0; i < n; ++i)\
+    \ {\n            if (scc.bln[i] == scc.bln[i + n]) return false;\n           \
+    \ istrue[i] = scc.bln[i] < scc.bln[i + n];\n            istrue[i + n] = !istrue[i];\n\
+    \        }\n        return true;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Graph/SCC.hpp\"\n\nstruct SAT { // 0-base\n  \
     \  int n;\n    std::vector<bool> istrue;\n    SCC<> scc;\n    SAT(int _n): n(_n),\
     \ istrue(n + n), scc(n + n) {}\n    int rv(int a) {\n        return a >= n ? a\
@@ -137,7 +145,7 @@ data:
   isVerificationFile: false
   path: Misc/2sat.hpp
   requiredBy: []
-  timestamp: '2026-09-13 13:11:32+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp

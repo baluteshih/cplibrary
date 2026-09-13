@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/min_cost_circulation.hpp
     title: Flow/min_cost_circulation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':question:'
@@ -101,32 +101,39 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Flow/min_cost_max_flow.hpp\"\n\n#line 4 \"Flow/min_cost_max_flow.hpp\"\
-    \n\ntemplate<typename T, typename C = T>\nstruct CostFlowWeight {\n    T cap;\n\
-    \    C cost;\n    T flow;\n    CostFlowWeight() : cap(0), cost(0), flow(0) {}\n\
-    \    CostFlowWeight(T c, C w, T f = 0) : cap(c), cost(w), flow(f) {}\n    friend\
-    \ std::ostream& operator<<(std::ostream& os, const CostFlowWeight &v) {\n    \
-    \    os << \"[\" << v.cap << \", \" << v.cost << \", \" << v.flow << \"]\";\n\
-    \        return os;\n    }\n};\n\ntemplate<typename T, typename C = T>\nclass\
-    \ min_cost_max_flow : public Graph<true, CostFlowWeight<T, C>, void> { // 0-base\n\
-    public:\n    using super = Graph<true, CostFlowWeight<T, C>, void>;\n    std::vector<int>\
-    \ past;\n    std::vector<C> dis, pot;\n    std::vector<T> up;\n    template<bool\
-    \ bellmanford = true>\n    bool shortest_path(int s, int t) {\n        std::vector<int>\
-    \ inq(this->n());\n        std::ranges::fill(dis, std::numeric_limits<C>::max());\n\
-    \        std::conditional_t<bellmanford, std::queue<int>, std::priority_queue<std::pair<C,\
-    \ int>, std::vector<std::pair<C, int>>, std::greater<std::pair<C, int>>>> q;\n\
-    \        auto relax = [&](int u, C d, T cap, int eid) {\n            if (cap >\
-    \ 0 && dis[u] > d) {\n                dis[u] = d, up[u] = cap, past[u] = eid;\n\
-    \                if constexpr (!bellmanford) q.emplace(dis[u], u);\n         \
-    \       else if (!inq[u]) inq[u] = 1, q.push(u);\n            }\n        };\n\
-    \        relax(s, 0, std::numeric_limits<T>::max(), -1);\n        while (!q.empty())\
-    \ {\n            C d;\n            int u;\n            if constexpr (bellmanford)\
-    \ u = q.front();\n            else std::tie(d, u) = q.top();\n            q.pop();\n\
-    \            if constexpr (bellmanford) inq[u] = 0;\n            else if (dis[u]\
-    \ != d) continue;\n            for (auto [v, eid] : this->G[u]) {\n          \
-    \      auto &w = this->edges[eid].weight;\n                C d2 = dis[u] + w.cost\
-    \ + pot[u] - pot[v];\n                relax(v, d2, std::min(up[u], w.cap - w.flow),\
-    \ eid);\n            }\n        }\n        return dis[t] != std::numeric_limits<C>::max();\n\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"Flow/min_cost_max_flow.hpp\"\
+    \n\n#line 4 \"Flow/min_cost_max_flow.hpp\"\n\ntemplate<typename T, typename C\
+    \ = T>\nstruct CostFlowWeight {\n    T cap;\n    C cost;\n    T flow;\n    CostFlowWeight()\
+    \ : cap(0), cost(0), flow(0) {}\n    CostFlowWeight(T c, C w, T f = 0) : cap(c),\
+    \ cost(w), flow(f) {}\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ CostFlowWeight &v) {\n        os << \"[\" << v.cap << \", \" << v.cost << \"\
+    , \" << v.flow << \"]\";\n        return os;\n    }\n};\n\ntemplate<typename T,\
+    \ typename C = T>\nclass min_cost_max_flow : public Graph<true, CostFlowWeight<T,\
+    \ C>, void> { // 0-base\npublic:\n    using super = Graph<true, CostFlowWeight<T,\
+    \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    std::vector<T>\
+    \ up;\n    template<bool bellmanford = true>\n    bool shortest_path(int s, int\
+    \ t) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
+    \ std::numeric_limits<C>::max());\n        std::conditional_t<bellmanford, std::queue<int>,\
+    \ std::priority_queue<std::pair<C, int>, std::vector<std::pair<C, int>>, std::greater<std::pair<C,\
+    \ int>>>> q;\n        auto relax = [&](int u, C d, T cap, int eid) {\n       \
+    \     if (cap > 0 && dis[u] > d) {\n                dis[u] = d, up[u] = cap, past[u]\
+    \ = eid;\n                if constexpr (!bellmanford) q.emplace(dis[u], u);\n\
+    \                else if (!inq[u]) inq[u] = 1, q.push(u);\n            }\n   \
+    \     };\n        relax(s, 0, std::numeric_limits<T>::max(), -1);\n        while\
+    \ (!q.empty()) {\n            C d;\n            int u;\n            if constexpr\
+    \ (bellmanford) u = q.front();\n            else std::tie(d, u) = q.top();\n \
+    \           q.pop();\n            if constexpr (bellmanford) inq[u] = 0;\n   \
+    \         else if (dis[u] != d) continue;\n            for (auto [v, eid] : this->G[u])\
+    \ {\n                auto &w = this->edges[eid].weight;\n                C d2\
+    \ = dis[u] + w.cost + pot[u] - pot[v];\n                relax(v, d2, std::min(up[u],\
+    \ w.cap - w.flow), eid);\n            }\n        }\n        return dis[t] != std::numeric_limits<C>::max();\n\
     \    }\n    min_cost_max_flow(int _n) : super(_n), past(_n), dis(_n), pot(_n),\
     \ up(_n) {} \n    template<bool bellmanford = true, bool neg = true>\n    std::pair<T,\
     \ C> solve(int s, int t) {\n        T flow = 0;\n        C cost = 0;\n       \
@@ -237,7 +244,7 @@ data:
   isVerificationFile: false
   path: Flow/bounded_cost_circulation.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/min_cost_b_flow.test.cpp

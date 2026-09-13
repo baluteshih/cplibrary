@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
   - icon: ':heavy_check_mark:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: Flow/min_cost_circulation_old.hpp
     title: Flow/min_cost_circulation_old.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/Matching.hpp
     title: Graph/Matching.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':heavy_check_mark:'
@@ -74,16 +74,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':heavy_check_mark:'
@@ -92,7 +92,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -153,7 +153,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/st_numbering.test.cpp
     title: test/1_library_checker/graph/st_numbering.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -183,34 +183,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/106033E.test.cpp
     title: test/4_codeforces/106033E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/bounded_flow.test.cpp
     title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/max_bounded_flow.test.cpp
     title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/7_loj/min_bounded_flow.test.cpp
     title: test/7_loj/min_bounded_flow.test.cpp
   _isVerificationFailed: true
@@ -298,7 +298,14 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n"
   code: "#pragma once\n\ntemplate<bool directed = true, typename Edge = void, typename\
     \ Vertex = void>\nclass Graph {\npublic:\n    static constexpr bool is_directed\
     \ = directed;\n    static constexpr bool hasEdgeWeight = !std::is_same_v<Edge,\
@@ -379,7 +386,14 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Graph/base.hpp
@@ -415,7 +429,7 @@ data:
   - Tree/CentroidTree.hpp
   - Tree/TreeTools.hpp
   - Tree/all_direction_composition.hpp
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/4_codeforces/106033E.test.cpp

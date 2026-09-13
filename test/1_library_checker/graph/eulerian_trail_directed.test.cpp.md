@@ -104,34 +104,42 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/eulerian_trail.hpp\"\n\ntemplate<bool circuits\
-    \ = false, bool remove_isolate_vertices = true, typename graph = Graph<true, void,\
-    \ void>>\nstd::pair<std::vector<int>, std::vector<int>> eulerian_trail(const graph\
-    \ &G) {\n    int s = -1, t = -1;\n    auto in_degree = G.in_degree();\n    if\
-    \ constexpr (G.is_directed) {\n        auto out_degree = G.out_degree();\n   \
-    \     for (int i = 0; i < G.n(); ++i)\n            if (in_degree[i] != out_degree[i])\
-    \ {\n                if (in_degree[i] + 1 == out_degree[i]) {\n              \
-    \      if (s == -1) s = i;\n                    else return {};\n            \
-    \    }\n                else if (in_degree[i] == out_degree[i] + 1) {\n      \
-    \              if (t == -1) t = i;\n                    else return {};\n    \
-    \            }\n                else return {};\n            }\n    }\n    else\
-    \ {\n        for (int i = 0; i < G.n(); ++i)\n            if (in_degree[i] % 2\
-    \ != 0) {\n                if (s == -1) s = i;\n                else if (t ==\
-    \ -1) t = i;\n                else return {};\n            }\n    }\n    if (int(s\
-    \ == -1) ^ int(t == -1)) return {};\n    if constexpr (circuits) if (s != -1)\
-    \ return {};\n    std::vector<int> vis(G.n()), vis_edge(G.m()), cur(G.n()), res_v,\
-    \ res_e;\n    if (s == -1) {\n        s = std::ranges::find_if(in_degree, [&](int\
-    \ d) { return d > 0; }) - in_degree.begin();\n        if (s == G.n()) s = 0;\n\
-    \        t = s;\n    }\n    if constexpr (remove_isolate_vertices)\n        for\
-    \ (int i = 0; i < G.n(); ++i)\n            if (in_degree[i] == 0 && i != s)\n\
-    \                vis[i] = 1;\n    auto dfs = [&](auto self, int u, int f) -> void\
-    \ {\n        vis[u] = 1;\n        if (f != -1) vis_edge[f] = 1;\n        for (int\
-    \ &i = cur[u]; i < int(G[u].size());) {\n            auto [v, eid] = G[u][i++];\n\
-    \            if (!vis_edge[eid]) self(self, v, eid); \n        }\n        res_v.push_back(u);\n\
-    \        if (f != -1) res_e.push_back(f);\n    };\n    dfs(dfs, s, -1);\n    if\
-    \ (std::ranges::find(vis, 0) != vis.end() || std::ranges::find(vis_edge, 0) !=\
-    \ vis_edge.end())\n        return {};\n    if constexpr (G.is_directed) std::ranges::reverse(res_v),\
-    \ std::ranges::reverse(res_e);\n    return {res_v, res_e};\n}\n#line 5 \"test/1_library_checker/graph/eulerian_trail_directed.test.cpp\"\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/eulerian_trail.hpp\"\
+    \n\ntemplate<bool circuits = false, bool remove_isolate_vertices = true, typename\
+    \ graph = Graph<true, void, void>>\nstd::pair<std::vector<int>, std::vector<int>>\
+    \ eulerian_trail(const graph &G) {\n    int s = -1, t = -1;\n    auto in_degree\
+    \ = G.in_degree();\n    if constexpr (G.is_directed) {\n        auto out_degree\
+    \ = G.out_degree();\n        for (int i = 0; i < G.n(); ++i)\n            if (in_degree[i]\
+    \ != out_degree[i]) {\n                if (in_degree[i] + 1 == out_degree[i])\
+    \ {\n                    if (s == -1) s = i;\n                    else return\
+    \ {};\n                }\n                else if (in_degree[i] == out_degree[i]\
+    \ + 1) {\n                    if (t == -1) t = i;\n                    else return\
+    \ {};\n                }\n                else return {};\n            }\n   \
+    \ }\n    else {\n        for (int i = 0; i < G.n(); ++i)\n            if (in_degree[i]\
+    \ % 2 != 0) {\n                if (s == -1) s = i;\n                else if (t\
+    \ == -1) t = i;\n                else return {};\n            }\n    }\n    if\
+    \ (int(s == -1) ^ int(t == -1)) return {};\n    if constexpr (circuits) if (s\
+    \ != -1) return {};\n    std::vector<int> vis(G.n()), vis_edge(G.m()), cur(G.n()),\
+    \ res_v, res_e;\n    if (s == -1) {\n        s = std::ranges::find_if(in_degree,\
+    \ [&](int d) { return d > 0; }) - in_degree.begin();\n        if (s == G.n())\
+    \ s = 0;\n        t = s;\n    }\n    if constexpr (remove_isolate_vertices)\n\
+    \        for (int i = 0; i < G.n(); ++i)\n            if (in_degree[i] == 0 &&\
+    \ i != s)\n                vis[i] = 1;\n    auto dfs = [&](auto self, int u, int\
+    \ f) -> void {\n        vis[u] = 1;\n        if (f != -1) vis_edge[f] = 1;\n \
+    \       for (int &i = cur[u]; i < int(G[u].size());) {\n            auto [v, eid]\
+    \ = G[u][i++];\n            if (!vis_edge[eid]) self(self, v, eid); \n       \
+    \ }\n        res_v.push_back(u);\n        if (f != -1) res_e.push_back(f);\n \
+    \   };\n    dfs(dfs, s, -1);\n    if (std::ranges::find(vis, 0) != vis.end() ||\
+    \ std::ranges::find(vis_edge, 0) != vis_edge.end())\n        return {};\n    if\
+    \ constexpr (G.is_directed) std::ranges::reverse(res_v), std::ranges::reverse(res_e);\n\
+    \    return {res_v, res_e};\n}\n#line 5 \"test/1_library_checker/graph/eulerian_trail_directed.test.cpp\"\
     \n\nvoid solve() {\n    int n, m;\n    std::cin >> n >> m;\n    Graph G(n);\n\
     \    while (m--) {\n        int u, v;\n        std::cin >> u >> v;\n        G.add_edge(u,\
     \ v);\n    }\n    auto [vertices, edges] = eulerian_trail(G);\n    if (vertices.empty())\
@@ -161,7 +169,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/eulerian_trail_directed.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/eulerian_trail_directed.test.cpp

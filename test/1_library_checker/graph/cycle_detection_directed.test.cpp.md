@@ -101,7 +101,14 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 5 \"test/1_library_checker/graph/cycle_detection_directed.test.cpp\"\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 5 \"test/1_library_checker/graph/cycle_detection_directed.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, m;\n    std::cin >> n >> m;\n    Graph graph(n);\n    for (int i = 0; i <\
     \ m; ++i) {\n        int u, v;\n        std::cin >> u >> v;\n        graph.add_edge(u,\
@@ -122,7 +129,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/cycle_detection_directed.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/cycle_detection_directed.test.cpp

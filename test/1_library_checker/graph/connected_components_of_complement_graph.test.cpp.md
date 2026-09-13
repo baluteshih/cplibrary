@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -113,30 +113,38 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Graph/complement_bfs.hpp\"\n\n#line 4 \"Graph/complement_bfs.hpp\"\
-    \n\n// parent[u] is the bfs parent of u, parent[root] = root\ntemplate<typename\
-    \ graph>\nstd::vector<int> complement_bfs(const graph &G, int start = -1) {\n\
-    \    std::vector<int> vis(G.n()), cur(G.n()), parent(G.n());\n    int vcnt = 0;\n\
-    \    std::iota(cur.begin(), cur.end(), 0);\n    if (start != -1) std::swap(cur[start],\
-    \ cur.back());\n    while (!cur.empty()) {\n        std::queue<int> q;\n     \
-    \   parent[cur.back()] = cur.back();\n        q.push(cur.back());\n        cur.pop_back();\n\
-    \        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n\
-    \            ++vcnt;\n            for (auto [v, eid] : G[u])\n               \
-    \ vis[v] = vcnt;\n            std::vector<int> nxt;\n            for (int i :\
-    \ cur)\n                if (vis[i] == vcnt) nxt.push_back(i);\n              \
-    \  else q.push(i), parent[i] = u;\n            cur.swap(nxt);\n        }\n   \
-    \ }\n    return parent;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line\
-    \ 2 \"Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\
-    \ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
-    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
-    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
-    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
-    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
-    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
-    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"Graph/complement_bfs.hpp\"\
+    \n\n#line 4 \"Graph/complement_bfs.hpp\"\n\n// parent[u] is the bfs parent of\
+    \ u, parent[root] = root\ntemplate<typename graph>\nstd::vector<int> complement_bfs(const\
+    \ graph &G, int start = -1) {\n    std::vector<int> vis(G.n()), cur(G.n()), parent(G.n());\n\
+    \    int vcnt = 0;\n    std::iota(cur.begin(), cur.end(), 0);\n    if (start !=\
+    \ -1) std::swap(cur[start], cur.back());\n    while (!cur.empty()) {\n       \
+    \ std::queue<int> q;\n        parent[cur.back()] = cur.back();\n        q.push(cur.back());\n\
+    \        cur.pop_back();\n        while (!q.empty()) {\n            int u = q.front();\n\
+    \            q.pop();\n            ++vcnt;\n            for (auto [v, eid] : G[u])\n\
+    \                vis[v] = vcnt;\n            std::vector<int> nxt;\n         \
+    \   for (int i : cur)\n                if (vis[i] == vcnt) nxt.push_back(i);\n\
+    \                else q.push(i), parent[i] = u;\n            cur.swap(nxt);\n\
+    \        }\n    }\n    return parent;\n}\n#line 2 \"DataStructure/DisjointSet.hpp\"\
+    \n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/DisjointSet.hpp\"\
+    \n\ntemplate<typename T = void, bool undo_tag = false>\nclass DisjointSet {\n\
+    protected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n    int\
+    \ n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
     \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
     \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
     \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
@@ -203,7 +211,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp

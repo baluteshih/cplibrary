@@ -94,27 +94,35 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/Dijkstra.hpp\"\n\ntemplate<class T>\nclass\
-    \ Dijkstra : public Graph<true, T> { // 0-base, O(mlogn)\n    using super = Graph<true,\
-    \ T>;\npublic:\n    std::vector<int> parent; // parent[source] = source\n    std::vector<int>\
-    \ parent_edge; // parent_edge[source] = -1 \n    std::vector<int> has_path;\n\
-    \    std::vector<T> dis;\n    Dijkstra(int n): super(n), parent(n), parent_edge(n),\
-    \ has_path(n), dis(n) {}\n    void solve(int source) {\n        std::ranges::fill(dis,\
-    \ std::numeric_limits<T>::max());\n        std::ranges::fill(has_path, 0);\n \
-    \       std::priority_queue<std::pair<T, int>, std::vector<std::pair<T, int>>,\
-    \ std::greater<std::pair<T, int>>> pq;\n        auto relax = [&](int u, T w, int\
-    \ f, int fedge) {\n            if (dis[u] > w) {\n                dis[u] = w;\n\
-    \                parent[u] = f;\n                parent_edge[u] = fedge;\n   \
-    \             pq.emplace(w, u);\n            }\n        };\n        relax(source,\
-    \ 0, source, -1);\n        while (!pq.empty()) {\n            auto [w, u] = pq.top();\n\
-    \            pq.pop();\n            if (dis[u] != w) continue;\n            has_path[u]\
-    \ = true;\n            for (auto [v, e] : this->G[u])\n                relax(v,\
-    \ dis[u] + this->edges[e].weight, u, e);\n        }\n    }\n    std::vector<int>\
-    \ path(int target, bool vertex = true) {\n        assert(has_path[target]);\n\
-    \        std::vector<int> res;\n        if (vertex) res.push_back(target);\n \
-    \       for (int x = target; parent[x] != x; x = parent[x]) {\n            if\
-    \ (vertex) res.push_back(parent[x]);\n            else res.push_back(parent_edge[x]);\n\
-    \        }\n        std::ranges::reverse(res);\n        return res;\n    }\n};\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/Dijkstra.hpp\"\
+    \n\ntemplate<class T>\nclass Dijkstra : public Graph<true, T> { // 0-base, O(mlogn)\n\
+    \    using super = Graph<true, T>;\npublic:\n    std::vector<int> parent; // parent[source]\
+    \ = source\n    std::vector<int> parent_edge; // parent_edge[source] = -1 \n \
+    \   std::vector<int> has_path;\n    std::vector<T> dis;\n    Dijkstra(int n):\
+    \ super(n), parent(n), parent_edge(n), has_path(n), dis(n) {}\n    void solve(int\
+    \ source) {\n        std::ranges::fill(dis, std::numeric_limits<T>::max());\n\
+    \        std::ranges::fill(has_path, 0);\n        std::priority_queue<std::pair<T,\
+    \ int>, std::vector<std::pair<T, int>>, std::greater<std::pair<T, int>>> pq;\n\
+    \        auto relax = [&](int u, T w, int f, int fedge) {\n            if (dis[u]\
+    \ > w) {\n                dis[u] = w;\n                parent[u] = f;\n      \
+    \          parent_edge[u] = fedge;\n                pq.emplace(w, u);\n      \
+    \      }\n        };\n        relax(source, 0, source, -1);\n        while (!pq.empty())\
+    \ {\n            auto [w, u] = pq.top();\n            pq.pop();\n            if\
+    \ (dis[u] != w) continue;\n            has_path[u] = true;\n            for (auto\
+    \ [v, e] : this->G[u])\n                relax(v, dis[u] + this->edges[e].weight,\
+    \ u, e);\n        }\n    }\n    std::vector<int> path(int target, bool vertex\
+    \ = true) {\n        assert(has_path[target]);\n        std::vector<int> res;\n\
+    \        if (vertex) res.push_back(target);\n        for (int x = target; parent[x]\
+    \ != x; x = parent[x]) {\n            if (vertex) res.push_back(parent[x]);\n\
+    \            else res.push_back(parent_edge[x]);\n        }\n        std::ranges::reverse(res);\n\
+    \        return res;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<class T>\nclass Dijkstra\
     \ : public Graph<true, T> { // 0-base, O(mlogn)\n    using super = Graph<true,\
     \ T>;\npublic:\n    std::vector<int> parent; // parent[source] = source\n    std::vector<int>\
@@ -141,7 +149,7 @@ data:
   isVerificationFile: false
   path: Graph/Dijkstra.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/shortest_path.test.cpp

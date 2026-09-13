@@ -94,18 +94,26 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/dominator_tree.hpp\"\n\n// return the parent\
-    \ of each vertex, where parent[root] = root\ntemplate<typename Edge = void, typename\
-    \ Vertex = void>\nstd::vector<int> dominator_tree(const Graph<true, Edge, Vertex>\
-    \ &G, int root) {\n    int n = G.n();\n    auto rG = G.reversed();\n    std::vector<std::vector<int>>\
-    \ tree(n);\n    int Time;\n    std::vector<int> pa(n), dfn(n, -1), id(n), semi(n),\
-    \ idom(n), best(n);\n    auto dfs = [&](auto self, int u) -> void {\n        id[dfn[u]\
-    \ = Time++] = u;\n        for (auto [v, eid] : G[u])\n            if (dfn[v] ==\
-    \ -1)\n                self(self, v), pa[dfn[v]] = dfn[u];\n    };\n    auto find\
-    \ = [&](auto self, int y, int x) -> int {\n        if (y <= x) return y;\n   \
-    \     int tmp = self(self, pa[y], x);\n        if (semi[best[y]] > semi[best[pa[y]]])\n\
-    \            best[y] = best[pa[y]];\n        return pa[y] = tmp;\n    };\n   \
-    \ Time = 0;\n    std::iota(best.begin(), best.end(), 0);\n    std::iota(semi.begin(),\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/dominator_tree.hpp\"\
+    \n\n// return the parent of each vertex, where parent[root] = root\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nstd::vector<int> dominator_tree(const\
+    \ Graph<true, Edge, Vertex> &G, int root) {\n    int n = G.n();\n    auto rG =\
+    \ G.reversed();\n    std::vector<std::vector<int>> tree(n);\n    int Time;\n \
+    \   std::vector<int> pa(n), dfn(n, -1), id(n), semi(n), idom(n), best(n);\n  \
+    \  auto dfs = [&](auto self, int u) -> void {\n        id[dfn[u] = Time++] = u;\n\
+    \        for (auto [v, eid] : G[u])\n            if (dfn[v] == -1)\n         \
+    \       self(self, v), pa[dfn[v]] = dfn[u];\n    };\n    auto find = [&](auto\
+    \ self, int y, int x) -> int {\n        if (y <= x) return y;\n        int tmp\
+    \ = self(self, pa[y], x);\n        if (semi[best[y]] > semi[best[pa[y]]])\n  \
+    \          best[y] = best[pa[y]];\n        return pa[y] = tmp;\n    };\n    Time\
+    \ = 0;\n    std::iota(best.begin(), best.end(), 0);\n    std::iota(semi.begin(),\
     \ semi.end(), 0);\n    dfs(dfs, root);\n    for (int i = Time - 1; i > 0; --i)\
     \ {\n        int u = id[i];\n        for (auto [v, eid] : rG[u])\n           \
     \ if ((v = dfn[v]) != -1) {\n                find(find, v, i);\n             \
@@ -145,7 +153,7 @@ data:
   isVerificationFile: false
   path: Graph/dominator_tree.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/dominatortree.test.cpp

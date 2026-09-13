@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -110,22 +110,30 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/enumerate_c3.hpp\"\n\ntemplate<typename\
-    \ G>\nvoid enumerate_c3(const G &_graph, auto func) {\n    std::vector<int> ord(_graph.n()),\
-    \ rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n    for (int i = 0; i < _graph.n();\
-    \ ++i)\n        ++cnt[_graph[i].size()];\n    std::partial_sum(cnt.rbegin(), cnt.rend(),\
-    \ cnt.rbegin());\n    for (int i = 0; i < _graph.n(); ++i)\n        ord[rk[i]\
-    \ = --cnt[_graph[i].size()]] = i;\n    auto graph = _graph.oriented(rk); \n  \
-    \  for (int x : ord) {\n        for (auto [y, _] : graph[x]) vis[y] = 1;\n   \
-    \     for (auto [y, _] : graph[x])\n            for (auto [z, __] : graph[y])\n\
-    \                if (vis[z])\n                    func(x, y, z);\n        for\
-    \ (auto [y, _] : graph[x]) vis[y] = 0;\n    }\n}\n#line 2 \"Numeric/Modint.hpp\"\
-    \n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n#line\
-    \ 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
-    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
-    \ long long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0)\
-    \ x += m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x,\
-    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/enumerate_c3.hpp\"\
+    \n\ntemplate<typename G>\nvoid enumerate_c3(const G &_graph, auto func) {\n  \
+    \  std::vector<int> ord(_graph.n()), rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n\
+    \    for (int i = 0; i < _graph.n(); ++i)\n        ++cnt[_graph[i].size()];\n\
+    \    std::partial_sum(cnt.rbegin(), cnt.rend(), cnt.rbegin());\n    for (int i\
+    \ = 0; i < _graph.n(); ++i)\n        ord[rk[i] = --cnt[_graph[i].size()]] = i;\n\
+    \    auto graph = _graph.oriented(rk); \n    for (int x : ord) {\n        for\
+    \ (auto [y, _] : graph[x]) vis[y] = 1;\n        for (auto [y, _] : graph[x])\n\
+    \            for (auto [z, __] : graph[y])\n                if (vis[z])\n    \
+    \                func(x, y, z);\n        for (auto [y, _] : graph[x]) vis[y] =\
+    \ 0;\n    }\n}\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library\
+    \ https://github.com/atcoder/ac-library\n#line 2 \"Numeric/internal_math.hpp\"\
+    \n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\n#ifdef\
+    \ _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr long\
+    \ long safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x +=\
+    \ m;\n    return x;\n}\nconstexpr long long pow_mod_constexpr(long long x, long\
+    \ long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
     \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
     \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
     \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\nconstexpr bool is_prime_constexpr(int\
@@ -249,7 +257,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/enumerate_triangles.test.cpp

@@ -94,18 +94,26 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/complement_bfs.hpp\"\n\n// parent[u] is\
-    \ the bfs parent of u, parent[root] = root\ntemplate<typename graph>\nstd::vector<int>\
-    \ complement_bfs(const graph &G, int start = -1) {\n    std::vector<int> vis(G.n()),\
-    \ cur(G.n()), parent(G.n());\n    int vcnt = 0;\n    std::iota(cur.begin(), cur.end(),\
-    \ 0);\n    if (start != -1) std::swap(cur[start], cur.back());\n    while (!cur.empty())\
-    \ {\n        std::queue<int> q;\n        parent[cur.back()] = cur.back();\n  \
-    \      q.push(cur.back());\n        cur.pop_back();\n        while (!q.empty())\
-    \ {\n            int u = q.front();\n            q.pop();\n            ++vcnt;\n\
-    \            for (auto [v, eid] : G[u])\n                vis[v] = vcnt;\n    \
-    \        std::vector<int> nxt;\n            for (int i : cur)\n              \
-    \  if (vis[i] == vcnt) nxt.push_back(i);\n                else q.push(i), parent[i]\
-    \ = u;\n            cur.swap(nxt);\n        }\n    }\n    return parent;\n}\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/complement_bfs.hpp\"\
+    \n\n// parent[u] is the bfs parent of u, parent[root] = root\ntemplate<typename\
+    \ graph>\nstd::vector<int> complement_bfs(const graph &G, int start = -1) {\n\
+    \    std::vector<int> vis(G.n()), cur(G.n()), parent(G.n());\n    int vcnt = 0;\n\
+    \    std::iota(cur.begin(), cur.end(), 0);\n    if (start != -1) std::swap(cur[start],\
+    \ cur.back());\n    while (!cur.empty()) {\n        std::queue<int> q;\n     \
+    \   parent[cur.back()] = cur.back();\n        q.push(cur.back());\n        cur.pop_back();\n\
+    \        while (!q.empty()) {\n            int u = q.front();\n            q.pop();\n\
+    \            ++vcnt;\n            for (auto [v, eid] : G[u])\n               \
+    \ vis[v] = vcnt;\n            std::vector<int> nxt;\n            for (int i :\
+    \ cur)\n                if (vis[i] == vcnt) nxt.push_back(i);\n              \
+    \  else q.push(i), parent[i] = u;\n            cur.swap(nxt);\n        }\n   \
+    \ }\n    return parent;\n}\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n// parent[u] is the bfs parent\
     \ of u, parent[root] = root\ntemplate<typename graph>\nstd::vector<int> complement_bfs(const\
     \ graph &G, int start = -1) {\n    std::vector<int> vis(G.n()), cur(G.n()), parent(G.n());\n\
@@ -123,7 +131,7 @@ data:
   isVerificationFile: false
   path: Graph/complement_bfs.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp

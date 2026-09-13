@@ -91,16 +91,23 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Flow/min_cost_circulation_old.hpp\"\n\ntemplate<typename\
-    \ T, typename C = T>\nstruct CostCirculationFlowWeight {\n    T fcap;\n    C cost;\n\
-    \    T cap, flow;\n    CostCirculationFlowWeight() : cap(0), fcap(0), cost(0),\
-    \ flow(0) {}\n    CostCirculationFlowWeight(T c, C w, T cc = 0, T f = 0) : fcap(c),\
-    \ cost(w), cap(cc), flow(f) {}\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const CostCirculationFlowWeight &v) {\n        os << \"[\" << v.fcap <<\
-    \ \", \" << v.cost << \", \" << v.cap << \", \" << v.flow << \"]\";\n        return\
-    \ os;\n    }\n};\n\n// O(VE * ElogC)\ntemplate<typename T, typename C = T>\nclass\
-    \ min_cost_circulation : public Graph<true, CostCirculationFlowWeight<T, C>, void>\
-    \ { // 0-base\npublic:\n    using super = Graph<true, CostCirculationFlowWeight<T,\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Flow/min_cost_circulation_old.hpp\"\
+    \n\ntemplate<typename T, typename C = T>\nstruct CostCirculationFlowWeight {\n\
+    \    T fcap;\n    C cost;\n    T cap, flow;\n    CostCirculationFlowWeight() :\
+    \ cap(0), fcap(0), cost(0), flow(0) {}\n    CostCirculationFlowWeight(T c, C w,\
+    \ T cc = 0, T f = 0) : fcap(c), cost(w), cap(cc), flow(f) {}\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const CostCirculationFlowWeight &v) {\n       \
+    \ os << \"[\" << v.fcap << \", \" << v.cost << \", \" << v.cap << \", \" << v.flow\
+    \ << \"]\";\n        return os;\n    }\n};\n\n// O(VE * ElogC)\ntemplate<typename\
+    \ T, typename C = T>\nclass min_cost_circulation : public Graph<true, CostCirculationFlowWeight<T,\
+    \ C>, void> { // 0-base\npublic:\n    using super = Graph<true, CostCirculationFlowWeight<T,\
     \ C>, void>;\n    std::vector<int> past;\n    std::vector<C> dis, pot;\n    void\
     \ BellmanFord(int s) {\n        std::vector<int> inq(this->n());\n        std::ranges::fill(dis,\
     \ std::numeric_limits<C>::max());\n        std::queue<int> q;\n        auto relax\
@@ -176,7 +183,7 @@ data:
   isVerificationFile: false
   path: Flow/min_cost_circulation_old.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Flow/min_cost_circulation_old.hpp

@@ -94,16 +94,24 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/enumerate_c3.hpp\"\n\ntemplate<typename\
-    \ G>\nvoid enumerate_c3(const G &_graph, auto func) {\n    std::vector<int> ord(_graph.n()),\
-    \ rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n    for (int i = 0; i < _graph.n();\
-    \ ++i)\n        ++cnt[_graph[i].size()];\n    std::partial_sum(cnt.rbegin(), cnt.rend(),\
-    \ cnt.rbegin());\n    for (int i = 0; i < _graph.n(); ++i)\n        ord[rk[i]\
-    \ = --cnt[_graph[i].size()]] = i;\n    auto graph = _graph.oriented(rk); \n  \
-    \  for (int x : ord) {\n        for (auto [y, _] : graph[x]) vis[y] = 1;\n   \
-    \     for (auto [y, _] : graph[x])\n            for (auto [z, __] : graph[y])\n\
-    \                if (vis[z])\n                    func(x, y, z);\n        for\
-    \ (auto [y, _] : graph[x]) vis[y] = 0;\n    }\n}\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/enumerate_c3.hpp\"\
+    \n\ntemplate<typename G>\nvoid enumerate_c3(const G &_graph, auto func) {\n  \
+    \  std::vector<int> ord(_graph.n()), rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n\
+    \    for (int i = 0; i < _graph.n(); ++i)\n        ++cnt[_graph[i].size()];\n\
+    \    std::partial_sum(cnt.rbegin(), cnt.rend(), cnt.rbegin());\n    for (int i\
+    \ = 0; i < _graph.n(); ++i)\n        ord[rk[i] = --cnt[_graph[i].size()]] = i;\n\
+    \    auto graph = _graph.oriented(rk); \n    for (int x : ord) {\n        for\
+    \ (auto [y, _] : graph[x]) vis[y] = 1;\n        for (auto [y, _] : graph[x])\n\
+    \            for (auto [z, __] : graph[y])\n                if (vis[z])\n    \
+    \                func(x, y, z);\n        for (auto [y, _] : graph[x]) vis[y] =\
+    \ 0;\n    }\n}\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename G>\nvoid\
     \ enumerate_c3(const G &_graph, auto func) {\n    std::vector<int> ord(_graph.n()),\
     \ rk(_graph.n()), cnt(_graph.n()), vis(_graph.n());\n    for (int i = 0; i < _graph.n();\
@@ -119,7 +127,7 @@ data:
   isVerificationFile: false
   path: Graph/enumerate_c3.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/enumerate_triangles.test.cpp

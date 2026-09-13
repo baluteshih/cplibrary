@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -225,13 +225,20 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Graph/count_spanning_tree.hpp\"\n\n#line 2 \"\
-    Matrix/Matrix.hpp\"\n\n#line 2 \"Matrix/Vector.hpp\"\n\n#line 2 \"Algebra/Field/concept.hpp\"\
-    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
-    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
-    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
-    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"Graph/count_spanning_tree.hpp\"\
+    \n\n#line 2 \"Matrix/Matrix.hpp\"\n\n#line 2 \"Matrix/Vector.hpp\"\n\n#line 2\
+    \ \"Algebra/Field/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\n\
+    template <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
+    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
     \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Field/concept.hpp\"\
     \n\ntemplate<typename T>\nconcept isField = Addable<T, T> && Multiplicable<T,\
     \ T> && std::default_initializable<T>;\n#line 4 \"Matrix/Vector.hpp\"\n\ntemplate<typename\
@@ -397,7 +404,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp

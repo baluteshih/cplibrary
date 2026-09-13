@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/strongly_connected_components.test.cpp
     title: test/1_library_checker/graph/strongly_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<bool\
@@ -106,22 +106,30 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/SCC.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nstruct SCC : public\
+    \ Graph<true, Edge, Vertex>  { // 0-base\n    using super = Graph<true, Edge,\
+    \ Vertex>;\n    int dft, nscc;\n    std::vector<int> low, dfn, bln, instack, stk;\n\
+    \    void dfs(int u) {\n        low[u] = dfn[u] = ++dft;\n        instack[u] =\
+    \ 1, stk.push_back(u);\n        for (auto [v, eid] : this->G[u])\n           \
+    \ if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u], low[v]);\n \
+    \           else if (instack[v] && dfn[v] < dfn[u])\n                low[u] =\
+    \ std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n            for\
+    \ (; stk.back() != u; stk.pop_back())\n                bln[stk.back()] = nscc,\
+    \ instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n\
+    \        }\n    }\n    SCC(int n): super(n), dft(), nscc(), low(n), dfn(n), bln(n),\
+    \ instack(n) {}\n    void solve() {\n        for (int i = 0; i < this->n(); ++i)\n\
+    \            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>> components()\
+    \ {\n        std::vector<std::vector<int>> res(nscc);\n        for (int i = 0;\
+    \ i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n        return res;\n\
+    \    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename Edge = void,\
     \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
     \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
@@ -145,8 +153,8 @@ data:
   requiredBy:
   - Misc/2sat.hpp
   - Graph/incremental_scc.hpp
-  timestamp: '2026-09-13 13:11:32+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-09-13 14:22:22+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/graph/incremental_scc.test.cpp

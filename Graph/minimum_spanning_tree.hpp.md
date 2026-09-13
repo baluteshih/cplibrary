@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -103,18 +103,26 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"DataStructure/DisjointSet.hpp\"\n\n#line 2 \"\
-    Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate\
-    \ <typename A, typename B>\nconcept Addable = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
-    \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
-    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
-    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
-    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
-    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
-    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"DataStructure/DisjointSet.hpp\"\
+    \n\n#line 2 \"Algebra/Monoid/concept.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
+    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
+    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/DisjointSet.hpp\"\
+    \n\ntemplate<typename T = void, bool undo_tag = false>\nclass DisjointSet {\n\
+    protected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n    int\
+    \ n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
     \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
     \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
     \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
@@ -176,7 +184,7 @@ data:
   isVerificationFile: false
   path: Graph/minimum_spanning_tree.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp

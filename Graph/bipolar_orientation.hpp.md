@@ -94,28 +94,35 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/bipolar_orientation.hpp\"\n\n// there exists\
-    \ bipolar orientation iff the graph is biconnected after adding the edge (s, t)\n\
-    template<typename Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false,\
-    \ Edge, Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n\
-    \    int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
-    \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
-    \ low(n), pa(n, -1), sgn(n), ord;\n    auto dfs = [&](auto self, int u) -> void\
-    \ {\n        ord.push_back(u);\n        low[u] = vis[u] = ord.size();\n      \
-    \  for (auto [v, eid] : G[u])\n            if (!vis[v])\n                pa[v]\
-    \ = u, self(self, v), low[u] = std::min(low[u], low[v]);\n            else\n \
-    \               low[u] = std::min(low[u], vis[v]);\n    };\n    dfs(dfs, s);\n\
-    \    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s] = t, prv[t] = s, sgn[s]\
-    \ = -1;\n    for (int i : ord)\n        if (i != s && i != t) {\n            int\
-    \ p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l] > 0)\n             \
-    \   nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n            else\n  \
-    \              prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]] = i;\n         \
-    \   sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n    for (int x =\
-    \ s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n  \
-    \  return res;\n}\n"
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/bipolar_orientation.hpp\"\
+    \n\n// there exists bipolar orientation iff the graph is biconnected after adding\
+    \ the edge (s, t)\ntemplate<typename Edge, typename Vertex>\nstd::vector<int>\
+    \ bipolar_orientation(UndirectedGraph<Edge, Vertex> &G, int s, int t) {\n    assert(s\
+    \ != t);\n    assert(G.m() > 0);\n    int n = G.n();\n    assert(0 <= s && s <\
+    \ n);\n    assert(0 <= t && t < n);\n    G[s].insert(G[s].begin(), std::make_pair(t,\
+    \ -1));\n    std::vector<int> vis(n), low(n), pa(n, -1), sgn(n), ord;\n    auto\
+    \ dfs = [&](auto self, int u) -> void {\n        ord.push_back(u);\n        low[u]\
+    \ = vis[u] = ord.size();\n        for (auto [v, eid] : G[u])\n            if (!vis[v])\n\
+    \                pa[v] = u, self(self, v), low[u] = std::min(low[u], low[v]);\n\
+    \            else\n                low[u] = std::min(low[u], vis[v]);\n    };\n\
+    \    dfs(dfs, s);\n    std::vector<int> nxt(n + 1, n), prv = nxt;\n    nxt[s]\
+    \ = t, prv[t] = s, sgn[s] = -1;\n    for (int i : ord)\n        if (i != s &&\
+    \ i != t) {\n            int p = pa[i], l = ord[low[i] - 1];\n            if (sgn[l]\
+    \ > 0)\n                nxt[i] = nxt[prv[i] = p], nxt[p] = prv[nxt[p]] = i;\n\
+    \            else\n                prv[i] = prv[nxt[i] = p], prv[p] = nxt[prv[p]]\
+    \ = i;\n            sgn[p] = -sgn[l];\n        }\n    std::vector<int> res;\n\
+    \    for (int x = s; x != n; x = nxt[x]) res.push_back(x);\n    G[s].erase(G[s].begin());\n\
+    \    return res;\n}\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n// there exists bipolar orientation\
     \ iff the graph is biconnected after adding the edge (s, t)\ntemplate<typename\
-    \ Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(Graph<false, Edge,\
+    \ Edge, typename Vertex>\nstd::vector<int> bipolar_orientation(UndirectedGraph<Edge,\
     \ Vertex> &G, int s, int t) {\n    assert(s != t);\n    assert(G.m() > 0);\n \
     \   int n = G.n();\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n\
     \    G[s].insert(G[s].begin(), std::make_pair(t, -1));\n    std::vector<int> vis(n),\
@@ -137,7 +144,7 @@ data:
   isVerificationFile: false
   path: Graph/bipolar_orientation.hpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/st_numbering.test.cpp

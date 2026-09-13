@@ -104,36 +104,44 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/BCC.hpp\"\n\r\ntemplate<typename Edge =\
-    \ void, typename Vertex = void>\r\nstruct BCC : public Graph<false, Edge, Vertex>\
-    \ { // 0-base\r\n    using super = Graph<false, Edge, Vertex>;\r\n    int dft,\
-    \ nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\n    std::vector<std::vector<int>>\
-    \ bcc;\r\n    void make_bcc(int u) {\r\n        bcc.emplace_back(1, u); \r\n \
-    \       for (; stk.back() != u; stk.pop_back())\r\n            bln[stk.back()]\
-    \ = nbcc, bcc[nbcc].push_back(stk.back());\r\n        stk.pop_back(), bln[u] =\
-    \ nbcc++;\r\n    }\r\n    void dfs(int u, int f) {\r\n        int child = 0;\r\
-    \n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\n        for (auto [v,\
-    \ eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n                dfs(v, u),\
-    \ ++child;\r\n                low[u] = std::min(low[u], low[v]);\r\n         \
-    \       if (dfn[u] <= low[v]) {\r\n                    is_ap[u] = 1, bln[u] =\
-    \ nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\n     \
-    \           }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n       \
-    \         low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child <\
-    \ 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n    }\r\
-    \n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n) {}\r\
-    \n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()), bln(G.n()),\
-    \ is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0; i < this->n();\
-    \ ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n    /*\r\n    Return\
-    \ std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex index of the vertex\
-    \ u belongs to\r\n    */\r\n    std::pair<std::vector<int>, std::vector<std::vector<int>>>\
-    \ block_cut_tree() const {\r\n        int count = nbcc;\r\n        std::vector<int>\
-    \ cir, newbln(bln);\r\n        std::vector<std::vector<int>> nG;\r\n        cir.resize(count);\r\
-    \n        for (int i = 0; i < this->n(); ++i)\r\n            if (is_ap[i])\r\n\
-    \                newbln[i] = count++;\r\n        cir.resize(count, 1), nG.resize(count);\r\
-    \n        for (int i = 0; i < count && !cir[i]; ++i)\r\n            for (int j\
-    \ : bcc[i])\r\n                if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]),\
-    \ nG[newbln[j]].push_back(i);\r\n        return {newbln, nG};\r\n    } // up to\
-    \ 2 * n - 2 nodes!! bln[i] for id\r\n};\r\n#line 5 \"test/1_library_checker/graph/biconnected_components.test.cpp\"\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/BCC.hpp\"\
+    \n\r\ntemplate<typename Edge = void, typename Vertex = void>\r\nstruct BCC : public\
+    \ UndirectedGraph<Edge, Vertex> { // 0-base\r\n    using super = UndirectedGraph<Edge,\
+    \ Vertex>;\r\n    int dft, nbcc;\r\n    std::vector<int> low, dfn, bln, stk, is_ap;\r\
+    \n    std::vector<std::vector<int>> bcc;\r\n    void make_bcc(int u) {\r\n   \
+    \     bcc.emplace_back(1, u); \r\n        for (; stk.back() != u; stk.pop_back())\r\
+    \n            bln[stk.back()] = nbcc, bcc[nbcc].push_back(stk.back());\r\n   \
+    \     stk.pop_back(), bln[u] = nbcc++;\r\n    }\r\n    void dfs(int u, int f)\
+    \ {\r\n        int child = 0;\r\n        low[u] = dfn[u] = ++dft, stk.push_back(u);\r\
+    \n        for (auto [v, eid] : this->G[u])\r\n            if (!dfn[v]) {\r\n \
+    \               dfs(v, u), ++child;\r\n                low[u] = std::min(low[u],\
+    \ low[v]);\r\n                if (dfn[u] <= low[v]) {\r\n                    is_ap[u]\
+    \ = 1, bln[u] = nbcc;\r\n                    make_bcc(v), bcc.back().push_back(u);\r\
+    \n                }\r\n            } else if (dfn[v] < dfn[u] && v != f)\r\n \
+    \               low[u] = std::min(low[u], dfn[v]);\r\n        if (f == -1 && child\
+    \ < 2) is_ap[u] = 0;\r\n        if (f == -1 && child == 0) make_bcc(u);\r\n  \
+    \  }\r\n    BCC(int n) : super(n), dft(), nbcc(), low(n), dfn(n), bln(n), is_ap(n)\
+    \ {}\r\n    BCC(const super &G) : super(G), dft(), nbcc(), low(G.n()), dfn(G.n()),\
+    \ bln(G.n()), is_ap(G.n()) {}\r\n    void solve() {\r\n        for (int i = 0;\
+    \ i < this->n(); ++i)\r\n            if (!dfn[i]) dfs(i, -1);\r\n    }\r\n   \
+    \ /*\r\n    Return std::pair<idx, tree adj matrix>\r\n    idx[u]: the new vertex\
+    \ index of the vertex u belongs to\r\n    */\r\n    std::pair<std::vector<int>,\
+    \ std::vector<std::vector<int>>> block_cut_tree() const {\r\n        int count\
+    \ = nbcc;\r\n        std::vector<int> cir, newbln(bln);\r\n        std::vector<std::vector<int>>\
+    \ nG;\r\n        cir.resize(count);\r\n        for (int i = 0; i < this->n();\
+    \ ++i)\r\n            if (is_ap[i])\r\n                newbln[i] = count++;\r\n\
+    \        cir.resize(count, 1), nG.resize(count);\r\n        for (int i = 0; i\
+    \ < count && !cir[i]; ++i)\r\n            for (int j : bcc[i])\r\n           \
+    \     if (is_ap[j])\r\n                    nG[i].push_back(newbln[j]), nG[newbln[j]].push_back(i);\r\
+    \n        return {newbln, nG};\r\n    } // up to 2 * n - 2 nodes!! bln[i] for\
+    \ id\r\n};\r\n#line 5 \"test/1_library_checker/graph/biconnected_components.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, m;\n    std::cin >> n >> m;\n    BCC bcc(n);\n    while (m--) {\n       \
     \ int u, v;\n        std::cin >> u >> v;\n        bcc.add_edge(u, v);\n    }\n\
@@ -155,7 +163,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 20:37:16+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/biconnected_components.test.cpp

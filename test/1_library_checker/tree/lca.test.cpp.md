@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/Doubling.hpp
     title: Doubling
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':heavy_check_mark:'
@@ -119,47 +119,55 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 2 \"Graph/UnifiedWeight.hpp\"\n\n#line 2 \"Algebra/ValidOperation.hpp\"\
-    \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
-    \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
-    \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
-    \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
-    \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\n\ntemplate <typename Edge,\
-    \ typename Vertex>\nstruct UnifiedWeight {\n    using type = std::conditional_t<std::is_void_v<Vertex>,\
-    \ Edge, Vertex>;\n};\n\ntemplate <typename Edge, typename Vertex>\nusing UnifiedWeight_t\
-    \ = typename UnifiedWeight<Edge, Vertex>::type;\n\ntemplate <typename Edge, typename\
-    \ Vertex>\nconcept AddableUnifiedWeight = \n    (std::is_void_v<Vertex> && Addable<Edge,\
-    \ Edge>) ||\n    (Addable<Vertex, Vertex> && (std::is_void_v<Edge> || Addable<Vertex,\
-    \ Edge>));\n#line 6 \"Tree/Tree.hpp\"\n\ntemplate<typename Edge = void, typename\
-    \ Vertex = void>\nclass Tree : public Graph<false, Edge, Vertex> {\npublic:\n\
-    \    using super = Graph<false, Edge, Vertex>;\n    using super::hasEdgeWeight;\n\
-    \    using super::hasVertexWeight;\n    using WeightType = UnifiedWeight_t<Edge,\
-    \ Vertex>;\n    int current_root;\n    std::vector<int> pa, dfs_in, dfs_out;\n\
-    \    std::vector<int> preorder, postorder;\n    Tree(int n): super(n), current_root(-1)\
-    \ {}\n    Tree(const super &graph, const std::vector<int> &edge_index): super(graph.n()),\
-    \ current_root(-1) {\n        assert(int(edge_index.size()) + 1 == this->n());\n\
-    \        for (int eid : edge_index)\n            this->add_edge(graph.edge(eid));\n\
-    \    }\n    void traverse(int root = 0) {\n        current_root = root;\n    \
-    \    std::vector<int>(this->n()).swap(pa);\n        std::vector<int>(this->n()).swap(dfs_in);\n\
-    \        std::vector<int>(this->n()).swap(dfs_out);\n        preorder.clear(),\
-    \ preorder.reserve(this->n());\n        postorder.clear(), postorder.reserve(this->n());\n\
-    \        int dft = -1;\n        auto dfs = [&](auto& self, int u, int f) -> void\
-    \ {\n            pa[u] = f;\n            dfs_in[u] = ++dft;\n            preorder.push_back(u);\n\
-    \            for (auto [v, eid] : this->G[u])\n                if (eid != f)\n\
-    \                    self(self, v, eid);\n            dfs_out[u] = dft;\n    \
-    \        postorder.push_back(u);\n        };\n        dfs(dfs, root, -1);\n  \
-    \  }\n    bool ancestor(int u, int v) const {\n        return dfs_in[u] <= dfs_in[v]\
-    \ && dfs_out[v] <= dfs_out[u];\n    }\n    void run_order(const std::vector<int>\
-    \ &order, const auto &func) {\n        for (int i : order)\n            func(i);\n\
-    \    }\n    void predfs(const auto &func) {\n        run_order(preorder, func);\n\
-    \    }\n    void postdfs(const auto &func) {\n        run_order(postorder, func);\n\
-    \    }\n    int parent(int u) const {\n        if (pa[u] == -1) return u;\n  \
-    \      return this->opposite(u, pa[u]);\n    }\n    int parent_eid(int u) const\
-    \ {\n        return pa[u];\n    }\n    super::edge_v& parent_edge(int u) {\n \
-    \       assert(pa[u] != -1);\n        return this->edge(pa[u]);\n    }\n    super::edge_v\
-    \ parent_edge(int u) const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n\
-    \    }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 2 \"Graph/UnifiedWeight.hpp\"\
+    \n\n#line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
+    concept Addable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
+    \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
+    \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Graph/UnifiedWeight.hpp\"\
+    \n\ntemplate <typename Edge, typename Vertex>\nstruct UnifiedWeight {\n    using\
+    \ type = std::conditional_t<std::is_void_v<Vertex>, Edge, Vertex>;\n};\n\ntemplate\
+    \ <typename Edge, typename Vertex>\nusing UnifiedWeight_t = typename UnifiedWeight<Edge,\
+    \ Vertex>::type;\n\ntemplate <typename Edge, typename Vertex>\nconcept AddableUnifiedWeight\
+    \ = \n    (std::is_void_v<Vertex> && Addable<Edge, Edge>) ||\n    (Addable<Vertex,\
+    \ Vertex> && (std::is_void_v<Edge> || Addable<Vertex, Edge>));\n#line 6 \"Tree/Tree.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nclass Tree : public\
+    \ Graph<false, Edge, Vertex> {\npublic:\n    using super = Graph<false, Edge,\
+    \ Vertex>;\n    using super::hasEdgeWeight;\n    using super::hasVertexWeight;\n\
+    \    using WeightType = UnifiedWeight_t<Edge, Vertex>;\n    int current_root;\n\
+    \    std::vector<int> pa, dfs_in, dfs_out;\n    std::vector<int> preorder, postorder;\n\
+    \    Tree(int n): super(n), current_root(-1) {}\n    Tree(const super &graph,\
+    \ const std::vector<int> &edge_index): super(graph.n()), current_root(-1) {\n\
+    \        assert(int(edge_index.size()) + 1 == this->n());\n        for (int eid\
+    \ : edge_index)\n            this->add_edge(graph.edge(eid));\n    }\n    void\
+    \ traverse(int root = 0) {\n        current_root = root;\n        std::vector<int>(this->n()).swap(pa);\n\
+    \        std::vector<int>(this->n()).swap(dfs_in);\n        std::vector<int>(this->n()).swap(dfs_out);\n\
+    \        preorder.clear(), preorder.reserve(this->n());\n        postorder.clear(),\
+    \ postorder.reserve(this->n());\n        int dft = -1;\n        auto dfs = [&](auto&\
+    \ self, int u, int f) -> void {\n            pa[u] = f;\n            dfs_in[u]\
+    \ = ++dft;\n            preorder.push_back(u);\n            for (auto [v, eid]\
+    \ : this->G[u])\n                if (eid != f)\n                    self(self,\
+    \ v, eid);\n            dfs_out[u] = dft;\n            postorder.push_back(u);\n\
+    \        };\n        dfs(dfs, root, -1);\n    }\n    bool ancestor(int u, int\
+    \ v) const {\n        return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];\n\
+    \    }\n    void run_order(const std::vector<int> &order, const auto &func) {\n\
+    \        for (int i : order)\n            func(i);\n    }\n    void predfs(const\
+    \ auto &func) {\n        run_order(preorder, func);\n    }\n    void postdfs(const\
+    \ auto &func) {\n        run_order(postorder, func);\n    }\n    int parent(int\
+    \ u) const {\n        if (pa[u] == -1) return u;\n        return this->opposite(u,\
+    \ pa[u]);\n    }\n    int parent_eid(int u) const {\n        return pa[u];\n \
+    \   }\n    super::edge_v& parent_edge(int u) {\n        assert(pa[u] != -1);\n\
+    \        return this->edge(pa[u]);\n    }\n    super::edge_v parent_edge(int u)\
+    \ const {\n        assert(pa[u] != -1);\n        return this->edge(pa[u]);\n \
+    \   }\n    std::vector<int> parents(int root = -1) {\n        if (current_root\
     \ == -1 || (root != -1 && current_root != root)) {\n            assert(root !=\
     \ -1);\n            traverse(root);\n        }\n        std::vector<int> res(this->n());\n\
     \        for (int i = 0; i < this->n(); ++i)\n            res[i] = parent(i);\n\
@@ -321,7 +329,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/lca.test.cpp
   requiredBy: []
-  timestamp: '2026-06-30 23:51:20+08:00'
+  timestamp: '2026-09-13 14:22:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/lca.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -103,38 +103,45 @@ data:
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
     \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
     \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n};\n#line 4 \"Graph/SCC.hpp\"\n\ntemplate<typename Edge = void,\
-    \ typename Vertex = void>\nstruct SCC : public Graph<true, Edge, Vertex>  { //\
-    \ 0-base\n    using super = Graph<true, Edge, Vertex>;\n    int dft, nscc;\n \
-    \   std::vector<int> low, dfn, bln, instack, stk;\n    void dfs(int u) {\n   \
-    \     low[u] = dfn[u] = ++dft;\n        instack[u] = 1, stk.push_back(u);\n  \
-    \      for (auto [v, eid] : this->G[u])\n            if (!dfn[v])\n          \
-    \      dfs(v), low[u] = std::min(low[u], low[v]);\n            else if (instack[v]\
-    \ && dfn[v] < dfn[u])\n                low[u] = std::min(low[u], dfn[v]);\n  \
-    \      if (low[u] == dfn[u]) {\n            for (; stk.back() != u; stk.pop_back())\n\
-    \                bln[stk.back()] = nscc, instack[stk.back()] = 0;\n          \
-    \  instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n        }\n    }\n    SCC(int\
-    \ n): super(n), dft(), nscc(), low(n), dfn(n), bln(n), instack(n) {}\n    void\
-    \ solve() {\n        for (int i = 0; i < this->n(); ++i)\n            if (!dfn[i])\
-    \ dfs(i);\n    }\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
-    \ res(nscc);\n        for (int i = 0; i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n\
-    \        return res;\n    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n\
-    #line 5 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
+    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
+    \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
+    \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
+    \                    self(self, v);\n        };\n        for (int i = 0; i < this->n();\
+    \ ++i) {\n            if (vis[i]) continue;\n            res.emplace_back();\n\
+    \            dfs(dfs, i);\n        }\n        return res;\n    }\n    bool is_connected()\
+    \ {\n        return components().size() == 1;\n    }\n};\n#line 4 \"Graph/SCC.hpp\"\
+    \n\ntemplate<typename Edge = void, typename Vertex = void>\nstruct SCC : public\
+    \ Graph<true, Edge, Vertex>  { // 0-base\n    using super = Graph<true, Edge,\
+    \ Vertex>;\n    int dft, nscc;\n    std::vector<int> low, dfn, bln, instack, stk;\n\
+    \    void dfs(int u) {\n        low[u] = dfn[u] = ++dft;\n        instack[u] =\
+    \ 1, stk.push_back(u);\n        for (auto [v, eid] : this->G[u])\n           \
+    \ if (!dfn[v])\n                dfs(v), low[u] = std::min(low[u], low[v]);\n \
+    \           else if (instack[v] && dfn[v] < dfn[u])\n                low[u] =\
+    \ std::min(low[u], dfn[v]);\n        if (low[u] == dfn[u]) {\n            for\
+    \ (; stk.back() != u; stk.pop_back())\n                bln[stk.back()] = nscc,\
+    \ instack[stk.back()] = 0;\n            instack[u] = 0, bln[u] = nscc++, stk.pop_back();\n\
+    \        }\n    }\n    SCC(int n): super(n), dft(), nscc(), low(n), dfn(n), bln(n),\
+    \ instack(n) {}\n    void solve() {\n        for (int i = 0; i < this->n(); ++i)\n\
+    \            if (!dfn[i]) dfs(i);\n    }\n    std::vector<std::vector<int>> components()\
+    \ {\n        std::vector<std::vector<int>> res(nscc);\n        for (int i = 0;\
+    \ i < this->n(); ++i)\n            res[bln[i]].push_back(i);\n        return res;\n\
+    \    }\n}; // scc_id(i): bln[i], stored in reversed dfs order\n#line 5 \"test/1_library_checker/graph/strongly_connected_components.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, m;\n    std::cin >> n >> m;\n    SCC scc(n);\n    while (m--) {\n       \
     \ int u, v;\n        std::cin >> u >> v;\n        scc.add_edge(u, v);\n    }\n\
-    \    scc.solve();\n    auto ans = scc.components();\n    std::cout << ans.size()\
-    \ << \"\\n\";\n    for (auto &v : ans) {\n        std::cout << v.size();\n   \
-    \     for (int i : v)\n            std::cout << \" \" << i;\n        std::cout\
-    \ << \"\\n\";\n    }\n}\n"
+    \    scc.solve();\n    auto ans = scc.components();\n    std::ranges::reverse(ans);\n\
+    \    std::cout << ans.size() << \"\\n\";\n    for (auto &v : ans) {\n        std::cout\
+    \ << v.size();\n        for (int i : v)\n            std::cout << \" \" << i;\n\
+    \        std::cout << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"assumption.hpp\"\
     \n\n#include \"Graph/SCC.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    SCC scc(n);\n\
     \    while (m--) {\n        int u, v;\n        std::cin >> u >> v;\n        scc.add_edge(u,\
-    \ v);\n    }\n    scc.solve();\n    auto ans = scc.components();\n    std::cout\
-    \ << ans.size() << \"\\n\";\n    for (auto &v : ans) {\n        std::cout << v.size();\n\
-    \        for (int i : v)\n            std::cout << \" \" << i;\n        std::cout\
-    \ << \"\\n\";\n    }\n}\n"
+    \ v);\n    }\n    scc.solve();\n    auto ans = scc.components();\n    std::ranges::reverse(ans);\n\
+    \    std::cout << ans.size() << \"\\n\";\n    for (auto &v : ans) {\n        std::cout\
+    \ << v.size();\n        for (int i : v)\n            std::cout << \" \" << i;\n\
+    \        std::cout << \"\\n\";\n    }\n}\n"
   dependsOn:
   - assumption.hpp
   - Graph/SCC.hpp
@@ -142,8 +149,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-09-13 13:11:32+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-09-13 14:22:22+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/strongly_connected_components.test.cpp
 layout: document
