@@ -15,6 +15,7 @@ int main() {
     }
     scc.solve();
     auto ans = scc.components();
+    std::ranges::reverse(ans);
     std::cout << ans.size() << "\n";
     for (auto &v : ans) {
         std::cout << v.size();
