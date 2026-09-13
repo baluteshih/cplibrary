@@ -30,7 +30,6 @@ struct SCC : public Graph<true, Edge, Vertex>  { // 0-base
         std::vector<std::vector<int>> res(nscc);
         for (int i = 0; i < this->n(); ++i)
             res[bln[i]].push_back(i);
-        std::ranges::reverse(res);
         return res;
     }
-}; // scc_id(i): bln[i]
+}; // scc_id(i): bln[i], stored in reversed dfs order

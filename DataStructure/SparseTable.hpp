@@ -8,7 +8,7 @@ class SparseTable {
     Doubling<Value, true> table;
 public:
     SparseTable(const std::ranges::range auto &data) : n(data.size()), table(n, data) {} 
-    Value range_prod(int l, int r) {
+    Value range_prod(int l, int r) const {
         assert(0 <= l && r <= n);
         assert(l <= r);
         if (l == r) return Value();
