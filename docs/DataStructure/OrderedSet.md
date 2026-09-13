@@ -20,15 +20,25 @@ class OrderedSet : public Discretization<T>;
 
 ---
 
-## Constructor
+## Constructors
 
 ```cpp
-OrderedSet(const std::ranges::range auto &_vals);
+using Discretization<T>::Discretization;
 ```
 
-* $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
+Constructors are inherited from `Discretization<T>`. Candidate values can be initialized using vector constructors or added via `push_back()` before calling `build()`.
 
-Constructs an empty ordered set using the given range `_vals` as the universe of possible elements to be inserted later.
+---
+
+## build
+
+```cpp
+void build() override;
+```
+
+* $O(N \log N)$ time, where $N$ is the number of candidate values.
+
+Sorts and removes duplicate candidate values by invoking `Discretization<T>::build()`, and initializes internal data structures (`vis` array and BIT). Must be called after populating candidate values and before performing set operations like `insert`, `erase`, or queries.
 
 ---
 
@@ -40,7 +50,7 @@ bool insert(T x);
 
 * $O(\log N)$ time
 
-Inserts the value `x` into the set. Returns `true` if `x` was successfully inserted, or `false` if `x` was already present. `x` must exist in the original array `_vals`.
+Inserts the value `x` into the set. Returns `true` if `x` was successfully inserted, or `false` if `x` was already present. `x` must exist in the discretized universe built via `build()`.
 
 ---
 
@@ -52,7 +62,7 @@ bool erase(T x);
 
 * $O(\log N)$ time
 
-Erases the value `x` from the set. Returns `true` if `x` was successfully erased, or `false` if `x` was not present. `x` must exist in the original array `_vals`.
+Erases the value `x` from the set. Returns `true` if `x` was successfully erased, or `false` if `x` was not present. `x` must exist in the discretized universe built via `build()`.
 
 ---
 

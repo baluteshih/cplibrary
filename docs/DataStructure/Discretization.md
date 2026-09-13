@@ -5,11 +5,15 @@ documentation_of: ../../DataStructure/Discretization.hpp
 
 A utility class for coordinate compression (discretization), allowing efficient mapping from values to $0$-indexed ranks and queries for intervals.
 
+## Inheritance
+
+`Discretization<T>` inherits publicly from `std::vector<T>`.
+
 ## Template Parameters
 
 ```cpp
 template<typename T>
-class Discretization;
+class Discretization : public std::vector<T>;
 ```
 
 * `T`: The type of elements being discretized.
@@ -17,22 +21,32 @@ class Discretization;
 
 ---
 
-## Constructor
+## Constructors
 
 ```cpp
-Discretization(const std::ranges::range auto &_vals);
+using std::vector<T>::vector;
 ```
 
-* $O(N \log N)$ time, where $N$ is the number of elements in `_vals`.
+Constructors are inherited from `std::vector<T>`. Elements can be initialized using any `std::vector` constructor (e.g. range iterator constructor, default constructor, initializer list) or pushed directly into the container before calling `build()`.
 
-Constructs a discretization object from a range of values. It sorts the range and removes duplicate elements.
+---
+
+## build
+
+```cpp
+virtual void build();
+```
+
+* $O(N \log N)$ time, where $N$ is the number of elements in the container.
+
+Sorts the underlying elements (`std::ranges::sort`) and removes duplicates (`std::ranges::unique`). Must be called after populating elements and prior to performing any discretization queries.
 
 ---
 
 ## idx
 
 ```cpp
-int idx(int x);
+int idx(T x);
 ```
 
 * $O(\log N)$ time
@@ -44,7 +58,7 @@ Returns the discretized index (rank) of the value `x`. Returns `-1` if `x` does 
 ## safe_idx
 
 ```cpp
-int safe_idx(int x);
+int safe_idx(T x);
 ```
 
 * $O(\log N)$ time
@@ -61,7 +75,7 @@ int left_close(T x);
 
 * $O(\log N)$ time
 
-Returns the first index `i` such that `vals[i] >= x`. Corresponds to the starting index when dealing with a closed left interval `[x, ...)`.
+Returns the first index `i` such that `(*this)[i] >= x`. Corresponds to the starting index when dealing with a closed left interval `[x, ...)`.
 
 ---
 
@@ -73,7 +87,7 @@ int left_open(T x);
 
 * $O(\log N)$ time
 
-Returns the last index `i` such that `vals[i] <= x`. Corresponds to the starting index when dealing with a closed left interval `(x, ...)`.
+Returns the last index `i` such that `(*this)[i] <= x`. Corresponds to the starting index when dealing with an open left interval `(x, ...)`.
 
 ---
 
@@ -85,7 +99,7 @@ int right_close(T x);
 
 * $O(\log N)$ time
 
-Returns the last index `i` such that `vals[i] <= x`. Corresponds to the ending index when dealing with a closed right interval `(..., x]`.
+Returns the last index `i` such that `(*this)[i] <= x`. Corresponds to the ending index when dealing with a closed right interval `(..., x]`.
 
 ---
 
@@ -97,16 +111,11 @@ int right_open(T x);
 
 * $O(\log N)$ time
 
-Returns the first index `i` such that `vals[i] >= x`. Corresponds to the ending index when dealing with an open right interval `(..., x)`.
+Returns the first index `i` such that `(*this)[i] >= x`. Corresponds to the ending index when dealing with an open right interval `(..., x)`.
 
 ---
 
-## operator[]
+## Inherited std::vector Methods
 
-```cpp
-const T& operator[](size_t index) const;
-```
+Because `Discretization<T>` inherits from `std::vector<T>`, all standard `std::vector` member functions (e.g., `operator[]`, `size()`, `push_back()`, `empty()`, iterators) are directly accessible.
 
-* $O(1)$ time
-
-Returns the original value at the given discretized index.
