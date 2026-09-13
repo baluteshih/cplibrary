@@ -14,7 +14,8 @@ int main() {
     std::vector<std::pair<int, int>> querys(q);
     for (auto &[l, r] : querys)
         std::cin >> l >> r;
-    Discretization val(arr);
+    Discretization<int> val(arr.begin(), arr.end());
+    val.build();
     for (auto &i : arr)
         i = val.idx(i);
     std::vector<int> cnt(val.size()), cnt2(n + 1), pl(val.size());

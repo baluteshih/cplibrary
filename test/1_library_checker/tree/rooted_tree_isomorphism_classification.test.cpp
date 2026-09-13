@@ -15,7 +15,8 @@ int main() {
         tree.add_edge(p, i);
     }
     auto res = tree.hash_values();
-    Discretization val(res);
+    Discretization<decltype(res)::value_type> val(res.begin(), res.end());
+    val.build();
     std::cout << val.size() << "\n";
     for (int i = 0; i < n; ++i)
         std::cout << val.idx(res[i]) << " \n"[i + 1 == n];

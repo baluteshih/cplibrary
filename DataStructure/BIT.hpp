@@ -10,7 +10,7 @@ public:
     int n;
     T total_;
     std::vector<T> bit;
-    BIT(int _n) : n(_n), total_(), bit(n + 1) {}
+    BIT(int _n = 0) : n(_n), total_(), bit(n + 1) {}
     BIT(const std::ranges::range auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(), arr.end(), T())), bit(n + 1) {
         for (int x = 1; x <= n; ++x) {
             bit[x] = arr[x - 1];

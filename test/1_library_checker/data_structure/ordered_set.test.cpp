@@ -10,15 +10,15 @@ int main() {
     std::vector<int> arr(n);
     for (int &i : arr)
         std::cin >> i;
-    std::vector<int> vals(arr);
+    OrderedSet<int> ord(arr.begin(), arr.end());
     std::vector<std::pair<int, int>> qry(q);
     for (auto &[t, x] : qry) {
         std::cin >> t >> x;
         if (t == 0 || t == 1)
-            vals.push_back(x);
+            ord.push_back(x);
     }
-    vals.push_back(0);
-    OrderedSet<int> ord(vals);
+    ord.push_back(0);
+    ord.build();
     for (int i : arr)
         ord.insert(i);
     for (auto &[t, x] : qry) {

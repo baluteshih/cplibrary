@@ -8,7 +8,12 @@ class OrderedSet : public Discretization<T> {
     std::vector<bool> vis;
     BIT<int> bit;
 public:
-    OrderedSet(const std::ranges::range auto &_vals): Discretization<T>(_vals), vis(std::ranges::distance(_vals)), bit(std::bit_ceil(vis.size())) {}
+    using Discretization<T>::Discretization;
+    void build() override {
+        Discretization<T>::build(); 
+        vis.assign(Discretization<T>::size(), false);
+        bit = BIT<int>(std::bit_ceil(Discretization<T>::size()));
+    }
     bool insert(T x) {
         x = this->safe_idx(x);
         if (vis[x]) return false;

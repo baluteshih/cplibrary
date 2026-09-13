@@ -1,47 +1,34 @@
 #pragma once
 
 template<typename T>
-class Discretization {
-    std::vector<T> vals;
-    static std::vector<T> sort_and_unique(std::ranges::range auto &&_vals) {
-        std::vector<T> res;
-        std::ranges::copy(_vals, std::back_inserter(res));
-        std::ranges::sort(res);
-        auto [first, last] = std::ranges::unique(res);
-        res.erase(first, last);
-        return res;
-    }
+class Discretization : public std::vector<T> {
 public:
+    using std::vector<T>::vector;
+    virtual void build() {
+        std::ranges::sort(*this);
+        auto [first, last] = std::ranges::unique(*this);
+        this->erase(first, last);
+    }
     int idx(T x) {
-        auto it = std::ranges::lower_bound(vals, x);
-        if (it == vals.end() || *it != x) return -1;
-        return it - vals.begin();
+        auto it = std::ranges::lower_bound(*this, x);
+        if (it == this->end() || *it != x) return -1;
+        return it - this->begin();
     }
     int safe_idx(T x) {
         int res = idx(x);
         assert(res != -1);
         return res;
     }
-    Discretization(std::ranges::range auto &&_vals) : vals(sort_and_unique(std::forward<decltype(_vals)>(_vals))) {}
     int left_close(T x) {
-        return std::ranges::lower_bound(vals, x) - vals.begin();
+        return std::ranges::lower_bound(*this, x) - this->begin();
     }
     int left_open(T x) {
-        return std::ranges::upper_bound(vals, x) - vals.begin() - 1;
+        return std::ranges::upper_bound(*this, x) - this->begin() - 1;
     }
     int right_close(T x) {
-        return std::ranges::upper_bound(vals, x) - vals.begin() - 1;
+        return std::ranges::upper_bound(*this, x) - this->begin() - 1;
     }
     int right_open(T x) {
-        return std::ranges::lower_bound(vals, x) - vals.begin();
-    }
-    const T& operator[](size_t index) const {
-        return vals[index];
-    }
-    int size() {
-        return vals.size();
+        return std::ranges::lower_bound(*this, x) - this->begin();
     }
 };
-
-template <std::ranges::range R>
-Discretization(R&&) -> Discretization<std::ranges::range_value_t<R>>;
