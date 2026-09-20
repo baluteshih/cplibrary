@@ -1,30 +1,41 @@
 #pragma once
 
+template<typename W>
+struct edge_data {
+    int from, to;
+    W weight;
+    edge_data() = default;
+    edge_data(int u, int v, const W &w) : from(u), to(v), weight(w) {}
+};
+template<>
+struct edge_data<void> { 
+    int from, to; 
+    edge_data() = default;
+    edge_data(int u, int v) : from(u), to(v) {}
+};
+
 template<bool directed = true, typename Edge = void, typename Vertex = void>
 class Graph {
 public:
     static constexpr bool is_directed = directed;
     static constexpr bool hasEdgeWeight = !std::is_same_v<Edge, void>;
     static constexpr bool hasVertexWeight = !std::is_same_v<Vertex, void>;
+    static constexpr bool hasEdgeWeightReverse = requires(Edge v) { v.reverse(); };
     using edge_value_type = Edge;
     using vertex_value_type = Vertex;
     struct Empty {};
-    struct edge_v {
-        int from, to;
-        [[no_unique_address]] std::conditional_t<hasEdgeWeight, Edge, Empty> weight;
-        edge_v() {}
-        edge_v(int u, int v) : from(u), to(v) {}
-        template <typename W>
-        edge_v(int u, int v, const W &w) requires(hasEdgeWeight) : from(u), to(v), weight(w) {}
+    struct edge_v : public edge_data<Edge> {
+        using edge_data<Edge>::edge_data;
         template <typename OtherEdge>
-        edge_v(const OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight; }) 
-            : from(other.from), to(other.to), weight(other.weight) {}
+        edge_v(const OtherEdge &other) requires(hasEdgeWeight && requires(OtherEdge o) { o.weight; })
+            : edge_data<Edge>(other.from, other.to, other.weight) {}
         template <typename OtherEdge>
-        edge_v(const OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; }) 
-            : from(other.from), to(other.to) {} 
+        edge_v(const OtherEdge &other) requires(!hasEdgeWeight || !requires(OtherEdge o) { o.weight; })
+            : edge_data<Edge>(other.from, other.to) {}
         edge_v reversed() const {
             edge_v res(*this);
             std::swap(res.from, res.to);
+            if constexpr (hasEdgeWeightReverse) res.weight.reverse();
             return res;
         }
         friend std::ostream& operator<<(std::ostream& os, const edge_v &v) {
