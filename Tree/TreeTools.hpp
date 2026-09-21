@@ -4,10 +4,10 @@
 #include "DataStructure/Doubling.hpp"
 #include "Algebra/ValidOperation.hpp"
 
-template<typename Edge = void, typename Vertex = void>
-class TreeTools : public Tree<Edge, Vertex> {
+template<typename Edge = void, typename Vertex = void, bool IsForest = false>
+class TreeTools : public Tree<Edge, Vertex, IsForest> {
 public:
-    using super = Tree<Edge, Vertex>;
+    using super = Tree<Edge, Vertex, IsForest>;
     using super::Tree;
     using super::hasEdgeWeight;
     using super::hasVertexWeight;
@@ -40,10 +40,10 @@ public:
             WeightType res = WeightType();
             if constexpr (this->hasEdgeWeight && this->hasVertexWeight) {
                 res = this->weight[i];
-                if (i != root) res = res + this->parent_edge(i).weight;
+                if (this->parent_eid(i) != -1) res = res + this->parent_edge(i).weight;
             }
             else if constexpr (this->hasEdgeWeight) {
-                if (i != root) res = this->parent_edge(i).weight; 
+                if (this->parent_eid(i) != -1) res = this->parent_edge(i).weight; 
             }
             else if constexpr (this->hasVertexWeight) {
                 res = this->weight[i];
@@ -51,6 +51,9 @@ public:
             return res;
         }));
         else pa_table = decltype(pa_table)(this->n(), this->parents()); 
+    }
+    bool same_tree(int u, int v) requires (IsForest) {
+        return pa_table.nxt.back()[u] == pa_table.nxt.back()[v];  
     }
     int lca(int u, int v) {
         if (this->ancestor(u, v)) return u;

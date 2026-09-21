@@ -4,7 +4,7 @@
 #include "Graph/UnifiedWeight.hpp"
 #include "Algebra/ValidOperation.hpp"
 
-template<typename Edge = void, typename Vertex = void>
+template<typename Edge = void, typename Vertex = void, bool IsForest = false>
 class Tree : public Graph<false, Edge, Vertex> {
 public:
     using super = Graph<false, Edge, Vertex>;
@@ -22,9 +22,9 @@ public:
     }
     void traverse(int root = 0) {
         current_root = root;
-        std::vector<int>(this->n()).swap(pa);
-        std::vector<int>(this->n()).swap(dfs_in);
-        std::vector<int>(this->n()).swap(dfs_out);
+        pa.assign(this->n(), -1);
+        dfs_in.assign(this->n(), -1);
+        dfs_out.assign(this->n(), -1);
         preorder.clear(), preorder.reserve(this->n());
         postorder.clear(), postorder.reserve(this->n());
         int dft = -1;
@@ -38,7 +38,11 @@ public:
             dfs_out[u] = dft;
             postorder.push_back(u);
         };
-        dfs(dfs, root, -1);
+        if (root != -1) dfs(dfs, root, -1);
+        if constexpr (IsForest) {
+            for (int i = 0; i < this->n(); ++i)
+                if (dfs_in[i] == -1) dfs(dfs, i, -1);
+        }
     }
     bool ancestor(int u, int v) const {
         return dfs_in[u] <= dfs_in[v] && dfs_out[v] <= dfs_out[u];
@@ -85,7 +89,8 @@ public:
         }
         std::vector<int> res(this->n(), -1);
         predfs([&](int u) {
-            res[u] = res[parent(u)] + 1;
+            if (parent_eid(u) != -1)
+                res[u] = res[parent(u)] + 1;
         });
         return res;
     }
