@@ -1,0 +1,52 @@
+@testset small
+random --N=2 --M=0 seed=1
+random --N=2 seed=1
+random --N=5 seed=1
+random --N=10 seed=1
+
+@testset dagpath
+dagpath seed=1
+dagpath seed=2
+dagpath seed=3
+dagpath --noise=100 seed=1
+dagpath --noise=1000 seed=1
+dagpath --noise=10000 seed=1
+
+@testset path
+path seed=1
+path seed=2
+path seed=3
+path --noise=100 seed=1
+path --noise=1000 seed=1
+path --noise=10000 seed=1
+
+@testset random
+random seed=1
+random seed=2
+random seed=3
+random --wl=1000000000 seed=1
+random --wl=100000000 seed=1
+
+@testset 2qbx
+2qbx seed=1
+2qbx seed=2
+2qbx seed=3
+2qbx seed=4
+
+@testset zhihu
+zhihu seed=1
+zhihu seed=2
+zhihu seed=3
+zhihu seed=4
+
+@testset misawa
+misawa seed=1
+misawa seed=2
+misawa seed=3
+misawa seed=4
+
+@testset slow_dinic_dense
+slow_dinic_dense seed=1
+slow_dinic_dense seed=2
+slow_dinic_dense seed=3
+slow_dinic_dense seed=4
