@@ -9,6 +9,9 @@ data:
     path: DataStructure/PointerSegmentTree.hpp
     title: Pointer Segment Tree
   - icon: ':heavy_check_mark:'
+    path: DataStructure/Splay.hpp
+    title: DataStructure/Splay.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':heavy_check_mark:'
@@ -18,6 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
@@ -52,6 +61,9 @@ data:
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -82,6 +94,7 @@ data:
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/Treap.hpp
   - DataStructure/LeftistTree.hpp
+  - DataStructure/Splay.hpp
   - Graph/minimum_arborescence.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -89,11 +102,14 @@ data:
   - test/9_qoj/17153.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/persistent_queue.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp

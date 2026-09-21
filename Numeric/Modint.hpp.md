@@ -97,6 +97,9 @@ data:
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -467,6 +470,7 @@ data:
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp

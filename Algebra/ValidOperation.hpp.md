@@ -33,6 +33,9 @@ data:
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
   - icon: ':heavy_check_mark:'
+    path: DataStructure/Splay.hpp
+    title: DataStructure/Splay.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Treap.hpp
     title: Treap
   - icon: ':heavy_check_mark:'
@@ -85,8 +88,14 @@ data:
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
@@ -102,6 +111,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
@@ -267,6 +279,7 @@ data:
   - DataStructure/Doubling.hpp
   - DataStructure/LeftistTree.hpp
   - DataStructure/CatTree.hpp
+  - DataStructure/Splay.hpp
   - Algebra/Field/concept.hpp
   - Algebra/Monoid/concept.hpp
   - Matrix/Vector.hpp
@@ -290,12 +303,15 @@ data:
   - test/9_qoj/17153.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/data_structure/persistent_queue.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp

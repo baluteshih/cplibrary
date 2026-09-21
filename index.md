@@ -126,6 +126,9 @@ data:
       path: DataStructure/SparseTable.hpp
       title: Sparse Table
     - icon: ':heavy_check_mark:'
+      path: DataStructure/Splay.hpp
+      title: DataStructure/Splay.hpp
+    - icon: ':heavy_check_mark:'
       path: DataStructure/StackPoolAllocator.hpp
       title: Stack Pool Allocator
     - icon: ':heavy_check_mark:'
@@ -575,11 +578,17 @@ data:
       path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
       title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+      title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
       title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/ordered_set.test.cpp
       title: test/1_library_checker/data_structure/ordered_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+      title: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
       title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
@@ -643,6 +652,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+      title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
       title: test/1_library_checker/data_structure/static_range_frequency.test.cpp

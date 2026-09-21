@@ -55,11 +55,17 @@ data:
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/line_add_get_min.test.cpp
     title: test/1_library_checker/data_structure/line_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+    title: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_treap.test.cpp
@@ -123,6 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+    title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
     title: test/1_library_checker/data_structure/static_range_frequency.test.cpp
@@ -637,6 +646,7 @@ data:
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/point_set_range_frequency.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
@@ -647,6 +657,7 @@ data:
   - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
@@ -655,6 +666,7 @@ data:
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp
   - test/1_library_checker/data_structure/persistent_queue.test.cpp
