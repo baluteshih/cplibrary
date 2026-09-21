@@ -82,11 +82,11 @@ data:
     \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
     \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
     \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
-    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
-    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
-    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
-    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
-    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \ std::vector<int>> cycle() const {\n        std::vector<int> vis(this->n());\n\
+    \        std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto\
+    \ dfs = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n     \
+    \       for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] ==\
+    \ 2) continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
     \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
     \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
@@ -106,9 +106,14 @@ data:
     \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
     \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
-    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \    }\n    std::vector<int> reachable(int s) const {\n        std::vector<int>\
+    \ res, vis(n());\n        auto dfs = [&](auto self, int u) -> void {\n       \
+    \     vis[u] = 1;\n            for (auto [v, eid] : G[u])\n                if\
+    \ (!vis[v])\n                    self(self, v);\n            res.push_back(u);\n\
+    \        };\n        dfs(dfs, s);\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n   \
+    \ std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
     \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
     \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
@@ -154,7 +159,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/two_edge_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2026-09-21 04:47:16+09:00'
+  timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/two_edge_connected_components.test.cpp

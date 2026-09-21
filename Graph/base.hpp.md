@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: Flow/min_cost_circulation_old.hpp
     title: Flow/min_cost_circulation_old.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -74,16 +74,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':heavy_check_mark:'
@@ -92,7 +92,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -180,28 +180,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow.test.cpp
     title: test/2_aoj/minimum_cost_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
     title: test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/106033E/106033E.test.cpp
     title: test/4_codeforces/106033E/106033E.test.cpp
   - icon: ':x:'
@@ -275,11 +275,11 @@ data:
     \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
     \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
     \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
-    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
-    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
-    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
-    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
-    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \ std::vector<int>> cycle() const {\n        std::vector<int> vis(this->n());\n\
+    \        std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto\
+    \ dfs = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n     \
+    \       for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] ==\
+    \ 2) continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
     \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
     \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
@@ -299,9 +299,14 @@ data:
     \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
     \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
-    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \    }\n    std::vector<int> reachable(int s) const {\n        std::vector<int>\
+    \ res, vis(n());\n        auto dfs = [&](auto self, int u) -> void {\n       \
+    \     vis[u] = 1;\n            for (auto [v, eid] : G[u])\n                if\
+    \ (!vis[v])\n                    self(self, v);\n            res.push_back(u);\n\
+    \        };\n        dfs(dfs, s);\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n   \
+    \ std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
     \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
     \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
@@ -366,11 +371,11 @@ data:
     \ reversed() const {\n        Graph res(n());\n        for (auto &e : edges)\n\
     \            res.add_edge(e.reversed());\n        if constexpr (hasVertexWeight)\
     \ res.set_vertex_weight(weight);\n        return res;\n    }\n    std::pair<std::vector<int>,\
-    \ std::vector<int>> cycle() {\n        std::vector<int> vis(this->n());\n    \
-    \    std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto dfs\
-    \ = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n         \
-    \   for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] == 2)\
-    \ continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
+    \ std::vector<int>> cycle() const {\n        std::vector<int> vis(this->n());\n\
+    \        std::vector<int> res_v, res_e;\n        int cyc_end = -1;\n        auto\
+    \ dfs = [&](auto self, int u, int f) -> int {\n            vis[u] = 1;\n     \
+    \       for (auto [v, eid] : G[u]) {\n                if (eid == f || vis[v] ==\
+    \ 2) continue;\n                if (vis[v] == 1) {\n                    res_v.push_back(u);\n\
     \                    res_e.push_back(eid);\n                    cyc_end = v;\n\
     \                    return 1;\n                }\n                int rt = self(self,\
     \ v, eid);\n                if (rt) {\n                    if (rt == 1) { \n \
@@ -390,9 +395,14 @@ data:
     \       Graph res(subset.size());\n        for (auto e : edges) {\n          \
     \  e.from = idx[e.from], e.to = idx[e.to];\n            if (e.to == -1 || e.from\
     \ == -1) continue;\n            res.add_edge(e);\n        }\n        return res;\n\
-    \    }\n};\n\ntemplate<typename Edge = void, typename Vertex = void>\nclass UndirectedGraph\
-    \ : public Graph<false, Edge, Vertex> {\npublic:\n    using Graph<false, Edge,\
-    \ Vertex>::Graph;\n    std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
+    \    }\n    std::vector<int> reachable(int s) const {\n        std::vector<int>\
+    \ res, vis(n());\n        auto dfs = [&](auto self, int u) -> void {\n       \
+    \     vis[u] = 1;\n            for (auto [v, eid] : G[u])\n                if\
+    \ (!vis[v])\n                    self(self, v);\n            res.push_back(u);\n\
+    \        };\n        dfs(dfs, s);\n        return res;\n    }\n};\n\ntemplate<typename\
+    \ Edge = void, typename Vertex = void>\nclass UndirectedGraph : public Graph<false,\
+    \ Edge, Vertex> {\npublic:\n    using Graph<false, Edge, Vertex>::Graph;\n   \
+    \ std::vector<std::vector<int>> components() {\n        std::vector<std::vector<int>>\
     \ res;\n        std::vector<bool> vis(this->n());\n        auto dfs = [&](auto\
     \ self, int u) -> void {\n            vis[u] = true;\n            res.back().push_back(u);\n\
     \            for (auto [v, eid] : this->G[u])\n                if (!vis[v])\n\
@@ -435,7 +445,7 @@ data:
   - Tree/CentroidTree.hpp
   - Tree/TreeTools.hpp
   - Tree/all_direction_composition.hpp
-  timestamp: '2026-09-21 04:47:16+09:00'
+  timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/4_codeforces/106033E/106033E.test.cpp
