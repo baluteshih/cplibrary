@@ -283,7 +283,6 @@ tags
 # verify-helper
 .verify-helper/cache/
 .verify-helper/timestamps.local.json
-.verify-helper/tmt-cli/
 __pycache__/
 *.pyc
 

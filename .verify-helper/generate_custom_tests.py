@@ -94,27 +94,34 @@ def compile_cpp(src_path: Path, output_binary: Path, extra_include: Optional[Pat
 
 
 def ensure_tmt_cli(root_dir: Path) -> Optional[List[str]]:
-    """Returns the command to execute tmt-cli, cloning it if necessary."""
+    """Returns the command to execute tmt-cli, cloning it outside the workspace if necessary."""
     tmt_bin = shutil.which("tmt")
     if tmt_bin:
         return [tmt_bin]
 
-    tmt_dir = root_dir / ".verify-helper" / "tmt-cli"
-    tmt_script = tmt_dir / "tmt.py"
-    if tmt_script.exists():
-        return [sys.executable, str(tmt_script)]
+    external_candidates = [
+        Path("/tmp/tmt-cli"),
+        Path.home() / ".cache" / "tmt-cli",
+        Path.home() / ".local" / "share" / "tmt-cli",
+    ]
+    for c in external_candidates:
+        script = c / "tmt.py"
+        if script.exists():
+            return [sys.executable, str(script)]
 
-    print("[Pre-Verify] tmt-cli not found. Cloning https://github.com/Task-Management-Tools/tmt-cli.git...")
+    target_dir = Path("/tmp/tmt-cli")
+    target_script = target_dir / "tmt.py"
+    print(f"[Pre-Verify] tmt-cli not found. Cloning into {target_dir}...")
     try:
-        tmt_dir.parent.mkdir(parents=True, exist_ok=True)
+        target_dir.parent.mkdir(parents=True, exist_ok=True)
         res = subprocess.run(
-            ["git", "clone", "--depth", "1", "https://github.com/Task-Management-Tools/tmt-cli.git", str(tmt_dir)],
+            ["git", "clone", "--depth", "1", "https://github.com/Task-Management-Tools/tmt-cli.git", str(target_dir)],
             capture_output=True,
             text=True,
         )
-        if res.returncode == 0 and tmt_script.exists():
+        if res.returncode == 0 and target_script.exists():
             print("[Pre-Verify] Successfully cloned tmt-cli.")
-            return [sys.executable, str(tmt_script)]
+            return [sys.executable, str(target_script)]
         else:
             print(f"[Pre-Verify] Error cloning tmt-cli: {res.stderr}", file=sys.stderr)
     except Exception as e:
