@@ -1,5 +1,5 @@
 #define PROBLEM "https://codeforces.com/gym/106033/problem/E"
-#define IGNORE
+#define GENERATOR "106033E_gen.py"
 #include "assumption.hpp"
 
 #include "Flow/Dinic.hpp"

@@ -26,6 +26,9 @@ jobs:
         pip3 install -U online-judge-verify-helper
         pip3 install "setuptools<81"
 
+    - name: Generate custom testcases
+      run: python3 .verify-helper/generate_custom_tests.py
+
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
