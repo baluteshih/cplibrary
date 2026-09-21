@@ -1,5 +1,6 @@
 #define PROBLEM "https://codeforces.com/gym/106033/problem/E"
 #define GENERATOR "106033E_gen.py"
+#define CHECKER "106033E_checker.cpp"
 #include "assumption.hpp"
 
 #include "Flow/Dinic.hpp"

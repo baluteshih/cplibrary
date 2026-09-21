@@ -1,14 +1,14 @@
-#!/usr/bin/env python3
 """
 Custom Testcase Pre-run Generator for online-judge-verify-helper.
 
-Scans test files (*.test.cpp) for custom generator directives:
+Scans test files (*.test.cpp) for custom generator & checker directives:
   #define PROBLEM "https://..."
   #define GENERATOR "path/to/gen.py" (or .cpp)
+  #define CHECKER "path/to/checker.py" (or .cpp) (optional)
   #define REFERENCE "path/to/ref.cpp" (optional)
   #define TESTCASES_DIR "path/to/testcases" (optional)
 
-If test cases already exist in .verify-helper/cache/<md5>/test and the generator/test
+If test cases already exist in .verify-helper/cache/<md5>/test and the generator/test/checker
 files haven't changed (checked via SHA256 fingerprint), generation is skipped.
 Otherwise, test cases are generated and placed into .verify-helper/cache/<md5>/test,
 which oj-verify will automatically pick up without downloading.
@@ -23,6 +23,28 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional
+
+
+def patch_oj_verify():
+    """Patches installed onlinejudge_verify.verify to pass --judge-command if a custom checker exists."""
+    try:
+        import onlinejudge_verify.verify
+        verify_py = Path(onlinejudge_verify.verify.__file__)
+        content = verify_py.read_text()
+        marker = "# [custom-checker-patch]"
+        if marker in content:
+            return
+        target = "if isinstance(problem, onlinejudge.service.library_checker.LibraryCheckerProblem):"
+        replacement = f"""custom_checker = directory / 'checker'
+        if custom_checker.exists():
+            command += ['--judge-command', str(custom_checker.resolve())]  {marker}
+        {target}"""
+        if target in content:
+            verify_py.write_text(content.replace(target, replacement, 1))
+            print("[Pre-Verify] Enabled custom checker support in onlinejudge_verify.")
+    except Exception as e:
+        print(f"[Pre-Verify] Note: Could not auto-patch onlinejudge_verify ({e}).", file=sys.stderr)
+
 
 
 def get_cxx_compiler_info() -> tuple[str, List[str]]:
@@ -58,7 +80,7 @@ def get_cxx_compiler_info() -> tuple[str, List[str]]:
 
 def compile_cpp(src_path: Path, output_binary: Path) -> bool:
     cxx, flags = get_cxx_compiler_info()
-    cmd = [cxx] + flags + ["-o", str(output_binary), str(src_path)]
+    cmd = [cxx] + flags + [f"-I{src_path.parent}", "-o", str(output_binary), str(src_path)]
     print(f"[Pre-Verify] Compiling {src_path} -> {output_binary}...")
     res = subprocess.run(cmd)
     return res.returncode == 0
@@ -100,9 +122,10 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
     generator_rel = directives.get("GENERATOR")
     testcases_dir_rel = directives.get("TESTCASES_DIR")
     reference_rel = directives.get("REFERENCE")
+    checker_rel = directives.get("CHECKER")
 
-    if not problem_url or (not generator_rel and not testcases_dir_rel):
-        return True  # Not a custom generator test
+    if not problem_url or (not generator_rel and not testcases_dir_rel and not checker_rel):
+        return True  # Not a custom generator/checker test
 
     # oj-verify's cache directory convention:
     url_md5 = hashlib.md5(problem_url.encode()).hexdigest()
@@ -114,12 +137,19 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
     dep_files = [test_file]
     gen_path: Optional[Path] = None
     ref_path: Optional[Path] = None
+    checker_path: Optional[Path] = None
 
     if generator_rel:
         gen_path = (test_file.parent / generator_rel).resolve()
         if not gen_path.exists():
             gen_path = (root_dir / generator_rel).resolve()
         dep_files.append(gen_path)
+        data_file = test_file.parent / "data"
+        if data_file.exists():
+            dep_files.append(data_file)
+        gen_dir = test_file.parent / "generators"
+        if gen_dir.exists() and gen_dir.is_dir():
+            dep_files.extend(sorted(gen_dir.glob("*.cpp")))
 
     if reference_rel:
         ref_path = (test_file.parent / reference_rel).resolve()
@@ -127,17 +157,43 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
             ref_path = (root_dir / reference_rel).resolve()
         dep_files.append(ref_path)
 
+    if checker_rel:
+        checker_path = (test_file.parent / checker_rel).resolve()
+        if not checker_path.exists():
+            checker_path = (root_dir / checker_rel).resolve()
+        dep_files.append(checker_path)
+
     # Check cache validity
     current_fingerprint = compute_fingerprint(dep_files)
-    if (
+    cache_valid = (
         test_dir.exists()
         and any(test_dir.glob("*.in"))
         and any(test_dir.glob("*.out"))
         and fingerprint_file.exists()
         and fingerprint_file.read_text().strip() == current_fingerprint
-    ):
+    )
+
+    # If checker exists, ensure compiled checker binary is present
+    checker_bin = cache_base / "checker"
+    if checker_path and checker_path.exists() and not checker_bin.exists():
+        cache_valid = False
+
+    if cache_valid:
         print(f"[Pre-Verify] Cache hit for {test_file.relative_to(root_dir)}. Skipping generation.")
         return True
+
+    # Prepare checker if specified
+    if checker_path and checker_path.exists():
+        cache_base.mkdir(parents=True, exist_ok=True)
+        if checker_path.suffix == ".py":
+            checker_bin.write_text(f'#!/usr/bin/env sh\nexec {sys.executable} "{checker_path.resolve()}" "$@"\n')
+            checker_bin.chmod(0o755)
+            print(f"[Pre-Verify] Configured Python checker: {checker_path.name}")
+        elif checker_path.suffix in [".cpp", ".cc"]:
+            print(f"[Pre-Verify] Compiling C++ checker: {checker_path.name}...")
+            if not compile_cpp(checker_path, checker_bin):
+                print(f"[Pre-Verify] Error compiling checker {checker_path}", file=sys.stderr)
+                return False
 
     print(f"[Pre-Verify] Generating custom testcases for {test_file.relative_to(root_dir)}...")
     if test_dir.exists():
@@ -228,19 +284,21 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
 
 def main():
     root_dir = Path.cwd()
+    patch_oj_verify()
+
     test_files = sorted(root_dir.glob("test/**/*.test.cpp"))
     success = True
     processed = 0
 
     for tf in test_files:
         directives = parse_directives(tf)
-        if "GENERATOR" in directives or "TESTCASES_DIR" in directives:
+        if "GENERATOR" in directives or "TESTCASES_DIR" in directives or "CHECKER" in directives:
             processed += 1
             if not process_test_file(tf, root_dir):
                 success = False
 
     if processed == 0:
-        print("[Pre-Verify] No custom generator directives found.")
+        print("[Pre-Verify] No custom generator/checker directives found.")
     else:
         print(f"[Pre-Verify] Processed {processed} custom test file(s).")
 
