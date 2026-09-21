@@ -160,11 +160,49 @@ def compute_fingerprint(files: List[Path]) -> str:
     return h.hexdigest()
 
 
+def get_recursive_dependencies(file_path: Path, root_dir: Path) -> Set[Path]:
+    """Recursively resolves all #include dependencies within the repository."""
+    root_resolved = root_dir.resolve()
+    visited: Set[Path] = set()
+    to_visit: List[Path] = [file_path.resolve()]
+
+    while to_visit:
+        curr = to_visit.pop()
+        if curr in visited:
+            continue
+        visited.add(curr)
+
+        try:
+            content = curr.read_text(errors="ignore")
+        except Exception:
+            continue
+
+        for line in content.splitlines():
+            m = re.match(r'#include\s*["<](.*)[">]', line.strip())
+            if m:
+                inc_str = m.group(1)
+                candidates = [
+                    curr.parent / inc_str,
+                    root_resolved / inc_str,
+                ]
+                for cand in candidates:
+                    try:
+                        cand_res = cand.resolve()
+                        if cand_res.is_file() and (cand_res == root_resolved or root_resolved in cand_res.parents):
+                            if cand_res not in visited:
+                                to_visit.append(cand_res)
+                            break
+                    except Exception:
+                        pass
+
+    return visited
+
+
 def is_verification_needed(test_file: Path, pkg_dir: Path, root_dir: Path) -> bool:
     """
     Checks if this test needs to be run by checking Git modification history
     against timestamps recorded in timestamps.remote.json / timestamps.local.json.
-    Matches oj-verify's verification skip logic.
+    Recursively tracks all included library dependencies.
     """
     ts_file = root_dir / ".verify-helper" / "timestamps.remote.json"
     if not ts_file.exists():
@@ -179,7 +217,7 @@ def is_verification_needed(test_file: Path, pkg_dir: Path, root_dir: Path) -> bo
     except Exception:
         return True
 
-    rel_test_str = str(test_file.relative_to(root_dir))
+    rel_test_str = str(test_file.resolve().relative_to(root_dir.resolve()))
     verified_time_str = ts_data.get(rel_test_str)
     if not verified_time_str:
         return True
@@ -190,16 +228,11 @@ def is_verification_needed(test_file: Path, pkg_dir: Path, root_dir: Path) -> bo
     except Exception:
         return True
 
-    paths_to_track = [str(test_file.relative_to(root_dir)), str(pkg_dir.relative_to(root_dir))]
-    try:
-        for line in test_file.read_text().splitlines():
-            m = re.match(r'#include\s*["<](.*)[">]', line.strip())
-            if m:
-                inc_candidate = root_dir / m.group(1)
-                if inc_candidate.exists() and inc_candidate.is_file():
-                    paths_to_track.append(str(inc_candidate.relative_to(root_dir)))
-    except Exception:
-        pass
+    # Recursively resolve all library dependencies of test_file
+    root_resolved = root_dir.resolve()
+    dep_files = get_recursive_dependencies(test_file, root_resolved)
+    paths_to_track = [str(d.relative_to(root_resolved)) for d in dep_files]
+    paths_to_track.append(str(pkg_dir.resolve().relative_to(root_resolved)))
 
     try:
         status_res = subprocess.run(
