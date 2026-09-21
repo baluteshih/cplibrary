@@ -125,7 +125,7 @@ public:
         if constexpr (hasVertexWeight) res.set_vertex_weight(weight);
         return res;
     }
-    std::pair<std::vector<int>, std::vector<int>> cycle() {
+    std::pair<std::vector<int>, std::vector<int>> cycle() const {
         std::vector<int> vis(this->n());
         std::vector<int> res_v, res_e;
         int cyc_end = -1;
@@ -177,6 +177,18 @@ public:
             if (e.to == -1 || e.from == -1) continue;
             res.add_edge(e);
         }
+        return res;
+    }
+    std::vector<int> reachable(int s) const {
+        std::vector<int> res, vis(n());
+        auto dfs = [&](auto self, int u) -> void {
+            vis[u] = 1;
+            for (auto [v, eid] : G[u])
+                if (!vis[v])
+                    self(self, v);
+            res.push_back(u);
+        };
+        dfs(dfs, s);
         return res;
     }
 };
