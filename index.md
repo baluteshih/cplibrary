@@ -127,7 +127,7 @@ data:
       title: Sparse Table
     - icon: ':heavy_check_mark:'
       path: DataStructure/Splay.hpp
-      title: DataStructure/Splay.hpp
+      title: Splay
     - icon: ':heavy_check_mark:'
       path: DataStructure/StackPoolAllocator.hpp
       title: Stack Pool Allocator

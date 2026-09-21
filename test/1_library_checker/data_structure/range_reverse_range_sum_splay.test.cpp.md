@@ -12,7 +12,7 @@ data:
     title: Default Allocator
   - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
-    title: DataStructure/Splay.hpp
+    title: Splay
   - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
