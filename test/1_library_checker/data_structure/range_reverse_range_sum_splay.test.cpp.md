@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/Monoid/sized_value.hpp
+    title: Algebra/Monoid/sized_value.hpp
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -309,43 +312,57 @@ data:
     \ [left, right] = split_range(l, r);\n        if (!empty()) reverse();\n     \
     \   this->left_merge(left).right_merge(right);\n    }\n    Iterator kth(int k)\
     \ requires (hasSize) {\n        return Iterator(find_kth(root, k), this);\n  \
-    \  }\n};\n#line 5 \"test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp\"\
-    \n\nstruct Value {\n    long long sum;\n    int sz;\n    Value(long long sum_\
-    \ = 0, int sz_ = 0): sum(sum_), sz(sz_) {}\n    Value operator+(const Value &rhs)\
-    \ const {\n        return Value(sum + rhs.sum, sz + rhs.sz);\n    }\n    int size()\
-    \ const {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\
-    \nusing splay = Splay<void, Value, void, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    splay tree;\n\
-    \    for (int i = 0; i < n; ++i) {\n        int x;\n        std::cin >> x;\n \
-    \       tree.push_back(Value(x, 1));\n    }\n    while (q--) {\n        int op,\
-    \ l, r;\n        std::cin >> op >> l >> r;\n        if (op == 0)\n           \
-    \ tree.range_reverse(l, r);\n        else\n            std::cout << tree.range_prod(l,\
-    \ r) << \"\\n\";\n    }\n}\n"
+    \  }\n};\n#line 1 \"Algebra/Monoid/sized_value.hpp\"\ntemplate <typename T, typename\
+    \ size_type = int>\nstruct sized_value {\n    T val;\n    size_type sz;\n    sized_value()\
+    \ : val(), sz(0) {}\n    sized_value(T v, size_type s = 1) : val(v), sz(s) {}\n\
+    \    sized_value operator+(const sized_value &rhs) const {\n        return sized_value(val\
+    \ + rhs.val, sz + rhs.sz);\n    }\n    template <typename Tag>\n    sized_value\
+    \ operator+(const Tag &tag) const {\n        if constexpr (requires { val.apply(tag,\
+    \ sz); }) {\n            return sized_value(val.apply(tag, sz), sz);\n       \
+    \ }\n        else if constexpr (requires { val + tag; }) {\n            return\
+    \ sized_value(val + tag, sz);\n        }\n        else {\n            static_assert(!sizeof(Tag*),\
+    \ \"Type T must implement either apply(Tag, size_type) or operator+(Tag)\");\n\
+    \            return *this;\n        }\n    }\n    size_type size() const { return\
+    \ sz; }\n    friend std::ostream& operator<<(std::ostream& os, const sized_value\
+    \ &v) requires requires(std::ostream& out, const T& inner_val) { out << inner_val;\
+    \ } {\n        os << v.val << \" \" << v.sz;\n        return os;\n    }\n};\n\
+    #line 6 \"test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp\"\
+    \n\nstruct Value {\n    long long sum;\n    Value(long long sum_ = 0): sum(sum_)\
+    \ {}\n    Value operator+(const Value &rhs) const {\n        return Value(sum\
+    \ + rhs.sum);\n    }\n    friend std::ostream& operator<<(std::ostream& os, const\
+    \ Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\nusing val\
+    \ = sized_value<Value>;\nusing splay = Splay<void, val, void, true>;\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    splay tree;\n    for (int i = 0; i < n; ++i) {\n        int\
+    \ x;\n        std::cin >> x;\n        tree.push_back(val(x, 1));\n    }\n    while\
+    \ (q--) {\n        int op, l, r;\n        std::cin >> op >> l >> r;\n        if\
+    \ (op == 0)\n            tree.range_reverse(l, r);\n        else\n           \
+    \ std::cout << tree.range_prod(l, r).val << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_reverse_range_sum\"\
-    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/Splay.hpp\"\n\nstruct\
-    \ Value {\n    long long sum;\n    int sz;\n    Value(long long sum_ = 0, int\
-    \ sz_ = 0): sum(sum_), sz(sz_) {}\n    Value operator+(const Value &rhs) const\
-    \ {\n        return Value(sum + rhs.sum, sz + rhs.sz);\n    }\n    int size()\
-    \ const {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const Value &v) {\n        os << v.sum;\n        return os;\n    }\n};\n\
-    \nusing splay = Splay<void, Value, void, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
-    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    splay tree;\n\
-    \    for (int i = 0; i < n; ++i) {\n        int x;\n        std::cin >> x;\n \
-    \       tree.push_back(Value(x, 1));\n    }\n    while (q--) {\n        int op,\
-    \ l, r;\n        std::cin >> op >> l >> r;\n        if (op == 0)\n           \
-    \ tree.range_reverse(l, r);\n        else\n            std::cout << tree.range_prod(l,\
-    \ r) << \"\\n\";\n    }\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/Splay.hpp\"\n#include\
+    \ \"Algebra/Monoid/sized_value.hpp\"\n\nstruct Value {\n    long long sum;\n \
+    \   Value(long long sum_ = 0): sum(sum_) {}\n    Value operator+(const Value &rhs)\
+    \ const {\n        return Value(sum + rhs.sum);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.sum;\n     \
+    \   return os;\n    }\n};\n\nusing val = sized_value<Value>;\nusing splay = Splay<void,\
+    \ val, void, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
+    \    int n, q;\n    std::cin >> n >> q;\n    splay tree;\n    for (int i = 0;\
+    \ i < n; ++i) {\n        int x;\n        std::cin >> x;\n        tree.push_back(val(x,\
+    \ 1));\n    }\n    while (q--) {\n        int op, l, r;\n        std::cin >> op\
+    \ >> l >> r;\n        if (op == 0)\n            tree.range_reverse(l, r);\n  \
+    \      else\n            std::cout << tree.range_prod(l, r).val << \"\\n\";\n\
+    \    }\n}\n"
   dependsOn:
   - assumption.hpp
   - DataStructure/Splay.hpp
   - DataStructure/DefaultAllocator.hpp
   - Algebra/ValidOperation.hpp
   - Algebra/size_value.hpp
+  - Algebra/Monoid/sized_value.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   requiredBy: []
-  timestamp: '2026-09-22 00:37:44+09:00'
+  timestamp: '2026-09-22 01:12:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp

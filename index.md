@@ -40,6 +40,9 @@ data:
     - icon: ':warning:'
       path: Algebra/Monoid/min_v.hpp
       title: Algebra/Monoid/min_v.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Monoid/sized_value.hpp
+      title: Algebra/Monoid/sized_value.hpp
   - name: Convolution
     pages:
     - icon: ':heavy_check_mark:'
