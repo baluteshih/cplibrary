@@ -24,7 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip3 install -U online-judge-verify-helper
-        pip3 install "setuptools<81"
+        pip3 install "setuptools<81" pyyaml
+        git clone --depth 1 https://github.com/Task-Management-Tools/tmt-cli.git .verify-helper/tmt-cli
 
     - name: Generate custom testcases
       run: python3 .verify-helper/generate_custom_tests.py

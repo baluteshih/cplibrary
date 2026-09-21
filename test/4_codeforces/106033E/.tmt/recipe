@@ -1,3 +1,9 @@
+@global-validation validator
+
+@testset samples
+manual 1.in 1.ans
+manual 2.in 2.ans
+manual 3.in
 @testset small
 random --N=2 --M=0 seed=1
 random --N=2 seed=1

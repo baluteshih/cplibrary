@@ -1,7 +1,7 @@
-#define OK_EXIT_CODE 0
-#define WA_EXIT_CODE 1
 #include "testlib.h"
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+#include <iostream>
 
 using namespace std;
 

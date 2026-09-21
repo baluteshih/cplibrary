@@ -1,0 +1,10 @@
+testcases/*.in
+testcases/*.ans
+testcases/*.out
+testcases/summary
+logs/
+sandbox/
+generator/build/
+validator/build/
+checker/build/
+solutions/build/
