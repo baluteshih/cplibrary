@@ -1,0 +1,1 @@
+build/education: education.cpp
