@@ -26,24 +26,69 @@ from typing import Dict, List, Optional
 
 
 def patch_oj_verify():
-    """Patches installed onlinejudge_verify.verify to pass --judge-command if a custom checker exists."""
+    """
+    Patches installed onlinejudge_verify components:
+    1. verify.py: Passes --judge-command to oj when a custom checker exists in cache.
+    2. documentation/configure.py: Prevents non-verification files under test/ from being scanned as library files.
+    3. languages/python.py: Handles timeout/errors gracefully in Python import analysis instead of crashing.
+    """
+    # 1. verify.py patch
     try:
         import onlinejudge_verify.verify
         verify_py = Path(onlinejudge_verify.verify.__file__)
         content = verify_py.read_text()
         marker = "# [custom-checker-patch]"
-        if marker in content:
-            return
-        target = "if isinstance(problem, onlinejudge.service.library_checker.LibraryCheckerProblem):"
-        replacement = f"""custom_checker = directory / 'checker'
+        if marker not in content:
+            target = "if isinstance(problem, onlinejudge.service.library_checker.LibraryCheckerProblem):"
+            replacement = f"""custom_checker = directory / 'checker'
         if custom_checker.exists():
             command += ['--judge-command', str(custom_checker.resolve())]  {marker}
         {target}"""
-        if target in content:
-            verify_py.write_text(content.replace(target, replacement, 1))
-            print("[Pre-Verify] Enabled custom checker support in onlinejudge_verify.")
+            if target in content:
+                verify_py.write_text(content.replace(target, replacement, 1))
+                print("[Pre-Verify] Enabled custom checker support in onlinejudge_verify.")
     except Exception as e:
-        print(f"[Pre-Verify] Note: Could not auto-patch onlinejudge_verify ({e}).", file=sys.stderr)
+        print(f"[Pre-Verify] Note: Could not auto-patch onlinejudge_verify.verify ({e}).", file=sys.stderr)
+
+    # 2. documentation/configure.py patch (ignore helper files under test/)
+    try:
+        import onlinejudge_verify.documentation.configure
+        conf_py = Path(onlinejudge_verify.documentation.configure.__file__)
+        content = conf_py.read_text()
+        marker = "# [ignore-test-helpers-patch]"
+        if marker not in content:
+            target = "def _find_source_code_paths(*, basedir: pathlib.Path) -> List[pathlib.Path]:\n    def pred(path: pathlib.Path) -> bool:\n        return onlinejudge_verify.languages.list.get(path) is not None"
+            replacement = f"""def _find_source_code_paths(*, basedir: pathlib.Path) -> List[pathlib.Path]:  {marker}
+    def pred(path: pathlib.Path) -> bool:
+        if onlinejudge_verify.languages.list.get(path) is None:
+            return False
+        rel = (path.resolve() if path.is_absolute() else (basedir / path).resolve()).relative_to(basedir.resolve())
+        if len(rel.parts) > 0 and rel.parts[0] in ('test', 'tests'):
+            return utils.is_verification_file(path, basedir=basedir)
+        return True"""
+            if target in content:
+                conf_py.write_text(content.replace(target, replacement, 1))
+                print("[Pre-Verify] Patched documentation generator to ignore test helpers.")
+    except Exception as e:
+        print(f"[Pre-Verify] Note: Could not auto-patch configure.py ({e}).", file=sys.stderr)
+
+    # 3. languages/python.py patch (graceful timeout handling)
+    try:
+        import onlinejudge_verify.languages.python
+        py_lang = Path(onlinejudge_verify.languages.python.__file__)
+        content = py_lang.read_text()
+        marker = "# [python-timeout-graceful-patch]"
+        if marker not in content:
+            target = '    except concurrent.futures.TimeoutError as e:\n        raise RuntimeError(f"Failed to analyze the dependency graph (timeout): {path}") from e'
+            replacement = f"""    except concurrent.futures.TimeoutError:  {marker}
+        logger.warning(f"Timeout analyzing Python dependency graph for {{path}}. Falling back to self-only dependency.")
+        return [path.resolve()]"""
+            if target in content:
+                py_lang.write_text(content.replace(target, replacement, 1))
+                print("[Pre-Verify] Patched Python dependency analyzer for resilience.")
+    except Exception as e:
+        print(f"[Pre-Verify] Note: Could not auto-patch languages/python.py ({e}).", file=sys.stderr)
+
 
 
 
@@ -139,29 +184,48 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
     ref_path: Optional[Path] = None
     checker_path: Optional[Path] = None
 
+    def resolve_rel(rel: Optional[str]) -> Optional[Path]:
+        if not rel:
+            return None
+        for candidate in [
+            test_file.parent / rel,
+            test_file.parent / ".support" / rel,
+            root_dir / rel,
+        ]:
+            if candidate.exists():
+                return candidate.resolve()
+        return (test_file.parent / rel).resolve()
+
     if generator_rel:
-        gen_path = (test_file.parent / generator_rel).resolve()
-        if not gen_path.exists():
-            gen_path = (root_dir / generator_rel).resolve()
-        dep_files.append(gen_path)
-        data_file = test_file.parent / "data"
-        if data_file.exists():
-            dep_files.append(data_file)
-        gen_dir = test_file.parent / "generators"
-        if gen_dir.exists() and gen_dir.is_dir():
-            dep_files.extend(sorted(gen_dir.glob("*.cpp")))
+        gen_path = resolve_rel(generator_rel)
+        if gen_path:
+            dep_files.append(gen_path)
+            gen_parent = gen_path.parent
+            data_file = gen_parent / "data"
+            if data_file.exists():
+                dep_files.append(data_file)
+            gen_dir = gen_parent / "generators"
+            if gen_dir.exists() and gen_dir.is_dir():
+                dep_files.extend(sorted(gen_dir.glob("*.cpp")))
+            samples_dir = gen_parent / "samples"
+            if samples_dir.exists() and samples_dir.is_dir():
+                dep_files.extend(sorted(samples_dir.glob("*.in")))
+            testlib_h = gen_parent / "testlib.h"
+            if testlib_h.exists():
+                dep_files.append(testlib_h)
 
     if reference_rel:
-        ref_path = (test_file.parent / reference_rel).resolve()
-        if not ref_path.exists():
-            ref_path = (root_dir / reference_rel).resolve()
-        dep_files.append(ref_path)
+        ref_path = resolve_rel(reference_rel)
+        if ref_path:
+            dep_files.append(ref_path)
 
     if checker_rel:
-        checker_path = (test_file.parent / checker_rel).resolve()
-        if not checker_path.exists():
-            checker_path = (root_dir / checker_rel).resolve()
-        dep_files.append(checker_path)
+        checker_path = resolve_rel(checker_rel)
+        if checker_path:
+            dep_files.append(checker_path)
+            testlib_h = checker_path.parent / "testlib.h"
+            if testlib_h.exists() and testlib_h not in dep_files:
+                dep_files.append(testlib_h)
 
     # Check cache validity
     current_fingerprint = compute_fingerprint(dep_files)
@@ -202,11 +266,9 @@ def process_test_file(test_file: Path, root_dir: Path) -> bool:
 
     # Mode 1: Static testcases directory
     if testcases_dir_rel:
-        source_dir = (test_file.parent / testcases_dir_rel).resolve()
-        if not source_dir.exists():
-            source_dir = (root_dir / testcases_dir_rel).resolve()
-        if not source_dir.exists():
-            print(f"[Pre-Verify] Error: TESTCASES_DIR '{source_dir}' not found!", file=sys.stderr)
+        source_dir = resolve_rel(testcases_dir_rel)
+        if not source_dir or not source_dir.exists():
+            print(f"[Pre-Verify] Error: TESTCASES_DIR '{testcases_dir_rel}' not found!", file=sys.stderr)
             return False
 
         for f in source_dir.glob("*"):
