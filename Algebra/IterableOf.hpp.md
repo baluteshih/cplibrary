@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -48,6 +51,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/static_range_frequency.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
 documentation_of: Algebra/IterableOf.hpp
 layout: document

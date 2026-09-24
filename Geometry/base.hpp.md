@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Geometry/DelaunayTriangulation.hpp
+    title: Geometry/DelaunayTriangulation.hpp
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
@@ -57,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
@@ -311,6 +317,7 @@ data:
   isVerificationFile: false
   path: Geometry/base.hpp
   requiredBy:
+  - Geometry/DelaunayTriangulation.hpp
   - Geometry/polygon.hpp
   - Geometry/half_plane_intersection.hpp
   - Geometry/furthest_pair.hpp
@@ -335,6 +342,7 @@ data:
   - test/5_NCOJ/929.test.cpp
   - test/9_qoj/6445.test.cpp
   - test/9_qoj/2162.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp

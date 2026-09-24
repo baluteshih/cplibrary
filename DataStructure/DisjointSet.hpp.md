@@ -28,6 +28,9 @@ data:
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
@@ -158,6 +161,7 @@ data:
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
 documentation_of: DataStructure/DisjointSet.hpp
 layout: document
 title: Disjoint Set Union (DSU)

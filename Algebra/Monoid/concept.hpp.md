@@ -67,6 +67,9 @@ data:
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
   - icon: ':heavy_check_mark:'
@@ -188,6 +191,7 @@ data:
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp

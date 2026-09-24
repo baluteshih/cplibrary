@@ -97,6 +97,9 @@ data:
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/biconnected_components.test.cpp
     title: test/1_library_checker/graph/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -472,6 +475,7 @@ data:
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/eulerian_trail_directed.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp

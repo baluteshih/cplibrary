@@ -9,9 +9,15 @@ data:
     title: Geometry/line.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Geometry/DelaunayTriangulation.hpp
+    title: Geometry/DelaunayTriangulation.hpp
+  - icon: ':heavy_check_mark:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
     title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
@@ -229,11 +235,13 @@ data:
   isVerificationFile: false
   path: Geometry/centers.hpp
   requiredBy:
+  - Geometry/DelaunayTriangulation.hpp
   - Geometry/minimum_enclosing_circle.hpp
   timestamp: '2026-06-18 21:56:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/9_qoj/6445.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp

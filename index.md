@@ -188,6 +188,9 @@ data:
   - name: Geometry
     pages:
     - icon: ':heavy_check_mark:'
+      path: Geometry/DelaunayTriangulation.hpp
+      title: Geometry/DelaunayTriangulation.hpp
+    - icon: ':heavy_check_mark:'
       path: Geometry/Point3D.hpp
       title: Geometry/Point3D.hpp
     - icon: ':heavy_check_mark:'
@@ -509,7 +512,7 @@ data:
     - icon: ':question:'
       path: assumption.hpp
       title: assumption.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: default_code.hpp
       title: default_code.hpp
     - icon: ':heavy_check_mark:'
@@ -731,6 +734,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
       title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+      title: test/1_library_checker/geometry/euclidean_mst.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/geometry/furthest_pair.test.cpp
       title: test/1_library_checker/geometry/furthest_pair.test.cpp

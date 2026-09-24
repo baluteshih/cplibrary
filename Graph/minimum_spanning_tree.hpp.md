@@ -16,6 +16,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   _isVerificationFailed: false
@@ -197,6 +200,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
 documentation_of: Graph/minimum_spanning_tree.hpp
 layout: document
 redirect_from:

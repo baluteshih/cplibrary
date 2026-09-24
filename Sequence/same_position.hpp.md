@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -45,6 +48,7 @@ data:
   timestamp: '2026-06-29 21:10:18+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
 documentation_of: Sequence/same_position.hpp
 layout: document

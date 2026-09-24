@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedVerifiedWith:
@@ -198,6 +198,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
@@ -664,6 +667,7 @@ data:
   - test/1_library_checker/data_structure/range_add_range_min.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
   - test/1_library_checker/biginteger/addition.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp

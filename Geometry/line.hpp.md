@@ -6,6 +6,9 @@ data:
     title: Geometry/base.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Geometry/DelaunayTriangulation.hpp
+    title: Geometry/DelaunayTriangulation.hpp
+  - icon: ':heavy_check_mark:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
   - icon: ':heavy_check_mark:'
@@ -36,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/geometry/euclidean_mst.test.cpp
+    title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/furthest_pair.test.cpp
     title: test/1_library_checker/geometry/furthest_pair.test.cpp
@@ -336,6 +342,7 @@ data:
   isVerificationFile: false
   path: Geometry/line.hpp
   requiredBy:
+  - Geometry/DelaunayTriangulation.hpp
   - Geometry/polygon.hpp
   - Geometry/half_plane_intersection.hpp
   - Geometry/furthest_pair.hpp
@@ -352,6 +359,7 @@ data:
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/9_qoj/6445.test.cpp
   - test/9_qoj/2162.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/2_aoj/cross_point.test.cpp
