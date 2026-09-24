@@ -86,8 +86,8 @@ data:
   timestamp: '2026-06-19 13:39:32+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/string/suffixarray.test.cpp
   - test/1_library_checker/string/number_of_substrings.test.cpp
+  - test/1_library_checker/string/suffixarray.test.cpp
 documentation_of: String/sais.hpp
 layout: document
 redirect_from:

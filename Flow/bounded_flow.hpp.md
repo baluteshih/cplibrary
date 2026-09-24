@@ -210,9 +210,9 @@ data:
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/7_loj/min_bounded_flow.test.cpp
   - test/7_loj/bounded_flow.test.cpp
   - test/7_loj/max_bounded_flow.test.cpp
-  - test/7_loj/min_bounded_flow.test.cpp
 documentation_of: Flow/bounded_flow.hpp
 layout: document
 redirect_from:

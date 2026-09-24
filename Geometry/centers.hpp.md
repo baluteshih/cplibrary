@@ -234,9 +234,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/9_qoj/6445.test.cpp
-  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
   - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/2_aoj/incircle_of_a_triangle.test.cpp
+  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
 documentation_of: Geometry/centers.hpp
 layout: document
 redirect_from:

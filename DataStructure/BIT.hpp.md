@@ -19,6 +19,12 @@ data:
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+    title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - icon: ':heavy_check_mark:'
@@ -92,17 +98,19 @@ data:
   isVerificationFile: false
   path: DataStructure/BIT.hpp
   requiredBy:
-  - DataStructure/OrderedSet.hpp
   - Geometry/PointInAngle.hpp
+  - DataStructure/OrderedSet.hpp
   timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
 documentation_of: DataStructure/BIT.hpp
 layout: document
 title: Binary Indexed Tree (BIT)

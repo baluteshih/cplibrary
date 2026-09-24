@@ -175,26 +175,26 @@ data:
   isVerificationFile: false
   path: Numeric/Combination.hpp
   requiredBy:
+  - Numbers/stirling_second_kind_row.hpp
+  - Numbers/stirling_first_kind.hpp
+  - Numbers/stirling_second_kind.hpp
+  - Numbers/stirling_first_kind_row.hpp
+  - Numbers/bernoulli_number.hpp
+  - Numbers/bell_number.hpp
   - Polynomial/shift.hpp
   - Polynomial/lagrange_interpolate_iota.hpp
-  - Numbers/bell_number.hpp
-  - Numbers/stirling_second_kind.hpp
-  - Numbers/stirling_second_kind_row.hpp
-  - Numbers/bernoulli_number.hpp
-  - Numbers/stirling_first_kind.hpp
-  - Numbers/stirling_first_kind_row.hpp
   timestamp: '2026-06-29 01:18:59+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
-  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
   - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/bell_number.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind_fixed_k.test.cpp
 documentation_of: Numeric/Combination.hpp
 layout: document
 redirect_from:

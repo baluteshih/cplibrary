@@ -109,11 +109,17 @@ data:
     path: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
     title: test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+    title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
@@ -270,81 +276,83 @@ data:
   isVerificationFile: false
   path: Algebra/ValidOperation.hpp
   requiredBy:
-  - DataStructure/PotentialDisjointSet.hpp
-  - DataStructure/OrderedSet.hpp
-  - DataStructure/Treap.hpp
-  - DataStructure/DisjointSet.hpp
-  - DataStructure/SparseTable.hpp
-  - DataStructure/BIT.hpp
-  - DataStructure/Doubling.hpp
-  - DataStructure/LeftistTree.hpp
-  - DataStructure/CatTree.hpp
-  - DataStructure/Splay.hpp
-  - Algebra/Field/concept.hpp
-  - Algebra/Monoid/concept.hpp
-  - Matrix/Vector.hpp
-  - Matrix/Matrix.hpp
-  - Graph/count_eulerian_circuits.hpp
-  - Graph/minimum_spanning_tree.hpp
-  - Graph/count_spanning_tree.hpp
-  - Graph/UnifiedWeight.hpp
-  - Graph/minimum_arborescence.hpp
-  - Geometry/PointInAngle.hpp
-  - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/centroid_divide_and_conquer.hpp
-  - Tree/Tree.hpp
-  - Tree/HeavyLightDecomposition.hpp
+  - Tree/all_direction_composition.hpp
   - Tree/CentroidTree.hpp
   - Tree/TreeTools.hpp
-  - Tree/all_direction_composition.hpp
+  - Tree/Tree.hpp
+  - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/HeavyLightDecomposition.hpp
+  - Geometry/PointInAngle.hpp
+  - Matrix/Matrix.hpp
+  - Matrix/Vector.hpp
+  - DataStructure/CatTree.hpp
+  - DataStructure/Doubling.hpp
+  - DataStructure/OrderedSet.hpp
+  - DataStructure/LeftistTree.hpp
+  - DataStructure/Treap.hpp
+  - DataStructure/PotentialDisjointSet.hpp
+  - DataStructure/BIT.hpp
+  - DataStructure/Splay.hpp
+  - DataStructure/DisjointSet.hpp
+  - DataStructure/SparseTable.hpp
+  - Graph/UnifiedWeight.hpp
+  - Graph/minimum_spanning_tree.hpp
+  - Graph/count_eulerian_circuits.hpp
+  - Graph/count_spanning_tree.hpp
+  - Graph/minimum_arborescence.hpp
+  - Algebra/Monoid/concept.hpp
+  - Algebra/Field/concept.hpp
   timestamp: '2026-06-30 17:03:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/9_qoj/17153.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-  - test/1_library_checker/data_structure/ordered_set.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
-  - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
-  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - test/1_library_checker/data_structure/unionfind.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - test/1_library_checker/tree/tree_diameter.test.cpp
-  - test/1_library_checker/tree/jump_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/1_library_checker/graph/directedmst.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
-  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
-  - test/8_luogu/P5055.test.cpp
+  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/directedmst.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/unionfind.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
+  - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_product.test.cpp
+  - test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
+  - test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
+  - test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_det.test.cpp
+  - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+  - test/1_library_checker/tree/tree_diameter.test.cpp
+  - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
+  - test/1_library_checker/tree/lca.test.cpp
+  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
+  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/8_luogu/P3835.test.cpp
+  - test/8_luogu/P5055.test.cpp
 documentation_of: Algebra/ValidOperation.hpp
 layout: document
 redirect_from:

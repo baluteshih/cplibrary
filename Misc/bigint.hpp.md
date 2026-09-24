@@ -393,8 +393,8 @@ data:
   timestamp: '2026-06-19 13:11:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/biginteger/addition.test.cpp
   - test/1_library_checker/biginteger/multiplication.test.cpp
+  - test/1_library_checker/biginteger/addition.test.cpp
 documentation_of: Misc/bigint.hpp
 layout: document
 redirect_from:

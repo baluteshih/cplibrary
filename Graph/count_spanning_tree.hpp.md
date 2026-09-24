@@ -358,8 +358,8 @@ data:
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
 documentation_of: Graph/count_spanning_tree.hpp
 layout: document

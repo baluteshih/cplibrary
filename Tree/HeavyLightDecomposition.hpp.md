@@ -305,9 +305,9 @@ data:
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
 documentation_of: Tree/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

@@ -10,6 +10,12 @@ data:
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+    title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - icon: ':heavy_check_mark:'
@@ -53,8 +59,10 @@ data:
   timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: DataStructure/Discretization.hpp
 layout: document

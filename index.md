@@ -444,6 +444,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Sequence/better_position.hpp
       title: Sequence/better_position.hpp
+    - icon: ':heavy_check_mark:'
+      path: Sequence/cdq_solver.hpp
+      title: Sequence/cdq_solver.hpp
     - icon: ':warning:'
       path: Sequence/count_subset_sum.hpp
       title: Sequence/count_subset_sum.hpp
@@ -611,6 +614,9 @@ data:
       path: test/1_library_checker/data_structure/point_add_range_sum.test.cpp
       title: test/1_library_checker/data_structure/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+      title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
       title: test/1_library_checker/data_structure/point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
@@ -658,6 +664,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
       title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+      title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_range_frequency.test.cpp
       title: test/1_library_checker/data_structure/static_range_frequency.test.cpp

@@ -185,9 +185,9 @@ data:
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/eulerian_trail_undirected.test.cpp
   - test/1_library_checker/graph/eulerian_trail_directed.test.cpp
-  - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
 documentation_of: Graph/eulerian_trail.hpp
 layout: document
 redirect_from:

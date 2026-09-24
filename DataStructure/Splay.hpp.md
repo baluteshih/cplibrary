@@ -583,8 +583,8 @@ data:
   timestamp: '2026-09-22 00:37:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
 documentation_of: DataStructure/Splay.hpp
 layout: document

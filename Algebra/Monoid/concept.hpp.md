@@ -43,6 +43,12 @@ data:
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
     title: test/1_library_checker/data_structure/ordered_set.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+    title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -155,38 +161,40 @@ data:
   isVerificationFile: false
   path: Algebra/Monoid/concept.hpp
   requiredBy:
-  - DataStructure/PotentialDisjointSet.hpp
+  - Tree/TreeTools.hpp
+  - Geometry/PointInAngle.hpp
+  - DataStructure/CatTree.hpp
+  - DataStructure/Doubling.hpp
   - DataStructure/OrderedSet.hpp
+  - DataStructure/PotentialDisjointSet.hpp
+  - DataStructure/BIT.hpp
   - DataStructure/DisjointSet.hpp
   - DataStructure/SparseTable.hpp
-  - DataStructure/BIT.hpp
-  - DataStructure/Doubling.hpp
-  - DataStructure/CatTree.hpp
   - Graph/minimum_spanning_tree.hpp
   - Graph/minimum_arborescence.hpp
-  - Geometry/PointInAngle.hpp
-  - Tree/TreeTools.hpp
   timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
+  - test/1_library_checker/graph/directedmst.test.cpp
+  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/unionfind.test.cpp
+  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
-  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-  - test/1_library_checker/data_structure/unionfind.test.cpp
-  - test/1_library_checker/tree/jump_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/1_library_checker/graph/directedmst.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/tree/jump_on_tree.test.cpp
 documentation_of: Algebra/Monoid/concept.hpp
 layout: document
 redirect_from:

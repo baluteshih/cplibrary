@@ -314,8 +314,8 @@ data:
   timestamp: '2026-06-29 01:18:59+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
   - test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp
 documentation_of: Polynomial/shift.hpp
 layout: document
 redirect_from:
