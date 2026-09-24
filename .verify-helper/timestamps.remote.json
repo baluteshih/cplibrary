@@ -63,6 +63,7 @@
 "test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp": "2026-06-29 01:18:59 +0800",
 "test/1_library_checker/geometry/closest_pair.test.cpp": "2026-06-19 13:39:32 +0800",
 "test/1_library_checker/geometry/count_points_in_triangle.test.cpp": "2026-09-13 13:55:16 +0800",
+"test/1_library_checker/geometry/euclidean_mst.test.cpp": "2026-09-25 00:52:55 +0800",
 "test/1_library_checker/geometry/furthest_pair.test.cpp": "2026-06-19 14:07:30 +0800",
 "test/1_library_checker/geometry/sort_points_by_argument.test.cpp": "2026-06-19 13:39:32 +0800",
 "test/1_library_checker/geometry/static_convex_hull.test.cpp": "2026-06-19 13:39:32 +0800",
