@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: Algebra/Acted_Monoid/min_v-add.hpp
+    title: Algebra/Acted_Monoid/min_v-add.hpp
+  - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
   - icon: ':heavy_check_mark:'
@@ -111,6 +114,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
     title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
@@ -306,6 +315,7 @@ data:
   - Graph/minimum_arborescence.hpp
   - Algebra/Monoid/concept.hpp
   - Algebra/Field/concept.hpp
+  - Algebra/Acted_Monoid/min_v-add.hpp
   timestamp: '2026-06-30 17:03:55+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -325,6 +335,7 @@ data:
   - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
@@ -334,6 +345,7 @@ data:
   - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp

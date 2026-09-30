@@ -2,6 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
+    title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
+  - icon: ':heavy_check_mark:'
+    path: Algebra/Monoid/sum_and_size.hpp
+    title: Algebra/Monoid/sum_and_size.hpp
+  - icon: ':heavy_check_mark:'
+    path: Algebra/Tag/linear_transform_tag.hpp
+    title: Algebra/Tag/linear_transform_tag.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':heavy_check_mark:'
@@ -151,7 +160,23 @@ data:
     , \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l, r, 0, n,\
     \ 1);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n   \
     \     std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n  \
-    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
+    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 2 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\
+    \n\n#line 2 \"Algebra/Monoid/sum_and_size.hpp\"\n\ntemplate<typename T, typename\
+    \ size_type = int>\nstruct sum_and_size {\n    T val;\n    size_type sz;\n   \
+    \ sum_and_size(T _val = 0, size_type _sz = 0): val(_val), sz(_sz) {}\n    sum_and_size\
+    \ operator+(const sum_and_size &rhs) const {\n        return sum_and_size(val\
+    \ + rhs.val, sz + rhs.sz);\n    }\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const sum_and_size &v) {\n        os << v.val;\n        return os;\n   \
+    \ }\n    friend std::istream& operator>>(std::istream& is, sum_and_size &v) {\n\
+    \        is >> v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n#line\
+    \ 2 \"Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename T>\nstruct linear_transform_tag\
+    \ {\n    T a, b;\n    linear_transform_tag(T _a = 1, T _b = 0): a(_a), b(_b) {}\n\
+    \    linear_transform_tag operator+(const linear_transform_tag &rhs) const {\n\
+    \        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\
+    #line 5 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\ntemplate<typename\
+    \ T, typename size_value>\nsum_and_size<T, size_value> operator+(const sum_and_size<T,\
+    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    return sum_and_size<T,\
+    \ size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);  \n}\n#line 6 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -255,54 +280,41 @@ data:
     \    unsigned int _v;\n    static constexpr unsigned int umod() { return m; }\n\
     \    static constexpr bool prime = internal::is_prime<m>;\n};\n\nusing modint998244353\
     \ = static_modint<998244353>;\nusing modint1000000007 = static_modint<1000000007>;\n\
-    #line 7 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
-    \n\nusing mint = modint998244353;\n\nstruct Tag {\n    mint a, b;\n    Tag(mint\
-    \ _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag operator+(const Tag &rhs) {\n\
-    \        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\nstruct Value\
-    \ {\n    mint mul;\n    int add;\n    Value(mint a = 0, int b = 1): mul(a), add(b)\
-    \ {}\n    Value operator+(const Value &rhs) {\n        return Value(mul + rhs.mul,\
-    \ add + rhs.add);\n    }\n    Value operator+(const Tag &tag) {\n        return\
-    \ Value(tag.a * mul + tag.b * add, add);\n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const Value &v) {\n        os << v.mul;\n        return os;\n    }\n   \
-    \ friend std::istream& operator>>(std::istream& is, Value &v) {\n        is >>\
-    \ v.mul;\n        v.add = 1;\n        return is;\n    }\n};\n\nint main() {\n\
-    \    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
-    \ >> n >> q;\n    std::vector<Value> arr(n);\n    for (auto &v : arr)\n      \
-    \  std::cin >> v;\n    SegmentTree<Value, Tag> seg(arr);\n    while (q--) {\n\
-    \        int t;\n        std::cin >> t;\n        if (t == 0) {\n            int\
-    \ l, r;\n            Tag tag;\n            std::cin >> l >> r >> tag.a >> tag.b;\n\
-    \            seg.range_transform(l, r, tag);\n        }\n        else {\n    \
-    \        int l, r;\n            std::cin >> l >> r;\n            std::cout <<\
-    \ seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    #line 8 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
+    \n\nusing mint = modint998244353;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    std::vector<sum_and_size<mint>>\
+    \ arr(n);\n    for (auto &v : arr)\n        std::cin >> v;\n    SegmentTree<sum_and_size<mint>,\
+    \ linear_transform_tag<mint>> seg(arr);\n    while (q--) {\n        int t;\n \
+    \       std::cin >> t;\n        if (t == 0) {\n            int l, r;\n       \
+    \     linear_transform_tag<mint> tag;\n            std::cin >> l >> r >> tag.a\
+    \ >> tag.b;\n            seg.range_transform(l, r, tag);\n        }\n        else\
+    \ {\n            int l, r;\n            std::cin >> l >> r;\n            std::cout\
+    \ << seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n\n\
-    #include \"Numeric/Modint.hpp\"\n\nusing mint = modint998244353;\n\nstruct Tag\
-    \ {\n    mint a, b;\n    Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag\
-    \ operator+(const Tag &rhs) {\n        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n\
-    \    }\n};\n\nstruct Value {\n    mint mul;\n    int add;\n    Value(mint a =\
-    \ 0, int b = 1): mul(a), add(b) {}\n    Value operator+(const Value &rhs) {\n\
-    \        return Value(mul + rhs.mul, add + rhs.add);\n    }\n    Value operator+(const\
-    \ Tag &tag) {\n        return Value(tag.a * mul + tag.b * add, add);\n    }\n\
-    \    friend std::ostream& operator<<(std::ostream& os, const Value &v) {\n   \
-    \     os << v.mul;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
-    \ is, Value &v) {\n        is >> v.mul;\n        v.add = 1;\n        return is;\n\
-    \    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    std::vector<Value> arr(n);\n    for\
-    \ (auto &v : arr)\n        std::cin >> v;\n    SegmentTree<Value, Tag> seg(arr);\n\
-    \    while (q--) {\n        int t;\n        std::cin >> t;\n        if (t == 0)\
-    \ {\n            int l, r;\n            Tag tag;\n            std::cin >> l >>\
-    \ r >> tag.a >> tag.b;\n            seg.range_transform(l, r, tag);\n        }\n\
-    \        else {\n            int l, r;\n            std::cin >> l >> r;\n    \
-    \        std::cout << seg.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \n#include \"assumption.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n\
+    #include \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\n#include\
+    \ \"Numeric/Modint.hpp\"\n\nusing mint = modint998244353;\n\nint main() {\n  \
+    \  std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<sum_and_size<mint>> arr(n);\n    for (auto &v :\
+    \ arr)\n        std::cin >> v;\n    SegmentTree<sum_and_size<mint>, linear_transform_tag<mint>>\
+    \ seg(arr);\n    while (q--) {\n        int t;\n        std::cin >> t;\n     \
+    \   if (t == 0) {\n            int l, r;\n            linear_transform_tag<mint>\
+    \ tag;\n            std::cin >> l >> r >> tag.a >> tag.b;\n            seg.range_transform(l,\
+    \ r, tag);\n        }\n        else {\n            int l, r;\n            std::cin\
+    \ >> l >> r;\n            std::cout << seg.range_prod(l, r) << \"\\n\";\n    \
+    \    }\n    }\n}\n"
   dependsOn:
   - assumption.hpp
   - DataStructure/SegmentTree.hpp
+  - Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
+  - Algebra/Monoid/sum_and_size.hpp
+  - Algebra/Tag/linear_transform_tag.hpp
   - Numeric/Modint.hpp
   - Numeric/internal_math.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 18:28:09+08:00'
+  timestamp: '2026-09-30 16:19:43+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp

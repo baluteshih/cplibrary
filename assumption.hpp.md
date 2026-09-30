@@ -153,7 +153,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - icon: ':heavy_check_mark:'

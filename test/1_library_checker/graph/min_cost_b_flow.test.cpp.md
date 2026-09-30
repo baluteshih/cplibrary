@@ -236,14 +236,18 @@ data:
     \ this->pop_edge(), this->pop_edge();\n        return res;\n    }\n    bool solve(int\
     \ s, int t, C inf) {\n        super::add_edge(t, s, std::numeric_limits<T>::max()\
     \ / 2, -inf);\n        bool res = solve(inf);\n        this->pop_edge(), this->pop_edge();\n\
-    \        return res;\n    }\n};\n#line 2 \"Misc/i128.hpp\"\n\nnamespace std {\n\
-    \    std::istream &operator>>(std::istream& is, __int128 &x) {\n        std::string\
-    \ s;\n        is >> s;\n        int sgn = 1;\n        if (s[0] == '-') sgn = -1,\
-    \ s.erase(s.begin());\n        x = 0;\n        for (char c : s)\n            x\
-    \ = x * 10 + int(c - '0'); \n        x *= sgn;\n        return is;\n    }\n  \
-    \  std::ostream &operator<<(std::ostream &os, const __int128 &x) {\n        if\
-    \ (x < 0) return os << '-' << -x;\n        if (x < 10) return os << int(x % 10);\n\
-    \        return os << x / 10 << int(x % 10);\n    }\n}\n#line 6 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\
+    \        return res;\n    }\n};\n#line 2 \"Misc/i128.hpp\"\n\nusing i128 = __int128;\n\
+    using u128 = unsigned __int128;\n\nnamespace std {\n    std::istream &operator>>(std::istream&\
+    \ is, __int128 &x) {\n        std::string s;\n        is >> s;\n        int sgn\
+    \ = 1;\n        if (s[0] == '-') sgn = -1, s.erase(s.begin());\n        x = 0;\n\
+    \        for (char c : s)\n            x = x * 10 + int(c - '0'); \n        x\
+    \ *= sgn;\n        return is;\n    }\n    std::ostream &operator<<(std::ostream\
+    \ &os, const __int128 &x) {\n        if (x < 0) return os << '-' << -x;\n    \
+    \    if (x < 10) return os << int(x % 10);\n        return os << x / 10 << int(x\
+    \ % 10);\n    }\n}\ninline i128 abs(i128 x) {\n    return x < 0 ? -x : x;\n}\n\
+    inline u128 gcd(u128 a, u128 b) {\n    while (b) a %= b, std::swap(a, b);\n  \
+    \  return a;\n}\ninline i128 gcd(i128 a, i128 b) {\n    return gcd((u128)abs(a),\
+    \ (u128)abs(b));\n}\n#line 6 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
     \ n, m;\n    std::cin >> n >> m;\n    bounded_cost_circulation<long long, __int128>\
     \ flow(n);\n    for (int i = 0; i < n; ++i) {\n        long long demand;\n   \
@@ -278,7 +282,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2026-09-21 23:40:52+09:00'
+  timestamp: '2026-09-30 15:38:11+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/min_cost_b_flow.test.cpp

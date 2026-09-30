@@ -1,11 +1,23 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Algebra/Acted_Monoid/min_v-add.hpp
+    title: Algebra/Acted_Monoid/min_v-add.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+    title: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/min_v.hpp\"\n\ntemplate<typename T, T inf\
@@ -24,10 +36,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: Algebra/Monoid/min_v.hpp
-  requiredBy: []
+  requiredBy:
+  - Algebra/Acted_Monoid/min_v-add.hpp
   timestamp: '2026-07-21 00:35:38+08:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
+  - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
+  - test/1_library_checker/data_structure/static_rmq.test.cpp
 documentation_of: Algebra/Monoid/min_v.hpp
 layout: document
 redirect_from:

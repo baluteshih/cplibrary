@@ -21,17 +21,21 @@ data:
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb_128bit\"\n#line\
     \ 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n#line\
     \ 3 \"test/1_library_checker/sample/many_aplusb_128bit.test.cpp\"\n\n#line 2 \"\
-    Misc/i128.hpp\"\n\nnamespace std {\n    std::istream &operator>>(std::istream&\
-    \ is, __int128 &x) {\n        std::string s;\n        is >> s;\n        int sgn\
-    \ = 1;\n        if (s[0] == '-') sgn = -1, s.erase(s.begin());\n        x = 0;\n\
-    \        for (char c : s)\n            x = x * 10 + int(c - '0'); \n        x\
-    \ *= sgn;\n        return is;\n    }\n    std::ostream &operator<<(std::ostream\
-    \ &os, const __int128 &x) {\n        if (x < 0) return os << '-' << -x;\n    \
-    \    if (x < 10) return os << int(x % 10);\n        return os << x / 10 << int(x\
-    \ % 10);\n    }\n}\n#line 5 \"test/1_library_checker/sample/many_aplusb_128bit.test.cpp\"\
-    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
-    \ t;\n    std::cin >> t;\n    while (t--) {\n        __int128 a, b;\n        std::cin\
-    \ >> a >> b;\n        std::cout << a + b << \"\\n\";\n    }\n}\n"
+    Misc/i128.hpp\"\n\nusing i128 = __int128;\nusing u128 = unsigned __int128;\n\n\
+    namespace std {\n    std::istream &operator>>(std::istream& is, __int128 &x) {\n\
+    \        std::string s;\n        is >> s;\n        int sgn = 1;\n        if (s[0]\
+    \ == '-') sgn = -1, s.erase(s.begin());\n        x = 0;\n        for (char c :\
+    \ s)\n            x = x * 10 + int(c - '0'); \n        x *= sgn;\n        return\
+    \ is;\n    }\n    std::ostream &operator<<(std::ostream &os, const __int128 &x)\
+    \ {\n        if (x < 0) return os << '-' << -x;\n        if (x < 10) return os\
+    \ << int(x % 10);\n        return os << x / 10 << int(x % 10);\n    }\n}\ninline\
+    \ i128 abs(i128 x) {\n    return x < 0 ? -x : x;\n}\ninline u128 gcd(u128 a, u128\
+    \ b) {\n    while (b) a %= b, std::swap(a, b);\n    return a;\n}\ninline i128\
+    \ gcd(i128 a, i128 b) {\n    return gcd((u128)abs(a), (u128)abs(b));\n}\n#line\
+    \ 5 \"test/1_library_checker/sample/many_aplusb_128bit.test.cpp\"\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t;\n    std::cin\
+    \ >> t;\n    while (t--) {\n        __int128 a, b;\n        std::cin >> a >> b;\n\
+    \        std::cout << a + b << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb_128bit\"\n\
     #include \"assumption.hpp\"\n\n#include \"Misc/i128.hpp\"\n\nint main() {\n  \
     \  std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t;\n    std::cin >>\
@@ -43,7 +47,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 21:01:17+08:00'
+  timestamp: '2026-09-30 15:38:11+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/sample/many_aplusb_128bit.test.cpp

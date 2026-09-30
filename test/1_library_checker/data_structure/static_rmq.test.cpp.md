@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: Algebra/Monoid/min_v.hpp
+    title: Algebra/Monoid/min_v.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':question:'
@@ -144,36 +147,34 @@ data:
     , \" << r << \"):\\n\";\n        if (l < r) \n            printinfo(l, r, 0, n,\
     \ 1);\n        std::cerr << \"\\e[0m\\n\";\n    }\n    void printall() {\n   \
     \     std::cerr << \"\\e[1;33mInfo all:\\n\";\n        printall(0, n, 1);\n  \
-    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/static_rmq.test.cpp\"\
-    \n\nstruct Value {\n    int val;\n    Value(int _v = 0): val(_v) {}\n    Value\
-    \ operator+(const Value &rhs) {\n        return Value(std::min(val, rhs.val));\n\
-    \    }\n    friend std::ostream& operator<<(std::ostream& os, const Value &v)\
-    \ {\n        os << v.val;\n        return os;\n    }\n    friend std::istream&\
-    \ operator>>(std::istream& is, Value &v) {\n        is >> v.val;\n        return\
-    \ is;\n    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    std::vector<Value> arr(n);\n    for\
-    \ (auto &v : arr)\n        std::cin >> v;\n    SegmentTree<Value> seg(arr);\n\
+    \      std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 2 \"Algebra/Monoid/min_v.hpp\"\
+    \n\ntemplate<typename T, T inf = std::numeric_limits<T>::max()>\nstruct min_v\
+    \ {\n    T val;\n    min_v(T _val = inf): val(_val) {}\n    min_v operator+(const\
+    \ min_v &rhs) const {\n        return min_v(std::min(val, rhs.val));\n    }\n\
+    \    friend std::ostream& operator<<(std::ostream& os, const min_v &v) {\n   \
+    \     os << v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
+    \ is, min_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
+    \ 6 \"test/1_library_checker/data_structure/static_rmq.test.cpp\"\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<min_v<int>> arr(n);\n    for (auto &v : arr)\n \
+    \       std::cin >> v;\n    SegmentTree<min_v<int>> seg(arr);\n    while (q--)\
+    \ {\n        int l, r;\n        std::cin >> l >> r;\n        std::cout << seg.range_prod(l,\
+    \ r) << \"\\n\";\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
+    assumption.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n#include \"Algebra/Monoid/min_v.hpp\"\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    std::vector<min_v<int>> arr(n);\n    for\
+    \ (auto &v : arr)\n        std::cin >> v;\n    SegmentTree<min_v<int>> seg(arr);\n\
     \    while (q--) {\n        int l, r;\n        std::cin >> l >> r;\n        std::cout\
     \ << seg.range_prod(l, r) << \"\\n\";\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
-    assumption.hpp\"\n\n#include \"DataStructure/SegmentTree.hpp\"\n\nstruct Value\
-    \ {\n    int val;\n    Value(int _v = 0): val(_v) {}\n    Value operator+(const\
-    \ Value &rhs) {\n        return Value(std::min(val, rhs.val));\n    }\n    friend\
-    \ std::ostream& operator<<(std::ostream& os, const Value &v) {\n        os <<\
-    \ v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
-    \ is, Value &v) {\n        is >> v.val;\n        return is;\n    }\n};\n\nint\
-    \ main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n\
-    \    std::cin >> n >> q;\n    std::vector<Value> arr(n);\n    for (auto &v : arr)\n\
-    \        std::cin >> v;\n    SegmentTree<Value> seg(arr);\n    while (q--) {\n\
-    \        int l, r;\n        std::cin >> l >> r;\n        std::cout << seg.range_prod(l,\
-    \ r) << \"\\n\";\n    }\n}\n"
   dependsOn:
   - assumption.hpp
   - DataStructure/SegmentTree.hpp
+  - Algebra/Monoid/min_v.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_rmq.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 18:28:09+08:00'
+  timestamp: '2026-09-25 22:41:03+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_rmq.test.cpp

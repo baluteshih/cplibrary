@@ -1,6 +1,14 @@
 ---
 data:
   libraryCategories:
+  - name: Algebra/Acted_Monoid
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Acted_Monoid/min_v-add.hpp
+      title: Algebra/Acted_Monoid/min_v-add.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
+      title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
   - name: Algebra/Field
     pages:
     - icon: ':heavy_check_mark:'
@@ -37,12 +45,23 @@ data:
     - icon: ':warning:'
       path: Algebra/Monoid/max_v.hpp
       title: Algebra/Monoid/max_v.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/min_v.hpp
       title: Algebra/Monoid/min_v.hpp
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/sized_value.hpp
       title: Algebra/Monoid/sized_value.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Monoid/sum_and_size.hpp
+      title: Algebra/Monoid/sum_and_size.hpp
+  - name: Algebra/Tag
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Tag/add_tag.hpp
+      title: Algebra/Tag/add_tag.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Tag/linear_transform_tag.hpp
+      title: Algebra/Tag/linear_transform_tag.hpp
   - name: Convolution
     pages:
     - icon: ':heavy_check_mark:'
@@ -143,7 +162,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/Treap.hpp
       title: Treap
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/ZkwSegmentTree.hpp
       title: Zkw Segment Tree
   - name: DataStructure/Convex
@@ -325,6 +344,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/i128.hpp
       title: Misc/i128.hpp
+    - icon: ':warning:'
+      path: Misc/i256.hpp
+      title: Misc/i256.hpp
     - icon: ':heavy_check_mark:'
       path: Misc/trygub_number.hpp
       title: Misc/trygub_number.hpp
@@ -377,6 +399,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/factor_transform.hpp
       title: Numeric/factor_transform.hpp
+    - icon: ':warning:'
+      path: Numeric/fast_gcd.hpp
+      title: Numeric/fast_gcd.hpp
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_enumerate.hpp
       title: Numeric/floor_enumerate.hpp
@@ -685,7 +710,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
       title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
       title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
     - icon: ':heavy_check_mark:'
