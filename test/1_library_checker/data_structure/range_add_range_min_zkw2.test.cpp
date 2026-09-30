@@ -2,56 +2,23 @@
 #include "assumption.hpp"
 
 #include "DataStructure/ZkwSegmentTree.hpp"
-
-struct Tag {
-    long long a;
-    Tag(long long _a = 0): a(_a) {}
-    Tag operator+(const Tag &rhs) {
-        return Tag(a + rhs.a);
-    }
-    friend std::ostream& operator<<(std::ostream& os, const Tag &v) {
-        os << v.a;
-        return os;
-    }
-};
-
-struct Value {
-    long long val;
-    Value(long long _val = 1e18): val(_val) {}
-    Value operator+(const Value &rhs) {
-        return Value(std::min(val, rhs.val));
-    }
-    Value operator+(const Tag &tag) {
-        return Value(val + tag.a);
-    }
-    Value operator-(const Tag &tag) {
-        return Value(val - tag.a);
-    }
-    friend std::ostream& operator<<(std::ostream& os, const Value &v) {
-        os << v.val;
-        return os;
-    }
-    friend std::istream& operator>>(std::istream& is, Value &v) {
-        is >> v.val;
-        return is;
-    }
-};
+#include "Algebra/Acted_Monoid/min_v-add.hpp"
 
 int main() {
     std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
     std::cin >> n >> q;
-    std::vector<Value> arr(n);
+    std::vector<min_v<long long>> arr(n);
     for (auto &v : arr)
         std::cin >> v;
-    ZkwSegmentTree<Value, Tag, false> seg(arr);
+    ZkwSegmentTree<min_v<long long>, add_tag<long long>, false> seg(arr);
     while (q--) {
         int type, l, r;
         std::cin >> type >> l >> r;
         if (type == 0) {
             int x;
             std::cin >> x;
-            seg.range_transform(l, r, Tag(x));
+            seg.range_transform(l, r, add_tag<long long>(x));
         }
         else {
             std::cout << seg.range_prod(l, r) << "\n";

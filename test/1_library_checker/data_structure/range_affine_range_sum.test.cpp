@@ -2,7 +2,7 @@
 #include "assumption.hpp"
 
 #include "DataStructure/SegmentTree.hpp"
-#include "Algebra/Monoid/linear_transform_tag.hpp"
+#include "Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp"
 
 #include "Numeric/Modint.hpp"
 
