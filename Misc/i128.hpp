@@ -1,5 +1,8 @@
 #pragma once
 
+using i128 = __int128;
+using u128 = unsigned __int128;
+
 namespace std {
     std::istream &operator>>(std::istream& is, __int128 &x) {
         std::string s;
@@ -17,4 +20,14 @@ namespace std {
         if (x < 10) return os << int(x % 10);
         return os << x / 10 << int(x % 10);
     }
+}
+inline i128 abs(i128 x) {
+    return x < 0 ? -x : x;
+}
+inline u128 gcd(u128 a, u128 b) {
+    while (b) a %= b, std::swap(a, b);
+    return a;
+}
+inline i128 gcd(i128 a, i128 b) {
+    return gcd((u128)abs(a), (u128)abs(b));
 }
