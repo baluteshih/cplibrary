@@ -24,6 +24,9 @@ data:
     path: DataStructure/Doubling.hpp
     title: Doubling
   - icon: ':heavy_check_mark:'
+    path: DataStructure/KDTree.hpp
+    title: DataStructure/KDTree.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,9 @@ data:
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -303,6 +309,7 @@ data:
   - DataStructure/OrderedSet.hpp
   - DataStructure/LeftistTree.hpp
   - DataStructure/Treap.hpp
+  - DataStructure/KDTree.hpp
   - DataStructure/PotentialDisjointSet.hpp
   - DataStructure/BIT.hpp
   - DataStructure/Splay.hpp
@@ -330,6 +337,7 @@ data:
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
+  - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/ordered_set_splay.test.cpp

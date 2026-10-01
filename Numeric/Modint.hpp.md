@@ -94,6 +94,9 @@ data:
     path: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
     title: test/1_library_checker/data_structure/deque_operate_all_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -455,6 +458,7 @@ data:
   - test/1_library_checker/convolution/convolution.test.cpp
   - test/1_library_checker/convolution/lcm_convolution.test.cpp
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
+  - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/queue_operate_all_composite.test.cpp
   - test/1_library_checker/data_structure/persistent_range_affine_range_sum.test.cpp

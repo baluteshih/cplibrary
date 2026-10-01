@@ -121,6 +121,9 @@ data:
       path: DataStructure/DynamicBitset.hpp
       title: Dynamic Bitset
     - icon: ':heavy_check_mark:'
+      path: DataStructure/KDTree.hpp
+      title: DataStructure/KDTree.hpp
+    - icon: ':heavy_check_mark:'
       path: DataStructure/LazyDeleteHeap.hpp
       title: Lazy Delete Heap
     - icon: ':heavy_check_mark:'
@@ -614,6 +617,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
       title: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+      title: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
       title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

@@ -55,6 +55,9 @@ data:
     path: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
     title: test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -632,6 +635,7 @@ data:
   - test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - test/1_library_checker/data_structure/unionfind.test.cpp
   - test/1_library_checker/data_structure/double_ended_priority_queue.test.cpp
+  - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/point_set_range_composite_large_array.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
   - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp

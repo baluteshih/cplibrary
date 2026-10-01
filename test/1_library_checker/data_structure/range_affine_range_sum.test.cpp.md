@@ -172,11 +172,13 @@ data:
     \ 2 \"Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename T>\nstruct linear_transform_tag\
     \ {\n    T a, b;\n    linear_transform_tag(T _a = 1, T _b = 0): a(_a), b(_b) {}\n\
     \    linear_transform_tag operator+(const linear_transform_tag &rhs) const {\n\
-    \        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\
-    #line 5 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\ntemplate<typename\
-    \ T, typename size_value>\nsum_and_size<T, size_value> operator+(const sum_and_size<T,\
-    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    return sum_and_size<T,\
-    \ size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);  \n}\n#line 6 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
+    \        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n \
+    \   bool operator==(const linear_transform_tag &rhs) const {\n        return a\
+    \ == rhs.a && b == rhs.b;\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\
+    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value> operator+(const\
+    \ sum_and_size<T, size_value> &lhs, const linear_transform_tag<T> &rhs) {\n  \
+    \  return sum_and_size<T, size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);\
+    \  \n}\n#line 6 \"test/1_library_checker/data_structure/range_affine_range_sum.test.cpp\"\
     \n\n#line 2 \"Numeric/Modint.hpp\"\n\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     #line 2 \"Numeric/internal_math.hpp\"\n// Reference: Atcoder Library https://github.com/atcoder/ac-library\n\
     \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace internal {\nconstexpr\
@@ -314,7 +316,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-09-30 16:19:43+08:00'
+  timestamp: '2026-10-02 00:18:20+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp

@@ -7,6 +7,9 @@ data:
     title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+    title: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
   _isVerificationFailed: false
@@ -38,6 +41,7 @@ data:
   timestamp: '2026-09-25 22:41:03+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
 documentation_of: Algebra/Monoid/sum_and_size.hpp
 layout: document
