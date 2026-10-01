@@ -6,6 +6,9 @@ data:
     path: Geometry/DelaunayTriangulation.hpp
     title: Geometry/DelaunayTriangulation.hpp
   - icon: ':heavy_check_mark:'
+    path: Geometry/OfflineBichromaticNearest.hpp
+    title: Geometry/OfflineBichromaticNearest.hpp
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,9 @@ data:
     path: Geometry/rotating_sweepline.hpp
     title: Geometry/rotating_sweepline.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/OfflineBichromaticNearest.test.cpp
+    title: test/0_custom/OfflineBichromaticNearest.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
@@ -320,6 +326,7 @@ data:
   - Geometry/DelaunayTriangulation.hpp
   - Geometry/polygon.hpp
   - Geometry/half_plane_intersection.hpp
+  - Geometry/OfflineBichromaticNearest.hpp
   - Geometry/furthest_pair.hpp
   - Geometry/PointInAngle.hpp
   - Geometry/convexHull3D.hpp
@@ -337,6 +344,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/6_TIOJ/1503.test.cpp
+  - test/0_custom/OfflineBichromaticNearest.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp

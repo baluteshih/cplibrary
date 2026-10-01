@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Geometry/OfflineBichromaticNearest.hpp
+    title: Geometry/OfflineBichromaticNearest.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/OfflineBichromaticNearest.test.cpp
+    title: test/0_custom/OfflineBichromaticNearest.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
     title: test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
@@ -276,10 +282,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/ZkwSegmentTree.hpp
-  requiredBy: []
+  requiredBy:
+  - Geometry/OfflineBichromaticNearest.hpp
   timestamp: '2026-09-30 16:19:43+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/0_custom/OfflineBichromaticNearest.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp

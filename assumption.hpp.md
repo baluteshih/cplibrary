@@ -7,6 +7,9 @@ data:
     title: default_code.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/OfflineBichromaticNearest.test.cpp
+    title: test/0_custom/OfflineBichromaticNearest.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
   - icon: ':heavy_check_mark:'
@@ -570,6 +573,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/6_TIOJ/1503.test.cpp
+  - test/0_custom/OfflineBichromaticNearest.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/3_yukicoder/1077.test.cpp
   - test/3_yukicoder/2114.test.cpp

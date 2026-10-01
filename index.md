@@ -210,6 +210,9 @@ data:
       path: Geometry/DelaunayTriangulation.hpp
       title: Geometry/DelaunayTriangulation.hpp
     - icon: ':heavy_check_mark:'
+      path: Geometry/OfflineBichromaticNearest.hpp
+      title: Geometry/OfflineBichromaticNearest.hpp
+    - icon: ':heavy_check_mark:'
       path: Geometry/Point3D.hpp
       title: Geometry/Point3D.hpp
     - icon: ':heavy_check_mark:'
@@ -344,7 +347,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/i128.hpp
       title: Misc/i128.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Misc/i256.hpp
       title: Misc/i256.hpp
     - icon: ':heavy_check_mark:'
@@ -557,6 +560,9 @@ data:
   verificationCategories:
   - name: test/0_custom
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/OfflineBichromaticNearest.test.cpp
+      title: test/0_custom/OfflineBichromaticNearest.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/0_custom/outerTangentBetweenConvex.test.cpp
       title: test/0_custom/outerTangentBetweenConvex.test.cpp
