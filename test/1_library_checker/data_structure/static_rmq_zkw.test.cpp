@@ -2,31 +2,16 @@
 #include "assumption.hpp"
 
 #include "DataStructure/ZkwSegmentTree.hpp"
-
-struct Value {
-    int val;
-    Value(int _v = 1e9): val(_v) {}
-    Value operator+(const Value &rhs) {
-        return Value(std::min(val, rhs.val));
-    }
-    friend std::ostream& operator<<(std::ostream& os, const Value &v) {
-        os << v.val;
-        return os;
-    }
-    friend std::istream& operator>>(std::istream& is, Value &v) {
-        is >> v.val;
-        return is;
-    }
-};
+#include "Algebra/Monoid/min_v.hpp"
 
 int main() {
     std::ios::sync_with_stdio(0), std::cin.tie(0);
     int n, q;
     std::cin >> n >> q;
-    std::vector<Value> arr(n);
+    std::vector<min_v<int>> arr(n);
     for (auto &v : arr)
         std::cin >> v;
-    ZkwSegmentTree<Value> seg(arr);
+    ZkwSegmentTree<min_v<int>> seg(arr);
     while (q--) {
         int l, r;
         std::cin >> l >> r;
