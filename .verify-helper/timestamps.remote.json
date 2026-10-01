@@ -48,6 +48,7 @@
 "test/1_library_checker/data_structure/static_rmq.test.cpp": "2026-09-25 22:41:03 +0800",
 "test/1_library_checker/data_structure/static_rmq_cattree.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp": "2026-09-13 13:11:32 +0800",
+"test/1_library_checker/data_structure/static_rmq_zkw.test.cpp": "2026-10-01 10:58:58 +0800",
 "test/1_library_checker/data_structure/unionfind.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/data_structure/unionfind_with_potential.test.cpp": "2026-06-30 17:38:58 +0800",
 "test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp": "2026-06-30 17:38:58 +0800",
