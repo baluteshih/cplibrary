@@ -151,8 +151,8 @@ private:
         Value res = Value();
         if (condition(u->pt, u->pt) != KDIntersect::OUTSIDE)
             res = res + u->org;
-        res = res + query_range_impl(u->l, condition);
-        res = res + query_range_impl(u->r, condition);
+        if (u->l) res = res + query_range_impl(u->l, condition);
+        if (u->r) res = res + query_range_impl(u->r, condition);
         return res;
     }
     static void transform_range_impl(node *u, const auto& condition, const Tag& tag) requires (hasTag) {
