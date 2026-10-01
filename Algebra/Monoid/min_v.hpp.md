@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq.test.cpp
     title: test/1_library_checker/data_structure/static_rmq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
+    title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -41,6 +44,7 @@ data:
   timestamp: '2026-07-21 00:35:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
   - test/1_library_checker/data_structure/range_add_range_min_zkw.test.cpp
   - test/1_library_checker/data_structure/static_rmq.test.cpp

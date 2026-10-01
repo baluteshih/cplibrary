@@ -162,7 +162,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/Treap.hpp
       title: Treap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/ZkwSegmentTree.hpp
       title: Zkw Segment Tree
   - name: DataStructure/Convex
@@ -710,7 +710,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
       title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
       title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
     - icon: ':heavy_check_mark:'

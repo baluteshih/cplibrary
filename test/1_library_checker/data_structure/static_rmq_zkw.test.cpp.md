@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: Algebra/Monoid/min_v.hpp
+    title: Algebra/Monoid/min_v.hpp
+  - icon: ':heavy_check_mark:'
     path: DataStructure/ZkwSegmentTree.hpp
     title: Zkw Segment Tree
   - icon: ':question:'
@@ -9,9 +12,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/staticrmq
@@ -147,37 +150,35 @@ data:
     \             if (r & 1) printnode(--r);\n            }\n        }\n        std::cerr\
     \ << \"\\e[0m\\n\";\n    }\n    void printall() {\n        std::cerr << \"\\e[1;33mInfo\
     \ all:\\n\";\n        for (int i = 1; i < n + n; ++i)\n            printnode(i);\n\
-    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 5 \"test/1_library_checker/data_structure/static_rmq_zkw.test.cpp\"\
-    \n\nstruct Value {\n    int val;\n    Value(int _v = 1e9): val(_v) {}\n    Value\
-    \ operator+(const Value &rhs) {\n        return Value(std::min(val, rhs.val));\n\
-    \    }\n    friend std::ostream& operator<<(std::ostream& os, const Value &v)\
-    \ {\n        os << v.val;\n        return os;\n    }\n    friend std::istream&\
-    \ operator>>(std::istream& is, Value &v) {\n        is >> v.val;\n        return\
-    \ is;\n    }\n};\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    std::vector<Value> arr(n);\n    for\
-    \ (auto &v : arr)\n        std::cin >> v;\n    ZkwSegmentTree<Value> seg(arr);\n\
-    \    while (q--) {\n        int l, r;\n        std::cin >> l >> r;\n        std::cout\
-    \ << seg.range_prod(l, r) << \"\\n\";\n    }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
-    assumption.hpp\"\n\n#include \"DataStructure/ZkwSegmentTree.hpp\"\n\nstruct Value\
-    \ {\n    int val;\n    Value(int _v = 1e9): val(_v) {}\n    Value operator+(const\
-    \ Value &rhs) {\n        return Value(std::min(val, rhs.val));\n    }\n    friend\
-    \ std::ostream& operator<<(std::ostream& os, const Value &v) {\n        os <<\
-    \ v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
-    \ is, Value &v) {\n        is >> v.val;\n        return is;\n    }\n};\n\nint\
-    \ main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n\
-    \    std::cin >> n >> q;\n    std::vector<Value> arr(n);\n    for (auto &v : arr)\n\
-    \        std::cin >> v;\n    ZkwSegmentTree<Value> seg(arr);\n    while (q--)\
+    \        std::cerr << \"\\e[0m\\n\";\n    }\n};\n#line 2 \"Algebra/Monoid/min_v.hpp\"\
+    \n\ntemplate<typename T, T inf = std::numeric_limits<T>::max()>\nstruct min_v\
+    \ {\n    T val;\n    min_v(T _val = inf): val(_val) {}\n    min_v operator+(const\
+    \ min_v &rhs) const {\n        return min_v(std::min(val, rhs.val));\n    }\n\
+    \    friend std::ostream& operator<<(std::ostream& os, const min_v &v) {\n   \
+    \     os << v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
+    \ is, min_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
+    \ 6 \"test/1_library_checker/data_structure/static_rmq_zkw.test.cpp\"\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<min_v<int>> arr(n);\n    for (auto &v : arr)\n \
+    \       std::cin >> v;\n    ZkwSegmentTree<min_v<int>> seg(arr);\n    while (q--)\
     \ {\n        int l, r;\n        std::cin >> l >> r;\n        std::cout << seg.range_prod(l,\
     \ r) << \"\\n\";\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
+    assumption.hpp\"\n\n#include \"DataStructure/ZkwSegmentTree.hpp\"\n#include \"\
+    Algebra/Monoid/min_v.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    std::vector<min_v<int>>\
+    \ arr(n);\n    for (auto &v : arr)\n        std::cin >> v;\n    ZkwSegmentTree<min_v<int>>\
+    \ seg(arr);\n    while (q--) {\n        int l, r;\n        std::cin >> l >> r;\n\
+    \        std::cout << seg.range_prod(l, r) << \"\\n\";\n    }\n}\n"
   dependsOn:
   - assumption.hpp
   - DataStructure/ZkwSegmentTree.hpp
+  - Algebra/Monoid/min_v.hpp
   isVerificationFile: true
   path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
   requiredBy: []
-  timestamp: '2026-09-30 16:19:43+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-10-01 10:58:58+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
 layout: document
