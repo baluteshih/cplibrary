@@ -7,4 +7,7 @@ struct linear_transform_tag {
     linear_transform_tag operator+(const linear_transform_tag &rhs) const {
         return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);
     }
+    bool operator==(const linear_transform_tag &rhs) const {
+        return a == rhs.a && b == rhs.b;
+    }
 };
