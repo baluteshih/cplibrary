@@ -1,9 +1,9 @@
 #pragma once
 
-template<typename T, T inf = std::numeric_limits<T>::max()>
+template<typename T, T neginf = std::numeric_limits<T>::lowest()>
 struct max_v {
     T val;
-    max_v(T _val = -inf): val(_val) {}
+    max_v(T _val = neginf): val(_val) {}
     max_v operator+(const max_v &rhs) const {
         return max_v(std::max(val, rhs.val));
     }
