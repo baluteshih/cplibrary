@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
     title: Ordered Set
+  - icon: ':heavy_check_mark:'
+    path: Sequence/longest_increasing_subsequence.hpp
+    title: Sequence/longest_increasing_subsequence.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
@@ -18,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+    title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
@@ -55,6 +61,7 @@ data:
   isVerificationFile: false
   path: DataStructure/Discretization.hpp
   requiredBy:
+  - Sequence/longest_increasing_subsequence.hpp
   - DataStructure/OrderedSet.hpp
   timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -63,6 +70,7 @@ data:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: DataStructure/Discretization.hpp
 layout: document

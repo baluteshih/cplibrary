@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
+  - icon: ':heavy_check_mark:'
+    path: Sequence/longest_increasing_subsequence.hpp
+    title: Sequence/longest_increasing_subsequence.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set.test.cpp
@@ -27,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+    title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
@@ -98,6 +104,7 @@ data:
   isVerificationFile: false
   path: DataStructure/BIT.hpp
   requiredBy:
+  - Sequence/longest_increasing_subsequence.hpp
   - Geometry/PointInAngle.hpp
   - DataStructure/OrderedSet.hpp
   timestamp: '2026-09-13 13:55:16+08:00'
@@ -107,6 +114,7 @@ data:
   - test/1_library_checker/data_structure/ordered_set.test.cpp
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

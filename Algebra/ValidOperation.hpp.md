@@ -69,6 +69,9 @@ data:
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
   - icon: ':heavy_check_mark:'
+    path: Sequence/longest_increasing_subsequence.hpp
+    title: Sequence/longest_increasing_subsequence.hpp
+  - icon: ':heavy_check_mark:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
   - icon: ':heavy_check_mark:'
@@ -205,6 +208,9 @@ data:
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+    title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -309,6 +315,7 @@ data:
   isVerificationFile: false
   path: Algebra/ValidOperation.hpp
   requiredBy:
+  - Sequence/longest_increasing_subsequence.hpp
   - Tree/centroid_divide_and_conquer.hpp
   - Tree/all_direction_composition.hpp
   - Tree/CentroidTree.hpp
@@ -380,6 +387,7 @@ data:
   - test/1_library_checker/linear_algebra/matrix_rank.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
+  - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp

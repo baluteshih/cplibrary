@@ -51,7 +51,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/linear_transform.hpp
       title: Algebra/Monoid/linear_transform.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/max_v.hpp
       title: Algebra/Monoid/max_v.hpp
     - icon: ':heavy_check_mark:'
@@ -499,6 +499,9 @@ data:
     - icon: ':warning:'
       path: Sequence/count_subset_sum.hpp
       title: Sequence/count_subset_sum.hpp
+    - icon: ':heavy_check_mark:'
+      path: Sequence/longest_increasing_subsequence.hpp
+      title: Sequence/longest_increasing_subsequence.hpp
     - icon: ':warning:'
       path: Sequence/maximum_non_adjacent_elements.hpp
       title: Sequence/maximum_non_adjacent_elements.hpp
@@ -926,6 +929,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+      title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/other/two_sat.test.cpp
       title: test/1_library_checker/other/two_sat.test.cpp

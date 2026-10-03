@@ -36,6 +36,9 @@ data:
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
+    path: Sequence/longest_increasing_subsequence.hpp
+    title: Sequence/longest_increasing_subsequence.hpp
+  - icon: ':heavy_check_mark:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
   _extendedVerifiedWith:
@@ -84,6 +87,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+    title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
@@ -164,6 +170,7 @@ data:
   isVerificationFile: false
   path: Algebra/Monoid/concept.hpp
   requiredBy:
+  - Sequence/longest_increasing_subsequence.hpp
   - Tree/TreeTools.hpp
   - Geometry/PointInAngle.hpp
   - DataStructure/CatTree.hpp
@@ -193,6 +200,7 @@ data:
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
+  - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp

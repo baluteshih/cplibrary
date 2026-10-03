@@ -334,6 +334,9 @@ data:
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+    title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -703,6 +706,7 @@ data:
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/1_library_checker/number_theory/counting_primes.test.cpp
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
