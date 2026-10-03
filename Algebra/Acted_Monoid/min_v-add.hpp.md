@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy: []

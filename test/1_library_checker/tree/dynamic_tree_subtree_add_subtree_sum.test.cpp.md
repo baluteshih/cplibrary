@@ -16,19 +16,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   - icon: ':question:'
@@ -419,7 +419,7 @@ data:
     \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
     \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
     \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
-    \    }\n    void subtree_transform(int x, const Tag& tag) requires (hasSubtree\
+    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
     \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
     \        tr[x].org.org = tr[x].org.org + tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy\
     \ + tag;\n        if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n\
@@ -507,7 +507,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-10-03 12:15:05+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp

@@ -10,19 +10,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/linear_transform_tag.hpp
     title: Algebra/Tag/linear_transform_tag.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'

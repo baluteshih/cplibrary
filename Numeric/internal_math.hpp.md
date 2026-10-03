@@ -53,7 +53,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
   - icon: ':heavy_check_mark:'
@@ -270,7 +270,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -285,9 +285,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -437,7 +437,7 @@ data:
   - Convolution/OnlineConvolution.hpp
   - Convolution/xor_convolution.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/5_NCOJ/929.test.cpp
   - test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp

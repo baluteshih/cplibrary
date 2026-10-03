@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'
@@ -16,13 +16,13 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/crt.hpp
     title: Numeric/crt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':heavy_check_mark:'

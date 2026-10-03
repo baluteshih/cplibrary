@@ -34,10 +34,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/size_value.hpp
       title: Algebra/size_value.hpp
   - name: Algebra/Monoid
@@ -48,7 +48,7 @@ data:
     - icon: ':warning:'
       path: Algebra/Monoid/history_min_with_add.hpp
       title: Algebra/Monoid/history_min_with_add.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/linear_transform.hpp
       title: Algebra/Monoid/linear_transform.hpp
     - icon: ':warning:'
@@ -57,7 +57,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/min_v.hpp
       title: Algebra/Monoid/min_v.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/reversable_linear_transform.hpp
       title: Algebra/Monoid/reversable_linear_transform.hpp
     - icon: ':heavy_check_mark:'
@@ -120,7 +120,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: Cat Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
     - icon: ':heavy_check_mark:'
@@ -165,7 +165,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: Sparse Table
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Splay.hpp
       title: Splay
     - icon: ':heavy_check_mark:'
@@ -408,7 +408,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -429,7 +429,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -541,7 +541,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/LinkCutTree.hpp
       title: Tree/LinkCutTree.hpp
     - icon: ':heavy_check_mark:'
@@ -999,10 +999,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     - icon: ':heavy_check_mark:'

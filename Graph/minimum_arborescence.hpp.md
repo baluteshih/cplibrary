@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'

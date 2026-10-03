@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
@@ -404,7 +404,7 @@ data:
     \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
     \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
     \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
-    \    }\n    void subtree_transform(int x, const Tag& tag) requires (hasSubtree\
+    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
     \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
     \        tr[x].org.org = tr[x].org.org + tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy\
     \ + tag;\n        if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n\
@@ -457,8 +457,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2026-10-03 12:15:05+08:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
 layout: document

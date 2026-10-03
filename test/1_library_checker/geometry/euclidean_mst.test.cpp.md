@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'

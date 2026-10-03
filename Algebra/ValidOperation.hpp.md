@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':heavy_check_mark:'
@@ -77,7 +77,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   - icon: ':heavy_check_mark:'
@@ -207,10 +207,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -255,9 +255,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "Algebra/ValidOperation.hpp"
@@ -337,7 +337,7 @@ data:
   - Algebra/Field/concept.hpp
   - Algebra/Acted_Monoid/min_v-add.hpp
   timestamp: '2026-06-30 17:03:55+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/9_qoj/17153.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':heavy_check_mark:'

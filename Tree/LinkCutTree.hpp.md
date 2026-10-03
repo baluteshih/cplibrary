@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
   _extendedRequiredBy: []
@@ -18,15 +18,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/LinkCutTree.hpp\"\n\n#line 2 \"DataStructure/Splay.hpp\"\
@@ -400,7 +400,7 @@ data:
     \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
     \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
     \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
-    \    }\n    void subtree_transform(int x, const Tag& tag) requires (hasSubtree\
+    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
     \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
     \        tr[x].org.org = tr[x].org.org + tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy\
     \ + tag;\n        if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n\
@@ -507,7 +507,7 @@ data:
     \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
     \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
     \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
-    \    }\n    void subtree_transform(int x, const Tag& tag) requires (hasSubtree\
+    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
     \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
     \        tr[x].org.org = tr[x].org.org + tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy\
     \ + tag;\n        if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n\
@@ -532,8 +532,8 @@ data:
   isVerificationFile: false
   path: Tree/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-10-03 12:15:05+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
