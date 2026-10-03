@@ -151,7 +151,8 @@ public:
                 tr[x].give_tag(-tr[y].org.vir_lazy);
             }
             tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;
-            tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir + tr[y].org.vir_lazy);
+            if constexpr (hasInvertibleTag) tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir + tr[y].org.vir_lazy);
+            else tr[y].org.sub_val = Subtree(tr[y].org.org) + tr[y].org.vir;
             tr[y].up();
         }
         return true;
@@ -204,7 +205,8 @@ public:
         if constexpr (hasSubtree) {
             if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);
             tr[parent].org.vir = tr[parent].org.vir + tr[child].val.sub_val;
-            tr[parent].org.sub_val = Subtree(tr[parent].org.org) + (tr[parent].org.vir + tr[parent].org.vir_lazy);
+            if constexpr (hasInvertibleTag) tr[parent].org.sub_val = Subtree(tr[parent].org.org) + (tr[parent].org.vir + tr[parent].org.vir_lazy);
+            else tr[parent].org.sub_val = Subtree(tr[parent].org.org) + tr[parent].org.vir;
             tr[parent].up();
         }
         return true;
