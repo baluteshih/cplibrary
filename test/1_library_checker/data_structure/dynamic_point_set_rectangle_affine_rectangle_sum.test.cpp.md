@@ -10,19 +10,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/linear_transform_tag.hpp
     title: Algebra/Tag/linear_transform_tag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -121,12 +121,12 @@ data:
     \ return Value();\n        if (state == KDIntersect::INSIDE) return u->val;\n\
     \        if constexpr (hasTag) u->down();\n        Value res = Value();\n    \
     \    if (condition(u->pt, u->pt) != KDIntersect::OUTSIDE)\n            res = res\
-    \ + u->org;\n        res = res + query_range_impl(u->l, condition);\n        res\
-    \ = res + query_range_impl(u->r, condition);\n        return res;\n    }\n   \
-    \ static void transform_range_impl(node *u, const auto& condition, const Tag&\
-    \ tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect state\
-    \ = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE) return;\n\
-    \        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
+    \ + u->org;\n        if (u->l) res = res + query_range_impl(u->l, condition);\n\
+    \        if (u->r) res = res + query_range_impl(u->r, condition);\n        return\
+    \ res;\n    }\n    static void transform_range_impl(node *u, const auto& condition,\
+    \ const Tag& tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect\
+    \ state = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE)\
+    \ return;\n        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
     \            return;\n        }\n        u->down();\n        if (condition(u->pt,\
     \ u->pt) != KDIntersect::OUTSIDE) {\n            if constexpr (hasTagToValue)\n\
     \                u->org = u->org + tag;\n        }\n        transform_range_impl(u->l,\
@@ -311,21 +311,24 @@ data:
     #line 2 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\n#line 2\
     \ \"Algebra/Monoid/sum_and_size.hpp\"\n\ntemplate<typename T, typename size_type\
     \ = int>\nstruct sum_and_size {\n    T val;\n    size_type sz;\n    sum_and_size(T\
-    \ _val = 0, size_type _sz = 0): val(_val), sz(_sz) {}\n    sum_and_size operator+(const\
+    \ _val, size_type _sz) : val(_val), sz(_sz) {}\n    sum_and_size(T _val) : sum_and_size(_val,\
+    \ 1) {}\n    sum_and_size() : sum_and_size(0, 0) {}\n    sum_and_size operator+(const\
     \ sum_and_size &rhs) const {\n        return sum_and_size(val + rhs.val, sz +\
-    \ rhs.sz);\n    }\n    friend std::ostream& operator<<(std::ostream& os, const\
-    \ sum_and_size &v) {\n        os << v.val;\n        return os;\n    }\n    friend\
-    \ std::istream& operator>>(std::istream& is, sum_and_size &v) {\n        is >>\
-    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n#line 2 \"Algebra/Tag/linear_transform_tag.hpp\"\
-    \n\ntemplate<typename T>\nstruct linear_transform_tag {\n    T a, b;\n    linear_transform_tag(T\
-    \ _a = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag operator+(const\
-    \ linear_transform_tag &rhs) const {\n        return linear_transform_tag(a *\
-    \ rhs.a, rhs.a * b + rhs.b);\n    }\n    bool operator==(const linear_transform_tag\
-    \ &rhs) const {\n        return a == rhs.a && b == rhs.b;\n    }\n};\n#line 5\
-    \ \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\ntemplate<typename\
-    \ T, typename size_value>\nsum_and_size<T, size_value> operator+(const sum_and_size<T,\
-    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    return sum_and_size<T,\
-    \ size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);  \n}\n#line 7 \"test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp\"\
+    \ rhs.sz);\n    }\n    sum_and_size operator-(const sum_and_size &rhs) const {\n\
+    \        return sum_and_size(val - rhs.val, sz - rhs.sz);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const sum_and_size &v) {\n        os << v.val;\n\
+    \        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
+    \ is, sum_and_size &v) {\n        is >> v.val;\n        v.sz = 1;\n        return\
+    \ is;\n    }\n};\n#line 2 \"Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename\
+    \ T>\nstruct linear_transform_tag {\n    T a, b;\n    linear_transform_tag(T _a\
+    \ = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag operator+(const linear_transform_tag\
+    \ &rhs) const {\n        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n\
+    \    }\n    bool operator==(const linear_transform_tag &rhs) const {\n       \
+    \ return a == rhs.a && b == rhs.b;\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\
+    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value> operator+(const\
+    \ sum_and_size<T, size_value> &lhs, const linear_transform_tag<T> &rhs) {\n  \
+    \  return sum_and_size<T, size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);\
+    \  \n}\n#line 7 \"test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp\"\
     \n\nusing mint = modint998244353;\nusing kdtree = KDTree<2, long long, sum_and_size<mint>,\
     \ linear_transform_tag<mint>>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    kdtree tree;\n\
@@ -376,7 +379,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-02 00:18:20+08:00'
+  timestamp: '2026-10-03 12:08:22+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

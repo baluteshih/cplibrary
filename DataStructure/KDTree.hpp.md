@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   _extendedRequiredBy: []
@@ -96,12 +96,12 @@ data:
     \ return Value();\n        if (state == KDIntersect::INSIDE) return u->val;\n\
     \        if constexpr (hasTag) u->down();\n        Value res = Value();\n    \
     \    if (condition(u->pt, u->pt) != KDIntersect::OUTSIDE)\n            res = res\
-    \ + u->org;\n        res = res + query_range_impl(u->l, condition);\n        res\
-    \ = res + query_range_impl(u->r, condition);\n        return res;\n    }\n   \
-    \ static void transform_range_impl(node *u, const auto& condition, const Tag&\
-    \ tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect state\
-    \ = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE) return;\n\
-    \        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
+    \ + u->org;\n        if (u->l) res = res + query_range_impl(u->l, condition);\n\
+    \        if (u->r) res = res + query_range_impl(u->r, condition);\n        return\
+    \ res;\n    }\n    static void transform_range_impl(node *u, const auto& condition,\
+    \ const Tag& tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect\
+    \ state = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE)\
+    \ return;\n        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
     \            return;\n        }\n        u->down();\n        if (condition(u->pt,\
     \ u->pt) != KDIntersect::OUTSIDE) {\n            if constexpr (hasTagToValue)\n\
     \                u->org = u->org + tag;\n        }\n        transform_range_impl(u->l,\
@@ -250,12 +250,12 @@ data:
     \ return Value();\n        if (state == KDIntersect::INSIDE) return u->val;\n\
     \        if constexpr (hasTag) u->down();\n        Value res = Value();\n    \
     \    if (condition(u->pt, u->pt) != KDIntersect::OUTSIDE)\n            res = res\
-    \ + u->org;\n        res = res + query_range_impl(u->l, condition);\n        res\
-    \ = res + query_range_impl(u->r, condition);\n        return res;\n    }\n   \
-    \ static void transform_range_impl(node *u, const auto& condition, const Tag&\
-    \ tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect state\
-    \ = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE) return;\n\
-    \        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
+    \ + u->org;\n        if (u->l) res = res + query_range_impl(u->l, condition);\n\
+    \        if (u->r) res = res + query_range_impl(u->r, condition);\n        return\
+    \ res;\n    }\n    static void transform_range_impl(node *u, const auto& condition,\
+    \ const Tag& tag) requires (hasTag) {\n        if (!u) return;\n        KDIntersect\
+    \ state = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE)\
+    \ return;\n        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
     \            return;\n        }\n        u->down();\n        if (condition(u->pt,\
     \ u->pt) != KDIntersect::OUTSIDE) {\n            if constexpr (hasTagToValue)\n\
     \                u->org = u->org + tag;\n        }\n        transform_range_impl(u->l,\
@@ -340,7 +340,7 @@ data:
   isVerificationFile: false
   path: DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2026-10-02 00:18:20+08:00'
+  timestamp: '2026-10-02 00:27:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:

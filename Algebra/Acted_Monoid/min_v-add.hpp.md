@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy: []
@@ -32,7 +32,8 @@ data:
     \ is, min_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
     \ 2 \"Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T>\nstruct add_tag {\n  \
     \  T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag operator+(const add_tag\
-    \ &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
+    \ &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n    add_tag operator-()\
+    \ const {\n        return add_tag(-a);\n    }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
     \n\ntemplate <typename A, typename B>\nconcept Addable = !std::is_void_v<A> &&\
     \ !std::is_void_v<B> && requires(A a, B b) { a + b; };\n\ntemplate <typename A,\
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
@@ -56,7 +57,7 @@ data:
   isVerificationFile: false
   path: Algebra/Acted_Monoid/min_v-add.hpp
   requiredBy: []
-  timestamp: '2026-09-30 16:19:43+08:00'
+  timestamp: '2026-10-03 12:08:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp

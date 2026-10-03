@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PointerSegmentTree.hpp
     title: Pointer Segment Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':heavy_check_mark:'
@@ -20,6 +20,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
+  - icon: ':question:'
+    path: Tree/LinkCutTree.hpp
+    title: Tree/LinkCutTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
@@ -73,6 +76,15 @@ data:
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,9 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
@@ -97,6 +109,7 @@ data:
   isVerificationFile: false
   path: DataStructure/DefaultAllocator.hpp
   requiredBy:
+  - Tree/LinkCutTree.hpp
   - DataStructure/LeftistTree.hpp
   - DataStructure/Treap.hpp
   - DataStructure/KDTree.hpp
@@ -104,7 +117,7 @@ data:
   - DataStructure/Splay.hpp
   - Graph/minimum_arborescence.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/9_qoj/17153.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
@@ -124,6 +137,9 @@ data:
   - test/1_library_checker/data_structure/point_set_range_composite_pointer.test.cpp
   - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum_large_array.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
 documentation_of: DataStructure/DefaultAllocator.hpp

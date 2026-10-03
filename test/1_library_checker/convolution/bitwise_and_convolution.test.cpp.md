@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Convolution/bitwise_transform.hpp
     title: Convolution/bitwise_transform.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'

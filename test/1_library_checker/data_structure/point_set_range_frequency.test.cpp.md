@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'

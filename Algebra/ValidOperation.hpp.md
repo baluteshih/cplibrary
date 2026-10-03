@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':heavy_check_mark:'
@@ -77,6 +77,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
+  - icon: ':question:'
+    path: Tree/LinkCutTree.hpp
+    title: Tree/LinkCutTree.hpp
   - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
@@ -202,6 +205,15 @@ data:
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - icon: ':x:'
+    path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+    title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -243,9 +255,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: '#line 2 "Algebra/ValidOperation.hpp"
@@ -301,6 +313,7 @@ data:
   - Tree/Tree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
   - Tree/HeavyLightDecomposition.hpp
+  - Tree/LinkCutTree.hpp
   - Geometry/PointInAngle.hpp
   - Matrix/Matrix.hpp
   - Matrix/Vector.hpp
@@ -324,7 +337,7 @@ data:
   - Algebra/Field/concept.hpp
   - Algebra/Acted_Monoid/min_v-add.hpp
   timestamp: '2026-06-30 17:03:55+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/9_qoj/17153.test.cpp
   - test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -365,6 +378,8 @@ data:
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
   - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
   - test/1_library_checker/tree/tree_diameter.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
@@ -373,6 +388,7 @@ data:
   - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
   - test/8_luogu/P3835.test.cpp

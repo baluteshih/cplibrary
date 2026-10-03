@@ -7,8 +7,14 @@ data:
       path: Algebra/Acted_Monoid/min_v-add.hpp
       title: Algebra/Acted_Monoid/min_v-add.hpp
     - icon: ':heavy_check_mark:'
+      path: Algebra/Acted_Monoid/sum_and_size-add.hpp
+      title: Algebra/Acted_Monoid/sum_and_size-add.hpp
+    - icon: ':heavy_check_mark:'
       path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
       title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Acted_Monoid/sum_v-add.hpp
+      title: Algebra/Acted_Monoid/sum_v-add.hpp
   - name: Algebra/Field
     pages:
     - icon: ':heavy_check_mark:'
@@ -28,10 +34,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/ValidOperation.hpp
       title: Algebra/ValidOperation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Algebra/size_value.hpp
       title: Algebra/size_value.hpp
   - name: Algebra/Monoid
@@ -42,18 +48,27 @@ data:
     - icon: ':warning:'
       path: Algebra/Monoid/history_min_with_add.hpp
       title: Algebra/Monoid/history_min_with_add.hpp
+    - icon: ':x:'
+      path: Algebra/Monoid/linear_transform.hpp
+      title: Algebra/Monoid/linear_transform.hpp
     - icon: ':warning:'
       path: Algebra/Monoid/max_v.hpp
       title: Algebra/Monoid/max_v.hpp
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/min_v.hpp
       title: Algebra/Monoid/min_v.hpp
+    - icon: ':x:'
+      path: Algebra/Monoid/reversable_linear_transform.hpp
+      title: Algebra/Monoid/reversable_linear_transform.hpp
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/sized_value.hpp
       title: Algebra/Monoid/sized_value.hpp
     - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/sum_and_size.hpp
       title: Algebra/Monoid/sum_and_size.hpp
+    - icon: ':heavy_check_mark:'
+      path: Algebra/Monoid/sum_v.hpp
+      title: Algebra/Monoid/sum_v.hpp
   - name: Algebra/Tag
     pages:
     - icon: ':heavy_check_mark:'
@@ -105,7 +120,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/CatTree.hpp
       title: Cat Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
     - icon: ':heavy_check_mark:'
@@ -150,7 +165,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: Sparse Table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: DataStructure/Splay.hpp
       title: Splay
     - icon: ':heavy_check_mark:'
@@ -393,7 +408,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -414,7 +429,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
     - icon: ':heavy_check_mark:'
@@ -526,6 +541,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
+    - icon: ':question:'
+      path: Tree/LinkCutTree.hpp
+      title: Tree/LinkCutTree.hpp
     - icon: ':heavy_check_mark:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
@@ -978,6 +996,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/cartesian_tree.test.cpp
       title: test/1_library_checker/tree/cartesian_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+      title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+    - icon: ':x:'
+      path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+      title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+    - icon: ':x:'
+      path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+      title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
       title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
