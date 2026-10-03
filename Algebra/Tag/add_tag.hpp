@@ -7,4 +7,7 @@ struct add_tag {
     add_tag operator+(const add_tag &rhs) const {
         return add_tag(a + rhs.a);
     }
+    add_tag operator-() const {
+        return add_tag(-a);
+    }
 };

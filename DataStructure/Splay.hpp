@@ -27,6 +27,7 @@ class Splay {
     static_assert(hasKey || hasValue);
     static_assert(!hasValue || Addable<Value, Value>);
     static_assert(!hasTag || Addable<Tag, Tag>);
+public:
     struct node {
         node *l = nullptr, *r = nullptr, *f = nullptr;
         [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();
@@ -34,10 +35,13 @@ class Splay {
         [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> val = get_default<hasValue, Value>();
         [[no_unique_address]] std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();
         [[no_unique_address]] std::conditional_t<Rev, int, Empty> rev = get_default<Rev, int>();
+        bool is_root() const {
+            return f == nullptr || (f->l != this && f->r != this);
+        }
         void up() {
             if constexpr (hasValue) {
                 val = org;
-                if (l) val = l->val + org;
+                if (l) val = l->val + val;
                 if (r) val = val + r->val;
             }
             if (l) l->f = this;
@@ -115,6 +119,7 @@ class Splay {
         node *cur = x;
         while (cur) {
             st.push_back(cur);
+            if (cur->is_root()) break;
             cur = cur->f;
         }
         for (int i = (int)st.size() - 1; i >= 0; --i) {
@@ -124,7 +129,7 @@ class Splay {
     static void rotate(node *x) {
         node *y = x->f, *z = y->f;
         int k = (y->r == x);
-        if (z) (z->l == y ? z->l : z->r) = x;
+        if (!y->is_root()) (z->l == y ? z->l : z->r) = x;
         x->f = z;
         node *c = (k ? x->l : x->r);
         (k ? y->r : y->l) = c;
@@ -136,9 +141,9 @@ class Splay {
     }
     static void splay_node(node *x, node *goal = nullptr) {
         if (!x) return;
-        while (x->f != goal) {
+        while (x->f != goal && !x->is_root()) {
             node *y = x->f, *z = y->f;
-            if (z != goal) {
+            if (y->f != goal && !y->is_root()) {
                 if ((z->l == y) ^ (y->l == x)) rotate(x);
                 else rotate(y);
             }
@@ -364,7 +369,6 @@ class Splay {
         else if (last) { splay_node(last); root = last; }
         return res;
     }
-public:
     Splay() = default;
     Splay(node *root_) : root(root_) {}
     Splay(const auto &v) requires (!hasKey || !hasValue) : root(NodeAlloc::allocate(v)) {}
