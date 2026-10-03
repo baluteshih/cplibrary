@@ -184,7 +184,7 @@ public:
         splay(&tr[x]);
         return tr[x].org.sub_val;
     }
-    void subtree_transform(int x, const Tag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {
+    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {
         access(x);
         splay(&tr[x]);
         tr[x].org.org = tr[x].org.org + tag;
