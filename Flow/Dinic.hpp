@@ -115,8 +115,11 @@ public:
     }
     T get_flow(int s) {
         T res = T();
-        for (auto [v, eid] : this->G[s])
-            res += this->edges[eid].weight.flow;
+        for (auto &e : this->edges) {
+            if (e.weight.cap == 0) continue;
+            if (e.from == s) res += e.weight.flow;
+            if (e.to == s) res -= e.weight.flow;
+        }
         return res;
     }
 };

@@ -1,0 +1,27 @@
+title: 有源汇有上下界最小流
+short_name: min_bounded_flow
+description: Minimum s-t flow with lower and upper bounds
+
+input_extension: .in
+output_extension: .ans
+
+judge_convention: icpc
+problem_type: batch
+
+validator:
+  type: default
+
+solution:
+  type: default
+  time_limit: 1000 ms
+  memory_limit: 256 MiB
+  output_limit: 8 MiB
+
+answer_generation:
+  type: solution
+  filename: sol.cpp
+
+checker:
+  type: default
+
+tmt_version: 0.1.0

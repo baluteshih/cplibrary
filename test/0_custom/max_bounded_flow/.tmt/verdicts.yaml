@@ -1,0 +1,26 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# forgets the flow already carried by the t->s edge after the feasibility phase
+- filename: no-base-flow.cpp
+  verdict: wrong-answer
+
+# keeps the t->s edge for the second phase, counting the base flow twice
+- filename: keep-back-edge.cpp
+  verdict: wrong-answer
+
+# never checks that the lower bounds can be satisfied
+- filename: no-feasibility-check.cpp
+  verdict: wrong-answer
+
+# sums flow on edges leaving s, ignoring flow that comes back into s
+- filename: out-edges-only.cpp
+  verdict: wrong-answer
+
+# augments without residual reverse edges, so greedy paths cannot be undone
+- filename: no-reverse-edge.cpp
+  verdict: wrong-answer
+
+# Ford-Fulkerson pushing one unit per DFS: time proportional to the total flow
+- filename: unit-augment.cpp
+  verdict: time-limit-exceeded

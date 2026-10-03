@@ -1,0 +1,26 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# prints the feasibility-phase flow without minimizing it
+- filename: only-base-flow.cpp
+  verdict: wrong-answer
+
+# keeps the infinite t->s edge during the cancellation phase
+- filename: keep-back-edge.cpp
+  verdict: wrong-answer
+
+# cancels with maxflow(s, t) instead of maxflow(t, s)
+- filename: wrong-direction.cpp
+  verdict: wrong-answer
+
+# never checks that the lower bounds can be satisfied
+- filename: no-feasibility-check.cpp
+  verdict: wrong-answer
+
+# augments without residual reverse edges, so greedy paths cannot be undone
+- filename: no-reverse-edge.cpp
+  verdict: wrong-answer
+
+# Ford-Fulkerson pushing one unit per DFS: time proportional to the total flow
+- filename: unit-augment.cpp
+  verdict: time-limit-exceeded

@@ -1,0 +1,28 @@
+title: 无源汇有上下界可行流
+short_name: bounded_flow
+description: Feasible circulation with lower and upper bounds (no source/sink). Non-official test cases.
+
+input_extension: .in
+output_extension: .ans
+
+judge_convention: icpc
+problem_type: batch
+
+validator:
+  type: default
+
+solution:
+  type: default
+  time_limit: 1000 ms
+  memory_limit: 256 MiB
+  output_limit: 8 MiB
+
+answer_generation:
+  type: solution
+  filename: sol.cpp
+
+checker:
+  type: custom
+  filename: checker.cpp
+
+tmt_version: 0.1.0

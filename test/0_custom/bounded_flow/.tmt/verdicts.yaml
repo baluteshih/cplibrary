@@ -1,0 +1,26 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# prints the reduced-network flow without adding the lower bound back
+- filename: no-lower-offset.cpp
+  verdict: wrong-answer
+
+# charges lower bounds to the wrong endpoints (demand sign flipped)
+- filename: swapped-demand.cpp
+  verdict: wrong-answer
+
+# compares max flow with the sum of all lower bounds instead of the positive demand
+- filename: wrong-total.cpp
+  verdict: wrong-answer
+
+# reduced edge capacity is upper instead of upper - lower
+- filename: cap-upper.cpp
+  verdict: wrong-answer
+
+# augments without residual reverse edges, so greedy paths cannot be undone
+- filename: no-reverse-edge.cpp
+  verdict: wrong-answer
+
+# Ford-Fulkerson pushing one unit per DFS: time proportional to total demand
+- filename: unit-augment.cpp
+  verdict: time-limit-exceeded

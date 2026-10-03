@@ -1,14 +1,12 @@
-#define PROBLEM "https://loj.ac/p/116"
-#define IGNORE
+#define PROBLEM "https://loj.ac/p/115"
 #include "assumption.hpp"
 
 #include "Flow/bounded_flow.hpp"
 
 int main() {
     std::ios::sync_with_stdio(0), std::cin.tie(0);
-    int n, m, s, t;
-    std::cin >> n >> m >> s >> t;
-    --s, --t;
+    int n, m;
+    std::cin >> n >> m;
     bounded_flow<int> flow(n);
     for (int i = 0; i < m; ++i) {
         int u, v, l, r;
@@ -16,9 +14,10 @@ int main() {
         --u, --v;
         flow.add_edge(u, v, l, r);
     }
-    if (!flow.solve(s, t)) std::cout << "please go home to sleep\n";
+    if (!flow.solve()) std::cout << "NO\n";
     else {
-        flow.maxflow(s, t);
-        std::cout << flow.get_flow(s) << "\n";
+        std::cout << "YES\n";
+        for (int i = 0; i < 2 * m; i += 2)
+            std::cout << flow.edge(i).weight.flow << "\n";
     }
 }

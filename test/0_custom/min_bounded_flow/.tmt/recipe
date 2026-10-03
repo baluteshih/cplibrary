@@ -1,0 +1,54 @@
+@global-validation validator
+@global-validation nonnegative
+
+@testset samples
+manual s1.in
+manual s2.in
+
+@testset handmade
+manual single-edge.in
+manual zero.in
+manual out-of-sink.in
+manual forced-middle.in
+manual chain-no.in
+manual greedy-trap.in
+manual max-chain.in
+manual parallel-forced.in
+manual compensate.in
+
+@testset small
+gen 3 6 5 feasible 30
+gen 3 6 5 feasible 0 2
+gen 4 10 10 feasible 50 1
+gen 5 12 10 perturb 1
+gen 5 12 10 perturb 2
+gen 6 15 3 random 0
+gen 6 15 20 feasible 20 3
+gen 8 20 100 feasible 40 5
+gen 8 20 100 perturb 1
+gen 10 30 1000 tight 30
+
+@testset medium
+gen 30 300 1000 feasible 30
+gen 30 300 1000 feasible 10 10
+gen 50 800 100000 feasible 50
+gen 50 800 100000 feasible 20 100
+gen 50 800 100000 perturb 1
+gen 50 800 100000 perturb 3
+gen 60 1000 100 random 0
+gen 60 1000 100000 tight 40
+
+@testset large
+gen 202 9999 100000 feasible 0
+gen 202 9999 100000 feasible 10
+gen 202 9999 100000 feasible 30 1
+gen 202 9999 100000 feasible 50 1000
+gen 202 9999 100000 feasible 80 50000
+gen 202 9999 100000 perturb 1
+gen 202 9999 100000 perturb 5
+gen 202 9999 100000 random 0
+gen 202 9999 100000 tight 20
+gen 202 9999 100000 tight 50
+gen 202 9999 100000 tight 80
+gen 100 9999 100000 feasible 40 3
+gen 20 9999 100000 feasible 60 3
