@@ -1003,6 +1003,9 @@ data:
       path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
+      title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     - icon: ':heavy_check_mark:'

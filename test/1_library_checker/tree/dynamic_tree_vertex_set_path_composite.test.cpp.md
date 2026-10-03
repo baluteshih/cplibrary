@@ -403,36 +403,39 @@ data:
     \ == x) return false;\n        access(y);\n        splay(&tr[y]);\n        tr[x].f\
     \ = &tr[y];\n        if constexpr (hasSubtree) {\n            if constexpr (hasInvertibleTag)\
     \ {\n                tr[x].give_tag(-tr[y].org.vir_lazy);\n            }\n   \
-    \         tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;\n            tr[y].org.sub_val\
-    \ = Subtree(tr[y].org.org) + (tr[y].org.vir + tr[y].org.vir_lazy);\n         \
-    \   tr[y].up();\n        }\n        return true;\n    }\n    bool cut(int x, int\
-    \ y) requires (Rev) {\n        makeroot(x);\n        if (findroot(y) != x) return\
-    \ false;\n        access(y);\n        if (tr[y].l != &tr[x] || tr[x].r != nullptr)\
-    \ return false;\n        tr[y].l = nullptr;\n        tr[x].f = nullptr;\n    \
-    \    tr[y].up();\n        return true;\n    }\n    Path path_query(int x, int\
-    \ y) requires (hasPath && Rev) {\n        makeroot(x);\n        access(y);\n \
-    \       splay(&tr[y]);\n        return tr[y].val.path_val;\n    }\n    void path_transform(int\
-    \ x, int y, const SafeTag& tag) requires (hasPath && hasTag && Rev) {\n      \
-    \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
-    \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
-    \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
-    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
-    \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
-    \        tr[x].org.org = tr[x].org.org + tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy\
-    \ + tag;\n        if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n\
-    \        tr[x].org.sub_val = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);\n\
-    \        tr[x].up();\n    }\n    bool link_directed(int child, int parent) {\n\
-    \        if (is_connected(child, parent)) return false; \n        access(child);\n\
-    \        splay(&tr[child]);\n        if (tr[child].l) return false;\n        access(parent);\n\
-    \        splay(&tr[parent]);\n        tr[child].f = &tr[parent];\n        if constexpr\
-    \ (hasSubtree) {\n            if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);\n\
+    \         tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;\n            if constexpr\
+    \ (hasInvertibleTag) tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir\
+    \ + tr[y].org.vir_lazy);\n            else tr[y].org.sub_val = Subtree(tr[y].org.org)\
+    \ + tr[y].org.vir;\n            tr[y].up();\n        }\n        return true;\n\
+    \    }\n    bool cut(int x, int y) requires (Rev) {\n        makeroot(x);\n  \
+    \      if (findroot(y) != x) return false;\n        access(y);\n        if (tr[y].l\
+    \ != &tr[x] || tr[x].r != nullptr) return false;\n        tr[y].l = nullptr;\n\
+    \        tr[x].f = nullptr;\n        tr[y].up();\n        return true;\n    }\n\
+    \    Path path_query(int x, int y) requires (hasPath && Rev) {\n        makeroot(x);\n\
+    \        access(y);\n        splay(&tr[y]);\n        return tr[y].val.path_val;\n\
+    \    }\n    void path_transform(int x, int y, const SafeTag& tag) requires (hasPath\
+    \ && hasTag && Rev) {\n        makeroot(x);\n        access(y);\n        splay(&tr[y]);\n\
+    \        tr[y].give_tag(tag);\n        tr[y].up();\n    }\n    Subtree subtree_query(int\
+    \ x) requires (hasSubtree) {\n        access(x);\n        splay(&tr[x]);\n   \
+    \     return tr[x].org.sub_val;\n    }\n    void subtree_transform(int x, const\
+    \ SafeTag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {\n      \
+    \  access(x);\n        splay(&tr[x]);\n        tr[x].org.org = tr[x].org.org +\
+    \ tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy + tag;\n        if constexpr\
+    \ (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n        tr[x].org.sub_val\
+    \ = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);\n        tr[x].up();\n\
+    \    }\n    bool link_directed(int child, int parent) {\n        if (is_connected(child,\
+    \ parent)) return false; \n        access(child);\n        splay(&tr[child]);\n\
+    \        if (tr[child].l) return false;\n        access(parent);\n        splay(&tr[parent]);\n\
+    \        tr[child].f = &tr[parent];\n        if constexpr (hasSubtree) {\n   \
+    \         if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);\n\
     \            tr[parent].org.vir = tr[parent].org.vir + tr[child].val.sub_val;\n\
-    \            tr[parent].org.sub_val = Subtree(tr[parent].org.org) + (tr[parent].org.vir\
-    \ + tr[parent].org.vir_lazy);\n            tr[parent].up();\n        }\n     \
-    \   return true;\n    }\n    bool cut_directed(int child) {\n        access(child);\n\
-    \        splay(&tr[child]);\n        if (!tr[child].l) return false; \n      \
-    \  tr[child].l->f = nullptr;\n        tr[child].l = nullptr;\n        tr[child].up();\n\
-    \        return true;\n    }\n};\n#line 2 \"Algebra/Monoid/reversable_linear_transform.hpp\"\
+    \            if constexpr (hasInvertibleTag) tr[parent].org.sub_val = Subtree(tr[parent].org.org)\
+    \ + (tr[parent].org.vir + tr[parent].org.vir_lazy);\n            else tr[parent].org.sub_val\
+    \ = Subtree(tr[parent].org.org) + tr[parent].org.vir;\n            tr[parent].up();\n\
+    \        }\n        return true;\n    }\n    bool cut_directed(int child) {\n\
+    \        access(child);\n        splay(&tr[child]);\n        if (!tr[child].l)\
+    \ return false; \n        tr[child].l->f = nullptr;\n        tr[child].l = nullptr;\n\
+    \        tr[child].up();\n        return true;\n    }\n};\n#line 2 \"Algebra/Monoid/reversable_linear_transform.hpp\"\
     \n\n#line 2 \"Algebra/Monoid/linear_transform.hpp\"\n\ntemplate<typename T>\n\
     struct linear_transform {\n    T a, b;\n    linear_transform(T _a = 1, T _b =\
     \ 0) : a(_a), b(_b) {}\n    linear_transform operator+(const linear_transform\
@@ -596,7 +599,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:15:05+08:00'
+  timestamp: '2026-10-03 12:33:30+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp

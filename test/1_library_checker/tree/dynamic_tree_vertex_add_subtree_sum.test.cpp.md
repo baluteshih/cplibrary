@@ -13,27 +13,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
+  - icon: ':heavy_check_mark:'
+    path: Tree/LinkCutTree.hpp
+    title: Tree/LinkCutTree.hpp
+  - icon: ':question:'
+    path: assumption.hpp
+    title: assumption.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-    title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-    title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-    title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"Tree/LinkCutTree.hpp\"\n\n#line 2 \"DataStructure/Splay.hpp\"\
-    \n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename T>\nstruct\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
+    links:
+    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
+  bundledCode: "#line 1 \"test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
+    \n#line 2 \"assumption.hpp\"\n\n#include <cassert>\n#include <bits/stdc++.h>\n\
+    #line 3 \"test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp\"\
+    \n\n#line 2 \"Tree/LinkCutTree.hpp\"\n\n#line 2 \"DataStructure/Splay.hpp\"\n\n\
+    #line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename T>\nstruct\
     \ DefaultAllocator {\n    template<typename... Args>\n    static T* allocate(Args&&...\
     \ args) { \n        return new T(std::forward<Args>(args)...);\n    }\n    static\
     \ void deallocate(T* p) { delete p; }\n};\n#line 2 \"Algebra/ValidOperation.hpp\"\
@@ -422,136 +423,51 @@ data:
     \        }\n        return true;\n    }\n    bool cut_directed(int child) {\n\
     \        access(child);\n        splay(&tr[child]);\n        if (!tr[child].l)\
     \ return false; \n        tr[child].l->f = nullptr;\n        tr[child].l = nullptr;\n\
-    \        tr[child].up();\n        return true;\n    }\n};\n"
-  code: "#pragma once\n\n#include \"DataStructure/Splay.hpp\"\n#include \"Algebra/ValidOperation.hpp\"\
-    \n#include \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate <\n    typename\
-    \ Value = void,\n    typename Path = void,\n    typename Subtree = void,\n   \
-    \ typename Tag = void,\n    bool Rev = true,\n    template<typename> class Allocator\
-    \ = DefaultAllocator\n>\nclass LinkCutTree {\n    static constexpr bool hasValue\
-    \ = !std::is_void_v<Value>;\n    static constexpr bool hasPath = !std::is_void_v<Path>;\n\
-    \    static constexpr bool hasSubtree = !std::is_void_v<Subtree>;\n    static\
-    \ constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasInvertibleTag\
-    \ = hasTag && requires(Tag t) { -t; };\n    struct Empty {};\n    using SafeValue\
-    \ = std::conditional_t<hasValue, Value, Empty>;\n    using SafeTag = std::conditional_t<hasTag,\
-    \ Tag, Empty>;\n    struct CompositeInfo {\n        [[no_unique_address]] std::conditional_t<hasValue,\
-    \ Value, Empty> org;\n        [[no_unique_address]] std::conditional_t<hasPath,\
-    \ Path, Empty> path_val;\n        [[no_unique_address]] std::conditional_t<hasSubtree,\
-    \ Subtree, Empty> sub_val;\n        [[no_unique_address]] std::conditional_t<hasSubtree,\
-    \ Subtree, Empty> vir;\n        [[no_unique_address]] std::conditional_t<hasSubtree\
-    \ && hasInvertibleTag, Tag, Empty> vir_lazy;\n        CompositeInfo() = default;\n\
-    \        CompositeInfo operator+(const CompositeInfo& rhs) const {\n         \
-    \   CompositeInfo res;\n            if constexpr (hasPath) res.path_val = this->path_val\
-    \ + rhs.path_val;\n            if constexpr (hasSubtree) res.sub_val = this->sub_val\
-    \ + rhs.sub_val;\n            return res;\n        }\n        CompositeInfo operator+(const\
-    \ SafeTag& t) const requires (hasTag) {\n            CompositeInfo res = *this;\n\
-    \            if constexpr (Addable<Value, Tag>) res.org = res.org + t;\n     \
-    \       if constexpr (Addable<Path, Tag>) res.path_val = res.path_val + t;\n \
-    \           if constexpr (Addable<Subtree, Tag>) res.sub_val = res.sub_val + t;\n\
-    \            if constexpr (hasSubtree && hasInvertibleTag) res.vir_lazy = res.vir_lazy\
-    \ + t;\n            return res;\n        }\n        void reverse() {\n       \
-    \     if constexpr (hasPath && requires { path_val.reverse(); }) path_val.reverse();\n\
-    \            if constexpr (hasSubtree && requires { sub_val.reverse(); }) sub_val.reverse();\n\
-    \        }\n    };\npublic:\n    using SplayTree = Splay<void, CompositeInfo,\
-    \ Tag, Rev, Allocator>;\n    using node = typename SplayTree::node;\n    void\
-    \ splay(node* x) {\n        SplayTree::push_all(x);\n        SplayTree::splay_node(x);\n\
-    \    }\n    std::vector<node> tr;\n    LinkCutTree(int n = 0) : tr(n) {}\n   \
-    \ LinkCutTree(const std::vector<SafeValue>& vals) requires (!std::is_void_v<Value>)\
-    \ : tr(vals.size()) {\n        for (size_t i = 0; i < vals.size(); ++i) {\n  \
-    \          tr[i].org.org = vals[i];\n            if constexpr (!std::is_void_v<Path>)\
-    \ tr[i].org.path_val = Path(vals[i]);\n            if constexpr (!std::is_void_v<Subtree>)\
-    \ tr[i].org.sub_val = Subtree(vals[i]);\n            tr[i].up();\n        }\n\
-    \    }\n    node* get_node(int x) { return &tr[x]; }\n    const SafeValue& getdata(int\
-    \ x) const requires (!std::is_void_v<Value>) {\n        access(x);\n        return\
-    \ tr[x].org.org;\n    }\n    void set_val(int x, const SafeValue& v) requires\
-    \ (hasValue) {\n        access(x);\n        tr[x].org.org = v;\n        if constexpr\
-    \ (hasPath) tr[x].org.path_val = Path(v);\n        if constexpr (hasSubtree) {\n\
-    \            if constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(v) +\
-    \ (tr[x].org.vir + tr[x].org.vir_lazy);\n            else tr[x].org.sub_val =\
-    \ Subtree(v) + tr[x].org.vir;\n        }\n        tr[x].up();\n    }\n    void\
-    \ transform(int x, const auto& func) {\n        access(x); \n        splay(&tr[x]);\n\
-    \        func(tr[x].org.org);\n        if constexpr (hasPath) tr[x].org.path_val\
-    \ = Path(tr[x].org.org);\n        if constexpr (hasSubtree) {\n            if\
-    \ constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(tr[x].org.org) + (tr[x].org.vir\
-    \ + tr[x].org.vir_lazy);\n            else tr[x].org.sub_val = Subtree(tr[x].org.org)\
-    \ + tr[x].org.vir;\n        }\n        tr[x].up();\n    }\n    int access(int\
-    \ x) {\n        node* curr = &tr[x];\n        node* last = nullptr;\n        for\
-    \ (node* y = curr; y; y = y->f) {\n            splay(y);\n            if constexpr\
-    \ (hasSubtree) {\n                static_assert(Subtractable<Subtree, Subtree>,\
-    \ \"Subtree requires operator- to maintain virtual trees\");\n               \
-    \ if (last) y->org.vir = y->org.vir - last->val.sub_val;\n                if constexpr\
-    \ (hasInvertibleTag) {\n                    if (y->r) y->r->give_tag(-y->org.vir_lazy);\n\
-    \                    if (last) last->give_tag(y->org.vir_lazy);\n            \
-    \    }\n                if (y->r) y->org.vir = y->org.vir + y->r->val.sub_val;\n\
-    \                if constexpr (hasInvertibleTag) y->org.sub_val = Subtree(y->org.org)\
-    \ + (y->org.vir + y->org.vir_lazy);\n                else y->org.sub_val = Subtree(y->org.org)\
-    \ + y->org.vir;\n            }\n            y->r = last;\n            y->up();\n\
-    \            last = y;\n        }\n        splay(curr);\n        return last ?\
-    \ static_cast<int>(last - tr.data()) : -1;\n    }\n    int findroot(int x) {\n\
-    \        access(x);\n        node* curr = &tr[x];\n        while (true) {\n  \
-    \          if constexpr (hasTag || Rev) curr->down();\n            if (curr->l)\
-    \ curr = curr->l;\n            else break;\n        }\n        splay(curr);\n\
-    \        return curr - &tr[0];\n    }\n    bool is_connected(int x, int y) {\n\
-    \        return findroot(x) == findroot(y);\n    }\n    int get_lca(int x, int\
-    \ y) {\n        if (!is_connected(x, y)) return -1;\n        access(x);\n    \
-    \    return access(y);\n    }\n    void makeroot(int x) requires (Rev) {\n   \
-    \     access(x);\n        tr[x].reverse();\n    }\n    void split(int x, int y)\
-    \ requires (Rev) {\n        makeroot(x);\n        access(y);\n    }\n    bool\
-    \ link(int x, int y) requires (Rev) {\n        makeroot(x);\n        if (findroot(y)\
-    \ == x) return false;\n        access(y);\n        splay(&tr[y]);\n        tr[x].f\
-    \ = &tr[y];\n        if constexpr (hasSubtree) {\n            if constexpr (hasInvertibleTag)\
-    \ {\n                tr[x].give_tag(-tr[y].org.vir_lazy);\n            }\n   \
-    \         tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;\n            if constexpr\
-    \ (hasInvertibleTag) tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir\
-    \ + tr[y].org.vir_lazy);\n            else tr[y].org.sub_val = Subtree(tr[y].org.org)\
-    \ + tr[y].org.vir;\n            tr[y].up();\n        }\n        return true;\n\
-    \    }\n    bool cut(int x, int y) requires (Rev) {\n        makeroot(x);\n  \
-    \      if (findroot(y) != x) return false;\n        access(y);\n        if (tr[y].l\
-    \ != &tr[x] || tr[x].r != nullptr) return false;\n        tr[y].l = nullptr;\n\
-    \        tr[x].f = nullptr;\n        tr[y].up();\n        return true;\n    }\n\
-    \    Path path_query(int x, int y) requires (hasPath && Rev) {\n        makeroot(x);\n\
-    \        access(y);\n        splay(&tr[y]);\n        return tr[y].val.path_val;\n\
-    \    }\n    void path_transform(int x, int y, const SafeTag& tag) requires (hasPath\
-    \ && hasTag && Rev) {\n        makeroot(x);\n        access(y);\n        splay(&tr[y]);\n\
-    \        tr[y].give_tag(tag);\n        tr[y].up();\n    }\n    Subtree subtree_query(int\
-    \ x) requires (hasSubtree) {\n        access(x);\n        splay(&tr[x]);\n   \
-    \     return tr[x].org.sub_val;\n    }\n    void subtree_transform(int x, const\
-    \ SafeTag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {\n      \
-    \  access(x);\n        splay(&tr[x]);\n        tr[x].org.org = tr[x].org.org +\
-    \ tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy + tag;\n        if constexpr\
-    \ (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n        tr[x].org.sub_val\
-    \ = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);\n        tr[x].up();\n\
-    \    }\n    bool link_directed(int child, int parent) {\n        if (is_connected(child,\
-    \ parent)) return false; \n        access(child);\n        splay(&tr[child]);\n\
-    \        if (tr[child].l) return false;\n        access(parent);\n        splay(&tr[parent]);\n\
-    \        tr[child].f = &tr[parent];\n        if constexpr (hasSubtree) {\n   \
-    \         if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);\n\
-    \            tr[parent].org.vir = tr[parent].org.vir + tr[child].val.sub_val;\n\
-    \            if constexpr (hasInvertibleTag) tr[parent].org.sub_val = Subtree(tr[parent].org.org)\
-    \ + (tr[parent].org.vir + tr[parent].org.vir_lazy);\n            else tr[parent].org.sub_val\
-    \ = Subtree(tr[parent].org.org) + tr[parent].org.vir;\n            tr[parent].up();\n\
-    \        }\n        return true;\n    }\n    bool cut_directed(int child) {\n\
-    \        access(child);\n        splay(&tr[child]);\n        if (!tr[child].l)\
-    \ return false; \n        tr[child].l->f = nullptr;\n        tr[child].l = nullptr;\n\
-    \        tr[child].up();\n        return true;\n    }\n};\n"
+    \        tr[child].up();\n        return true;\n    }\n};\n#line 5 \"test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp\"\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ n, q;\n    std::cin >> n >> q;\n    std::vector<long long> arr(n);\n    for\
+    \ (auto &v : arr) std::cin >> v;\n    LinkCutTree<long long, void, long long>\
+    \ lct(arr);\n    for (int i = 1; i < n; ++i) {\n        int u, v;\n        std::cin\
+    \ >> u >> v;\n        lct.link(u, v);\n    }\n    while (q--) {\n        int op;\n\
+    \        std::cin >> op;\n        if (op == 0) {\n            int u, v, w, x;\n\
+    \            std::cin >> u >> v >> w >> x;\n            lct.cut(u, v);\n     \
+    \       lct.link(w, x);\n        }\n        else if (op == 1) {\n            int\
+    \ p, x;\n            std::cin >> p >> x;\n            lct.transform(p, [&](auto\
+    \ &v) {\n                v += x;\n            });\n        }\n        else {\n\
+    \            int v, p;\n            std::cin >> v >> p;\n            lct.makeroot(p);\n\
+    \            std::cout << lct.subtree_query(v) << \"\\n\";\n        }\n    }\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
+    \n#include \"assumption.hpp\"\n\n#include \"Tree/LinkCutTree.hpp\"\n\nint main()\
+    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n, q;\n    std::cin\
+    \ >> n >> q;\n    std::vector<long long> arr(n);\n    for (auto &v : arr) std::cin\
+    \ >> v;\n    LinkCutTree<long long, void, long long> lct(arr);\n    for (int i\
+    \ = 1; i < n; ++i) {\n        int u, v;\n        std::cin >> u >> v;\n       \
+    \ lct.link(u, v);\n    }\n    while (q--) {\n        int op;\n        std::cin\
+    \ >> op;\n        if (op == 0) {\n            int u, v, w, x;\n            std::cin\
+    \ >> u >> v >> w >> x;\n            lct.cut(u, v);\n            lct.link(w, x);\n\
+    \        }\n        else if (op == 1) {\n            int p, x;\n            std::cin\
+    \ >> p >> x;\n            lct.transform(p, [&](auto &v) {\n                v +=\
+    \ x;\n            });\n        }\n        else {\n            int v, p;\n    \
+    \        std::cin >> v >> p;\n            lct.makeroot(p);\n            std::cout\
+    \ << lct.subtree_query(v) << \"\\n\";\n        }\n    }\n}\n"
   dependsOn:
+  - assumption.hpp
+  - Tree/LinkCutTree.hpp
   - DataStructure/Splay.hpp
   - DataStructure/DefaultAllocator.hpp
   - Algebra/ValidOperation.hpp
   - Algebra/size_value.hpp
-  isVerificationFile: false
-  path: Tree/LinkCutTree.hpp
+  isVerificationFile: true
+  path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
   timestamp: '2026-10-03 12:33:30+08:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-documentation_of: Tree/LinkCutTree.hpp
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
 layout: document
 redirect_from:
-- /library/Tree/LinkCutTree.hpp
-- /library/Tree/LinkCutTree.hpp.html
-title: Tree/LinkCutTree.hpp
+- /verify/test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
+- /verify/test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp.html
+title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
 ---
