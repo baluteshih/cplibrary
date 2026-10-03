@@ -196,6 +196,9 @@ data:
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/1_library_checker/other/find_linear_recurrence.test.cpp
+    title: test/1_library_checker/other/find_linear_recurrence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -485,6 +488,7 @@ data:
   - test/1_library_checker/linear_algebra/matrix_det.test.cpp
   - test/1_library_checker/set_power_series/subset_convolution.test.cpp
   - test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/1_library_checker/other/find_linear_recurrence.test.cpp
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - test/1_library_checker/number_theory/sqrt_mod.test.cpp
   - test/1_library_checker/string/longest_common_substring.test.cpp

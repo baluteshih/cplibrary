@@ -415,6 +415,9 @@ data:
       path: Numeric/barrett.hpp
       title: Numeric/barrett.hpp
     - icon: ':heavy_check_mark:'
+      path: Numeric/berlekamp_massey.hpp
+      title: Numeric/berlekamp_massey.hpp
+    - icon: ':heavy_check_mark:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':heavy_check_mark:'
@@ -926,6 +929,9 @@ data:
       title: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
   - name: test/1_library_checker/other
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/other/find_linear_recurrence.test.cpp
+      title: test/1_library_checker/other/find_linear_recurrence.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
