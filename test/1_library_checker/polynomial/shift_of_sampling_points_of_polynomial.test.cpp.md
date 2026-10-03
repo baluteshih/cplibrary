@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

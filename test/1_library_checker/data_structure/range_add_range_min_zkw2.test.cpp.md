@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/ZkwSegmentTree.hpp
     title: Zkw Segment Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

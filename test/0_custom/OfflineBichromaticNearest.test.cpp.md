@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Misc/i256.hpp
     title: Misc/i256.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

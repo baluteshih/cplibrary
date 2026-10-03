@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'

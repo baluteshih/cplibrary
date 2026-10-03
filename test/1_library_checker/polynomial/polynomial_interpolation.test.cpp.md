@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/interpolate.hpp
     title: Polynomial/interpolate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

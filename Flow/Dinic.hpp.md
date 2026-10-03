@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/bounded_flow/bounded_flow.test.cpp
+    title: test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+    title: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+    title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E/106033E.test.cpp
     title: test/4_codeforces/106033E/106033E.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/bounded_flow.test.cpp
-    title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/max_bounded_flow.test.cpp
-    title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/min_bounded_flow.test.cpp
-    title: test/7_loj/min_bounded_flow.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/Dinic.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<typename\
@@ -171,8 +171,9 @@ data:
     \          }\n        }\n        \n        this->edges = std::move(backup_edges);\
     \ \n        return res;\n    }\n    void reset() {\n        for (auto &e : this->edges)\
     \ e.weight.flow = 0;\n    }\n    T get_flow(int s) {\n        T res = T();\n \
-    \       for (auto [v, eid] : this->G[s])\n            res += this->edges[eid].weight.flow;\n\
-    \        return res;\n    }\n};\n"
+    \       for (auto &e : this->edges) {\n            if (e.weight.cap == 0) continue;\n\
+    \            if (e.from == s) res += e.weight.flow;\n            if (e.to == s)\
+    \ res -= e.weight.flow;\n        }\n        return res;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\ntemplate<typename T>\nstruct\
     \ FlowWeight {\n    T cap, flow;\n    FlowWeight() : cap(0), flow(0) {}\n    FlowWeight(T\
     \ c, T f = 0) : cap(c), flow(f) {}\n    friend std::ostream& operator<<(std::ostream&\
@@ -221,21 +222,22 @@ data:
     \ stk);\n                stk.clear();\n            }\n        }\n        \n  \
     \      this->edges = std::move(backup_edges); \n        return res;\n    }\n \
     \   void reset() {\n        for (auto &e : this->edges) e.weight.flow = 0;\n \
-    \   }\n    T get_flow(int s) {\n        T res = T();\n        for (auto [v, eid]\
-    \ : this->G[s])\n            res += this->edges[eid].weight.flow;\n        return\
-    \ res;\n    }\n};\n"
+    \   }\n    T get_flow(int s) {\n        T res = T();\n        for (auto &e : this->edges)\
+    \ {\n            if (e.weight.cap == 0) continue;\n            if (e.from == s)\
+    \ res += e.weight.flow;\n            if (e.to == s) res -= e.weight.flow;\n  \
+    \      }\n        return res;\n    }\n};\n"
   dependsOn:
   - Graph/base.hpp
   isVerificationFile: false
   path: Flow/Dinic.hpp
   requiredBy:
   - Flow/bounded_flow.hpp
-  timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-10-03 14:32:36+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/7_loj/min_bounded_flow.test.cpp
-  - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/max_bounded_flow.test.cpp
+  - test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
   - test/4_codeforces/106033E/106033E.test.cpp
 documentation_of: Flow/Dinic.hpp
 layout: document

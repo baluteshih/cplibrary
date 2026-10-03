@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/complement_bfs.hpp
     title: Graph/complement_bfs.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

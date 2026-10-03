@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/cdq_solver.hpp
     title: Sequence/cdq_solver.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

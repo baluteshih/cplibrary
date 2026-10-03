@@ -204,13 +204,13 @@ data:
       title: Enumerate/subset_enumerate.hpp
   - name: Flow
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
     - icon: ':heavy_check_mark:'
@@ -304,7 +304,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -564,7 +564,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':heavy_check_mark:'
@@ -593,6 +593,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/0_custom/outerTangentBetweenConvex.test.cpp
       title: test/0_custom/outerTangentBetweenConvex.test.cpp
+  - name: test/0_custom/bounded_flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/bounded_flow/bounded_flow.test.cpp
+      title: test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - name: test/0_custom/max_bounded_flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+      title: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+  - name: test/0_custom/min_bounded_flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+      title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
   - name: test/1_library_checker/biginteger
     pages:
     - icon: ':heavy_check_mark:'
@@ -1163,15 +1178,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/7_loj/2302.test.cpp
       title: test/7_loj/2302.test.cpp
-    - icon: ':x:'
-      path: test/7_loj/bounded_flow.test.cpp
-      title: test/7_loj/bounded_flow.test.cpp
-    - icon: ':x:'
-      path: test/7_loj/max_bounded_flow.test.cpp
-      title: test/7_loj/max_bounded_flow.test.cpp
-    - icon: ':x:'
-      path: test/7_loj/min_bounded_flow.test.cpp
-      title: test/7_loj/min_bounded_flow.test.cpp
   - name: test/8_luogu
     pages:
     - icon: ':heavy_check_mark:'

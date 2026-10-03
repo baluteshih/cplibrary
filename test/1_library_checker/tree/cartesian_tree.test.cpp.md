@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/better_position.hpp
     title: Sequence/better_position.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

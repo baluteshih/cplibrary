@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/7_loj/bounded_flow.test.cpp
-    title: test/7_loj/bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/max_bounded_flow.test.cpp
-    title: test/7_loj/max_bounded_flow.test.cpp
-  - icon: ':x:'
-    path: test/7_loj/min_bounded_flow.test.cpp
-    title: test/7_loj/min_bounded_flow.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/bounded_flow/bounded_flow.test.cpp
+    title: test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+    title: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+    title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Flow/bounded_flow.hpp\"\n\n#line 2 \"Flow/Dinic.hpp\"\n\n\
@@ -168,23 +168,24 @@ data:
     \          }\n        }\n        \n        this->edges = std::move(backup_edges);\
     \ \n        return res;\n    }\n    void reset() {\n        for (auto &e : this->edges)\
     \ e.weight.flow = 0;\n    }\n    T get_flow(int s) {\n        T res = T();\n \
-    \       for (auto [v, eid] : this->G[s])\n            res += this->edges[eid].weight.flow;\n\
-    \        return res;\n    }\n};\n#line 4 \"Flow/bounded_flow.hpp\"\n\ntemplate<class\
-    \ T>\nclass bounded_flow : public Dinic<T> { // 0-base\npublic:\n    using super\
-    \ = Dinic<T>;\n    int real_n;\n    std::vector<T> cnt;\n    bounded_flow(int\
-    \ _n) : super(_n + 2), real_n(_n), cnt(real_n + 2) {}\n    void add_edge(int u,\
-    \ int v, T lcap, T rcap) {\n        cnt[u] -= lcap, cnt[v] += lcap;\n        super::super::add_edge(u,\
-    \ v, FlowWeight<T>(rcap, lcap));\n        super::super::add_edge(v, u, FlowWeight<T>(0,\
-    \ 0));\n    }\n    bool solve() {\n        T sum = 0;\n        int added_cnt =\
-    \ 0;\n        bool res = true;\n        for (int i = 0; i < real_n; ++i)\n   \
-    \         if (cnt[i] > 0)\n                super::add_edge(real_n, i, cnt[i]),\
-    \ sum += cnt[i], ++added_cnt;\n            else if (cnt[i] < 0)\n            \
-    \    super::add_edge(i, real_n + 1, -cnt[i]), ++added_cnt;\n        if (sum !=\
-    \ this->maxflow(real_n, real_n + 1)) res = false;\n        while (added_cnt--)\
-    \ this->pop_edge(), this->pop_edge();\n        return res;\n    }\n    bool solve(int\
-    \ s, int t) {\n        super::add_edge(t, s, std::numeric_limits<T>::max());\n\
-    \        bool res = solve();\n        this->pop_edge(), this->pop_edge();\n  \
-    \      return res;\n    }\n};\n"
+    \       for (auto &e : this->edges) {\n            if (e.weight.cap == 0) continue;\n\
+    \            if (e.from == s) res += e.weight.flow;\n            if (e.to == s)\
+    \ res -= e.weight.flow;\n        }\n        return res;\n    }\n};\n#line 4 \"\
+    Flow/bounded_flow.hpp\"\n\ntemplate<class T>\nclass bounded_flow : public Dinic<T>\
+    \ { // 0-base\npublic:\n    using super = Dinic<T>;\n    int real_n;\n    std::vector<T>\
+    \ cnt;\n    bounded_flow(int _n) : super(_n + 2), real_n(_n), cnt(real_n + 2)\
+    \ {}\n    void add_edge(int u, int v, T lcap, T rcap) {\n        cnt[u] -= lcap,\
+    \ cnt[v] += lcap;\n        super::super::add_edge(u, v, FlowWeight<T>(rcap, lcap));\n\
+    \        super::super::add_edge(v, u, FlowWeight<T>(0, 0));\n    }\n    bool solve()\
+    \ {\n        T sum = 0;\n        int added_cnt = 0;\n        bool res = true;\n\
+    \        for (int i = 0; i < real_n; ++i)\n            if (cnt[i] > 0)\n     \
+    \           super::add_edge(real_n, i, cnt[i]), sum += cnt[i], ++added_cnt;\n\
+    \            else if (cnt[i] < 0)\n                super::add_edge(i, real_n +\
+    \ 1, -cnt[i]), ++added_cnt;\n        if (sum != this->maxflow(real_n, real_n +\
+    \ 1)) res = false;\n        while (added_cnt--) this->pop_edge(), this->pop_edge();\n\
+    \        return res;\n    }\n    bool solve(int s, int t) {\n        super::add_edge(t,\
+    \ s, std::numeric_limits<T>::max());\n        bool res = solve();\n        this->pop_edge(),\
+    \ this->pop_edge();\n        return res;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Flow/Dinic.hpp\"\n\ntemplate<class T>\nclass bounded_flow\
     \ : public Dinic<T> { // 0-base\npublic:\n    using super = Dinic<T>;\n    int\
     \ real_n;\n    std::vector<T> cnt;\n    bounded_flow(int _n) : super(_n + 2),\
@@ -207,12 +208,12 @@ data:
   isVerificationFile: false
   path: Flow/bounded_flow.hpp
   requiredBy: []
-  timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-10-03 14:32:36+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/7_loj/min_bounded_flow.test.cpp
-  - test/7_loj/bounded_flow.test.cpp
-  - test/7_loj/max_bounded_flow.test.cpp
+  - test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
 documentation_of: Flow/bounded_flow.hpp
 layout: document
 redirect_from:

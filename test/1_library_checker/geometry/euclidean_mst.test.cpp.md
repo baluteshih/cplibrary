@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/same_position.hpp
     title: Sequence/same_position.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   - icon: ':heavy_check_mark:'

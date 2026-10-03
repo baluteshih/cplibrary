@@ -1,0 +1,170 @@
+---- build/validator.compile.log ----
+In file included from validator.cpp:1:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In member function ‘bool pattern::matches(const std::string&) const’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1313:42: warning: declaration of ‘s’ shadows a member of ‘pattern’ [-Wshadow]
+ 1313 | bool pattern::matches(const std::string &s) const {
+      |                       ~~~~~~~~~~~~~~~~~~~^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:749:17: note: shadowed declaration is here
+  749 |     std::string s;
+      |                 ^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In member function ‘bool pattern::matches(const std::string&, size_t) const’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1367:42: warning: declaration of ‘s’ shadows a member of ‘pattern’ [-Wshadow]
+ 1367 | bool pattern::matches(const std::string &s, size_t pos) const {
+      |                       ~~~~~~~~~~~~~~~~~~~^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:749:17: note: shadowed declaration is here
+  749 |     std::string s;
+      |                 ^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘pattern::pattern(std::string)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1547:30: warning: declaration of ‘s’ shadows a member of ‘pattern’ [-Wshadow]
+ 1547 | pattern::pattern(std::string s) : s(s), from(0), to(0) {
+      |                  ~~~~~~~~~~~~^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:749:17: note: shadowed declaration is here
+  749 |     std::string s;
+      |                 ^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘pattern::pattern(std::string)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1547:30: warning: declaration of ‘s’ shadows a member of ‘pattern’ [-Wshadow]
+ 1547 | pattern::pattern(std::string s) : s(s), from(0), to(0) {
+      |                  ~~~~~~~~~~~~^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:749:17: note: shadowed declaration is here
+  749 |     std::string s;
+      |                 ^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘pattern::pattern(std::string)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1547:30: warning: declaration of ‘s’ shadows a member of ‘pattern’ [-Wshadow]
+ 1547 | pattern::pattern(std::string s) : s(s), from(0), to(0) {
+      |                  ~~~~~~~~~~~~^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:749:17: note: shadowed declaration is here
+  749 |     std::string s;
+      |                 ^
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In member function ‘int FileInputStreamReader::getc(FILE*)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1793:20: warning: declaration of ‘file’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1793 |     int getc(FILE *file) {
+      |              ~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1779:16: note: shadowed declaration is here
+ 1779 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘FileInputStreamReader::FileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:63: warning: declaration of ‘name’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                            ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1780:17: note: shadowed declaration is here
+ 1780 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:38: warning: declaration of ‘file’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                           ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1779:16: note: shadowed declaration is here
+ 1779 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘FileInputStreamReader::FileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:63: warning: declaration of ‘name’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                            ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1780:17: note: shadowed declaration is here
+ 1780 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:38: warning: declaration of ‘file’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                           ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1779:16: note: shadowed declaration is here
+ 1779 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘FileInputStreamReader::FileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:63: warning: declaration of ‘name’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                            ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1780:17: note: shadowed declaration is here
+ 1780 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1825:38: warning: declaration of ‘file’ shadows a member of ‘FileInputStreamReader’ [-Wshadow]
+ 1825 |     FileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                           ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1779:16: note: shadowed declaration is here
+ 1779 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘BufferedFileInputStreamReader::BufferedFileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:71: warning: declaration of ‘name’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                                    ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1898:17: note: shadowed declaration is here
+ 1898 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:46: warning: declaration of ‘file’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                   ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1897:16: note: shadowed declaration is here
+ 1897 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘BufferedFileInputStreamReader::BufferedFileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:71: warning: declaration of ‘name’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                                    ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1898:17: note: shadowed declaration is here
+ 1898 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:46: warning: declaration of ‘file’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                   ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1897:16: note: shadowed declaration is here
+ 1897 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘BufferedFileInputStreamReader::BufferedFileInputStreamReader(FILE*, const std::string&)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:71: warning: declaration of ‘name’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                                    ~~~~~~~~~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1898:17: note: shadowed declaration is here
+ 1898 |     std::string name;
+      |                 ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1939:46: warning: declaration of ‘file’ shadows a member of ‘BufferedFileInputStreamReader’ [-Wshadow]
+ 1939 |     BufferedFileInputStreamReader(std::FILE *file, const std::string &name) : file(file), name(name), line(1) {
+      |                                   ~~~~~~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:1897:16: note: shadowed declaration is here
+ 1897 |     std::FILE *file;
+      |                ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘ValidatorBoundsHit::ValidatorBoundsHit(bool, bool)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:50: warning: declaration of ‘maxHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                                             ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2410:10: note: shadowed declaration is here
+ 2410 |     bool maxHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:29: warning: declaration of ‘minHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                        ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2409:10: note: shadowed declaration is here
+ 2409 |     bool minHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘ValidatorBoundsHit::ValidatorBoundsHit(bool, bool)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:50: warning: declaration of ‘maxHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                                             ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2410:10: note: shadowed declaration is here
+ 2410 |     bool maxHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:29: warning: declaration of ‘minHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                        ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2409:10: note: shadowed declaration is here
+ 2409 |     bool minHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In constructor ‘ValidatorBoundsHit::ValidatorBoundsHit(bool, bool)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:50: warning: declaration of ‘maxHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                                             ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2410:10: note: shadowed declaration is here
+ 2410 |     bool maxHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2412:29: warning: declaration of ‘minHit’ shadows a member of ‘ValidatorBoundsHit’ [-Wshadow]
+ 2412 |     ValidatorBoundsHit(bool minHit = false, bool maxHit = false) : minHit(minHit), maxHit(maxHit) {
+      |                        ~~~~~^~~~~~~~~~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2409:10: note: shadowed declaration is here
+ 2409 |     bool minHit;
+      |          ^~~~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In member function ‘void InStream::init(std::string, TMode)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:3301:49: warning: declaration of ‘mode’ shadows a member of ‘InStream’ [-Wshadow]
+ 3301 | void InStream::init(std::string fileName, TMode mode) {
+      |                                           ~~~~~~^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:2034:11: note: shadowed declaration is here
+ 2034 |     TMode mode;
+      |           ^~~~
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h: In member function ‘void InStream::init(FILE*, TMode)’:
+/home/runner/work/cplibrary/cplibrary/test/0_custom/bounded_flow/.tmt/include/testlib.h:3325:41: warning: declaration of ‘mode’ shadows a 
