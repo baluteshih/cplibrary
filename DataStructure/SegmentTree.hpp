@@ -8,6 +8,7 @@ class SegmentTree {
     std::vector<Value> seg;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>, Empty> lazy;
+    using TagParam = std::conditional_t<hasTag, Tag, Empty>;
     Value get_val(int rt) {
         if constexpr (pushdown) return seg[rt];
         else return seg[rt] + lazy[rt];
@@ -15,7 +16,7 @@ class SegmentTree {
     void up(int rt) {
         seg[rt] = get_val(rt << 1) + get_val(rt << 1 | 1);
     }
-    void give_tag(int rt, auto tag) requires (hasTag) {
+    void give_tag(int rt, const TagParam &tag) requires (hasTag) {
         if constexpr (pushdown) seg[rt] = seg[rt] + tag;
         lazy[rt] = lazy[rt] + tag;
     }
@@ -24,12 +25,12 @@ class SegmentTree {
         give_tag(rt << 1 | 1, lazy[rt]);
         lazy[rt] = Tag();
     }
-    void initialize(int l, int r, int rt, const std::vector<Value> &data) {
+    void initialize(int l, int r, int rt, const auto &gen) {
         if (r - l == 1) 
-            return seg[rt] = data[l], void();
+            return seg[rt] = gen(l), void();
         int mid = (l + r) >> 1;
-        initialize(l, mid, rt << 1, data);
-        initialize(mid, r, rt << 1 | 1, data);
+        initialize(l, mid, rt << 1, gen);
+        initialize(mid, r, rt << 1 | 1, gen);
         up(rt);
     }
     Value range_prod(int L, int R, int l, int r, int rt) {
@@ -72,7 +73,7 @@ class SegmentTree {
         else transform(x, mid, r, rt << 1 | 1, func);
         up(rt);
     }
-    void range_transform(int L, int R, int l, int r, int rt, const auto &tag) requires (hasTag) {
+    void range_transform(int L, int R, int l, int r, int rt, const TagParam &tag) requires (hasTag) {
         if (L <= l && R >= r)
             return give_tag(rt, tag);
         if constexpr (pushdown) down(rt);
@@ -81,7 +82,7 @@ class SegmentTree {
         if (R > mid) range_transform(L, R, mid, r, rt << 1 | 1, tag);
         up(rt);
     }
-    void range_transform_beats(int L, int R, int l, int r, int rt, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag) {
+    void range_transform_beats(int L, int R, int l, int r, int rt, const TagParam &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag) {
         if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return seg[rt]; else return get_val(rt) + (..., tag_sum); }()))
             return give_tag(rt, tag);
         assert(r - l > 1);
@@ -170,11 +171,14 @@ class SegmentTree {
         printall(mid, r, rt << 1 | 1);
     }
 public:
-    SegmentTree(const std::vector<Value> &data): n(data.size()), seg(n << 2) { 
-        if constexpr (hasTag) lazy.resize(n << 2); 
-        initialize(0, n, 1, data);
+    template <typename Gen>
+    SegmentTree(int size, Gen gen) : n(size), seg(size << 2) { 
+        if constexpr (hasTag) lazy.resize(size << 2); 
+        initialize(0, size, 1, gen);
     }
-    SegmentTree(int size): SegmentTree(vector<Value>(size)) {}
+    SegmentTree(const std::vector<Value> &data) : SegmentTree(data.size(), [&](int i) { return data[i]; }) {}
+    SegmentTree(int size, const Value &v) : SegmentTree(size, [&v](int) { return v; }) {}
+    SegmentTree(int size) : SegmentTree(size, [](int) { return Value(); }) {}
     Value get(int x) {
         assert(0 <= x && x < n);
         return get(x, 0, n, 1);
@@ -193,13 +197,13 @@ public:
         assert(0 <= x && x < n);
         transform(x, 0, n, 1, func);
     }
-    void range_transform(int l, int r, const auto &tag) requires (hasTag) {
+    void range_transform(int l, int r, const TagParam &tag) requires (hasTag) {
         assert(0 <= l && r <= n);
         assert(l <= r);
         if (l < r)
             range_transform(l, r, 0, n, 1, tag);
     }
-    void range_transform_beats(int l, int r, const auto &tag, const auto &tag_condition) requires (hasTag) {
+    void range_transform_beats(int l, int r, const auto &tag, const TagParam &tag_condition) requires (hasTag) {
         assert(0 <= l && r <= n);
         assert(l <= r);
         if (l < r)

@@ -8,6 +8,7 @@ class ZkwSegmentTree {
     std::vector<Value> seg;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasTag, std::vector<Tag>, Empty> lazy;
+    using TagParam = std::conditional_t<hasTag, Tag, Empty>;
     using SearchTag = std::conditional_t<!pushdown, Tag, Empty>;
 
     decltype(auto) get_val(int rt) {
@@ -18,7 +19,7 @@ class ZkwSegmentTree {
         if constexpr (pushdown) return static_cast<const Value&>(seg[rt]);
         else return get_val(rt) + tag;
     }
-    void give_tag(int rt, const auto &tag) requires (hasTag) {
+    void give_tag(int rt, const TagParam &tag) requires (hasTag) {
         if constexpr (pushdown) seg[rt] = seg[rt] + tag;
         lazy[rt] = lazy[rt] + tag;
     }
@@ -54,8 +55,8 @@ class ZkwSegmentTree {
         for (; l >= 1; l >>= 1)
             up(l);
     }
-    auto tag_prod(int p) requires (!pushdown) {
-        Tag res = Tag();
+    TagParam tag_prod(int p) requires (!pushdown) {
+        TagParam res = Tag();
         for (p += n; p >= 1; p >>= 1)
             res = res + lazy[p];
         return res;
@@ -199,7 +200,7 @@ public:
             down(x);
         for (func(seg[x += n]); x > 1; up(x >>= 1));
     }
-    void range_transform(int l, int r, const auto &tag) requires (hasTag) {
+    void range_transform(int l, int r, const TagParam &tag) requires (hasTag) {
         assert(0 <= l && r <= sz);
         assert(l <= r);
         if (l < r) {

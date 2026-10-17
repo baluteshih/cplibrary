@@ -10,4 +10,8 @@ struct add_tag {
     add_tag operator-() const {
         return add_tag(-a);
     }
+    friend std::ostream& operator<<(std::ostream& os, const add_tag &v) {
+        os << v.a;
+        return os;
+    }
 };
