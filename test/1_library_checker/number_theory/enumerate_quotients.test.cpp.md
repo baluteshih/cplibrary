@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/floor_enumerate.hpp
     title: Numeric/floor_enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

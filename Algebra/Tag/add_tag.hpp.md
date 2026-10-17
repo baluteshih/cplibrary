@@ -29,11 +29,14 @@ data:
   bundledCode: "#line 2 \"Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T>\nstruct\
     \ add_tag {\n    T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag operator+(const\
     \ add_tag &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n    add_tag\
-    \ operator-() const {\n        return add_tag(-a);\n    }\n};\n"
+    \ operator-() const {\n        return add_tag(-a);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const add_tag &v) {\n        os << v.a;\n     \
+    \   return os;\n    }\n};\n"
   code: "#pragma once\n\ntemplate<typename T>\nstruct add_tag {\n    T a;\n    add_tag(T\
     \ _a = 0): a(_a) {}\n    add_tag operator+(const add_tag &rhs) const {\n     \
     \   return add_tag(a + rhs.a);\n    }\n    add_tag operator-() const {\n     \
-    \   return add_tag(-a);\n    }\n};\n"
+    \   return add_tag(-a);\n    }\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const add_tag &v) {\n        os << v.a;\n        return os;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Algebra/Tag/add_tag.hpp
@@ -41,7 +44,7 @@ data:
   - Algebra/Acted_Monoid/sum_v-add.hpp
   - Algebra/Acted_Monoid/min_v-add.hpp
   - Algebra/Acted_Monoid/sum_and_size-add.hpp
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-10-18 00:18:29+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp

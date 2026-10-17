@@ -31,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -453,10 +453,11 @@ data:
     \n\ntemplate<typename T>\nstruct add_tag {\n    T a;\n    add_tag(T _a = 0): a(_a)\
     \ {}\n    add_tag operator+(const add_tag &rhs) const {\n        return add_tag(a\
     \ + rhs.a);\n    }\n    add_tag operator-() const {\n        return add_tag(-a);\n\
-    \    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-add.hpp\"\n\ntemplate<typename\
-    \ T, typename size_value>\nsum_and_size<T, size_value> operator+(const sum_and_size<T,\
-    \ size_value> &lhs, const add_tag<T> &rhs) {\n    return sum_and_size<T, size_value>(lhs.val\
-    \ + rhs.a * lhs.sz, lhs.sz);  \n}\n#line 2 \"Algebra/Acted_Monoid/sum_v-add.hpp\"\
+    \    }\n    friend std::ostream& operator<<(std::ostream& os, const add_tag &v)\
+    \ {\n        os << v.a;\n        return os;\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-add.hpp\"\
+    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value> operator+(const\
+    \ sum_and_size<T, size_value> &lhs, const add_tag<T> &rhs) {\n    return sum_and_size<T,\
+    \ size_value>(lhs.val + rhs.a * lhs.sz, lhs.sz);  \n}\n#line 2 \"Algebra/Acted_Monoid/sum_v-add.hpp\"\
     \n\n#line 2 \"Algebra/Monoid/sum_v.hpp\"\n\ntemplate<typename T>\nstruct sum_v\
     \ {\n    T val;\n    sum_v(T _val = 0): val(_val) {}\n    sum_v operator+(const\
     \ sum_v &rhs) const {\n        return sum_v(val + rhs.val);\n    }\n    friend\
@@ -510,7 +511,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:33:30+08:00'
+  timestamp: '2026-10-18 00:18:29+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp

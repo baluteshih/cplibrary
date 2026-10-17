@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/pi_count.hpp
     title: Numeric/pi_count.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

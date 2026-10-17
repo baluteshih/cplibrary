@@ -27,9 +27,11 @@ data:
     \ 2 \"Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T>\nstruct add_tag {\n  \
     \  T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag operator+(const add_tag\
     \ &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n    add_tag operator-()\
-    \ const {\n        return add_tag(-a);\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_v-add.hpp\"\
-    \n\ntemplate<typename T>\nsum_v<T> operator+(const sum_v<T> &lhs, const add_tag<T>\
-    \ &rhs) {\n    return sum_v<T>(lhs.val + rhs.a);  \n}\n"
+    \ const {\n        return add_tag(-a);\n    }\n    friend std::ostream& operator<<(std::ostream&\
+    \ os, const add_tag &v) {\n        os << v.a;\n        return os;\n    }\n};\n\
+    #line 5 \"Algebra/Acted_Monoid/sum_v-add.hpp\"\n\ntemplate<typename T>\nsum_v<T>\
+    \ operator+(const sum_v<T> &lhs, const add_tag<T> &rhs) {\n    return sum_v<T>(lhs.val\
+    \ + rhs.a);  \n}\n"
   code: "#pragma once\n\n#include \"Algebra/Monoid/sum_v.hpp\"\n#include \"Algebra/Tag/add_tag.hpp\"\
     \n\ntemplate<typename T>\nsum_v<T> operator+(const sum_v<T> &lhs, const add_tag<T>\
     \ &rhs) {\n    return sum_v<T>(lhs.val + rhs.a);  \n}\n"
@@ -39,7 +41,7 @@ data:
   isVerificationFile: false
   path: Algebra/Acted_Monoid/sum_v-add.hpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-10-18 00:18:29+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp

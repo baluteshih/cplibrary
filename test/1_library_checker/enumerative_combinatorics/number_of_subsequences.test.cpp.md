@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/same_position.hpp
     title: Sequence/same_position.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

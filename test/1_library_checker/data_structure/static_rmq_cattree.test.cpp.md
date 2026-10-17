@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/CatTree.hpp
     title: Cat Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
