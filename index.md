@@ -159,7 +159,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: Potential Disjoint Set
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
@@ -564,7 +564,7 @@ data:
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: assumption.hpp
       title: assumption.hpp
     - icon: ':heavy_check_mark:'
@@ -734,7 +734,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
       title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'

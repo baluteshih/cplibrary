@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Sqrt.hpp
     title: Polynomial/Sqrt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

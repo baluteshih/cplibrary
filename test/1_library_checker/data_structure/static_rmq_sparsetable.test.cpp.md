@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

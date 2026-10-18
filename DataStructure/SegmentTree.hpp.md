@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -30,9 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/SegmentTree.hpp\"\n\ntemplate<typename Value\
@@ -149,7 +149,7 @@ data:
     \ range_transform(int l, int r, const TagParam &tag) requires (hasTag) {\n   \
     \     assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n\
     \            range_transform(l, r, 0, n, 1, tag);\n    }\n    void range_transform_beats(int\
-    \ l, int r, const auto &tag, const TagParam &tag_condition) requires (hasTag)\
+    \ l, int r, const TagParam &tag, const auto &tag_condition) requires (hasTag)\
     \ {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l\
     \ < r)\n            range_transform_beats(l, r, 0, n, 1, tag, tag_condition);\n\
     \    }\n    int range_left_search(const auto &condition, int l = -1, int r = -1)\
@@ -278,7 +278,7 @@ data:
     \ range_transform(int l, int r, const TagParam &tag) requires (hasTag) {\n   \
     \     assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n\
     \            range_transform(l, r, 0, n, 1, tag);\n    }\n    void range_transform_beats(int\
-    \ l, int r, const auto &tag, const TagParam &tag_condition) requires (hasTag)\
+    \ l, int r, const TagParam &tag, const auto &tag_condition) requires (hasTag)\
     \ {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l\
     \ < r)\n            range_transform_beats(l, r, 0, n, 1, tag, tag_condition);\n\
     \    }\n    int range_left_search(const auto &condition, int l = -1, int r = -1)\
@@ -298,8 +298,8 @@ data:
   isVerificationFile: false
   path: DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2026-10-18 00:18:29+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-10-18 11:13:35+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/predecessor_problem.test.cpp
   - test/1_library_checker/data_structure/range_affine_point_get.test.cpp

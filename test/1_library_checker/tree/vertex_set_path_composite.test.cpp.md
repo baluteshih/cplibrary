@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':heavy_check_mark:'
@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -483,7 +483,7 @@ data:
     \ range_transform(int l, int r, const TagParam &tag) requires (hasTag) {\n   \
     \     assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l < r)\n\
     \            range_transform(l, r, 0, n, 1, tag);\n    }\n    void range_transform_beats(int\
-    \ l, int r, const auto &tag, const TagParam &tag_condition) requires (hasTag)\
+    \ l, int r, const TagParam &tag, const auto &tag_condition) requires (hasTag)\
     \ {\n        assert(0 <= l && r <= n);\n        assert(l <= r);\n        if (l\
     \ < r)\n            range_transform_beats(l, r, 0, n, 1, tag, tag_condition);\n\
     \    }\n    int range_left_search(const auto &condition, int l = -1, int r = -1)\
@@ -568,7 +568,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2026-10-18 00:18:29+08:00'
+  timestamp: '2026-10-18 11:13:35+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/vertex_set_path_composite.test.cpp

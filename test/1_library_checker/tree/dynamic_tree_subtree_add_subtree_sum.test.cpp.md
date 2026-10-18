@@ -31,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

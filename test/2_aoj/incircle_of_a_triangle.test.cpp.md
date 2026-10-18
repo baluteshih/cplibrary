@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

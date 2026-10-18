@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/miller_rabin.hpp
     title: Numeric/miller_rabin.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
