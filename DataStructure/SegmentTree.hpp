@@ -203,7 +203,7 @@ public:
         if (l < r)
             range_transform(l, r, 0, n, 1, tag);
     }
-    void range_transform_beats(int l, int r, const auto &tag, const TagParam &tag_condition) requires (hasTag) {
+    void range_transform_beats(int l, int r, const TagParam &tag, const auto &tag_condition) requires (hasTag) {
         assert(0 <= l && r <= n);
         assert(l <= r);
         if (l < r)
