@@ -603,13 +603,13 @@ data:
   timestamp: '2026-10-03 12:08:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
 documentation_of: DataStructure/Splay.hpp
 layout: document
 title: Splay

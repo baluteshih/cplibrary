@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/convexHull3D.hpp\"\n\n#line 2 \"Geometry/Point3D.hpp\"\
@@ -260,7 +260,7 @@ data:
   path: Geometry/convexHull3D.hpp
   requiredBy: []
   timestamp: '2026-06-19 23:20:06+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/9_qoj/6445.test.cpp
 documentation_of: Geometry/convexHull3D.hpp

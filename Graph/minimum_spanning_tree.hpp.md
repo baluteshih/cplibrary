@@ -199,8 +199,8 @@ data:
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
 documentation_of: Graph/minimum_spanning_tree.hpp
 layout: document
 redirect_from:

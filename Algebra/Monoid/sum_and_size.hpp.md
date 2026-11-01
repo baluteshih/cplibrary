@@ -54,9 +54,9 @@ data:
   timestamp: '2026-10-03 12:08:22+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
 documentation_of: Algebra/Monoid/sum_and_size.hpp
 layout: document
 redirect_from:

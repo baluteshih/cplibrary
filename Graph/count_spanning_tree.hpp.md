@@ -359,8 +359,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
 documentation_of: Graph/count_spanning_tree.hpp
 layout: document
 redirect_from:

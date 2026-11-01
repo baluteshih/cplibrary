@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

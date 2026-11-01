@@ -41,6 +41,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
+  - icon: ':warning:'
+    path: Graph/bfs.hpp
+    title: Graph/bfs.hpp
+  - icon: ':warning:'
+    path: Graph/bfs01.hpp
+    title: Graph/bfs01.hpp
   - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
@@ -417,79 +423,81 @@ data:
   isVerificationFile: false
   path: Graph/base.hpp
   requiredBy:
-  - Flow/Dinic.hpp
-  - Flow/bounded_cost_circulation.hpp
-  - Flow/min_cost_circulation_old.hpp
-  - Flow/min_cost_circulation.hpp
-  - Flow/min_cost_max_flow.hpp
-  - Flow/bounded_flow.hpp
-  - Misc/2sat.hpp
-  - Tree/centroid_divide_and_conquer.hpp
   - Tree/all_direction_composition.hpp
   - Tree/CentroidTree.hpp
+  - Tree/centroid_divide_and_conquer.hpp
   - Tree/TreeTools.hpp
-  - Tree/Tree.hpp
   - Tree/CentroidDS/DistanceSolver.hpp
+  - Tree/Tree.hpp
   - Tree/HeavyLightDecomposition.hpp
-  - Graph/BipartiteMatching.hpp
-  - Graph/minimum_spanning_tree.hpp
-  - Graph/eulerian_trail.hpp
-  - Graph/incremental_scc.hpp
-  - Graph/BipartiteGraph.hpp
-  - Graph/bipolar_orientation.hpp
-  - Graph/count_eulerian_circuits.hpp
+  - Misc/2sat.hpp
   - Graph/complement_bfs.hpp
-  - Graph/SCC.hpp
-  - Graph/ECC.hpp
-  - Graph/BCC.hpp
-  - Graph/dominator_tree.hpp
-  - Graph/count_spanning_tree.hpp
-  - Graph/Dijkstra.hpp
-  - Graph/enumerate_c3.hpp
+  - Graph/bipolar_orientation.hpp
+  - Graph/minimum_spanning_tree.hpp
+  - Graph/BipartiteMatching.hpp
   - Graph/Matching.hpp
   - Graph/minimum_arborescence.hpp
+  - Graph/bfs01.hpp
+  - Graph/incremental_scc.hpp
+  - Graph/eulerian_trail.hpp
+  - Graph/BipartiteGraph.hpp
+  - Graph/SCC.hpp
+  - Graph/count_eulerian_circuits.hpp
+  - Graph/bfs.hpp
+  - Graph/enumerate_c3.hpp
+  - Graph/Dijkstra.hpp
+  - Graph/BCC.hpp
+  - Graph/ECC.hpp
+  - Graph/dominator_tree.hpp
+  - Graph/count_spanning_tree.hpp
+  - Flow/bounded_cost_circulation.hpp
+  - Flow/min_cost_max_flow.hpp
+  - Flow/min_cost_circulation_old.hpp
+  - Flow/min_cost_circulation.hpp
+  - Flow/Dinic.hpp
+  - Flow/bounded_flow.hpp
   timestamp: '2026-09-21 23:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/0_custom/bounded_flow/bounded_flow.test.cpp
-  - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
-  - test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
-  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/other/two_sat.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
+  - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/graph/cycle_detection_directed.test.cpp
+  - test/1_library_checker/graph/general_matching.test.cpp
+  - test/1_library_checker/graph/minimum_spanning_tree.test.cpp
+  - test/1_library_checker/graph/min_cost_b_flow.test.cpp
+  - test/1_library_checker/graph/dominatortree.test.cpp
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - test/1_library_checker/graph/enumerate_triangles.test.cpp
-  - test/1_library_checker/graph/biconnected_components.test.cpp
   - test/1_library_checker/graph/two_edge_connected_components.test.cpp
   - test/1_library_checker/graph/st_numbering.test.cpp
+  - test/1_library_checker/graph/cycle_detection_undirected.test.cpp
   - test/1_library_checker/graph/eulerian_trail_undirected.test.cpp
-  - test/1_library_checker/graph/strongly_connected_components.test.cpp
   - test/1_library_checker/graph/shortest_path.test.cpp
-  - test/1_library_checker/graph/bipartitematching.test.cpp
-  - test/1_library_checker/graph/incremental_scc.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - test/1_library_checker/graph/strongly_connected_components.test.cpp
+  - test/1_library_checker/graph/enumerate_triangles.test.cpp
   - test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - test/1_library_checker/graph/dominatortree.test.cpp
-  - test/1_library_checker/graph/general_matching.test.cpp
-  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
   - test/1_library_checker/graph/eulerian_trail_directed.test.cpp
-  - test/1_library_checker/graph/directedmst.test.cpp
-  - test/1_library_checker/geometry/euclidean_mst.test.cpp
-  - test/1_library_checker/other/two_sat.test.cpp
-  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/graph/biconnected_components.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
+  - test/1_library_checker/graph/bipartitematching.test.cpp
+  - test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
+  - test/1_library_checker/graph/incremental_scc.test.cpp
+  - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
+  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
+  - test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
   - test/1_library_checker/tree/tree_diameter.test.cpp
   - test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - test/1_library_checker/tree/lca.test.cpp
-  - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
+  - test/1_library_checker/tree/lca.test.cpp
   - test/2_aoj/minimum_cost_flow.test.cpp
   - test/2_aoj/minimum_cost_flow_dijkstra.test.cpp
+  - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+  - test/0_custom/bounded_flow/bounded_flow.test.cpp
   - test/4_codeforces/106033E/106033E.test.cpp
 documentation_of: Graph/base.hpp
 layout: document

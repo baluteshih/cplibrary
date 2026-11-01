@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

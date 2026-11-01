@@ -119,9 +119,9 @@ data:
   timestamp: '2026-06-30 17:38:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-  - test/1_library_checker/tree/lca.test.cpp
   - test/1_library_checker/tree/jump_on_tree.test.cpp
+  - test/1_library_checker/tree/lca.test.cpp
+  - test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
 documentation_of: DataStructure/Doubling.hpp
 layout: document
 title: Doubling

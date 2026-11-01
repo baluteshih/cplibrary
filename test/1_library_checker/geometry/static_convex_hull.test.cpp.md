@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Misc/cyc_bitonic_search.hpp
     title: Misc/cyc_bitonic_search.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -182,83 +182,83 @@ data:
     \   Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(), vec.end()) {}\
     \ \n    template <typename U, U _eps, typename _MulT>\n    Polygon(const Polygon<U,\
     \ _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}\n    Point& at(int\
-    \ index) {\n        index %= this->size();\n        if (index < 0) index += this->size();\n\
-    \        return (*this)[index];\n    }\n    const Point& at(int index) const {\n\
-    \        index %= this->size();\n        if (index < 0) index += this->size();\n\
-    \        return (*this)[index];\n    }\n    Line edge(int index) const {\n   \
-    \     return Ln(at(index), at(index + 1));\n    }\n    // return twice of the\
-    \ true direct area\n    MulT area() {\n        MulT res = 0;\n        int n =\
-    \ this->size();\n        for (int i = 0; i < n; ++i)\n            res += cross((*this)[i],\
-    \ (*this)[(i + 1) % n]);\n        return res;\n    }\n    int polygon_dir() {\n\
-    \        return sign(area());\n    }\n    friend bool pointInPoly(const Point\
-    \ &p, const Polygon &a, bool strict = false) {\n        int n = a.size(), res\
-    \ = 0;\n        for (int i = 0; i < n; i++) {\n            Point u = a[i], v =\
-    \ a[(i + 1) % n];\n            if (pointOnSeg(p, Ln(u, v))) { return !strict;\
-    \ }\n            if (cmp(u.y, v.y) <= 0) { std::swap(u, v); }\n            if\
-    \ (cmp(p.y, u.y) > 0 || cmp(p.y, v.y) <= 0) { continue; }\n            res ^=\
-    \ sign(cross(p, u, v)) > 0;\n        }\n        return res;\n    }\n    friend\
-    \ bool pointStrictlyInPoly(const Point &p, const Polygon &a) {\n        return\
-    \ pointInPoly(p, a, true);\n    }\n    template <typename Ret = DefaultFloat<T>>\n\
-    \    friend Ret polyUnionArea(const std::vector<Polygon> &poly) {\n        auto\
-    \ rat = [&](const Point &a, const Point &b) {\n            return sign(b.x) ?\
-    \ Ret(a.x) / Ret(b.x) : Ret(a.y) / Ret(b.y);\n        };\n        Ret res = 0;\n\
-    \        for (auto &p : poly)\n            for (int a = 0; a < int(p.size());\
-    \ ++a) {\n                Point A = p[a], B = p[(a + 1) % int(p.size())];\n  \
-    \              std::vector<std::pair<Ret, int>> segs;\n                segs.emplace_back(Ret(0),\
-    \ 0);\n                segs.emplace_back(Ret(1), 0);\n                for (auto\
-    \ &q : poly) {\n                    if (&p == &q) continue;\n                \
-    \    for (int b = 0; b < int(q.size()); ++b) {\n                        Point\
-    \ C = q[b], D = q[(b + 1) % int(q.size())];\n                        int sc =\
-    \ side(A, B, C), sd = side(A, B, D);\n                        if (sc != sd &&\
-    \ std::min(sc, sd) < 0) {\n                            Ret sa = cross(D - C, A\
-    \ - C), sb = cross(D - C, B - C);\n                            segs.emplace_back(sa\
-    \ / (sa - sb), Geometry<int>::sign(sc - sd));\n                        }\n   \
-    \                     if (!sc && !sd && &q < &p && sign(dot(B - A, D - C)) > 0)\
-    \ {\n                            segs.emplace_back(rat(C - A, B - A), 1);\n  \
-    \                          segs.emplace_back(rat(D - A, B - A), -1);\n       \
-    \                 }\n                    }\n                }\n              \
-    \  std::ranges::sort(segs);\n                for (auto &s : segs) s.first = std::clamp(s.first,\
-    \ Ret(0), Ret(1));\n                Ret sum = 0;\n                int cnt = segs[0].second;\n\
-    \                for (int j = 1; j < int(segs.size()); ++j) {\n              \
-    \      if (!cnt) sum += segs[j].first - segs[j - 1].first;\n                 \
-    \   cnt += segs[j].second;\n                }\n                res += Ret(cross(A,\
-    \ B)) * sum;\n            }\n        return res / 2;\n    }\n};\n\ntemplate <typename\
-    \ PointType>\nstruct PolygonType;\n\ntemplate <typename T, T eps, typename MulT>\n\
-    struct PolygonType<Pt<T, eps, MulT>> {\n    using type = Polygon<T, eps, MulT>;\n\
-    };\n#line 2 \"Misc/cyc_bitonic_search.hpp\"\n\n/* \n   bool pred(int a, int b);\n\
-    \   a is better than b\n   f(0) ~ f(n - 1) is a cyclic-shift bitonic-function\n\
-    \   return idx s.t. pred(x, idx) is false forall x\n*/\nint cyc_bitonic_search(int\
-    \ n, auto pred) {\n    if (n == 1) return 0;\n    int l = 0, r = n; bool rv =\
-    \ pred(1, 0);\n    while (r - l > 1) {\n        int m = (l + r) / 2;\n       \
-    \ if (pred(0, m) ? rv: pred(m, (m + 1) % n)) r = m;\n        else l = m;\n   \
-    \ }\n    return pred(l, r % n) ? l : r % n;\n}\n\n/* \n   bool pred(int o, int\
-    \ a, int b);\n   a is better than b\n   f(o, 0) ~ f(o, n - 1) is a cyclic-shift\
-    \ bitonic-function\n   return idx[o] s.t. pred(o, x, idx[o]) is false forall x\n\
-    \   idx should be non-decreasing, and idx[o] != o\n*/\nstd::vector<int> rotating_calipers(int\
-    \ n, auto pred) {\n    assert(n >= 2);\n    std::vector<int> res(n, 1);\n    for\
-    \ (int i = 2; i < n; ++i)\n        if (pred(0, i, res[0]))\n            res[0]\
-    \ = i;\n    for (int i = 1; i < n; ++i) {\n        res[i] = res[i - 1];\n    \
-    \    while ((res[i] + 1) % n != i && pred(i, (res[i] + 1) % n, res[i] % n))\n\
-    \            ++res[i];\n        res[i] %= n;\n    }\n    return res;\n}\n#line\
-    \ 7 \"Geometry/convex.hpp\"\n\ntemplate <typename Point>\nPolygonType<Point>::type\
-    \ convexHull(std::vector<Point> dots, bool sort_and_unique = true) {\n    if (sort_and_unique)\
-    \ {\n        std::ranges::sort(dots);\n        dots.erase(std::ranges::unique(dots).begin(),\
-    \ dots.end());\n    }\n    int n = dots.size();\n    if (n <= 1) { return dots;\
-    \ }\n    std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i = 0; i\
-    \ < n; res[j++] = dots[i++]) {\n        while (j >= 2 && side(res[j - 2], res[j\
-    \ - 1], dots[i]) <= 0) { j--; }\n    }\n    for (int i = n - 2, k = j; i >= 0;\
-    \ res[j++] = dots[i--]) {\n        while (j > k && side(res[j - 2], res[j - 1],\
-    \ dots[i]) <= 0) { j--; }\n    }\n    res.resize(j - 1);\n    return res;\n}\n\
-    \ntemplate <typename Point>\nstd::pair<typename PolygonType<Point>::type, typename\
-    \ PolygonType<Point>::type> convexHullParts(std::vector<Point> dots, bool sort_and_unique\
-    \ = true) {\n    if (sort_and_unique) {\n        std::ranges::sort(dots);\n  \
-    \      dots.erase(std::ranges::unique(dots).begin(), dots.end());\n    }\n   \
-    \ int n = dots.size();\n    if (n <= 1) { return std::make_pair(dots, dots); }\n\
-    \    std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i = 0; i < n;\
-    \ res[j++] = dots[i++]) {\n        while (j >= 2 && side(res[j - 2], res[j - 1],\
-    \ dots[i]) <= 0) { j--; }\n    }\n    int k = j;\n    for (int i = n - 2; i >=\
-    \ 0; res[j++] = dots[i--]) {\n        while (j > k && side(res[j - 2], res[j -\
-    \ 1], dots[i]) <= 0) { j--; }\n    }\n    std::vector<Point> lower(res.begin(),\
+    \ index) {\n        index %= int(this->size());\n        if (index < 0) index\
+    \ += this->size();\n        return (*this)[index];\n    }\n    const Point& at(int\
+    \ index) const {\n        index %= this->size();\n        if (index < 0) index\
+    \ += this->size();\n        return (*this)[index];\n    }\n    Line edge(int index)\
+    \ const {\n        return Ln(at(index), at(index + 1));\n    }\n    // return\
+    \ twice of the true direct area\n    MulT area() {\n        MulT res = 0;\n  \
+    \      int n = this->size();\n        for (int i = 0; i < n; ++i)\n          \
+    \  res += cross((*this)[i], (*this)[(i + 1) % n]);\n        return res;\n    }\n\
+    \    int polygon_dir() {\n        return sign(area());\n    }\n    friend bool\
+    \ pointInPoly(const Point &p, const Polygon &a, bool strict = false) {\n     \
+    \   int n = a.size(), res = 0;\n        for (int i = 0; i < n; i++) {\n      \
+    \      Point u = a[i], v = a[(i + 1) % n];\n            if (pointOnSeg(p, Ln(u,\
+    \ v))) { return !strict; }\n            if (cmp(u.y, v.y) <= 0) { std::swap(u,\
+    \ v); }\n            if (cmp(p.y, u.y) > 0 || cmp(p.y, v.y) <= 0) { continue;\
+    \ }\n            res ^= sign(cross(p, u, v)) > 0;\n        }\n        return res;\n\
+    \    }\n    friend bool pointStrictlyInPoly(const Point &p, const Polygon &a)\
+    \ {\n        return pointInPoly(p, a, true);\n    }\n    template <typename Ret\
+    \ = DefaultFloat<T>>\n    friend Ret polyUnionArea(const std::vector<Polygon>\
+    \ &poly) {\n        auto rat = [&](const Point &a, const Point &b) {\n       \
+    \     return sign(b.x) ? Ret(a.x) / Ret(b.x) : Ret(a.y) / Ret(b.y);\n        };\n\
+    \        Ret res = 0;\n        for (auto &p : poly)\n            for (int a =\
+    \ 0; a < int(p.size()); ++a) {\n                Point A = p[a], B = p[(a + 1)\
+    \ % int(p.size())];\n                std::vector<std::pair<Ret, int>> segs;\n\
+    \                segs.emplace_back(Ret(0), 0);\n                segs.emplace_back(Ret(1),\
+    \ 0);\n                for (auto &q : poly) {\n                    if (&p == &q)\
+    \ continue;\n                    for (int b = 0; b < int(q.size()); ++b) {\n \
+    \                       Point C = q[b], D = q[(b + 1) % int(q.size())];\n    \
+    \                    int sc = side(A, B, C), sd = side(A, B, D);\n           \
+    \             if (sc != sd && std::min(sc, sd) < 0) {\n                      \
+    \      Ret sa = cross(D - C, A - C), sb = cross(D - C, B - C);\n             \
+    \               segs.emplace_back(sa / (sa - sb), Geometry<int>::sign(sc - sd));\n\
+    \                        }\n                        if (!sc && !sd && &q < &p\
+    \ && sign(dot(B - A, D - C)) > 0) {\n                            segs.emplace_back(rat(C\
+    \ - A, B - A), 1);\n                            segs.emplace_back(rat(D - A, B\
+    \ - A), -1);\n                        }\n                    }\n             \
+    \   }\n                std::ranges::sort(segs);\n                for (auto &s\
+    \ : segs) s.first = std::clamp(s.first, Ret(0), Ret(1));\n                Ret\
+    \ sum = 0;\n                int cnt = segs[0].second;\n                for (int\
+    \ j = 1; j < int(segs.size()); ++j) {\n                    if (!cnt) sum += segs[j].first\
+    \ - segs[j - 1].first;\n                    cnt += segs[j].second;\n         \
+    \       }\n                res += Ret(cross(A, B)) * sum;\n            }\n   \
+    \     return res / 2;\n    }\n};\n\ntemplate <typename PointType>\nstruct PolygonType;\n\
+    \ntemplate <typename T, T eps, typename MulT>\nstruct PolygonType<Pt<T, eps, MulT>>\
+    \ {\n    using type = Polygon<T, eps, MulT>;\n};\n#line 2 \"Misc/cyc_bitonic_search.hpp\"\
+    \n\n/* \n   bool pred(int a, int b);\n   a is better than b\n   f(0) ~ f(n - 1)\
+    \ is a cyclic-shift bitonic-function\n   return idx s.t. pred(x, idx) is false\
+    \ forall x\n*/\nint cyc_bitonic_search(int n, auto pred) {\n    if (n == 1) return\
+    \ 0;\n    int l = 0, r = n; bool rv = pred(1, 0);\n    while (r - l > 1) {\n \
+    \       int m = (l + r) / 2;\n        if (pred(0, m) ? rv: pred(m, (m + 1) % n))\
+    \ r = m;\n        else l = m;\n    }\n    return pred(l, r % n) ? l : r % n;\n\
+    }\n\n/* \n   bool pred(int o, int a, int b);\n   a is better than b\n   f(o, 0)\
+    \ ~ f(o, n - 1) is a cyclic-shift bitonic-function\n   return idx[o] s.t. pred(o,\
+    \ x, idx[o]) is false forall x\n   idx should be non-decreasing, and idx[o] !=\
+    \ o\n*/\nstd::vector<int> rotating_calipers(int n, auto pred) {\n    assert(n\
+    \ >= 2);\n    std::vector<int> res(n, 1);\n    for (int i = 2; i < n; ++i)\n \
+    \       if (pred(0, i, res[0]))\n            res[0] = i;\n    for (int i = 1;\
+    \ i < n; ++i) {\n        res[i] = res[i - 1];\n        while ((res[i] + 1) % n\
+    \ != i && pred(i, (res[i] + 1) % n, res[i] % n))\n            ++res[i];\n    \
+    \    res[i] %= n;\n    }\n    return res;\n}\n#line 7 \"Geometry/convex.hpp\"\n\
+    \ntemplate <typename Point>\nPolygonType<Point>::type convexHull(std::vector<Point>\
+    \ dots, bool sort_and_unique = true) {\n    if (sort_and_unique) {\n        std::ranges::sort(dots);\n\
+    \        dots.erase(std::ranges::unique(dots).begin(), dots.end());\n    }\n \
+    \   int n = dots.size();\n    if (n <= 1) { return dots; }\n    std::vector<Point>\
+    \ res(2 * n);\n    int j = 0;\n    for (int i = 0; i < n; res[j++] = dots[i++])\
+    \ {\n        while (j >= 2 && side(res[j - 2], res[j - 1], dots[i]) <= 0) { j--;\
+    \ }\n    }\n    for (int i = n - 2, k = j; i >= 0; res[j++] = dots[i--]) {\n \
+    \       while (j > k && side(res[j - 2], res[j - 1], dots[i]) <= 0) { j--; }\n\
+    \    }\n    res.resize(j - 1);\n    return res;\n}\n\ntemplate <typename Point>\n\
+    std::pair<typename PolygonType<Point>::type, typename PolygonType<Point>::type>\
+    \ convexHullParts(std::vector<Point> dots, bool sort_and_unique = true) {\n  \
+    \  if (sort_and_unique) {\n        std::ranges::sort(dots);\n        dots.erase(std::ranges::unique(dots).begin(),\
+    \ dots.end());\n    }\n    int n = dots.size();\n    if (n <= 1) { return std::make_pair(dots,\
+    \ dots); }\n    std::vector<Point> res(2 * n);\n    int j = 0;\n    for (int i\
+    \ = 0; i < n; res[j++] = dots[i++]) {\n        while (j >= 2 && side(res[j - 2],\
+    \ res[j - 1], dots[i]) <= 0) { j--; }\n    }\n    int k = j;\n    for (int i =\
+    \ n - 2; i >= 0; res[j++] = dots[i--]) {\n        while (j > k && side(res[j -\
+    \ 2], res[j - 1], dots[i]) <= 0) { j--; }\n    }\n    std::vector<Point> lower(res.begin(),\
     \ res.begin() + k);\n    std::vector<Point> upper(res.begin() + k - 1, res.begin()\
     \ + j);\n    std::ranges::reverse(upper);\n    return std::make_pair(lower, upper);\n\
     }\n\n// warning : if all point on same line will return {1, 2, 3, 2}\ntemplate\
@@ -338,7 +338,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/static_convex_hull.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-11-01 09:20:33+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/static_convex_hull.test.cpp

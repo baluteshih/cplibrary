@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/OfflineBichromaticNearest.hpp
     title: Geometry/OfflineBichromaticNearest.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   - icon: ':heavy_check_mark:'
     path: Misc/i256.hpp
     title: Misc/i256.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []

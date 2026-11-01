@@ -16,13 +16,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/DelaunayTriangulation.hpp
     title: Geometry/DelaunayTriangulation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/same_position.hpp
     title: Sequence/same_position.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   - icon: ':heavy_check_mark:'

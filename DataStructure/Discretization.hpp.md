@@ -66,12 +66,12 @@ data:
   timestamp: '2026-09-13 13:55:16+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
-  - test/1_library_checker/data_structure/ordered_set.test.cpp
-  - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
+  - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
+  - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
+  - test/1_library_checker/data_structure/ordered_set.test.cpp
+  - test/1_library_checker/data_structure/static_range_mode_query.test.cpp
 documentation_of: DataStructure/Discretization.hpp
 layout: document
 title: Discretization

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: assumption.hpp
     title: assumption.hpp
   _extendedRequiredBy: []
@@ -173,7 +173,7 @@ data:
     \ eps>::cmp;\n    Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(),\
     \ vec.end()) {} \n    template <typename U, U _eps, typename _MulT>\n    Polygon(const\
     \ Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}\n \
-    \   Point& at(int index) {\n        index %= this->size();\n        if (index\
+    \   Point& at(int index) {\n        index %= int(this->size());\n        if (index\
     \ < 0) index += this->size();\n        return (*this)[index];\n    }\n    const\
     \ Point& at(int index) const {\n        index %= this->size();\n        if (index\
     \ < 0) index += this->size();\n        return (*this)[index];\n    }\n    Line\
@@ -236,7 +236,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/area.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
+  timestamp: '2026-11-01 09:20:33+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/area.test.cpp

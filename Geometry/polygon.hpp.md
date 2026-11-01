@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
@@ -69,27 +69,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/2162.test.cpp
     title: test/9_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/polygon.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -240,7 +240,7 @@ data:
     \ eps>::cmp;\n    Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(),\
     \ vec.end()) {} \n    template <typename U, U _eps, typename _MulT>\n    Polygon(const\
     \ Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}\n \
-    \   Point& at(int index) {\n        index %= this->size();\n        if (index\
+    \   Point& at(int index) {\n        index %= int(this->size());\n        if (index\
     \ < 0) index += this->size();\n        return (*this)[index];\n    }\n    const\
     \ Point& at(int index) const {\n        index %= this->size();\n        if (index\
     \ < 0) index += this->size();\n        return (*this)[index];\n    }\n    Line\
@@ -292,7 +292,7 @@ data:
     \    using Geometry<MulT, eps>::cmp;\n    Polygon(const std::vector<Point> &vec)\
     \ : Polygon(vec.begin(), vec.end()) {} \n    template <typename U, U _eps, typename\
     \ _MulT>\n    Polygon(const Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(),\
-    \ other.end()) {}\n    Point& at(int index) {\n        index %= this->size();\n\
+    \ other.end()) {}\n    Point& at(int index) {\n        index %= int(this->size());\n\
     \        if (index < 0) index += this->size();\n        return (*this)[index];\n\
     \    }\n    const Point& at(int index) const {\n        index %= this->size();\n\
     \        if (index < 0) index += this->size();\n        return (*this)[index];\n\
@@ -342,35 +342,35 @@ data:
   isVerificationFile: false
   path: Geometry/polygon.hpp
   requiredBy:
-  - Geometry/furthest_pair.hpp
-  - Geometry/convex.hpp
   - Geometry/minimum_enclosing_circle.hpp
-  - Geometry/circle_cover.hpp
   - Geometry/outerTangentBetweenConvex.hpp
   - Geometry/circle.hpp
-  timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - Geometry/furthest_pair.hpp
+  - Geometry/circle_cover.hpp
+  - Geometry/convex.hpp
+  timestamp: '2026-11-01 09:20:33+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/6_TIOJ/1503.test.cpp
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/9_qoj/6445.test.cpp
-  - test/9_qoj/2162.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
-  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - test/2_aoj/cross_points_of_circles.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
-  - test/2_aoj/common_tangent.test.cpp
+  - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/polygon-point_containment.test.cpp
+  - test/2_aoj/cross_points_of_circles.test.cpp
   - test/2_aoj/area.test.cpp
+  - test/2_aoj/polygon-point_containment.test.cpp
   - test/2_aoj/convex_cut.test.cpp
-  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/type_of_circle.test.cpp
   - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/4_codeforces/101242J.test.cpp
+  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
+  - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
+  - test/2_aoj/common_tangent.test.cpp
+  - test/9_qoj/2162.test.cpp
+  - test/9_qoj/6445.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/4_codeforces/101673A.test.cpp
   - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/101242J.test.cpp
 documentation_of: Geometry/polygon.hpp
 layout: document
 redirect_from:

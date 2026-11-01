@@ -8,46 +8,46 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/OfflineBichromaticNearest.hpp
     title: Geometry/OfflineBichromaticNearest.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/closest_pair.hpp
     title: Geometry/closest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   - icon: ':heavy_check_mark:'
@@ -138,13 +138,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101242J.test.cpp
     title: test/4_codeforces/101242J.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/101673A.test.cpp
     title: test/4_codeforces/101673A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/4_codeforces/104114B.test.cpp
     title: test/4_codeforces/104114B.test.cpp
   - icon: ':heavy_check_mark:'
@@ -153,18 +153,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/6_TIOJ/1503.test.cpp
     title: test/6_TIOJ/1503.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/2162.test.cpp
     title: test/9_qoj/2162.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/base.hpp\"\n    \ntemplate <typename T>\nusing\
@@ -323,62 +323,62 @@ data:
   isVerificationFile: false
   path: Geometry/base.hpp
   requiredBy:
-  - Geometry/DelaunayTriangulation.hpp
-  - Geometry/polygon.hpp
-  - Geometry/half_plane_intersection.hpp
-  - Geometry/OfflineBichromaticNearest.hpp
-  - Geometry/furthest_pair.hpp
-  - Geometry/PointInAngle.hpp
-  - Geometry/convexHull3D.hpp
-  - Geometry/convex.hpp
-  - Geometry/minimum_enclosing_circle.hpp
   - Geometry/rotating_sweepline.hpp
-  - Geometry/circle_cover.hpp
-  - Geometry/closest_pair.hpp
+  - Geometry/centers.hpp
   - Geometry/line.hpp
+  - Geometry/minimum_enclosing_circle.hpp
+  - Geometry/half_plane_intersection.hpp
+  - Geometry/convexHull3D.hpp
+  - Geometry/polygon.hpp
   - Geometry/outerTangentBetweenConvex.hpp
   - Geometry/circle.hpp
+  - Geometry/DelaunayTriangulation.hpp
+  - Geometry/furthest_pair.hpp
+  - Geometry/PointInAngle.hpp
   - Geometry/Point3D.hpp
-  - Geometry/centers.hpp
+  - Geometry/circle_cover.hpp
+  - Geometry/convex.hpp
+  - Geometry/closest_pair.hpp
+  - Geometry/OfflineBichromaticNearest.hpp
   timestamp: '2026-06-18 21:56:55+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/6_TIOJ/1503.test.cpp
-  - test/0_custom/OfflineBichromaticNearest.test.cpp
-  - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/5_NCOJ/123.test.cpp
-  - test/5_NCOJ/929.test.cpp
-  - test/9_qoj/6445.test.cpp
-  - test/9_qoj/2162.test.cpp
-  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/1_library_checker/geometry/closest_pair.test.cpp
+  - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - test/2_aoj/cross_point.test.cpp
+  - test/5_NCOJ/929.test.cpp
+  - test/5_NCOJ/123.test.cpp
+  - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/distance.test.cpp
+  - test/2_aoj/tangent_to_a_circle.test.cpp
   - test/2_aoj/parallel-orthogonal.test.cpp
-  - test/2_aoj/type_of_circle.test.cpp
   - test/2_aoj/counter-clockwise.test.cpp
+  - test/2_aoj/cross_points_of_circles.test.cpp
+  - test/2_aoj/area.test.cpp
+  - test/2_aoj/polygon-point_containment.test.cpp
+  - test/2_aoj/incircle_of_a_triangle.test.cpp
+  - test/2_aoj/convex_cut.test.cpp
+  - test/2_aoj/minimum_enclosing_circle.test.cpp
+  - test/2_aoj/projection.test.cpp
+  - test/2_aoj/intersection.test.cpp
+  - test/2_aoj/type_of_circle.test.cpp
+  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
+  - test/2_aoj/cross_point.test.cpp
+  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
+  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/reflection.test.cpp
-  - test/2_aoj/cross_points_of_circles.test.cpp
-  - test/2_aoj/projection.test.cpp
-  - test/2_aoj/minimum_enclosing_circle.test.cpp
-  - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/common_tangent.test.cpp
-  - test/2_aoj/tangent_to_a_circle.test.cpp
-  - test/2_aoj/polygon-point_containment.test.cpp
-  - test/2_aoj/intersection.test.cpp
-  - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - test/2_aoj/area.test.cpp
-  - test/2_aoj/convex_cut.test.cpp
-  - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - test/4_codeforces/101242J.test.cpp
+  - test/9_qoj/2162.test.cpp
+  - test/9_qoj/6445.test.cpp
+  - test/0_custom/outerTangentBetweenConvex.test.cpp
+  - test/0_custom/OfflineBichromaticNearest.test.cpp
   - test/4_codeforces/101673A.test.cpp
   - test/4_codeforces/104114B.test.cpp
+  - test/4_codeforces/101242J.test.cpp
 documentation_of: Geometry/base.hpp
 layout: document
 redirect_from:

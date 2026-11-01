@@ -89,30 +89,30 @@ data:
   path: Algebra/size_value.hpp
   requiredBy:
   - Tree/LinkCutTree.hpp
-  - DataStructure/LeftistTree.hpp
-  - DataStructure/Treap.hpp
-  - DataStructure/Splay.hpp
   - Graph/minimum_arborescence.hpp
+  - DataStructure/Splay.hpp
+  - DataStructure/Treap.hpp
+  - DataStructure/LeftistTree.hpp
   timestamp: '2026-06-18 22:20:51+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/9_qoj/17153.test.cpp
   - test/1_library_checker/graph/directedmst.test.cpp
-  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
-  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
-  - test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
   - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum_splay.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_splay.test.cpp
+  - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
+  - test/1_library_checker/data_structure/ordered_set_treap.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue.test.cpp
+  - test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/1_library_checker/data_structure/persistent_queue_stackpool.test.cpp
   - test/8_luogu/P3835.test.cpp
   - test/8_luogu/P5055.test.cpp
+  - test/9_qoj/17153.test.cpp
 documentation_of: Algebra/size_value.hpp
 layout: document
 redirect_from:

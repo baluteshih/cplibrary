@@ -90,8 +90,8 @@ data:
   timestamp: '2026-05-04 10:37:09+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/1_library_checker/number_theory/primitive_root.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient.test.cpp
+  - test/1_library_checker/number_theory/primitive_root.test.cpp
 documentation_of: Numeric/primitive_root.hpp
 layout: document
 redirect_from:

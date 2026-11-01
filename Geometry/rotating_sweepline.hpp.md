@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy: []
@@ -173,8 +173,8 @@ data:
   timestamp: '2026-06-19 23:20:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/5_NCOJ/123.test.cpp
   - test/5_NCOJ/929.test.cpp
+  - test/5_NCOJ/123.test.cpp
 documentation_of: Geometry/rotating_sweepline.hpp
 layout: document
 redirect_from:
