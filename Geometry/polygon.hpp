@@ -15,7 +15,7 @@ public:
     template <typename U, U _eps, typename _MulT>
     Polygon(const Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}
     Point& at(int index) {
-        index %= this->size();
+        index %= int(this->size());
         if (index < 0) index += this->size();
         return (*this)[index];
     }
