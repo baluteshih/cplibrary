@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/reversable_linear_transform.hpp
     title: Algebra/Monoid/reversable_linear_transform.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/linear_transform.hpp\"\n\ntemplate<typename\
@@ -33,7 +33,7 @@ data:
   requiredBy:
   - Algebra/Monoid/reversable_linear_transform.hpp
   timestamp: '2026-10-03 12:08:22+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
 documentation_of: Algebra/Monoid/linear_transform.hpp

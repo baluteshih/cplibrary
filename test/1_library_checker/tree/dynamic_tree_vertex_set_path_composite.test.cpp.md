@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/linear_transform.hpp
     title: Algebra/Monoid/linear_transform.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/reversable_linear_transform.hpp
     title: Algebra/Monoid/reversable_linear_transform.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   - icon: ':question:'
@@ -33,9 +33,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
@@ -593,7 +593,7 @@ data:
   path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   requiredBy: []
   timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
 layout: document

@@ -8,14 +8,14 @@ data:
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SparseTable.hpp
     title: Sparse Table
   - icon: ':x:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/1_library_checker/tree/lca.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Doubling.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
@@ -120,7 +120,7 @@ data:
   - Tree/TreeTools.hpp
   - DataStructure/SparseTable.hpp
   timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/jump_on_tree.test.cpp
   - test/1_library_checker/tree/lca.test.cpp

@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_rmq.test.cpp
     title: test/1_library_checker/data_structure/static_rmq.test.cpp
   - icon: ':x:'

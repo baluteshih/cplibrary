@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
     title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/sum_and_size.hpp
     title: Algebra/Monoid/sum_and_size.hpp
   - icon: ':heavy_check_mark:'

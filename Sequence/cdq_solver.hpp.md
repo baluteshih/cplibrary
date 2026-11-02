@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
     title: test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
     title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Sequence/cdq_solver.hpp\"\n\ntemplate<typename E, typename\
@@ -47,7 +47,7 @@ data:
   path: Sequence/cdq_solver.hpp
   requiredBy: []
   timestamp: '2026-09-24 21:34:44+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/point_add_rectangle_sum.test.cpp
   - test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp

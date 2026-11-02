@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/DelaunayTriangulation.hpp
     title: Geometry/DelaunayTriangulation.hpp
   - icon: ':heavy_check_mark:'
@@ -11,7 +11,7 @@ data:
   - icon: ':x:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
   - icon: ':question:'
@@ -63,10 +63,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'

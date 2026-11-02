@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/sum_v-add.hpp
     title: Algebra/Acted_Monoid/sum_v-add.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/sum_v.hpp\"\n\ntemplate<typename T>\nstruct\
@@ -34,7 +34,7 @@ data:
   requiredBy:
   - Algebra/Acted_Monoid/sum_v-add.hpp
   timestamp: '2026-10-03 12:08:22+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
 documentation_of: Algebra/Monoid/sum_v.hpp

@@ -13,22 +13,22 @@ data:
   - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'
@@ -36,9 +36,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
@@ -398,7 +398,7 @@ data:
   path: test/1_library_checker/graph/directedmst.test.cpp
   requiredBy: []
   timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/directedmst.test.cpp
 layout: document

@@ -5,11 +5,11 @@ data:
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/count_eulerian_circuits.hpp
     title: Graph/count_eulerian_circuits.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/eulerian_trail_undirected.test.cpp
     title: test/1_library_checker/graph/eulerian_trail_undirected.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/eulerian_trail.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -183,7 +183,7 @@ data:
   requiredBy:
   - Graph/count_eulerian_circuits.hpp
   timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/eulerian_trail_undirected.test.cpp

@@ -5,22 +5,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
   - icon: ':heavy_check_mark:'
     path: DataStructure/PointerSegmentTree.hpp
     title: Pointer Segment Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':question:'
     path: DataStructure/Treap.hpp
     title: Treap
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   _extendedVerifiedWith:
@@ -69,22 +69,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - icon: ':x:'

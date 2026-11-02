@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/sum_and_size.hpp
     title: Algebra/Monoid/sum_and_size.hpp
   - icon: ':heavy_check_mark:'

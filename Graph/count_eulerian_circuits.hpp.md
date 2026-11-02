@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
   - icon: ':question:'
@@ -10,16 +10,16 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/eulerian_trail.hpp
     title: Graph/eulerian_trail.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
   - icon: ':question:'
@@ -27,12 +27,12 @@ data:
     title: Numeric/internal_math.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/count_eulerian_circuits.hpp\"\n\n#line 2 \"Graph/eulerian_trail.hpp\"\
@@ -395,7 +395,7 @@ data:
   path: Graph/count_eulerian_circuits.hpp
   requiredBy: []
   timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
 documentation_of: Graph/count_eulerian_circuits.hpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/eulerian_trail.hpp
     title: Graph/eulerian_trail.hpp
   - icon: ':question:'

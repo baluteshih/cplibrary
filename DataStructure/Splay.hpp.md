@@ -11,7 +11,7 @@ data:
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   _extendedVerifiedWith:
@@ -21,24 +21,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
     title: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Splay.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
@@ -604,7 +604,7 @@ data:
   requiredBy:
   - Tree/LinkCutTree.hpp
   timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
   - test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp

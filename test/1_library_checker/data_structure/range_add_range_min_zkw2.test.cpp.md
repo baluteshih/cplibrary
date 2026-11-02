@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/min_v-add.hpp
     title: Algebra/Acted_Monoid/min_v-add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/min_v.hpp
     title: Algebra/Monoid/min_v.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/ZkwSegmentTree.hpp
     title: Zkw Segment Tree
   - icon: ':question:'

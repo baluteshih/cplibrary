@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Sequence/cdq_solver.hpp
     title: Sequence/cdq_solver.hpp
   - icon: ':question:'

@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/Matching.hpp
     title: Graph/Matching.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':warning:'
@@ -50,13 +50,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/complement_bfs.hpp
     title: Graph/complement_bfs.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/count_eulerian_circuits.hpp
     title: Graph/count_eulerian_circuits.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -65,16 +65,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Graph/eulerian_trail.hpp
     title: Graph/eulerian_trail.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -89,7 +89,7 @@ data:
   - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':x:'
@@ -111,7 +111,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
     title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,16 +120,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
@@ -138,7 +138,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
     title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -156,13 +156,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - icon: ':heavy_check_mark:'

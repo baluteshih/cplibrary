@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Sequence/occur_position.hpp
     title: Sequence/occur_position.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Sequence/same_position.hpp
     title: Sequence/same_position.hpp
   _extendedVerifiedWith:
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: '#line 2 "Algebra/IterableOf.hpp"
@@ -48,7 +48,7 @@ data:
   - Sequence/same_position.hpp
   - Sequence/occur_position.hpp
   timestamp: '2026-06-29 20:59:50+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/number_of_subsequences.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp

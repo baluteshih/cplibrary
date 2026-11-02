@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':question:'
@@ -22,7 +22,7 @@ data:
   - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   - icon: ':question:'
