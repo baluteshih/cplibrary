@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/sum_and_size.hpp
     title: Algebra/Monoid/sum_and_size.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Acted_Monoid/sum_and_size-add.hpp\"\n\n#line 2 \"\
@@ -29,27 +29,26 @@ data:
     \        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
     \ is, sum_and_size &v) {\n        is >> v.val;\n        v.sz = 1;\n        return\
     \ is;\n    }\n};\n#line 2 \"Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T>\n\
-    struct add_tag {\n    T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag operator+(const\
-    \ add_tag &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n    add_tag\
+    struct add_tag {\n    T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag& operator+=(const\
+    \ add_tag &rhs) {\n        a += rhs.a;\n        return *this;\n    }\n    add_tag\
     \ operator-() const {\n        return add_tag(-a);\n    }\n    friend std::ostream&\
     \ operator<<(std::ostream& os, const add_tag &v) {\n        os << v.a;\n     \
     \   return os;\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-add.hpp\"\
-    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value> operator+(const\
-    \ sum_and_size<T, size_value> &lhs, const add_tag<T> &rhs) {\n    return sum_and_size<T,\
-    \ size_value>(lhs.val + rhs.a * lhs.sz, lhs.sz);  \n}\n"
+    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value>& operator+=(sum_and_size<T,\
+    \ size_value> &lhs, const add_tag<T> &rhs) {\n    lhs.val += rhs.a * lhs.sz;\n\
+    \    return lhs;\n}\n"
   code: "#pragma once\n\n#include \"Algebra/Monoid/sum_and_size.hpp\"\n#include \"\
     Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T, typename size_value>\nsum_and_size<T,\
-    \ size_value> operator+(const sum_and_size<T, size_value> &lhs, const add_tag<T>\
-    \ &rhs) {\n    return sum_and_size<T, size_value>(lhs.val + rhs.a * lhs.sz, lhs.sz);\
-    \  \n}\n"
+    \ size_value>& operator+=(sum_and_size<T, size_value> &lhs, const add_tag<T> &rhs)\
+    \ {\n    lhs.val += rhs.a * lhs.sz;\n    return lhs;\n}\n"
   dependsOn:
   - Algebra/Monoid/sum_and_size.hpp
   - Algebra/Tag/add_tag.hpp
   isVerificationFile: false
   path: Algebra/Acted_Monoid/sum_and_size-add.hpp
   requiredBy: []
-  timestamp: '2026-10-18 00:18:29+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
 documentation_of: Algebra/Acted_Monoid/sum_and_size-add.hpp

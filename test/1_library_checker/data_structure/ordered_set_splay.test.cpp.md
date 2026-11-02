@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Splay.hpp
     title: Splay
   - icon: ':question:'
@@ -38,28 +38,32 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 2 \"Algebra/size_value.hpp\"\n\nstruct size_v {\n    int\
-    \ sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v operator+(const size_v\
-    \ &rhs) const {\n        return size_v(sz + rhs.sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const size_v &v) {\n        os << v.sz;\n        return os;\n    }\n};\n\
-    #line 6 \"DataStructure/Splay.hpp\"\n\ntemplate<typename Key = void, \n      \
-    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
-    \ = false,\n         template<typename> class Allocator = DefaultAllocator\n>\n\
-    class Splay {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n    static\
-    \ constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr bool\
-    \ hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey = Addable<Key,\
-    \ Tag>;\n    static constexpr bool hasTagToValue = Addable<Value, Tag>;\n    static\
-    \ constexpr bool hasSize = requires(Value v) { v.size(); };\n    static constexpr\
-    \ bool hasValueReverse = requires(Value v) { v.reverse(); };\n    struct Empty\
-    \ {};\n    template <bool Condition, typename T>\n    static auto get_default()\
-    \ {\n        if constexpr (Condition) return T();\n        else return Empty{};\n\
-    \    }\n    static_assert(hasKey || hasValue);\n    static_assert(!hasValue ||\
-    \ Addable<Value, Value>);\n    static_assert(!hasTag || Addable<Tag, Tag>);\n\
-    public:\n    struct node {\n        node *l = nullptr, *r = nullptr, *f = nullptr;\n\
-    \        [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey,\
-    \ Key>();\n        [[no_unique_address]] std::conditional_t<hasValue, Value, Empty>\
-    \ org = get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 2 \"Algebra/size_value.hpp\"\
+    \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
+    \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 6 \"DataStructure/Splay.hpp\"\n\ntemplate<typename\
+    \ Key = void, \n         typename Value = size_v,\n         typename Tag = void,\
+    \ \n         bool Rev = false,\n         template<typename> class Allocator =\
+    \ DefaultAllocator\n>\nclass Splay {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n\
+    \    static constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr\
+    \ bool hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey =\
+    \ AssignAddable<Key, Tag>;\n    static constexpr bool hasTagToValue = AssignAddable<Value,\
+    \ Tag>;\n    static constexpr bool hasSize = requires(Value v) { v.size(); };\n\
+    \    static constexpr bool hasValueReverse = requires(Value v) { v.reverse();\
+    \ };\n    struct Empty {};\n    template <bool Condition, typename T>\n    static\
+    \ auto get_default() {\n        if constexpr (Condition) return T();\n       \
+    \ else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n    static_assert(!hasValue\
+    \ || Addable<Value, Value>);\n    static_assert(!hasTag || (AssignAddable<Tag,\
+    \ Tag> && (hasTagToKey || hasTagToValue)));\npublic:\n    struct node {\n    \
+    \    node *l = nullptr, *r = nullptr, *f = nullptr;\n        [[no_unique_address]]\
+    \ std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();\n \
+    \       [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> org =\
+    \ get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
     \ Value, Empty> val = get_default<hasValue, Value>();\n        [[no_unique_address]]\
     \ std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();\n\
     \        [[no_unique_address]] std::conditional_t<Rev, int, Empty> rev = get_default<Rev,\
@@ -69,82 +73,81 @@ data:
     \ val = l->val + val;\n                if (r) val = val + r->val;\n          \
     \  }\n            if (l) l->f = this;\n            if (r) r->f = this;\n     \
     \   }\n        void give_tag(const auto &tag) requires (hasTag) {\n          \
-    \  if constexpr (hasTagToValue) {\n                org = org + tag; \n       \
-    \         val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
-    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
-    \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
-    \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
-    \                val.reverse();\n            }\n            std::swap(l, r);\n\
-    \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
-    \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
-    \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
-    \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
-    \   else need_tag = true;\n            }\n            if (!need_rev && !need_tag)\
-    \ return;\n            if (l) {\n                if constexpr (hasTag) if (need_tag)\
-    \ l->give_tag(lazy);\n                if constexpr (Rev) if (need_rev) l->reverse();\n\
-    \            }\n            if (r) {\n                if constexpr (hasTag) if\
-    \ (need_tag) r->give_tag(lazy);\n                if constexpr (Rev) if (need_rev)\
-    \ r->reverse();\n            }\n            if constexpr (hasTag) lazy = Tag();\n\
-    \            if constexpr (Rev) rev = 0;\n        }\n        node() = default;\n\
-    \        node(const auto &v) requires (!hasKey || !hasValue) {\n            if\
-    \ constexpr (hasKey) key = Key(v);\n            else org = val = Value(v);\n \
-    \       }\n        node(const auto &k, const auto &v) requires (hasKey && hasValue)\
-    \ : key(k), org(v), val(v) {}\n        friend std::ostream& operator<<(std::ostream&\
-    \ os, const node &v) {\n            if constexpr (hasKey && hasValue) os << \"\
-    {key = \" << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr\
-    \ (hasKey) os << v.key;\n            else os << v.org;\n            return os;\n\
-    \        }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
-    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
-    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
-    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
-    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
-    \ r), std::cerr << \", \";\n            printnode(\"f\", f);\n            std::cerr\
-    \ << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void push_all(node *x) {\n        if (!x)\
-    \ return;\n        static std::vector<node*> st;\n        st.clear();\n      \
-    \  node *cur = x;\n        while (cur) {\n            st.push_back(cur);\n   \
-    \         if (cur->is_root()) break;\n            cur = cur->f;\n        }\n \
-    \       for (int i = (int)st.size() - 1; i >= 0; --i) {\n            if constexpr\
-    \ (hasTag || Rev) st[i]->down();\n        }\n    }\n    static void rotate(node\
-    \ *x) {\n        node *y = x->f, *z = y->f;\n        int k = (y->r == x);\n  \
-    \      if (!y->is_root()) (z->l == y ? z->l : z->r) = x;\n        x->f = z;\n\
-    \        node *c = (k ? x->l : x->r);\n        (k ? y->r : y->l) = c;\n      \
-    \  if (c) c->f = y;\n        (k ? x->l : x->r) = y;\n        y->f = x;\n     \
-    \   y->up();\n        x->up();\n    }\n    static void splay_node(node *x, node\
-    \ *goal = nullptr) {\n        if (!x) return;\n        while (x->f != goal &&\
-    \ !x->is_root()) {\n            node *y = x->f, *z = y->f;\n            if (y->f\
-    \ != goal && !y->is_root()) {\n                if ((z->l == y) ^ (y->l == x))\
-    \ rotate(x);\n                else rotate(y);\n            }\n            rotate(x);\n\
-    \        }\n    }\n    static void split(node *source, node *&left, node *&right,\
-    \ const auto &condition) {\n        if (!source) return void(left = right = nullptr);\n\
-    \        node *cur = source, *last = nullptr, *split_point = nullptr;\n      \
-    \  while (cur) {\n            if constexpr (hasTag || Rev) cur->down();\n    \
-    \        last = cur;\n            if (condition(cur)) {\n                split_point\
-    \ = cur;\n                cur = cur->r;\n            }\n            else {\n \
-    \               cur = cur->l;\n            }\n        }\n        if (last) splay_node(last);\n\
-    \        if (split_point) {\n            splay_node(split_point); \n         \
-    \   left = split_point;\n            right = left->r;\n            if (right)\
-    \ right->f = nullptr;\n            left->r = nullptr;\n            left->up();\n\
-    \        }\n        else {\n            left = nullptr;\n            right = last;\n\
-    \        }\n    }\n    static void split_value(node *source, node *&left, node\
-    \ *&right, const auto &condition) requires (hasValue) {\n        if (!source)\
+    \  if constexpr (hasTagToValue) {\n                org += tag; \n            \
+    \    val += tag;\n            }\n            if constexpr (hasTagToKey) {\n  \
+    \              key += tag;\n            }\n            lazy += tag;\n        }\n\
+    \        void reverse() requires (Rev) {\n            rev ^= 1;\n            if\
+    \ constexpr (hasValueReverse) {\n                org.reverse();\n            \
+    \    val.reverse();\n            }\n            std::swap(l, r);\n        }\n\
+    \        void down() requires (hasTag || Rev) {\n            bool need_rev = false;\n\
+    \            if constexpr (Rev) need_rev = rev;\n            bool need_tag = false;\n\
+    \            if constexpr (hasTag) { \n                if constexpr (std::equality_comparable<Tag>)\
+    \ need_tag = !(lazy == Tag());\n                else need_tag = true;\n      \
+    \      }\n            if (!need_rev && !need_tag) return;\n            if (l)\
+    \ {\n                if constexpr (hasTag) if (need_tag) l->give_tag(lazy);\n\
+    \                if constexpr (Rev) if (need_rev) l->reverse();\n            }\n\
+    \            if (r) {\n                if constexpr (hasTag) if (need_tag) r->give_tag(lazy);\n\
+    \                if constexpr (Rev) if (need_rev) r->reverse();\n            }\n\
+    \            if constexpr (hasTag) lazy = Tag();\n            if constexpr (Rev)\
+    \ rev = 0;\n        }\n        node() = default;\n        node(const auto &v)\
+    \ requires (!hasKey || !hasValue) {\n            if constexpr (hasKey) key = Key(v);\n\
+    \            else org = val = Value(v);\n        }\n        node(const auto &k,\
+    \ const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v) {}\n \
+    \       friend std::ostream& operator<<(std::ostream& os, const node &v) {\n \
+    \           if constexpr (hasKey && hasValue) os << \"{key = \" << v.key << \"\
+    , org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os << v.key;\n\
+    \            else os << v.org;\n            return os;\n        }\n        void\
+    \ debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \";\n       \
+    \     auto printnode = [&](std::string name, node* ptr) {\n                std::cerr\
+    \ << name << \": \";\n                if (ptr) std::cerr << *ptr;\n          \
+    \      else std::cerr << \"null\";\n            };\n            printnode(\"l\"\
+    , l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \",\
+    \ \";\n            printnode(\"f\", f);\n            std::cerr << \"\\e[0m\\n\"\
+    ;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root =\
+    \ nullptr;\n    static void push_all(node *x) {\n        if (!x) return;\n   \
+    \     static std::vector<node*> st;\n        st.clear();\n        node *cur =\
+    \ x;\n        while (cur) {\n            st.push_back(cur);\n            if (cur->is_root())\
+    \ break;\n            cur = cur->f;\n        }\n        for (int i = (int)st.size()\
+    \ - 1; i >= 0; --i) {\n            if constexpr (hasTag || Rev) st[i]->down();\n\
+    \        }\n    }\n    static void rotate(node *x) {\n        node *y = x->f,\
+    \ *z = y->f;\n        int k = (y->r == x);\n        if (!y->is_root()) (z->l ==\
+    \ y ? z->l : z->r) = x;\n        x->f = z;\n        node *c = (k ? x->l : x->r);\n\
+    \        (k ? y->r : y->l) = c;\n        if (c) c->f = y;\n        (k ? x->l :\
+    \ x->r) = y;\n        y->f = x;\n        y->up();\n        x->up();\n    }\n \
+    \   static void splay_node(node *x, node *goal = nullptr) {\n        if (!x) return;\n\
+    \        while (x->f != goal && !x->is_root()) {\n            node *y = x->f,\
+    \ *z = y->f;\n            if (y->f != goal && !y->is_root()) {\n             \
+    \   if ((z->l == y) ^ (y->l == x)) rotate(x);\n                else rotate(y);\n\
+    \            }\n            rotate(x);\n        }\n    }\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
     \ return void(left = right = nullptr);\n        node *cur = source, *last = nullptr,\
-    \ *split_point = nullptr;\n        Value left_product = Value();\n        while\
-    \ (cur) {\n            if constexpr (hasTag || Rev) cur->down();\n           \
-    \ last = cur;\n            Value current = left_product + get_val(cur->l) + cur->org;\
-    \ \n            if (condition(current)) {\n                split_point = cur;\n\
-    \                left_product = current;\n                cur = cur->r;\n    \
-    \        }\n            else {\n                cur = cur->l;\n            }\n\
+    \ *split_point = nullptr;\n        while (cur) {\n            if constexpr (hasTag\
+    \ || Rev) cur->down();\n            last = cur;\n            if (condition(cur))\
+    \ {\n                split_point = cur;\n                cur = cur->r;\n     \
+    \       }\n            else {\n                cur = cur->l;\n            }\n\
     \        }\n        if (last) splay_node(last);\n        if (split_point) {\n\
-    \            splay_node(split_point);\n            left = split_point;\n     \
-    \       right = left->r;\n            if (right) right->f = nullptr;\n       \
-    \     left->r = nullptr;\n            left->up();\n        }\n        else {\n\
+    \            splay_node(split_point); \n            left = split_point;\n    \
+    \        right = left->r;\n            if (right) right->f = nullptr;\n      \
+    \      left->r = nullptr;\n            left->up();\n        }\n        else {\n\
     \            left = nullptr;\n            right = last;\n        }\n    }\n  \
-    \  static Value prefix_product(node *&source, const auto &condition) requires\
-    \ (hasValue) {\n        if (!source) return Value();\n        node *cur = source,\
-    \ *last = nullptr;\n        Value res = Value();\n        while (cur) {\n    \
-    \        if constexpr (hasTag || Rev) cur->down();\n            last = cur;\n\
-    \            if (condition(cur)) {\n                res = res + get_val(cur->l)\
+    \  static void split_value(node *source, node *&left, node *&right, const auto\
+    \ &condition) requires (hasValue) {\n        if (!source) return void(left = right\
+    \ = nullptr);\n        node *cur = source, *last = nullptr, *split_point = nullptr;\n\
+    \        Value left_product = Value();\n        while (cur) {\n            if\
+    \ constexpr (hasTag || Rev) cur->down();\n            last = cur;\n          \
+    \  Value current = left_product + get_val(cur->l) + cur->org; \n            if\
+    \ (condition(current)) {\n                split_point = cur;\n               \
+    \ left_product = current;\n                cur = cur->r;\n            }\n    \
+    \        else {\n                cur = cur->l;\n            }\n        }\n   \
+    \     if (last) splay_node(last);\n        if (split_point) {\n            splay_node(split_point);\n\
+    \            left = split_point;\n            right = left->r;\n            if\
+    \ (right) right->f = nullptr;\n            left->r = nullptr;\n            left->up();\n\
+    \        }\n        else {\n            left = nullptr;\n            right = last;\n\
+    \        }\n    }\n    static Value prefix_product(node *&source, const auto &condition)\
+    \ requires (hasValue) {\n        if (!source) return Value();\n        node *cur\
+    \ = source, *last = nullptr;\n        Value res = Value();\n        while (cur)\
+    \ {\n            if constexpr (hasTag || Rev) cur->down();\n            last =\
+    \ cur;\n            if (condition(cur)) {\n                res = res + get_val(cur->l)\
     \ + cur->org;\n                cur = cur->r;\n            }\n            else\
     \ {\n                cur = cur->l;\n            }\n        }\n        if (last)\
     \ {\n            splay_node(last);\n            source = last;\n        }\n  \
@@ -362,7 +365,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/ordered_set_splay.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/ordered_set_splay.test.cpp

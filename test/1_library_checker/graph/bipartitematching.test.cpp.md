@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/BipartiteMatching.hpp
     title: Graph/BipartiteMatching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':question:'

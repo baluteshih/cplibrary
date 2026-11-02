@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/Acted_Monoid/sum_and_size-add.hpp
     title: Algebra/Acted_Monoid/sum_and_size-add.hpp
   - icon: ':heavy_check_mark:'
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/sum_and_size.hpp\"\n\ntemplate<typename T,\
@@ -52,7 +52,7 @@ data:
   - Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
   - Algebra/Acted_Monoid/sum_and_size-add.hpp
   timestamp: '2026-10-03 12:08:22+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

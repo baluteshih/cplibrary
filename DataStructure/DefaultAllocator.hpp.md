@@ -5,22 +5,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
   - icon: ':heavy_check_mark:'
     path: DataStructure/PointerSegmentTree.hpp
     title: Pointer Segment Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Splay.hpp
     title: Splay
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Treap.hpp
     title: Treap
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   _extendedVerifiedWith:
@@ -69,36 +69,36 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/DefaultAllocator.hpp\"\n\ntemplate<typename\
@@ -120,7 +120,7 @@ data:
   - DataStructure/PointerSegmentTree.hpp
   - DataStructure/LeftistTree.hpp
   timestamp: '2026-05-05 22:01:14+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp
   - test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp

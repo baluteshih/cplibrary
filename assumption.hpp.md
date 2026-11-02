@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: default_code.hpp
     title: default_code.hpp
   _extendedVerifiedWith:
@@ -147,10 +147,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum_splay.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
     title: test/1_library_checker/data_structure/rectangle_add_point_get.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,25 +159,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq.test.cpp
     title: test/1_library_checker/data_structure/static_rmq.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_sparsetable.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind.test.cpp
     title: test/1_library_checker/data_structure/unionfind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - icon: ':heavy_check_mark:'
@@ -210,10 +210,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
     title: test/1_library_checker/geometry/count_points_in_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -231,16 +231,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
@@ -249,13 +249,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
     title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/dominatortree.test.cpp
     title: test/1_library_checker/graph/dominatortree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/1_library_checker/graph/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -270,13 +270,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -291,28 +291,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/two_edge_connected_components.test.cpp
     title: test/1_library_checker/graph/two_edge_connected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -345,7 +345,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -408,49 +408,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/cartesian_tree.test.cpp
     title: test/1_library_checker/tree/cartesian_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -549,13 +549,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
   - icon: ':x:'

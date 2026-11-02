@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Splay.hpp
     title: Splay
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
@@ -43,28 +43,32 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 2 \"Algebra/size_value.hpp\"\n\nstruct size_v {\n    int\
-    \ sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v operator+(const size_v\
-    \ &rhs) const {\n        return size_v(sz + rhs.sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const size_v &v) {\n        os << v.sz;\n        return os;\n    }\n};\n\
-    #line 6 \"DataStructure/Splay.hpp\"\n\ntemplate<typename Key = void, \n      \
-    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
-    \ = false,\n         template<typename> class Allocator = DefaultAllocator\n>\n\
-    class Splay {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n    static\
-    \ constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr bool\
-    \ hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey = Addable<Key,\
-    \ Tag>;\n    static constexpr bool hasTagToValue = Addable<Value, Tag>;\n    static\
-    \ constexpr bool hasSize = requires(Value v) { v.size(); };\n    static constexpr\
-    \ bool hasValueReverse = requires(Value v) { v.reverse(); };\n    struct Empty\
-    \ {};\n    template <bool Condition, typename T>\n    static auto get_default()\
-    \ {\n        if constexpr (Condition) return T();\n        else return Empty{};\n\
-    \    }\n    static_assert(hasKey || hasValue);\n    static_assert(!hasValue ||\
-    \ Addable<Value, Value>);\n    static_assert(!hasTag || Addable<Tag, Tag>);\n\
-    public:\n    struct node {\n        node *l = nullptr, *r = nullptr, *f = nullptr;\n\
-    \        [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey,\
-    \ Key>();\n        [[no_unique_address]] std::conditional_t<hasValue, Value, Empty>\
-    \ org = get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 2 \"Algebra/size_value.hpp\"\
+    \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
+    \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 6 \"DataStructure/Splay.hpp\"\n\ntemplate<typename\
+    \ Key = void, \n         typename Value = size_v,\n         typename Tag = void,\
+    \ \n         bool Rev = false,\n         template<typename> class Allocator =\
+    \ DefaultAllocator\n>\nclass Splay {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n\
+    \    static constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr\
+    \ bool hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey =\
+    \ AssignAddable<Key, Tag>;\n    static constexpr bool hasTagToValue = AssignAddable<Value,\
+    \ Tag>;\n    static constexpr bool hasSize = requires(Value v) { v.size(); };\n\
+    \    static constexpr bool hasValueReverse = requires(Value v) { v.reverse();\
+    \ };\n    struct Empty {};\n    template <bool Condition, typename T>\n    static\
+    \ auto get_default() {\n        if constexpr (Condition) return T();\n       \
+    \ else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n    static_assert(!hasValue\
+    \ || Addable<Value, Value>);\n    static_assert(!hasTag || (AssignAddable<Tag,\
+    \ Tag> && (hasTagToKey || hasTagToValue)));\npublic:\n    struct node {\n    \
+    \    node *l = nullptr, *r = nullptr, *f = nullptr;\n        [[no_unique_address]]\
+    \ std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();\n \
+    \       [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> org =\
+    \ get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
     \ Value, Empty> val = get_default<hasValue, Value>();\n        [[no_unique_address]]\
     \ std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();\n\
     \        [[no_unique_address]] std::conditional_t<Rev, int, Empty> rev = get_default<Rev,\
@@ -74,82 +78,81 @@ data:
     \ val = l->val + val;\n                if (r) val = val + r->val;\n          \
     \  }\n            if (l) l->f = this;\n            if (r) r->f = this;\n     \
     \   }\n        void give_tag(const auto &tag) requires (hasTag) {\n          \
-    \  if constexpr (hasTagToValue) {\n                org = org + tag; \n       \
-    \         val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
-    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
-    \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
-    \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
-    \                val.reverse();\n            }\n            std::swap(l, r);\n\
-    \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
-    \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
-    \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
-    \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
-    \   else need_tag = true;\n            }\n            if (!need_rev && !need_tag)\
-    \ return;\n            if (l) {\n                if constexpr (hasTag) if (need_tag)\
-    \ l->give_tag(lazy);\n                if constexpr (Rev) if (need_rev) l->reverse();\n\
-    \            }\n            if (r) {\n                if constexpr (hasTag) if\
-    \ (need_tag) r->give_tag(lazy);\n                if constexpr (Rev) if (need_rev)\
-    \ r->reverse();\n            }\n            if constexpr (hasTag) lazy = Tag();\n\
-    \            if constexpr (Rev) rev = 0;\n        }\n        node() = default;\n\
-    \        node(const auto &v) requires (!hasKey || !hasValue) {\n            if\
-    \ constexpr (hasKey) key = Key(v);\n            else org = val = Value(v);\n \
-    \       }\n        node(const auto &k, const auto &v) requires (hasKey && hasValue)\
-    \ : key(k), org(v), val(v) {}\n        friend std::ostream& operator<<(std::ostream&\
-    \ os, const node &v) {\n            if constexpr (hasKey && hasValue) os << \"\
-    {key = \" << v.key << \", org = \" << v.org << \"}\";\n            else if constexpr\
-    \ (hasKey) os << v.key;\n            else os << v.org;\n            return os;\n\
-    \        }\n        void debuginfo() const {\n            std::cerr << \"\\e[1;33minfo:\
-    \ \";\n            auto printnode = [&](std::string name, node* ptr) {\n     \
-    \           std::cerr << name << \": \";\n                if (ptr) std::cerr <<\
-    \ *ptr;\n                else std::cerr << \"null\";\n            };\n       \
-    \     printnode(\"l\", l), std::cerr << \", \";\n            printnode(\"r\",\
-    \ r), std::cerr << \", \";\n            printnode(\"f\", f);\n            std::cerr\
-    \ << \"\\e[0m\\n\";\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\n    static void push_all(node *x) {\n        if (!x)\
-    \ return;\n        static std::vector<node*> st;\n        st.clear();\n      \
-    \  node *cur = x;\n        while (cur) {\n            st.push_back(cur);\n   \
-    \         if (cur->is_root()) break;\n            cur = cur->f;\n        }\n \
-    \       for (int i = (int)st.size() - 1; i >= 0; --i) {\n            if constexpr\
-    \ (hasTag || Rev) st[i]->down();\n        }\n    }\n    static void rotate(node\
-    \ *x) {\n        node *y = x->f, *z = y->f;\n        int k = (y->r == x);\n  \
-    \      if (!y->is_root()) (z->l == y ? z->l : z->r) = x;\n        x->f = z;\n\
-    \        node *c = (k ? x->l : x->r);\n        (k ? y->r : y->l) = c;\n      \
-    \  if (c) c->f = y;\n        (k ? x->l : x->r) = y;\n        y->f = x;\n     \
-    \   y->up();\n        x->up();\n    }\n    static void splay_node(node *x, node\
-    \ *goal = nullptr) {\n        if (!x) return;\n        while (x->f != goal &&\
-    \ !x->is_root()) {\n            node *y = x->f, *z = y->f;\n            if (y->f\
-    \ != goal && !y->is_root()) {\n                if ((z->l == y) ^ (y->l == x))\
-    \ rotate(x);\n                else rotate(y);\n            }\n            rotate(x);\n\
-    \        }\n    }\n    static void split(node *source, node *&left, node *&right,\
-    \ const auto &condition) {\n        if (!source) return void(left = right = nullptr);\n\
-    \        node *cur = source, *last = nullptr, *split_point = nullptr;\n      \
-    \  while (cur) {\n            if constexpr (hasTag || Rev) cur->down();\n    \
-    \        last = cur;\n            if (condition(cur)) {\n                split_point\
-    \ = cur;\n                cur = cur->r;\n            }\n            else {\n \
-    \               cur = cur->l;\n            }\n        }\n        if (last) splay_node(last);\n\
-    \        if (split_point) {\n            splay_node(split_point); \n         \
-    \   left = split_point;\n            right = left->r;\n            if (right)\
-    \ right->f = nullptr;\n            left->r = nullptr;\n            left->up();\n\
-    \        }\n        else {\n            left = nullptr;\n            right = last;\n\
-    \        }\n    }\n    static void split_value(node *source, node *&left, node\
-    \ *&right, const auto &condition) requires (hasValue) {\n        if (!source)\
+    \  if constexpr (hasTagToValue) {\n                org += tag; \n            \
+    \    val += tag;\n            }\n            if constexpr (hasTagToKey) {\n  \
+    \              key += tag;\n            }\n            lazy += tag;\n        }\n\
+    \        void reverse() requires (Rev) {\n            rev ^= 1;\n            if\
+    \ constexpr (hasValueReverse) {\n                org.reverse();\n            \
+    \    val.reverse();\n            }\n            std::swap(l, r);\n        }\n\
+    \        void down() requires (hasTag || Rev) {\n            bool need_rev = false;\n\
+    \            if constexpr (Rev) need_rev = rev;\n            bool need_tag = false;\n\
+    \            if constexpr (hasTag) { \n                if constexpr (std::equality_comparable<Tag>)\
+    \ need_tag = !(lazy == Tag());\n                else need_tag = true;\n      \
+    \      }\n            if (!need_rev && !need_tag) return;\n            if (l)\
+    \ {\n                if constexpr (hasTag) if (need_tag) l->give_tag(lazy);\n\
+    \                if constexpr (Rev) if (need_rev) l->reverse();\n            }\n\
+    \            if (r) {\n                if constexpr (hasTag) if (need_tag) r->give_tag(lazy);\n\
+    \                if constexpr (Rev) if (need_rev) r->reverse();\n            }\n\
+    \            if constexpr (hasTag) lazy = Tag();\n            if constexpr (Rev)\
+    \ rev = 0;\n        }\n        node() = default;\n        node(const auto &v)\
+    \ requires (!hasKey || !hasValue) {\n            if constexpr (hasKey) key = Key(v);\n\
+    \            else org = val = Value(v);\n        }\n        node(const auto &k,\
+    \ const auto &v) requires (hasKey && hasValue) : key(k), org(v), val(v) {}\n \
+    \       friend std::ostream& operator<<(std::ostream& os, const node &v) {\n \
+    \           if constexpr (hasKey && hasValue) os << \"{key = \" << v.key << \"\
+    , org = \" << v.org << \"}\";\n            else if constexpr (hasKey) os << v.key;\n\
+    \            else os << v.org;\n            return os;\n        }\n        void\
+    \ debuginfo() const {\n            std::cerr << \"\\e[1;33minfo: \";\n       \
+    \     auto printnode = [&](std::string name, node* ptr) {\n                std::cerr\
+    \ << name << \": \";\n                if (ptr) std::cerr << *ptr;\n          \
+    \      else std::cerr << \"null\";\n            };\n            printnode(\"l\"\
+    , l), std::cerr << \", \";\n            printnode(\"r\", r), std::cerr << \",\
+    \ \";\n            printnode(\"f\", f);\n            std::cerr << \"\\e[0m\\n\"\
+    ;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node *root =\
+    \ nullptr;\n    static void push_all(node *x) {\n        if (!x) return;\n   \
+    \     static std::vector<node*> st;\n        st.clear();\n        node *cur =\
+    \ x;\n        while (cur) {\n            st.push_back(cur);\n            if (cur->is_root())\
+    \ break;\n            cur = cur->f;\n        }\n        for (int i = (int)st.size()\
+    \ - 1; i >= 0; --i) {\n            if constexpr (hasTag || Rev) st[i]->down();\n\
+    \        }\n    }\n    static void rotate(node *x) {\n        node *y = x->f,\
+    \ *z = y->f;\n        int k = (y->r == x);\n        if (!y->is_root()) (z->l ==\
+    \ y ? z->l : z->r) = x;\n        x->f = z;\n        node *c = (k ? x->l : x->r);\n\
+    \        (k ? y->r : y->l) = c;\n        if (c) c->f = y;\n        (k ? x->l :\
+    \ x->r) = y;\n        y->f = x;\n        y->up();\n        x->up();\n    }\n \
+    \   static void splay_node(node *x, node *goal = nullptr) {\n        if (!x) return;\n\
+    \        while (x->f != goal && !x->is_root()) {\n            node *y = x->f,\
+    \ *z = y->f;\n            if (y->f != goal && !y->is_root()) {\n             \
+    \   if ((z->l == y) ^ (y->l == x)) rotate(x);\n                else rotate(y);\n\
+    \            }\n            rotate(x);\n        }\n    }\n    static void split(node\
+    \ *source, node *&left, node *&right, const auto &condition) {\n        if (!source)\
     \ return void(left = right = nullptr);\n        node *cur = source, *last = nullptr,\
-    \ *split_point = nullptr;\n        Value left_product = Value();\n        while\
-    \ (cur) {\n            if constexpr (hasTag || Rev) cur->down();\n           \
-    \ last = cur;\n            Value current = left_product + get_val(cur->l) + cur->org;\
-    \ \n            if (condition(current)) {\n                split_point = cur;\n\
-    \                left_product = current;\n                cur = cur->r;\n    \
-    \        }\n            else {\n                cur = cur->l;\n            }\n\
+    \ *split_point = nullptr;\n        while (cur) {\n            if constexpr (hasTag\
+    \ || Rev) cur->down();\n            last = cur;\n            if (condition(cur))\
+    \ {\n                split_point = cur;\n                cur = cur->r;\n     \
+    \       }\n            else {\n                cur = cur->l;\n            }\n\
     \        }\n        if (last) splay_node(last);\n        if (split_point) {\n\
-    \            splay_node(split_point);\n            left = split_point;\n     \
-    \       right = left->r;\n            if (right) right->f = nullptr;\n       \
-    \     left->r = nullptr;\n            left->up();\n        }\n        else {\n\
+    \            splay_node(split_point); \n            left = split_point;\n    \
+    \        right = left->r;\n            if (right) right->f = nullptr;\n      \
+    \      left->r = nullptr;\n            left->up();\n        }\n        else {\n\
     \            left = nullptr;\n            right = last;\n        }\n    }\n  \
-    \  static Value prefix_product(node *&source, const auto &condition) requires\
-    \ (hasValue) {\n        if (!source) return Value();\n        node *cur = source,\
-    \ *last = nullptr;\n        Value res = Value();\n        while (cur) {\n    \
-    \        if constexpr (hasTag || Rev) cur->down();\n            last = cur;\n\
-    \            if (condition(cur)) {\n                res = res + get_val(cur->l)\
+    \  static void split_value(node *source, node *&left, node *&right, const auto\
+    \ &condition) requires (hasValue) {\n        if (!source) return void(left = right\
+    \ = nullptr);\n        node *cur = source, *last = nullptr, *split_point = nullptr;\n\
+    \        Value left_product = Value();\n        while (cur) {\n            if\
+    \ constexpr (hasTag || Rev) cur->down();\n            last = cur;\n          \
+    \  Value current = left_product + get_val(cur->l) + cur->org; \n            if\
+    \ (condition(current)) {\n                split_point = cur;\n               \
+    \ left_product = current;\n                cur = cur->r;\n            }\n    \
+    \        else {\n                cur = cur->l;\n            }\n        }\n   \
+    \     if (last) splay_node(last);\n        if (split_point) {\n            splay_node(split_point);\n\
+    \            left = split_point;\n            right = left->r;\n            if\
+    \ (right) right->f = nullptr;\n            left->r = nullptr;\n            left->up();\n\
+    \        }\n        else {\n            left = nullptr;\n            right = last;\n\
+    \        }\n    }\n    static Value prefix_product(node *&source, const auto &condition)\
+    \ requires (hasValue) {\n        if (!source) return Value();\n        node *cur\
+    \ = source, *last = nullptr;\n        Value res = Value();\n        while (cur)\
+    \ {\n            if constexpr (hasTag || Rev) cur->down();\n            last =\
+    \ cur;\n            if (condition(cur)) {\n                res = res + get_val(cur->l)\
     \ + cur->org;\n                cur = cur->r;\n            }\n            else\
     \ {\n                cur = cur->l;\n            }\n        }\n        if (last)\
     \ {\n            splay_node(last);\n            source = last;\n        }\n  \
@@ -333,15 +336,18 @@ data:
     \        CompositeInfo operator+(const CompositeInfo& rhs) const {\n         \
     \   CompositeInfo res;\n            if constexpr (hasPath) res.path_val = this->path_val\
     \ + rhs.path_val;\n            if constexpr (hasSubtree) res.sub_val = this->sub_val\
-    \ + rhs.sub_val;\n            return res;\n        }\n        CompositeInfo operator+(const\
-    \ SafeTag& t) const requires (hasTag) {\n            CompositeInfo res = *this;\n\
-    \            if constexpr (Addable<Value, Tag>) res.org = res.org + t;\n     \
-    \       if constexpr (Addable<Path, Tag>) res.path_val = res.path_val + t;\n \
-    \           if constexpr (Addable<Subtree, Tag>) res.sub_val = res.sub_val + t;\n\
-    \            if constexpr (hasSubtree && hasInvertibleTag) res.vir_lazy = res.vir_lazy\
-    \ + t;\n            return res;\n        }\n        void reverse() {\n       \
-    \     if constexpr (hasPath && requires { path_val.reverse(); }) path_val.reverse();\n\
-    \            if constexpr (hasSubtree && requires { sub_val.reverse(); }) sub_val.reverse();\n\
+    \ + rhs.sub_val;\n            return res;\n        }\n        CompositeInfo& operator+=(const\
+    \ SafeTag& t) requires (hasTag) {\n            if constexpr (AssignAddable<Value,\
+    \ Tag>) org += t;\n            if constexpr (AssignAddable<Path, Tag>) path_val\
+    \ += t;\n            if constexpr (AssignAddable<Subtree, Tag>) sub_val += t;\n\
+    \            if constexpr (hasSubtree && hasInvertibleTag) vir_lazy += t;\n  \
+    \          return *this;\n        }\n        void update_sub_val() requires (hasSubtree)\
+    \ {\n            if constexpr (hasInvertibleTag) {\n                Subtree v_val\
+    \ = vir;\n                v_val += vir_lazy;\n                sub_val = Subtree(org)\
+    \ + v_val;\n            }\n            else {\n                sub_val = Subtree(org)\
+    \ + vir;\n            }\n        }\n        void reverse() {\n            if constexpr\
+    \ (hasPath && requires { path_val.reverse(); }) path_val.reverse();\n        \
+    \    if constexpr (hasSubtree && requires { sub_val.reverse(); }) sub_val.reverse();\n\
     \        }\n    };\npublic:\n    using SplayTree = Splay<void, CompositeInfo,\
     \ Tag, Rev, Allocator>;\n    using node = typename SplayTree::node;\n    void\
     \ splay(node* x) {\n        SplayTree::push_all(x);\n        SplayTree::splay_node(x);\n\
@@ -355,71 +361,58 @@ data:
     \ x) const requires (!std::is_void_v<Value>) {\n        access(x);\n        return\
     \ tr[x].org.org;\n    }\n    void set_val(int x, const SafeValue& v) requires\
     \ (hasValue) {\n        access(x);\n        tr[x].org.org = v;\n        if constexpr\
-    \ (hasPath) tr[x].org.path_val = Path(v);\n        if constexpr (hasSubtree) {\n\
-    \            if constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(v) +\
-    \ (tr[x].org.vir + tr[x].org.vir_lazy);\n            else tr[x].org.sub_val =\
-    \ Subtree(v) + tr[x].org.vir;\n        }\n        tr[x].up();\n    }\n    void\
-    \ transform(int x, const auto& func) {\n        access(x); \n        splay(&tr[x]);\n\
-    \        func(tr[x].org.org);\n        if constexpr (hasPath) tr[x].org.path_val\
-    \ = Path(tr[x].org.org);\n        if constexpr (hasSubtree) {\n            if\
-    \ constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(tr[x].org.org) + (tr[x].org.vir\
-    \ + tr[x].org.vir_lazy);\n            else tr[x].org.sub_val = Subtree(tr[x].org.org)\
-    \ + tr[x].org.vir;\n        }\n        tr[x].up();\n    }\n    int access(int\
-    \ x) {\n        node* curr = &tr[x];\n        node* last = nullptr;\n        for\
-    \ (node* y = curr; y; y = y->f) {\n            splay(y);\n            if constexpr\
-    \ (hasSubtree) {\n                static_assert(Subtractable<Subtree, Subtree>,\
-    \ \"Subtree requires operator- to maintain virtual trees\");\n               \
-    \ if (last) y->org.vir = y->org.vir - last->val.sub_val;\n                if constexpr\
-    \ (hasInvertibleTag) {\n                    if (y->r) y->r->give_tag(-y->org.vir_lazy);\n\
+    \ (hasPath) tr[x].org.path_val = Path(v);\n        if constexpr (hasSubtree) tr[x].org.update_sub_val();\n\
+    \        tr[x].up();\n    }\n    void transform(int x, const auto& func) {\n \
+    \       access(x); \n        splay(&tr[x]);\n        func(tr[x].org.org);\n  \
+    \      if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n    \
+    \    if constexpr (hasSubtree) tr[x].org.update_sub_val();\n        tr[x].up();\n\
+    \    }\n    int access(int x) {\n        node* curr = &tr[x];\n        node* last\
+    \ = nullptr;\n        for (node* y = curr; y; y = y->f) {\n            splay(y);\n\
+    \            if constexpr (hasSubtree) {\n                static_assert(Subtractable<Subtree,\
+    \ Subtree>, \"Subtree requires operator- to maintain virtual trees\");\n     \
+    \           if (last) y->org.vir = y->org.vir - last->val.sub_val;\n         \
+    \       if constexpr (hasInvertibleTag) {\n                    if (y->r) y->r->give_tag(-y->org.vir_lazy);\n\
     \                    if (last) last->give_tag(y->org.vir_lazy);\n            \
     \    }\n                if (y->r) y->org.vir = y->org.vir + y->r->val.sub_val;\n\
-    \                if constexpr (hasInvertibleTag) y->org.sub_val = Subtree(y->org.org)\
-    \ + (y->org.vir + y->org.vir_lazy);\n                else y->org.sub_val = Subtree(y->org.org)\
-    \ + y->org.vir;\n            }\n            y->r = last;\n            y->up();\n\
-    \            last = y;\n        }\n        splay(curr);\n        return last ?\
-    \ static_cast<int>(last - tr.data()) : -1;\n    }\n    int findroot(int x) {\n\
-    \        access(x);\n        node* curr = &tr[x];\n        while (true) {\n  \
-    \          if constexpr (hasTag || Rev) curr->down();\n            if (curr->l)\
-    \ curr = curr->l;\n            else break;\n        }\n        splay(curr);\n\
-    \        return curr - &tr[0];\n    }\n    bool is_connected(int x, int y) {\n\
-    \        return findroot(x) == findroot(y);\n    }\n    int get_lca(int x, int\
-    \ y) {\n        if (!is_connected(x, y)) return -1;\n        access(x);\n    \
-    \    return access(y);\n    }\n    void makeroot(int x) requires (Rev) {\n   \
-    \     access(x);\n        tr[x].reverse();\n    }\n    void split(int x, int y)\
-    \ requires (Rev) {\n        makeroot(x);\n        access(y);\n    }\n    bool\
+    \                y->org.update_sub_val();\n            }\n            y->r = last;\n\
+    \            y->up();\n            last = y;\n        }\n        splay(curr);\n\
+    \        return last ? static_cast<int>(last - tr.data()) : -1;\n    }\n    int\
+    \ findroot(int x) {\n        access(x);\n        node* curr = &tr[x];\n      \
+    \  while (true) {\n            if constexpr (hasTag || Rev) curr->down();\n  \
+    \          if (curr->l) curr = curr->l;\n            else break;\n        }\n\
+    \        splay(curr);\n        return curr - &tr[0];\n    }\n    bool is_connected(int\
+    \ x, int y) {\n        return findroot(x) == findroot(y);\n    }\n    int get_lca(int\
+    \ x, int y) {\n        if (!is_connected(x, y)) return -1;\n        access(x);\n\
+    \        return access(y);\n    }\n    void makeroot(int x) requires (Rev) {\n\
+    \        access(x);\n        tr[x].reverse();\n    }\n    void split(int x, int\
+    \ y) requires (Rev) {\n        makeroot(x);\n        access(y);\n    }\n    bool\
     \ link(int x, int y) requires (Rev) {\n        makeroot(x);\n        if (findroot(y)\
     \ == x) return false;\n        access(y);\n        splay(&tr[y]);\n        tr[x].f\
     \ = &tr[y];\n        if constexpr (hasSubtree) {\n            if constexpr (hasInvertibleTag)\
     \ {\n                tr[x].give_tag(-tr[y].org.vir_lazy);\n            }\n   \
-    \         tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;\n            if constexpr\
-    \ (hasInvertibleTag) tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir\
-    \ + tr[y].org.vir_lazy);\n            else tr[y].org.sub_val = Subtree(tr[y].org.org)\
-    \ + tr[y].org.vir;\n            tr[y].up();\n        }\n        return true;\n\
-    \    }\n    bool cut(int x, int y) requires (Rev) {\n        makeroot(x);\n  \
-    \      if (findroot(y) != x) return false;\n        access(y);\n        if (tr[y].l\
-    \ != &tr[x] || tr[x].r != nullptr) return false;\n        tr[y].l = nullptr;\n\
-    \        tr[x].f = nullptr;\n        tr[y].up();\n        return true;\n    }\n\
-    \    Path path_query(int x, int y) requires (hasPath && Rev) {\n        makeroot(x);\n\
-    \        access(y);\n        splay(&tr[y]);\n        return tr[y].val.path_val;\n\
-    \    }\n    void path_transform(int x, int y, const SafeTag& tag) requires (hasPath\
-    \ && hasTag && Rev) {\n        makeroot(x);\n        access(y);\n        splay(&tr[y]);\n\
-    \        tr[y].give_tag(tag);\n        tr[y].up();\n    }\n    Subtree subtree_query(int\
-    \ x) requires (hasSubtree) {\n        access(x);\n        splay(&tr[x]);\n   \
-    \     return tr[x].org.sub_val;\n    }\n    void subtree_transform(int x, const\
-    \ SafeTag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {\n      \
-    \  access(x);\n        splay(&tr[x]);\n        tr[x].org.org = tr[x].org.org +\
-    \ tag;\n        tr[x].org.vir_lazy = tr[x].org.vir_lazy + tag;\n        if constexpr\
-    \ (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n        tr[x].org.sub_val\
-    \ = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);\n        tr[x].up();\n\
-    \    }\n    bool link_directed(int child, int parent) {\n        if (is_connected(child,\
-    \ parent)) return false; \n        access(child);\n        splay(&tr[child]);\n\
-    \        if (tr[child].l) return false;\n        access(parent);\n        splay(&tr[parent]);\n\
-    \        tr[child].f = &tr[parent];\n        if constexpr (hasSubtree) {\n   \
-    \         if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);\n\
+    \         tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;\n            tr[y].org.update_sub_val();\n\
+    \            tr[y].up();\n        }\n        return true;\n    }\n    bool cut(int\
+    \ x, int y) requires (Rev) {\n        makeroot(x);\n        if (findroot(y) !=\
+    \ x) return false;\n        access(y);\n        if (tr[y].l != &tr[x] || tr[x].r\
+    \ != nullptr) return false;\n        tr[y].l = nullptr;\n        tr[x].f = nullptr;\n\
+    \        tr[y].up();\n        return true;\n    }\n    Path path_query(int x,\
+    \ int y) requires (hasPath && Rev) {\n        makeroot(x);\n        access(y);\n\
+    \        splay(&tr[y]);\n        return tr[y].val.path_val;\n    }\n    void path_transform(int\
+    \ x, int y, const SafeTag& tag) requires (hasPath && hasTag && Rev) {\n      \
+    \  makeroot(x);\n        access(y);\n        splay(&tr[y]);\n        tr[y].give_tag(tag);\n\
+    \        tr[y].up();\n    }\n    Subtree subtree_query(int x) requires (hasSubtree)\
+    \ {\n        access(x);\n        splay(&tr[x]);\n        return tr[x].org.sub_val;\n\
+    \    }\n    void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree\
+    \ && hasTag && hasInvertibleTag) {\n        access(x);\n        splay(&tr[x]);\n\
+    \        tr[x].org.org += tag;\n        tr[x].org.vir_lazy += tag;\n        if\
+    \ constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);\n        tr[x].org.update_sub_val();\n\
+    \        tr[x].up();\n    }\n    bool link_directed(int child, int parent) {\n\
+    \        if (is_connected(child, parent)) return false; \n        access(child);\n\
+    \        splay(&tr[child]);\n        if (tr[child].l) return false;\n        access(parent);\n\
+    \        splay(&tr[parent]);\n        tr[child].f = &tr[parent];\n        if constexpr\
+    \ (hasSubtree) {\n            if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);\n\
     \            tr[parent].org.vir = tr[parent].org.vir + tr[child].val.sub_val;\n\
-    \            if constexpr (hasInvertibleTag) tr[parent].org.sub_val = Subtree(tr[parent].org.org)\
-    \ + (tr[parent].org.vir + tr[parent].org.vir_lazy);\n            else tr[parent].org.sub_val\
-    \ = Subtree(tr[parent].org.org) + tr[parent].org.vir;\n            tr[parent].up();\n\
+    \            tr[parent].org.update_sub_val();\n            tr[parent].up();\n\
     \        }\n        return true;\n    }\n    bool cut_directed(int child) {\n\
     \        access(child);\n        splay(&tr[child]);\n        if (!tr[child].l)\
     \ return false; \n        tr[child].l->f = nullptr;\n        tr[child].l = nullptr;\n\
@@ -461,8 +454,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:33:30+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/tree/dynamic_tree_vertex_add_subtree_sum.test.cpp
 layout: document

@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/SCC.hpp\"\n\n#line 2 \"Graph/base.hpp\"\n\ntemplate<typename\
@@ -163,7 +163,7 @@ data:
   - Misc/2sat.hpp
   - Graph/incremental_scc.hpp
   timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/graph/strongly_connected_components.test.cpp

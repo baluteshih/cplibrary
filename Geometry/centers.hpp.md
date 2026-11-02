@@ -8,14 +8,14 @@ data:
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Geometry/DelaunayTriangulation.hpp
     title: Geometry/DelaunayTriangulation.hpp
   - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'

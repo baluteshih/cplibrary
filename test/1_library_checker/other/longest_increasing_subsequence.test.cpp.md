@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/Monoid/max_v.hpp
     title: Algebra/Monoid/max_v.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
   - icon: ':question:'
@@ -24,9 +24,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/longest_increasing_subsequence
@@ -54,30 +54,34 @@ data:
     \ && requires(A a, B b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Subtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b)\
     \ { a - b; };\n\ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
-    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
-    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"\
-    DataStructure/BIT.hpp\"\n\ntemplate<class T>\nrequires isCommutativeMonoid<T>\n\
-    class BIT { // 0-base\npublic:\n    int n;\n    T total_;\n    std::vector<T>\
-    \ bit;\n    BIT(int _n = 0) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range\
-    \ auto &arr) : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(),\
-    \ arr.end(), T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n   \
-    \         bit[x] = arr[x - 1];\n            int y = x - (x & -x);\n          \
-    \  for (int i = x - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] +\
-    \ bit[i];\n        }\n    }\n    void modify(int x, T v) {\n        total_ = total_\
-    \ + v;\n        for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] +\
-    \ v;\n    }\n    T prefix(int x) {\n        T res = T();\n        for (++x; x;\
-    \ x -= x & -x)\n            res = res + bit[x];\n        return res;\n    }\n\
-    \    T suffix(int x) requires Subtractable<T, T> {\n        return total_ - prefix(x\
-    \ - 1);\n    }\n    T range(int l, int r) requires Subtractable<T, T> { // [l,\
-    \ r)\n        if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l\
-    \ - 1);\n        return res;\n    }\n    int kth(int k) { // 0-base query\n  \
-    \      assert((n & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n     \
-    \   for (int i = n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n\
-    \                k -= bit[res += i];\n        }\n        return res;\n    }\n\
-    \    T total() {\n        return total_;\n    }\n};\n#line 2 \"Algebra/Monoid/max_v.hpp\"\
-    \n\ntemplate<typename T, T neginf = std::numeric_limits<T>::lowest()>\nstruct\
-    \ max_v {\n    T val;\n    max_v(T _val = neginf): val(_val) {}\n    max_v operator+(const\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n\ntemplate <typename\
+    \ A, typename B>\nconcept AssignAddable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a += b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ AssignSubtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A\
+    \ a, B b) { a -= b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 5 \"DataStructure/BIT.hpp\"\
+    \n\ntemplate<class T>\nrequires isCommutativeMonoid<T>\nclass BIT { // 0-base\n\
+    public:\n    int n;\n    T total_;\n    std::vector<T> bit;\n    BIT(int _n =\
+    \ 0) : n(_n), total_(), bit(n + 1) {}\n    BIT(const std::ranges::range auto &arr)\
+    \ : n(std::ranges::distance(arr)), total_(std::accumulate(arr.begin(), arr.end(),\
+    \ T())), bit(n + 1) {\n        for (int x = 1; x <= n; ++x) {\n            bit[x]\
+    \ = arr[x - 1];\n            int y = x - (x & -x);\n            for (int i = x\
+    \ - 1; i > y; i -= i & -i)\n                bit[x] = bit[x] + bit[i];\n      \
+    \  }\n    }\n    void modify(int x, T v) {\n        total_ = total_ + v;\n   \
+    \     for (++x; x <= n; x += x & -x)\n            bit[x] = bit[x] + v;\n    }\n\
+    \    T prefix(int x) {\n        T res = T();\n        for (++x; x; x -= x & -x)\n\
+    \            res = res + bit[x];\n        return res;\n    }\n    T suffix(int\
+    \ x) requires Subtractable<T, T> {\n        return total_ - prefix(x - 1);\n \
+    \   }\n    T range(int l, int r) requires Subtractable<T, T> { // [l, r)\n   \
+    \     if (l >= r) return T();\n        T res = prefix(r - 1) - prefix(l - 1);\n\
+    \        return res;\n    }\n    int kth(int k) { // 0-base query\n        assert((n\
+    \ & (n - 1)) == 0);\n        ++k;\n        int res = 0;\n        for (int i =\
+    \ n >> 1; i >= 1; i >>= 1) {\n            if (bit[res + i] < k)\n            \
+    \    k -= bit[res += i];\n        }\n        return res;\n    }\n    T total()\
+    \ {\n        return total_;\n    }\n};\n#line 2 \"Algebra/Monoid/max_v.hpp\"\n\
+    \ntemplate<typename T, T neginf = std::numeric_limits<T>::lowest()>\nstruct max_v\
+    \ {\n    T val;\n    max_v(T _val = neginf): val(_val) {}\n    max_v operator+(const\
     \ max_v &rhs) const {\n        return max_v(std::max(val, rhs.val));\n    }\n\
     \    friend std::ostream& operator<<(std::ostream& os, const max_v &v) {\n   \
     \     os << v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
@@ -116,8 +120,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:58:48+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
 layout: document

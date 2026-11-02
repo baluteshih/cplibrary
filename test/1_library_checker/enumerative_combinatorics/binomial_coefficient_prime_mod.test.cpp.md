@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/barrett.hpp
     title: Numeric/barrett.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'

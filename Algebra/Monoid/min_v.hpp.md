@@ -12,15 +12,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
     title: test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq.test.cpp
     title: test/1_library_checker/data_structure/static_rmq.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_zkw.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/min_v.hpp\"\n\ntemplate<typename T, T inf\
@@ -42,7 +42,7 @@ data:
   requiredBy:
   - Algebra/Acted_Monoid/min_v-add.hpp
   timestamp: '2026-07-21 00:35:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/static_rmq.test.cpp
   - test/1_library_checker/data_structure/static_rmq_zkw.test.cpp

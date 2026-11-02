@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
     title: test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/CatTree.hpp\"\n\n#line 2 \"Algebra/Monoid/concept.hpp\"\
@@ -23,14 +23,18 @@ data:
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
     \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
     \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
-    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
-    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
-    DataStructure/CatTree.hpp\"\n\ntemplate<typename Value = int>\nrequires isMonoid<Value>\n\
-    class CatTree {\n    int n;\n    std::vector<int> mid;\n    std::vector<std::vector<Value>>\
-    \ lft, rgt;\n    void initialize(int l, int r, int rt, const std::vector<Value>\
-    \ &data) {\n        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n\
-    \            return;\n        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt]\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n\ntemplate <typename\
+    \ A, typename B>\nconcept AssignAddable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a += b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ AssignSubtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A\
+    \ a, B b) { a -= b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/CatTree.hpp\"\
+    \n\ntemplate<typename Value = int>\nrequires isMonoid<Value>\nclass CatTree {\n\
+    \    int n;\n    std::vector<int> mid;\n    std::vector<std::vector<Value>> lft,\
+    \ rgt;\n    void initialize(int l, int r, int rt, const std::vector<Value> &data)\
+    \ {\n        if (r - l == 1) {\n            lft[rt].push_back(data[l]);\n    \
+    \        return;\n        }\n        mid[rt] = (l + r) >> 1;\n        lft[rt].resize(mid[rt]\
     \ - l);\n        rgt[rt].resize(r - mid[rt]);\n        for (int i = mid[rt] -\
     \ 1; i >= l; --i) {\n            lft[rt][mid[rt] - i - 1] = i < std::ssize(data)\
     \ ? data[i] : Value();\n            if (mid[rt] - i - 1 > 0)\n               \
@@ -77,8 +81,8 @@ data:
   isVerificationFile: false
   path: DataStructure/CatTree.hpp
   requiredBy: []
-  timestamp: '2026-06-30 17:38:58+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/data_structure/static_rmq_cattree.test.cpp
 documentation_of: DataStructure/CatTree.hpp

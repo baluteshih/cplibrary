@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/incremental_scc
@@ -282,12 +282,16 @@ data:
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
     \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
     \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
-    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
-    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
-    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
-    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
-    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n\ntemplate <typename\
+    \ A, typename B>\nconcept AssignAddable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a += b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ AssignSubtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A\
+    \ a, B b) { a -= b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
+    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
+    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/DisjointSet.hpp\"\
+    \n\ntemplate<typename T = void, bool undo_tag = false>\nclass DisjointSet {\n\
+    protected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n    int\
+    \ n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
     \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
     \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
     \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
@@ -368,8 +372,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/incremental_scc.test.cpp
   requiredBy: []
-  timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/incremental_scc.test.cpp
 layout: document

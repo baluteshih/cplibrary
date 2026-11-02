@@ -1,59 +1,59 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_eulerian_circuits.hpp
     title: Graph/count_eulerian_circuits.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: '#line 2 "Algebra/Field/concept.hpp"
@@ -78,6 +78,18 @@ data:
 
     concept Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
     a, B b) { a * b; };
+
+
+    template <typename A, typename B>
+
+    concept AssignAddable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a += b; };
+
+
+    template <typename A, typename B>
+
+    concept AssignSubtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A
+    a, B b) { a -= b; };
 
     #line 4 "Algebra/Field/concept.hpp"
 
@@ -107,8 +119,8 @@ data:
   - Matrix/Vector.hpp
   - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
-  timestamp: '2026-06-30 17:03:55+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
   - test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/min_v.hpp
     title: Algebra/Monoid/min_v.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Tag/add_tag.hpp
     title: Algebra/Tag/add_tag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
   _extendedRequiredBy: []
@@ -31,8 +31,8 @@ data:
     \     os << v.val;\n        return os;\n    }\n    friend std::istream& operator>>(std::istream&\
     \ is, min_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
     \ 2 \"Algebra/Tag/add_tag.hpp\"\n\ntemplate<typename T>\nstruct add_tag {\n  \
-    \  T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag operator+(const add_tag\
-    \ &rhs) const {\n        return add_tag(a + rhs.a);\n    }\n    add_tag operator-()\
+    \  T a;\n    add_tag(T _a = 0): a(_a) {}\n    add_tag& operator+=(const add_tag\
+    \ &rhs) {\n        a += rhs.a;\n        return *this;\n    }\n    add_tag operator-()\
     \ const {\n        return add_tag(-a);\n    }\n    friend std::ostream& operator<<(std::ostream&\
     \ os, const add_tag &v) {\n        os << v.a;\n        return os;\n    }\n};\n\
     #line 2 \"Algebra/ValidOperation.hpp\"\n\ntemplate <typename A, typename B>\n\
@@ -40,17 +40,21 @@ data:
     \ b) { a + b; };\n\ntemplate <typename A, typename B>\nconcept Subtractable =\
     \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a - b; };\n\
     \ntemplate <typename A, typename B>\nconcept Multiplicable = !std::is_void_v<A>\
-    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n#line 6 \"Algebra/Acted_Monoid/min_v-add.hpp\"\
-    \n\ntemplate<typename T, typename U>\nmin_v<T> operator+(const min_v<T> &lhs,\
-    \ const add_tag<U> &rhs) {\n    return min_v<T>(lhs.val + rhs.a);  \n}\n\ntemplate<typename\
-    \ T, typename U>\nmin_v<T> operator-(const min_v<T> &lhs, const add_tag<U> &rhs)\
-    \ requires (Subtractable<T, U>) {\n    return min_v<T>(lhs.val - rhs.a);  \n}\n"
+    \ && !std::is_void_v<B> && requires(A a, B b) { a * b; };\n\ntemplate <typename\
+    \ A, typename B>\nconcept AssignAddable = !std::is_void_v<A> && !std::is_void_v<B>\
+    \ && requires(A a, B b) { a += b; };\n\ntemplate <typename A, typename B>\nconcept\
+    \ AssignSubtractable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A\
+    \ a, B b) { a -= b; };\n#line 6 \"Algebra/Acted_Monoid/min_v-add.hpp\"\n\ntemplate<typename\
+    \ T, typename U>\nmin_v<T>& operator+=(min_v<T> &lhs, const add_tag<U> &rhs) {\n\
+    \    lhs.val += rhs.a;\n    return lhs;\n}\n\ntemplate<typename T, typename U>\n\
+    min_v<T>& operator-=(min_v<T> &lhs, const add_tag<U> &rhs) requires (AssignSubtractable<T,\
+    \ U>) {\n    lhs.val -= rhs.a;\n    return lhs;\n}\n"
   code: "#pragma once\n\n#include \"Algebra/Monoid/min_v.hpp\"\n#include \"Algebra/Tag/add_tag.hpp\"\
     \n#include \"Algebra/ValidOperation.hpp\"\n\ntemplate<typename T, typename U>\n\
-    min_v<T> operator+(const min_v<T> &lhs, const add_tag<U> &rhs) {\n    return min_v<T>(lhs.val\
-    \ + rhs.a);  \n}\n\ntemplate<typename T, typename U>\nmin_v<T> operator-(const\
-    \ min_v<T> &lhs, const add_tag<U> &rhs) requires (Subtractable<T, U>) {\n    return\
-    \ min_v<T>(lhs.val - rhs.a);  \n}\n"
+    min_v<T>& operator+=(min_v<T> &lhs, const add_tag<U> &rhs) {\n    lhs.val += rhs.a;\n\
+    \    return lhs;\n}\n\ntemplate<typename T, typename U>\nmin_v<T>& operator-=(min_v<T>\
+    \ &lhs, const add_tag<U> &rhs) requires (AssignSubtractable<T, U>) {\n    lhs.val\
+    \ -= rhs.a;\n    return lhs;\n}\n"
   dependsOn:
   - Algebra/Monoid/min_v.hpp
   - Algebra/Tag/add_tag.hpp
@@ -58,7 +62,7 @@ data:
   isVerificationFile: false
   path: Algebra/Acted_Monoid/min_v-add.hpp
   requiredBy: []
-  timestamp: '2026-10-18 00:18:29+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/range_add_range_min_zkw2.test.cpp

@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/Matching.hpp
     title: Graph/Matching.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
   - icon: ':warning:'
@@ -50,13 +50,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/bipolar_orientation.hpp
     title: Graph/bipolar_orientation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/complement_bfs.hpp
     title: Graph/complement_bfs.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_eulerian_circuits.hpp
     title: Graph/count_eulerian_circuits.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -65,40 +65,40 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/enumerate_c3.hpp
     title: Graph/enumerate_c3.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/eulerian_trail.hpp
     title: Graph/eulerian_trail.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/incremental_scc.hpp
     title: Graph/incremental_scc.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_arborescence.hpp
     title: Graph/minimum_arborescence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
     path: Misc/2sat.hpp
     title: Misc/2sat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -111,7 +111,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
     title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/geometry/euclidean_mst.test.cpp
     title: test/1_library_checker/geometry/euclidean_mst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,16 +120,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/bipartitematching.test.cpp
     title: test/1_library_checker/graph/bipartitematching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
     title: test/1_library_checker/graph/connected_components_of_complement_graph.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
@@ -138,7 +138,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
     title: test/1_library_checker/graph/cycle_detection_undirected.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -156,13 +156,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/general_matching.test.cpp
     title: test/1_library_checker/graph/general_matching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
     title: test/1_library_checker/graph/minimum_spanning_tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -180,37 +180,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -222,9 +222,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E/106033E.test.cpp
     title: test/4_codeforces/106033E/106033E.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/base.hpp\"\n\ntemplate<typename W>\nstruct edge_data\
@@ -457,7 +457,7 @@ data:
   - Flow/Dinic.hpp
   - Flow/bounded_flow.hpp
   timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp

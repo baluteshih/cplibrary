@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/SCC.hpp
     title: Graph/SCC.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/incremental_scc.hpp\"\n\n#line 2 \"Graph/SCC.hpp\"\
@@ -178,7 +178,7 @@ data:
   path: Graph/incremental_scc.hpp
   requiredBy: []
   timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/incremental_scc.test.cpp
 documentation_of: Graph/incremental_scc.hpp

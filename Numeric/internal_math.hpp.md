@@ -5,19 +5,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Convolution/OnlineConvolution.hpp
     title: Convolution/OnlineConvolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/convolution.hpp
     title: Convolution/convolution.hpp
   - icon: ':heavy_check_mark:'
     path: Convolution/xor_convolution.hpp
     title: Convolution/xor_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_eulerian_circuits.hpp
     title: Graph/count_eulerian_circuits.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
   - icon: ':heavy_check_mark:'
@@ -50,13 +50,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
   - icon: ':heavy_check_mark:'
@@ -65,7 +65,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   - icon: ':heavy_check_mark:'
@@ -153,10 +153,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
     title: test/1_library_checker/data_structure/range_affine_range_sum_pointer.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
     title: test/1_library_checker/data_structure/unionfind_with_potential_non_commutative_group.test.cpp
   - icon: ':heavy_check_mark:'
@@ -186,40 +186,40 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
     title: test/1_library_checker/graph/counting_eulerian_circuits.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_directed.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
     title: test/1_library_checker/graph/counting_spanning_tree_undirected.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/enumerate_triangles.test.cpp
     title: test/1_library_checker/graph/enumerate_triangles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -273,24 +273,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -440,7 +440,7 @@ data:
   - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

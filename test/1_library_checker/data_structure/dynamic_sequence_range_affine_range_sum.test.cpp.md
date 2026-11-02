@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Treap.hpp
     title: Treap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -148,28 +148,32 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 2 \"Algebra/size_value.hpp\"\n\nstruct size_v {\n    int\
-    \ sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v operator+(const size_v\
-    \ &rhs) const {\n        return size_v(sz + rhs.sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const size_v &v) {\n        os << v.sz;\n        return os;\n    }\n};\n\
-    #line 6 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n    #define RNGSEED 880301\n\
-    #endif\n\ntemplate<typename Key = void, \n         typename Value = size_v,\n\
-    \         typename Tag = void, \n         bool Rev = false,\n         template<typename>\
-    \ class Allocator = DefaultAllocator,\n         bool persistent = false\n>\nclass\
-    \ Treap {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n    static\
-    \ constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr bool\
-    \ hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey = Addable<Key,\
-    \ Tag>;\n    static constexpr bool hasTagToValue = Addable<Value, Tag>;\n    static\
-    \ constexpr bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
-    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
-    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
-    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
-    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
-    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
-    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
-    \    static_assert(!hasValue || Addable<Value, Value>);\n    static_assert(!hasTag\
-    \ || Addable<Tag, Tag>);\n    static inline std::conditional_t<!persistent, std::mt19937,\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 2 \"Algebra/size_value.hpp\"\
+    \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
+    \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 6 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n\
+    \    #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n      \
+    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
+    \ = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
+    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
+    \ hasKey = !std::is_void_v<Key>;\n    static constexpr bool hasValue = !std::is_void_v<Value>;\n\
+    \    static constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr\
+    \ bool hasTagToKey = AssignAddable<Key, Tag>;\n    static constexpr bool hasTagToValue\
+    \ = AssignAddable<Value, Tag>;\n    static constexpr bool usePri = !persistent;\n\
+    \    static constexpr bool hasSize = requires(Value v) { v.size(); };\n    static\
+    \ constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };\n    struct\
+    \ Empty {};\n    template <bool Condition, typename T>\n    static auto get_default()\
+    \ {\n        if constexpr (Condition) return T();\n        else return Empty{};\n\
+    \    }\n    template <bool Condition>\n    static auto get_pri() {\n        if\
+    \ constexpr (Condition) return rng();\n        else return Empty{};\n    }\n \
+    \   static_assert(hasKey || hasValue);\n    static_assert(!hasValue || Addable<Value,\
+    \ Value>);\n    static_assert(!hasTag || (AssignAddable<Tag, Tag> && (hasTagToKey\
+    \ || hasTagToValue)));\n    static inline std::conditional_t<!persistent, std::mt19937,\
     \ std::mt19937_64> rng{RNGSEED};\n    struct node {\n        node *l = nullptr,\
     \ *r = nullptr;\n        [[no_unique_address]] std::conditional_t<!persistent,\
     \ node*, Empty> f = get_default<!persistent, node*>();\n        [[no_unique_address]]\
@@ -186,13 +190,13 @@ data:
     \    if constexpr (!persistent) {\n                f = nullptr;\n            \
     \    if (l) l->f = this;\n                if (r) r->f = this;\n            }\n\
     \        }\n        void give_tag(const auto &tag) requires (hasTag) {\n     \
-    \       if constexpr (hasTagToValue) {\n                org = org + tag; \n  \
-    \              val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
-    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
-    \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
-    \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
-    \                val.reverse();\n            }\n            std::swap(l, r);\n\
-    \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
+    \       if constexpr (hasTagToValue) {\n                org += tag; \n       \
+    \         val += tag;\n            }\n            if constexpr (hasTagToKey) {\n\
+    \                key += tag;\n            }\n            lazy += tag;\n      \
+    \  }\n        void reverse() requires (Rev) {\n            rev ^= 1;\n       \
+    \     if constexpr (hasValueReverse) {\n                org.reverse();\n     \
+    \           val.reverse();\n            }\n            std::swap(l, r);\n    \
+    \    }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
     \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
     \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
     \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
@@ -408,59 +412,61 @@ data:
     \ {\n            return v.size() <= k;\n        }), this);\n    }\n};\n#line 6\
     \ \"test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \n\nusing mint = modint998244353;\n\nstruct Tag {\n    mint a, b;\n    Tag(mint\
-    \ _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag operator+(const Tag &rhs) {\n\
-    \        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\nstruct Value\
-    \ {\n    mint val;\n    int sz;\n    Value(mint a = 0, int b = 0): val(a), sz(b)\
-    \ {}\n    Value operator+(const Value &rhs) const {\n        return Value(val\
-    \ + rhs.val, sz + rhs.sz);\n    }\n    Value operator+(const Tag &tag) const {\n\
-    \        return Value(tag.a * val + tag.b * sz, sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    static Value get(int l, int r) {\n      \
-    \  return Value(0, r - l);\n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const Value &v) {\n        os << v.val;\n        return os;\n    }\n   \
-    \ friend std::istream& operator>>(std::istream& is, Value &v) {\n        is >>\
-    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void,\
-    \ Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n    for (int i = 0;\
-    \ i < n; ++i) {\n        Value v;\n        std::cin >> v;\n        tree.push_back(v);\n\
-    \    }\n    while (q--) {\n        int t;\n        std::cin >> t;\n        if\
-    \ (t == 0) {\n            int i;\n            Value v;\n            std::cin >>\
-    \ i >> v;\n            auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
-    \        }\n        else if (t == 1) {\n            int i;\n            std::cin\
-    \ >> i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else\
-    \ if (t == 2) {\n            int l, r;\n            std::cin >> l >> r;\n    \
-    \        tree.range_reverse(l, r);\n        }\n        else if (t == 3) {\n  \
-    \          int l, r;\n            Tag tag;\n            std::cin >> l >> r >>\
-    \ tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n        }\n \
-    \       else {\n            int l, r;\n            std::cin >> l >> r;\n     \
-    \       std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \ _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag& operator+=(const Tag &rhs) {\n\
+    \        a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n        return *this;\n\
+    \    }\n};\n\nstruct Value {\n    mint val;\n    int sz;\n    Value(mint a = 0,\
+    \ int b = 0): val(a), sz(b) {}\n    Value operator+(const Value &rhs) const {\n\
+    \        return Value(val + rhs.val, sz + rhs.sz);\n    }\n    Value& operator+=(const\
+    \ Tag &tag) {\n        val = tag.a * val + tag.b * sz;\n        return *this;\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    static Value get(int\
+    \ l, int r) {\n        return Value(0, r - l);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.val;\n     \
+    \   return os;\n    }\n    friend std::istream& operator>>(std::istream& is, Value\
+    \ &v) {\n        is >> v.val;\n        v.sz = 1;\n        return is;\n    }\n\
+    };\n\nusing treap = Treap<void, Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\
+    \    for (int i = 0; i < n; ++i) {\n        Value v;\n        std::cin >> v;\n\
+    \        tree.push_back(v);\n    }\n    while (q--) {\n        int t;\n      \
+    \  std::cin >> t;\n        if (t == 0) {\n            int i;\n            Value\
+    \ v;\n            std::cin >> i >> v;\n            auto lft = tree.split_size(i);\n\
+    \            tree.left_merge(treap(v)).left_merge(lft);\n        }\n        else\
+    \ if (t == 1) {\n            int i;\n            std::cin >> i;\n            tree.erase<false>(tree.kth(i));\n\
+    \        }\n        else if (t == 2) {\n            int l, r;\n            std::cin\
+    \ >> l >> r;\n            tree.range_reverse(l, r);\n        }\n        else if\
+    \ (t == 3) {\n            int l, r;\n            Tag tag;\n            std::cin\
+    \ >> l >> r >> tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n\
+    \        }\n        else {\n            int l, r;\n            std::cin >> l >>\
+    \ r;\n            std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n\
+    \    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
     \n#include \"assumption.hpp\"\n\n#include \"Numeric/Modint.hpp\"\n#include \"\
     DataStructure/Treap.hpp\"\n\nusing mint = modint998244353;\n\nstruct Tag {\n \
-    \   mint a, b;\n    Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag operator+(const\
-    \ Tag &rhs) {\n        return Tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n};\n\n\
-    struct Value {\n    mint val;\n    int sz;\n    Value(mint a = 0, int b = 0):\
-    \ val(a), sz(b) {}\n    Value operator+(const Value &rhs) const {\n        return\
-    \ Value(val + rhs.val, sz + rhs.sz);\n    }\n    Value operator+(const Tag &tag)\
-    \ const {\n        return Value(tag.a * val + tag.b * sz, sz);\n    }\n    int\
-    \ size() const {\n        return sz; \n    }\n    static Value get(int l, int\
-    \ r) {\n        return Value(0, r - l);\n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const Value &v) {\n        os << v.val;\n        return os;\n    }\n   \
-    \ friend std::istream& operator>>(std::istream& is, Value &v) {\n        is >>\
-    \ v.val;\n        v.sz = 1;\n        return is;\n    }\n};\n\nusing treap = Treap<void,\
-    \ Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
-    \    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n    for (int i = 0;\
-    \ i < n; ++i) {\n        Value v;\n        std::cin >> v;\n        tree.push_back(v);\n\
-    \    }\n    while (q--) {\n        int t;\n        std::cin >> t;\n        if\
-    \ (t == 0) {\n            int i;\n            Value v;\n            std::cin >>\
-    \ i >> v;\n            auto lft = tree.split_size(i);\n            tree.left_merge(treap(v)).left_merge(lft);\n\
-    \        }\n        else if (t == 1) {\n            int i;\n            std::cin\
-    \ >> i;\n            tree.erase<false>(tree.kth(i));\n        }\n        else\
-    \ if (t == 2) {\n            int l, r;\n            std::cin >> l >> r;\n    \
-    \        tree.range_reverse(l, r);\n        }\n        else if (t == 3) {\n  \
-    \          int l, r;\n            Tag tag;\n            std::cin >> l >> r >>\
-    \ tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n        }\n \
-    \       else {\n            int l, r;\n            std::cin >> l >> r;\n     \
-    \       std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n    }\n}\n"
+    \   mint a, b;\n    Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}\n    Tag& operator+=(const\
+    \ Tag &rhs) {\n        a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n        return\
+    \ *this;\n    }\n};\n\nstruct Value {\n    mint val;\n    int sz;\n    Value(mint\
+    \ a = 0, int b = 0): val(a), sz(b) {}\n    Value operator+(const Value &rhs) const\
+    \ {\n        return Value(val + rhs.val, sz + rhs.sz);\n    }\n    Value& operator+=(const\
+    \ Tag &tag) {\n        val = tag.a * val + tag.b * sz;\n        return *this;\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    static Value get(int\
+    \ l, int r) {\n        return Value(0, r - l);\n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const Value &v) {\n        os << v.val;\n     \
+    \   return os;\n    }\n    friend std::istream& operator>>(std::istream& is, Value\
+    \ &v) {\n        is >> v.val;\n        v.sz = 1;\n        return is;\n    }\n\
+    };\n\nusing treap = Treap<void, Value, Tag, true>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    treap tree;\n\
+    \    for (int i = 0; i < n; ++i) {\n        Value v;\n        std::cin >> v;\n\
+    \        tree.push_back(v);\n    }\n    while (q--) {\n        int t;\n      \
+    \  std::cin >> t;\n        if (t == 0) {\n            int i;\n            Value\
+    \ v;\n            std::cin >> i >> v;\n            auto lft = tree.split_size(i);\n\
+    \            tree.left_merge(treap(v)).left_merge(lft);\n        }\n        else\
+    \ if (t == 1) {\n            int i;\n            std::cin >> i;\n            tree.erase<false>(tree.kth(i));\n\
+    \        }\n        else if (t == 2) {\n            int l, r;\n            std::cin\
+    \ >> l >> r;\n            tree.range_reverse(l, r);\n        }\n        else if\
+    \ (t == 3) {\n            int l, r;\n            Tag tag;\n            std::cin\
+    \ >> l >> r >> tag.a >> tag.b;\n            tree.range_transform(l, r, tag);\n\
+    \        }\n        else {\n            int l, r;\n            std::cin >> l >>\
+    \ r;\n            std::cout << tree.range_prod(l, r) << \"\\n\";\n        }\n\
+    \    }\n}\n"
   dependsOn:
   - assumption.hpp
   - Numeric/Modint.hpp
@@ -472,7 +478,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-07-12 15:36:33+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_sequence_range_affine_range_sum.test.cpp

@@ -4,25 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
     title: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/sum_and_size.hpp
     title: Algebra/Monoid/sum_and_size.hpp
   - icon: ':heavy_check_mark:'
     path: Algebra/Tag/linear_transform_tag.hpp
     title: Algebra/Tag/linear_transform_tag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -51,20 +51,23 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 5 \"DataStructure/KDTree.hpp\"\n\n#ifndef KDTREE_ALPHA\n\
-    \    #define KDTREE_ALPHA 0.75\n#endif\n\nenum class KDIntersect { OUTSIDE = 0,\
-    \ INSIDE = 1, PARTIAL = 2 };\n\ntemplate<size_t K,\n         typename Coord =\
-    \ long long,\n         typename Value = void,\n         typename Tag = void,\n\
-    \         template<typename> class Allocator = DefaultAllocator\n>\nclass KDTree\
-    \ {\n    static constexpr bool hasValue = !std::is_void_v<Value>;\n    static\
-    \ constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToValue\
-    \ = Addable<Value, Tag>;\n    struct Empty {};\n    template <bool Condition,\
-    \ typename T>\n    static auto get_default() {\n        if constexpr (Condition)\
-    \ return T();\n        else return Empty{};\n    }\n    static_assert(!hasValue\
-    \ || Addable<Value, Value>);\n    static_assert(!hasTag || Addable<Tag, Tag>);\n\
-    public:\n    using Point = std::array<Coord, K>;\n\n    struct node {\n      \
-    \  node *l = nullptr, *r = nullptr;\n        Point pt;\n        Point mn, mx;\n\
-    \        int sz = 1;\n        [[no_unique_address]] std::conditional_t<hasValue,\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 5 \"DataStructure/KDTree.hpp\"\
+    \n\n#ifndef KDTREE_ALPHA\n    #define KDTREE_ALPHA 0.75\n#endif\n\nenum class\
+    \ KDIntersect { OUTSIDE = 0, INSIDE = 1, PARTIAL = 2 };\n\ntemplate<size_t K,\n\
+    \         typename Coord = long long,\n         typename Value = void,\n     \
+    \    typename Tag = void,\n         template<typename> class Allocator = DefaultAllocator\n\
+    >\nclass KDTree {\n    static constexpr bool hasValue = !std::is_void_v<Value>;\n\
+    \    static constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr\
+    \ bool hasTagToValue = AssignAddable<Value, Tag>;\n    struct Empty {};\n    template\
+    \ <bool Condition, typename T>\n    static auto get_default() {\n        if constexpr\
+    \ (Condition) return T();\n        else return Empty{};\n    }\n    static_assert(!hasValue\
+    \ || Addable<Value, Value>);\n    static_assert(!hasTag || (AssignAddable<Tag,\
+    \ Tag> && hasTagToValue));\npublic:\n    using Point = std::array<Coord, K>;\n\
+    \n    struct node {\n        node *l = nullptr, *r = nullptr;\n        Point pt;\n\
+    \        Point mn, mx;\n        int sz = 1;\n        [[no_unique_address]] std::conditional_t<hasValue,\
     \ Value, Empty> org = get_default<hasValue, Value>();\n        [[no_unique_address]]\
     \ std::conditional_t<hasValue, Value, Empty> val = get_default<hasValue, Value>();\n\
     \        [[no_unique_address]] std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag,\
@@ -81,41 +84,41 @@ data:
     \ std::min(mn[i], r->mn[i]);\n                    mx[i] = std::max(mx[i], r->mx[i]);\n\
     \                }\n                if constexpr (hasValue) val = val + r->val;\n\
     \            }\n        }\n        void give_tag(const auto &tag) requires (hasTag)\
-    \ {\n            if constexpr (hasTagToValue) {\n                org = org + tag;\n\
-    \                val = val + tag; \n            }\n            lazy = lazy + tag;\n\
-    \        }\n        void down() requires (hasTag) {\n            bool need_tag\
-    \ = false;\n            if constexpr (std::equality_comparable<Tag>) need_tag\
-    \ = !(lazy == Tag());\n            else need_tag = true;\n            \n     \
-    \       if (!need_tag) return;\n            \n            if (l) l->give_tag(lazy);\n\
-    \            if (r) r->give_tag(lazy);\n            lazy = Tag();\n        }\n\
-    \        friend std::ostream& operator<<(std::ostream& os, const node &v) {\n\
-    \            os << \"(\";\n            for(size_t i=0; i<K; ++i) os << v.pt[i]\
-    \ << (i+1==K ? \"\" : \", \");\n            os << \")\";\n            if constexpr\
-    \ (hasValue) os << \" {org = \" << v.org << \", val = \" << v.val << \"}\";\n\
-    \            return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n\
-    \    node *root = nullptr;\nprivate:\n    static void free(node *&ptr) {\n   \
-    \     if (ptr == nullptr) return;\n        free(ptr->l);\n        free(ptr->r);\n\
-    \        NodeAlloc::deallocate(ptr);\n        ptr = nullptr;\n    }\n    static\
-    \ void flatten(node *u, std::vector<node*>& res) {\n        if (!u) return;\n\
-    \        if constexpr (hasTag) u->down();\n        flatten(u->l, res);\n     \
-    \   res.push_back(u);\n        flatten(u->r, res);\n    }\n    static bool cmp_less(node*\
-    \ a, node* b, int dim) {\n        if (a->pt[dim] != b->pt[dim]) return a->pt[dim]\
-    \ < b->pt[dim];\n        return std::less<node*>{}(a, b);\n    }\n    static node*\
-    \ build_tree(std::vector<node*>& nodes, int l, int r, int dim) {\n        if (l\
-    \ > r) return nullptr;\n        int mid = l + (r - l) / 2;\n        std::nth_element(nodes.begin()\
-    \ + l, nodes.begin() + mid, nodes.begin() + r + 1, [dim](node* a, node* b) {\n\
-    \            return cmp_less(a, b, dim);\n        });\n        node *u = nodes[mid];\n\
-    \        u->l = build_tree(nodes, l, mid - 1, (dim + 1) % K);\n        u->r =\
-    \ build_tree(nodes, mid + 1, r, (dim + 1) % K);\n        u->up();\n        return\
-    \ u;\n    }\n    static void insert_impl(node*& u, node* target, int dim, node**&\
-    \ rebuild_ptr, int& rebuild_dim) {\n        if (!u) {\n            u = target;\n\
-    \            u->up();\n            return;\n        }\n        if constexpr (hasTag)\
-    \ u->down();\n        if (cmp_less(target, u, dim))\n            insert_impl(u->l,\
-    \ target, (dim + 1) % K, rebuild_ptr, rebuild_dim);\n        else\n          \
-    \  insert_impl(u->r, target, (dim + 1) % K, rebuild_ptr, rebuild_dim);\n     \
-    \   u->up();\n        int max_sz = std::max(u->l ? u->l->sz : 0, u->r ? u->r->sz\
-    \ : 0);\n        if (max_sz > u->sz * KDTREE_ALPHA) {\n            rebuild_ptr\
-    \ = &u;\n            rebuild_dim = dim;\n        }\n    }\n    static Value query_range_impl(node\
+    \ {\n            if constexpr (hasTagToValue) {\n                org += tag;\n\
+    \                val += tag; \n            }\n            lazy += tag;\n     \
+    \   }\n        void down() requires (hasTag) {\n            bool need_tag = false;\n\
+    \            if constexpr (std::equality_comparable<Tag>) need_tag = !(lazy ==\
+    \ Tag());\n            else need_tag = true;\n            \n            if (!need_tag)\
+    \ return;\n            \n            if (l) l->give_tag(lazy);\n            if\
+    \ (r) r->give_tag(lazy);\n            lazy = Tag();\n        }\n        friend\
+    \ std::ostream& operator<<(std::ostream& os, const node &v) {\n            os\
+    \ << \"(\";\n            for(size_t i=0; i<K; ++i) os << v.pt[i] << (i+1==K ?\
+    \ \"\" : \", \");\n            os << \")\";\n            if constexpr (hasValue)\
+    \ os << \" {org = \" << v.org << \", val = \" << v.val << \"}\";\n           \
+    \ return os;\n        }\n    };\n    using NodeAlloc = Allocator<node>;\n    node\
+    \ *root = nullptr;\nprivate:\n    static void free(node *&ptr) {\n        if (ptr\
+    \ == nullptr) return;\n        free(ptr->l);\n        free(ptr->r);\n        NodeAlloc::deallocate(ptr);\n\
+    \        ptr = nullptr;\n    }\n    static void flatten(node *u, std::vector<node*>&\
+    \ res) {\n        if (!u) return;\n        if constexpr (hasTag) u->down();\n\
+    \        flatten(u->l, res);\n        res.push_back(u);\n        flatten(u->r,\
+    \ res);\n    }\n    static bool cmp_less(node* a, node* b, int dim) {\n      \
+    \  if (a->pt[dim] != b->pt[dim]) return a->pt[dim] < b->pt[dim];\n        return\
+    \ std::less<node*>{}(a, b);\n    }\n    static node* build_tree(std::vector<node*>&\
+    \ nodes, int l, int r, int dim) {\n        if (l > r) return nullptr;\n      \
+    \  int mid = l + (r - l) / 2;\n        std::nth_element(nodes.begin() + l, nodes.begin()\
+    \ + mid, nodes.begin() + r + 1, [dim](node* a, node* b) {\n            return\
+    \ cmp_less(a, b, dim);\n        });\n        node *u = nodes[mid];\n        u->l\
+    \ = build_tree(nodes, l, mid - 1, (dim + 1) % K);\n        u->r = build_tree(nodes,\
+    \ mid + 1, r, (dim + 1) % K);\n        u->up();\n        return u;\n    }\n  \
+    \  static void insert_impl(node*& u, node* target, int dim, node**& rebuild_ptr,\
+    \ int& rebuild_dim) {\n        if (!u) {\n            u = target;\n          \
+    \  u->up();\n            return;\n        }\n        if constexpr (hasTag) u->down();\n\
+    \        if (cmp_less(target, u, dim))\n            insert_impl(u->l, target,\
+    \ (dim + 1) % K, rebuild_ptr, rebuild_dim);\n        else\n            insert_impl(u->r,\
+    \ target, (dim + 1) % K, rebuild_ptr, rebuild_dim);\n        u->up();\n      \
+    \  int max_sz = std::max(u->l ? u->l->sz : 0, u->r ? u->r->sz : 0);\n        if\
+    \ (max_sz > u->sz * KDTREE_ALPHA) {\n            rebuild_ptr = &u;\n         \
+    \   rebuild_dim = dim;\n        }\n    }\n    static Value query_range_impl(node\
     \ *u, const auto& condition) requires (hasValue) {\n        if (!u) return Value();\n\
     \        KDIntersect state = condition(u->mn, u->mx);\n        if (state == KDIntersect::OUTSIDE)\
     \ return Value();\n        if (state == KDIntersect::INSIDE) return u->val;\n\
@@ -129,7 +132,7 @@ data:
     \ return;\n        if (state == KDIntersect::INSIDE) {\n            u->give_tag(tag);\n\
     \            return;\n        }\n        u->down();\n        if (condition(u->pt,\
     \ u->pt) != KDIntersect::OUTSIDE) {\n            if constexpr (hasTagToValue)\n\
-    \                u->org = u->org + tag;\n        }\n        transform_range_impl(u->l,\
+    \                u->org += tag;\n        }\n        transform_range_impl(u->l,\
     \ condition, tag);\n        transform_range_impl(u->r, condition, tag);\n    \
     \    u->up();\n    }\n    static bool update_node_impl(node* u, node* target,\
     \ const auto& op, int dim) requires (hasValue) {\n        if (!u) return false;\n\
@@ -321,14 +324,14 @@ data:
     \ is, sum_and_size &v) {\n        is >> v.val;\n        v.sz = 1;\n        return\
     \ is;\n    }\n};\n#line 2 \"Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename\
     \ T>\nstruct linear_transform_tag {\n    T a, b;\n    linear_transform_tag(T _a\
-    \ = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag operator+(const linear_transform_tag\
-    \ &rhs) const {\n        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n\
-    \    }\n    bool operator==(const linear_transform_tag &rhs) const {\n       \
-    \ return a == rhs.a && b == rhs.b;\n    }\n};\n#line 5 \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\
-    \n\ntemplate<typename T, typename size_value>\nsum_and_size<T, size_value> operator+(const\
-    \ sum_and_size<T, size_value> &lhs, const linear_transform_tag<T> &rhs) {\n  \
-    \  return sum_and_size<T, size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);\
-    \  \n}\n#line 7 \"test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp\"\
+    \ = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag& operator+=(const\
+    \ linear_transform_tag &rhs) {\n        a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n\
+    \        return *this;\n    }\n    bool operator==(const linear_transform_tag\
+    \ &rhs) const {\n        return a == rhs.a && b == rhs.b;\n    }\n};\n#line 5\
+    \ \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\ntemplate<typename\
+    \ T, typename size_value>\nsum_and_size<T, size_value>& operator+=(sum_and_size<T,\
+    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    lhs.val = lhs.val\
+    \ * rhs.a + lhs.sz * rhs.b;\n    return lhs;\n}\n#line 7 \"test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp\"\
     \n\nusing mint = modint998244353;\nusing kdtree = KDTree<2, long long, sum_and_size<mint>,\
     \ linear_transform_tag<mint>>;\n\nint main() {\n    std::ios::sync_with_stdio(0),\
     \ std::cin.tie(0);\n    int n, q;\n    std::cin >> n >> q;\n    kdtree tree;\n\
@@ -379,7 +382,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

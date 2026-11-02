@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/IterableOf.hpp
     title: Algebra/IterableOf.hpp
   _extendedRequiredBy: []

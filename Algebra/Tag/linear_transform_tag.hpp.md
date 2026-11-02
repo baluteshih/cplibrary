@@ -19,22 +19,22 @@ data:
     links: []
   bundledCode: "#line 2 \"Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename\
     \ T>\nstruct linear_transform_tag {\n    T a, b;\n    linear_transform_tag(T _a\
-    \ = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag operator+(const linear_transform_tag\
-    \ &rhs) const {\n        return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n\
-    \    }\n    bool operator==(const linear_transform_tag &rhs) const {\n       \
-    \ return a == rhs.a && b == rhs.b;\n    }\n};\n"
+    \ = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag& operator+=(const\
+    \ linear_transform_tag &rhs) {\n        a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n\
+    \        return *this;\n    }\n    bool operator==(const linear_transform_tag\
+    \ &rhs) const {\n        return a == rhs.a && b == rhs.b;\n    }\n};\n"
   code: "#pragma once\n\ntemplate<typename T>\nstruct linear_transform_tag {\n   \
     \ T a, b;\n    linear_transform_tag(T _a = 1, T _b = 0): a(_a), b(_b) {}\n   \
-    \ linear_transform_tag operator+(const linear_transform_tag &rhs) const {\n  \
-    \      return linear_transform_tag(a * rhs.a, rhs.a * b + rhs.b);\n    }\n   \
-    \ bool operator==(const linear_transform_tag &rhs) const {\n        return a ==\
-    \ rhs.a && b == rhs.b;\n    }\n};\n"
+    \ linear_transform_tag& operator+=(const linear_transform_tag &rhs) {\n      \
+    \  a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n        return *this;\n    }\n\
+    \    bool operator==(const linear_transform_tag &rhs) const {\n        return\
+    \ a == rhs.a && b == rhs.b;\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: Algebra/Tag/linear_transform_tag.hpp
   requiredBy:
   - Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
-  timestamp: '2026-10-02 00:18:20+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

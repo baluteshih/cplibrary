@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: DataStructure/LeftistTree.hpp
     title: Leftist Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/minimum_arborescence.hpp\"\n\n#line 2 \"Graph/base.hpp\"\
@@ -135,12 +135,15 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\n\ntemplate<typename\
-    \ T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\ntemplate<typename\
-    \ T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"DataStructure/DisjointSet.hpp\"\
-    \n\ntemplate<typename T = void, bool undo_tag = false>\nclass DisjointSet {\n\
-    protected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n    int\
-    \ n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 4 \"Algebra/Monoid/concept.hpp\"\
+    \n\ntemplate<typename T>\nconcept isMonoid = Addable<T, T> && std::default_initializable<T>;\n\
+    \ntemplate<typename T>\nconcept isCommutativeMonoid = isMonoid<T>;\n#line 4 \"\
+    DataStructure/DisjointSet.hpp\"\n\ntemplate<typename T = void, bool undo_tag =\
+    \ false>\nclass DisjointSet {\nprotected:\n    static constexpr bool hasT = isCommutativeMonoid<T>;\n\
+    \    int n;\n    std::vector<int> boss, sz;\n    struct Empty {};\n    [[no_unique_address]]\
     \ std::conditional_t<hasT, std::vector<T>, Empty> data;\n    [[no_unique_address]]\
     \ std::conditional_t<undo_tag, std::vector<std::pair<int*, int>>, Empty> cache;\n\
     \    [[no_unique_address]] std::conditional_t<undo_tag && hasT, std::vector<std::pair<T*,\
@@ -194,21 +197,22 @@ data:
     \ = !std::is_same_v<Info, void>;\n    struct Empty {};\n    template <bool Condition,\
     \ typename T>\n    static auto get_default() {\n        if constexpr (Condition)\
     \ return T();\n        else return Empty{};\n    }\n    static_assert(!hasTag\
-    \ || Addable<Key, Tag>);\n    struct node {\n        node *l = nullptr, *r = nullptr;\n\
-    \        Key key;\n        [[no_unique_address]] std::conditional_t<hasTag, Tag,\
-    \ Empty> lazy = get_default<hasTag, Tag>();\n        [[no_unique_address]] std::conditional_t<hasInfo,\
-    \ Info, Empty> info = get_default<hasInfo, Info>();\n        int rank = 0;\n \
-    \       void up() {\n            if (get_rank(r) > get_rank(l)) std::swap(r, l);\n\
-    \            rank = get_rank(r) + 1;\n        }\n        void give_tag(const auto\
-    \ &tag) requires (hasTag) {\n            key = key + tag;\n            lazy =\
-    \ lazy + tag;\n        }\n        void down() requires (hasTag) {\n          \
-    \  bool need_tag = false;\n            if constexpr (std::equality_comparable<Tag>)\
-    \ need_tag = (lazy != Tag());\n            else need_tag = true;\n           \
-    \ if (!need_tag) return;\n            if (l) {\n                if constexpr (persistent)\
-    \ l = NodeAlloc::allocate(*l);\n                l->give_tag(lazy);\n         \
-    \   }\n            if (r) {\n                if constexpr (persistent) r = NodeAlloc::allocate(*r);\n\
-    \                r->give_tag(lazy);\n            }\n            lazy = Tag();\n\
-    \        }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
+    \ || (AssignAddable<Key, Tag> && AssignAddable<Tag, Tag>));\n    struct node {\n\
+    \        node *l = nullptr, *r = nullptr;\n        Key key;\n        [[no_unique_address]]\
+    \ std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();\n\
+    \        [[no_unique_address]] std::conditional_t<hasInfo, Info, Empty> info =\
+    \ get_default<hasInfo, Info>();\n        int rank = 0;\n        void up() {\n\
+    \            if (get_rank(r) > get_rank(l)) std::swap(r, l);\n            rank\
+    \ = get_rank(r) + 1;\n        }\n        void give_tag(const auto &tag) requires\
+    \ (hasTag) {\n            key += tag;\n            lazy += tag;\n        }\n \
+    \       void down() requires (hasTag) {\n            bool need_tag = false;\n\
+    \            if constexpr (std::equality_comparable<Tag>) need_tag = (lazy !=\
+    \ Tag());\n            else need_tag = true;\n            if (!need_tag) return;\n\
+    \            if (l) {\n                if constexpr (persistent) l = NodeAlloc::allocate(*l);\n\
+    \                l->give_tag(lazy);\n            }\n            if (r) {\n   \
+    \             if constexpr (persistent) r = NodeAlloc::allocate(*r);\n       \
+    \         r->give_tag(lazy);\n            }\n            lazy = Tag();\n     \
+    \   }\n        node() = default;\n        node(const auto &v) requires (!hasInfo)\
     \ : key(v) {}\n        node(const auto &k, const auto &v) requires (hasInfo) :\
     \ key(k), info(v) {}\n        friend std::ostream& operator<<(std::ostream& os,\
     \ const node &v) {\n            if constexpr (hasInfo) os << \"{key = \" << v.key\
@@ -295,8 +299,8 @@ data:
   isVerificationFile: false
   path: Graph/minimum_arborescence.hpp
   requiredBy: []
-  timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/graph/directedmst.test.cpp
 documentation_of: Graph/minimum_arborescence.hpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/size_value.hpp
     title: Algebra/size_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/DefaultAllocator.hpp
     title: Default Allocator
   _extendedRequiredBy: []
@@ -30,18 +30,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
     title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P3835.test.cpp
     title: test/8_luogu/P3835.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/8_luogu/P5055.test.cpp
     title: test/8_luogu/P5055.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Treap.hpp\"\n\n#line 2 \"DataStructure/DefaultAllocator.hpp\"\
@@ -53,28 +53,32 @@ data:
     \ typename B>\nconcept Subtractable = !std::is_void_v<A> && !std::is_void_v<B>\
     \ && requires(A a, B b) { a - b; };\n\ntemplate <typename A, typename B>\nconcept\
     \ Multiplicable = !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B\
-    \ b) { a * b; };\n#line 2 \"Algebra/size_value.hpp\"\n\nstruct size_v {\n    int\
-    \ sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v operator+(const size_v\
-    \ &rhs) const {\n        return size_v(sz + rhs.sz);\n    }\n    int size() const\
-    \ {\n        return sz; \n    }\n    friend std::ostream& operator<<(std::ostream&\
-    \ os, const size_v &v) {\n        os << v.sz;\n        return os;\n    }\n};\n\
-    #line 6 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n    #define RNGSEED 880301\n\
-    #endif\n\ntemplate<typename Key = void, \n         typename Value = size_v,\n\
-    \         typename Tag = void, \n         bool Rev = false,\n         template<typename>\
-    \ class Allocator = DefaultAllocator,\n         bool persistent = false\n>\nclass\
-    \ Treap {\n    static constexpr bool hasKey = !std::is_void_v<Key>;\n    static\
-    \ constexpr bool hasValue = !std::is_void_v<Value>;\n    static constexpr bool\
-    \ hasTag = !std::is_void_v<Tag>;\n    static constexpr bool hasTagToKey = Addable<Key,\
-    \ Tag>;\n    static constexpr bool hasTagToValue = Addable<Value, Tag>;\n    static\
-    \ constexpr bool usePri = !persistent;\n    static constexpr bool hasSize = requires(Value\
-    \ v) { v.size(); };\n    static constexpr bool hasValueReverse = requires(Value\
-    \ v) { v.reverse(); };\n    struct Empty {};\n    template <bool Condition, typename\
-    \ T>\n    static auto get_default() {\n        if constexpr (Condition) return\
-    \ T();\n        else return Empty{};\n    }\n    template <bool Condition>\n \
-    \   static auto get_pri() {\n        if constexpr (Condition) return rng();\n\
-    \        else return Empty{};\n    }\n    static_assert(hasKey || hasValue);\n\
-    \    static_assert(!hasValue || Addable<Value, Value>);\n    static_assert(!hasTag\
-    \ || Addable<Tag, Tag>);\n    static inline std::conditional_t<!persistent, std::mt19937,\
+    \ b) { a * b; };\n\ntemplate <typename A, typename B>\nconcept AssignAddable =\
+    \ !std::is_void_v<A> && !std::is_void_v<B> && requires(A a, B b) { a += b; };\n\
+    \ntemplate <typename A, typename B>\nconcept AssignSubtractable = !std::is_void_v<A>\
+    \ && !std::is_void_v<B> && requires(A a, B b) { a -= b; };\n#line 2 \"Algebra/size_value.hpp\"\
+    \n\nstruct size_v {\n    int sz;\n    size_v(int sz_ = 0): sz(sz_) {}\n    size_v\
+    \ operator+(const size_v &rhs) const {\n        return size_v(sz + rhs.sz);\n\
+    \    }\n    int size() const {\n        return sz; \n    }\n    friend std::ostream&\
+    \ operator<<(std::ostream& os, const size_v &v) {\n        os << v.sz;\n     \
+    \   return os;\n    }\n};\n#line 6 \"DataStructure/Treap.hpp\"\n\n#ifndef RNGSEED\n\
+    \    #define RNGSEED 880301\n#endif\n\ntemplate<typename Key = void, \n      \
+    \   typename Value = size_v,\n         typename Tag = void, \n         bool Rev\
+    \ = false,\n         template<typename> class Allocator = DefaultAllocator,\n\
+    \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
+    \ hasKey = !std::is_void_v<Key>;\n    static constexpr bool hasValue = !std::is_void_v<Value>;\n\
+    \    static constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr\
+    \ bool hasTagToKey = AssignAddable<Key, Tag>;\n    static constexpr bool hasTagToValue\
+    \ = AssignAddable<Value, Tag>;\n    static constexpr bool usePri = !persistent;\n\
+    \    static constexpr bool hasSize = requires(Value v) { v.size(); };\n    static\
+    \ constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };\n    struct\
+    \ Empty {};\n    template <bool Condition, typename T>\n    static auto get_default()\
+    \ {\n        if constexpr (Condition) return T();\n        else return Empty{};\n\
+    \    }\n    template <bool Condition>\n    static auto get_pri() {\n        if\
+    \ constexpr (Condition) return rng();\n        else return Empty{};\n    }\n \
+    \   static_assert(hasKey || hasValue);\n    static_assert(!hasValue || Addable<Value,\
+    \ Value>);\n    static_assert(!hasTag || (AssignAddable<Tag, Tag> && (hasTagToKey\
+    \ || hasTagToValue)));\n    static inline std::conditional_t<!persistent, std::mt19937,\
     \ std::mt19937_64> rng{RNGSEED};\n    struct node {\n        node *l = nullptr,\
     \ *r = nullptr;\n        [[no_unique_address]] std::conditional_t<!persistent,\
     \ node*, Empty> f = get_default<!persistent, node*>();\n        [[no_unique_address]]\
@@ -91,13 +95,13 @@ data:
     \    if constexpr (!persistent) {\n                f = nullptr;\n            \
     \    if (l) l->f = this;\n                if (r) r->f = this;\n            }\n\
     \        }\n        void give_tag(const auto &tag) requires (hasTag) {\n     \
-    \       if constexpr (hasTagToValue) {\n                org = org + tag; \n  \
-    \              val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
-    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
-    \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
-    \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
-    \                val.reverse();\n            }\n            std::swap(l, r);\n\
-    \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
+    \       if constexpr (hasTagToValue) {\n                org += tag; \n       \
+    \         val += tag;\n            }\n            if constexpr (hasTagToKey) {\n\
+    \                key += tag;\n            }\n            lazy += tag;\n      \
+    \  }\n        void reverse() requires (Rev) {\n            rev ^= 1;\n       \
+    \     if constexpr (hasValueReverse) {\n                org.reverse();\n     \
+    \           val.reverse();\n            }\n            std::swap(l, r);\n    \
+    \    }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
     \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
     \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
     \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
@@ -319,22 +323,23 @@ data:
     \         bool persistent = false\n>\nclass Treap {\n    static constexpr bool\
     \ hasKey = !std::is_void_v<Key>;\n    static constexpr bool hasValue = !std::is_void_v<Value>;\n\
     \    static constexpr bool hasTag = !std::is_void_v<Tag>;\n    static constexpr\
-    \ bool hasTagToKey = Addable<Key, Tag>;\n    static constexpr bool hasTagToValue\
-    \ = Addable<Value, Tag>;\n    static constexpr bool usePri = !persistent;\n  \
-    \  static constexpr bool hasSize = requires(Value v) { v.size(); };\n    static\
+    \ bool hasTagToKey = AssignAddable<Key, Tag>;\n    static constexpr bool hasTagToValue\
+    \ = AssignAddable<Value, Tag>;\n    static constexpr bool usePri = !persistent;\n\
+    \    static constexpr bool hasSize = requires(Value v) { v.size(); };\n    static\
     \ constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };\n    struct\
     \ Empty {};\n    template <bool Condition, typename T>\n    static auto get_default()\
     \ {\n        if constexpr (Condition) return T();\n        else return Empty{};\n\
     \    }\n    template <bool Condition>\n    static auto get_pri() {\n        if\
     \ constexpr (Condition) return rng();\n        else return Empty{};\n    }\n \
     \   static_assert(hasKey || hasValue);\n    static_assert(!hasValue || Addable<Value,\
-    \ Value>);\n    static_assert(!hasTag || Addable<Tag, Tag>);\n    static inline\
-    \ std::conditional_t<!persistent, std::mt19937, std::mt19937_64> rng{RNGSEED};\n\
-    \    struct node {\n        node *l = nullptr, *r = nullptr;\n        [[no_unique_address]]\
-    \ std::conditional_t<!persistent, node*, Empty> f = get_default<!persistent, node*>();\n\
-    \        [[no_unique_address]] std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey,\
-    \ Key>();\n        [[no_unique_address]] std::conditional_t<hasValue, Value, Empty>\
-    \ org = get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
+    \ Value>);\n    static_assert(!hasTag || (AssignAddable<Tag, Tag> && (hasTagToKey\
+    \ || hasTagToValue)));\n    static inline std::conditional_t<!persistent, std::mt19937,\
+    \ std::mt19937_64> rng{RNGSEED};\n    struct node {\n        node *l = nullptr,\
+    \ *r = nullptr;\n        [[no_unique_address]] std::conditional_t<!persistent,\
+    \ node*, Empty> f = get_default<!persistent, node*>();\n        [[no_unique_address]]\
+    \ std::conditional_t<hasKey, Key, Empty> key = get_default<hasKey, Key>();\n \
+    \       [[no_unique_address]] std::conditional_t<hasValue, Value, Empty> org =\
+    \ get_default<hasValue, Value>();\n        [[no_unique_address]] std::conditional_t<hasValue,\
     \ Value, Empty> val = get_default<hasValue, Value>();\n        [[no_unique_address]]\
     \ std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();\n\
     \        [[no_unique_address]] std::conditional_t<Rev, int, Empty> rev = get_default<Rev,\
@@ -345,13 +350,13 @@ data:
     \    if constexpr (!persistent) {\n                f = nullptr;\n            \
     \    if (l) l->f = this;\n                if (r) r->f = this;\n            }\n\
     \        }\n        void give_tag(const auto &tag) requires (hasTag) {\n     \
-    \       if constexpr (hasTagToValue) {\n                org = org + tag; \n  \
-    \              val = val + tag;\n            }\n            if constexpr (hasTagToKey)\
-    \ {\n                key = key + tag;\n            }\n            lazy = lazy\
-    \ + tag;\n        }\n        void reverse() requires (Rev) {\n            rev\
-    \ ^= 1;\n            if constexpr (hasValueReverse) {\n                org.reverse();\n\
-    \                val.reverse();\n            }\n            std::swap(l, r);\n\
-    \        }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
+    \       if constexpr (hasTagToValue) {\n                org += tag; \n       \
+    \         val += tag;\n            }\n            if constexpr (hasTagToKey) {\n\
+    \                key += tag;\n            }\n            lazy += tag;\n      \
+    \  }\n        void reverse() requires (Rev) {\n            rev ^= 1;\n       \
+    \     if constexpr (hasValueReverse) {\n                org.reverse();\n     \
+    \           val.reverse();\n            }\n            std::swap(l, r);\n    \
+    \    }\n        void down() requires (hasTag || Rev) {\n            bool need_rev\
     \ = false;\n            if constexpr (Rev) need_rev = rev;\n            bool need_tag\
     \ = false;\n            if constexpr (hasTag) { \n                if constexpr\
     \ (std::equality_comparable<Tag>) need_tag = !(lazy == Tag());\n             \
@@ -572,8 +577,8 @@ data:
   isVerificationFile: false
   path: DataStructure/Treap.hpp
   requiredBy: []
-  timestamp: '2026-07-12 15:36:33+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-02 10:56:38+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/data_structure/persistent_queue_pool.test.cpp
   - test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
@@ -612,10 +617,10 @@ class Treap;
     * Must have a default constructor `Value()` acting as the identity element.
     * Requires a member function `size()` for size-based operations.
 * `Tag`: The type of lazy tags.
-    * Must support `operator+` for tag composition (`Tag + Tag`).
+    * Must support `operator+=` for tag composition (`Tag += Tag`).
     * Must have a default constructor `Tag()` acting as the identity tag.
-    * If `operator+` between `Value` and `Tag` is supported, the lazy tag will be applied to `Value`.
-    * If `operator+` between `Key` and `Tag` is supported, the lazy tag will be applied to `Key`.
+    * If `operator+=` between `Value` and `Tag` is supported, the lazy tag will be applied to `Value`.
+    * If `operator+=` between `Key` and `Tag` is supported, the lazy tag will be applied to `Key`.
     * **WARNING**: It is recommended to use a custom struct to implement the `Tag` to prevent unexpected application. 
 * `Rev`: If `true`, supports range reversals (`range_reverse`).
     * If `Value` has a `reverse()` member function, it is called for the node value and composed value during propagation.

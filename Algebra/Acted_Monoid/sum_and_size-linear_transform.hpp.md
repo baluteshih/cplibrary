@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/sum_and_size.hpp
     title: Algebra/Monoid/sum_and_size.hpp
   - icon: ':heavy_check_mark:'
@@ -33,26 +33,26 @@ data:
     \ operator>>(std::istream& is, sum_and_size &v) {\n        is >> v.val;\n    \
     \    v.sz = 1;\n        return is;\n    }\n};\n#line 2 \"Algebra/Tag/linear_transform_tag.hpp\"\
     \n\ntemplate<typename T>\nstruct linear_transform_tag {\n    T a, b;\n    linear_transform_tag(T\
-    \ _a = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag operator+(const\
-    \ linear_transform_tag &rhs) const {\n        return linear_transform_tag(a *\
-    \ rhs.a, rhs.a * b + rhs.b);\n    }\n    bool operator==(const linear_transform_tag\
+    \ _a = 1, T _b = 0): a(_a), b(_b) {}\n    linear_transform_tag& operator+=(const\
+    \ linear_transform_tag &rhs) {\n        a *= rhs.a;\n        b = rhs.a * b + rhs.b;\n\
+    \        return *this;\n    }\n    bool operator==(const linear_transform_tag\
     \ &rhs) const {\n        return a == rhs.a && b == rhs.b;\n    }\n};\n#line 5\
     \ \"Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp\"\n\ntemplate<typename\
-    \ T, typename size_value>\nsum_and_size<T, size_value> operator+(const sum_and_size<T,\
-    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    return sum_and_size<T,\
-    \ size_value>(lhs.val * rhs.a + lhs.sz * rhs.b, lhs.sz);  \n}\n"
+    \ T, typename size_value>\nsum_and_size<T, size_value>& operator+=(sum_and_size<T,\
+    \ size_value> &lhs, const linear_transform_tag<T> &rhs) {\n    lhs.val = lhs.val\
+    \ * rhs.a + lhs.sz * rhs.b;\n    return lhs;\n}\n"
   code: "#pragma once\n\n#include \"Algebra/Monoid/sum_and_size.hpp\"\n#include \"\
     Algebra/Tag/linear_transform_tag.hpp\"\n\ntemplate<typename T, typename size_value>\n\
-    sum_and_size<T, size_value> operator+(const sum_and_size<T, size_value> &lhs,\
-    \ const linear_transform_tag<T> &rhs) {\n    return sum_and_size<T, size_value>(lhs.val\
-    \ * rhs.a + lhs.sz * rhs.b, lhs.sz);  \n}\n"
+    sum_and_size<T, size_value>& operator+=(sum_and_size<T, size_value> &lhs, const\
+    \ linear_transform_tag<T> &rhs) {\n    lhs.val = lhs.val * rhs.a + lhs.sz * rhs.b;\n\
+    \    return lhs;\n}\n"
   dependsOn:
   - Algebra/Monoid/sum_and_size.hpp
   - Algebra/Tag/linear_transform_tag.hpp
   isVerificationFile: false
   path: Algebra/Acted_Monoid/sum_and_size-linear_transform.hpp
   requiredBy: []
-  timestamp: '2026-10-03 12:08:22+08:00'
+  timestamp: '2026-11-02 10:56:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/data_structure/dynamic_point_set_rectangle_affine_rectangle_sum.test.cpp

@@ -6,6 +6,9 @@ data:
     path: Convolution/and_convolution.hpp
     title: Convolution/and_convolution.hpp
   - icon: ':warning:'
+    path: Convolution/online_bitwise_transform.hpp
+    title: Convolution/online_bitwise_transform.hpp
+  - icon: ':warning:'
     path: Convolution/or_convolution.hpp
     title: Convolution/or_convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,7 @@ data:
   path: Convolution/bitwise_transform.hpp
   requiredBy:
   - Convolution/and_convolution.hpp
+  - Convolution/online_bitwise_transform.hpp
   - Convolution/or_convolution.hpp
   - Convolution/subset_convolution.hpp
   - Convolution/xor_convolution.hpp
