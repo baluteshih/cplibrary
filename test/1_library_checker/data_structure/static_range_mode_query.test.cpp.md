@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/NullFunc.hpp
     title: Algebra/NullFunc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   - icon: ':heavy_check_mark:'

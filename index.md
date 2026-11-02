@@ -31,7 +31,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Algebra/IterableOf.hpp
       title: Algebra/IterableOf.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/NullFunc.hpp
       title: Algebra/NullFunc.hpp
     - icon: ':question:'
@@ -42,7 +42,7 @@ data:
       title: Algebra/size_value.hpp
   - name: Algebra/Monoid
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Algebra/Monoid/concept.hpp
       title: Algebra/Monoid/concept.hpp
     - icon: ':warning:'
@@ -91,7 +91,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Convolution/bitwise_transform.hpp
       title: Convolution/bitwise_transform.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Convolution/convolution.hpp
       title: Convolution/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -120,7 +120,7 @@ data:
       title: Convolution/xor_convolution.hpp
   - name: DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/BIT.hpp
       title: Binary Indexed Tree (BIT)
     - icon: ':heavy_check_mark:'
@@ -129,13 +129,13 @@ data:
     - icon: ':question:'
       path: DataStructure/DefaultAllocator.hpp
       title: Default Allocator
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Discretization.hpp
       title: Discretization
     - icon: ':heavy_check_mark:'
       path: DataStructure/DisjointSet.hpp
       title: Disjoint Set Union (DSU)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/Doubling.hpp
       title: Doubling
     - icon: ':heavy_check_mark:'
@@ -157,6 +157,9 @@ data:
       path: DataStructure/OrderedSet.hpp
       title: Ordered Set
     - icon: ':heavy_check_mark:'
+      path: DataStructure/PartitionTree.hpp
+      title: Partition Tree
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PointerSegmentTree.hpp
       title: Pointer Segment Tree
     - icon: ':heavy_check_mark:'
@@ -165,7 +168,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/PotentialDisjointSet.hpp
       title: Potential Disjoint Set
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: Segment Tree
     - icon: ':heavy_check_mark:'
@@ -310,10 +313,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/SCC.hpp
       title: Graph/SCC.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':warning:'
@@ -423,7 +426,7 @@ data:
     - icon: ':warning:'
       path: Numeric/Fraction.hpp
       title: Numeric/Fraction.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/Modint.hpp
       title: Numeric/Modint.hpp
     - icon: ':heavy_check_mark:'
@@ -432,7 +435,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/berlekamp_massey.hpp
       title: Numeric/berlekamp_massey.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/crt.hpp
       title: Numeric/crt.hpp
     - icon: ':heavy_check_mark:'
@@ -447,10 +450,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: Numeric/floor_sum.hpp
       title: Numeric/floor_sum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_math.hpp
       title: Numeric/internal_math.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Numeric/internal_primitive_root.hpp
       title: Numeric/internal_primitive_root.hpp
     - icon: ':heavy_check_mark:'
@@ -482,7 +485,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Polynomial/Bostan_Mori.hpp
       title: Polynomial/Bostan_Mori.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Polynomial/NTT.hpp
       title: Polynomial/NTT.hpp
     - icon: ':heavy_check_mark:'
@@ -551,30 +554,30 @@ data:
       title: String/z_algo.hpp
   - name: Tree/CentroidDS
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidDS/DistanceSolver.hpp
       title: Tree/CentroidDS/DistanceSolver.hpp
   - name: Tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/CentroidTree.hpp
       title: Tree/CentroidTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/HeavyLightDecomposition.hpp
       title: Tree/HeavyLightDecomposition.hpp
     - icon: ':heavy_check_mark:'
       path: Tree/LinkCutTree.hpp
       title: Tree/LinkCutTree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Tree/Tree.hpp
       title: Tree/Tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/TreeTools.hpp
       title: Tree/TreeTools.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/all_direction_composition.hpp
       title: Tree/all_direction_composition.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Tree/centroid_divide_and_conquer.hpp
       title: Tree/centroid_divide_and_conquer.hpp
   - name: .
@@ -752,6 +755,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_chmin_chmax_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/1_library_checker/data_structure/range_kth_smallest.test.cpp
+      title: test/1_library_checker/data_structure/range_kth_smallest.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
       title: test/1_library_checker/data_structure/range_reverse_range_sum.test.cpp
@@ -1050,37 +1056,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
       title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/jump_on_tree.test.cpp
       title: test/1_library_checker/tree/jump_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/lca.test.cpp
       title: test/1_library_checker/tree/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
       title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_diameter.test.cpp
       title: test/1_library_checker/tree/tree_diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
       title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
       title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
       title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
       title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - name: test/2_aoj

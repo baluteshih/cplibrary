@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   - icon: ':heavy_check_mark:'

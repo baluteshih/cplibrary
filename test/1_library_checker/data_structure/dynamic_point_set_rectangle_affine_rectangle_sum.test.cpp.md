@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/KDTree.hpp
     title: DataStructure/KDTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
