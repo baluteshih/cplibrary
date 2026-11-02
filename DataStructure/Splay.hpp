@@ -14,8 +14,8 @@ class Splay {
     static constexpr bool hasKey = !std::is_void_v<Key>;
     static constexpr bool hasValue = !std::is_void_v<Value>;
     static constexpr bool hasTag = !std::is_void_v<Tag>;
-    static constexpr bool hasTagToKey = Addable<Key, Tag>;
-    static constexpr bool hasTagToValue = Addable<Value, Tag>;
+    static constexpr bool hasTagToKey = AssignAddable<Key, Tag>;
+    static constexpr bool hasTagToValue = AssignAddable<Value, Tag>;
     static constexpr bool hasSize = requires(Value v) { v.size(); };
     static constexpr bool hasValueReverse = requires(Value v) { v.reverse(); };
     struct Empty {};
@@ -26,7 +26,7 @@ class Splay {
     }
     static_assert(hasKey || hasValue);
     static_assert(!hasValue || Addable<Value, Value>);
-    static_assert(!hasTag || Addable<Tag, Tag>);
+    static_assert(!hasTag || (AssignAddable<Tag, Tag> && (hasTagToKey || hasTagToValue)));
 public:
     struct node {
         node *l = nullptr, *r = nullptr, *f = nullptr;
@@ -49,13 +49,13 @@ public:
         }
         void give_tag(const auto &tag) requires (hasTag) {
             if constexpr (hasTagToValue) {
-                org = org + tag; 
-                val = val + tag;
+                org += tag; 
+                val += tag;
             }
             if constexpr (hasTagToKey) {
-                key = key + tag;
+                key += tag;
             }
-            lazy = lazy + tag;
+            lazy += tag;
         }
         void reverse() requires (Rev) {
             rev ^= 1;

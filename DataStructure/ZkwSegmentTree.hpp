@@ -1,9 +1,12 @@
 #pragma once
 
+#include "Algebra/ValidOperation.hpp"
+
 template<typename Value = int, typename Tag = void, bool pushdown = true>
 class ZkwSegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
     static_assert(pushdown || hasTag, "Lazy tag must exist when pushdown is false");
+    static_assert(!hasTag || (AssignAddable<Value, Tag> && AssignAddable<Tag, Tag>));
     int n, sz, lg;
     std::vector<Value> seg;
     struct Empty {};
@@ -13,15 +16,23 @@ class ZkwSegmentTree {
 
     decltype(auto) get_val(int rt) {
         if constexpr (pushdown) return static_cast<const Value&>(seg[rt]);
-        else return seg[rt] + lazy[rt];
+        else {
+            Value res = seg[rt];
+            res += lazy[rt];
+            return res;
+        }
     }
     decltype(auto) search_val(int rt, const SearchTag &tag) {
         if constexpr (pushdown) return static_cast<const Value&>(seg[rt]);
-        else return get_val(rt) + tag;
+        else {
+            Value res = get_val(rt);
+            res += tag;
+            return res;
+        }
     }
     void give_tag(int rt, const TagParam &tag) requires (hasTag) {
-        if constexpr (pushdown) seg[rt] = seg[rt] + tag;
-        lazy[rt] = lazy[rt] + tag;
+        if constexpr (pushdown) seg[rt] += tag;
+        lazy[rt] += tag;
     }
     void push(int rt) requires (hasTag && pushdown) {
         give_tag(rt << 1, lazy[rt]);
@@ -44,7 +55,7 @@ class ZkwSegmentTree {
     void up(int p) {
         if constexpr (pushdown) {
             seg[p] = seg[p << 1] + seg[p << 1 | 1];
-            if constexpr (hasTag) seg[p] = seg[p] + lazy[p];
+            if constexpr (hasTag) seg[p] += lazy[p];
         }
         else seg[p] = get_val(p << 1) + get_val(p << 1 | 1);
     }
@@ -58,7 +69,7 @@ class ZkwSegmentTree {
     TagParam tag_prod(int p) requires (!pushdown) {
         TagParam res = Tag();
         for (p += n; p >= 1; p >>= 1)
-            res = res + lazy[p];
+            res += lazy[p];
         return res;
     }
 
@@ -112,7 +123,7 @@ class ZkwSegmentTree {
         if (R <= l || r <= L) return R;
         if (L <= l && r <= R && !condition(search_val(rt, tag))) return R;
         if (r - l == 1) return l;
-        tag = tag + lazy[rt];
+        tag += lazy[rt];
         int mid = (l + r) >> 1;
         int res = range_left_search_rec(L, R, l, mid, rt << 1, condition, tag);
         if (res != R) return res;
@@ -122,7 +133,7 @@ class ZkwSegmentTree {
         if (R <= l || r <= L) return L - 1;
         if (L <= l && r <= R && !condition(search_val(rt, tag))) return L - 1;
         if (r - l == 1) return l;
-        tag = tag + lazy[rt];
+        tag += lazy[rt];
         int mid = (l + r) >> 1;
         int res = range_right_search_rec(L, R, mid, r, rt << 1 | 1, condition, tag);
         if (res != L - 1) return res;
@@ -153,7 +164,11 @@ public:
         assert(0 <= x && x < sz);
         if constexpr (hasTag) {
             if constexpr (pushdown) down(x);
-            else return seg[x + n] + tag_prod(x);
+            else {
+                Value res = seg[x + n];
+                res += tag_prod(x);
+                return res;
+            }
         }
         return seg[x + n];
     }
@@ -174,14 +189,14 @@ public:
             if (r & 1) resr = get_val(--r) + resr, r_valid = true;
             if constexpr (!pushdown) {
                 tl >>= 1, tr >>= 1;
-                if (l_valid) resl = resl + lazy[tl];
-                if (r_valid) resr = resr + lazy[tr];
+                if (l_valid) resl += lazy[tl];
+                if (r_valid) resr += lazy[tr];
             }
         }
         if constexpr (!pushdown) {
             for (tl >>= 1, tr >>= 1; tl >= 1; tl >>= 1, tr >>= 1) {
-                if (l_valid) resl = resl + lazy[tl];
-                if (r_valid) resr = resr + lazy[tr];
+                if (l_valid) resl += lazy[tl];
+                if (r_valid) resr += lazy[tr];
             }
         }
         return resl + resr;
@@ -190,7 +205,10 @@ public:
         assert(0 <= x && x < sz);
         if constexpr (hasTag) {
             if constexpr (pushdown) down(x);
-            else v = v - tag_prod(x);
+            else {
+                static_assert(AssignSubtractable<Value, Tag>);
+                v -= tag_prod(x);
+            }
         }
         for (seg[x += n] = std::move(v); x > 1; up(x >>= 1));
     }
@@ -242,7 +260,7 @@ public:
         SearchTag tag = SearchTag();
         while (rt < n) {
             if constexpr (hasTag && pushdown) push(rt);
-            if constexpr (!pushdown) tag = tag + lazy[rt];
+            if constexpr (!pushdown) tag += lazy[rt];
             int lc = rt << 1, rc = lc | 1;
             rt = go_left(search_val(lc, tag), search_val(rc, tag)) ? lc : rc;
         }

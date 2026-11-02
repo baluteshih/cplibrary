@@ -9,8 +9,10 @@ using mint = modint998244353;
 struct Tag {
     mint a, b;
     Tag(mint _a = 1, mint _b = 0): a(_a), b(_b) {}
-    Tag operator+(const Tag &rhs) {
-        return Tag(a * rhs.a, rhs.a * b + rhs.b);
+    Tag& operator+=(const Tag &rhs) {
+        a *= rhs.a;
+        b = rhs.a * b + rhs.b;
+        return *this;
     }
 };
 
@@ -21,8 +23,9 @@ struct Value {
     Value operator+(const Value &rhs) {
         return Value(mul + rhs.mul, add + rhs.add);
     }
-    Value operator+(const Tag &tag) {
-        return Value(tag.a * mul + tag.b * add, add);
+    Value& operator+=(const Tag &tag) {
+        mul = tag.a * mul + tag.b * add;
+        return *this;
     }
     static Value get(int l, int r) {
         return Value(0, r - l);

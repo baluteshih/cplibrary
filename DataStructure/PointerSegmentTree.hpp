@@ -1,12 +1,14 @@
 #pragma once
 
 #include "DataStructure/DefaultAllocator.hpp"
+#include "Algebra/ValidOperation.hpp"
 
 template<typename Value = int, typename Tag = void, bool pushdown = true, template<typename> class Allocator = DefaultAllocator, bool dynamic = false, bool persistent = false>
 class PointerSegmentTree {
     static constexpr bool hasTag = !std::is_same_v<Tag, void>;
     static constexpr bool hasGet = requires(int l, int r) { Value::get(l, r); };
     static_assert(pushdown || hasTag, "Lazy tag must exist when pushdown is false");
+    static_assert(!hasTag || (AssignAddable<Value, Tag> && AssignAddable<Tag, Tag>));
     int n;
     struct Empty {};
     template <bool Condition, typename T>
@@ -20,7 +22,11 @@ class PointerSegmentTree {
         [[no_unique_address]] std::conditional_t<hasTag, Tag, Empty> lazy = get_default<hasTag, Tag>();
         Value get_val() {
             if constexpr (pushdown) return val;
-            else return val + lazy;
+            else {
+                Value res = val;
+                res += lazy;
+                return res;
+            }
         }
         void up() {
             if constexpr (dynamic) {
@@ -39,8 +45,8 @@ class PointerSegmentTree {
             else val = val + Value::get((lft + rgt) / 2, rgt);
         }
         void give_tag(const auto &tag) requires (hasTag) {
-            if constexpr (pushdown) val = val + tag;
-            lazy = lazy + tag;
+            if constexpr (pushdown) val += tag;
+            lazy += tag;
         }
         void down(int lbnd, int rbnd) requires (hasTag && pushdown) {
             bool need_tag = false;
@@ -98,9 +104,11 @@ class PointerSegmentTree {
             return range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r); 
         }
         else {
-            if (R <= mid) return range_prod(L, R, l, mid, p->l) + p->lazy;
-            if (L >= mid) return range_prod(L, R, mid, r, p->r) + p->lazy;
-            return range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r) + p->lazy;
+            Value res = R <= mid ? range_prod(L, R, l, mid, p->l) :
+                        L >= mid ? range_prod(L, R, mid, r, p->r) :
+                        range_prod(L, R, l, mid, p->l) + range_prod(L, R, mid, r, p->r);
+            res += p->lazy;
+            return res;
         }
     }
     void update(node *&p, int l, int r) {
@@ -118,8 +126,11 @@ class PointerSegmentTree {
             else modify(x, mid, r, p->r, v);
         }
         else {
-            if (x < mid) modify(x, l, mid, p->l, v - p->lazy);
-            else modify(x, mid, r, p->r, v - p->lazy);
+            static_assert(AssignSubtractable<Value, Tag>);
+            Value nv = v;
+            nv -= p->lazy;
+            if (x < mid) modify(x, l, mid, p->l, nv);
+            else modify(x, mid, r, p->r, nv);
         }
         update(p, l, r);
     }
@@ -145,11 +156,18 @@ class PointerSegmentTree {
     }
     void range_transform_beats(int L, int R, int l, int r, node *&p, const auto &tag, const auto &tag_condition, auto... tag_sum) requires (hasTag) {
         if constexpr (dynamic || persistent) check_node(p, l, r);
-        if (L <= l && R >= r && tag_condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum); }()))
+        if (L <= l && R >= r && tag_condition([&]{
+            if constexpr (pushdown) return p->val;
+            else {
+                Value res = p->get_val();
+                ((res += tag_sum), ...);
+                return res;
+            }
+        }()))
             return p->give_tag(tag);
         assert(r - l > 1);
         if constexpr (pushdown) p->down(l, r);
-        else ((tag_sum = tag_sum + p->lazy), ...);
+        else ((tag_sum += p->lazy), ...);
         int mid = (l + r) >> 1;
         if (L < mid) range_transform_beats(L, R, l, mid, p->l, tag, tag_condition, tag_sum...);
         if (R > mid) range_transform_beats(L, R, mid, r, p->r, tag, tag_condition, tag_sum...);
@@ -158,15 +176,29 @@ class PointerSegmentTree {
     int range_left_search(int L, int R, int l, int r, node *p, const auto &condition, auto... tag_sum) {
         if constexpr (!dynamic) if (!p) return R;
         if (r - l == 1) {
-            if (!condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum); }()))
+            if (!condition([&]{
+                if constexpr (pushdown) return p->val;
+                else {
+                    Value res = p->get_val();
+                    ((res += tag_sum), ...);
+                    return res;
+                }
+            }()))
                 return R;
             return l;
         }
         int mid = (l + r) >> 1;
         if constexpr (hasTag && pushdown) p->down(l, r);
-        if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);
+        if constexpr (!pushdown) ((tag_sum += p->lazy), ...);
         if (L <= l && R >= r) {
-            if (p->l && condition([&]{ if constexpr(pushdown) return p->l->val; else return p->l->get_val() + (..., tag_sum); }()))
+            if (p->l && condition([&]{
+                if constexpr (pushdown) return p->l->val;
+                else {
+                    Value res = p->l->get_val();
+                    ((res += tag_sum), ...);
+                    return res;
+                }
+            }()))
                 return range_left_search(L, R, l, mid, p->l, condition, tag_sum...);
             return range_left_search(L, R, mid, r, p->r, condition, tag_sum...);
         }
@@ -181,15 +213,29 @@ class PointerSegmentTree {
     int range_right_search(int L, int R, int l, int r, node *p, const auto &condition, auto... tag_sum) {
         if constexpr (!dynamic) if (!p) return L - 1;
         if (r - l == 1) {
-            if (!condition([&]{ if constexpr(pushdown) return p->val; else return p->get_val() + (..., tag_sum); }()))
+            if (!condition([&]{
+                if constexpr (pushdown) return p->val;
+                else {
+                    Value res = p->get_val();
+                    ((res += tag_sum), ...);
+                    return res;
+                }
+            }()))
                 return L - 1;
             return l;
         }
         int mid = (l + r) >> 1;
         if constexpr (hasTag && pushdown) p->down(l, r);
-        if constexpr (!pushdown) ((tag_sum = tag_sum + p->lazy), ...);
+        if constexpr (!pushdown) ((tag_sum += p->lazy), ...);
         if (L <= l && R >= r) {
-            if (p->r && condition([&]{ if constexpr(pushdown) return p->r->val; else return p->r->get_val() + (..., tag_sum); }()))
+            if (p->r && condition([&]{
+                if constexpr (pushdown) return p->r->val;
+                else {
+                    Value res = p->r->get_val();
+                    ((res += tag_sum), ...);
+                    return res;
+                }
+            }()))
                 return range_right_search(L, R, mid, r, p->r, condition, tag_sum...);
             return range_right_search(L, R, l, mid, p->l, condition, tag_sum...);
         }
@@ -205,17 +251,25 @@ class PointerSegmentTree {
         [[no_unique_address]] std::conditional_t<!pushdown, Tag, Empty> tag;
         while (r - l > 1) {
             if constexpr (hasTag && pushdown) p->down(l, r);
-            if constexpr (!pushdown) tag = tag + p->lazy;
+            if constexpr (!pushdown) tag += p->lazy;
             int mid = (l + r) >> 1;
             if (x < mid) r = mid, p = p->l;
             else l = mid, p = p->r;
             if constexpr (dynamic || persistent) if (!p) {
-                if constexpr (hasGet) return Value::get(x, x + 1) + tag;
-                else return Value() + tag;
+                Value res = [&] {
+                    if constexpr (hasGet) return Value::get(x, x + 1);
+                    else return Value();
+                }();
+                if constexpr (!pushdown) res += tag;
+                return res;
             }
         }
         if constexpr (pushdown) return p->val;
-        else return p->get_val() + tag;
+        else {
+            Value res = p->get_val();
+            res += tag;
+            return res;
+        }
     }
     void range_copy(int L, int R, int l, int r, node *&p, node *&q) requires (pushdown && persistent) {
         if (L <= l && R >= r)

@@ -19,9 +19,9 @@ class LeftistTree;
 
 * `Key`: The type of elements used for priority.
     * Must support `operator<` for comparison (the element with the smallest `Key` will be at the top).
-    * If `Tag` is not `void`, must support `Key + Tag`.
+    * If `Tag` is not `void`, must support `Key += Tag`.
 * `Tag`: The type of lazy tags. Use `void` if no lazy propagation is needed.
-    * Must support `Tag + Tag` for tag composition and `Key + Tag` for applying to a key.
+    * Must support `Tag += Tag` for tag composition and `Key += Tag` for applying to a key.
     * Must have a default constructor `Tag()` acting as the identity tag.
 * `Info`: Additional information stored in each node. Use `void` if not needed.
 * `Allocator`: The allocator for nodes. Defaults to `DefaultAllocator`.

@@ -18,7 +18,7 @@ template<size_t K,
 class KDTree {
     static constexpr bool hasValue = !std::is_void_v<Value>;
     static constexpr bool hasTag = !std::is_void_v<Tag>;
-    static constexpr bool hasTagToValue = Addable<Value, Tag>;
+    static constexpr bool hasTagToValue = AssignAddable<Value, Tag>;
     struct Empty {};
     template <bool Condition, typename T>
     static auto get_default() {
@@ -26,7 +26,7 @@ class KDTree {
         else return Empty{};
     }
     static_assert(!hasValue || Addable<Value, Value>);
-    static_assert(!hasTag || Addable<Tag, Tag>);
+    static_assert(!hasTag || (AssignAddable<Tag, Tag> && hasTagToValue));
 public:
     using Point = std::array<Coord, K>;
 
@@ -67,10 +67,10 @@ public:
         }
         void give_tag(const auto &tag) requires (hasTag) {
             if constexpr (hasTagToValue) {
-                org = org + tag;
-                val = val + tag; 
+                org += tag;
+                val += tag; 
             }
-            lazy = lazy + tag;
+            lazy += tag;
         }
         void down() requires (hasTag) {
             bool need_tag = false;
@@ -166,7 +166,7 @@ private:
         u->down();
         if (condition(u->pt, u->pt) != KDIntersect::OUTSIDE) {
             if constexpr (hasTagToValue)
-                u->org = u->org + tag;
+                u->org += tag;
         }
         transform_range_impl(u->l, condition, tag);
         transform_range_impl(u->r, condition, tag);

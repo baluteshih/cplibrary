@@ -8,17 +8,16 @@ const long long INF = 1e18;
 struct Tag {
     long long lazymax, lazymin, lazyadd;
     Tag(long long _mx = -INF, long long _mn = INF, long long _add = 0): lazymax(_mx), lazymin(_mn), lazyadd(_add) {}
-    Tag operator+(const Tag &rhs) const {
-        Tag res(*this);
-        res.lazyadd += rhs.lazyadd;
-        if (res.lazymax != -INF) res.lazymax += rhs.lazyadd;
-        if (res.lazymin != INF) res.lazymin += rhs.lazyadd;
+    Tag& operator+=(const Tag &rhs) {
+        lazyadd += rhs.lazyadd;
+        if (lazymax != -INF) lazymax += rhs.lazyadd;
+        if (lazymin != INF) lazymin += rhs.lazyadd;
         if (rhs.lazymin != INF) { 
-            res.lazymin = std::min(res.lazymin, rhs.lazymin);
-            res.lazymax = std::min(res.lazymax, rhs.lazymin);
+            lazymin = std::min(lazymin, rhs.lazymin);
+            lazymax = std::min(lazymax, rhs.lazymin);
         }
-        if (rhs.lazymax != -INF) res.lazymax = std::max(res.lazymax, rhs.lazymax);
-        return res;
+        if (rhs.lazymax != -INF) lazymax = std::max(lazymax, rhs.lazymax);
+        return *this;
     }
 };
 
@@ -60,28 +59,27 @@ struct Value {
         res.sz = sz + rhs.sz;
         return res;
     }
-    Value operator+(const Tag &tag) const {
-        Value res(*this);
-        res.mx += tag.lazyadd;
-        if (res.smx != -INF) res.smx += tag.lazyadd;
-        res.mi += tag.lazyadd;
-        if (res.smi != INF) res.smi += tag.lazyadd;
-        res.sum += tag.lazyadd * sz;
-        if (tag.lazymin < res.mx) {
-            assert(tag.lazymin > res.smx);
-            res.sum += res.mxcnt * (tag.lazymin - res.mx);
-            if (res.mx == res.smi) res.smi = tag.lazymin;
-            if (res.mx == res.mi) res.mi = tag.lazymin;
-            res.mx = tag.lazymin;
+    Value& operator+=(const Tag &tag) {
+        mx += tag.lazyadd;
+        if (smx != -INF) smx += tag.lazyadd;
+        mi += tag.lazyadd;
+        if (smi != INF) smi += tag.lazyadd;
+        sum += tag.lazyadd * sz;
+        if (tag.lazymin < mx) {
+            assert(tag.lazymin > smx);
+            sum += mxcnt * (tag.lazymin - mx);
+            if (mx == smi) smi = tag.lazymin;
+            if (mx == mi) mi = tag.lazymin;
+            mx = tag.lazymin;
         }
-        if (tag.lazymax > res.mi) {   
-            assert(tag.lazymax < res.smi);
-            res.sum += res.micnt * (tag.lazymax - res.mi);
-            if (res.mi == res.smx) res.smx = tag.lazymax;
-            if (res.mi == res.mx) res.mx = tag.lazymax;
-            res.mi = tag.lazymax;
+        if (tag.lazymax > mi) {   
+            assert(tag.lazymax < smi);
+            sum += micnt * (tag.lazymax - mi);
+            if (mi == smx) smx = tag.lazymax;
+            if (mi == mx) mx = tag.lazymax;
+            mi = tag.lazymax;
         }
-        return res;
+        return *this;
     }
     friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.sum;

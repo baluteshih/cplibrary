@@ -34,13 +34,22 @@ class LinkCutTree {
             if constexpr (hasSubtree) res.sub_val = this->sub_val + rhs.sub_val;
             return res;
         }
-        CompositeInfo operator+(const SafeTag& t) const requires (hasTag) {
-            CompositeInfo res = *this;
-            if constexpr (Addable<Value, Tag>) res.org = res.org + t;
-            if constexpr (Addable<Path, Tag>) res.path_val = res.path_val + t;
-            if constexpr (Addable<Subtree, Tag>) res.sub_val = res.sub_val + t;
-            if constexpr (hasSubtree && hasInvertibleTag) res.vir_lazy = res.vir_lazy + t;
-            return res;
+        CompositeInfo& operator+=(const SafeTag& t) requires (hasTag) {
+            if constexpr (AssignAddable<Value, Tag>) org += t;
+            if constexpr (AssignAddable<Path, Tag>) path_val += t;
+            if constexpr (AssignAddable<Subtree, Tag>) sub_val += t;
+            if constexpr (hasSubtree && hasInvertibleTag) vir_lazy += t;
+            return *this;
+        }
+        void update_sub_val() requires (hasSubtree) {
+            if constexpr (hasInvertibleTag) {
+                Subtree v_val = vir;
+                v_val += vir_lazy;
+                sub_val = Subtree(org) + v_val;
+            }
+            else {
+                sub_val = Subtree(org) + vir;
+            }
         }
         void reverse() {
             if constexpr (hasPath && requires { path_val.reverse(); }) path_val.reverse();
@@ -73,10 +82,7 @@ public:
         access(x);
         tr[x].org.org = v;
         if constexpr (hasPath) tr[x].org.path_val = Path(v);
-        if constexpr (hasSubtree) {
-            if constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(v) + (tr[x].org.vir + tr[x].org.vir_lazy);
-            else tr[x].org.sub_val = Subtree(v) + tr[x].org.vir;
-        }
+        if constexpr (hasSubtree) tr[x].org.update_sub_val();
         tr[x].up();
     }
     void transform(int x, const auto& func) {
@@ -84,10 +90,7 @@ public:
         splay(&tr[x]);
         func(tr[x].org.org);
         if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);
-        if constexpr (hasSubtree) {
-            if constexpr (hasInvertibleTag) tr[x].org.sub_val = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);
-            else tr[x].org.sub_val = Subtree(tr[x].org.org) + tr[x].org.vir;
-        }
+        if constexpr (hasSubtree) tr[x].org.update_sub_val();
         tr[x].up();
     }
     int access(int x) {
@@ -103,8 +106,7 @@ public:
                     if (last) last->give_tag(y->org.vir_lazy);
                 }
                 if (y->r) y->org.vir = y->org.vir + y->r->val.sub_val;
-                if constexpr (hasInvertibleTag) y->org.sub_val = Subtree(y->org.org) + (y->org.vir + y->org.vir_lazy);
-                else y->org.sub_val = Subtree(y->org.org) + y->org.vir;
+                y->org.update_sub_val();
             }
             y->r = last;
             y->up();
@@ -151,8 +153,7 @@ public:
                 tr[x].give_tag(-tr[y].org.vir_lazy);
             }
             tr[y].org.vir = tr[y].org.vir + tr[x].val.sub_val;
-            if constexpr (hasInvertibleTag) tr[y].org.sub_val = Subtree(tr[y].org.org) + (tr[y].org.vir + tr[y].org.vir_lazy);
-            else tr[y].org.sub_val = Subtree(tr[y].org.org) + tr[y].org.vir;
+            tr[y].org.update_sub_val();
             tr[y].up();
         }
         return true;
@@ -188,10 +189,10 @@ public:
     void subtree_transform(int x, const SafeTag& tag) requires (hasSubtree && hasTag && hasInvertibleTag) {
         access(x);
         splay(&tr[x]);
-        tr[x].org.org = tr[x].org.org + tag;
-        tr[x].org.vir_lazy = tr[x].org.vir_lazy + tag;
+        tr[x].org.org += tag;
+        tr[x].org.vir_lazy += tag;
         if constexpr (hasPath) tr[x].org.path_val = Path(tr[x].org.org);
-        tr[x].org.sub_val = Subtree(tr[x].org.org) + (tr[x].org.vir + tr[x].org.vir_lazy);
+        tr[x].org.update_sub_val();
         tr[x].up();
     }
     bool link_directed(int child, int parent) {
@@ -205,8 +206,7 @@ public:
         if constexpr (hasSubtree) {
             if constexpr (hasInvertibleTag) tr[child].give_tag(-tr[parent].org.vir_lazy);
             tr[parent].org.vir = tr[parent].org.vir + tr[child].val.sub_val;
-            if constexpr (hasInvertibleTag) tr[parent].org.sub_val = Subtree(tr[parent].org.org) + (tr[parent].org.vir + tr[parent].org.vir_lazy);
-            else tr[parent].org.sub_val = Subtree(tr[parent].org.org) + tr[parent].org.vir;
+            tr[parent].org.update_sub_val();
             tr[parent].up();
         }
         return true;

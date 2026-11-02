@@ -5,11 +5,13 @@
 #include "Algebra/ValidOperation.hpp"
 
 template<typename T, typename U>
-min_v<T> operator+(const min_v<T> &lhs, const add_tag<U> &rhs) {
-    return min_v<T>(lhs.val + rhs.a);  
+min_v<T>& operator+=(min_v<T> &lhs, const add_tag<U> &rhs) {
+    lhs.val += rhs.a;
+    return lhs;
 }
 
 template<typename T, typename U>
-min_v<T> operator-(const min_v<T> &lhs, const add_tag<U> &rhs) requires (Subtractable<T, U>) {
-    return min_v<T>(lhs.val - rhs.a);  
+min_v<T>& operator-=(min_v<T> &lhs, const add_tag<U> &rhs) requires (AssignSubtractable<T, U>) {
+    lhs.val -= rhs.a;
+    return lhs;
 }

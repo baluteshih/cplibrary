@@ -6,8 +6,9 @@
 struct Tag {
     long long a;
     Tag(long long _a = 0): a(_a) {}
-    Tag operator+(const Tag &rhs) {
-        return Tag(a + rhs.a);
+    Tag& operator+=(const Tag &rhs) {
+        a += rhs.a;
+        return *this;
     }
 };
 
@@ -17,11 +18,13 @@ struct Value {
     Value operator+(const Value &rhs) {
         return Value(std::min(val, rhs.val));
     }
-    Value operator+(const Tag &tag) {
-        return Value(val + tag.a);
+    Value& operator+=(const Tag &tag) {
+        val += tag.a;
+        return *this;
     }
-    Value operator-(const Tag &tag) {
-        return Value(val - tag.a);
+    Value& operator-=(const Tag &tag) {
+        val -= tag.a;
+        return *this;
     }
     friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.val;

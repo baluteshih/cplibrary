@@ -19,7 +19,7 @@ class LeftistTree {
         if constexpr (Condition) return T();
         else return Empty{};
     }
-    static_assert(!hasTag || Addable<Key, Tag>);
+    static_assert(!hasTag || (AssignAddable<Key, Tag> && AssignAddable<Tag, Tag>));
     struct node {
         node *l = nullptr, *r = nullptr;
         Key key;
@@ -31,8 +31,8 @@ class LeftistTree {
             rank = get_rank(r) + 1;
         }
         void give_tag(const auto &tag) requires (hasTag) {
-            key = key + tag;
-            lazy = lazy + tag;
+            key += tag;
+            lazy += tag;
         }
         void down() requires (hasTag) {
             bool need_tag = false;

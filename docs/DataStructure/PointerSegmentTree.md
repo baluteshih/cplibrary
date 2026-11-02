@@ -23,7 +23,7 @@ class PointerSegmentTree;
     * Must support associative property `operator+` for merging two `Value` objects (commutative or non-commutative depending on usage).
     * Must have a default constructor `Value()` acting as the identity element.
 * `Tag`: The type of lazy tags.
-    * Must support `operator+` for tag composition (`Tag + Tag`) and applying to a value (`Value + Tag`).
+    * Must support `operator+=` for tag composition (`Tag += Tag`) and applying to a value (`Value += Tag`).
     * Must have a default constructor `Tag()` acting as the identity tag.
 * `pushdown`: If `true`, uses standard lazy propagation. If `false`, uses tag permanentization (requires commutative operations in some cases).
 * `Allocator`: The allocator used for node management (e.g., `DefaultAllocator`, `PoolAllocator`, `StackPoolAllocator`).

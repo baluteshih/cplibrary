@@ -10,8 +10,10 @@ using mint = modint998244353;
 struct Tag {
     mint mul, add;
     Tag(mint _mul = 1, mint _add = 0): mul(_mul), add(_add) {}
-    Tag operator+(const Tag &rhs) {
-        return Tag(mul * rhs.mul, rhs.mul * add + rhs.add);
+    Tag& operator+=(const Tag &rhs) {
+        mul *= rhs.mul;
+        add = rhs.mul * add + rhs.add;
+        return *this;
     }
 };
 
@@ -21,8 +23,9 @@ struct Value {
     Value operator+([[maybe_unused]] const Value &rhs) {
         return *this;
     }
-    Value operator+(const Tag &tag) {
-        return Value(tag.mul * val + tag.add);
+    Value& operator+=(const Tag &tag) {
+        val = tag.mul * val + tag.add;
+        return *this;
     }
     friend std::ostream& operator<<(std::ostream& os, const Value &v) {
         os << v.val;
