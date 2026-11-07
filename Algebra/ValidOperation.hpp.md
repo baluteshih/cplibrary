@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/min_v-add.hpp
     title: Algebra/Acted_Monoid/min_v-add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
   - icon: ':question:'
@@ -80,13 +80,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
   - icon: ':x:'
@@ -110,7 +110,7 @@ data:
   - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -264,19 +264,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -291,7 +291,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Numbers/bernoulli_number.hpp
     title: Numbers/bernoulli_number.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':question:'
@@ -13,13 +13,13 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bernoulli_number
@@ -320,7 +320,7 @@ data:
   path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   requiredBy: []
   timestamp: '2026-11-07 14:46:12+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/number_theory/bernoulli_number.test.cpp
 layout: document

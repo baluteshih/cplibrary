@@ -19,7 +19,7 @@ data:
   - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedRequiredBy: []

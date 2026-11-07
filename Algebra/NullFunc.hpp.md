@@ -14,14 +14,14 @@ data:
   - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'

@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/quadratic_residue.hpp
     title: Numeric/quadratic_residue.hpp
   - icon: ':question:'

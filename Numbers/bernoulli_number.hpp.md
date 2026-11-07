@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':question:'
@@ -10,23 +10,23 @@ data:
   - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Numbers/bernoulli_number.hpp\"\n\n#line 2 \"Polynomial/Polynomial.hpp\"\
@@ -304,7 +304,7 @@ data:
   path: Numbers/bernoulli_number.hpp
   requiredBy: []
   timestamp: '2026-11-07 14:46:12+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/number_theory/bernoulli_number.test.cpp
 documentation_of: Numbers/bernoulli_number.hpp

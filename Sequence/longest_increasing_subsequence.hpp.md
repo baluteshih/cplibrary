@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/max_v.hpp
     title: Algebra/Monoid/max_v.hpp
   - icon: ':question:'
@@ -18,12 +18,12 @@ data:
     title: Discretization
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Sequence/longest_increasing_subsequence.hpp\"\n\n#line 2\
@@ -110,7 +110,7 @@ data:
   path: Sequence/longest_increasing_subsequence.hpp
   requiredBy: []
   timestamp: '2026-11-07 14:46:12+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
 documentation_of: Sequence/longest_increasing_subsequence.hpp

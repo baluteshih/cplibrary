@@ -26,14 +26,14 @@ data:
   - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/directedmst.test.cpp
     title: test/1_library_checker/graph/directedmst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'

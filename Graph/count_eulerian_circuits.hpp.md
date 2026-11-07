@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
   - icon: ':question:'
@@ -16,10 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/eulerian_trail.hpp
     title: Graph/eulerian_trail.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
   - icon: ':question:'

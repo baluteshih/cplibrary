@@ -303,22 +303,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product_mod_2.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -339,52 +339,52 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sqrt_mod.test.cpp
     title: test/1_library_checker/number_theory/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
     title: test/1_library_checker/number_theory/sum_of_floor_of_linear.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/find_linear_recurrence.test.cpp
     title: test/1_library_checker/other/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/two_sat.test.cpp
     title: test/1_library_checker/other/two_sat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
     title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
     title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
     title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -396,7 +396,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/enumerate_palindromes.test.cpp
     title: test/1_library_checker/string/enumerate_palindromes.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
   - icon: ':heavy_check_mark:'
@@ -405,7 +405,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/suffixarray.test.cpp
     title: test/1_library_checker/string/suffixarray.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/string/zalgorithm.test.cpp
     title: test/1_library_checker/string/zalgorithm.test.cpp
   - icon: ':heavy_check_mark:'
@@ -423,7 +423,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'
