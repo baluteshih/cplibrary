@@ -13,6 +13,21 @@ data:
     path: test/0_custom/bounded_flow/bounded_flow.test.cpp
     title: test/0_custom/bounded_flow/bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/circle-coverage/circle-coverage.test.cpp
+    title: test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hulls/convex-hulls.test.cpp
+    title: test/0_custom/convex-hulls/convex-hulls.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+    title: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+    title: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-queries/convex-queries.test.cpp
+    title: test/0_custom/convex-queries/convex-queries.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
     title: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,6 +36,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/polygon-containment/polygon-containment.test.cpp
+    title: test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/polygon-cover/polygon-cover.test.cpp
+    title: test/0_custom/polygon-cover/polygon-cover.test.cpp
+  - icon: ':x:'
+    path: test/0_custom/polygon-outline/polygon-outline.test.cpp
+    title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/biginteger/addition.test.cpp
     title: test/1_library_checker/biginteger/addition.test.cpp
@@ -276,7 +300,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -387,7 +411,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
     title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -528,15 +552,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/3_yukicoder/2114.test.cpp
     title: test/3_yukicoder/2114.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101242J.test.cpp
-    title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101673A.test.cpp
-    title: test/4_codeforces/101673A.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/104114B.test.cpp
-    title: test/4_codeforces/104114B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E/106033E.test.cpp
     title: test/4_codeforces/106033E/106033E.test.cpp
@@ -546,9 +561,6 @@ data:
   - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
-    path: test/6_TIOJ/1503.test.cpp
-    title: test/6_TIOJ/1503.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/7_loj/2302.test.cpp
     title: test/7_loj/2302.test.cpp
@@ -747,7 +759,6 @@ data:
   - test/3_yukicoder/2114.test.cpp
   - test/5_NCOJ/929.test.cpp
   - test/5_NCOJ/123.test.cpp
-  - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/distance.test.cpp
   - test/2_aoj/minimum_cost_flow.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp
@@ -774,15 +785,20 @@ data:
   - test/9_qoj/17153.test.cpp
   - test/9_qoj/2162.test.cpp
   - test/9_qoj/6445.test.cpp
+  - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - test/0_custom/polygon-cover/polygon-cover.test.cpp
+  - test/0_custom/polygon-outline/polygon-outline.test.cpp
+  - test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - test/0_custom/circle-coverage/circle-coverage.test.cpp
   - test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
+  - test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - test/0_custom/convex-queries/convex-queries.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
+  - test/0_custom/convex-hulls/convex-hulls.test.cpp
   - test/0_custom/bounded_flow/bounded_flow.test.cpp
   - test/0_custom/OfflineBichromaticNearest.test.cpp
-  - test/4_codeforces/101673A.test.cpp
   - test/4_codeforces/106033E/106033E.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/101242J.test.cpp
 documentation_of: assumption.hpp
 layout: document
 redirect_from:

@@ -27,28 +27,32 @@ data:
     \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
     \ (std::is_same_v<T, long double>)\n        return T(1e-12);\n    else\n     \
     \   return T(0); \n}\n\ntemplate <typename T, T eps = get_default_eps<T>()>\n\
-    struct Geometry {\n    static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n            return (x > eps) - (x < -eps); \n        }\n        else {\n\
-    \            return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T\
-    \ a, T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T\
-    \ eps = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps>\
-    \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
-    \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
-    \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
-    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
-    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
-    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
-    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
-    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
-    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
-    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
-    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
-    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
-    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
-    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
-    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
-    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    struct Geometry {\n    template <typename U = T>\n    static int sign(U x) {\n\
+    \        if constexpr (std::is_floating_point_v<U>) {\n            return (x >\
+    \ U(eps)) - (x < -U(eps));\n        }\n        else {\n            return (x >\
+    \ 0) - (x < 0);\n        }\n    }\n    template <typename U = T, typename V =\
+    \ U>\n    static int cmp(U a, V b) {\n        if constexpr (std::is_floating_point_v<U>\
+    \ || std::is_floating_point_v<V>) {\n            using W = std::common_type_t<U,\
+    \ V>;\n            return sign(W(a) - W(b));\n        }\n        else {\n    \
+    \        return std::cmp_greater(a, b) - std::cmp_less(a, b);\n        }\n   \
+    \ }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(), typename MulT =\
+    \ T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n    using Geometry<T,\
+    \ eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val\
+    \ = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) :\
+    \ x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream &is, Pt &p)\
+    \ { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
+    \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
+    \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
+    \ == b); }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const\
+    \ Pt &a) {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator-=(const Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n\
+    \    }\n    Pt& operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n\
+    \    }\n    Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n\
+    \    }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b;\
+    \ }\n    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n\
+    \    friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend\
+    \ Pt operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
     \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
     \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
@@ -131,7 +135,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2026-11-07 14:46:12+08:00'
+  timestamp: '2026-11-08 00:49:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/sort_points_by_argument.test.cpp

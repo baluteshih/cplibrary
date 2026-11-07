@@ -29,15 +29,19 @@ data:
     \        return T(1e-6);\n    else if constexpr (std::is_same_v<T, double>)\n\
     \        return T(1e-9);\n    else if constexpr (std::is_same_v<T, long double>)\n\
     \        return T(1e-12);\n    else\n        return T(0); \n}\n\ntemplate <typename\
-    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    static int sign(T x)\
-    \ {\n        if constexpr (std::is_floating_point_v<T>) {\n            return\
-    \ (x > eps) - (x < -eps); \n        }\n        else {\n            return (x >\
-    \ 0) - (x < 0);\n        }\n    }\n    static int cmp(T a, T b) {\n        return\
-    \ sign(a - b);\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
+    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    template <typename\
+    \ U = T>\n    static int sign(U x) {\n        if constexpr (std::is_floating_point_v<U>)\
+    \ {\n            return (x > U(eps)) - (x < -U(eps));\n        }\n        else\
+    \ {\n            return (x > 0) - (x < 0);\n        }\n    }\n    template <typename\
+    \ U = T, typename V = U>\n    static int cmp(U a, V b) {\n        if constexpr\
+    \ (std::is_floating_point_v<U> || std::is_floating_point_v<V>) {\n           \
+    \ using W = std::common_type_t<U, V>;\n            return sign(W(a) - W(b));\n\
+    \        }\n        else {\n            return std::cmp_greater(a, b) - std::cmp_less(a,\
+    \ b);\n        }\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
-    \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
-    \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static\
+    \ constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n\
+    \    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
     \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
@@ -100,30 +104,30 @@ data:
     \ a, b, p, strict);\n        return !_betweenAngle(o, b, a, p, !strict);\n   \
     \ }\n};\n#line 4 \"Geometry/line.hpp\"\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nstruct Ln : Geometry<T, eps> {\n    using value_type = T;\n\
-    \    using Point = Pt<T, eps, MulT>;\n    std::array<Point, 2> l;\n    using Geometry<MulT,\
-    \ eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val\
-    \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
-    \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
-    \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
-    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
-    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
-    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
-    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
-    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
-    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
-    \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
-    \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
-    \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
-    \    }\n    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T,\
-    \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend Pt<Ret,\
-    \ _eps, _MulT> projection(const Point &p, const Ln &l) {\n        auto d = direction(l);\n\
-    \        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret, _eps, _MulT>(d) * (Ret(dot(p\
-    \ - l[0], d)) / Ret(square(d)));\n    }\n    template <typename Ret = DefaultFloat<T>,\
-    \ Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT\
-    \ = Ret>\n    friend Pt<Ret, _eps, _MulT> reflection(const Point &p, const Ln\
-    \ &l) {\n        return projection<Ret, _eps, _MulT>(p, l) * Ret(2) - Pt<Ret,\
-    \ _eps, _MulT>(p);\n    }\n    template <typename Ret = DefaultFloat<T>>\n   \
-    \ friend Ret pointToLineDist(const Point &p, const Ln &l) {\n        if (l[0]\
+    \    using product_type = MulT;\n    using Point = Pt<T, eps, MulT>;\n    std::array<Point,\
+    \ 2> l;\n    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n\
+    \    static constexpr T eps_val = eps;\n    Ln() {}\n    Ln(const Point &a, const\
+    \ Point &b) : l{a, b} {}\n    friend std::istream& operator>>(std::istream &is,\
+    \ Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename\
+    \ U, U _eps, typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0],\
+    \ other.l[1]} {}\n    friend int side(const Point &p, const Ln &l) { \n      \
+    \  return side(p, l[0], l[1]);\n    }\n    Point& operator[](int index) {\n  \
+    \      return l[index];\n    }\n    const Point& operator[](int index) const {\n\
+    \        return l[index];\n    }\n    friend Point direction(const Ln &l) {\n\
+    \        return l[1] - l[0];\n    }\n    friend bool parallel(const Ln &l1, const\
+    \ Ln &l2) {\n        return parallel(direction(l1), direction(l2));\n    }\n \
+    \   friend bool sameDirection(const Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1),\
+    \ direction(l2));\n    }\n    template <typename Ret = DefaultFloat<T>, Ret _eps\
+    \ = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n\
+    \    friend Pt<Ret, _eps, _MulT> projection(const Point &p, const Ln &l) {\n \
+    \       auto d = direction(l);\n        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret,\
+    \ _eps, _MulT>(d) * (Ret(dot(p - l[0], d)) / Ret(square(d)));\n    }\n    template\
+    \ <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(),\
+    \ typename _MulT = Ret>\n    friend Pt<Ret, _eps, _MulT> reflection(const Point\
+    \ &p, const Ln &l) {\n        return projection<Ret, _eps, _MulT>(p, l) * Ret(2)\
+    \ - Pt<Ret, _eps, _MulT>(p);\n    }\n    template <typename Ret = DefaultFloat<T>>\n\
+    \    friend Ret pointToLineDist(const Point &p, const Ln &l) {\n        if (l[0]\
     \ == l[1]) { return dist<Ret>(p, l[0]); }\n        return std::abs(cross(l[0]\
     \ - l[1], l[0] - p)) / length<Ret>(direction(l));\n    }\n    // better use integers\
     \ if you don't need exact coordinate\n    // l <= r is not explicitly required\n\
@@ -182,7 +186,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/cross_point.test.cpp
   requiredBy: []
-  timestamp: '2026-11-07 14:46:12+08:00'
+  timestamp: '2026-11-08 00:49:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/cross_point.test.cpp

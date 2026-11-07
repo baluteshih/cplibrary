@@ -219,19 +219,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Flow/min_cost_circulation.hpp
       title: Flow/min_cost_circulation.hpp
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -257,7 +257,7 @@ data:
     - icon: ':question:'
       path: Geometry/circle.hpp
       title: Geometry/circle.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/circle_cover.hpp
       title: Geometry/circle_cover.hpp
     - icon: ':heavy_check_mark:'
@@ -316,7 +316,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':warning:'
@@ -380,7 +380,7 @@ data:
     - icon: ':question:'
       path: Misc/cyc_bitonic_search.hpp
       title: Misc/cyc_bitonic_search.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: Misc/i128.hpp
       title: Misc/i128.hpp
     - icon: ':heavy_check_mark:'
@@ -616,6 +616,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/0_custom/bounded_flow/bounded_flow.test.cpp
       title: test/0_custom/bounded_flow/bounded_flow.test.cpp
+  - name: test/0_custom/circle-coverage
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/circle-coverage/circle-coverage.test.cpp
+      title: test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - name: test/0_custom/convex-hulls
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-hulls/convex-hulls.test.cpp
+      title: test/0_custom/convex-hulls/convex-hulls.test.cpp
+  - name: test/0_custom/convex-line-intersection
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+      title: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - name: test/0_custom/convex-minkowski
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+      title: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - name: test/0_custom/convex-queries
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-queries/convex-queries.test.cpp
+      title: test/0_custom/convex-queries/convex-queries.test.cpp
   - name: test/0_custom/max_bounded_flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -626,6 +651,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
       title: test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
+  - name: test/0_custom/polygon-containment
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/polygon-containment/polygon-containment.test.cpp
+      title: test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - name: test/0_custom/polygon-cover
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/polygon-cover/polygon-cover.test.cpp
+      title: test/0_custom/polygon-cover/polygon-cover.test.cpp
+  - name: test/0_custom/polygon-outline
+    pages:
+    - icon: ':x:'
+      path: test/0_custom/polygon-outline/polygon-outline.test.cpp
+      title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - name: test/1_library_checker/biginteger
     pages:
     - icon: ':heavy_check_mark:'
@@ -893,7 +933,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/incremental_scc.test.cpp
       title: test/1_library_checker/graph/incremental_scc.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
       title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1014,7 +1054,7 @@ data:
       title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - name: test/1_library_checker/sample
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
       title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - name: test/1_library_checker/set_power_series
@@ -1165,17 +1205,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/3_yukicoder/2114.test.cpp
       title: test/3_yukicoder/2114.test.cpp
-  - name: test/4_codeforces
-    pages:
-    - icon: ':x:'
-      path: test/4_codeforces/101242J.test.cpp
-      title: test/4_codeforces/101242J.test.cpp
-    - icon: ':x:'
-      path: test/4_codeforces/101673A.test.cpp
-      title: test/4_codeforces/101673A.test.cpp
-    - icon: ':x:'
-      path: test/4_codeforces/104114B.test.cpp
-      title: test/4_codeforces/104114B.test.cpp
   - name: test/4_codeforces/106033E
     pages:
     - icon: ':heavy_check_mark:'
@@ -1189,11 +1218,6 @@ data:
     - icon: ':x:'
       path: test/5_NCOJ/929.test.cpp
       title: test/5_NCOJ/929.test.cpp
-  - name: test/6_TIOJ
-    pages:
-    - icon: ':x:'
-      path: test/6_TIOJ/1503.test.cpp
-      title: test/6_TIOJ/1503.test.cpp
   - name: test/7_loj
     pages:
     - icon: ':heavy_check_mark:'

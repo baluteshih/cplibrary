@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/many_aplusb_128bit
@@ -28,14 +28,13 @@ data:
     \ s)\n            x = x * 10 + int(c - '0'); \n        x *= sgn;\n        return\
     \ is;\n    }\n    std::ostream &operator<<(std::ostream &os, const __int128 &x)\
     \ {\n        if (x < 0) return os << '-' << -x;\n        if (x < 10) return os\
-    \ << int(x % 10);\n        return os << x / 10 << int(x % 10);\n    }\n}\ninline\
-    \ i128 abs(i128 x) {\n    return x < 0 ? -x : x;\n}\ninline u128 gcd(u128 a, u128\
-    \ b) {\n    while (b) a %= b, std::swap(a, b);\n    return a;\n}\ninline i128\
-    \ gcd(i128 a, i128 b) {\n    return gcd((u128)abs(a), (u128)abs(b));\n}\n#line\
-    \ 5 \"test/1_library_checker/sample/many_aplusb_128bit.test.cpp\"\n\nint main()\
-    \ {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t;\n    std::cin\
-    \ >> t;\n    while (t--) {\n        __int128 a, b;\n        std::cin >> a >> b;\n\
-    \        std::cout << a + b << \"\\n\";\n    }\n}\n"
+    \ << int(x % 10);\n        return os << x / 10 << int(x % 10);\n    }\n    inline\
+    \ u128 gcd(u128 a, u128 b) {\n        while (b) a %= b, std::swap(a, b);\n   \
+    \     return a;\n    }\n    inline i128 gcd(i128 a, i128 b) {\n        return\
+    \ gcd((u128)abs(a), (u128)abs(b));\n    }\n}\n#line 5 \"test/1_library_checker/sample/many_aplusb_128bit.test.cpp\"\
+    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
+    \ t;\n    std::cin >> t;\n    while (t--) {\n        __int128 a, b;\n        std::cin\
+    \ >> a >> b;\n        std::cout << a + b << \"\\n\";\n    }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb_128bit\"\n\
     #include \"assumption.hpp\"\n\n#include \"Misc/i128.hpp\"\n\nint main() {\n  \
     \  std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int t;\n    std::cin >>\
@@ -47,8 +46,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   requiredBy: []
-  timestamp: '2026-09-30 15:38:11+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-08 00:49:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
 layout: document

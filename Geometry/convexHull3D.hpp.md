@@ -24,15 +24,19 @@ data:
     \        return T(1e-6);\n    else if constexpr (std::is_same_v<T, double>)\n\
     \        return T(1e-9);\n    else if constexpr (std::is_same_v<T, long double>)\n\
     \        return T(1e-12);\n    else\n        return T(0); \n}\n\ntemplate <typename\
-    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    static int sign(T x)\
-    \ {\n        if constexpr (std::is_floating_point_v<T>) {\n            return\
-    \ (x > eps) - (x < -eps); \n        }\n        else {\n            return (x >\
-    \ 0) - (x < 0);\n        }\n    }\n    static int cmp(T a, T b) {\n        return\
-    \ sign(a - b);\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
+    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    template <typename\
+    \ U = T>\n    static int sign(U x) {\n        if constexpr (std::is_floating_point_v<U>)\
+    \ {\n            return (x > U(eps)) - (x < -U(eps));\n        }\n        else\
+    \ {\n            return (x > 0) - (x < 0);\n        }\n    }\n    template <typename\
+    \ U = T, typename V = U>\n    static int cmp(U a, V b) {\n        if constexpr\
+    \ (std::is_floating_point_v<U> || std::is_floating_point_v<V>) {\n           \
+    \ using W = std::common_type_t<U, V>;\n            return sign(W(a) - W(b));\n\
+    \        }\n        else {\n            return std::cmp_greater(a, b) - std::cmp_less(a,\
+    \ b);\n        }\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
-    \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
-    \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static\
+    \ constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n\
+    \    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
     \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
@@ -95,27 +99,27 @@ data:
     \ a, b, p, strict);\n        return !_betweenAngle(o, b, a, p, !strict);\n   \
     \ }\n};\n#line 4 \"Geometry/Point3D.hpp\"\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nstruct Pt3 : Geometry<T, eps> {\n    using value_type =\
-    \ T;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n\
-    \    static constexpr T eps_val = eps;\n    T x = 0, y = 0, z = 0;\n    Pt3()\
-    \ : x(0), y(0), z(0) {}\n    Pt3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}\n\
-    \    friend std::istream& operator>>(std::istream &is, Pt3 &p) { return is >>\
-    \ p.x >> p.y >> p.z; }\n    friend std::ostream& operator<<(std::ostream &os,\
-    \ const Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend\
-    \ bool operator==(const Pt3 &a, const Pt3 &b) {\n        return cmp(a.x, b.x)\
-    \ == 0 && cmp(a.y, b.y) == 0 && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const\
-    \ Pt3 &a, const Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x,\
-    \ -y, -z); }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y,\
-    \ z += a.z;\n        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n\
-    \        x -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3&\
-    \ operator*=(T d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n\
-    \    }\n    Pt3& operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return\
-    \ *this;\n    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return\
-    \ Pt3(a) += b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return\
-    \ Pt3(a) -= b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a)\
-    \ *= d; }\n    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n\
-    \    friend bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x,\
-    \ b.x);\n        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n\
-    \        return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
+    \ T;\n    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n  \
+    \  static constexpr T eps_val = eps;\n    T x = 0, y = 0, z = 0;\n    Pt3() :\
+    \ x(0), y(0), z(0) {}\n    Pt3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}\n  \
+    \  friend std::istream& operator>>(std::istream &is, Pt3 &p) { return is >> p.x\
+    \ >> p.y >> p.z; }\n    friend std::ostream& operator<<(std::ostream &os, const\
+    \ Pt3 &p) { return os << p.x << ' ' << p.y << ' ' << p.z; }\n    friend bool operator==(const\
+    \ Pt3 &a, const Pt3 &b) {\n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y)\
+    \ == 0 && cmp(a.z, b.z) == 0; \n    }\n    friend bool operator!=(const Pt3 &a,\
+    \ const Pt3 &b) { return !(a == b); }\n    Pt3 operator-() { return Pt(-x, -y,\
+    \ -z); }\n    Pt3& operator+=(const Pt3 &a) {\n        x += a.x, y += a.y, z +=\
+    \ a.z;\n        return *this;\n    }\n    Pt3& operator-=(const Pt3 &a) {\n  \
+    \      x -= a.x, y -= a.y, z -= a.z;\n        return *this;\n    }\n    Pt3& operator*=(T\
+    \ d) {\n        x *= d, y *= d, z *= d;\n        return *this;\n    }\n    Pt3&\
+    \ operator/=(T d) {\n        x /= d, y /= d, z /= d;\n        return *this;\n\
+    \    }\n    friend Pt3 operator+(const Pt3 &a, const Pt3 &b) { return Pt3(a) +=\
+    \ b; }\n    friend Pt3 operator-(const Pt3 &a, const Pt3 &b) { return Pt3(a) -=\
+    \ b; }\n    friend Pt3 operator*(const Pt3 &a, T d) { return Pt3(a) *= d; }\n\
+    \    friend Pt3 operator/(const Pt3 &a, T d) { return Pt3(a) /= d; }\n    friend\
+    \ bool operator<(const Pt3 &a, const Pt3 &b) {\n        int sx = cmp(a.x, b.x);\n\
+    \        if (sx != 0) return sx == -1;\n        int sy = cmp(a.y, b.y);\n    \
+    \    return sy != 0 ? sy == -1 : cmp(a.z, b.z) == -1;\n    }\n    friend bool\
     \ operator>(const Pt3 &a, const Pt3 &b) { return b < a; }\n    friend bool operator<=(const\
     \ Pt3 &a, const Pt3 &b) { return !(b < a); }\n    friend bool operator>=(const\
     \ Pt3 &a, const Pt3 &b) { return !(a < b); }\n    template <typename U, U _eps,\
@@ -167,10 +171,10 @@ data:
     \n\n// all points coplanar case will WA, O(n^2)\ntemplate<typename T, T eps =\
     \ get_default_eps<T>(), typename MulT = T>\nstruct convexHull3D : Geometry<T,\
     \ eps> {\n    using Point = Pt3<T, eps, MulT>; \n    using value_type = T;\n \
-    \   using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n  \
-    \  static constexpr T eps_val = eps;\n    struct Face {\n        int a, b, c;\n\
-    \        Face(int ta, int tb, int tc) : a(ta), b(tb), c(tc) {}\n    }; // store\
-    \ the faces with input point indexes\n    std::vector<Face> res;\n    std::vector<Point>\
+    \   using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static\
+    \ constexpr T eps_val = eps;\n    struct Face {\n        int a, b, c;\n      \
+    \  Face(int ta, int tb, int tc) : a(ta), b(tb), c(tc) {}\n    }; // store the\
+    \ faces with input point indexes\n    std::vector<Face> res;\n    std::vector<Point>\
     \ P;\n    convexHull3D(const std::vector<Point> &_P) : res(), P(_P) {\n      \
     \  int n = P.size();\n        if (n <= 2) return; // be careful about edge case\n\
     \        // ensure first 4 points are not coplanar\n        std::swap(P[1], *std::ranges::find_if(P,\
@@ -211,10 +215,10 @@ data:
   code: "#pragma once\n\n#include \"Geometry/Point3D.hpp\"\n\n// all points coplanar\
     \ case will WA, O(n^2)\ntemplate<typename T, T eps = get_default_eps<T>(), typename\
     \ MulT = T>\nstruct convexHull3D : Geometry<T, eps> {\n    using Point = Pt3<T,\
-    \ eps, MulT>; \n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n\
-    \    using Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n\
-    \    struct Face {\n        int a, b, c;\n        Face(int ta, int tb, int tc)\
-    \ : a(ta), b(tb), c(tc) {}\n    }; // store the faces with input point indexes\n\
+    \ eps, MulT>; \n    using value_type = T;\n    using Geometry<T, eps>::sign;\n\
+    \    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val = eps;\n   \
+    \ struct Face {\n        int a, b, c;\n        Face(int ta, int tb, int tc) :\
+    \ a(ta), b(tb), c(tc) {}\n    }; // store the faces with input point indexes\n\
     \    std::vector<Face> res;\n    std::vector<Point> P;\n    convexHull3D(const\
     \ std::vector<Point> &_P) : res(), P(_P) {\n        int n = P.size();\n      \
     \  if (n <= 2) return; // be careful about edge case\n        // ensure first\
@@ -259,7 +263,7 @@ data:
   isVerificationFile: false
   path: Geometry/convexHull3D.hpp
   requiredBy: []
-  timestamp: '2026-11-07 14:46:12+08:00'
+  timestamp: '2026-11-08 00:49:38+08:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/9_qoj/6445.test.cpp

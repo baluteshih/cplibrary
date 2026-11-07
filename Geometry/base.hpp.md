@@ -20,7 +20,7 @@ data:
   - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
   - icon: ':heavy_check_mark:'
@@ -58,8 +58,32 @@ data:
     path: test/0_custom/OfflineBichromaticNearest.test.cpp
     title: test/0_custom/OfflineBichromaticNearest.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/circle-coverage/circle-coverage.test.cpp
+    title: test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hulls/convex-hulls.test.cpp
+    title: test/0_custom/convex-hulls/convex-hulls.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+    title: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+    title: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-queries/convex-queries.test.cpp
+    title: test/0_custom/convex-queries/convex-queries.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/polygon-containment/polygon-containment.test.cpp
+    title: test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/polygon-cover/polygon-cover.test.cpp
+    title: test/0_custom/polygon-cover/polygon-cover.test.cpp
+  - icon: ':x:'
+    path: test/0_custom/polygon-outline/polygon-outline.test.cpp
+    title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/closest_pair.test.cpp
     title: test/1_library_checker/geometry/closest_pair.test.cpp
@@ -139,23 +163,11 @@ data:
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':x:'
-    path: test/4_codeforces/101242J.test.cpp
-    title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101673A.test.cpp
-    title: test/4_codeforces/101673A.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/104114B.test.cpp
-    title: test/4_codeforces/104114B.test.cpp
-  - icon: ':x:'
     path: test/5_NCOJ/123.test.cpp
     title: test/5_NCOJ/123.test.cpp
   - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
-    path: test/6_TIOJ/1503.test.cpp
-    title: test/6_TIOJ/1503.test.cpp
   - icon: ':x:'
     path: test/9_qoj/2162.test.cpp
     title: test/9_qoj/2162.test.cpp
@@ -173,15 +185,19 @@ data:
     \ float>)\n        return T(1e-6);\n    else if constexpr (std::is_same_v<T, double>)\n\
     \        return T(1e-9);\n    else if constexpr (std::is_same_v<T, long double>)\n\
     \        return T(1e-12);\n    else\n        return T(0); \n}\n\ntemplate <typename\
-    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    static int sign(T x)\
-    \ {\n        if constexpr (std::is_floating_point_v<T>) {\n            return\
-    \ (x > eps) - (x < -eps); \n        }\n        else {\n            return (x >\
-    \ 0) - (x < 0);\n        }\n    }\n    static int cmp(T a, T b) {\n        return\
-    \ sign(a - b);\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
+    \ T, T eps = get_default_eps<T>()>\nstruct Geometry {\n    template <typename\
+    \ U = T>\n    static int sign(U x) {\n        if constexpr (std::is_floating_point_v<U>)\
+    \ {\n            return (x > U(eps)) - (x < -U(eps));\n        }\n        else\
+    \ {\n            return (x > 0) - (x < 0);\n        }\n    }\n    template <typename\
+    \ U = T, typename V = U>\n    static int cmp(U a, V b) {\n        if constexpr\
+    \ (std::is_floating_point_v<U> || std::is_floating_point_v<V>) {\n           \
+    \ using W = std::common_type_t<U, V>;\n            return sign(W(a) - W(b));\n\
+    \        }\n        else {\n            return std::cmp_greater(a, b) - std::cmp_less(a,\
+    \ b);\n        }\n    }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n\
-    \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
-    \   static constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0)\
-    \ {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
+    \    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static\
+    \ constexpr T eps_val = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n\
+    \    Pt(T x_, T y_) : x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream\
     \ &is, Pt &p) { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
     \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
     \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
@@ -249,28 +265,32 @@ data:
     \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
     \ (std::is_same_v<T, long double>)\n        return T(1e-12);\n    else\n     \
     \   return T(0); \n}\n\ntemplate <typename T, T eps = get_default_eps<T>()>\n\
-    struct Geometry {\n    static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n            return (x > eps) - (x < -eps); \n        }\n        else {\n\
-    \            return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T\
-    \ a, T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T\
-    \ eps = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps>\
-    \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
-    \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
-    \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
-    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
-    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
-    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
-    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
-    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
-    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
-    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
-    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
-    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
-    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
-    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
-    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
-    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    struct Geometry {\n    template <typename U = T>\n    static int sign(U x) {\n\
+    \        if constexpr (std::is_floating_point_v<U>) {\n            return (x >\
+    \ U(eps)) - (x < -U(eps));\n        }\n        else {\n            return (x >\
+    \ 0) - (x < 0);\n        }\n    }\n    template <typename U = T, typename V =\
+    \ U>\n    static int cmp(U a, V b) {\n        if constexpr (std::is_floating_point_v<U>\
+    \ || std::is_floating_point_v<V>) {\n            using W = std::common_type_t<U,\
+    \ V>;\n            return sign(W(a) - W(b));\n        }\n        else {\n    \
+    \        return std::cmp_greater(a, b) - std::cmp_less(a, b);\n        }\n   \
+    \ }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(), typename MulT =\
+    \ T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n    using Geometry<T,\
+    \ eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val\
+    \ = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) :\
+    \ x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream &is, Pt &p)\
+    \ { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
+    \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
+    \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
+    \ == b); }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const\
+    \ Pt &a) {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator-=(const Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n\
+    \    }\n    Pt& operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n\
+    \    }\n    Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n\
+    \    }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b;\
+    \ }\n    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n\
+    \    friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend\
+    \ Pt operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
     \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
     \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
@@ -340,7 +360,7 @@ data:
   - Geometry/convex.hpp
   - Geometry/closest_pair.hpp
   - Geometry/OfflineBichromaticNearest.hpp
-  timestamp: '2026-11-07 14:46:12+08:00'
+  timestamp: '2026-11-08 00:49:38+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
@@ -351,7 +371,6 @@ data:
   - test/1_library_checker/geometry/count_points_in_triangle.test.cpp
   - test/5_NCOJ/929.test.cpp
   - test/5_NCOJ/123.test.cpp
-  - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/distance.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp
   - test/2_aoj/parallel-orthogonal.test.cpp
@@ -374,11 +393,16 @@ data:
   - test/2_aoj/common_tangent.test.cpp
   - test/9_qoj/2162.test.cpp
   - test/9_qoj/6445.test.cpp
+  - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - test/0_custom/polygon-cover/polygon-cover.test.cpp
+  - test/0_custom/polygon-outline/polygon-outline.test.cpp
+  - test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - test/0_custom/convex-queries/convex-queries.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
+  - test/0_custom/convex-hulls/convex-hulls.test.cpp
   - test/0_custom/OfflineBichromaticNearest.test.cpp
-  - test/4_codeforces/101673A.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/101242J.test.cpp
 documentation_of: Geometry/base.hpp
 layout: document
 redirect_from:

@@ -38,28 +38,32 @@ data:
     \ (std::is_same_v<T, double>)\n        return T(1e-9);\n    else if constexpr\
     \ (std::is_same_v<T, long double>)\n        return T(1e-12);\n    else\n     \
     \   return T(0); \n}\n\ntemplate <typename T, T eps = get_default_eps<T>()>\n\
-    struct Geometry {\n    static int sign(T x) {\n        if constexpr (std::is_floating_point_v<T>)\
-    \ {\n            return (x > eps) - (x < -eps); \n        }\n        else {\n\
-    \            return (x > 0) - (x < 0);\n        }\n    }\n    static int cmp(T\
-    \ a, T b) {\n        return sign(a - b);\n    }\n};\n\ntemplate<typename T, T\
-    \ eps = get_default_eps<T>(), typename MulT = T>\nstruct Pt : Geometry<T, eps>\
-    \ {\n    using value_type = T;\n    using Geometry<MulT, eps>::sign;\n    using\
-    \ Geometry<MulT, eps>::cmp;\n    static constexpr T eps_val = eps;\n    T x =\
-    \ 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) : x(x_), y(y_) {}\n\
-    \    friend std::istream& operator>>(std::istream &is, Pt &p) { return is >> p.x\
-    \ >> p.y; }\n    friend std::ostream& operator<<(std::ostream &os, const Pt &p)\
-    \ { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const Pt &a,\
-    \ const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) == 0; \n\
-    \    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a == b);\
-    \ }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const Pt &a)\
-    \ {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt& operator-=(const\
-    \ Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n    }\n    Pt&\
-    \ operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n    }\n \
-    \   Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n  \
-    \  }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b; }\n\
-    \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
-    \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
-    \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
+    struct Geometry {\n    template <typename U = T>\n    static int sign(U x) {\n\
+    \        if constexpr (std::is_floating_point_v<U>) {\n            return (x >\
+    \ U(eps)) - (x < -U(eps));\n        }\n        else {\n            return (x >\
+    \ 0) - (x < 0);\n        }\n    }\n    template <typename U = T, typename V =\
+    \ U>\n    static int cmp(U a, V b) {\n        if constexpr (std::is_floating_point_v<U>\
+    \ || std::is_floating_point_v<V>) {\n            using W = std::common_type_t<U,\
+    \ V>;\n            return sign(W(a) - W(b));\n        }\n        else {\n    \
+    \        return std::cmp_greater(a, b) - std::cmp_less(a, b);\n        }\n   \
+    \ }\n};\n\ntemplate<typename T, T eps = get_default_eps<T>(), typename MulT =\
+    \ T>\nstruct Pt : Geometry<T, eps> {\n    using value_type = T;\n    using Geometry<T,\
+    \ eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val\
+    \ = eps;\n    T x = 0, y = 0;\n    Pt() : x(0), y(0) {}\n    Pt(T x_, T y_) :\
+    \ x(x_), y(y_) {}\n    friend std::istream& operator>>(std::istream &is, Pt &p)\
+    \ { return is >> p.x >> p.y; }\n    friend std::ostream& operator<<(std::ostream\
+    \ &os, const Pt &p) { return os << p.x << ' ' << p.y; }\n    friend bool operator==(const\
+    \ Pt &a, const Pt &b) { \n        return cmp(a.x, b.x) == 0 && cmp(a.y, b.y) ==\
+    \ 0; \n    }\n    friend bool operator!=(const Pt &a, const Pt &b) { return !(a\
+    \ == b); }\n    Pt operator-() { return Pt(-x, -y); }\n    Pt& operator+=(const\
+    \ Pt &a) {\n        x += a.x, y += a.y;\n        return *this;\n    }\n    Pt&\
+    \ operator-=(const Pt &a) {\n        x -= a.x, y -= a.y;\n        return *this;\n\
+    \    }\n    Pt& operator*=(T d) {\n        x *= d, y *= d;\n        return *this;\n\
+    \    }\n    Pt& operator/=(T d) {\n        x /= d, y /= d;\n        return *this;\n\
+    \    }\n    friend Pt operator+(const Pt &a, const Pt &b) { return Pt(a) += b;\
+    \ }\n    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n\
+    \    friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend\
+    \ Pt operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
     \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
     \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
@@ -109,30 +113,31 @@ data:
     \ a, b, p, strict);\n        return !_betweenAngle(o, b, a, p, !strict);\n   \
     \ }\n};\n#line 2 \"Geometry/line.hpp\"\n\n#line 4 \"Geometry/line.hpp\"\n\ntemplate<typename\
     \ T, T eps = get_default_eps<T>(), typename MulT = T>\nstruct Ln : Geometry<T,\
-    \ eps> {\n    using value_type = T;\n    using Point = Pt<T, eps, MulT>;\n   \
-    \ std::array<Point, 2> l;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT,\
-    \ eps>::cmp;\n    static constexpr T eps_val = eps;\n    Ln() {}\n    Ln(const\
-    \ Point &a, const Point &b) : l{a, b} {}\n    friend std::istream& operator>>(std::istream\
-    \ &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream\
-    \ &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename\
-    \ U, U _eps, typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0],\
-    \ other.l[1]} {}\n    friend int side(const Point &p, const Ln &l) { \n      \
-    \  return side(p, l[0], l[1]);\n    }\n    Point& operator[](int index) {\n  \
-    \      return l[index];\n    }\n    const Point& operator[](int index) const {\n\
-    \        return l[index];\n    }\n    friend Point direction(const Ln &l) {\n\
-    \        return l[1] - l[0];\n    }\n    friend bool parallel(const Ln &l1, const\
-    \ Ln &l2) {\n        return parallel(direction(l1), direction(l2));\n    }\n \
-    \   friend bool sameDirection(const Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1),\
-    \ direction(l2));\n    }\n    template <typename Ret = DefaultFloat<T>, Ret _eps\
-    \ = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n\
-    \    friend Pt<Ret, _eps, _MulT> projection(const Point &p, const Ln &l) {\n \
-    \       auto d = direction(l);\n        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret,\
-    \ _eps, _MulT>(d) * (Ret(dot(p - l[0], d)) / Ret(square(d)));\n    }\n    template\
-    \ <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(),\
-    \ typename _MulT = Ret>\n    friend Pt<Ret, _eps, _MulT> reflection(const Point\
-    \ &p, const Ln &l) {\n        return projection<Ret, _eps, _MulT>(p, l) * Ret(2)\
-    \ - Pt<Ret, _eps, _MulT>(p);\n    }\n    template <typename Ret = DefaultFloat<T>>\n\
-    \    friend Ret pointToLineDist(const Point &p, const Ln &l) {\n        if (l[0]\
+    \ eps> {\n    using value_type = T;\n    using product_type = MulT;\n    using\
+    \ Point = Pt<T, eps, MulT>;\n    std::array<Point, 2> l;\n    using Geometry<T,\
+    \ eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val\
+    \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
+    \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
+    \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
+    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
+    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
+    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
+    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
+    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
+    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
+    \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
+    \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
+    \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
+    \    }\n    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T,\
+    \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend Pt<Ret,\
+    \ _eps, _MulT> projection(const Point &p, const Ln &l) {\n        auto d = direction(l);\n\
+    \        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret, _eps, _MulT>(d) * (Ret(dot(p\
+    \ - l[0], d)) / Ret(square(d)));\n    }\n    template <typename Ret = DefaultFloat<T>,\
+    \ Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT\
+    \ = Ret>\n    friend Pt<Ret, _eps, _MulT> reflection(const Point &p, const Ln\
+    \ &l) {\n        return projection<Ret, _eps, _MulT>(p, l) * Ret(2) - Pt<Ret,\
+    \ _eps, _MulT>(p);\n    }\n    template <typename Ret = DefaultFloat<T>>\n   \
+    \ friend Ret pointToLineDist(const Point &p, const Ln &l) {\n        if (l[0]\
     \ == l[1]) { return dist<Ret>(p, l[0]); }\n        return std::abs(cross(l[0]\
     \ - l[1], l[0] - p)) / length<Ret>(direction(l));\n    }\n    // better use integers\
     \ if you don't need exact coordinate\n    // l <= r is not explicitly required\n\
@@ -174,103 +179,111 @@ data:
     \  using type = Ln<T, eps, MulT>;\n};\n#line 2 \"Geometry/polygon.hpp\"\n\n#line\
     \ 5 \"Geometry/polygon.hpp\"\n\ntemplate<typename T, T eps = get_default_eps<T>(),\
     \ typename MulT = T>\nclass Polygon : public std::vector<Pt<T, eps, MulT>>, public\
-    \ Geometry<MulT, eps> {\npublic:\n    using Point = Pt<T, eps, MulT>;\n    using\
+    \ Geometry<T, eps> {\npublic:\n    using Point = Pt<T, eps, MulT>;\n    using\
     \ Line = Ln<T, eps, MulT>;\n    using std::vector<Pt<T, eps, MulT>>::vector;\n\
-    \    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT, eps>::cmp;\n \
-    \   Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(), vec.end()) {}\
-    \ \n    template <typename U, U _eps, typename _MulT>\n    Polygon(const Polygon<U,\
-    \ _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}\n    Point& at(int\
-    \ index) {\n        index %= int(this->size());\n        if (index < 0) index\
-    \ += this->size();\n        return (*this)[index];\n    }\n    const Point& at(int\
-    \ index) const {\n        index %= this->size();\n        if (index < 0) index\
-    \ += this->size();\n        return (*this)[index];\n    }\n    Line edge(int index)\
-    \ const {\n        return Ln(at(index), at(index + 1));\n    }\n    // return\
-    \ twice of the true direct area\n    MulT area() {\n        MulT res = 0;\n  \
-    \      int n = this->size();\n        for (int i = 0; i < n; ++i)\n          \
-    \  res += cross((*this)[i], (*this)[(i + 1) % n]);\n        return res;\n    }\n\
-    \    int polygon_dir() {\n        return sign(area());\n    }\n    friend bool\
-    \ pointInPoly(const Point &p, const Polygon &a, bool strict = false) {\n     \
-    \   int n = a.size(), res = 0;\n        for (int i = 0; i < n; i++) {\n      \
-    \      Point u = a[i], v = a[(i + 1) % n];\n            if (pointOnSeg(p, Ln(u,\
-    \ v))) { return !strict; }\n            if (cmp(u.y, v.y) <= 0) { std::swap(u,\
-    \ v); }\n            if (cmp(p.y, u.y) > 0 || cmp(p.y, v.y) <= 0) { continue;\
-    \ }\n            res ^= sign(cross(p, u, v)) > 0;\n        }\n        return res;\n\
-    \    }\n    friend bool pointStrictlyInPoly(const Point &p, const Polygon &a)\
-    \ {\n        return pointInPoly(p, a, true);\n    }\n    template <typename Ret\
-    \ = DefaultFloat<T>>\n    friend Ret polyUnionArea(const std::vector<Polygon>\
-    \ &poly) {\n        auto rat = [&](const Point &a, const Point &b) {\n       \
-    \     return sign(b.x) ? Ret(a.x) / Ret(b.x) : Ret(a.y) / Ret(b.y);\n        };\n\
-    \        Ret res = 0;\n        for (auto &p : poly)\n            for (int a =\
-    \ 0; a < int(p.size()); ++a) {\n                Point A = p[a], B = p[(a + 1)\
-    \ % int(p.size())];\n                std::vector<std::pair<Ret, int>> segs;\n\
-    \                segs.emplace_back(Ret(0), 0);\n                segs.emplace_back(Ret(1),\
-    \ 0);\n                for (auto &q : poly) {\n                    if (&p == &q)\
-    \ continue;\n                    for (int b = 0; b < int(q.size()); ++b) {\n \
-    \                       Point C = q[b], D = q[(b + 1) % int(q.size())];\n    \
-    \                    int sc = side(A, B, C), sd = side(A, B, D);\n           \
-    \             if (sc != sd && std::min(sc, sd) < 0) {\n                      \
-    \      Ret sa = cross(D - C, A - C), sb = cross(D - C, B - C);\n             \
-    \               segs.emplace_back(sa / (sa - sb), Geometry<int>::sign(sc - sd));\n\
-    \                        }\n                        if (!sc && !sd && &q < &p\
-    \ && sign(dot(B - A, D - C)) > 0) {\n                            segs.emplace_back(rat(C\
+    \    using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    Polygon(const\
+    \ std::vector<Point> &vec) : Polygon(vec.begin(), vec.end()) {} \n    template\
+    \ <typename U, U _eps, typename _MulT>\n    Polygon(const Polygon<U, _eps, _MulT>&\
+    \ other) : Polygon(other.begin(), other.end()) {}\n    Point& at(int index) {\n\
+    \        index %= int(this->size());\n        if (index < 0) index += this->size();\n\
+    \        return (*this)[index];\n    }\n    const Point& at(int index) const {\n\
+    \        index %= int(this->size());\n        if (index < 0) index += this->size();\n\
+    \        return (*this)[index];\n    }\n    Line edge(int index) const {\n   \
+    \     return Ln(at(index), at(index + 1));\n    }\n    // return twice of the\
+    \ true direct area\n    MulT area() {\n        MulT res = 0;\n        int n =\
+    \ this->size();\n        for (int i = 0; i < n; ++i)\n            res += cross((*this)[i],\
+    \ (*this)[(i + 1) % n]);\n        return res;\n    }\n    int polygon_dir() {\n\
+    \        return sign(area());\n    }\n    friend bool pointInPoly(const Point\
+    \ &p, const Polygon &a, bool strict = false) {\n        int n = a.size(), res\
+    \ = 0;\n        for (int i = 0; i < n; i++) {\n            Point u = a[i], v =\
+    \ a[(i + 1) % n];\n            if (pointOnSeg(p, Ln(u, v))) { return !strict;\
+    \ }\n            if (cmp(u.y, v.y) <= 0) { std::swap(u, v); }\n            if\
+    \ (cmp(p.y, u.y) > 0 || cmp(p.y, v.y) <= 0) { continue; }\n            res ^=\
+    \ sign(cross(p, u, v)) > 0;\n        }\n        return res;\n    }\n    friend\
+    \ bool pointStrictlyInPoly(const Point &p, const Polygon &a) {\n        return\
+    \ pointInPoly(p, a, true);\n    }\n    // res[k]: area covered by at least k simple\
+    \ CCW polygons; res[0] undefined.\n    template <typename Ret = DefaultFloat<T>>\n\
+    \    friend std::vector<Ret> polyCoverArea(const std::vector<Polygon> &poly) {\n\
+    \        auto rat = [&](const Point &a, const Point &b) {\n            return\
+    \ sign(b.x) ? Ret(a.x) / Ret(b.x) : Ret(a.y) / Ret(b.y);\n        };\n       \
+    \ std::vector<Ret> res(poly.size() + 1);\n        for (auto &p : poly)\n     \
+    \       for (int a = 0; a < int(p.size()); ++a) {\n                Point A = p[a],\
+    \ B = p[(a + 1) % int(p.size())];\n                std::vector<std::pair<Ret,\
+    \ int>> segs;\n                segs.emplace_back(Ret(0), 0);\n               \
+    \ segs.emplace_back(Ret(1), 0);\n                for (auto &q : poly) {\n    \
+    \                if (&p == &q) continue;\n                    for (int b = 0;\
+    \ b < int(q.size()); ++b) {\n                        Point C = q[b], D = q[(b\
+    \ + 1) % int(q.size())];\n                        int sc = side(A, B, C), sd =\
+    \ side(A, B, D);\n                        if (sc != sd && std::min(sc, sd) < 0)\
+    \ {\n                            Ret sa = cross(D - C, A - C), sb = cross(D -\
+    \ C, B - C);\n                            segs.emplace_back(sa / (sa - sb), Geometry<int>::sign(sc\
+    \ - sd));\n                        }\n                        if (!sc && !sd &&\
+    \ &q < &p && sign(dot(B - A, D - C)) > 0) {\n                            segs.emplace_back(rat(C\
     \ - A, B - A), 1);\n                            segs.emplace_back(rat(D - A, B\
     \ - A), -1);\n                        }\n                    }\n             \
     \   }\n                std::ranges::sort(segs);\n                for (auto &s\
-    \ : segs) s.first = std::clamp(s.first, Ret(0), Ret(1));\n                Ret\
-    \ sum = 0;\n                int cnt = segs[0].second;\n                for (int\
-    \ j = 1; j < int(segs.size()); ++j) {\n                    if (!cnt) sum += segs[j].first\
-    \ - segs[j - 1].first;\n                    cnt += segs[j].second;\n         \
-    \       }\n                res += Ret(cross(A, B)) * sum;\n            }\n   \
-    \     return res / 2;\n    }\n};\n\ntemplate <typename PointType>\nstruct PolygonType;\n\
-    \ntemplate <typename T, T eps, typename MulT>\nstruct PolygonType<Pt<T, eps, MulT>>\
-    \ {\n    using type = Polygon<T, eps, MulT>;\n};\n#line 6 \"Geometry/circle.hpp\"\
-    \n\ntemplate<typename T, T eps = get_default_eps<T>(), typename MulT = T>\nstruct\
-    \ Circle : Geometry<T, eps> {\n    using value_type = T;\n    using Point = Pt<T,\
-    \ eps, MulT>;\n    using Line = Ln<T, eps, MulT>;\n    using polygon = Polygon<T,\
-    \ eps, MulT>;\n    using Geometry<MulT, eps>::sign;\n    using Geometry<MulT,\
-    \ eps>::cmp;\n    static constexpr T eps_val = eps;\n    Point o;\n    T r;\n\
-    \    Circle(Point _o = {}, T _r = 0) : o(_o), r(_r) {}\n    template <typename\
-    \ U, U _eps, typename _MulT>\n    Circle(const Circle<U, _eps, _MulT>& other)\
-    \ : o(other.o), r(other.r) {}\n    // actually counts number of tangent lines\n\
-    \    friend int typeOfCircles(const Circle &c1, const Circle &c2) {\n        auto\
-    \ [o1, r1] = c1;\n        auto [o2, r2] = c2;\n        MulT d2 = dist2(o1, o2);\n\
-    \        int cmpsum = cmp(d2, MulT(r1 + r2) * MulT(r1 + r2));\n        if (cmpsum\
-    \ == 1) { return 4; }\n        if (cmpsum == 0) { return 3; }\n        int cmpdiff\
-    \ = cmp(d2, MulT(r1 - r2) * MulT(r1 - r2));\n        if (cmpdiff == 1) { return\
-    \ 2; }\n        if (cmpdiff == 0) { return 1; }\n        return 0;\n    }\n  \
-    \  // -1: in, 0: on, 1: out\n    friend bool pointToCircle(const Point &p, const\
-    \ Circle &c) {\n        MulT x = square(p - c.o), d = x - MulT(c.r) * MulT(c.r);\n\
-    \        return cmp(dist2(c.o, p), MulT(c.r) * MulT(c.r));\n    }\n    // aligned\
-    \ l.a -> l.b;\n    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T,\
-    \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend std::vector<Pt<Ret,\
-    \ _eps, _MulT>> circleLineIntersection(const Circle &c, const Line &l) {\n   \
-    \     auto casto = Pt<Ret, _eps, _MulT>(c.o);\n        auto p = projection<Ret,\
-    \ _eps, _MulT>(c.o, l);\n        _MulT h = c.r * c.r - square(p - casto);\n  \
-    \      if (sign(h) < 0) { return {}; }\n        auto q = normal<Ret, _eps, _MulT>(direction(l))\
-    \ * std::sqrt(h);\n        return {p - q, p + q};\n    }\n    bool segCircleIntersect(const\
-    \ Line &l, const Circle &cc) {\n        if (l[0] == l[1]) return pointToCircle(l[0],\
-    \ cc) == 0;\n        Point dp = direction(l);\n        MulT a = square(dp);\n\
-    \        MulT b = 2 * dot(dp, l[0] - cc.o);\n        MulT c = square(cc.o) + square(l[0])\
-    \ - 2 * dot(cc.o, l[0]) - MulT(cc.r) * MulT(cc.r);\n        MulT res = b * b -\
-    \ 4 * a * c;\n        return sign(res) >= 0;\n    }\n    // circles shouldn't\
-    \ be identical\n    // one intersection dupliacted, aligned c1 counterclockwise\n\
+    \ : segs) s.first = std::clamp(s.first, Ret(0), Ret(1));\n                int\
+    \ cnt = segs[0].second;\n                for (int j = 1; j < int(segs.size());\
+    \ ++j) {\n                    if (segs[j].first > segs[j - 1].first)\n       \
+    \                 res[cnt + 1] += Ret(cross(A, B)) * (segs[j].first - segs[j -\
+    \ 1].first) / 2;\n                    cnt += segs[j].second;\n               \
+    \ }\n            }\n        return res;\n    }\n    template <typename Ret = DefaultFloat<T>>\n\
+    \    friend Ret polyUnionArea(const std::vector<Polygon> &poly) {\n        return\
+    \ poly.empty() ? Ret(0) : polyCoverArea<Ret>(poly)[1];\n    }\n};\n\ntemplate\
+    \ <typename PointType>\nstruct PolygonType;\n\ntemplate <typename T, T eps, typename\
+    \ MulT>\nstruct PolygonType<Pt<T, eps, MulT>> {\n    using type = Polygon<T, eps,\
+    \ MulT>;\n};\n#line 6 \"Geometry/circle.hpp\"\n\ntemplate<typename T, T eps =\
+    \ get_default_eps<T>(), typename MulT = T>\nstruct Circle : Geometry<T, eps> {\n\
+    \    using value_type = T;\n    using Point = Pt<T, eps, MulT>;\n    using Line\
+    \ = Ln<T, eps, MulT>;\n    using polygon = Polygon<T, eps, MulT>;\n    using Geometry<T,\
+    \ eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val\
+    \ = eps;\n    Point o;\n    T r;\n    Circle(Point _o = {}, T _r = 0) : o(_o),\
+    \ r(_r) {}\n    template <typename U, U _eps, typename _MulT>\n    Circle(const\
+    \ Circle<U, _eps, _MulT>& other) : o(other.o), r(other.r) {}\n    // actually\
+    \ counts number of tangent lines\n    friend int typeOfCircles(const Circle &c1,\
+    \ const Circle &c2) {\n        auto [o1, r1] = c1;\n        auto [o2, r2] = c2;\n\
+    \        MulT d2 = dist2(o1, o2);\n        int cmpsum = cmp(d2, (MulT(r1) + MulT(r2))\
+    \ * (MulT(r1) + MulT(r2)));\n        if (cmpsum == 1) { return 4; }\n        if\
+    \ (cmpsum == 0) { return 3; }\n        int cmpdiff = cmp(d2, (MulT(r1) - MulT(r2))\
+    \ * (MulT(r1) - MulT(r2)));\n        if (cmpdiff == 1) { return 2; }\n       \
+    \ if (cmpdiff == 0) { return 1; }\n        return 0;\n    }\n    // -1: in, 0:\
+    \ on, 1: out\n    friend bool pointToCircle(const Point &p, const Circle &c) {\n\
+    \        MulT x = square(p - c.o), d = x - MulT(c.r) * MulT(c.r);\n        return\
+    \ cmp(dist2(c.o, p), MulT(c.r) * MulT(c.r));\n    }\n    // aligned l.a -> l.b;\n\
     \    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret>\
     \ ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend std::vector<Pt<Ret,\
-    \ _eps, _MulT>> circleIntersection(const Circle &c1, const Circle &c2) {\n   \
-    \     int type = typeOfCircles(c1, c2);\n        if (type == 0 || type == 4) {\
-    \ return {}; }\n        auto [o1, r1] = c1;\n        auto [o2, r2] = c2;\n   \
-    \     Ret d = std::clamp(dist(o1, o2), std::abs(Ret(r1 - r2)), Ret(r1 + r2));\n\
-    \        Ret y = (r1 * r1 + d * d - r2 * r2) / (2 * d);\n        Ret x = std::sqrt(_MulT(r1)\
-    \ * _MulT(r1) - _MulT(y) * _MulT(y));\n        auto dir = normal<Ret, _eps, _MulT>(o2\
-    \ - o1);\n        auto q1 = Pt<Ret, _eps, _MulT>(o1) + dir * y;\n        auto\
-    \ q2 = rotate90(dir) * x;\n        return {q1 - q2, q1 + q2};\n    }\n    // counterclockwise,\
-    \ on circle -> no tangent\n    template <typename Ret = DefaultFloat<T>, Ret _eps\
-    \ = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n\
-    \    friend std::vector<Pt<Ret, _eps, _MulT>> pointCircleTangent(const Point &p,\
-    \ const Circle &c) {\n        MulT x = square(p - c.o), d = x - MulT(c.r) * MulT(c.r);\n\
-    \        if (sign(d) <= 0) { return {}; }\n        auto q1 = Pt<Ret, _eps, _MulT>(c.o)\
-    \ + Pt<Ret, _eps, _MulT>(p - c.o) * (Ret(c.r) * Ret(c.r) / Ret(x));\n        auto\
-    \ q2 = Pt<Ret, _eps, _MulT>(rotate90(p - c.o)) * (Ret(c.r) * std::sqrt(Ret(d))\
+    \ _eps, _MulT>> circleLineIntersection(const Circle &c, const Line &l) {\n   \
+    \     auto casto = Pt<Ret, _eps, _MulT>(c.o);\n        auto p = projection<Ret,\
+    \ _eps, _MulT>(c.o, l);\n        _MulT h = _MulT(c.r) * _MulT(c.r) - square(p\
+    \ - casto);\n        if (decltype(p)::sign(h) < 0) { return {}; }\n        auto\
+    \ q = normal<Ret, _eps, _MulT>(direction(l)) * std::sqrt(h);\n        return {p\
+    \ - q, p + q};\n    }\n    bool segCircleIntersect(const Line &l, const Circle\
+    \ &cc) {\n        if (l[0] == l[1]) return pointToCircle(l[0], cc) == 0;\n   \
+    \     Point dp = direction(l);\n        MulT a = square(dp);\n        MulT b =\
+    \ 2 * dot(dp, l[0] - cc.o);\n        MulT c = square(cc.o) + square(l[0]) - 2\
+    \ * dot(cc.o, l[0]) - MulT(cc.r) * MulT(cc.r);\n        MulT res = b * b - 4 *\
+    \ a * c;\n        return sign(res) >= 0;\n    }\n    // circles shouldn't be identical\n\
+    \    // one intersection dupliacted, aligned c1 counterclockwise\n    template\
+    \ <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(),\
+    \ typename _MulT = Ret>\n    friend std::vector<Pt<Ret, _eps, _MulT>> circleIntersection(const\
+    \ Circle &c1, const Circle &c2) {\n        int type = typeOfCircles(c1, c2);\n\
+    \        if (type == 0 || type == 4) { return {}; }\n        auto [o1, r1] = c1;\n\
+    \        auto [o2, r2] = c2;\n        _MulT dx = _MulT(o2.x) - _MulT(o1.x), dy\
+    \ = _MulT(o2.y) - _MulT(o1.y);\n        _MulT d2 = dx * dx + dy * dy;\n      \
+    \  _MulT sum = _MulT(r1) + _MulT(r2), diff = _MulT(r1) - _MulT(r2);\n        Ret\
+    \ d = std::clamp(std::sqrt(Ret(d2)), std::abs(Ret(diff)), Ret(sum));\n       \
+    \ Ret y = Ret(_MulT(r1) * _MulT(r1) + d2 - _MulT(r2) * _MulT(r2)) / (Ret(2) *\
+    \ d);\n        _MulT h2 = (sum * sum - d2) * (d2 - diff * diff);\n        Ret\
+    \ x = std::sqrt(Ret(std::max(_MulT(0), h2))) / (Ret(2) * d);\n        auto dir\
+    \ = normal<Ret, _eps, _MulT>(o2 - o1);\n        auto q1 = Pt<Ret, _eps, _MulT>(o1)\
+    \ + dir * y;\n        auto q2 = rotate90(dir) * x;\n        return {q1 - q2, q1\
+    \ + q2};\n    }\n    // counterclockwise, on circle -> no tangent\n    template\
+    \ <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(),\
+    \ typename _MulT = Ret>\n    friend std::vector<Pt<Ret, _eps, _MulT>> pointCircleTangent(const\
+    \ Point &p, const Circle &c) {\n        MulT x = square(p - c.o), d = x - MulT(c.r)\
+    \ * MulT(c.r);\n        if (sign(d) <= 0) { return {}; }\n        auto q1 = Pt<Ret,\
+    \ _eps, _MulT>(c.o) + Pt<Ret, _eps, _MulT>(p - c.o) * (Ret(c.r) * Ret(c.r) / Ret(x));\n\
+    \        auto q2 = Pt<Ret, _eps, _MulT>(rotate90(p - c.o)) * (Ret(c.r) * std::sqrt(Ret(d))\
     \ / Ret(x));\n        return {q1 - q2, q1 + q2};\n    }\n    // one-point tangent\
     \ lines are not returned\n    template <typename Ret = DefaultFloat<T>, Ret _eps\
     \ = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n\
@@ -348,7 +361,7 @@ data:
   isVerificationFile: true
   path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
   requiredBy: []
-  timestamp: '2026-11-07 14:46:12+08:00'
+  timestamp: '2026-11-08 00:49:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp

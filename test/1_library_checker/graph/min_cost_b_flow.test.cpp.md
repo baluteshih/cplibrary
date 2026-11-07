@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Flow/min_cost_circulation.hpp
     title: Flow/min_cost_circulation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
@@ -244,21 +244,20 @@ data:
     \ *= sgn;\n        return is;\n    }\n    std::ostream &operator<<(std::ostream\
     \ &os, const __int128 &x) {\n        if (x < 0) return os << '-' << -x;\n    \
     \    if (x < 10) return os << int(x % 10);\n        return os << x / 10 << int(x\
-    \ % 10);\n    }\n}\ninline i128 abs(i128 x) {\n    return x < 0 ? -x : x;\n}\n\
-    inline u128 gcd(u128 a, u128 b) {\n    while (b) a %= b, std::swap(a, b);\n  \
-    \  return a;\n}\ninline i128 gcd(i128 a, i128 b) {\n    return gcd((u128)abs(a),\
-    \ (u128)abs(b));\n}\n#line 6 \"test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\
-    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
-    \ n, m;\n    std::cin >> n >> m;\n    bounded_cost_circulation<long long, __int128>\
-    \ flow(n);\n    for (int i = 0; i < n; ++i) {\n        long long demand;\n   \
-    \     std::cin >> demand;\n        flow.add_demand(i, demand);\n    }\n    for\
-    \ (int i = 0; i < m; ++i) {\n        long long s, t, l, u, c;\n        std::cin\
-    \ >> s >> t >> l >> u >> c;\n        flow.add_edge(s, t, l, u, c);\n    }\n\n\
-    \    if (!flow.solve(1e12)) {\n        std::cout << \"infeasible\\n\";\n     \
-    \   return 0;\n    }\n    \n    auto cap = flow.get_cap();\n    auto pot = flow.get_potential();\n\
-    \    std::cout << flow.get_cost() << \"\\n\";\n    for (int i = 0; i < n; ++i)\n\
-    \        std::cout << pot[i] << '\\n';\n    for (int i = 0; i < m; ++i)\n    \
-    \    std::cout << cap[i] << \"\\n\";\n}\n"
+    \ % 10);\n    }\n    inline u128 gcd(u128 a, u128 b) {\n        while (b) a %=\
+    \ b, std::swap(a, b);\n        return a;\n    }\n    inline i128 gcd(i128 a, i128\
+    \ b) {\n        return gcd((u128)abs(a), (u128)abs(b));\n    }\n}\n#line 6 \"\
+    test/1_library_checker/graph/min_cost_b_flow.test.cpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0),\
+    \ std::cin.tie(0);\n    int n, m;\n    std::cin >> n >> m;\n    bounded_cost_circulation<long\
+    \ long, __int128> flow(n);\n    for (int i = 0; i < n; ++i) {\n        long long\
+    \ demand;\n        std::cin >> demand;\n        flow.add_demand(i, demand);\n\
+    \    }\n    for (int i = 0; i < m; ++i) {\n        long long s, t, l, u, c;\n\
+    \        std::cin >> s >> t >> l >> u >> c;\n        flow.add_edge(s, t, l, u,\
+    \ c);\n    }\n\n    if (!flow.solve(1e12)) {\n        std::cout << \"infeasible\\\
+    n\";\n        return 0;\n    }\n    \n    auto cap = flow.get_cap();\n    auto\
+    \ pot = flow.get_potential();\n    std::cout << flow.get_cost() << \"\\n\";\n\
+    \    for (int i = 0; i < n; ++i)\n        std::cout << pot[i] << '\\n';\n    for\
+    \ (int i = 0; i < m; ++i)\n        std::cout << cap[i] << \"\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include\
     \ \"assumption.hpp\"\n\n#include \"Flow/bounded_cost_circulation.hpp\"\n#include\
     \ \"Misc/i128.hpp\"\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
@@ -282,8 +281,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2026-09-30 15:38:11+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-08 00:49:38+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/graph/min_cost_b_flow.test.cpp
 layout: document

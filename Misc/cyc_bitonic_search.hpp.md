@@ -13,6 +13,18 @@ data:
     title: Geometry/outerTangentBetweenConvex.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hulls/convex-hulls.test.cpp
+    title: test/0_custom/convex-hulls/convex-hulls.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+    title: test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+    title: test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-queries/convex-queries.test.cpp
+    title: test/0_custom/convex-queries/convex-queries.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,12 +36,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/101242J.test.cpp
-    title: test/4_codeforces/101242J.test.cpp
-  - icon: ':x:'
-    path: test/4_codeforces/104114B.test.cpp
-    title: test/4_codeforces/104114B.test.cpp
   - icon: ':x:'
     path: test/9_qoj/2162.test.cpp
     title: test/9_qoj/2162.test.cpp
@@ -82,9 +88,11 @@ data:
   - test/1_library_checker/geometry/furthest_pair.test.cpp
   - test/2_aoj/convex_cut.test.cpp
   - test/9_qoj/2162.test.cpp
+  - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
+  - test/0_custom/convex-minkowski/convex-minkowski.test.cpp
+  - test/0_custom/convex-queries/convex-queries.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
-  - test/4_codeforces/104114B.test.cpp
-  - test/4_codeforces/101242J.test.cpp
+  - test/0_custom/convex-hulls/convex-hulls.test.cpp
 documentation_of: Misc/cyc_bitonic_search.hpp
 layout: document
 redirect_from:
