@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/IterableOf.hpp
     title: Algebra/IterableOf.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   - icon: ':question:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -115,8 +115,8 @@ data:
     \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
     \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
     \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
-    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
-    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
+    \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
     \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
     \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
@@ -444,7 +444,7 @@ data:
     \ u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n   \
     \     if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
     \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
-    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
+    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[u]); \n            if\
     \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
     \        }\n        boss[v] = u;\n        sz[u] += sz[v];\n        if constexpr\
     \ (hasT) {\n            data[u] = data[u] + data[v]; \n        }\n        return\
@@ -524,7 +524,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/euclidean_mst.test.cpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/euclidean_mst.test.cpp

@@ -4,23 +4,23 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Tree/all_direction_composition.hpp\"\n\n#line 2 \"Tree/Tree.hpp\"\
@@ -172,11 +172,11 @@ data:
     \        return res;\n    }\n    std::vector<int> depth(int root = -1) {\n   \
     \     if (current_root == -1 || (root != -1 && current_root != root)) {\n    \
     \        assert(root != -1);\n            traverse(root);\n        }\n       \
-    \ std::vector<int> res(this->n(), -1);\n        predfs([&](int u) {\n        \
-    \    if (parent_eid(u) != -1)\n                res[u] = res[parent(u)] + 1;\n\
-    \        });\n        return res;\n    }\n    auto distance_edge(int root = -1)\
-    \ requires (hasEdgeWeight) {\n        if (current_root == -1 || (root != -1 &&\
-    \ current_root != root)) {\n            assert(root != -1);\n            traverse(root);\n\
+    \ std::vector<int> res(this->n());\n        predfs([&](int u) {\n            if\
+    \ (parent_eid(u) != -1)\n                res[u] = res[parent(u)] + 1;\n      \
+    \  });\n        return res;\n    }\n    auto distance_edge(int root = -1) requires\
+    \ (hasEdgeWeight) {\n        if (current_root == -1 || (root != -1 && current_root\
+    \ != root)) {\n            assert(root != -1);\n            traverse(root);\n\
     \        }\n        std::vector<Edge> res(this->n());\n        predfs([&](int\
     \ u) {\n            if (parent_eid(u) != -1)\n                res[u] = res[parent(u)]\
     \ + parent_edge(u).weight;\n        });\n        return res;\n    }\n    auto\
@@ -184,9 +184,10 @@ data:
     \ {\n        if (current_root == -1 || (root != -1 && current_root != root)) {\n\
     \            assert(root != -1);\n            traverse(root);\n        }\n   \
     \     std::vector<WeightType> res(this->n());\n        predfs([&](int u) {\n \
-    \           res[u] = res[parent(u)];\n            if constexpr (hasEdgeWeight)\
-    \ if (u != root)\n                res[u] = res[u] + parent_edge(u).weight;\n \
-    \           if constexpr (hasVertexWeight)\n                res[u] = res[u] +\
+    \           res[u] = WeightType();\n            if (parent_eid(u) != -1) {\n \
+    \               res[u] = res[parent(u)];\n                if constexpr (hasEdgeWeight)\n\
+    \                    res[u] = res[u] + parent_edge(u).weight;\n            }\n\
+    \            if constexpr (hasVertexWeight)\n                res[u] = res[u] +\
     \ this->weight[u];\n        });\n        return res;\n    }\n    std::vector<int>\
     \ subtree_size(int root = -1) {\n        if (current_root == -1 || (root != -1\
     \ && current_root != root)) {\n            assert(root != -1);\n            traverse(root);\n\
@@ -264,8 +265,8 @@ data:
   isVerificationFile: false
   path: Tree/all_direction_composition.hpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/tree/tree_path_composite_sum.test.cpp
 documentation_of: Tree/all_direction_composition.hpp

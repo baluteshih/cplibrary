@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -153,7 +153,7 @@ data:
     \ u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n   \
     \     if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
     \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
-    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
+    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[u]); \n            if\
     \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
     \        }\n        boss[v] = u;\n        sz[u] += sz[v];\n        if constexpr\
     \ (hasT) {\n            data[u] = data[u] + data[v]; \n        }\n        return\
@@ -199,7 +199,7 @@ data:
   isVerificationFile: false
   path: Graph/minimum_spanning_tree.hpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/euclidean_mst.test.cpp

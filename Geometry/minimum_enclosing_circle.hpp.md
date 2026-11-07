@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':question:'
@@ -18,7 +18,7 @@ data:
     title: Geometry/polygon.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/minimum_enclosing_circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -58,8 +58,8 @@ data:
     \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
     \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
     \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
-    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
-    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
+    \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
     \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
     \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
@@ -387,8 +387,8 @@ data:
   isVerificationFile: false
   path: Geometry/minimum_enclosing_circle.hpp
   requiredBy: []
-  timestamp: '2026-11-01 09:20:33+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/9_qoj/6445.test.cpp

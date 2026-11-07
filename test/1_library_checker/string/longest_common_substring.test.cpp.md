@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Misc/MultiInt.hpp
     title: Misc/MultiInt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: String/RollingHash.hpp
     title: String/RollingHash.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/longest_common_substring
@@ -193,12 +193,13 @@ data:
     \            res[i] = RollingHash(1, Val(a[i]));\n            if (i) res[i] =\
     \ res[i - 1] + res[i];\n        }\n        return res;\n    }\n    static RollingHash\
     \ rangeHash(const std::vector<RollingHash> &prefix_sum, int l, int r) {\n    \
-    \    if (l > r) return RollingHash();\n        if (l == 0) return prefix_sum[r\
-    \ - 1];\n        return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);\n    }\n\
-    \    friend std::ostream& operator<<(std::ostream& os, const RollingHash& v) {\n\
-    \        os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n#line\
-    \ 6 \"test/1_library_checker/string/longest_common_substring.test.cpp\"\n\nusing\
-    \ mint1 = modint998244353;\nusing mint2 = modint1000000007;\nusing Hash = RollingHash<307,\
+    \    assert(0 <= l && l <= r && r <= std::ssize(prefix_sum));\n        if (l ==\
+    \ r) return RollingHash();\n        if (l == 0) return prefix_sum[r - 1];\n  \
+    \      return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);\n    }\n    friend\
+    \ std::ostream& operator<<(std::ostream& os, const RollingHash& v) {\n       \
+    \ os << v.sz << \" | \" << v.val; \n        return os;\n    }\n};\n#line 6 \"\
+    test/1_library_checker/string/longest_common_substring.test.cpp\"\n\nusing mint1\
+    \ = modint998244353;\nusing mint2 = modint1000000007;\nusing Hash = RollingHash<307,\
     \ mint1, mint2>;\n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n\
     \    std::string s, t;\n    std::cin >> s >> t;\n    auto prefix1 = Hash::prefixHash(s);\n\
     \    auto prefix2 = Hash::prefixHash(t);\n    int anslen = 0, a = 0, b = 0;\n\n\
@@ -243,8 +244,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/string/longest_common_substring.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/string/longest_common_substring.test.cpp
 layout: document

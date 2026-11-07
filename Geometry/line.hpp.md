@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
   - icon: ':x:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
@@ -48,64 +48,64 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/geometry/static_convex_hull.test.cpp
     title: test/1_library_checker/geometry/static_convex_hull.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/area.test.cpp
     title: test/2_aoj/area.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
     title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
     title: test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/common_tangent.test.cpp
     title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/convex_cut.test.cpp
     title: test/2_aoj/convex_cut.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/counter-clockwise.test.cpp
     title: test/2_aoj/counter-clockwise.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/cross_point.test.cpp
     title: test/2_aoj/cross_point.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/cross_points_of_circles.test.cpp
     title: test/2_aoj/cross_points_of_circles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/distance.test.cpp
     title: test/2_aoj/distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/incircle_of_a_triangle.test.cpp
     title: test/2_aoj/incircle_of_a_triangle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/intersection.test.cpp
     title: test/2_aoj/intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/parallel-orthogonal.test.cpp
     title: test/2_aoj/parallel-orthogonal.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/polygon-point_containment.test.cpp
     title: test/2_aoj/polygon-point_containment.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/projection.test.cpp
     title: test/2_aoj/projection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/reflection.test.cpp
     title: test/2_aoj/reflection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/tangent_to_a_circle.test.cpp
     title: test/2_aoj/tangent_to_a_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':x:'
@@ -160,8 +160,8 @@ data:
     \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
     \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
     \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
-    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
-    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
+    \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
     \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
     \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
@@ -352,7 +352,7 @@ data:
   - Geometry/furthest_pair.hpp
   - Geometry/circle_cover.hpp
   - Geometry/convex.hpp
-  timestamp: '2026-06-18 21:56:55+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp

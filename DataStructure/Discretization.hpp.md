@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/OrderedSet.hpp
     title: Ordered Set
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
   _extendedVerifiedWith:
@@ -21,15 +21,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
     title: test/1_library_checker/data_structure/static_range_mode_query.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"DataStructure/Discretization.hpp\"\n\ntemplate<typename\
@@ -64,7 +64,7 @@ data:
   - Sequence/longest_increasing_subsequence.hpp
   - DataStructure/OrderedSet.hpp
   timestamp: '2026-09-13 13:55:16+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp

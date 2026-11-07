@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/Monoid/max_v.hpp
     title: Algebra/Monoid/max_v.hpp
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Sequence/longest_increasing_subsequence.hpp\"\n\n#line 2\
@@ -79,27 +79,27 @@ data:
     \ is, max_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
     \ 6 \"Sequence/longest_increasing_subsequence.hpp\"\n\ntemplate<bool strict =\
     \ true, typename T = int>\nstd::vector<int> longest_increasing_subsequence(const\
-    \ std::vector<T> &arr) {\n    Discretization<T> val(arr.begin(), arr.end());\n\
-    \    val.build();\n    BIT<max_v<std::pair<int, int>>> bit(val.size());\n    std::vector<int>\
-    \ dp(arr.size()), tr(arr.size());\n    for (int i = 0; i < int(arr.size()); ++i)\
-    \ {\n        int cur = val.idx(arr[i]);\n        auto [v, idx] = bit.prefix(cur\
-    \ - strict).val;\n        if (v <= 0) dp[i] = 1, tr[i] = -1;\n        else dp[i]\
-    \ = v + 1, tr[i] = idx;\n        bit.modify(cur, std::make_pair(dp[i], i));\n\
-    \    }\n    std::vector<int> res;\n    for (int mx = std::ranges::max_element(dp)\
-    \ - dp.begin(); mx != -1; mx = tr[mx])\n        res.push_back(mx);\n    std::ranges::reverse(res);\n\
-    \    return res;\n}\n"
+    \ std::vector<T> &arr) {\n    if (arr.empty()) return {};\n    Discretization<T>\
+    \ val(arr.begin(), arr.end());\n    val.build();\n    BIT<max_v<std::pair<int,\
+    \ int>>> bit(val.size());\n    std::vector<int> dp(arr.size()), tr(arr.size());\n\
+    \    for (int i = 0; i < int(arr.size()); ++i) {\n        int cur = val.idx(arr[i]);\n\
+    \        auto [v, idx] = bit.prefix(cur - strict).val;\n        if (v <= 0) dp[i]\
+    \ = 1, tr[i] = -1;\n        else dp[i] = v + 1, tr[i] = idx;\n        bit.modify(cur,\
+    \ std::make_pair(dp[i], i));\n    }\n    std::vector<int> res;\n    for (int mx\
+    \ = std::ranges::max_element(dp) - dp.begin(); mx != -1; mx = tr[mx])\n      \
+    \  res.push_back(mx);\n    std::ranges::reverse(res);\n    return res;\n}\n"
   code: "#pragma once\n\n#include \"DataStructure/Discretization.hpp\"\n#include \"\
     DataStructure/BIT.hpp\"\n#include \"Algebra/Monoid/max_v.hpp\"\n\ntemplate<bool\
     \ strict = true, typename T = int>\nstd::vector<int> longest_increasing_subsequence(const\
-    \ std::vector<T> &arr) {\n    Discretization<T> val(arr.begin(), arr.end());\n\
-    \    val.build();\n    BIT<max_v<std::pair<int, int>>> bit(val.size());\n    std::vector<int>\
-    \ dp(arr.size()), tr(arr.size());\n    for (int i = 0; i < int(arr.size()); ++i)\
-    \ {\n        int cur = val.idx(arr[i]);\n        auto [v, idx] = bit.prefix(cur\
-    \ - strict).val;\n        if (v <= 0) dp[i] = 1, tr[i] = -1;\n        else dp[i]\
-    \ = v + 1, tr[i] = idx;\n        bit.modify(cur, std::make_pair(dp[i], i));\n\
-    \    }\n    std::vector<int> res;\n    for (int mx = std::ranges::max_element(dp)\
-    \ - dp.begin(); mx != -1; mx = tr[mx])\n        res.push_back(mx);\n    std::ranges::reverse(res);\n\
-    \    return res;\n}\n"
+    \ std::vector<T> &arr) {\n    if (arr.empty()) return {};\n    Discretization<T>\
+    \ val(arr.begin(), arr.end());\n    val.build();\n    BIT<max_v<std::pair<int,\
+    \ int>>> bit(val.size());\n    std::vector<int> dp(arr.size()), tr(arr.size());\n\
+    \    for (int i = 0; i < int(arr.size()); ++i) {\n        int cur = val.idx(arr[i]);\n\
+    \        auto [v, idx] = bit.prefix(cur - strict).val;\n        if (v <= 0) dp[i]\
+    \ = 1, tr[i] = -1;\n        else dp[i] = v + 1, tr[i] = idx;\n        bit.modify(cur,\
+    \ std::make_pair(dp[i], i));\n    }\n    std::vector<int> res;\n    for (int mx\
+    \ = std::ranges::max_element(dp) - dp.begin(); mx != -1; mx = tr[mx])\n      \
+    \  res.push_back(mx);\n    std::ranges::reverse(res);\n    return res;\n}\n"
   dependsOn:
   - DataStructure/Discretization.hpp
   - DataStructure/BIT.hpp
@@ -109,8 +109,8 @@ data:
   isVerificationFile: false
   path: Sequence/longest_increasing_subsequence.hpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
 documentation_of: Sequence/longest_increasing_subsequence.hpp

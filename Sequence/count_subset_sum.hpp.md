@@ -43,15 +43,15 @@ data:
     \    auto count = [&](T gap) -> std::vector<long long> {\n        std::vector<long\
     \ long> res(n + 1), cur(n + 1);\n        for (int i = 0; auto &v : lset) {\n \
     \           while (i < int(rset.size()) && v.v + rset[i].v < gap) ++cur[rset[i++].cnt];\n\
-    \            for (int j = 0; j <= n; ++j) res[v.cnt + j] += cur[j];\n        }\n\
-    \        return res;\n    };\n    std::vector<long long> res(n + 1);\n    if (lset[0]\
-    \ + rset.back() >= rgt) res = count(rgt); \n    else {\n        std::vector<long\
-    \ long> lcnt(n + 1), rcnt(n + 1);\n        for (auto &v : lset) ++lcnt[v.cnt];\n\
-    \        for (auto &v : rset) ++rcnt[v.cnt];\n        for (int i = 0; i <= n;\
-    \ ++i)\n            for (int j = 0; j <= n; ++j)\n                res[i + j] +=\
-    \ lcnt[i] * rcnt[j];\n    }\n    if (lset.back() + rset[0] < lft) {\n        auto\
-    \ minus = count(lft);\n        for (int i = 0; i <= n; ++i) res[i] -= minus[i];\n\
-    \    }\n    return res;\n}\n"
+    \            for (int j = 0; v.cnt + j <= n; ++j) res[v.cnt + j] += cur[j];\n\
+    \        }\n        return res;\n    };\n    std::vector<long long> res(n + 1);\n\
+    \    if (lset[0].v + rset.back().v >= rgt) res = count(rgt); \n    else {\n  \
+    \      std::vector<long long> lcnt(n + 1), rcnt(n + 1);\n        for (auto &v\
+    \ : lset) ++lcnt[v.cnt];\n        for (auto &v : rset) ++rcnt[v.cnt];\n      \
+    \  for (int i = 0; i <= n; ++i)\n            for (int j = 0; i + j <= n; ++j)\n\
+    \                res[i + j] += lcnt[i] * rcnt[j];\n    }\n    if (lset.back().v\
+    \ + rset[0].v < lft) {\n        auto minus = count(lft);\n        for (int i =\
+    \ 0; i <= n; ++i) res[i] -= minus[i];\n    }\n    return res;\n}\n"
   code: "#pragma once\n\n#include \"Enumerate/subset_enumerate.hpp\"\n\n// [lft, rgt)\n\
     template<typename T>\nlong long count_subset_sum(const std::vector<T> &arr, T\
     \ lft, T rgt) {\n    int n = arr.size();\n    if (n == 0) return lft <= 0 && 0\
@@ -78,21 +78,21 @@ data:
     \    auto count = [&](T gap) -> std::vector<long long> {\n        std::vector<long\
     \ long> res(n + 1), cur(n + 1);\n        for (int i = 0; auto &v : lset) {\n \
     \           while (i < int(rset.size()) && v.v + rset[i].v < gap) ++cur[rset[i++].cnt];\n\
-    \            for (int j = 0; j <= n; ++j) res[v.cnt + j] += cur[j];\n        }\n\
-    \        return res;\n    };\n    std::vector<long long> res(n + 1);\n    if (lset[0]\
-    \ + rset.back() >= rgt) res = count(rgt); \n    else {\n        std::vector<long\
-    \ long> lcnt(n + 1), rcnt(n + 1);\n        for (auto &v : lset) ++lcnt[v.cnt];\n\
-    \        for (auto &v : rset) ++rcnt[v.cnt];\n        for (int i = 0; i <= n;\
-    \ ++i)\n            for (int j = 0; j <= n; ++j)\n                res[i + j] +=\
-    \ lcnt[i] * rcnt[j];\n    }\n    if (lset.back() + rset[0] < lft) {\n        auto\
-    \ minus = count(lft);\n        for (int i = 0; i <= n; ++i) res[i] -= minus[i];\n\
-    \    }\n    return res;\n}\n"
+    \            for (int j = 0; v.cnt + j <= n; ++j) res[v.cnt + j] += cur[j];\n\
+    \        }\n        return res;\n    };\n    std::vector<long long> res(n + 1);\n\
+    \    if (lset[0].v + rset.back().v >= rgt) res = count(rgt); \n    else {\n  \
+    \      std::vector<long long> lcnt(n + 1), rcnt(n + 1);\n        for (auto &v\
+    \ : lset) ++lcnt[v.cnt];\n        for (auto &v : rset) ++rcnt[v.cnt];\n      \
+    \  for (int i = 0; i <= n; ++i)\n            for (int j = 0; i + j <= n; ++j)\n\
+    \                res[i + j] += lcnt[i] * rcnt[j];\n    }\n    if (lset.back().v\
+    \ + rset[0].v < lft) {\n        auto minus = count(lft);\n        for (int i =\
+    \ 0; i <= n; ++i) res[i] -= minus[i];\n    }\n    return res;\n}\n"
   dependsOn:
   - Enumerate/subset_enumerate.hpp
   isVerificationFile: false
   path: Sequence/count_subset_sum.hpp
   requiredBy: []
-  timestamp: '2026-06-28 02:52:11+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Sequence/count_subset_sum.hpp

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Convolution/OnlineConvolution.hpp
     title: Convolution/OnlineConvolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/convolution.hpp
     title: Convolution/convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Numbers/bernoulli_number.hpp
     title: Numbers/bernoulli_number.hpp
   - icon: ':heavy_check_mark:'
@@ -41,25 +41,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/stirling_second_kind_row.hpp
     title: Numbers/stirling_second_kind_row.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Sqrt.hpp
     title: Polynomial/Sqrt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/interpolate.hpp
     title: Polynomial/interpolate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -96,51 +96,51 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
     title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
     title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
     title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Polynomial/NTT.hpp\"\n\n#line 2 \"Numeric/Modint.hpp\"\n\
@@ -267,7 +267,7 @@ data:
     \ internal::modint_base>\nclass NTT {\n    inline static int max_size = 1;\n \
     \   inline static std::vector<T> w{1, T(1)};\n    inline static const T root =\
     \ internal::primitive_root_constexpr(T::mod());\n    static void ensure_upper_bound(int\
-    \ n) {\n        if (max_size < n) {\n            while (max_size <= n) max_size\
+    \ n) {\n        if (max_size < n) {\n            while (max_size < n) max_size\
     \ <<= 1;\n            w.resize(max_size);\n            std::ranges::fill(w, 1);\n\
     \            T dw = root.pow((T::mod() - 1) / max_size);\n            for (int\
     \ s = max_size / 2; s; s >>= 1, dw *= dw) {\n                w[s] = 1;\n     \
@@ -276,31 +276,31 @@ data:
     \ int ntt_max_limit = []() {\n        unsigned int m = T::mod() - 1;\n       \
     \ int limit = 1;\n        while ((m & 1) == 0) {\n            limit <<= 1;\n \
     \           m >>= 1;\n        }\n        return limit;\n    }();\n    static void\
-    \ ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        int n =\
-    \ a.size();\n        assert((n & (n - 1)) == 0);\n        ensure_upper_bound(n);\n\
-    \        for (int i = 0, j = 1; j < n - 1; ++j) {\n            for (int k = n\
-    \ >> 1; (i ^= k) < k; k >>= 1);\n            if (j < i) std::swap(a[i], a[j]);\n\
-    \        }\n        for (int s = 1; s < n; s <<= 1) {\n            for (int i\
-    \ = 0; i < n; i += s * 2) {\n                for (int j = 0; j < s; ++j) {\n \
-    \                   T tmp = a[i + s + j] * w[s + j];\n                    a[i\
-    \ + s + j] = a[i + j] - tmp;\n                    a[i + j] += tmp;\n         \
-    \       }\n            }\n        }\n        if (!inv) return;\n        T iv =\
-    \ T(n).inv(); \n        std::reverse(a.begin() + 1, a.begin() + n);\n        for\
-    \ (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n    static size_t maxsize() {\n\
-    \        return max_size;\n    }\n    static std::vector<T> convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n        if (a.empty() || b.empty()) return std::vector<T>();\n\
-    \        int n = 1, sz = int(a.size()) + int(b.size()) - 1;\n        while (n\
-    \ < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"the result length exceeds\
-    \ the limit of the prime can support\");\n        a.resize(n), b.resize(n);\n\
-    \        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i]\
-    \ = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n        return\
-    \ a;\n    }\n};\n"
+    \ ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        assert(!a.empty()\
+    \ && a.size() <= size_t(ntt_max_limit));\n        int n = a.size();\n        assert(std::has_single_bit(static_cast<unsigned\
+    \ int>(n)));\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j\
+    \ < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n\
+    \            if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
+    \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
+    \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
+    \ b.empty()) return std::vector<T>();\n        int n = 1, sz = int(a.size()) +\
+    \ int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit\
+    \ && \"the result length exceeds the limit of the prime can support\");\n    \
+    \    a.resize(n), b.resize(n);\n        ntt(a), ntt(b);\n        for (int i =\
+    \ 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n        ntt(a, true);\n   \
+    \     a.resize(sz);\n        return a;\n    }\n};\n"
   code: "#pragma once\n\n#include \"Numeric/Modint.hpp\"\n#include \"Numeric/internal_primitive_root.hpp\"\
     \n\ntemplate<typename T>\nrequires std::derived_from<T, internal::modint_base>\n\
     class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
     \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
     \    static void ensure_upper_bound(int n) {\n        if (max_size < n) {\n  \
-    \          while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
+    \          while (max_size < n) max_size <<= 1;\n            w.resize(max_size);\n\
     \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
     \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
     \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
@@ -309,15 +309,16 @@ data:
     \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
     \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
     \ limit;\n    }();\n    static void ntt(std::vector<T> &a, bool inv = false) {\
-    \ //0 <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) ==\
-    \ 0);\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j < n -\
-    \ 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n      \
-    \      if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s = 1; s\
-    \ < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n        \
-    \        for (int j = 0; j < s; ++j) {\n                    T tmp = a[i + s +\
-    \ j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n       \
-    \             a[i + j] += tmp;\n                }\n            }\n        }\n\
-    \        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ //0 <= a[i] < P\n        assert(!a.empty() && a.size() <= size_t(ntt_max_limit));\n\
+    \        int n = a.size();\n        assert(std::has_single_bit(static_cast<unsigned\
+    \ int>(n)));\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j\
+    \ < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n\
+    \            if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
     \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
     \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
     \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
@@ -351,8 +352,8 @@ data:
   - Polynomial/Polynomial.hpp
   - Convolution/convolution.hpp
   - Convolution/OnlineConvolution.hpp
-  timestamp: '2026-06-19 13:11:38+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_first_kind.test.cpp

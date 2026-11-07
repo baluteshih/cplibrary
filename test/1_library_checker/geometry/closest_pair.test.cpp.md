@@ -52,8 +52,8 @@ data:
     \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
     \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
     \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
-    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
-    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
+    \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
     \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
     \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
@@ -139,7 +139,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/geometry/closest_pair.test.cpp
   requiredBy: []
-  timestamp: '2026-06-19 13:39:32+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/geometry/closest_pair.test.cpp

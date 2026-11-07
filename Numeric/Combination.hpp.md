@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Numbers/bernoulli_number.hpp
     title: Numbers/bernoulli_number.hpp
   - icon: ':heavy_check_mark:'
@@ -23,10 +23,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/stirling_second_kind_row.hpp
     title: Numbers/stirling_second_kind_row.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -48,18 +48,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
     title: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Numeric/Combination.hpp\"\n\n#line 2 \"Numeric/internal_math.hpp\"\
@@ -184,7 +184,7 @@ data:
   - Polynomial/shift.hpp
   - Polynomial/lagrange_interpolate_iota.hpp
   timestamp: '2026-06-29 01:18:59+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

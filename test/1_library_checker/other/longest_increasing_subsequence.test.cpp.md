@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Algebra/Monoid/max_v.hpp
     title: Algebra/Monoid/max_v.hpp
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Discretization.hpp
     title: Discretization
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
   - icon: ':question:'
@@ -24,9 +24,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/longest_increasing_subsequence
@@ -88,20 +88,21 @@ data:
     \ is, max_v &v) {\n        is >> v.val;\n        return is;\n    }\n};\n#line\
     \ 6 \"Sequence/longest_increasing_subsequence.hpp\"\n\ntemplate<bool strict =\
     \ true, typename T = int>\nstd::vector<int> longest_increasing_subsequence(const\
-    \ std::vector<T> &arr) {\n    Discretization<T> val(arr.begin(), arr.end());\n\
-    \    val.build();\n    BIT<max_v<std::pair<int, int>>> bit(val.size());\n    std::vector<int>\
-    \ dp(arr.size()), tr(arr.size());\n    for (int i = 0; i < int(arr.size()); ++i)\
-    \ {\n        int cur = val.idx(arr[i]);\n        auto [v, idx] = bit.prefix(cur\
-    \ - strict).val;\n        if (v <= 0) dp[i] = 1, tr[i] = -1;\n        else dp[i]\
-    \ = v + 1, tr[i] = idx;\n        bit.modify(cur, std::make_pair(dp[i], i));\n\
-    \    }\n    std::vector<int> res;\n    for (int mx = std::ranges::max_element(dp)\
-    \ - dp.begin(); mx != -1; mx = tr[mx])\n        res.push_back(mx);\n    std::ranges::reverse(res);\n\
-    \    return res;\n}\n#line 5 \"test/1_library_checker/other/longest_increasing_subsequence.test.cpp\"\
-    \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
-    \ n;\n    std::cin >> n;\n    std::vector<int> arr(n);\n    for (int &i : arr)\
-    \ std::cin >> i;\n    auto ans = longest_increasing_subsequence(arr);\n    std::cout\
-    \ << ans.size() << \"\\n\";\n    for (int i = 0; i < int(ans.size()); ++i)\n \
-    \       std::cout << ans[i] << \" \\n\"[i + 1 == int(ans.size())]; \n}\n"
+    \ std::vector<T> &arr) {\n    if (arr.empty()) return {};\n    Discretization<T>\
+    \ val(arr.begin(), arr.end());\n    val.build();\n    BIT<max_v<std::pair<int,\
+    \ int>>> bit(val.size());\n    std::vector<int> dp(arr.size()), tr(arr.size());\n\
+    \    for (int i = 0; i < int(arr.size()); ++i) {\n        int cur = val.idx(arr[i]);\n\
+    \        auto [v, idx] = bit.prefix(cur - strict).val;\n        if (v <= 0) dp[i]\
+    \ = 1, tr[i] = -1;\n        else dp[i] = v + 1, tr[i] = idx;\n        bit.modify(cur,\
+    \ std::make_pair(dp[i], i));\n    }\n    std::vector<int> res;\n    for (int mx\
+    \ = std::ranges::max_element(dp) - dp.begin(); mx != -1; mx = tr[mx])\n      \
+    \  res.push_back(mx);\n    std::ranges::reverse(res);\n    return res;\n}\n#line\
+    \ 5 \"test/1_library_checker/other/longest_increasing_subsequence.test.cpp\"\n\
+    \nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int n;\n\
+    \    std::cin >> n;\n    std::vector<int> arr(n);\n    for (int &i : arr) std::cin\
+    \ >> i;\n    auto ans = longest_increasing_subsequence(arr);\n    std::cout <<\
+    \ ans.size() << \"\\n\";\n    for (int i = 0; i < int(ans.size()); ++i)\n    \
+    \    std::cout << ans[i] << \" \\n\"[i + 1 == int(ans.size())]; \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_increasing_subsequence\"\
     \n#include \"assumption.hpp\"\n\n#include \"Sequence/longest_increasing_subsequence.hpp\"\
     \n\nint main() {\n    std::ios::sync_with_stdio(0), std::cin.tie(0);\n    int\
@@ -120,8 +121,8 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
 layout: document

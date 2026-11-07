@@ -14,32 +14,32 @@ data:
   - icon: ':x:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
     title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/common_tangent.test.cpp
     title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/cross_points_of_circles.test.cpp
     title: test/2_aoj/cross_points_of_circles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/tangent_to_a_circle.test.cpp
     title: test/2_aoj/tangent_to_a_circle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -82,8 +82,8 @@ data:
     \    friend Pt operator-(const Pt &a, const Pt &b) { return Pt(a) -= b; }\n  \
     \  friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }\n    friend Pt\
     \ operator/(const Pt &a, T d) { return Pt(a) /= d; }\n    friend bool operator<(const\
-    \ Pt &a, const Pt &b) {\n        int sx = cmp(a.x, b.x);\n        return sx !=\
-    \ 0 ? sx == -1 : cmp(a.y, b.y) == -1;\n    }\n    friend bool operator>(const\
+    \ Pt &a, const Pt &b) {\n        if (a.x < b.x) return true;\n        if (b.x\
+    \ < a.x) return false;\n        return a.y < b.y;\n    }\n    friend bool operator>(const\
     \ Pt &a, const Pt &b) { return b < a; }\n    friend bool operator<=(const Pt &a,\
     \ const Pt &b) { return !(b < a); }\n    friend bool operator>=(const Pt &a, const\
     \ Pt &b) { return !(a < b); }\n    template <typename U, U _eps, typename _MulT>\n\
@@ -455,8 +455,8 @@ data:
   requiredBy:
   - Geometry/minimum_enclosing_circle.hpp
   - Geometry/circle_cover.hpp
-  timestamp: '2026-11-01 09:20:33+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2026-11-07 14:46:12+08:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp

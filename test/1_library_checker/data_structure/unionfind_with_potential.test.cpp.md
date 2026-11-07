@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':question:'
@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PotentialDisjointSet.hpp
     title: Potential Disjoint Set
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'
@@ -67,7 +67,7 @@ data:
     \ u, int v, bool force = false) {\n        u = leader(u), v = leader(v);\n   \
     \     if (u == v) return false;\n        if (sz[u] < sz[v] && !force) std::swap(u,\
     \ v);\n        if constexpr (undo_tag) {\n            cache.emplace_back(&boss[v],\
-    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[v]); \n            if\
+    \ boss[v]); \n            cache.emplace_back(&sz[u], sz[u]); \n            if\
     \ constexpr (hasT)\n                data_cache.emplace_back(&data[u], data[u]);\n\
     \        }\n        boss[v] = u;\n        sz[u] += sz[v];\n        if constexpr\
     \ (hasT) {\n            data[u] = data[u] + data[v]; \n        }\n        return\
@@ -243,7 +243,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp
   requiredBy: []
-  timestamp: '2026-11-02 10:56:38+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/data_structure/unionfind_with_potential.test.cpp

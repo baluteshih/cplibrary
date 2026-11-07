@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
   _extendedRequiredBy: []
@@ -149,7 +149,7 @@ data:
     \ internal::modint_base>\nclass NTT {\n    inline static int max_size = 1;\n \
     \   inline static std::vector<T> w{1, T(1)};\n    inline static const T root =\
     \ internal::primitive_root_constexpr(T::mod());\n    static void ensure_upper_bound(int\
-    \ n) {\n        if (max_size < n) {\n            while (max_size <= n) max_size\
+    \ n) {\n        if (max_size < n) {\n            while (max_size < n) max_size\
     \ <<= 1;\n            w.resize(max_size);\n            std::ranges::fill(w, 1);\n\
     \            T dw = root.pow((T::mod() - 1) / max_size);\n            for (int\
     \ s = max_size / 2; s; s >>= 1, dw *= dw) {\n                w[s] = 1;\n     \
@@ -158,28 +158,28 @@ data:
     \ int ntt_max_limit = []() {\n        unsigned int m = T::mod() - 1;\n       \
     \ int limit = 1;\n        while ((m & 1) == 0) {\n            limit <<= 1;\n \
     \           m >>= 1;\n        }\n        return limit;\n    }();\n    static void\
-    \ ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        int n =\
-    \ a.size();\n        assert((n & (n - 1)) == 0);\n        ensure_upper_bound(n);\n\
-    \        for (int i = 0, j = 1; j < n - 1; ++j) {\n            for (int k = n\
-    \ >> 1; (i ^= k) < k; k >>= 1);\n            if (j < i) std::swap(a[i], a[j]);\n\
-    \        }\n        for (int s = 1; s < n; s <<= 1) {\n            for (int i\
-    \ = 0; i < n; i += s * 2) {\n                for (int j = 0; j < s; ++j) {\n \
-    \                   T tmp = a[i + s + j] * w[s + j];\n                    a[i\
-    \ + s + j] = a[i + j] - tmp;\n                    a[i + j] += tmp;\n         \
-    \       }\n            }\n        }\n        if (!inv) return;\n        T iv =\
-    \ T(n).inv(); \n        std::reverse(a.begin() + 1, a.begin() + n);\n        for\
-    \ (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n    static size_t maxsize() {\n\
-    \        return max_size;\n    }\n    static std::vector<T> convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n        if (a.empty() || b.empty()) return std::vector<T>();\n\
-    \        int n = 1, sz = int(a.size()) + int(b.size()) - 1;\n        while (n\
-    \ < sz) n <<= 1;\n        assert(n <= ntt_max_limit && \"the result length exceeds\
-    \ the limit of the prime can support\");\n        a.resize(n), b.resize(n);\n\
-    \        ntt(a), ntt(b);\n        for (int i = 0; i < n; ++i)\n            a[i]\
-    \ = a[i] * b[i];\n        ntt(a, true);\n        a.resize(sz);\n        return\
-    \ a;\n    }\n};\n#line 6 \"Convolution/OnlineConvolution.hpp\"\n\ntemplate<typename\
-    \ T>\nstruct OnlineConvolution {\n    std::vector<T> f, g, h, fm, gm;\n    int\
-    \ p;\n    \n    OnlineConvolution() : p(0) {}\n\n    T query(int idx, T f_i, T\
-    \ g_i) {\n        assert(idx == p);\n        f.push_back(f_i), g.push_back(g_i);\n\
+    \ ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P\n        assert(!a.empty()\
+    \ && a.size() <= size_t(ntt_max_limit));\n        int n = a.size();\n        assert(std::has_single_bit(static_cast<unsigned\
+    \ int>(n)));\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j\
+    \ < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n\
+    \            if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
+    \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
+    \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
+    \ b.empty()) return std::vector<T>();\n        int n = 1, sz = int(a.size()) +\
+    \ int(b.size()) - 1;\n        while (n < sz) n <<= 1;\n        assert(n <= ntt_max_limit\
+    \ && \"the result length exceeds the limit of the prime can support\");\n    \
+    \    a.resize(n), b.resize(n);\n        ntt(a), ntt(b);\n        for (int i =\
+    \ 0; i < n; ++i)\n            a[i] = a[i] * b[i];\n        ntt(a, true);\n   \
+    \     a.resize(sz);\n        return a;\n    }\n};\n#line 6 \"Convolution/OnlineConvolution.hpp\"\
+    \n\ntemplate<typename T>\nstruct OnlineConvolution {\n    std::vector<T> f, g,\
+    \ h, fm, gm;\n    int p;\n    \n    OnlineConvolution() : p(0) {}\n\n    T query(int\
+    \ idx, T f_i, T g_i) {\n        assert(idx == p);\n        f.push_back(f_i), g.push_back(g_i);\n\
     \        int z = __builtin_ctz(p + 2), w = 1 << z, s;\n        std::vector<T>\
     \ b0, b1;\n        if (p + 2 == w) {\n            b0 = f, b0.resize(2 * w);\n\
     \            NTT<T>::ntt(b0, false);\n            b1 = g, b1.resize(2 * w);\n\
@@ -221,7 +221,7 @@ data:
   isVerificationFile: false
   path: Convolution/OnlineConvolution.hpp
   requiredBy: []
-  timestamp: '2026-06-19 13:11:38+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/convolution/convolution_online.test.cpp

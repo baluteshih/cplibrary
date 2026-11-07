@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/base.hpp
     title: Graph/base.hpp
   _extendedRequiredBy: []
@@ -111,31 +111,34 @@ data:
     \n\n// return (dis[u], parent[u])\n// parent[u] is the bfs parent of u, parent[root]\
     \ = root\n// if not reachable from root, dis[u] = parent[u] = -1\ntemplate<typename\
     \ graph>\nstd::pair<std::vector<int>, std::vector<int>> bfs01(const graph &G,\
-    \ int root) {\n    std::vector<int> parent(G.n(), -1), dis(G.n(), -1);\n    std::deque<int>\
-    \ q;\n    auto relax = [&](int u, int d, int f) {\n        if (dis[u] == -1) {\n\
-    \            dis[u] = d;\n            parent[u] = f;\n            if (q.empty()\
-    \ || d >= dis[q.back()]) q.push_back(u);\n            else q.push_front(u);\n\
-    \        }\n    };\n    relax(root, 0, root);\n    while (!q.empty()) {\n    \
-    \    int u = q[0];\n        q.pop_front();\n        for (auto [v, eid] : G[u])\n\
-    \            relax(v, dis[u] + int(G.edge(eid).weight), u);\n    }\n    return\
-    \ std::make_pair(dis, parent);\n}\n"
+    \ int root) {\n    assert(0 <= root && root < G.n());\n    std::vector<int> parent(G.n(),\
+    \ -1), dis(G.n(), -1);\n    std::deque<std::pair<int, int>> q;\n    dis[root]\
+    \ = 0, parent[root] = root;\n    q.emplace_front(root, 0);\n    while (!q.empty())\
+    \ {\n        auto [u, d] = q.front();\n        q.pop_front();\n        if (d !=\
+    \ dis[u]) continue;\n        for (auto [v, eid] : G[u]) {\n            auto w\
+    \ = G.edge(eid).weight;\n            int nd = d + int(w);\n            if (dis[v]\
+    \ != -1 && dis[v] <= nd) continue;\n            dis[v] = nd;\n            parent[v]\
+    \ = u;\n            if (w == 0) q.emplace_front(v, nd);\n            else q.emplace_back(v,\
+    \ nd);\n        }\n    }\n    return {dis, parent};\n}\n"
   code: "#pragma once\n\n#include \"Graph/base.hpp\"\n\n// return (dis[u], parent[u])\n\
     // parent[u] is the bfs parent of u, parent[root] = root\n// if not reachable\
     \ from root, dis[u] = parent[u] = -1\ntemplate<typename graph>\nstd::pair<std::vector<int>,\
-    \ std::vector<int>> bfs01(const graph &G, int root) {\n    std::vector<int> parent(G.n(),\
-    \ -1), dis(G.n(), -1);\n    std::deque<int> q;\n    auto relax = [&](int u, int\
-    \ d, int f) {\n        if (dis[u] == -1) {\n            dis[u] = d;\n        \
-    \    parent[u] = f;\n            if (q.empty() || d >= dis[q.back()]) q.push_back(u);\n\
-    \            else q.push_front(u);\n        }\n    };\n    relax(root, 0, root);\n\
-    \    while (!q.empty()) {\n        int u = q[0];\n        q.pop_front();\n   \
-    \     for (auto [v, eid] : G[u])\n            relax(v, dis[u] + int(G.edge(eid).weight),\
-    \ u);\n    }\n    return std::make_pair(dis, parent);\n}\n"
+    \ std::vector<int>> bfs01(const graph &G, int root) {\n    assert(0 <= root &&\
+    \ root < G.n());\n    std::vector<int> parent(G.n(), -1), dis(G.n(), -1);\n  \
+    \  std::deque<std::pair<int, int>> q;\n    dis[root] = 0, parent[root] = root;\n\
+    \    q.emplace_front(root, 0);\n    while (!q.empty()) {\n        auto [u, d]\
+    \ = q.front();\n        q.pop_front();\n        if (d != dis[u]) continue;\n \
+    \       for (auto [v, eid] : G[u]) {\n            auto w = G.edge(eid).weight;\n\
+    \            int nd = d + int(w);\n            if (dis[v] != -1 && dis[v] <= nd)\
+    \ continue;\n            dis[v] = nd;\n            parent[v] = u;\n          \
+    \  if (w == 0) q.emplace_front(v, nd);\n            else q.emplace_back(v, nd);\n\
+    \        }\n    }\n    return {dis, parent};\n}\n"
   dependsOn:
   - Graph/base.hpp
   isVerificationFile: false
   path: Graph/bfs01.hpp
   requiredBy: []
-  timestamp: '2026-11-01 10:04:01+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: Graph/bfs01.hpp

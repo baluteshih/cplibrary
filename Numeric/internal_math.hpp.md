@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Convolution/OnlineConvolution.hpp
     title: Convolution/OnlineConvolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Convolution/convolution.hpp
     title: Convolution/convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/count_spanning_tree.hpp
     title: Graph/count_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
   - icon: ':heavy_check_mark:'
@@ -26,7 +26,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/bell_number.hpp
     title: Numbers/bell_number.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Numbers/bernoulli_number.hpp
     title: Numbers/bernoulli_number.hpp
   - icon: ':heavy_check_mark:'
@@ -47,43 +47,43 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numeric/Binomial.hpp
     title: Numeric/Binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
   - icon: ':heavy_check_mark:'
     path: Numeric/DynamicModint.hpp
     title: Numeric/DynamicModint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/quadratic_residue.hpp
     title: Numeric/quadratic_residue.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Bostan_Mori.hpp
     title: Polynomial/Bostan_Mori.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/Sqrt.hpp
     title: Polynomial/Sqrt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/interpolate.hpp
     title: Polynomial/interpolate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/lagrange_interpolate_iota.hpp
     title: Polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Polynomial/linear_recursion.hpp
     title: Polynomial/linear_recursion.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/shift.hpp
     title: Polynomial/shift.hpp
   _extendedVerifiedWith:
@@ -210,19 +210,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/number_theory/bernoulli_number.test.cpp
     title: test/1_library_checker/number_theory/bernoulli_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -231,66 +231,66 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/other/find_linear_recurrence.test.cpp
     title: test/1_library_checker/other/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/1_library_checker/other/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
     title: test/1_library_checker/polynomial/division_of_polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/exp_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/inv_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/log_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
     title: test/1_library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
     title: test/1_library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/1_library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/pow_of_formal_power_series.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
     title: test/1_library_checker/polynomial/product_of_polynomial_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/1_library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/set_power_series/subset_convolution.test.cpp
     title: test/1_library_checker/set_power_series/subset_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/string/longest_common_substring.test.cpp
     title: test/1_library_checker/string/longest_common_substring.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://github.com/atcoder/ac-library
@@ -440,7 +440,7 @@ data:
   - Graph/count_eulerian_circuits.hpp
   - Graph/count_spanning_tree.hpp
   timestamp: '2026-05-29 21:39:52+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind_fixed_k.test.cpp
   - test/1_library_checker/enumerative_combinatorics/binomial_coefficient_prime_mod.test.cpp

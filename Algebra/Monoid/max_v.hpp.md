@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Algebra/Monoid/max_v.hpp\"\n\ntemplate<typename T, T neginf\
@@ -34,7 +34,7 @@ data:
   requiredBy:
   - Sequence/longest_increasing_subsequence.hpp
   timestamp: '2026-10-03 12:58:48+08:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/1_library_checker/other/longest_increasing_subsequence.test.cpp
 documentation_of: Algebra/Monoid/max_v.hpp

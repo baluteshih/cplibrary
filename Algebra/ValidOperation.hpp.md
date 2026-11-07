@@ -5,16 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Acted_Monoid/min_v-add.hpp
     title: Algebra/Acted_Monoid/min_v-add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/sized_value.hpp
     title: Algebra/Monoid/sized_value.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/BIT.hpp
     title: Binary Indexed Tree (BIT)
   - icon: ':heavy_check_mark:'
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSet.hpp
     title: Disjoint Set Union (DSU)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/Doubling.hpp
     title: Doubling
   - icon: ':heavy_check_mark:'
@@ -44,7 +44,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/PotentialDisjointSet.hpp
     title: Potential Disjoint Set
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':heavy_check_mark:'
@@ -65,7 +65,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Graph/UnifiedWeight.hpp
     title: Graph/UnifiedWeight.hpp
   - icon: ':heavy_check_mark:'
@@ -80,37 +80,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: Graph/minimum_spanning_tree.hpp
     title: Graph/minimum_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Matrix/Matrix.hpp
     title: Matrix/Matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Matrix/Vector.hpp
     title: Matrix/Vector.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Sequence/longest_increasing_subsequence.hpp
     title: Sequence/longest_increasing_subsequence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidDS/DistanceSolver.hpp
     title: Tree/CentroidDS/DistanceSolver.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/CentroidTree.hpp
     title: Tree/CentroidTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/HeavyLightDecomposition.hpp
     title: Tree/HeavyLightDecomposition.hpp
   - icon: ':heavy_check_mark:'
     path: Tree/LinkCutTree.hpp
     title: Tree/LinkCutTree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Tree/Tree.hpp
     title: Tree/Tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/TreeTools.hpp
     title: Tree/TreeTools.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/all_direction_composition.hpp
     title: Tree/all_direction_composition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Tree/centroid_divide_and_conquer.hpp
     title: Tree/centroid_divide_and_conquer.hpp
   _extendedVerifiedWith:
@@ -264,19 +264,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_product.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
     title: test/1_library_checker/linear_algebra/matrix_rank.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
     title: test/1_library_checker/linear_algebra/pow_of_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
     title: test/1_library_checker/linear_algebra/system_of_linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
     title: test/1_library_checker/other/longest_increasing_subsequence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -291,37 +291,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/dynamic_tree_vertex_set_path_composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/1_library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/jump_on_tree.test.cpp
     title: test/1_library_checker/tree/jump_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/lca.test.cpp
     title: test/1_library_checker/tree/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
     title: test/1_library_checker/tree/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_diameter.test.cpp
     title: test/1_library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
     title: test/1_library_checker/tree/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_add_range_contour_sum_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
     title: test/1_library_checker/tree/vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
     title: test/1_library_checker/tree/vertex_get_range_contour_add_on_tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
     title: test/1_library_checker/tree/vertex_set_path_composite.test.cpp
   - icon: ':x:'

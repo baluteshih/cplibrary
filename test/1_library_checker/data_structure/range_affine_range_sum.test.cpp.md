@@ -13,13 +13,13 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
   - icon: ':question:'

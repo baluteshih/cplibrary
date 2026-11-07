@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: Numbers/stirling_second_kind.hpp
     title: Numbers/stirling_second_kind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Combination.hpp
     title: Numeric/Combination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/Modint.hpp
     title: Numeric/Modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_math.hpp
     title: Numeric/internal_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Numeric/internal_primitive_root.hpp
     title: Numeric/internal_primitive_root.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/NTT.hpp
     title: Polynomial/NTT.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: Polynomial/Polynomial.hpp
     title: Polynomial/Polynomial.hpp
   - icon: ':question:'
@@ -164,7 +164,7 @@ data:
     class NTT {\n    inline static int max_size = 1;\n    inline static std::vector<T>\
     \ w{1, T(1)};\n    inline static const T root = internal::primitive_root_constexpr(T::mod());\n\
     \    static void ensure_upper_bound(int n) {\n        if (max_size < n) {\n  \
-    \          while (max_size <= n) max_size <<= 1;\n            w.resize(max_size);\n\
+    \          while (max_size < n) max_size <<= 1;\n            w.resize(max_size);\n\
     \            std::ranges::fill(w, 1);\n            T dw = root.pow((T::mod() -\
     \ 1) / max_size);\n            for (int s = max_size / 2; s; s >>= 1, dw *= dw)\
     \ {\n                w[s] = 1;\n                for (int j = 1; j < s; ++j) \n\
@@ -173,15 +173,16 @@ data:
     \ int m = T::mod() - 1;\n        int limit = 1;\n        while ((m & 1) == 0)\
     \ {\n            limit <<= 1;\n            m >>= 1;\n        }\n        return\
     \ limit;\n    }();\n    static void ntt(std::vector<T> &a, bool inv = false) {\
-    \ //0 <= a[i] < P\n        int n = a.size();\n        assert((n & (n - 1)) ==\
-    \ 0);\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j < n -\
-    \ 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n      \
-    \      if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s = 1; s\
-    \ < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n        \
-    \        for (int j = 0; j < s; ++j) {\n                    T tmp = a[i + s +\
-    \ j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n       \
-    \             a[i + j] += tmp;\n                }\n            }\n        }\n\
-    \        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
+    \ //0 <= a[i] < P\n        assert(!a.empty() && a.size() <= size_t(ntt_max_limit));\n\
+    \        int n = a.size();\n        assert(std::has_single_bit(static_cast<unsigned\
+    \ int>(n)));\n        ensure_upper_bound(n);\n        for (int i = 0, j = 1; j\
+    \ < n - 1; ++j) {\n            for (int k = n >> 1; (i ^= k) < k; k >>= 1);\n\
+    \            if (j < i) std::swap(a[i], a[j]);\n        }\n        for (int s\
+    \ = 1; s < n; s <<= 1) {\n            for (int i = 0; i < n; i += s * 2) {\n \
+    \               for (int j = 0; j < s; ++j) {\n                    T tmp = a[i\
+    \ + s + j] * w[s + j];\n                    a[i + s + j] = a[i + j] - tmp;\n \
+    \                   a[i + j] += tmp;\n                }\n            }\n     \
+    \   }\n        if (!inv) return;\n        T iv = T(n).inv(); \n        std::reverse(a.begin()\
     \ + 1, a.begin() + n);\n        for (int i = 0; i < n; ++i) a[i] *= iv;\n    }\n\
     \    static size_t maxsize() {\n        return max_size;\n    }\n    static std::vector<T>\
     \ convolution(std::vector<T> a, std::vector<T> b) {\n        if (a.empty() ||\
@@ -319,7 +320,7 @@ data:
   isVerificationFile: true
   path: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
   requiredBy: []
-  timestamp: '2026-06-29 01:18:59+08:00'
+  timestamp: '2026-11-07 14:46:12+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/1_library_checker/enumerative_combinatorics/stirling_number_of_the_second_kind.test.cpp
