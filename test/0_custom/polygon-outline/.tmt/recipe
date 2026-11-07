@@ -1,0 +1,29 @@
+@global-validation validator
+
+@testset samples
+manual sample1.in
+
+@testset coverage
+gen 1 80 0 1
+gen 2 80 0 2
+gen 3 80 0 3
+gen 5 80 0 5
+gen 7 80 0 7
+gen 8 80 0 8
+gen 12 100 2 1
+gen 12 100 3 2
+gen 1000 1000 1 3
+gen 1000 1000 2 4
+gen 20 200 0 100
+gen 31 200 0 101
+gen 42 200 0 102
+gen 53 200 0 103
+gen 64 200 0 104
+gen 75 200 0 105
+gen 86 200 0 106
+gen 97 200 0 107
+gen 108 200 0 108
+gen 119 200 0 109
+gen 200000 200000 1 201
+gen 200000 200000 0 202
+gen 10000 10000 2 203

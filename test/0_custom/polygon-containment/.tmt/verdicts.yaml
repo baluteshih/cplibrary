@@ -1,0 +1,12 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: bbox-only.cpp
+  verdict: wrong-answer
+- filename: boundary-inside.cpp
+  verdict: wrong-answer
+- filename: boundary-outside.cpp
+  verdict: wrong-answer
+- filename: ccw-only.cpp
+  verdict: wrong-answer
+- filename: double-vertex.cpp
+  verdict: wrong-answer

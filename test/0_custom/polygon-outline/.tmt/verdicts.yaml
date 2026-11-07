@@ -1,0 +1,14 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: unsigned-index.cpp
+  verdict: wrong-answer
+- filename: absolute-area.cpp
+  verdict: wrong-answer
+- filename: half-area.cpp
+  verdict: wrong-answer
+- filename: narrow-area.cpp
+  verdict: wrong-answer
+- filename: omit-closing.cpp
+  verdict: wrong-answer
+- filename: reverse-edge.cpp
+  verdict: wrong-answer

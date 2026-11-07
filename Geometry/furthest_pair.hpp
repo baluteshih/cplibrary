@@ -10,7 +10,7 @@ std::pair<int, int> furthest_pair(const std::vector<Point> &dots) {
     auto convex = convexHull(dots);
     if (int(convex.size()) == 1) return std::make_pair(0, 1);
     auto res = rotating_calipers(int(convex.size()), [&](int o, int a, int b) {
-        return Point::cmp(cross(convex[o], convex[(o + 1) % int(convex.size())], convex[a]), cross(convex[o], convex[(o + 1) % int(convex.size())], convex[b])) > 0; 
+        return Point::cmp(cross(convex[o], convex[(o + 1) % int(convex.size())], convex[a]), cross(convex[o], convex[(o + 1) % int(convex.size())], convex[b])) > 0;
     });
     std::pair<int, int> ans = std::make_pair(0, res[0]);
     for (int i = 1; i < int(convex.size()); ++i)

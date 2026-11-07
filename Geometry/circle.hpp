@@ -10,8 +10,8 @@ struct Circle : Geometry<T, eps> {
     using Point = Pt<T, eps, MulT>;
     using Line = Ln<T, eps, MulT>;
     using polygon = Polygon<T, eps, MulT>;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     static constexpr T eps_val = eps;
     Point o;
     T r;
@@ -23,10 +23,10 @@ struct Circle : Geometry<T, eps> {
         auto [o1, r1] = c1;
         auto [o2, r2] = c2;
         MulT d2 = dist2(o1, o2);
-        int cmpsum = cmp(d2, MulT(r1 + r2) * MulT(r1 + r2));
+        int cmpsum = cmp(d2, (MulT(r1) + MulT(r2)) * (MulT(r1) + MulT(r2)));
         if (cmpsum == 1) { return 4; }
         if (cmpsum == 0) { return 3; }
-        int cmpdiff = cmp(d2, MulT(r1 - r2) * MulT(r1 - r2));
+        int cmpdiff = cmp(d2, (MulT(r1) - MulT(r2)) * (MulT(r1) - MulT(r2)));
         if (cmpdiff == 1) { return 2; }
         if (cmpdiff == 0) { return 1; }
         return 0;
@@ -41,8 +41,8 @@ struct Circle : Geometry<T, eps> {
     friend std::vector<Pt<Ret, _eps, _MulT>> circleLineIntersection(const Circle &c, const Line &l) {
         auto casto = Pt<Ret, _eps, _MulT>(c.o);
         auto p = projection<Ret, _eps, _MulT>(c.o, l);
-        _MulT h = c.r * c.r - square(p - casto);
-        if (sign(h) < 0) { return {}; }
+        _MulT h = _MulT(c.r) * _MulT(c.r) - square(p - casto);
+        if (decltype(p)::sign(h) < 0) { return {}; }
         auto q = normal<Ret, _eps, _MulT>(direction(l)) * std::sqrt(h);
         return {p - q, p + q};
     }

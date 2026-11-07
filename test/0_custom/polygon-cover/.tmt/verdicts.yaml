@@ -1,0 +1,16 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: sum-only.cpp
+  verdict: wrong-answer
+- filename: pairwise-only.cpp
+  verdict: wrong-answer
+- filename: polygon-boxes.cpp
+  verdict: wrong-answer
+- filename: integer-area.cpp
+  verdict: wrong-answer
+- filename: exact-only.cpp
+  verdict: wrong-answer
+- filename: suffix-sum.cpp
+  verdict: wrong-answer
+- filename: union-only.cpp
+  verdict: wrong-answer

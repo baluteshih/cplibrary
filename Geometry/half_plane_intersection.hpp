@@ -4,7 +4,7 @@
 #include "Geometry/line.hpp"
 
 // Check inter(l1, l2) in l0
-template<typename Line, typename MulT = typename Line::value_type, MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val : get_default_eps<MulT>()>
+template<typename Line, typename MulT = typename Line::product_type, MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val : get_default_eps<MulT>()>
 bool line_contain(const Line &l0, const Line &l1, const Line &l2, bool strict = true) {
     auto area_pair = [&](const Line &a, const Line &b) {
         return std::make_pair(cross(a[1] - a[0], b[0] - a[0]), cross(a[1] - a[0], b[1] - a[0]));
@@ -15,7 +15,7 @@ bool line_contain(const Line &l0, const Line &l1, const Line &l2, bool strict = 
     return Geometry<MulT, eps>::cmp(MulT(a02Y) * MulT(a12X), MulT(a02X) * MulT(a12Y)) >= int(strict);
 }
 
-template<typename Line, typename MulT = typename Line::value_type, MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val : get_default_eps<MulT>()>
+template<typename Line, typename MulT = typename Line::product_type, MulT eps = std::is_same_v<typename Line::value_type, MulT> ? Line::eps_val : get_default_eps<MulT>()>
 std::vector<Line> half_plane_intersection(std::vector<Line> arr) {
     std::ranges::sort(arr, [&](const Line &a, const Line &b) -> int {
         if (!sameDirection(a, b))

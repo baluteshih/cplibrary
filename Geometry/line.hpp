@@ -5,10 +5,11 @@
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Ln : Geometry<T, eps> {
     using value_type = T;
+    using product_type = MulT;
     using Point = Pt<T, eps, MulT>;
     std::array<Point, 2> l;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     static constexpr T eps_val = eps;
     Ln() {}
     Ln(const Point &a, const Point &b) : l{a, b} {}

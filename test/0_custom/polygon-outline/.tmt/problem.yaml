@@ -1,0 +1,20 @@
+title: 輪廓索引與有向面積
+short_name: polygon-outline
+description: 輪廓索引與有向面積
+input_extension: .in
+output_extension: .ans
+judge_convention: icpc
+problem_type: batch
+validator:
+  type: default
+solution:
+  type: default
+  time_limit: 1 s
+  memory_limit: 512 MiB
+  output_limit: 32 MiB
+answer_generation:
+  type: solution
+  filename: sol.cpp
+checker:
+  type: default
+tmt_version: 0.1.0

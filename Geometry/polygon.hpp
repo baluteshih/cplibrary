@@ -4,13 +4,13 @@
 #include "Geometry/line.hpp"
 
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
-class Polygon : public std::vector<Pt<T, eps, MulT>>, public Geometry<MulT, eps> {
+class Polygon : public std::vector<Pt<T, eps, MulT>>, public Geometry<T, eps> {
 public:
     using Point = Pt<T, eps, MulT>;
     using Line = Ln<T, eps, MulT>;
     using std::vector<Pt<T, eps, MulT>>::vector;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     Polygon(const std::vector<Point> &vec) : Polygon(vec.begin(), vec.end()) {} 
     template <typename U, U _eps, typename _MulT>
     Polygon(const Polygon<U, _eps, _MulT>& other) : Polygon(other.begin(), other.end()) {}
@@ -20,7 +20,7 @@ public:
         return (*this)[index];
     }
     const Point& at(int index) const {
-        index %= this->size();
+        index %= int(this->size());
         if (index < 0) index += this->size();
         return (*this)[index];
     }
@@ -52,12 +52,13 @@ public:
     friend bool pointStrictlyInPoly(const Point &p, const Polygon &a) {
         return pointInPoly(p, a, true);
     }
+    // res[k]: area covered by at least k simple CCW polygons; res[0] undefined.
     template <typename Ret = DefaultFloat<T>>
-    friend Ret polyUnionArea(const std::vector<Polygon> &poly) {
+    friend std::vector<Ret> polyCoverArea(const std::vector<Polygon> &poly) {
         auto rat = [&](const Point &a, const Point &b) {
             return sign(b.x) ? Ret(a.x) / Ret(b.x) : Ret(a.y) / Ret(b.y);
         };
-        Ret res = 0;
+        std::vector<Ret> res(poly.size() + 1);
         for (auto &p : poly)
             for (int a = 0; a < int(p.size()); ++a) {
                 Point A = p[a], B = p[(a + 1) % int(p.size())];
@@ -81,15 +82,18 @@ public:
                 }
                 std::ranges::sort(segs);
                 for (auto &s : segs) s.first = std::clamp(s.first, Ret(0), Ret(1));
-                Ret sum = 0;
                 int cnt = segs[0].second;
                 for (int j = 1; j < int(segs.size()); ++j) {
-                    if (!cnt) sum += segs[j].first - segs[j - 1].first;
+                    if (segs[j].first > segs[j - 1].first)
+                        res[cnt + 1] += Ret(cross(A, B)) * (segs[j].first - segs[j - 1].first) / 2;
                     cnt += segs[j].second;
                 }
-                res += Ret(cross(A, B)) * sum;
             }
-        return res / 2;
+        return res;
+    }
+    template <typename Ret = DefaultFloat<T>>
+    friend Ret polyUnionArea(const std::vector<Polygon> &poly) {
+        return poly.empty() ? Ret(0) : polyCoverArea<Ret>(poly)[1];
     }
 };
 

@@ -7,8 +7,8 @@ template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct convexHull3D : Geometry<T, eps> {
     using Point = Pt3<T, eps, MulT>; 
     using value_type = T;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     static constexpr T eps_val = eps;
     struct Face {
         int a, b, c;

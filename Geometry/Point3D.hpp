@@ -5,8 +5,8 @@
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Pt3 : Geometry<T, eps> {
     using value_type = T;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     static constexpr T eps_val = eps;
     T x = 0, y = 0, z = 0;
     Pt3() : x(0), y(0), z(0) {}

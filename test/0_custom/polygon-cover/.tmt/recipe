@@ -1,0 +1,39 @@
+@global-validation validator
+
+@testset samples
+manual sample1.in
+manual sample2.in
+
+@testset coverage
+gen empty 0 1
+gen fraction 2 2
+gen ring 4 3
+gen touch 4 4
+gen rect 20 10
+gen rect 20 11
+gen rect 20 12
+gen rect 20 13
+gen tri 30 20
+gen tri 30 21
+gen tri 30 22
+gen tri 30 23
+gen duplicates 50 30
+gen duplicates 50 31
+gen nested 50 40
+gen nested 50 41
+gen adjacent 50 50
+gen adjacent 50 51
+gen concave 15 60
+gen concave 15 61
+gen concave 15 62
+gen thin 20 70
+gen thin 20 71
+gen thin 20 72
+gen stress 15 80
+gen stress 20 81
+gen stress 25 82
+gen stress 15 83
+gen stress 20 84
+gen stress 25 85
+gen maxdepth 60 90
+gen shared 40 91

@@ -17,24 +17,32 @@ constexpr T get_default_eps() {
 
 template <typename T, T eps = get_default_eps<T>()>
 struct Geometry {
-    static int sign(T x) {
-        if constexpr (std::is_floating_point_v<T>) {
-            return (x > eps) - (x < -eps); 
+    template <typename U = T>
+    static int sign(U x) {
+        if constexpr (std::is_floating_point_v<U>) {
+            return (x > U(eps)) - (x < -U(eps));
         }
         else {
             return (x > 0) - (x < 0);
         }
     }
-    static int cmp(T a, T b) {
-        return sign(a - b);
+    template <typename U = T, typename V = U>
+    static int cmp(U a, V b) {
+        if constexpr (std::is_floating_point_v<U> || std::is_floating_point_v<V>) {
+            using W = std::common_type_t<U, V>;
+            return sign(W(a) - W(b));
+        }
+        else {
+            return std::cmp_greater(a, b) - std::cmp_less(a, b);
+        }
     }
 };
 
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct Pt : Geometry<T, eps> {
     using value_type = T;
-    using Geometry<MulT, eps>::sign;
-    using Geometry<MulT, eps>::cmp;
+    using Geometry<T, eps>::sign;
+    using Geometry<T, eps>::cmp;
     static constexpr T eps_val = eps;
     T x = 0, y = 0;
     Pt() : x(0), y(0) {}
