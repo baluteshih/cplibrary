@@ -42,7 +42,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/polygon-cover/polygon-cover.test.cpp
     title: test/0_custom/polygon-cover/polygon-cover.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/polygon-outline/polygon-outline.test.cpp
     title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - icon: ':heavy_check_mark:'
@@ -300,7 +300,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -411,7 +411,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
     title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
     title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - icon: ':heavy_check_mark:'

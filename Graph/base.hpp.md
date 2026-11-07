@@ -5,19 +5,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: Flow/Dinic.hpp
     title: Flow/Dinic.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/bounded_cost_circulation.hpp
     title: Flow/bounded_cost_circulation.hpp
   - icon: ':heavy_check_mark:'
     path: Flow/bounded_flow.hpp
     title: Flow/bounded_flow.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Flow/min_cost_circulation.hpp
     title: Flow/min_cost_circulation.hpp
   - icon: ':warning:'
     path: Flow/min_cost_circulation_old.hpp
     title: Flow/min_cost_circulation_old.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Flow/min_cost_max_flow.hpp
     title: Flow/min_cost_max_flow.hpp
   - icon: ':heavy_check_mark:'
@@ -159,7 +159,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/incremental_scc.test.cpp
     title: test/1_library_checker/graph/incremental_scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -222,9 +222,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/4_codeforces/106033E/106033E.test.cpp
     title: test/4_codeforces/106033E/106033E.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Graph/base.hpp\"\n\ntemplate<typename W>\nstruct edge_data\
@@ -457,7 +457,7 @@ data:
   - Flow/Dinic.hpp
   - Flow/bounded_flow.hpp
   timestamp: '2026-09-21 23:40:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/other/two_sat.test.cpp
   - test/1_library_checker/geometry/euclidean_mst.test.cpp

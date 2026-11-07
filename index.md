@@ -219,19 +219,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: Flow/Dinic.hpp
       title: Flow/Dinic.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/bounded_cost_circulation.hpp
       title: Flow/bounded_cost_circulation.hpp
     - icon: ':heavy_check_mark:'
       path: Flow/bounded_flow.hpp
       title: Flow/bounded_flow.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Flow/min_cost_circulation.hpp
       title: Flow/min_cost_circulation.hpp
     - icon: ':warning:'
       path: Flow/min_cost_circulation_old.hpp
       title: Flow/min_cost_circulation_old.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Flow/min_cost_max_flow.hpp
       title: Flow/min_cost_max_flow.hpp
   - name: Geometry
@@ -316,7 +316,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Graph/UnifiedWeight.hpp
       title: Graph/UnifiedWeight.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Graph/base.hpp
       title: Graph/base.hpp
     - icon: ':warning:'
@@ -380,7 +380,7 @@ data:
     - icon: ':question:'
       path: Misc/cyc_bitonic_search.hpp
       title: Misc/cyc_bitonic_search.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Misc/i128.hpp
       title: Misc/i128.hpp
     - icon: ':heavy_check_mark:'
@@ -663,7 +663,7 @@ data:
       title: test/0_custom/polygon-cover/polygon-cover.test.cpp
   - name: test/0_custom/polygon-outline
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/0_custom/polygon-outline/polygon-outline.test.cpp
       title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - name: test/1_library_checker/biginteger
@@ -933,7 +933,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/incremental_scc.test.cpp
       title: test/1_library_checker/graph/incremental_scc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/graph/min_cost_b_flow.test.cpp
       title: test/1_library_checker/graph/min_cost_b_flow.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1054,7 +1054,7 @@ data:
       title: test/1_library_checker/polynomial/sqrt_of_formal_power_series.test.cpp
   - name: test/1_library_checker/sample
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
       title: test/1_library_checker/sample/many_aplusb_128bit.test.cpp
   - name: test/1_library_checker/set_power_series

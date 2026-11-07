@@ -81,7 +81,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/polygon-cover/polygon-cover.test.cpp
     title: test/0_custom/polygon-cover/polygon-cover.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/polygon-outline/polygon-outline.test.cpp
     title: test/0_custom/polygon-outline/polygon-outline.test.cpp
   - icon: ':heavy_check_mark:'

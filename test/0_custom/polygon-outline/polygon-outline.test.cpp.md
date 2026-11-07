@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Misc/i128.hpp
     title: Misc/i128.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: assumption.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: polygon-outline
@@ -276,7 +276,7 @@ data:
   path: test/0_custom/polygon-outline/polygon-outline.test.cpp
   requiredBy: []
   timestamp: '2026-11-08 00:49:38+08:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/0_custom/polygon-outline/polygon-outline.test.cpp
 layout: document
