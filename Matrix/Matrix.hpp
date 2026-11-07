@@ -48,7 +48,7 @@ public:
         assert(n() == rhs.n());
         assert(m() == rhs.m());
         for (int i = 0; i < n(); ++i)
-            (*this)[i] += rhs[i];
+            (*this)[i] -= rhs[i];
         return *this;
     }
     Matrix& operator|=(Matrix const& rhs) {
@@ -57,7 +57,7 @@ public:
             (*this)[i] |= rhs[i];
         return *this;
     }
-    Matrix& operator/=(const T &v) const { return *this *= v.inv(); }
+    Matrix& operator/=(const T &v) { return *this *= v.inv(); }
     Matrix operator*(const Matrix &rhs) const { return Matrix(*this) *= rhs; }
     Matrix operator*(const T &v) const { return Matrix(*this) *= v; }
     Matrix operator/(const T &v) const { return Matrix(*this) /= v; }

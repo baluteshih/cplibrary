@@ -6,6 +6,7 @@
 
 template<bool strict = true, typename T = int>
 std::vector<int> longest_increasing_subsequence(const std::vector<T> &arr) {
+    if (arr.empty()) return {};
     Discretization<T> val(arr.begin(), arr.end());
     val.build();
     BIT<max_v<std::pair<int, int>>> bit(val.size());

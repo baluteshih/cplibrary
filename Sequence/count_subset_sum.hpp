@@ -47,21 +47,21 @@ std::vector<long long> count_subset_sum_with_count(const std::vector<T> &arr, T 
         std::vector<long long> res(n + 1), cur(n + 1);
         for (int i = 0; auto &v : lset) {
             while (i < int(rset.size()) && v.v + rset[i].v < gap) ++cur[rset[i++].cnt];
-            for (int j = 0; j <= n; ++j) res[v.cnt + j] += cur[j];
+            for (int j = 0; v.cnt + j <= n; ++j) res[v.cnt + j] += cur[j];
         }
         return res;
     };
     std::vector<long long> res(n + 1);
-    if (lset[0] + rset.back() >= rgt) res = count(rgt); 
+    if (lset[0].v + rset.back().v >= rgt) res = count(rgt); 
     else {
         std::vector<long long> lcnt(n + 1), rcnt(n + 1);
         for (auto &v : lset) ++lcnt[v.cnt];
         for (auto &v : rset) ++rcnt[v.cnt];
         for (int i = 0; i <= n; ++i)
-            for (int j = 0; j <= n; ++j)
+            for (int j = 0; i + j <= n; ++j)
                 res[i + j] += lcnt[i] * rcnt[j];
     }
-    if (lset.back() + rset[0] < lft) {
+    if (lset.back().v + rset[0].v < lft) {
         auto minus = count(lft);
         for (int i = 0; i <= n; ++i) res[i] -= minus[i];
     }

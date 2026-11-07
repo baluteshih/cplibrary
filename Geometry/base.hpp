@@ -67,8 +67,9 @@ struct Pt : Geometry<T, eps> {
     friend Pt operator*(const Pt &a, T d) { return Pt(a) *= d; }
     friend Pt operator/(const Pt &a, T d) { return Pt(a) /= d; }
     friend bool operator<(const Pt &a, const Pt &b) {
-        int sx = cmp(a.x, b.x);
-        return sx != 0 ? sx == -1 : cmp(a.y, b.y) == -1;
+        if (a.x < b.x) return true;
+        if (b.x < a.x) return false;
+        return a.y < b.y;
     }
     friend bool operator>(const Pt &a, const Pt &b) { return b < a; }
     friend bool operator<=(const Pt &a, const Pt &b) { return !(b < a); }

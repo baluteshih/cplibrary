@@ -37,7 +37,7 @@ public:
         if (sz[u] < sz[v] && !force) std::swap(u, v);
         if constexpr (undo_tag) {
             cache.emplace_back(&boss[v], boss[v]); 
-            cache.emplace_back(&sz[u], sz[v]); 
+            cache.emplace_back(&sz[u], sz[u]); 
             if constexpr (hasT)
                 data_cache.emplace_back(&data[u], data[u]);
         }

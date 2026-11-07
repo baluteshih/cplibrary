@@ -87,7 +87,7 @@ public:
             assert(root != -1);
             traverse(root);
         }
-        std::vector<int> res(this->n(), -1);
+        std::vector<int> res(this->n());
         predfs([&](int u) {
             if (parent_eid(u) != -1)
                 res[u] = res[parent(u)] + 1;
@@ -113,9 +113,12 @@ public:
         }
         std::vector<WeightType> res(this->n());
         predfs([&](int u) {
-            res[u] = res[parent(u)];
-            if constexpr (hasEdgeWeight) if (u != root)
-                res[u] = res[u] + parent_edge(u).weight;
+            res[u] = WeightType();
+            if (parent_eid(u) != -1) {
+                res[u] = res[parent(u)];
+                if constexpr (hasEdgeWeight)
+                    res[u] = res[u] + parent_edge(u).weight;
+            }
             if constexpr (hasVertexWeight)
                 res[u] = res[u] + this->weight[u];
         });

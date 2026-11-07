@@ -20,7 +20,7 @@ public:
     Doubling<std::conditional_t<hasAddition, WeightType, void>, false> pa_table;
     struct Empty {};
     [[no_unique_address]] std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>, Empty> data;
-    [[no_unique_address]] std::conditional_t<hasWeight, std::vector<std::vector<WeightType>>, Empty> rootpath;
+    [[no_unique_address]] std::conditional_t<hasWeight, std::vector<WeightType>, Empty> rootpath;
     void build_rootpath(int root = -1) {
         if (this->current_root == -1 || (root != -1 && this->current_root != root)) {
             if (root == -1) root = 0;
@@ -28,7 +28,7 @@ public:
         }
         this->depth().swap(dep);
         if constexpr (hasAddition) {
-            this->weighted_distance().swap(rootpath);
+            super::weighted_distance().swap(rootpath);
         }
     }
     void build_patable(int root = -1) {

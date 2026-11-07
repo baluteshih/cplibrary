@@ -1,6 +1,7 @@
 #pragma once
 
 std::vector<int> make_z(const std::string &s) {
+    if (s.empty()) return {};
     std::vector<int> z(s.size());
     int l = 0, r = 0;
     z[0] = s.size();

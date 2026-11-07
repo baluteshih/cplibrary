@@ -71,7 +71,8 @@ struct RollingHash {
         return res;
     }
     static RollingHash rangeHash(const std::vector<RollingHash> &prefix_sum, int l, int r) {
-        if (l > r) return RollingHash();
+        assert(0 <= l && l <= r && r <= std::ssize(prefix_sum));
+        if (l == r) return RollingHash();
         if (l == 0) return prefix_sum[r - 1];
         return (prefix_sum[r - 1] - prefix_sum[l - 1]) * (-l);
     }

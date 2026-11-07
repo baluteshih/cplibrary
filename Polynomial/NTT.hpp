@@ -11,7 +11,7 @@ class NTT {
     inline static const T root = internal::primitive_root_constexpr(T::mod());
     static void ensure_upper_bound(int n) {
         if (max_size < n) {
-            while (max_size <= n) max_size <<= 1;
+            while (max_size < n) max_size <<= 1;
             w.resize(max_size);
             std::ranges::fill(w, 1);
             T dw = root.pow((T::mod() - 1) / max_size);
@@ -33,8 +33,9 @@ public:
         return limit;
     }();
     static void ntt(std::vector<T> &a, bool inv = false) { //0 <= a[i] < P
+        assert(!a.empty() && a.size() <= size_t(ntt_max_limit));
         int n = a.size();
-        assert((n & (n - 1)) == 0);
+        assert(std::has_single_bit(static_cast<unsigned int>(n)));
         ensure_upper_bound(n);
         for (int i = 0, j = 1; j < n - 1; ++j) {
             for (int k = n >> 1; (i ^= k) < k; k >>= 1);
