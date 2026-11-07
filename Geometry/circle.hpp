@@ -63,9 +63,13 @@ struct Circle : Geometry<T, eps> {
         if (type == 0 || type == 4) { return {}; }
         auto [o1, r1] = c1;
         auto [o2, r2] = c2;
-        Ret d = std::clamp(dist(o1, o2), std::abs(Ret(r1 - r2)), Ret(r1 + r2));
-        Ret y = (r1 * r1 + d * d - r2 * r2) / (2 * d);
-        Ret x = std::sqrt(_MulT(r1) * _MulT(r1) - _MulT(y) * _MulT(y));
+        _MulT dx = _MulT(o2.x) - _MulT(o1.x), dy = _MulT(o2.y) - _MulT(o1.y);
+        _MulT d2 = dx * dx + dy * dy;
+        _MulT sum = _MulT(r1) + _MulT(r2), diff = _MulT(r1) - _MulT(r2);
+        Ret d = std::clamp(std::sqrt(Ret(d2)), std::abs(Ret(diff)), Ret(sum));
+        Ret y = Ret(_MulT(r1) * _MulT(r1) + d2 - _MulT(r2) * _MulT(r2)) / (Ret(2) * d);
+        _MulT h2 = (sum * sum - d2) * (d2 - diff * diff);
+        Ret x = std::sqrt(Ret(std::max(_MulT(0), h2))) / (Ret(2) * d);
         auto dir = normal<Ret, _eps, _MulT>(o2 - o1);
         auto q1 = Pt<Ret, _eps, _MulT>(o1) + dir * y;
         auto q2 = rotate90(dir) * x;

@@ -1,0 +1,21 @@
+title: 重疊的圓形區域
+short_name: circle-coverage
+description: Areas covered by at least k disks
+input_extension: .in
+output_extension: .ans
+judge_convention: icpc
+problem_type: batch
+validator:
+  type: default
+solution:
+  type: default
+  time_limit: 1 s
+  memory_limit: 512 MiB
+  output_limit: 8 MiB
+answer_generation:
+  type: solution
+  filename: sol.cpp
+checker:
+  type: custom
+  filename: checker.cpp
+tmt_version: 0.1.0

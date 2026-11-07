@@ -1,0 +1,79 @@
+Circle coverage package verification
+
+The statement directory is read-only. Its initial SHA-256 and nanosecond mtimes
+are recorded in statement-snapshot.json and were verified unchanged.
+Headers were copied from tmt-cli/examples/icpc/include as authorized.
+
+Reference: solutions/sol.cpp, O(n^2 log n) time and O(n) working memory.
+Identical circles are grouped with multiplicity. On each oriented boundary arc,
+if c other disks cover it and its group has weight w, its Green integral belongs
+to thresholds c+1 through c+w. A range difference array accumulates these terms.
+Tangency and containment predicates use exact 64-bit integer squared distances.
+The half-angle uses atan2(sqrt((sumRadius^2-d^2)*(d^2-diffRadius^2)),
+d^2+r_i^2-r_j^2). Every integer intermediate fits signed 64 bits under the
+statement constraints. This avoids the near-tangency cancellation of acos.
+Coordinates are translated, arc sine differences use the midpoint identity,
+and both difference entries and prefix sums use compensated summation.
+Long double precision is platform-dependent; independent numeric checks are
+included rather than assuming that it has more precision than double.
+
+36 inputs: 2 samples, 12 geometry cases, 7 structured cases, 15 random cases.
+The 500-circle cases cover identical disks, strict offset containment chains,
+concentric radii, nested disks with varying multiplicities, disjoint disks,
+eight weighted disks through a common point, and a heavily intersecting grid.
+Random cases include small independent-oracle inputs and maximal configurations.
+The same-event construction has intersections (3,+/-4) on the scanned disk
+(0,0,5), shared by disks (6,0,5) and (3,0,4).
+
+Wrong submissions (all declared wrong-answer and caught):
+  deduplicate.cpp: loses multiplicities.
+  exactly-k.cpp: prints exact rather than threshold coverage.
+  no-wrap.cpp: drops one piece of intervals crossing the angle cut.
+  no-containment.cpp: omits full circumference coverage.
+  float-precision.cpp: accumulates in single precision.
+  acos-near-tangent.cpp: loses small overlaps when acos rounds near 1.
+The last is caught solely by geometry case 12 in the current test set.
+
+Custom checker enforces |a-b| <= 1e-6*max(1,abs(b)) per item,
+requires exactly n finite real tokens, and rejects missing and extra output.
+tools/check-components.py checks 11 validator and 11 checker scenarios.
+
+Independent oracle: tools/crosscheck.py uses Python Decimal at 65 digits,
+splits vertical slabs at circle endpoints and intersection x coordinates,
+and analytically integrates ordered upper/lower semicircle strips. Its atan
+is evaluated by argument reduction and a convergent Taylor series. Both
+internal and external tangencies are slab cuts. There is no dependency on
+mpmath, numerical quadrature, Monte Carlo, or the library under test.
+It checks 119 cases, 580 oracle/metamorphic comparisons, analytic maximal
+nested/disjoint cases, monotonicity and the multiplicity-weighted area sum.
+Oracle/metamorphic tolerance is 1e-7*max(1,abs(expected)); the library uses
+the statement tolerance 1e-6. See crosscheck-report.json for measured results.
+
+Library finding (original library was not edited):
+  3
+  0 0 10000
+  199 9998 1
+  200 9998 1
+High-precision A_3 = 0.623968848830200284217396050586328443...
+Circle<int> / default double circle_cover returns 0.623990317016024
+on this machine, exceeding the absolute tolerance. The stable reference
+returns 0.623968877480365 (error about 2.87e-8).
+Reproduce with tools/library-under-test.cpp; this wrapper tests all n levels.
+It uses the live repository headers and is deliberately outside solutions/:
+its result is a regression finding, not an expected accepted submission.
+
+Commands from the problem directory (use a GNU C++20 compiler):
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py invoke solutions/sol.cpp
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py verify
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen --verify-hash
+  g++-16 -std=gnu++20 -O2 solutions/sol.cpp -o /tmp/circle-reference
+  g++-16 -std=gnu++20 -O2 -I ../../.. tools/library-under-test.cpp -o /tmp/circle-library
+  python3 tools/crosscheck.py /tmp/circle-reference /tmp/circle-library
+  python3 tools/check-components.py
+
+All package files outside statement/ were newly added; no original file was
+replaced or removed, so no author-file backup was necessary. Generated answer
+hashes changed during development when the reference's acos precision bug was
+fixed; these hashes were first created in this session, not inherited data.
+The finalized hash baseline is checked with gen --verify-hash.

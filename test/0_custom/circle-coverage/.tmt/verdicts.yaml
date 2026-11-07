@@ -1,0 +1,26 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# Drops multiplicities of identical circles.
+- filename: deduplicate.cpp
+  verdict: wrong-answer
+
+# Prints exactly-k coverage instead of at-least-k.
+- filename: exactly-k.cpp
+  verdict: wrong-answer
+
+# Truncates crossing intervals at the angular cut, dropping the other piece.
+- filename: no-wrap.cpp
+  verdict: wrong-answer
+
+# Ignores circles that contain the entire scanned circumference.
+- filename: no-containment.cpp
+  verdict: wrong-answer
+
+# Uses single precision for intersections and area accumulation.
+- filename: float-precision.cpp
+  verdict: wrong-answer
+
+# Unstable angular computation near tangency.
+- filename: acos-near-tangent.cpp
+  verdict: wrong-answer

@@ -1,0 +1,45 @@
+@global-validation validator
+
+@testset samples
+manual s1.in
+manual s2.in
+
+@testset geometry
+manual single.in
+manual external-tangent.in
+manual internal-tangent.in
+manual near-external.in
+manual near-internal.in
+manual far-small.in
+manual wrap.in
+manual same-event.in
+manual hole.in
+manual zero-high.in
+manual extremes.in
+manual near-diagonal.in
+
+@testset structured
+gen identical 500
+gen chain 500
+gen concentric 500
+gen weighted 500
+gen disjoint 500
+gen common 500
+gen grid 500
+
+@testset random
+gen small 8 0
+gen small 8 1
+gen small 8 2
+gen small 8 3
+gen small 8 4
+gen random 500 0
+gen random 500 1
+gen random 500 2
+gen random 500 3
+gen dense 500 0
+gen dense 500 1
+gen dense 500 2
+gen duplicates 500 0
+gen duplicates 500 1
+gen duplicates 500 2

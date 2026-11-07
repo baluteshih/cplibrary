@@ -1,0 +1,9 @@
+{
+  "oracle_cases": 119,
+  "oracle_and_metamorphic_checks": 580,
+  "formal_cases": 36,
+  "analytic_maximum_size_cases": 5,
+  "input_bytes": 110906,
+  "maximum_relative_area_sum_error": "9.3897743969546717997990268096259195237749776476380538760527019920E-14",
+  "library_failures": []
+}
