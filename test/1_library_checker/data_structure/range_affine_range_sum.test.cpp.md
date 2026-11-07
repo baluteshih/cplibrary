@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: Algebra/ValidOperation.hpp
     title: Algebra/ValidOperation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: Segment Tree
   - icon: ':question:'

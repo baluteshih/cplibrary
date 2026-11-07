@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':question:'
@@ -18,7 +18,7 @@ data:
     title: Geometry/polygon.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/minimum_enclosing_circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\
@@ -388,7 +388,7 @@ data:
   path: Geometry/minimum_enclosing_circle.hpp
   requiredBy: []
   timestamp: '2026-11-07 14:46:12+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/9_qoj/6445.test.cpp

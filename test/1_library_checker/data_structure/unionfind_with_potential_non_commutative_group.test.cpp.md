@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Algebra/Field/concept.hpp
     title: Algebra/Field/concept.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Algebra/Monoid/concept.hpp
     title: Algebra/Monoid/concept.hpp
   - icon: ':question:'

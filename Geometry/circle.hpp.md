@@ -14,32 +14,32 @@ data:
   - icon: ':x:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
     title: test/2_aoj/area_of_intersection_between_two_circles.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/common_tangent.test.cpp
     title: test/2_aoj/common_tangent.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
     title: test/2_aoj/cross_points_of_a_circle_and_a_line.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/cross_points_of_circles.test.cpp
     title: test/2_aoj/cross_points_of_circles.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
     title: test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/tangent_to_a_circle.test.cpp
     title: test/2_aoj/tangent_to_a_circle.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/circle.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -456,7 +456,7 @@ data:
   - Geometry/minimum_enclosing_circle.hpp
   - Geometry/circle_cover.hpp
   timestamp: '2026-11-07 14:46:12+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/6_TIOJ/1503.test.cpp
   - test/2_aoj/tangent_to_a_circle.test.cpp
