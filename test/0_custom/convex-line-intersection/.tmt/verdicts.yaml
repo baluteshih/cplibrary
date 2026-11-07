@@ -1,0 +1,34 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# Sorts CUT edge indices instead of preserving directed entry/exit order.
+- filename: unordered-cut.cpp
+  verdict: wrong-answer
+
+# Assigns vertex intersections to incoming edges instead of outgoing edges.
+- filename: incoming-vertex-edge.cpp
+  verdict: wrong-answer
+
+# Reports a collinear edge as a CUT instead of EDGE.
+- filename: edge-as-cut.cpp
+  verdict: wrong-answer
+
+# Discards a tangent vertex as an empty intersection.
+- filename: missing-point.cpp
+  verdict: wrong-answer
+
+# Truncates signed line-side cross products to 32 bits.
+- filename: int32-side.cpp
+  verdict: wrong-answer
+
+# Outputs one-based rather than zero-based indices.
+- filename: one-based.cpp
+  verdict: wrong-answer
+
+# Treats the line as a finite segment.
+- filename: finite-segment.cpp
+  verdict: wrong-answer
+
+# O(n*q) support searches.
+- filename: linear-scan.cpp
+  verdict: time-limit-exceeded

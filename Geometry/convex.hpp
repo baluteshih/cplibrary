@@ -72,6 +72,7 @@ PolygonType<Point>::type convexHullNonstrict(std::vector<Point> dots, bool sort_
 // a and b are nonempty, need reorder
 template <typename polygon>
 polygon convexMinkowski(polygon a, polygon b) {
+    using Point = typename polygon::value_type;
     a = convexHull(a), b = convexHull(b);
     int n = a.size(), m = b.size();
     if (n != 1) { std::swap(n, m), std::swap(a, b); }
@@ -84,7 +85,7 @@ polygon convexMinkowski(polygon a, polygon b) {
     polygon c;
     for (int i = 0, j = 0; i < n || j < m; ) {
         c.push_back(a[i] + b[j]);
-        int s = sign(cross(a[i + 1] - a[i], b[j + 1] - b[j]));
+        int s = Point::sign(cross(a[i + 1] - a[i], b[j + 1] - b[j]));
         if (i < n && s >= 0) { i++; }
         if (j < m && s <= 0) { j++; }
     }

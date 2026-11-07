@@ -1,0 +1,115 @@
+Convex Minkowski package verification
+
+Reference: solutions/sol.cpp. Time O(n log n + m log m), memory O(n+m).
+Each input is independently sorted/deduplicated and reduced to its strict
+Andrew hull. A singleton translates the other hull. Otherwise, hulls are
+rotated to their lexicographically leftmost lowest point (compare y, then x),
+so their cyclic edge sequences are sorted by polar angle from the positive
+x axis. These sequences are merged using half-plane/cross-product comparisons;
+equal directions advance together. Starting from the sum of the two lowest
+vertices, accumulated edges trace the sum boundary. The final result is
+rotated to its lexicographic minimum. A segment contributes two opposite edges,
+so parallel and nonparallel segment sums follow the same merge procedure.
+No output hull rebuilding is used to repair the edge-merge result.
+
+All coordinates, differences and products are long long. Input differences
+are bounded by 2e8, so input edge cross products have magnitude <=8e16.
+Output coordinates may reach +/-2e8. Even the slow submission's hull checks
+on summed points have cross products bounded by 3.2e17, below signed 64 bits.
+The reference uses no floating point and no target-library implementation.
+
+Limits: 5 seconds, 512 MiB, 8 MiB output. Standalone reference invocation
+measured a maximum of 0.051 seconds / 30.77 MiB on this machine. These are
+local measurements, not timing calibration for another judge environment.
+The default ICPC checker compares output tokens exactly, without float tolerance.
+
+33 formal testcases:
+  1 original sample.
+  12 original manual configurations: point+point, point+polygon in both orders,
+  parallel/opposite/nonparallel segments, segment+polygon, parallel polygon
+  edges, unsorted clouds with interior points, coordinate extremes, a thin
+  triangle, and repeated singleton locations.
+  6 seeded small random cloud pairs.
+  10 structured upper-bound cases: two large strict convex polygons, matching
+  parallel edges, all-identical clouds, parallel/nonparallel collinear clouds,
+  dense rectangle boundaries, extreme corners plus many interior points,
+  many repeated locations, and n=1 or m=1 with total size 200000.
+  3 maximal random cloud pairs.
+  1 additional precision regression, appended in a separate testset.
+The large polygon generator uses primitive integer edge directions paired
+with their opposites, so it closes exactly and has strictly turning edges.
+One cloud is optionally transformed by (x,y)->(x-y,x+y) to interleave edge
+angles. Inputs are shuffled so they are not preordered strict hulls.
+The largest measured sum hull has 172158 vertices. The largest answer is
+2987473 bytes, safely within 8 MiB. Inputs total 42632220 bytes and answers
+5094129 bytes. testcases/hash.json pins the final generated data.
+
+Independent oracle: tools/crosscheck.py enumerates every pair sum for small
+clouds and computes their hull by exact gift wrapping in Python integers,
+not by the reference's Andrew/edge-merge procedure. It checks 254 original
+configurations and 1266 exact oracle/metamorphic comparisons: exchanging
+clouds, permuting inputs, translating one cloud, and reflecting both clouds
+with orientation/start normalization. All 33 formal outputs are reproduced
+and checked under A/B exchange. For small formal files, every pair sum is
+also checked. There are 285 exact support-function identity checks across
+formal cases, including selected output edge normals. Strict orientation,
+unique output vertices, canonical start and output coordinate bounds are
+checked as additional necessary properties, not as the sole oracle.
+The sample answer tokens match the statement verbatim.
+
+Component checks: tools/check-components.py exercises 12 validator and 7
+checker scenarios, including both minimal clouds, duplicates, zero/oversized
+counts, total-size overflow, coordinate bounds, malformed input, output
+coordinates of +/-2e8, wrong/missing/extra output tokens and noninteger spellings.
+
+Wrong submissions:
+  no-point-translation.cpp: forgets singleton translation.
+  segments-as-segment.cpp: treats the sum of nonparallel segments as a segment.
+  parallel-extra-vertices.cpp: handles tied edge angles one at a time.
+  wrong-start.cpp: starts at minimum y instead of lexicographic minimum.
+  raw-input.cpp: skips input convex hull construction.
+  int32-cross.cpp: truncates cross products to signed 32 bits.
+  double-cross.cpp: compares separately rounded double products for orientation.
+  pairwise-slow.cpp: enumerates every hull-vertex pair, rebuilding the partial
+  hull after each row to keep memory bounded; TLE on the large convex cases.
+
+Precision test: A={(-100000000,-100000000),(0,-1),(99999999,99999997)},
+B={(0,0)}. The exact orientation determinant is -1, while the two separately
+rounded double products compare equal. The correct sum has 3 vertices and
+the double-predicate solution outputs 2. Comparing the products explicitly
+also prevents fused multiply-add on this machine from concealing the intended
+loss of precision; a single double multiplication/subtraction expression
+had passed the earlier data. This targeted case was added after that wrong
+submission unexpectedly passed, and its WA declaration was retained.
+The development hash check showed only the new precision input/answer as
+extra files; every existing testcase hash was unchanged.
+
+Reproduction from the package directory, using GNU Make and GNU C++20:
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py invoke solutions/sol.cpp
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py verify
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen --verify-hash
+  g++-16 -std=gnu++20 -O2 solutions/sol.cpp -o /tmp/minkowski-reference
+  python3 tools/crosscheck.py /tmp/minkowski-reference
+  python3 tools/check-components.py
+
+Preservation: statement/ content hashes and nanosecond mtimes remain unchanged
+(see statement-snapshot.json). All package files outside statement/ were added;
+no original file was overwritten or deleted, so no author-file backup was
+necessary. Headers were copied from tmt-cli/examples/icpc/include as authorized.
+The library headers and user-authored test drivers were not modified. The
+verification here establishes the package reference and tests, and makes no
+claim that the target convexMinkowski implementation passed this package.
+
+Final tmt verify: 0 warning, 0 error.
+Final generation: Hash matches!
+Statement content/mtimes: unchanged.
+sol.cpp: Correct  AC: 33    AC
+no-point-translation.cpp: Incorrect  AC: 26, WA: 7  WA
+segments-as-segment.cpp: Incorrect  AC: 31, WA: 2  WA
+parallel-extra-vertices.cpp: Incorrect  WA: 12, AC: 21  WA
+wrong-start.cpp: Incorrect  AC: 19, WA: 14  WA
+raw-input.cpp: Incorrect  AC: 6, WA: 27  WA
+int32-cross.cpp: Incorrect  AC: 23, WA: 10  WA
+double-cross.cpp: Incorrect  AC: 32, WA: 1  WA
+pairwise-slow.cpp: Incorrect  AC: 31, TLE: 2  TLE

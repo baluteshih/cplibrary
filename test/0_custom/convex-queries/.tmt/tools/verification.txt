@@ -1,0 +1,131 @@
+Convex queries package verification
+
+Reference: solutions/sol.cpp. Preprocessing O(n log n), O(log n) per query,
+O(n) working memory. No target library code is used by the answer generator.
+I: explicit singleton/segment checks, otherwise fan triangulation and binary
+search, with segment bounds enforced on both bounding rays.
+D: integer polar sorting of hull edge directions, then a lower_bound support
+query to maximize cross(d,C_i). This is a cross-product objective, not dot.
+T: three noncollinear hull vertices define an interior centroid. Three times
+the direction from P toward that centroid is used to avoid rational/float
+coordinates. Support queries find opposite-side extrema; binary searches
+locate the two crossings of the centroid line with the boundary. The strictly
+positive-side and negative-side vertex chains have unimodal viewing angles.
+Adjacent ray cross products locate the maximum/minimum angle by binary search.
+The minimum-angle ray has all hull vertices on its left; the maximum-angle
+ray has all vertices on its right, fixing the required output order.
+The centroid line cuts the interior and both intersections lie ahead of P,
+so tangent contacts do not lie on that splitting line. Collinear crossing
+vertices are excluded from the positive/negative chain interiors.
+
+All arithmetic uses long long before coordinate subtraction/multiplication.
+Ordinary coordinate differences are <=2e8. The centroid direction components
+are <=6e8; associated cross products are bounded by 2.4e17, within signed
+64 bits. No atan2, floating-point epsilon, or high-precision approximation
+is needed for any reference query.
+
+Validator: rebuilds the strict hull and checks its complete cyclic sequence,
+rejecting self-intersection and multiple winding, not only bad local turns.
+Singletons and lexicographically sorted distinct segment endpoints are accepted.
+D must be nonzero; T requires n>=3 and a strictly external point, checked in
+O(log n). Bounds, exact spaces/newlines and EOF are enforced.
+
+Custom checker: I compares exact uppercase labels. D compares the candidate's
+cross product with the reference maximum in O(1), accepting every tie.
+For T, each reference contact admits itself and any adjacent vertex on the
+same ray from P (zero cross, positive dot). A supporting line of a strictly
+convex polygon contains at most two adjacent vertices; since P is strictly
+outside, these are exactly all possible tied contacts. The two contact sets
+are checked in their fixed left/right order, never sorted or interchanged.
+Every candidate index is range-checked and extra output tokens are rejected.
+Cost is O(n+q), so the checker never scans the polygon per candidate.
+
+29 formal inputs: 1 sample, 10 manual boundary/degenerate cases, 6 small
+seeded random polygons, 9 structured inputs, and 3 larger random cases.
+Manual cases include n=1/q=1, singleton and segment location, direction ties
+on a segment, vertical and negative-slope segments, polygon boundary points,
+fan-ray extensions, cyclic shifts, edge-extension tangents, direction vectors
+near the negative-x polar cut, coordinate extrema and a determinant-one
+triangle. Structured files include n=200000/q=200000 with I/D/T separately
+and mixed, maximal query counts for singleton/segment/vertical inputs,
+a 10001-vertex parabola hull, and a square with q=200000.
+Primitive integer edge directions generate maximal strictly convex polygons;
+first vertices are cyclically shifted to avoid a fixed canonical index.
+For tangent queries, an edge extension or a point strictly right of a CCW
+edge supplies a certificate of externality. Random direction components are
+checked against the direction bound before emission. Two initial random
+files failed that bound, were corrected, and were regenerated successfully.
+All initial author files were statements, so no preexisting generated data
+was replaced. The final hash baseline includes all 29 valid cases.
+
+Time/memory/output limits: 5 seconds / 512 MiB / 8 MiB.
+Standalone reference invocation measured at most 0.181 seconds / under 32 MiB
+on this machine. These local timings do not calibrate a different judge.
+Inputs total 44557344 bytes; answers total 8710914 bytes.
+Largest answer: 2584983 bytes, within the 8 MiB cap.
+
+Independent oracle: tools/crosscheck.py scans all edges for point location,
+all vertices for support ties, and all pairs of candidate/contact vertices
+for the complete ordered tangent sets on small polygons. It uses arbitrary-
+precision Python integers and does not implement the reference search.
+171 configurations yield 117645 small/metamorphic query comparisons,
+including cyclic shifts, translations and reflections with CCW restoration.
+5687 D ties and 10496 T queries with an edge tie are included. On 29 formal
+inputs, 601098 queries are checked independently: all degenerate queries and
+bounded selections from large polygons. For a selected large-polygon tangent,
+the oracle scans all vertices against both reported supporting rays directly.
+The original sample output is checked as one valid answer, not an exact
+index sequence that all other correct submissions must reproduce.
+
+Checker/validator regressions: tools/check-components.py passes 29 validator
+and 206 checker checks. Candidate tangent pairs on a square are exhaustively
+compared with full-scan acceptance sets, using each possible reference tie
+choice. Tests include swapped contacts, wrong support points, range errors,
+missing/extra tokens, wrong labels and decimal/noninteger indices. Degenerate
+support ties accept both segment endpoints. Invalid clockwise/star/multiple
+winding inputs, interior/boundary T points, degenerate T queries, and zero D
+vectors are rejected.
+
+Solution roster and intended failure modes:
+  sol.cpp: independent reference, accepted.
+  alternate-ties.cpp: deliberately selects alternate legal contact endpoints,
+  accepted; this exercises checker flexibility on the full formal data.
+  swapped-tangents.cpp: interchanges the required left/right contacts, WA.
+  dot-support.cpp: solves the dot rather than cross support objective, WA.
+  boundary-as-in.cpp: reports boundary as strict interior, WA.
+  line-not-segment.cpp: treats a full supporting line as a degenerate hull, WA.
+  fan-ray-extension.cpp: omits bounds on the two outer fan segments, WA.
+  int32-cross.cpp: truncates orientation values to signed 32 bits, WA.
+  linear-support.cpp: O(n) support search, TLE on three maximal query files.
+
+Final full tmt verify: 0 warning, 0 error.
+sol.cpp: Correct  AC: 29    AC
+alternate-ties.cpp: Correct  AC: 29    AC
+swapped-tangents.cpp: Incorrect  WA: 19, AC: 10  WA
+dot-support.cpp: Incorrect  WA: 24, AC: 5  WA
+boundary-as-in.cpp: Incorrect  WA: 26, AC: 3  WA
+line-not-segment.cpp: Incorrect  AC: 27, WA: 2  WA
+fan-ray-extension.cpp: Incorrect  AC: 28, WA: 1  WA
+int32-cross.cpp: Incorrect  AC: 10, WA: 19  WA
+linear-support.cpp: Incorrect  AC: 26, TLE: 3  TLE
+
+Reproduction, from this package with GNU Make and a GNU C++20 compiler:
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py invoke solutions/sol.cpp
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py verify
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen --verify-hash
+  g++-16 -std=gnu++20 -O2 solutions/sol.cpp -o /tmp/queries-reference
+  python3 tools/crosscheck.py /tmp/queries-reference
+  python3 tools/check-components.py
+
+Preservation: all statement content hashes and nanosecond mtimes remain
+unchanged (statement-snapshot.json). Everything outside statement/ was newly
+added; no author file was overwritten or deleted and no author-file backup
+was necessary. testlib.h and jngen.h were copied from the tmt-cli examples as
+authorized. The target library and user-authored test drivers were not edited.
+The independent checks establish the package reference and checker; they do
+not claim that the target library implementation passed this package.
+
+Final hash check: Hash matches!
+Statement hashes and mtimes: unchanged.
+Unused-include cleanup: all solution translation units pass GNU C++20 syntax/warning checks.

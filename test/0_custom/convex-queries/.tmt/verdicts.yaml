@@ -1,0 +1,34 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# Selects alternate endpoints of tied supporting edges.
+- filename: alternate-ties.cpp
+  verdict: accepted
+
+# Reverses the required left/right tangent order.
+- filename: swapped-tangents.cpp
+  verdict: wrong-answer
+
+# Maximizes dot(d,C_i) instead of cross(d,C_i).
+- filename: dot-support.cpp
+  verdict: wrong-answer
+
+# Treats boundary points as strictly inside.
+- filename: boundary-as-in.cpp
+  verdict: wrong-answer
+
+# Treats the entire supporting line of a degenerate segment as ON.
+- filename: line-not-segment.cpp
+  verdict: wrong-answer
+
+# Forgets to bound the segment when a point lies on a fan boundary ray.
+- filename: fan-ray-extension.cpp
+  verdict: wrong-answer
+
+# Truncates integer cross products to signed 32 bits.
+- filename: int32-cross.cpp
+  verdict: wrong-answer
+
+# O(n) rather than logarithmic support queries.
+- filename: linear-support.cpp
+  verdict: time-limit-exceeded

@@ -1,0 +1,84 @@
+Convex hulls package verification
+
+Reference: solutions/sol.cpp, independent Andrew monotone chains.
+Time O(n log n), working memory O(n). Input locations are sorted and deduplicated.
+Signed 64-bit differences/products are safe: coordinate differences <= 2e8,
+so a cross product has absolute value at most 8e16 < 2^63.
+Strict lower and upper chains remove non-left/non-right turns, respectively;
+non-strict chains retain collinear points. All chains are built S to T.
+Joining the lower chain with the interior of the reversed upper chain gives
+H or B. This also implements the prescribed collinear return traversal.
+Empty and singleton inputs follow directly from the same chain construction.
+
+Checker: tmt default ICPC checker, exact token comparison (no float tolerance).
+Output cap: 32 MiB; the largest measured answer is 9,941,272 bytes and would
+exceed the default 8 MiB cap. Time/memory limits remain 5 seconds / 512 MiB.
+Reference invocation measured at most 0.086 seconds / 33.02 MiB on this machine;
+these are local measurements, not calibration for a different judge machine.
+
+30 testcases: 2 original samples, 11 degeneracy/adversarial manual cases,
+9 structured cases at n=200000, and 8 random cases (5 small, 3 maximal).
+Structured modes: all equal, negative-slope line, vertical line, dense rectangle
+boundary, four corners plus many interior points, all vertices on a strict
+convex polygon, sorted input, reversed input, and many repeated locations.
+The convex generator uses distinct primitive integer edge directions, paired
+with their opposites and sorted by angle. Their cumulative sum closes exactly,
+and each successive edge turns strictly; all 200000 generated points are
+strict hull vertices. Coordinates remain within 1e8.
+Inputs total 39,457,520 bytes; answers total 24,273,078 bytes.
+
+Wrong solutions and their intended errors:
+  swapped-chains.cpp: prints U in the L block and vice versa.
+  strict-boundary.cpp: removes intermediate boundary locations.
+  nonstrict-hull.cpp: retains intermediate collinear points in strict H/L/U.
+  collinear-one-way.cpp: omits the return walk in collinear B.
+  no-dedup.cpp: retains repeated input positions.
+  missing-endpoint.cpp: omits T from U.
+  int32-cross.cpp: truncates orientation values to signed 32 bits.
+  jarvis-slow.cpp: correct O(n*h) gift wrapping, TLE on the maximal strict hull.
+
+Final full tmt verify: 0 warning, 0 error.
+  sol.cpp: Correct  AC: 30    AC
+  swapped-chains.cpp: Incorrect  WA: 19, AC: 11  WA
+  strict-boundary.cpp: Incorrect  WA: 13, AC: 17  WA
+  nonstrict-hull.cpp: Incorrect  WA: 13, AC: 17  WA
+  collinear-one-way.cpp: Incorrect  AC: 24, WA: 6  WA
+  no-dedup.cpp: Incorrect  WA: 13, AC: 17  WA
+  missing-endpoint.cpp: Incorrect  WA: 26, AC: 4  WA
+  int32-cross.cpp: Incorrect  AC: 21, WA: 9  WA
+  jarvis-slow.cpp: Incorrect  AC: 29, TLE: 1  TLE
+
+Independent verification: tools/crosscheck.py enumerates supporting directed
+edges using arbitrary-precision Python integers. It does not use monotone
+chains or the library under test. It checks all 512 subsets of a 3x3 grid,
+150 seeded small point clouds and all 13 manual inputs, including the samples.
+Transforms include input permutations, translation, rotation and reflection;
+expected sequences are reconstructed with the correct orientation and start.
+675 original configurations and 1324 oracle/metamorphic comparisons passed.
+Both samples also match their statement-provided answer tokens exactly.
+
+Live library driver: tools/library-driver.cpp tests convexHull,
+convexHullNonstrict and convexHullParts with Pt<long long>. For each input it
+also sorts/deduplicates independently and calls all three with
+sort_and_unique=false, checking equality with the default calls. All small
+oracle checks and 30 formal cases passed; the target headers were not changed.
+
+10 strict validator checks and 6 default checker checks passed, covering
+empty/legal input, out-of-range n/coordinates, non-integers, malformed
+whitespace, missing/extra input or output, and changed output values.
+
+Reproduction (from this package; choose an installed GNU C++20 compiler):
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py invoke solutions/sol.cpp
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py verify
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen --verify-hash
+  g++-16 -std=gnu++20 -O2 solutions/sol.cpp -o /tmp/hulls-reference
+  g++-16 -std=gnu++20 -O2 -I ../../.. tools/library-driver.cpp -o /tmp/hulls-library
+  python3 tools/crosscheck.py /tmp/hulls-reference /tmp/hulls-library
+  python3 tools/check-components.py
+
+Preservation: all original files under statement/ have unchanged content hashes
+and nanosecond mtimes (see statement-snapshot.json). All files outside statement/
+were newly added; no original file was overwritten or deleted. No author-file
+backup was required. testlib.h and jngen.h were copied from tmt-cli's example
+include directory as explicitly authorized. testcases/hash.json pins the data.

@@ -1,0 +1,99 @@
+Directed line / convex polygon package
+
+Reference: solutions/sol.cpp; no target library is used by the answer generator.
+Preprocessing O(n log n), each query O(log n), working memory O(n).
+Edge directions are sorted by an integer half-plane/cross-product comparator.
+For s(i)=cross(B-A,C_i-A), the first edge at or after direction B-A starts a
+minimum plateau/vertex; the antipodal direction similarly finds the maximum.
+An extreme equal to zero yields EDGE if the outgoing edge is collinear,
+otherwise POINT. Strict opposite signs imply a CUT. Values are monotone on
+the two boundary chains connecting the extrema, so each zero crossing is
+located by binary search. A zero vertex is assigned to its outgoing edge.
+For CCW boundaries the positive-to-negative crossing is entry along B-A,
+and the negative-to-positive crossing is exit. No floating point is needed.
+Coordinate differences are at most 2e8; cross products have absolute value
+at most 8e16 and fit signed 64 bits. Coordinates are stored in long long
+before subtraction and multiplication.
+
+Validator: strict bounds/spacing/EOF and distinct query endpoints. Rebuilds
+the strict hull independently and compares the input cyclic sequence with
+that hull. This rejects clockwise order, duplicates, concavity, collinear
+vertices, self-intersection and multiple winding, while accepting every
+cyclic rotation of a strict counterclockwise polygon.
+Checker: tmt default exact token checker with case_sensitive enabled.
+Limits: 5 seconds, 512 MiB, 8 MiB output, as specified/defaulted.
+Reference local invocation: at most 0.143 seconds / under 32 MiB.
+These are local measurements, not a benchmark of another judge environment.
+
+28 formal cases: 1 original sample, 7 hand-built boundary configurations,
+8 small random polygons, 8 structured cases, and 4 larger random query sets.
+Boundary cases include both endpoints inside, edge overlap and reversal,
+vertex tangency, two-vertex cuts, vertex/edge cuts, edge n-1/0 wraparound,
+cyclic relabeling, negative coordinates, coordinate extrema, and an extremely
+thin triangle of determinant one at coordinate magnitude 1e8.
+The large convex construction uses primitive integer edge directions paired
+with their opposites, producing 200000 strict vertices; the largest query
+batch has q=200000. Other shapes include a 10001-vertex parabola hull and a
+square with maximal query count. Structured modes isolate edge queries,
+vertex-pair queries, outside parallel lines, and mixed/random queries.
+Inputs total 43,458,372 bytes; answers total 7,620,774 bytes.
+The inherited statement files were preserved, with original SHA-256 values
+and nanosecond mtimes recorded in statement-snapshot.json.
+
+Independent verification: tools/crosscheck.py uses Python Fraction to compute
+all boundary intersections, deduplicates vertex intersections by their exact
+line parameter, and orders the two endpoints by that parameter. It scans
+edges directly rather than using direction sorting or support-point search.
+188 small configurations, including 180 seeded random polygons and all
+manual cases, give 74366 exact query comparisons after cyclic shifts,
+translation and line reversal. All four output categories are exercised.
+Another 11132 queries from formal cases are checked against the exact oracle;
+large cases use bounded selections to avoid O(n*q) Python work. Full formal
+outputs are checked for reproducibility and reversed-direction query prefixes
+are checked. The original sample's answer tokens match the statement exactly.
+See crosscheck-report.json for the classification counts and exact sizes.
+
+Component regressions: tools/check-components.py checks 21 validator cases
+and 8 checker cases. In particular, a star traversal with positive local
+turns is rejected, showing that the validator is not just a local-turn test.
+Checker tests reject swapped indices, missing/extra tokens, lowercase labels,
+real-valued index spellings, and a wrong category.
+
+Wrong submissions:
+  unordered-cut.cpp: sorts the two edge indices instead of following direction.
+  incoming-vertex-edge.cpp: assigns a vertex to its incoming edge.
+  edge-as-cut.cpp: reports a collinear edge as CUT.
+  missing-point.cpp: drops vertex-only tangent intersections.
+  int32-side.cpp: truncates side cross products to signed 32 bits.
+  one-based.cpp: outputs indices starting from one.
+  finite-segment.cpp: rejects intersections outside t in [0,1].
+  linear-scan.cpp: correct support search by O(n) scan for every query, TLE.
+
+Reproduction from this package (GNU Make and GNU C++20):
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py invoke solutions/sol.cpp
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py verify
+  MAKE=gmake python3 /Users/baluteshih/Project/tmt-cli/tmt.py gen --verify-hash
+  g++-16 -std=gnu++20 -O2 solutions/sol.cpp -o /tmp/line-reference
+  python3 tools/crosscheck.py /tmp/line-reference
+  python3 tools/check-components.py
+
+All files outside statement/ were newly added; no author file was replaced
+or deleted and no backup was necessary. testlib.h and jngen.h were copied
+from tmt-cli/examples/icpc/include as authorized. The target library and
+user-authored test drivers were not modified. The independent oracle checks
+the package reference; this work does not claim the target library passed.
+
+Final verification: 0 warning, 0 error.
+Final generation check: Hash matches!
+Statement content hashes and mtimes: unchanged.
+Sample answer tokens: exact match.
+sol.cpp: Correct  AC: 28    AC
+unordered-cut.cpp: Incorrect  WA: 25, AC: 3  WA
+incoming-vertex-edge.cpp: Incorrect  WA: 25, AC: 3  WA
+edge-as-cut.cpp: Incorrect  WA: 25, AC: 3  WA
+missing-point.cpp: Incorrect  WA: 21, AC: 7  WA
+int32-side.cpp: Incorrect  AC: 8, WA: 20  WA
+one-based.cpp: Incorrect  WA: 27, AC: 1  WA
+finite-segment.cpp: Incorrect  AC: 20, WA: 8  WA
+linear-scan.cpp: Incorrect  AC: 27, TLE: 1  TLE

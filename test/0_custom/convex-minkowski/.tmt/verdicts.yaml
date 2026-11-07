@@ -1,0 +1,34 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# Forgets the offset when one hull is a singleton.
+- filename: no-point-translation.cpp
+  verdict: wrong-answer
+
+# Assumes that the sum of any two segments is another segment.
+- filename: segments-as-segment.cpp
+  verdict: wrong-answer
+
+# Processes equal-direction edges separately, retaining collinear vertices.
+- filename: parallel-extra-vertices.cpp
+  verdict: wrong-answer
+
+# Leaves the result starting at its lowest point rather than lexicographic minimum.
+- filename: wrong-start.cpp
+  verdict: wrong-answer
+
+# Treats unsorted clouds as already ordered strict convex polygons.
+- filename: raw-input.cpp
+  verdict: wrong-answer
+
+# Truncates orientation cross products to signed 32 bits.
+- filename: int32-cross.cpp
+  verdict: wrong-answer
+
+# Rounds exact integer orientation predicates through double.
+- filename: double-cross.cpp
+  verdict: wrong-answer
+
+# Pairwise enumeration with bounded memory.
+- filename: pairwise-slow.cpp
+  verdict: time-limit-exceeded

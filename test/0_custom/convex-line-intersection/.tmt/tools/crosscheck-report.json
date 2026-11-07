@@ -1,0 +1,15 @@
+{
+  "small_configurations": 188,
+  "oracle_query_comparisons": 74366,
+  "classifications_checked": {
+    "EMPTY": 18944,
+    "POINT": 5754,
+    "EDGE": 5589,
+    "CUT": 44079
+  },
+  "formal_cases": 28,
+  "formal_oracle_queries": 11132,
+  "input_bytes": 43458372,
+  "answer_bytes": 7620774,
+  "statement_content_and_mtimes_unchanged": true
+}

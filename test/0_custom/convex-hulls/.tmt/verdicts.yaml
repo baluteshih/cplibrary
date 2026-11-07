@@ -1,0 +1,34 @@
+- filename: sol.cpp
+  verdict: accepted
+
+# Prints upper and lower chains in the wrong blocks.
+- filename: swapped-chains.cpp
+  verdict: wrong-answer
+
+# Drops collinear boundary points.
+- filename: strict-boundary.cpp
+  verdict: wrong-answer
+
+# Retains collinear points in the strict hull and chains.
+- filename: nonstrict-hull.cpp
+  verdict: wrong-answer
+
+# Prints a one-way boundary instead of the collinear return walk.
+- filename: collinear-one-way.cpp
+  verdict: wrong-answer
+
+# Forgets to remove duplicate input positions.
+- filename: no-dedup.cpp
+  verdict: wrong-answer
+
+# Omits T from the upper chain to avoid duplicate hull endpoints.
+- filename: missing-endpoint.cpp
+  verdict: wrong-answer
+
+# Truncates the cross product to signed 32 bits.
+- filename: int32-cross.cpp
+  verdict: wrong-answer
+
+# O(n*h) gift wrapping on the maximal convex polygon.
+- filename: jarvis-slow.cpp
+  verdict: time-limit-exceeded

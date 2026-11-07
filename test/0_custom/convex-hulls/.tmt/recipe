@@ -1,0 +1,39 @@
+@global-validation validator
+
+@testset samples
+manual s1.in
+manual s2.in
+
+@testset degeneracies
+manual asymmetric.in
+manual duplicate-extremes.in
+manual empty.in
+manual equals.in
+manual extremes.in
+manual horizontal.in
+manual near-collinear.in
+manual negative-line.in
+manual single.in
+manual two.in
+manual vertical.in
+
+@testset structured
+gen equal 200000
+gen line 200000
+gen vertical 200000
+gen rectangle 200000
+gen interior 200000
+gen convex 200000
+gen sorted 200000
+gen reversed 200000
+gen duplicates 200000
+
+@testset random
+gen small 10 0
+gen small 17 1
+gen small 24 2
+gen small 31 3
+gen small 38 4
+gen random 200000 0
+gen random 200000 1
+gen random 200000 2

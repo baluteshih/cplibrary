@@ -1,0 +1,46 @@
+@global-validation validator
+
+@testset samples
+manual s1.in
+
+@testset boundaries
+manual point-point.in
+manual point-polygon.in
+manual polygon-point.in
+manual parallel-segments.in
+manual opposite-segments.in
+manual crossing-segments.in
+manual segment-polygon.in
+manual parallel-edges.in
+manual unsorted-interior.in
+manual coordinate-extremes.in
+manual near-collinear.in
+manual duplicate-singletons.in
+
+@testset small
+gen small 5 7 0
+gen small 8 9 1
+gen small 11 11 2
+gen small 14 13 3
+gen small 17 15 4
+gen small 20 17 5
+
+@testset structured
+gen convex 100000 100000
+gen parallel 100000 100000
+gen equal 100000 100000
+gen line 100000 100000
+gen crossing-lines 100000 100000
+gen rectangle 100000 100000
+gen interior 100000 100000
+gen duplicates 100000 100000
+gen random 1 199999
+gen random 199999 1
+
+@testset random
+gen random 100000 100000 0
+gen random 100000 100000 1
+gen random 100000 100000 2
+
+@testset precision
+manual double-cancellation.in

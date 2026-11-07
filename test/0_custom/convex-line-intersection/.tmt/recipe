@@ -1,0 +1,39 @@
+@global-validation validator
+
+@testset samples
+manual s1.in
+
+@testset boundaries
+manual square-boundaries.in
+manual rotated-square.in
+manual reversed-lines.in
+manual min-triangle.in
+manual extreme-square.in
+manual unit-determinant.in
+manual negative-diamond.in
+
+@testset small
+gen small 20 120 mixed 0
+gen small 23 120 mixed 1
+gen small 26 120 mixed 2
+gen small 29 120 mixed 3
+gen small 32 120 mixed 4
+gen small 35 120 mixed 5
+gen small 38 120 mixed 6
+gen small 41 120 mixed 7
+
+@testset structured
+gen convex 200000 200000 mixed 0
+gen convex 200000 1000 edge 1
+gen convex 200000 1000 vertex 2
+gen parabola 10001 20000 mixed 3
+gen square 4 200000 mixed 4
+gen square 4 200000 random 5
+gen random 50000 200000 vertex 6
+gen random 1000 20000 outside 7
+
+@testset random
+gen random 2000 5000 mixed 0
+gen random 2000 5000 mixed 1
+gen random 2000 5000 mixed 2
+gen random 2000 5000 mixed 3

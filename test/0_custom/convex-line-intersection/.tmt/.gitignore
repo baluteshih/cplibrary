@@ -1,0 +1,10 @@
+generator/build
+validator/build
+checker/build
+interactor/build
+manager/build
+testcases/*
+!testcases/hash.json
+logs/
+sandbox/
+__pycache__/

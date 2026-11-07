@@ -1,0 +1,11 @@
+{
+  "oracle_configurations": 254,
+  "oracle_and_metamorphic_comparisons": 1266,
+  "formal_cases": 33,
+  "formal_support_checks": 285,
+  "largest_output_hull": 172158,
+  "input_bytes": 42632220,
+  "answer_bytes": 5094129,
+  "largest_answer_bytes": 2987473,
+  "statement_content_and_mtimes_unchanged": true
+}

@@ -1,0 +1,15 @@
+{
+  "small_configurations": 171,
+  "oracle_query_comparisons": 117645,
+  "ties_checked": {
+    "D": 5687,
+    "T": 10496
+  },
+  "formal_cases": 29,
+  "formal_oracle_queries": 601098,
+  "largest_n": 200000,
+  "largest_q": 200000,
+  "input_bytes": 44557344,
+  "answer_bytes": 8710914,
+  "statement_content_and_mtimes_unchanged": true
+}
