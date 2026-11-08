@@ -1,0 +1,8 @@
+generator/build/
+validator/build/
+checker/build/
+solutions/build/
+logs/
+sandbox/
+testcases/*
+!testcases/hash.json

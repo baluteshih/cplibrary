@@ -1,0 +1,29 @@
+@global-validation validator
+
+@testset samples
+manual sample1.in
+
+@testset coverage
+gen tetra 4 50 1
+gen box 8 100 2
+gen translated 8 1000 3
+gen duplicates 80 200 4
+gen prefix 100 200 5
+gen huge 4 100 6
+gen thin 4 100 7
+gen grid 100 1000 8
+gen grid 500 200000 9
+gen grid 500 200000 10
+gen grid 500 10000 11
+gen grid 250 20000 12
+gen pyramid 100 500 13
+gen box 500 50000 14
+gen random 8 500 15
+gen random 10 500 16
+gen random 12 1000 17
+gen huge 4 2000 18
+gen translated 500 2000 19
+gen prefix 100 2000 20
+gen duplicates 500 1000 21
+gen thin 4 1000 22
+gen random 12 1000 23

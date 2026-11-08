@@ -2,7 +2,7 @@
 
 #include "Geometry/Point3D.hpp"
 
-// all points coplanar case will WA, O(n^2)
+// all points coplanar case will WA, O(n^2), MulT ~ 48C^4
 template<typename T, T eps = get_default_eps<T>(), typename MulT = T>
 struct convexHull3D : Geometry<T, eps> {
     using Point = Pt3<T, eps, MulT>; 
@@ -12,7 +12,7 @@ struct convexHull3D : Geometry<T, eps> {
     static constexpr T eps_val = eps;
     struct Face {
         int a, b, c;
-        Face(int ta, int tb, int tc) : a(ta), b(tb), c(tc) {}
+        Face(int ta = -1, int tb = -1, int tc = -1) : a(ta), b(tb), c(tc) {}
     }; // store the faces with input point indexes
     std::vector<Face> res;
     std::vector<Point> P;
@@ -50,10 +50,11 @@ struct convexHull3D : Geometry<T, eps> {
         if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.c])) != 0) return 0;
         return 1;
     }
-    int polygon_face_num() {
-        int ans = 0;
+    std::vector<Face> get_faces() {
+        std::vector<Face> ans;
         for (int i = 0; i < int(res.size()); ++i)
-            ans += std::none_of(res.begin(), res.begin() + i, [&](const Face &g) { return same(res[i], g); });
+            if (std::none_of(res.begin(), res.begin() + i, [&](const Face &g) { return same(res[i], g); }))
+                ans.push_back(res[i]);
         return ans;
     }
     // return 6 times the actual volume
@@ -71,6 +72,18 @@ struct convexHull3D : Geometry<T, eps> {
         Ret c = Ret(p2.x - p1.x) * Ret(p3.y - p1.y) - Ret(p2.y - p1.y) * Ret(p3.x - p1.x); 
         Ret d = Ret(0) - Ret(a * p1.x + b * p1.y + c * p1.z); 
         return std::abs(a * Ret(p.x) + b * Ret(p.y) + c * Ret(p.z) + d) / std::sqrt(a * a + b * b + c * c);                    
+    }
+    // Integer plane ax+by+cz=d, with primitive normal and the Face's orientation.
+    std::array<MulT, 4> get_plane(const Face &f) const {
+        static_assert(!std::is_floating_point_v<T> && !std::is_floating_point_v<MulT>, "get_plane requires integer coordinates and products");
+        using ExactPoint = Pt3<MulT>;
+        auto a = ExactPoint(P[f.a]);
+        auto normal = cross(ExactPoint(P[f.b]) - a, ExactPoint(P[f.c]) - a);
+        std::array<MulT, 4> plane{normal.x, normal.y, normal.z, dot(normal, a)};
+        MulT g = std::gcd(std::gcd(plane[0], plane[1]), plane[2]);
+        assert(g != 0);
+        for (auto &x : plane) x /= g;
+        return plane;
     }
 };
 // n^2 delaunay: facets with negative z normal of

@@ -1,0 +1,16 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: divide-six.cpp
+  verdict: wrong-answer
+- filename: narrow-volume.cpp
+  verdict: wrong-answer
+- filename: triangle-count.cpp
+  verdict: wrong-answer
+- filename: flip-normal.cpp
+  verdict: wrong-answer
+- filename: unnormalized.cpp
+  verdict: wrong-answer
+- filename: first-four.cpp
+  verdict: wrong-answer
+- filename: cubic-pivot.cpp
+  verdict: time-limit-exceeded

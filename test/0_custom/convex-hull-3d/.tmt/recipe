@@ -1,0 +1,25 @@
+@global-validation validator
+
+@testset samples
+manual sample1.in
+manual sample2.in
+
+@testset coverage
+gen tetra 4 1
+gen cube 200 2
+gen duplicates 60 3
+gen collinear 100 4
+gen plane 200 5
+gen random 30 6
+gen random 100 7
+gen random 300 8
+gen thin 4 9
+gen translated 8 10
+gen pyramid 201 11
+gen interior 1000 12
+gen grid 500 13
+gen grid 1000 14
+gen grid 2000 15
+gen grid 3000 16
+gen noise 2000 17
+gen noise 3000 18

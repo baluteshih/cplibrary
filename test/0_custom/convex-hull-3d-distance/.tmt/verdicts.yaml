@@ -1,0 +1,16 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: signed.cpp
+  verdict: wrong-answer
+- filename: no-normalization.cpp
+  verdict: wrong-answer
+- filename: squared-normalization.cpp
+  verdict: wrong-answer
+- filename: min-support.cpp
+  verdict: wrong-answer
+- filename: narrow-dot.cpp
+  verdict: wrong-answer
+- filename: float.cpp
+  verdict: wrong-answer
+- filename: nearest-vertex.cpp
+  verdict: wrong-answer
