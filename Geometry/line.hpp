@@ -15,6 +15,11 @@ struct Ln : Geometry<T, eps> {
     Ln(const Point &a, const Point &b) : l{a, b} {}
     friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0] >> p.l[1]; }
     friend std::ostream& operator<<(std::ostream &os, const Ln &p) { return os << p.l[0] << ' ' << p.l[1]; }
+    friend bool operator<(const Ln &a, const Ln &b) {
+        if (a.l[0] < b.l[0]) return true;
+        if (b.l[0] < a.l[0]) return false;
+        return a.l[1] < b.l[1];
+    }
     template <typename U, U _eps, typename _MulT>
     Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]} {}
     friend int side(const Point &p, const Ln &l) { 

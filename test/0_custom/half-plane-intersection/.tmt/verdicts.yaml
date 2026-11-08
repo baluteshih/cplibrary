@@ -1,0 +1,16 @@
+- filename: sol.cpp
+  verdict: accepted
+- filename: loose-parallel.cpp
+  verdict: wrong-answer
+- filename: keep-collinear.cpp
+  verdict: wrong-answer
+- filename: narrow-turn.cpp
+  verdict: wrong-answer
+- filename: float-turn.cpp
+  verdict: wrong-answer
+- filename: input-order.cpp
+  verdict: wrong-answer
+- filename: reversed.cpp
+  verdict: wrong-answer
+- filename: gift-wrap.cpp
+  verdict: time-limit-exceeded

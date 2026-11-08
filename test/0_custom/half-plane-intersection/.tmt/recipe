@@ -1,0 +1,33 @@
+@global-validation validator
+
+@testset samples
+manual sample1.in
+manual sample2.in
+
+@testset coverage
+gen box 4 0
+gen fraction 8 1
+gen parallel 80 2
+gen parallel 80 3
+gen duplicates 200 4
+gen corner 200 5
+gen thin 100 6
+gen random 30 10
+gen random 100 11
+gen random 300 12
+gen random 1000 13
+gen random 2000 14
+gen random 10000 15
+gen random 100000 16
+gen random 100000 17
+gen lattice 2000 20
+gen lattice 100000 21
+gen lattice 100000 22
+gen corner 100000 23
+gen duplicates 100000 24
+gen thin 100000 25
+gen parallel 100000 26
+gen large-random 100000 30
+gen large-thin 100 31
+gen large-lattice 100000 32
+gen large-random 200 33
