@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   - icon: ':question:'

@@ -242,7 +242,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/OfflineBichromaticNearest.hpp
       title: Geometry/OfflineBichromaticNearest.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/Point3D.hpp
       title: Geometry/Point3D.hpp
     - icon: ':heavy_check_mark:'
@@ -251,10 +251,10 @@ data:
     - icon: ':question:'
       path: Geometry/base.hpp
       title: Geometry/base.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/centers.hpp
       title: Geometry/centers.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/circle.hpp
       title: Geometry/circle.hpp
     - icon: ':heavy_check_mark:'
@@ -266,7 +266,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/convex.hpp
       title: Geometry/convex.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/convexHull3D.hpp
       title: Geometry/convexHull3D.hpp
     - icon: ':heavy_check_mark:'
@@ -275,16 +275,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/half_plane_intersection.hpp
       title: Geometry/half_plane_intersection.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/line.hpp
       title: Geometry/line.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/minimum_enclosing_circle.hpp
       title: Geometry/minimum_enclosing_circle.hpp
     - icon: ':heavy_check_mark:'
       path: Geometry/outerTangentBetweenConvex.hpp
       title: Geometry/outerTangentBetweenConvex.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/polygon.hpp
       title: Geometry/polygon.hpp
     - icon: ':x:'
@@ -621,6 +621,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/0_custom/circle-coverage/circle-coverage.test.cpp
       title: test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - name: test/0_custom/convex-hull-3d
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+      title: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+  - name: test/0_custom/convex-hull-3d-distance
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+      title: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
   - name: test/0_custom/convex-hulls
     pages:
     - icon: ':heavy_check_mark:'
@@ -1241,9 +1251,6 @@ data:
     - icon: ':x:'
       path: test/9_qoj/17153.test.cpp
       title: test/9_qoj/17153.test.cpp
-    - icon: ':x:'
-      path: test/9_qoj/6445.test.cpp
-      title: test/9_qoj/6445.test.cpp
 layout: toppage
 ---
 A personal library for competitive programming.

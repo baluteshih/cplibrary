@@ -4,11 +4,11 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
@@ -93,12 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':x:'
-    path: test/9_qoj/6445.test.cpp
-    title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/polygon.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -373,7 +370,7 @@ data:
   - Geometry/circle_cover.hpp
   - Geometry/convex.hpp
   timestamp: '2026-11-08 14:42:51+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
   - test/1_library_checker/geometry/furthest_pair.test.cpp
@@ -388,7 +385,6 @@ data:
   - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/common_tangent.test.cpp
-  - test/9_qoj/6445.test.cpp
   - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/polygon-cover/polygon-cover.test.cpp
   - test/0_custom/polygon-outline/polygon-outline.test.cpp

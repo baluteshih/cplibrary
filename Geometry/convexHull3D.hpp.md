@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':question:'
@@ -9,12 +9,15 @@ data:
     title: Geometry/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/9_qoj/6445.test.cpp
-    title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+    title: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+    title: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/convexHull3D.hpp\"\n\n#line 2 \"Geometry/Point3D.hpp\"\
@@ -168,25 +171,26 @@ data:
     \        Pt3<Ret, _eps, _MulT> u = Pt3<Ret, _eps, _MulT>(axis) / length<Ret>(axis);\n\
     \        return u * Ret(dot(u, p)) * (1 - c) + Pt3<Ret, _eps, _MulT>(p) * c +\
     \ cross(u, Pt3<Ret, _eps, _MulT>(p)) * s;\n    }\n};\n#line 4 \"Geometry/convexHull3D.hpp\"\
-    \n\n// all points coplanar case will WA, O(n^2)\ntemplate<typename T, T eps =\
-    \ get_default_eps<T>(), typename MulT = T>\nstruct convexHull3D : Geometry<T,\
+    \n\n// all points coplanar case will WA, O(n^2), MulT ~ 48C^4\ntemplate<typename\
+    \ T, T eps = get_default_eps<T>(), typename MulT = T>\nstruct convexHull3D : Geometry<T,\
     \ eps> {\n    using Point = Pt3<T, eps, MulT>; \n    using value_type = T;\n \
     \   using Geometry<T, eps>::sign;\n    using Geometry<T, eps>::cmp;\n    static\
     \ constexpr T eps_val = eps;\n    struct Face {\n        int a, b, c;\n      \
-    \  Face(int ta, int tb, int tc) : a(ta), b(tb), c(tc) {}\n    }; // store the\
-    \ faces with input point indexes\n    std::vector<Face> res;\n    std::vector<Point>\
-    \ P;\n    convexHull3D(const std::vector<Point> &_P) : res(), P(_P) {\n      \
-    \  int n = P.size();\n        if (n <= 2) return; // be careful about edge case\n\
-    \        // ensure first 4 points are not coplanar\n        std::swap(P[1], *std::ranges::find_if(P,\
-    \ [&](auto p) { return sign(square(P[0] - p)) != 0; }));\n        std::swap(P[2],\
-    \ *std::ranges::find_if(P, [&](auto p) { return sign(square(cross(p, P[0], P[1])))\
-    \ != 0; }));\n        std::swap(P[3], *std::ranges::find_if(P, [&](auto p) { return\
-    \ sign(volume(P[0], P[1], P[2], p)) != 0; }));\n        std::vector<std::vector<int>>\
-    \ flag(n, std::vector<int>(n));\n        res.emplace_back(0, 1, 2);\n        res.emplace_back(2,\
-    \ 1, 0);\n        for (int i = 3; i < n; ++i) {\n            std::vector<Face>\
-    \ next;\n            for (auto f : res) {\n                int d = sign(volume(P[f.a],\
-    \ P[f.b], P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n  \
-    \              int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
+    \  Face(int ta = -1, int tb = -1, int tc = -1) : a(ta), b(tb), c(tc) {}\n    };\
+    \ // store the faces with input point indexes\n    std::vector<Face> res;\n  \
+    \  std::vector<Point> P;\n    convexHull3D(const std::vector<Point> &_P) : res(),\
+    \ P(_P) {\n        int n = P.size();\n        if (n <= 2) return; // be careful\
+    \ about edge case\n        // ensure first 4 points are not coplanar\n       \
+    \ std::swap(P[1], *std::ranges::find_if(P, [&](auto p) { return sign(square(P[0]\
+    \ - p)) != 0; }));\n        std::swap(P[2], *std::ranges::find_if(P, [&](auto\
+    \ p) { return sign(square(cross(p, P[0], P[1]))) != 0; }));\n        std::swap(P[3],\
+    \ *std::ranges::find_if(P, [&](auto p) { return sign(volume(P[0], P[1], P[2],\
+    \ p)) != 0; }));\n        std::vector<std::vector<int>> flag(n, std::vector<int>(n));\n\
+    \        res.emplace_back(0, 1, 2);\n        res.emplace_back(2, 1, 0);\n    \
+    \    for (int i = 3; i < n; ++i) {\n            std::vector<Face> next;\n    \
+    \        for (auto f : res) {\n                int d = sign(volume(P[f.a], P[f.b],\
+    \ P[f.c], P[i]));\n                if (d <= 0) next.push_back(f);\n          \
+    \      int ff = (d > 0) - (d < 0);\n                flag[f.a][f.b] = flag[f.b][f.c]\
     \ = flag[f.c][f.a] = ff;\n            }\n            for (auto f : res) {\n  \
     \              auto F = [&](int x, int y) {\n                    if (flag[x][y]\
     \ > 0 && flag[y][x] <= 0)\n                        next.emplace_back(x, y, i);\n\
@@ -195,31 +199,39 @@ data:
     \ Face &s, const Face &t) {\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.a]))\
     \ != 0) return 0;\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.b])) !=\
     \ 0) return 0;\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.c])) != 0)\
-    \ return 0;\n        return 1;\n    }\n    int polygon_face_num() {\n        int\
-    \ ans = 0;\n        for (int i = 0; i < int(res.size()); ++i)\n            ans\
-    \ += std::none_of(res.begin(), res.begin() + i, [&](const Face &g) { return same(res[i],\
-    \ g); });\n        return ans;\n    }\n    // return 6 times the actual volume\n\
-    \    MulT get_volume() {\n        MulT ans = 0;\n        for (auto f : res)\n\
-    \            ans += volume(Point(0, 0, 0), P[f.a], P[f.b], P[f.c]);\n        return\
-    \ ans;\n    }\n    template <typename Ret = DefaultFloat<T>>\n    Ret get_dis(Point\
-    \ p, Face f) {\n        Point p1 = P[f.a], p2 = P[f.b], p3 = P[f.c];         \
-    \           \n        Ret a = Ret(p2.y - p1.y) * Ret(p3.z - p1.z) - Ret(p2.z -\
-    \ p1.z) * Ret(p3.y - p1.y); \n        Ret b = Ret(p2.z - p1.z) * Ret(p3.x - p1.x)\
-    \ - Ret(p2.x - p1.x) * Ret(p3.z - p1.z); \n        Ret c = Ret(p2.x - p1.x) *\
-    \ Ret(p3.y - p1.y) - Ret(p2.y - p1.y) * Ret(p3.x - p1.x); \n        Ret d = Ret(0)\
-    \ - Ret(a * p1.x + b * p1.y + c * p1.z); \n        return std::abs(a * Ret(p.x)\
-    \ + b * Ret(p.y) + c * Ret(p.z) + d) / std::sqrt(a * a + b * b + c * c);     \
-    \               \n    }\n};\n// n^2 delaunay: facets with negative z normal of\n\
-    // convexhull of (x, y, x^2 + y^2), use a pseudo-point\n// (0, 0, inf) to avoid\
-    \ degenerate case\n"
+    \ return 0;\n        return 1;\n    }\n    std::vector<Face> get_faces() {\n \
+    \       std::vector<Face> ans;\n        for (int i = 0; i < int(res.size()); ++i)\n\
+    \            if (std::none_of(res.begin(), res.begin() + i, [&](const Face &g)\
+    \ { return same(res[i], g); }))\n                ans.push_back(res[i]);\n    \
+    \    return ans;\n    }\n    // return 6 times the actual volume\n    MulT get_volume()\
+    \ {\n        MulT ans = 0;\n        for (auto f : res)\n            ans += volume(Point(0,\
+    \ 0, 0), P[f.a], P[f.b], P[f.c]);\n        return ans;\n    }\n    template <typename\
+    \ Ret = DefaultFloat<T>>\n    Ret get_dis(Point p, Face f) {\n        Point p1\
+    \ = P[f.a], p2 = P[f.b], p3 = P[f.c];                    \n        Ret a = Ret(p2.y\
+    \ - p1.y) * Ret(p3.z - p1.z) - Ret(p2.z - p1.z) * Ret(p3.y - p1.y); \n       \
+    \ Ret b = Ret(p2.z - p1.z) * Ret(p3.x - p1.x) - Ret(p2.x - p1.x) * Ret(p3.z -\
+    \ p1.z); \n        Ret c = Ret(p2.x - p1.x) * Ret(p3.y - p1.y) - Ret(p2.y - p1.y)\
+    \ * Ret(p3.x - p1.x); \n        Ret d = Ret(0) - Ret(a * p1.x + b * p1.y + c *\
+    \ p1.z); \n        return std::abs(a * Ret(p.x) + b * Ret(p.y) + c * Ret(p.z)\
+    \ + d) / std::sqrt(a * a + b * b + c * c);                    \n    }\n    //\
+    \ Integer plane ax+by+cz=d, with primitive normal and the Face's orientation.\n\
+    \    std::array<MulT, 4> get_plane(const Face &f) const {\n        static_assert(!std::is_floating_point_v<T>\
+    \ && !std::is_floating_point_v<MulT>, \"get_plane requires integer coordinates\
+    \ and products\");\n        using ExactPoint = Pt3<MulT>;\n        auto a = ExactPoint(P[f.a]);\n\
+    \        auto normal = cross(ExactPoint(P[f.b]) - a, ExactPoint(P[f.c]) - a);\n\
+    \        std::array<MulT, 4> plane{normal.x, normal.y, normal.z, dot(normal, a)};\n\
+    \        MulT g = std::gcd(std::gcd(plane[0], plane[1]), plane[2]);\n        assert(g\
+    \ != 0);\n        for (auto &x : plane) x /= g;\n        return plane;\n    }\n\
+    };\n// n^2 delaunay: facets with negative z normal of\n// convexhull of (x, y,\
+    \ x^2 + y^2), use a pseudo-point\n// (0, 0, inf) to avoid degenerate case\n"
   code: "#pragma once\n\n#include \"Geometry/Point3D.hpp\"\n\n// all points coplanar\
-    \ case will WA, O(n^2)\ntemplate<typename T, T eps = get_default_eps<T>(), typename\
-    \ MulT = T>\nstruct convexHull3D : Geometry<T, eps> {\n    using Point = Pt3<T,\
-    \ eps, MulT>; \n    using value_type = T;\n    using Geometry<T, eps>::sign;\n\
+    \ case will WA, O(n^2), MulT ~ 48C^4\ntemplate<typename T, T eps = get_default_eps<T>(),\
+    \ typename MulT = T>\nstruct convexHull3D : Geometry<T, eps> {\n    using Point\
+    \ = Pt3<T, eps, MulT>; \n    using value_type = T;\n    using Geometry<T, eps>::sign;\n\
     \    using Geometry<T, eps>::cmp;\n    static constexpr T eps_val = eps;\n   \
-    \ struct Face {\n        int a, b, c;\n        Face(int ta, int tb, int tc) :\
-    \ a(ta), b(tb), c(tc) {}\n    }; // store the faces with input point indexes\n\
-    \    std::vector<Face> res;\n    std::vector<Point> P;\n    convexHull3D(const\
+    \ struct Face {\n        int a, b, c;\n        Face(int ta = -1, int tb = -1,\
+    \ int tc = -1) : a(ta), b(tb), c(tc) {}\n    }; // store the faces with input\
+    \ point indexes\n    std::vector<Face> res;\n    std::vector<Point> P;\n    convexHull3D(const\
     \ std::vector<Point> &_P) : res(), P(_P) {\n        int n = P.size();\n      \
     \  if (n <= 2) return; // be careful about edge case\n        // ensure first\
     \ 4 points are not coplanar\n        std::swap(P[1], *std::ranges::find_if(P,\
@@ -240,33 +252,42 @@ data:
     \ Face &s, const Face &t) {\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.a]))\
     \ != 0) return 0;\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.b])) !=\
     \ 0) return 0;\n        if (sign(volume(P[s.a], P[s.b], P[s.c], P[t.c])) != 0)\
-    \ return 0;\n        return 1;\n    }\n    int polygon_face_num() {\n        int\
-    \ ans = 0;\n        for (int i = 0; i < int(res.size()); ++i)\n            ans\
-    \ += std::none_of(res.begin(), res.begin() + i, [&](const Face &g) { return same(res[i],\
-    \ g); });\n        return ans;\n    }\n    // return 6 times the actual volume\n\
-    \    MulT get_volume() {\n        MulT ans = 0;\n        for (auto f : res)\n\
-    \            ans += volume(Point(0, 0, 0), P[f.a], P[f.b], P[f.c]);\n        return\
-    \ ans;\n    }\n    template <typename Ret = DefaultFloat<T>>\n    Ret get_dis(Point\
-    \ p, Face f) {\n        Point p1 = P[f.a], p2 = P[f.b], p3 = P[f.c];         \
-    \           \n        Ret a = Ret(p2.y - p1.y) * Ret(p3.z - p1.z) - Ret(p2.z -\
-    \ p1.z) * Ret(p3.y - p1.y); \n        Ret b = Ret(p2.z - p1.z) * Ret(p3.x - p1.x)\
-    \ - Ret(p2.x - p1.x) * Ret(p3.z - p1.z); \n        Ret c = Ret(p2.x - p1.x) *\
-    \ Ret(p3.y - p1.y) - Ret(p2.y - p1.y) * Ret(p3.x - p1.x); \n        Ret d = Ret(0)\
-    \ - Ret(a * p1.x + b * p1.y + c * p1.z); \n        return std::abs(a * Ret(p.x)\
-    \ + b * Ret(p.y) + c * Ret(p.z) + d) / std::sqrt(a * a + b * b + c * c);     \
-    \               \n    }\n};\n// n^2 delaunay: facets with negative z normal of\n\
-    // convexhull of (x, y, x^2 + y^2), use a pseudo-point\n// (0, 0, inf) to avoid\
-    \ degenerate case\n"
+    \ return 0;\n        return 1;\n    }\n    std::vector<Face> get_faces() {\n \
+    \       std::vector<Face> ans;\n        for (int i = 0; i < int(res.size()); ++i)\n\
+    \            if (std::none_of(res.begin(), res.begin() + i, [&](const Face &g)\
+    \ { return same(res[i], g); }))\n                ans.push_back(res[i]);\n    \
+    \    return ans;\n    }\n    // return 6 times the actual volume\n    MulT get_volume()\
+    \ {\n        MulT ans = 0;\n        for (auto f : res)\n            ans += volume(Point(0,\
+    \ 0, 0), P[f.a], P[f.b], P[f.c]);\n        return ans;\n    }\n    template <typename\
+    \ Ret = DefaultFloat<T>>\n    Ret get_dis(Point p, Face f) {\n        Point p1\
+    \ = P[f.a], p2 = P[f.b], p3 = P[f.c];                    \n        Ret a = Ret(p2.y\
+    \ - p1.y) * Ret(p3.z - p1.z) - Ret(p2.z - p1.z) * Ret(p3.y - p1.y); \n       \
+    \ Ret b = Ret(p2.z - p1.z) * Ret(p3.x - p1.x) - Ret(p2.x - p1.x) * Ret(p3.z -\
+    \ p1.z); \n        Ret c = Ret(p2.x - p1.x) * Ret(p3.y - p1.y) - Ret(p2.y - p1.y)\
+    \ * Ret(p3.x - p1.x); \n        Ret d = Ret(0) - Ret(a * p1.x + b * p1.y + c *\
+    \ p1.z); \n        return std::abs(a * Ret(p.x) + b * Ret(p.y) + c * Ret(p.z)\
+    \ + d) / std::sqrt(a * a + b * b + c * c);                    \n    }\n    //\
+    \ Integer plane ax+by+cz=d, with primitive normal and the Face's orientation.\n\
+    \    std::array<MulT, 4> get_plane(const Face &f) const {\n        static_assert(!std::is_floating_point_v<T>\
+    \ && !std::is_floating_point_v<MulT>, \"get_plane requires integer coordinates\
+    \ and products\");\n        using ExactPoint = Pt3<MulT>;\n        auto a = ExactPoint(P[f.a]);\n\
+    \        auto normal = cross(ExactPoint(P[f.b]) - a, ExactPoint(P[f.c]) - a);\n\
+    \        std::array<MulT, 4> plane{normal.x, normal.y, normal.z, dot(normal, a)};\n\
+    \        MulT g = std::gcd(std::gcd(plane[0], plane[1]), plane[2]);\n        assert(g\
+    \ != 0);\n        for (auto &x : plane) x /= g;\n        return plane;\n    }\n\
+    };\n// n^2 delaunay: facets with negative z normal of\n// convexhull of (x, y,\
+    \ x^2 + y^2), use a pseudo-point\n// (0, 0, inf) to avoid degenerate case\n"
   dependsOn:
   - Geometry/Point3D.hpp
   - Geometry/base.hpp
   isVerificationFile: false
   path: Geometry/convexHull3D.hpp
   requiredBy: []
-  timestamp: '2026-11-08 00:49:38+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2026-11-08 19:59:56+08:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/9_qoj/6445.test.cpp
+  - test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+  - test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
 documentation_of: Geometry/convexHull3D.hpp
 layout: document
 redirect_from:

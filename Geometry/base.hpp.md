@@ -8,16 +8,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/OfflineBichromaticNearest.hpp
     title: Geometry/OfflineBichromaticNearest.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/Point3D.hpp
     title: Geometry/Point3D.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/PointInAngle.hpp
     title: Geometry/PointInAngle.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/centers.hpp
     title: Geometry/centers.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/circle.hpp
     title: Geometry/circle.hpp
   - icon: ':heavy_check_mark:'
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   - icon: ':heavy_check_mark:'
@@ -38,16 +38,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   - icon: ':heavy_check_mark:'
     path: Geometry/outerTangentBetweenConvex.hpp
     title: Geometry/outerTangentBetweenConvex.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/polygon.hpp
     title: Geometry/polygon.hpp
   - icon: ':x:'
@@ -60,6 +60,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/circle-coverage/circle-coverage.test.cpp
     title: test/0_custom/circle-coverage/circle-coverage.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+    title: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+    title: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/0_custom/convex-hulls/convex-hulls.test.cpp
     title: test/0_custom/convex-hulls/convex-hulls.test.cpp
@@ -171,9 +177,6 @@ data:
   - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
-    path: test/9_qoj/6445.test.cpp
-    title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -391,18 +394,19 @@ data:
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/reflection.test.cpp
   - test/2_aoj/common_tangent.test.cpp
-  - test/9_qoj/6445.test.cpp
   - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/polygon-cover/polygon-cover.test.cpp
   - test/0_custom/polygon-outline/polygon-outline.test.cpp
   - test/0_custom/convex-minkowski/convex-minkowski.test.cpp
   - test/0_custom/circle-coverage/circle-coverage.test.cpp
   - test/0_custom/polygon-containment/polygon-containment.test.cpp
+  - test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
   - test/0_custom/convex-queries/convex-queries.test.cpp
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/0_custom/convex-hulls/convex-hulls.test.cpp
   - test/0_custom/OfflineBichromaticNearest.test.cpp
   - test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
+  - test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
 documentation_of: Geometry/base.hpp
 layout: document
 redirect_from:

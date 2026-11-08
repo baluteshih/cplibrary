@@ -5,16 +5,19 @@ data:
     path: Geometry/base.hpp
     title: Geometry/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convexHull3D.hpp
     title: Geometry/convexHull3D.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/9_qoj/6445.test.cpp
-    title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+    title: test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+    title: test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/Point3D.hpp\"\n    \n#line 2 \"Geometry/base.hpp\"\
@@ -246,9 +249,10 @@ data:
   requiredBy:
   - Geometry/convexHull3D.hpp
   timestamp: '2026-11-08 00:49:38+08:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/9_qoj/6445.test.cpp
+  - test/0_custom/convex-hull-3d-distance/convex-hull-3d-distance.test.cpp
+  - test/0_custom/convex-hull-3d/convex-hull-3d.test.cpp
 documentation_of: Geometry/Point3D.hpp
 layout: document
 redirect_from:

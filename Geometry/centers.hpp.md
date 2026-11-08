@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: Geometry/base.hpp
     title: Geometry/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/line.hpp
     title: Geometry/line.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: Geometry/DelaunayTriangulation.hpp
     title: Geometry/DelaunayTriangulation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/minimum_enclosing_circle.hpp
     title: Geometry/minimum_enclosing_circle.hpp
   _extendedVerifiedWith:
@@ -27,12 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/minimum_enclosing_circle.test.cpp
     title: test/2_aoj/minimum_enclosing_circle.test.cpp
-  - icon: ':x:'
-    path: test/9_qoj/6445.test.cpp
-    title: test/9_qoj/6445.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"Geometry/centers.hpp\"\n\n#line 2 \"Geometry/base.hpp\"\n\
@@ -245,13 +242,12 @@ data:
   - Geometry/minimum_enclosing_circle.hpp
   - Geometry/DelaunayTriangulation.hpp
   timestamp: '2026-11-08 14:42:51+08:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/1_library_checker/geometry/euclidean_mst.test.cpp
   - test/2_aoj/incircle_of_a_triangle.test.cpp
   - test/2_aoj/minimum_enclosing_circle.test.cpp
   - test/2_aoj/circumscribed_circle_of_a_triangle.test.cpp
-  - test/9_qoj/6445.test.cpp
 documentation_of: Geometry/centers.hpp
 layout: document
 redirect_from:
