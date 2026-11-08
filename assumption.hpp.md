@@ -28,6 +28,9 @@ data:
     path: test/0_custom/convex-queries/convex-queries.test.cpp
     title: test/0_custom/convex-queries/convex-queries.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
+    title: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
     title: test/0_custom/max_bounded_flow/max_bounded_flow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -574,9 +577,6 @@ data:
     path: test/9_qoj/17153.test.cpp
     title: test/9_qoj/17153.test.cpp
   - icon: ':x:'
-    path: test/9_qoj/2162.test.cpp
-    title: test/9_qoj/2162.test.cpp
-  - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
   _isVerificationFailed: true
@@ -783,7 +783,6 @@ data:
   - test/2_aoj/common_tangent.test.cpp
   - test/7_loj/2302.test.cpp
   - test/9_qoj/17153.test.cpp
-  - test/9_qoj/2162.test.cpp
   - test/9_qoj/6445.test.cpp
   - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/min_bounded_flow/min_bounded_flow.test.cpp
@@ -798,6 +797,7 @@ data:
   - test/0_custom/convex-hulls/convex-hulls.test.cpp
   - test/0_custom/bounded_flow/bounded_flow.test.cpp
   - test/0_custom/OfflineBichromaticNearest.test.cpp
+  - test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
   - test/4_codeforces/106033E/106033E.test.cpp
 documentation_of: assumption.hpp
 layout: document

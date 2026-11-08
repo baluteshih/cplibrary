@@ -26,7 +26,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/closest_pair.hpp
     title: Geometry/closest_pair.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
   - icon: ':x:'
@@ -35,7 +35,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/furthest_pair.hpp
     title: Geometry/furthest_pair.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/half_plane_intersection.hpp
     title: Geometry/half_plane_intersection.hpp
   - icon: ':question:'
@@ -72,6 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/0_custom/convex-queries/convex-queries.test.cpp
     title: test/0_custom/convex-queries/convex-queries.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
+    title: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/0_custom/outerTangentBetweenConvex.test.cpp
     title: test/0_custom/outerTangentBetweenConvex.test.cpp
@@ -168,9 +171,6 @@ data:
   - icon: ':x:'
     path: test/5_NCOJ/929.test.cpp
     title: test/5_NCOJ/929.test.cpp
-  - icon: ':x:'
-    path: test/9_qoj/2162.test.cpp
-    title: test/9_qoj/2162.test.cpp
   - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
@@ -391,7 +391,6 @@ data:
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/reflection.test.cpp
   - test/2_aoj/common_tangent.test.cpp
-  - test/9_qoj/2162.test.cpp
   - test/9_qoj/6445.test.cpp
   - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/polygon-cover/polygon-cover.test.cpp
@@ -403,6 +402,7 @@ data:
   - test/0_custom/outerTangentBetweenConvex.test.cpp
   - test/0_custom/convex-hulls/convex-hulls.test.cpp
   - test/0_custom/OfflineBichromaticNearest.test.cpp
+  - test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
 documentation_of: Geometry/base.hpp
 layout: document
 redirect_from:

@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Geometry/circle_cover.hpp
     title: Geometry/circle_cover.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Geometry/convex.hpp
     title: Geometry/convex.hpp
   - icon: ':heavy_check_mark:'
@@ -93,9 +93,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/2_aoj/type_of_circle.test.cpp
     title: test/2_aoj/type_of_circle.test.cpp
-  - icon: ':x:'
-    path: test/9_qoj/2162.test.cpp
-    title: test/9_qoj/2162.test.cpp
   - icon: ':x:'
     path: test/9_qoj/6445.test.cpp
     title: test/9_qoj/6445.test.cpp
@@ -192,56 +189,58 @@ data:
     \ = eps;\n    Ln() {}\n    Ln(const Point &a, const Point &b) : l{a, b} {}\n \
     \   friend std::istream& operator>>(std::istream &is, Ln &p) { return is >> p.l[0]\
     \ >> p.l[1]; }\n    friend std::ostream& operator<<(std::ostream &os, const Ln\
-    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    template <typename U, U _eps,\
-    \ typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>& other) : l{other.l[0], other.l[1]}\
-    \ {}\n    friend int side(const Point &p, const Ln &l) { \n        return side(p,\
-    \ l[0], l[1]);\n    }\n    Point& operator[](int index) {\n        return l[index];\n\
-    \    }\n    const Point& operator[](int index) const {\n        return l[index];\n\
-    \    }\n    friend Point direction(const Ln &l) {\n        return l[1] - l[0];\n\
-    \    }\n    friend bool parallel(const Ln &l1, const Ln &l2) {\n        return\
-    \ parallel(direction(l1), direction(l2));\n    }\n    friend bool sameDirection(const\
-    \ Ln &l1, const Ln &l2) {\n        return sameDirection(direction(l1), direction(l2));\n\
+    \ &p) { return os << p.l[0] << ' ' << p.l[1]; }\n    friend bool operator<(const\
+    \ Ln &a, const Ln &b) {\n        if (a.l[0] < b.l[0]) return true;\n        if\
+    \ (b.l[0] < a.l[0]) return false;\n        return a.l[1] < b.l[1];\n    }\n  \
+    \  template <typename U, U _eps, typename _MulT>\n    Ln(const Ln<U, _eps, _MulT>&\
+    \ other) : l{other.l[0], other.l[1]} {}\n    friend int side(const Point &p, const\
+    \ Ln &l) { \n        return side(p, l[0], l[1]);\n    }\n    Point& operator[](int\
+    \ index) {\n        return l[index];\n    }\n    const Point& operator[](int index)\
+    \ const {\n        return l[index];\n    }\n    friend Point direction(const Ln\
+    \ &l) {\n        return l[1] - l[0];\n    }\n    friend bool parallel(const Ln\
+    \ &l1, const Ln &l2) {\n        return parallel(direction(l1), direction(l2));\n\
+    \    }\n    friend bool sameDirection(const Ln &l1, const Ln &l2) {\n        return\
+    \ sameDirection(direction(l1), direction(l2));\n    }\n    template <typename\
+    \ Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(),\
+    \ typename _MulT = Ret>\n    friend Pt<Ret, _eps, _MulT> projection(const Point\
+    \ &p, const Ln &l) {\n        auto d = direction(l);\n        return Pt<Ret, _eps,\
+    \ _MulT>(l[0]) + Pt<Ret, _eps, _MulT>(d) * (Ret(dot(p - l[0], d)) / Ret(square(d)));\n\
     \    }\n    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T,\
     \ Ret> ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend Pt<Ret,\
-    \ _eps, _MulT> projection(const Point &p, const Ln &l) {\n        auto d = direction(l);\n\
-    \        return Pt<Ret, _eps, _MulT>(l[0]) + Pt<Ret, _eps, _MulT>(d) * (Ret(dot(p\
-    \ - l[0], d)) / Ret(square(d)));\n    }\n    template <typename Ret = DefaultFloat<T>,\
+    \ _eps, _MulT> reflection(const Point &p, const Ln &l) {\n        return projection<Ret,\
+    \ _eps, _MulT>(p, l) * Ret(2) - Pt<Ret, _eps, _MulT>(p);\n    }\n    template\
+    \ <typename Ret = DefaultFloat<T>>\n    friend Ret pointToLineDist(const Point\
+    \ &p, const Ln &l) {\n        if (l[0] == l[1]) { return dist<Ret>(p, l[0]); }\n\
+    \        return std::abs(cross(l[0] - l[1], l[0] - p)) / length<Ret>(direction(l));\n\
+    \    }\n    // better use integers if you don't need exact coordinate\n    //\
+    \ l <= r is not explicitly required\n    template <typename Ret = DefaultFloat<T>,\
     \ Ret _eps = std::is_same_v<T, Ret> ? eps : get_default_eps<Ret>(), typename _MulT\
-    \ = Ret>\n    friend Pt<Ret, _eps, _MulT> reflection(const Point &p, const Ln\
-    \ &l) {\n        return projection<Ret, _eps, _MulT>(p, l) * Ret(2) - Pt<Ret,\
-    \ _eps, _MulT>(p);\n    }\n    template <typename Ret = DefaultFloat<T>>\n   \
-    \ friend Ret pointToLineDist(const Point &p, const Ln &l) {\n        if (l[0]\
-    \ == l[1]) { return dist<Ret>(p, l[0]); }\n        return std::abs(cross(l[0]\
-    \ - l[1], l[0] - p)) / length<Ret>(direction(l));\n    }\n    // better use integers\
-    \ if you don't need exact coordinate\n    // l <= r is not explicitly required\n\
-    \    template <typename Ret = DefaultFloat<T>, Ret _eps = std::is_same_v<T, Ret>\
-    \ ? eps : get_default_eps<Ret>(), typename _MulT = Ret>\n    friend Pt<Ret, _eps,\
-    \ _MulT> lineIntersection(const Ln &l1, const Ln &l2) {\n        return Pt<Ret,\
-    \ _eps, _MulT>(l1[0]) - Pt<Ret, _eps, _MulT>(direction(l1)) * (Ret(cross(direction(l2),\
-    \ l1[0] - l2[0])) / Ret(cross(direction(l2), direction(l1))));\n    }\n    template\
-    \ <typename U>\n    static bool between(U m, U l, U r) {\n        return cmp(l,\
-    \ m) == 0 || cmp(m, r) == 0 || (l < m) != (r < m);\n    }\n    friend bool pointOnSeg(const\
-    \ Point &p, const Ln &l) {\n        return side(p, l) == 0 && between(p.x, l[0].x,\
-    \ l[1].x) && between(p.y, l[0].y, l[1].y);\n    }\n    friend bool pointStrictlyOnSeg(const\
-    \ Point &p, const Ln &l) {\n        return side(p, l) == 0 && sign(dot(p - l[0],\
-    \ direction(l))) * sign(dot(p - l[1], direction(l))) < 0;\n    }\n    template\
-    \ <typename U>\n    static bool overlap(U l1, U r1, U l2, U r2) {\n        if\
-    \ (l1 > r1) { std::swap(l1, r1); }\n        if (l2 > r2) { std::swap(l2, r2);\
-    \ }\n        return cmp(r1, l2) != -1 && cmp(r2, l1) != -1;\n    }\n    friend\
-    \ bool segIntersect(const Ln &l1, const Ln &l2) {\n        auto [p1, p2] = l1.l;\n\
-    \        auto [q1, q2] = l2.l;\n        return overlap(p1.x, p2.x, q1.x, q2.x)\
-    \ && overlap(p1.y, p2.y, q1.y, q2.y) &&\n                side(p1, l2) * side(p2,\
-    \ l2) <= 0 &&\n                side(q1, l1) * side(q2, l1) <= 0;\n    }\n    //\
-    \ parallel intersecting is false\n    friend bool segStrictlyIntersect(const Ln\
-    \ &l1, const Ln &l2) {\n        auto [p1, p2] = l1.l;\n        auto [q1, q2] =\
-    \ l2.l;\n        return side(p1, l2) * side(p2, l2) < 0 &&\n               side(q1,\
-    \ l1) * side(q2, l1) < 0;\n    }\n    // parallel or intersect at source doesn't\
-    \ count\n    friend bool rayIntersect(const Ln &l1, const Ln &l2) {\n        int\
-    \ x = sign(cross(l1[1] - l1[0], l2[1] - l2[0]));\n        return x == 0 ? false\
-    \ : side(l1[0], l2) == x && side(l2[0], l1) == -x;\n    } \n    template <typename\
-    \ Ret = DefaultFloat<T>>\n    friend Ret pointToSegDist(const Point &p, const\
-    \ Ln &l) {\n        auto d = direction(l);\n        if (sign(dot(p - l[0], d))\
-    \ >= 0 && sign(dot(p - l[1], d)) <= 0)\n            return pointToLineDist<Ret>(p,\
+    \ = Ret>\n    friend Pt<Ret, _eps, _MulT> lineIntersection(const Ln &l1, const\
+    \ Ln &l2) {\n        return Pt<Ret, _eps, _MulT>(l1[0]) - Pt<Ret, _eps, _MulT>(direction(l1))\
+    \ * (Ret(cross(direction(l2), l1[0] - l2[0])) / Ret(cross(direction(l2), direction(l1))));\n\
+    \    }\n    template <typename U>\n    static bool between(U m, U l, U r) {\n\
+    \        return cmp(l, m) == 0 || cmp(m, r) == 0 || (l < m) != (r < m);\n    }\n\
+    \    friend bool pointOnSeg(const Point &p, const Ln &l) {\n        return side(p,\
+    \ l) == 0 && between(p.x, l[0].x, l[1].x) && between(p.y, l[0].y, l[1].y);\n \
+    \   }\n    friend bool pointStrictlyOnSeg(const Point &p, const Ln &l) {\n   \
+    \     return side(p, l) == 0 && sign(dot(p - l[0], direction(l))) * sign(dot(p\
+    \ - l[1], direction(l))) < 0;\n    }\n    template <typename U>\n    static bool\
+    \ overlap(U l1, U r1, U l2, U r2) {\n        if (l1 > r1) { std::swap(l1, r1);\
+    \ }\n        if (l2 > r2) { std::swap(l2, r2); }\n        return cmp(r1, l2) !=\
+    \ -1 && cmp(r2, l1) != -1;\n    }\n    friend bool segIntersect(const Ln &l1,\
+    \ const Ln &l2) {\n        auto [p1, p2] = l1.l;\n        auto [q1, q2] = l2.l;\n\
+    \        return overlap(p1.x, p2.x, q1.x, q2.x) && overlap(p1.y, p2.y, q1.y, q2.y)\
+    \ &&\n                side(p1, l2) * side(p2, l2) <= 0 &&\n                side(q1,\
+    \ l1) * side(q2, l1) <= 0;\n    }\n    // parallel intersecting is false\n   \
+    \ friend bool segStrictlyIntersect(const Ln &l1, const Ln &l2) {\n        auto\
+    \ [p1, p2] = l1.l;\n        auto [q1, q2] = l2.l;\n        return side(p1, l2)\
+    \ * side(p2, l2) < 0 &&\n               side(q1, l1) * side(q2, l1) < 0;\n   \
+    \ }\n    // parallel or intersect at source doesn't count\n    friend bool rayIntersect(const\
+    \ Ln &l1, const Ln &l2) {\n        int x = sign(cross(l1[1] - l1[0], l2[1] - l2[0]));\n\
+    \        return x == 0 ? false : side(l1[0], l2) == x && side(l2[0], l1) == -x;\n\
+    \    } \n    template <typename Ret = DefaultFloat<T>>\n    friend Ret pointToSegDist(const\
+    \ Point &p, const Ln &l) {\n        auto d = direction(l);\n        if (sign(dot(p\
+    \ - l[0], d)) >= 0 && sign(dot(p - l[1], d)) <= 0)\n            return pointToLineDist<Ret>(p,\
     \ l);\n        return std::min(dist<Ret>(p, l[0]), dist<Ret>(p, l[1]));\n    }\n\
     \    template <typename Ret = DefaultFloat<T>>\n    friend Ret segDist(const Ln\
     \ &l1, const Ln &l2) {\n        if (segIntersect(l1, l2)) { return Ret(0); }\n\
@@ -373,7 +372,7 @@ data:
   - Geometry/furthest_pair.hpp
   - Geometry/circle_cover.hpp
   - Geometry/convex.hpp
-  timestamp: '2026-11-08 00:49:38+08:00'
+  timestamp: '2026-11-08 14:42:51+08:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/1_library_checker/geometry/static_convex_hull.test.cpp
@@ -389,7 +388,6 @@ data:
   - test/2_aoj/area_of_intersection_between_two_circles.test.cpp
   - test/2_aoj/intersection_of_a_circle_and_a_polygon.test.cpp
   - test/2_aoj/common_tangent.test.cpp
-  - test/9_qoj/2162.test.cpp
   - test/9_qoj/6445.test.cpp
   - test/0_custom/convex-line-intersection/convex-line-intersection.test.cpp
   - test/0_custom/polygon-cover/polygon-cover.test.cpp

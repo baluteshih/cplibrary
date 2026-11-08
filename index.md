@@ -263,7 +263,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/closest_pair.hpp
       title: Geometry/closest_pair.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/convex.hpp
       title: Geometry/convex.hpp
     - icon: ':x:'
@@ -272,7 +272,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Geometry/furthest_pair.hpp
       title: Geometry/furthest_pair.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Geometry/half_plane_intersection.hpp
       title: Geometry/half_plane_intersection.hpp
     - icon: ':question:'
@@ -377,7 +377,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Misc/bigint.hpp
       title: Misc/bigint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Misc/cyc_bitonic_search.hpp
       title: Misc/cyc_bitonic_search.hpp
     - icon: ':heavy_check_mark:'
@@ -641,6 +641,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/0_custom/convex-queries/convex-queries.test.cpp
       title: test/0_custom/convex-queries/convex-queries.test.cpp
+  - name: test/0_custom/half-plane-intersection
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
+      title: test/0_custom/half-plane-intersection/half-plane-intersection.test.cpp
   - name: test/0_custom/max_bounded_flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -1236,9 +1241,6 @@ data:
     - icon: ':x:'
       path: test/9_qoj/17153.test.cpp
       title: test/9_qoj/17153.test.cpp
-    - icon: ':x:'
-      path: test/9_qoj/2162.test.cpp
-      title: test/9_qoj/2162.test.cpp
     - icon: ':x:'
       path: test/9_qoj/6445.test.cpp
       title: test/9_qoj/6445.test.cpp
